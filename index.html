@@ -21,6 +21,7 @@
       --text-mid:   #A09C96;
       --text-light: #888480;
       --border:     #2C2C34;
+      --mono:       'Courier New', 'Consolas', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -32,7 +33,7 @@
       line-height: 1.6;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -49,45 +50,51 @@
     .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
     .nav-links a {
       color: var(--text-mid); text-decoration: none; font-size: 0.88rem;
-      font-weight: 500; letter-spacing: 0.02em;
-      transition: color 0.2s;
+      font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--heading); }
     .nav-cta {
       background: var(--btn-bg) !important;
       color: var(--btn-text) !important;
-      padding: 0.5rem 1.3rem;
-      border-radius: 5px;
-      font-weight: 600 !important;
-      font-size: 0.85rem !important;
+      padding: 0.5rem 1.3rem; border-radius: 5px;
+      font-weight: 600 !important; font-size: 0.85rem !important;
       transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--btn-hover) !important; color: var(--btn-text) !important; }
+    .nav-cta:hover { background: var(--btn-hover) !important; }
 
-    /* ── HERO ── */
+    /* HERO */
     #hero {
       min-height: 100vh;
       display: flex; align-items: center;
       padding: 9rem 6% 6rem;
       border-bottom: 1px solid var(--border);
+      position: relative;
+      background-image: radial-gradient(circle, rgba(44,44,52,0.8) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
+      pointer-events: none;
     }
     .hero-inner {
       max-width: 1100px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 5rem; align-items: center;
+      position: relative; z-index: 1;
     }
     .hero-label {
       display: inline-block;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.2rem; font-family: var(--mono);
     }
+    .hero-label::before { content: '// '; opacity: 0.5; }
     .hero-title {
       font-size: clamp(2.2rem, 4vw, 3.4rem);
       font-weight: 900; line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--heading);
-      margin-bottom: 1.2rem;
+      letter-spacing: -0.03em; color: var(--heading); margin-bottom: 1.2rem;
     }
     .hero-title em { font-style: normal; color: var(--accent); }
     .hero-sub {
@@ -100,54 +107,47 @@
       padding: 0.75rem 1.8rem; border-radius: 5px;
       font-weight: 700; font-size: 0.9rem;
       text-decoration: none; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
+      transition: background 0.2s, transform 0.15s; display: inline-block;
     }
     .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); }
     .btn-outline {
       border: 1.5px solid #444448; color: var(--text-mid);
       padding: 0.75rem 1.8rem; border-radius: 5px;
-      font-weight: 600; font-size: 0.9rem;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-      display: inline-block;
+      font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block;
     }
     .btn-outline:hover { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
 
-    .hero-right {
-      display: flex; flex-direction: column; gap: 1rem;
-    }
+    .hero-right { display: flex; flex-direction: column; gap: 1rem; }
     .hero-stat-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.2rem 1.5rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.2rem 1.5rem;
       display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.2s;
     }
+    .hero-stat-card:hover { border-color: rgba(123,175,212,0.3); }
     .stat-icon {
-      font-size: 1.4rem;
       width: 44px; height: 44px;
-      background: var(--accent-mid);
-      border-radius: 8px;
+      background: var(--accent-mid); border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      flex-shrink: 0; color: var(--accent);
     }
-    .stat-text-num { font-size: 1.3rem; font-weight: 800; color: var(--heading); }
+    .stat-icon svg { width: 20px; height: 20px; }
+    .stat-text-num { font-size: 1.1rem; font-weight: 800; color: var(--heading); }
     .stat-text-label { font-size: 0.8rem; color: var(--text-light); }
 
-    /* ── SECTION COMMON ── */
+    /* SECTION COMMON */
     section { padding: 6rem 6%; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.6rem; font-family: var(--mono);
     }
     .section-title {
       font-size: clamp(1.7rem, 3vw, 2.3rem);
       font-weight: 800; line-height: 1.2;
-      letter-spacing: -0.02em; color: var(--heading);
-      margin-bottom: 0.8rem;
+      letter-spacing: -0.02em; color: var(--heading); margin-bottom: 0.8rem;
     }
     .section-sub {
       color: var(--text-light); font-size: 0.95rem;
@@ -155,82 +155,89 @@
     }
     .divider {
       width: 36px; height: 3px;
-      background: var(--accent); border-radius: 2px;
-      margin-bottom: 2.5rem;
+      background: var(--accent); border-radius: 2px; margin-bottom: 2.5rem;
     }
 
-    /* ── SERVICES ── */
+    /* ICON WRAP */
+    .icon-wrap {
+      width: 44px; height: 44px;
+      background: var(--accent-mid); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); margin-bottom: 0.9rem;
+    }
+    .icon-wrap svg { width: 20px; height: 20px; }
+
+    /* SERVICES */
     #services { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
     }
-    .service-card {
-      background: var(--bg);
-      padding: 2rem 1.8rem;
-      transition: background 0.2s;
-    }
+    .service-card { background: var(--bg); padding: 2rem 1.8rem; transition: background 0.2s; }
     .service-card:hover { background: var(--bg2); }
-    .service-icon {
-      font-size: 1.4rem; margin-bottom: 0.9rem;
-      display: flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px;
-      background: var(--accent-mid);
-      border-radius: 8px;
-    }
     .service-name { font-size: 0.95rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
     .service-desc { font-size: 0.83rem; color: var(--text-light); line-height: 1.65; }
 
-    /* ── PROCESS ── */
+    /* PROCESS */
     #process { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .process-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
     .process-step { position: relative; }
     .step-num {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
       color: var(--accent); text-transform: uppercase; margin-bottom: 0.8rem;
+      font-family: var(--mono);
     }
     .step-title { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
     .step-desc { font-size: 0.83rem; color: var(--text-light); line-height: 1.65; }
     .step-line {
       position: absolute; top: 0.3rem; right: 0;
-      width: calc(100% - 2.5rem); height: 1px;
-      background: var(--border);
+      width: calc(100% - 2.5rem); height: 1px; background: var(--border);
     }
     .process-step:last-child .step-line { display: none; }
 
-    /* ── PORTFOLIO ── */
+    /* PORTFOLIO */
     #work { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .portfolio-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
-    }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
     .portfolio-card {
       background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     }
     .portfolio-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      border-color: rgba(123,175,212,0.25);
     }
-    .portfolio-thumb {
-      width: 100%; aspect-ratio: 16/9;
-      background: var(--bg3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-      border-bottom: 1px solid var(--border);
+
+    /* Browser mockup */
+    .browser-mockup { border-bottom: 1px solid var(--border); overflow: hidden; }
+    .browser-bar {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.55rem 0.8rem;
+      background: var(--bg3); border-bottom: 1px solid var(--border);
     }
+    .browser-dots { display: flex; gap: 0.3rem; flex-shrink: 0; }
+    .browser-dots span { width: 8px; height: 8px; border-radius: 50%; background: #3a3a44; }
+    .browser-url-bar {
+      flex: 1; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 0.18rem 0.6rem;
+      font-size: 0.66rem; color: var(--text-light);
+      font-family: var(--mono);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .browser-viewport { position: relative; height: 170px; overflow: hidden; background: var(--bg3); }
+    .browser-viewport iframe {
+      width: 200%; height: 200%;
+      transform: scale(0.5); transform-origin: top left;
+      border: none; pointer-events: none;
+    }
+
     .portfolio-body { padding: 1.3rem 1.4rem; }
     .portfolio-tag {
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+      font-family: var(--mono);
     }
     .portfolio-name { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
     .portfolio-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; margin-bottom: 1rem; }
@@ -248,53 +255,35 @@
       transition: gap 0.2s;
     }
     .portfolio-link:hover { gap: 0.55rem; }
-    .portfolio-placeholder {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 3rem 2rem;
-      border: 1.5px dashed var(--border);
-      border-radius: 10px; background: var(--bg);
-      min-height: 280px;
-    }
-    .placeholder-icon { font-size: 2rem; margin-bottom: 0.8rem; color: var(--text-light); }
-    .placeholder-text { font-size: 0.9rem; font-weight: 700; color: var(--heading); margin-bottom: 0.3rem; }
-    .placeholder-sub { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.2rem; }
 
-    /* ── WHY ── */
-    #why { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    /* WHY */
+    #why { background: var(--bg); border-bottom: 1px solid var(--border); }
     .why-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      background: var(--border); border: 1px solid var(--border);
       border-radius: 10px; overflow: hidden;
     }
-    .why-card {
-      padding: 2rem 1.8rem;
-      background: var(--bg2);
-      transition: background 0.2s;
-    }
-    .why-card:hover { background: var(--bg3); }
-    .why-icon { font-size: 1.3rem; margin-bottom: 0.8rem; }
+    .why-card { padding: 2rem 1.8rem; background: var(--bg); transition: background 0.2s; }
+    .why-card:hover { background: var(--bg2); }
     .why-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
     .why-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; }
 
-    /* ── CONTACT ── */
-    #contact { background: var(--bg); }
-    .contact-wrap {
-      display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start;
-    }
+    /* CONTACT */
+    #contact { background: var(--bg2); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
     .contact-info .section-title { margin-bottom: 0.8rem; }
     .contact-info p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; }
     .contact-detail {
       display: flex; align-items: flex-start; gap: 0.8rem;
       font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0.6rem;
     }
-    .contact-detail span:first-child { color: var(--accent); margin-top: 1px; }
+    .contact-detail .d-icon { color: var(--accent); margin-top: 2px; }
+    .contact-detail .d-icon svg { width: 15px; height: 15px; }
     .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
     .contact-form input,
     .contact-form textarea,
     .contact-form select {
-      background: var(--bg2); border: 1px solid var(--border);
+      background: var(--bg3); border: 1px solid var(--border);
       color: var(--text); padding: 0.8rem 1rem;
       border-radius: 6px; font-size: 0.88rem; font-family: inherit;
       transition: border-color 0.2s; width: 100%;
@@ -305,13 +294,12 @@
     .contact-form textarea { resize: vertical; min-height: 110px; }
     .contact-form input::placeholder,
     .contact-form textarea::placeholder { color: var(--text-light); }
-    .contact-form select { color: var(--text-mid); background: var(--bg2); }
+    .contact-form select { color: var(--text-mid); }
     .contact-form select option { background: var(--bg3); color: var(--text); }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
+      background: var(--bg); border-top: 1px solid var(--border);
       padding: 2rem 6%;
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 1rem;
@@ -320,18 +308,14 @@
     .footer-logo span { color: var(--text-light); }
     .footer-copy { font-size: 0.78rem; color: var(--text-light); }
     .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a {
-      font-size: 0.78rem; color: var(--text-light);
-      text-decoration: none; transition: color 0.2s;
-    }
+    .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
       .hero-right { display: none; }
-      .services-grid,
-      .why-grid { grid-template-columns: 1fr; }
+      .services-grid, .why-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; }
       .portfolio-grid { grid-template-columns: 1fr; }
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -351,7 +335,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#why">Why Us</a></li>
-      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
     </ul>
   </nav>
 
@@ -359,41 +343,49 @@
   <section id="hero">
     <div class="hero-inner">
       <div>
-        <span class="hero-label">Web Design & Digital Solutions</span>
-        <h1 class="hero-title">Built for your<br /><em>small business.</em><br />Done right.</h1>
-        <p class="hero-sub">FJMedia builds fast, custom websites with real backend systems — order tracking, email notifications, and everything in between.</p>
+        <span class="hero-label">Web Design &amp; Digital Systems</span>
+        <h1 class="hero-title">We build first.<br /><em>You pay after.</em></h1>
+        <p class="hero-sub">FJMedia builds custom websites with full backend systems — forms, email automation, and data tracking. No upfront cost. No risk. You only pay if you love what we deliver.</p>
         <div class="hero-btns">
-          <a href="#contact" class="btn-primary">Get a Free Quote</a>
+          <a href="#contact" class="btn-primary">Book a Call</a>
           <a href="#work" class="btn-outline">See Our Work</a>
         </div>
       </div>
       <div class="hero-right">
         <div class="hero-stat-card">
-          <div class="stat-icon">🌐</div>
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
           <div>
-            <div class="stat-text-num">$0 / month</div>
-            <div class="stat-text-label">Hosting cost to your client</div>
+            <div class="stat-text-num">No Upfront Cost</div>
+            <div class="stat-text-label">You pay only after you approve</div>
           </div>
         </div>
         <div class="hero-stat-card">
-          <div class="stat-icon">⚡</div>
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
           <div>
             <div class="stat-text-num">Days, not weeks</div>
-            <div class="stat-text-label">Average turnaround time</div>
+            <div class="stat-text-label">Average first draft turnaround</div>
           </div>
         </div>
         <div class="hero-stat-card">
-          <div class="stat-icon">🛠️</div>
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
           <div>
             <div class="stat-text-num">100% Custom</div>
-            <div class="stat-text-label">No templates. Built from scratch.</div>
+            <div class="stat-text-label">No templates. Hand-coded every time.</div>
           </div>
         </div>
         <div class="hero-stat-card">
-          <div class="stat-icon">📊</div>
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
           <div>
             <div class="stat-text-num">Full Backend</div>
-            <div class="stat-text-label">Orders, emails & data — automated</div>
+            <div class="stat-text-label">Forms, emails &amp; data — automated</div>
           </div>
         </div>
       </div>
@@ -403,40 +395,52 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="section-inner">
-      <p class="section-label">What We Offer</p>
+      <p class="section-label">What We Build</p>
       <h2 class="section-title">Everything your business needs online</h2>
-      <p class="section-sub">From design to deployment — we handle the full picture.</p>
+      <p class="section-sub">From first design to live deployment — we handle the full picture.</p>
       <div class="divider"></div>
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon">🖥️</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
           <div class="service-name">Custom Website Design</div>
           <div class="service-desc">Hand-coded, mobile-ready websites tailored to your brand. No templates — built from scratch every time.</div>
         </div>
         <div class="service-card">
-          <div class="service-icon">📋</div>
-          <div class="service-name">Order & Booking Forms</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          </div>
+          <div class="service-name">Order &amp; Booking Forms</div>
           <div class="service-desc">Smart forms with live pricing logic and instant email notifications so you never miss a customer.</div>
         </div>
         <div class="service-card">
-          <div class="service-icon">📊</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
           <div class="service-name">Google Sheets CRM</div>
           <div class="service-desc">Every order automatically logged in a clean Google Sheet — your own free dashboard, no subscriptions.</div>
         </div>
         <div class="service-card">
-          <div class="service-icon">🌐</div>
-          <div class="service-name">Domain & Hosting Setup</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="service-name">Domain &amp; Hosting Setup</div>
           <div class="service-desc">We handle DNS, GitHub Pages hosting, and SSL. Your site live with a professional URL at minimal cost.</div>
         </div>
         <div class="service-card">
-          <div class="service-icon">📧</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
           <div class="service-name">Email Notifications</div>
           <div class="service-desc">Instant alerts every time a customer submits an order or inquiry — straight to your inbox.</div>
         </div>
         <div class="service-card">
-          <div class="service-icon">🔧</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
           <div class="service-name">Ongoing Maintenance</div>
-          <div class="service-desc">Pricing changes, new photos, seasonal updates — fast turnaround with no tech headaches for you.</div>
+          <div class="service-desc">Pricing updates, new photos, seasonal changes — fast turnaround with no tech headaches on your end.</div>
         </div>
       </div>
     </div>
@@ -446,33 +450,33 @@
   <section id="process">
     <div class="section-inner">
       <p class="section-label">How It Works</p>
-      <h2 class="section-title">Simple process. No surprises.</h2>
-      <p class="section-sub">From first conversation to live website — here's exactly what to expect.</p>
+      <h2 class="section-title">A process built around your confidence.</h2>
+      <p class="section-sub">We removed the risk. You don't pay for anything until you're ready to move forward.</p>
       <div class="divider"></div>
       <div class="process-grid">
         <div class="process-step">
           <div class="step-line"></div>
-          <div class="step-num">Step 01</div>
-          <div class="step-title">Discovery</div>
-          <div class="step-desc">We learn about your business, your goals, and what you need. Simple conversation — no jargon.</div>
+          <div class="step-num">01 — Intro Call</div>
+          <div class="step-title">We see if it's a fit</div>
+          <div class="step-desc">A quick call to learn about your business and what you need. No commitment, no sales pitch — just an honest conversation to make sure we're the right team for you.</div>
         </div>
         <div class="process-step">
           <div class="step-line"></div>
-          <div class="step-num">Step 02</div>
-          <div class="step-title">Build</div>
-          <div class="step-desc">We design and build your site — custom to your brand, with all the features your business needs.</div>
+          <div class="step-num">02 — We Build First</div>
+          <div class="step-title">No payment. No contract.</div>
+          <div class="step-desc">If we're a match, we get to work. We design and build your full site before you pay a single dollar. No invoices, no deposits — just results delivered upfront.</div>
         </div>
         <div class="process-step">
           <div class="step-line"></div>
-          <div class="step-num">Step 03</div>
-          <div class="step-title">Review</div>
-          <div class="step-desc">You get a live preview link before anything goes public. We refine until it's exactly right.</div>
+          <div class="step-num">03 — You Decide</div>
+          <div class="step-title">Approve it or walk away.</div>
+          <div class="step-desc">We share a live preview link. If you love it, we move forward. If it's not right, we refine until it is — or part ways. No charge either way.</div>
         </div>
         <div class="process-step">
           <div class="step-line"></div>
-          <div class="step-num">Step 04</div>
-          <div class="step-title">Launch</div>
-          <div class="step-desc">We connect your domain, push live, and hand everything over. You focus on your business.</div>
+          <div class="step-num">04 — Package &amp; Launch</div>
+          <div class="step-title">Choose your plan. Go live.</div>
+          <div class="step-desc">Once you're in, we walk you through package options based on exactly what we built together. Then we connect your domain and push your site live.</div>
         </div>
       </div>
     </div>
@@ -488,9 +492,17 @@
       <div class="portfolio-grid">
 
         <div class="portfolio-card">
-          <div class="portfolio-thumb">🍪</div>
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url-bar">sugarandshaicookies.com</div>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://sugarandshaicookies.com" loading="lazy" scrolling="no" tabindex="-1" title="Sugar and Shai Cookies"></iframe>
+            </div>
+          </div>
           <div class="portfolio-body">
-            <div class="portfolio-tag">Food & Bakery · Winnipeg, MB</div>
+            <div class="portfolio-tag">Food &amp; Bakery · Winnipeg, MB</div>
             <div class="portfolio-name">Sugar and Shai Cookies</div>
             <div class="portfolio-desc">Pre-order site with live pricing, flavour selectors, Google Sheets tracking, and automated email notifications.</div>
             <div class="portfolio-pills">
@@ -499,12 +511,20 @@
               <span class="pill">Sheets CRM</span>
               <span class="pill">Custom Domain</span>
             </div>
-            <a href="https://sugarandshaicookies.com" target="_blank" class="portfolio-link">Visit Site →</a>
+            <a href="https://sugarandshaicookies.com" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
           </div>
         </div>
 
         <div class="portfolio-card">
-          <div class="portfolio-thumb">🚗</div>
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url-bar">fjdmedia.github.io/royal-kings-auto-care</div>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://fjdmedia.github.io/royal-kings-auto-care" loading="lazy" scrolling="no" tabindex="-1" title="Royal Kings Auto Care"></iframe>
+            </div>
+          </div>
           <div class="portfolio-body">
             <div class="portfolio-tag">Auto Detailing · Winnipeg, MB</div>
             <div class="portfolio-name">Royal Kings Auto Care</div>
@@ -515,23 +535,31 @@
               <span class="pill">Booking Form</span>
               <span class="pill">Mobile Ready</span>
             </div>
-            <a href="https://fjdmedia.github.io/royal-kings-auto-care" target="_blank" class="portfolio-link">Visit Site →</a>
+            <a href="https://fjdmedia.github.io/royal-kings-auto-care" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
           </div>
         </div>
 
         <div class="portfolio-card">
-          <div class="portfolio-thumb">🎉</div>
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url-bar">fjdmedia.github.io/Diego_n_Andrea</div>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://fjdmedia.github.io/Diego_n_Andrea" loading="lazy" scrolling="no" tabindex="-1" title="Diego and Andrea Wedding Social"></iframe>
+            </div>
+          </div>
           <div class="portfolio-body">
             <div class="portfolio-tag">Event · Winnipeg, MB</div>
-            <div class="portfolio-name">Diego & Andrea Wedding Social</div>
-            <div class="portfolio-desc">Scrapbook-style event site with an interactive prize gallery, ticket info, grand prize reveal section, and Facebook DM integration for ticket sales.</div>
+            <div class="portfolio-name">Diego &amp; Andrea Wedding Social</div>
+            <div class="portfolio-desc">Scrapbook-style event site with an interactive prize gallery, ticket info, grand prize reveal, and Facebook DM integration for ticket sales.</div>
             <div class="portfolio-pills">
               <span class="pill">Event Site</span>
               <span class="pill">Prize Gallery</span>
               <span class="pill">Scrapbook Design</span>
               <span class="pill">Mobile Ready</span>
             </div>
-            <a href="https://fjdmedia.github.io/Diego_n_Andrea" target="_blank" class="portfolio-link">Visit Site →</a>
+            <a href="https://fjdmedia.github.io/Diego_n_Andrea" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
           </div>
         </div>
 
@@ -548,34 +576,46 @@
       <div class="divider"></div>
       <div class="why-grid">
         <div class="why-card">
-          <div class="why-icon">⚡</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
           <div class="why-title">Fast Turnaround</div>
-          <div class="why-desc">Most sites go live within days. We work efficiently without cutting corners.</div>
+          <div class="why-desc">Most sites are delivered within days. We work efficiently without cutting corners.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">💰</div>
-          <div class="why-title">No Monthly Hosting Fees</div>
-          <div class="why-desc">Hosted on GitHub Pages — no $30–$50/month bills. You only pay for your domain (~$15/yr).</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="why-title">Zero Risk to You</div>
+          <div class="why-desc">You don't pay until you see and approve the finished site. No contracts, no deposits upfront.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🎨</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
           <div class="why-title">100% Custom Built</div>
-          <div class="why-desc">No Wix, no Squarespace. Every site is hand-coded to match your brand exactly.</div>
+          <div class="why-desc">No Wix. No Squarespace. Every site is hand-coded to match your brand exactly.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🤝</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
           <div class="why-title">Direct Communication</div>
-          <div class="why-desc">You work directly with us — no account managers or support tickets. Always responsive.</div>
+          <div class="why-desc">You work directly with us — no account managers or support tickets. Fast replies, always.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">📈</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
           <div class="why-title">Built to Convert</div>
           <div class="why-desc">Every site is designed with one goal: turning visitors into paying customers.</div>
         </div>
         <div class="why-card">
-          <div class="why-icon">🔒</div>
-          <div class="why-title">SSL Security Included</div>
-          <div class="why-desc">Every site ships with HTTPS. No extra cost, no setup required on your end.</div>
+          <div class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="why-title">Low Overhead for You</div>
+          <div class="why-desc">Sites hosted on GitHub Pages — no $30&#8211;50/month bills. You only pay for your domain (~$15/yr).</div>
         </div>
       </div>
     </div>
@@ -586,41 +626,47 @@
     <div class="section-inner">
       <div class="contact-wrap">
         <div class="contact-info">
-          <p class="section-label">Get In Touch</p>
-          <h2 class="section-title">Let's build something.</h2>
+          <p class="section-label">Book a Call</p>
+          <h2 class="section-title">Let's see if we're a fit.</h2>
           <div class="divider"></div>
-          <p>Ready to get started or just have a question? Fill out the form and we'll get back to you within 24 hours.</p>
+          <p>The first step is a quick, no-pressure conversation. Tell us about your business and what you're looking for — we'll take it from there.</p>
           <div class="contact-detail">
-            <span>📧</span>
+            <span class="d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
             <span>diazfjamesc@gmail.com</span>
           </div>
           <div class="contact-detail">
-            <span>📍</span>
-            <span>Winnipeg, MB — Serving local & remote clients</span>
+            <span class="d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span>Winnipeg, MB &#8212; Serving local &amp; remote clients</span>
           </div>
           <div class="contact-detail">
-            <span>⏱️</span>
+            <span class="d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
             <span>Response within 24 hours</span>
           </div>
         </div>
         <form class="contact-form" id="contactForm">
           <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
           <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
-          <input type="text"  name="name"     placeholder="Your Name"              required />
-          <input type="email" name="email"    placeholder="Your Email"             required />
+          <input type="text"  name="name"     placeholder="Your Name"               required />
+          <input type="email" name="email"    placeholder="Your Email"              required />
           <input type="text"  name="business" placeholder="Business Name (optional)" />
           <select name="service">
-            <option value="" disabled selected>What do you need?</option>
+            <option value="" disabled selected>What are you looking for?</option>
             <option>New Website</option>
             <option>Order / Booking Form</option>
-            <option>Domain & Hosting Setup</option>
+            <option>Domain &amp; Hosting Setup</option>
             <option>Website Update / Maintenance</option>
             <option>Full Package</option>
             <option>Not Sure Yet</option>
           </select>
-          <textarea name="message" placeholder="Tell us about your business and what you're looking for..."></textarea>
-          <button type="submit" class="btn-primary" id="submitBtn">Send Message</button>
-          <p id="formMsg" style="font-size:0.85rem;color:var(--accent);display:none;text-align:center;">Message sent — we'll be in touch within 24 hours.</p>
+          <textarea name="message" placeholder="Tell us about your business and what you need..."></textarea>
+          <button type="submit" class="btn-primary" id="submitBtn">Book a Call</button>
+          <p id="formMsg" style="font-size:0.85rem;color:var(--accent);display:none;text-align:center;">Message sent &#8212; we'll reach out within 24 hours to schedule your call.</p>
         </form>
       </div>
     </div>
@@ -629,7 +675,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">FJ<span>Media</span></div>
-    <div class="footer-copy">© 2026 FJMedia. All rights reserved.</div>
+    <div class="footer-copy">&#169; 2026 FJMedia. All rights reserved.</div>
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
@@ -644,7 +690,7 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      btn.textContent = 'Sending…';
+      btn.textContent = 'Sending\u2026';
       btn.disabled = true;
 
       fetch('https://api.web3forms.com/submit', {
@@ -660,7 +706,7 @@
         } else { throw new Error(); }
       })
       .catch(() => {
-        btn.textContent = 'Send Message';
+        btn.textContent = 'Book a Call';
         btn.disabled = false;
         alert('Something went wrong. Please email us directly.');
       });
