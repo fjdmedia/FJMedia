@@ -311,6 +311,65 @@
     .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dotDrift {
+      0%   { background-position: 0 0; }
+      100% { background-position: 24px 24px; }
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* Hero entrance — staggered */
+    .hero-label { animation: fadeUp 0.55s ease both 0.1s; }
+    .hero-title  { animation: fadeUp 0.55s ease both 0.28s; }
+    .hero-sub    { animation: fadeUp 0.55s ease both 0.44s; }
+    .hero-btns   { animation: fadeUp 0.55s ease both 0.58s; }
+    .hero-stat-card:nth-child(1) { animation: fadeUp 0.5s ease both 0.35s; }
+    .hero-stat-card:nth-child(2) { animation: fadeUp 0.5s ease both 0.5s; }
+    .hero-stat-card:nth-child(3) { animation: fadeUp 0.5s ease both 0.65s; }
+    .hero-stat-card:nth-child(4) { animation: fadeUp 0.5s ease both 0.8s; }
+
+    /* Blinking cursor on label */
+    .hero-label::after { content: '_'; margin-left: 1px; animation: cursorBlink 1s step-end infinite; }
+
+    /* Dot grid slow drift */
+    #hero { animation: dotDrift 16s linear infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.in-view { opacity: 1; transform: none; }
+
+    /* Card stagger delays */
+    .service-card.reveal:nth-child(2),
+    .why-card.reveal:nth-child(2),
+    .portfolio-card.reveal:nth-child(2) { transition-delay: 0.1s; }
+
+    .service-card.reveal:nth-child(3),
+    .why-card.reveal:nth-child(3),
+    .portfolio-card.reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    .service-card.reveal:nth-child(4) { transition-delay: 0.1s; }
+    .service-card.reveal:nth-child(5) { transition-delay: 0.2s; }
+    .service-card.reveal:nth-child(6) { transition-delay: 0.3s; }
+
+    .process-step.reveal:nth-child(2) { transition-delay: 0.1s; }
+    .process-step.reveal:nth-child(3) { transition-delay: 0.2s; }
+    .process-step.reveal:nth-child(4) { transition-delay: 0.3s; }
+
+    .section-title.reveal { transition-delay: 0.07s; }
+    .section-sub.reveal   { transition-delay: 0.14s; }
+    .divider.reveal        { transition-delay: 0.1s; }
+
     /* MOBILE */
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -687,6 +746,23 @@
     const form = document.getElementById('contactForm');
     const msg  = document.getElementById('formMsg');
     const btn  = document.getElementById('submitBtn');
+
+    // Scroll reveal
+    (function() {
+      [
+        '.section-label', '.section-title', '.section-sub', '.divider',
+        '.service-card', '.process-step', '.portfolio-card', '.why-card',
+        '.contact-info', '.contact-form'
+      ].forEach(s => document.querySelectorAll(s).forEach(el => el.classList.add('reveal')));
+
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
