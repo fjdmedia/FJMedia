@@ -234,8 +234,39 @@
 
     /* PORTFOLIO */
     #work { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .carousel-outer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .carousel-arrow {
+      flex-shrink: 0;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      z-index: 2;
+    }
+    .carousel-arrow:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg3);
+    }
+    .carousel-arrow svg { width: 16px; height: 16px; }
+    .carousel-viewport { flex: 1; overflow: hidden; }
+    .portfolio-track {
+      display: flex;
+      gap: 20px;
+      will-change: transform;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
     .portfolio-card {
+      flex-shrink: 0;
       background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; overflow: hidden;
       transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
@@ -243,7 +274,7 @@
     .portfolio-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-      border-color: rgba(123,175,212,0.25);
+      border-color: rgba(201,168,76,0.2);
     }
 
     /* Browser mockup */
@@ -522,11 +553,10 @@
     /* Card stagger delays */
     .service-card.reveal:nth-child(2),
     .why-card.reveal:nth-child(2),
-    .portfolio-card.reveal:nth-child(2) { transition-delay: 0.1s; }
+
 
     .service-card.reveal:nth-child(3),
     .why-card.reveal:nth-child(3),
-    .portfolio-card.reveal:nth-child(3) { transition-delay: 0.2s; }
 
     .service-card.reveal:nth-child(4) { transition-delay: 0.1s; }
     .service-card.reveal:nth-child(5) { transition-delay: 0.2s; }
@@ -544,7 +574,7 @@
       .hero-right { display: none; }
       .services-grid, .why-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; }
-      .portfolio-grid { grid-template-columns: 1fr; }
+      .carousel-arrow { display: none; }
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
       footer { flex-direction: column; text-align: center; }
@@ -758,7 +788,12 @@
       <h2 class="section-title">Real sites. Real businesses.</h2>
       <p class="section-sub">Every project is fully custom and built to convert visitors into customers.</p>
       <div class="divider"></div>
-      <div class="portfolio-grid">
+      <div class="carousel-outer">
+        <button class="carousel-arrow prev-arrow" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-viewport">
+        <div class="portfolio-track">
 
         <div class="portfolio-card">
           <div class="browser-mockup">
@@ -856,6 +891,11 @@
           </div>
         </div>
 
+        </div>
+        </div>
+        <button class="carousel-arrow next-arrow" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -1071,6 +1111,71 @@
       }, { threshold: 0.1 });
 
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
+
+    // Portfolio carousel
+    (function() {
+      const viewport = document.querySelector('.carousel-viewport');
+      const track    = document.querySelector('.portfolio-track');
+      if (!track) return;
+
+      const GAP = 20;
+      const origCards = Array.from(track.querySelectorAll('.portfolio-card'));
+      const n = origCards.length;
+
+      // Clone all cards and append for infinite loop
+      origCards.forEach(card => track.appendChild(card.cloneNode(true)));
+
+      let idx = 0;
+      let busy = false;
+
+      function cardWidth() {
+        return (viewport.offsetWidth - GAP * 2) / 3;
+      }
+
+      function setCardWidths() {
+        const cw = cardWidth();
+        track.querySelectorAll('.portfolio-card').forEach(c => { c.style.width = cw + 'px'; });
+      }
+
+      function moveTo(i, animate) {
+        track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+        track.style.transform = 'translateX(-' + (i * (cardWidth() + GAP)) + 'px)';
+        idx = i;
+      }
+
+      function next() {
+        if (busy) return;
+        busy = true;
+        moveTo(idx + 1, true);
+        if (idx >= n) {
+          setTimeout(() => { moveTo(0, false); busy = false; }, 460);
+        } else {
+          setTimeout(() => { busy = false; }, 460);
+        }
+      }
+
+      function prev() {
+        if (busy) return;
+        busy = true;
+        if (idx === 0) {
+          moveTo(n, false);
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            moveTo(n - 1, true);
+            setTimeout(() => { busy = false; }, 460);
+          }));
+        } else {
+          moveTo(idx - 1, true);
+          setTimeout(() => { busy = false; }, 460);
+        }
+      }
+
+      document.querySelector('.next-arrow').addEventListener('click', next);
+      document.querySelector('.prev-arrow').addEventListener('click', prev);
+
+      window.addEventListener('resize', () => { setCardWidths(); moveTo(idx, false); });
+      setCardWidths();
+      moveTo(0, false);
     })();
 
     form.addEventListener('submit', function(e) {
