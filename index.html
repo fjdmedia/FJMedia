@@ -366,6 +366,50 @@
 
     /* PRICING */
     #pricing { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .roi-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 2.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .roi-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .roi-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      font-family: var(--mono);
+    }
+    .roi-statement {
+      font-size: 1.1rem; font-weight: 700; color: var(--heading);
+      margin-bottom: 1.5rem; line-height: 1.4;
+    }
+    .roi-statement strong { color: var(--accent); }
+    .roi-examples {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .roi-example {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.2rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .roi-sale {
+      font-size: 0.78rem; font-weight: 700; color: var(--text-mid);
+      font-family: var(--mono);
+    }
+    .roi-calc {
+      font-size: 0.82rem; color: var(--text-light); line-height: 1.4;
+    }
+    .roi-calc strong { color: var(--heading); font-weight: 700; }
+    .roi-footer {
+      font-size: 0.85rem; color: var(--text-mid); font-weight: 300;
+      border-top: 1px solid var(--border); padding-top: 1rem;
+      font-style: italic;
+    }
+
     .scarcity-bar {
       display: flex; align-items: center; gap: 0.75rem;
       background: rgba(201,168,76,0.07);
@@ -1007,6 +1051,27 @@
       <h2 class="section-title">Transparent pricing.<br/>Real value.</h2>
       <p class="section-sub">Every package includes a fully custom-built site. No templates, no shortcuts — just results.</p>
       <div class="divider"></div>
+
+      <div class="roi-block">
+        <div class="roi-label">The math</div>
+        <p class="roi-statement">Most clients break even within <strong>30 days</strong> of launch — then every new customer your site brings in is pure profit.</p>
+        <div class="roi-examples">
+          <div class="roi-example">
+            <span class="roi-sale">$150 avg sale</span>
+            <span class="roi-calc"><strong>4 extra customers</strong> covers the site. Everything after that is profit.</span>
+          </div>
+          <div class="roi-example">
+            <span class="roi-sale">$300 avg sale</span>
+            <span class="roi-calc"><strong>2 extra customers</strong> covers the site. Everything after that is profit.</span>
+          </div>
+          <div class="roi-example">
+            <span class="roi-sale">$500 avg sale</span>
+            <span class="roi-calc"><strong>1 extra customer</strong> covers the site. Everything after that is profit.</span>
+          </div>
+        </div>
+        <p class="roi-footer">"What we charge is a fraction of what one month of new customers would bring you."</p>
+      </div>
+
       <div class="scarcity-bar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         We take on a maximum of <strong>&nbsp;3 builds per month&nbsp;</strong> so every site gets the attention it deserves. <span class="scarcity-slots">1 slot open this month</span>
