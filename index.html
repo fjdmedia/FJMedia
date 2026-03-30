@@ -457,6 +457,61 @@
     #hero { animation: dotDrift 16s linear infinite; }
 
     /* Scroll reveal */
+    /* OFFER */
+    #offer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 6%;
+      text-align: center;
+    }
+    .offer-headline {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--heading);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .offer-headline em { color: var(--accent); font-style: normal; }
+    .offer-sub {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-bottom: 3rem;
+    }
+    .offer-pillars {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .offer-pillar {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem 2rem;
+      flex: 1;
+      min-width: 180px;
+      max-width: 240px;
+    }
+    .offer-pillar-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .offer-pillar-label {
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -565,6 +620,30 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section id="offer">
+    <div class="section-inner">
+      <p class="section-label" style="justify-content:center;">The Offer</p>
+      <h2 class="offer-headline">We build. You approve.<br><em>Then you pay.</em></h2>
+      <p class="offer-sub">No contracts. No deposits. No risk — ever.</p>
+      <div class="offer-pillars">
+        <div class="offer-pillar reveal">
+          <div class="offer-pillar-num">14 Days</div>
+          <div class="offer-pillar-label">First draft delivered</div>
+        </div>
+        <div class="offer-pillar reveal">
+          <div class="offer-pillar-num">$0</div>
+          <div class="offer-pillar-label">Upfront cost to you</div>
+        </div>
+        <div class="offer-pillar reveal">
+          <div class="offer-pillar-num">100%</div>
+          <div class="offer-pillar-label">Free to walk away</div>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary">Book a Free Intro Call</a>
     </div>
   </section>
 
@@ -750,6 +829,54 @@
               <span class="pill">Mobile Ready</span>
             </div>
             <a href="https://fjdmedia.github.io/Diego_n_Andrea" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url-bar">fjdmedia.github.io/the-brigs</div>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://fjdmedia.github.io/the-brigs" loading="lazy" scrolling="no" tabindex="-1" title="The BRIGS"></iframe>
+            </div>
+          </div>
+          <div class="portfolio-body">
+            <div class="portfolio-tag">Food &amp; Desserts · Winnipeg, MB</div>
+            <div class="portfolio-name">The BRIGS</div>
+            <div class="portfolio-desc">Brazilian brigadeiro business site built with multiple custom design versions — giving the client real options before committing to a direction.</div>
+            <div class="portfolio-pills">
+              <span class="pill">Multiple Designs</span>
+              <span class="pill">Order Form</span>
+              <span class="pill">Custom Design</span>
+              <span class="pill">Mobile Ready</span>
+            </div>
+            <a href="https://fjdmedia.github.io/the-brigs" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <div class="browser-dots"><span></span><span></span><span></span></div>
+              <div class="browser-url-bar">fjdmedia.github.io/drrylclyde</div>
+            </div>
+            <div class="browser-viewport">
+              <iframe src="https://fjdmedia.github.io/drrylclyde" loading="lazy" scrolling="no" tabindex="-1" title="drrylclyde"></iframe>
+            </div>
+          </div>
+          <div class="portfolio-body">
+            <div class="portfolio-tag">Barbershop · Winnipeg, MB</div>
+            <div class="portfolio-name">@drrylclyde</div>
+            <div class="portfolio-desc">Dark minimal portfolio site for a barber — photo and video gallery showcasing cuts, with a clean mobile-first layout built for Instagram traffic.</div>
+            <div class="portfolio-pills">
+              <span class="pill">Photo Gallery</span>
+              <span class="pill">Video Gallery</span>
+              <span class="pill">Dark Minimal</span>
+              <span class="pill">Mobile Ready</span>
+            </div>
+            <a href="https://fjdmedia.github.io/drrylclyde" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
           </div>
         </div>
 
