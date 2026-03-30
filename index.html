@@ -422,20 +422,8 @@
       margin-bottom: 0.3rem; font-family: var(--mono);
     }
     .pricing-tagline { font-size: 1.15rem; font-weight: 800; color: var(--heading); margin-bottom: 1.2rem; }
-    .pricing-price {
-      font-size: 2.8rem; font-weight: 900; color: var(--heading);
-      letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem;
-    }
-    .pricing-market { font-size: 0.78rem; color: var(--text-light); margin-bottom: 0.5rem; }
-    .pricing-market span { color: var(--text-mid); text-decoration: line-through; }
-    .pricing-save {
-      display: inline-block; font-size: 0.7rem; font-weight: 700;
-      background: rgba(123,175,212,0.1); color: var(--accent);
-      border: 1px solid rgba(123,175,212,0.2);
-      padding: 0.18rem 0.55rem; border-radius: 4px; margin-bottom: 1.4rem;
-    }
     .pricing-divider { height: 1px; background: var(--border); margin-bottom: 1.3rem; }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.8rem; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 0; }
     .pricing-features li {
       font-size: 0.84rem; color: var(--text-mid);
       display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;
@@ -446,7 +434,39 @@
       font-size: 0.73rem; font-weight: 600; color: var(--text-light);
       white-space: nowrap; margin-top: 2px; flex-shrink: 0;
     }
-    .pricing-btn { display: block; width: 100%; text-align: center; padding: 0.8rem 1rem; }
+    .pricing-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.2rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .pricing-total-label {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--text-light); font-weight: 600;
+    }
+    .pricing-total-val {
+      font-size: 0.85rem; color: var(--text-mid); font-weight: 700;
+      text-decoration: line-through; text-decoration-color: var(--border);
+    }
+    .pricing-price-block {
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.4rem;
+    }
+    .pricing-you-pay {
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--text-light); font-family: var(--mono); margin-bottom: 0.15rem;
+    }
+    .pricing-price {
+      font-size: 2.8rem; font-weight: 900; color: var(--heading);
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.5rem;
+    }
+    .pricing-save {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      background: rgba(201,168,76,0.1); color: var(--accent);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.18rem 0.55rem; border-radius: 4px;
+    }
+    .pricing-btn { display: block; width: 100%; text-align: center; padding: 0.8rem 1rem; margin-top: 1.4rem; }
     .pricing-addon {
       margin-top: 2.2rem; background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; padding: 1.1rem 1.6rem;
@@ -994,59 +1014,85 @@
 
       <div class="pricing-grid">
 
-        <!-- Starter -->
+        <!-- Get Found -->
         <div class="pricing-card reveal">
-          <div class="pricing-tier">Starter</div>
-          <div class="pricing-tagline">Get Found Online</div>
-          <div class="pricing-price">$350</div>
-          <div class="pricing-market">Est. market value <span>$900+</span></div>
-          <div class="pricing-save">You save ~$550</div>
+          <div class="pricing-tier">Get Found</div>
+          <div class="pricing-tagline">A professional presence that works</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Custom single-page website</span><span class="feat-val">$500+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Mobile responsive design</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Contact form + email alerts</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> GitHub Pages hosting setup</span><span class="feat-val">$50+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Custom website — Home, About, Services, Contact</span><span class="feat-val">$600+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Hand-coded — no templates, no page builders</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized across all devices</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Contact form + instant email alerts</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> We write all your website copy</span><span class="feat-val">$250+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> On-page SEO setup (title, meta, OG tags)</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> GitHub Pages hosting setup</span><span class="feat-val">$75+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 1 month of free changes after launch</span><span class="feat-val">$150+</span></li>
           </ul>
+          <div class="pricing-total-row">
+            <span class="pricing-total-label">Total value</span>
+            <span class="pricing-total-val">$1,725+</span>
+          </div>
+          <div class="pricing-price-block">
+            <div class="pricing-you-pay">You pay</div>
+            <div class="pricing-price">$350</div>
+            <span class="pricing-save">You save $1,375+</span>
+          </div>
           <a href="#contact" class="btn-outline pricing-btn">Get Started</a>
         </div>
 
-        <!-- Standard -->
+        <!-- Get Customers -->
         <div class="pricing-card pricing-featured reveal">
           <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-tier">Growth</div>
-          <div class="pricing-tagline">Turn Visitors Into Clients</div>
-          <div class="pricing-price">$600</div>
-          <div class="pricing-market">Est. market value <span>$1,700+</span></div>
-          <div class="pricing-save">You save ~$1,100</div>
+          <div class="pricing-tier">Get Customers</div>
+          <div class="pricing-tagline">Turn your site into a lead machine</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Starter</span><span class="feat-val">$900+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> GA4 analytics + tracking</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Google Sheets CRM</span><span class="feat-val">$300+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Click tracking on CTAs</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Gallery / Services section</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Social media integration</span><span class="feat-val">$50+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Found</span><span class="feat-val">$1,725+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Order / booking form with live pricing</span><span class="feat-val">$300+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Google Sheets CRM — every lead auto-logged</span><span class="feat-val">$250+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Automated email notification on every inquiry</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> GA4 analytics + CTA click tracking</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Gallery / services showcase section</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Social media link integration</span><span class="feat-val">$75+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 3 months of free changes after launch</span><span class="feat-val">$450+</span></li>
           </ul>
+          <div class="pricing-total-row">
+            <span class="pricing-total-label">Total value</span>
+            <span class="pricing-total-val">$3,350+</span>
+          </div>
+          <div class="pricing-price-block">
+            <div class="pricing-you-pay">You pay</div>
+            <div class="pricing-price">$600</div>
+            <span class="pricing-save">You save $2,750+</span>
+          </div>
           <a href="#contact" class="btn-primary pricing-btn">Get Started</a>
         </div>
 
-        <!-- Full -->
+        <!-- Own the Market -->
         <div class="pricing-card reveal">
-          <div class="pricing-tier">Authority</div>
-          <div class="pricing-tagline">Dominate Your Market</div>
-          <div class="pricing-price">$1,000</div>
-          <div class="pricing-market">Est. market value <span>$2,950+</span></div>
-          <div class="pricing-save">You save ~$1,950</div>
+          <div class="pricing-tier">Own the Market</div>
+          <div class="pricing-tagline">A full digital system, done for you</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Growth</span><span class="feat-val">$1,700+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Sheets dashboard + CRM</span><span class="feat-val">$500+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Auto-reply to customers</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Reviews / testimonials section</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Custom domain + DNS setup</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 3-month maintenance included</span><span class="feat-val">$300+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Customers</span><span class="feat-val">$3,350+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 2–3 custom design versions to choose from</span><span class="feat-val">$500+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Auto-reply emails to every customer inquiry</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Customer reviews + testimonials section</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Custom domain + full DNS setup</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Local Business schema markup</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Open Graph + social sharing optimization</span><span class="feat-val">$100+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 6 months of managed maintenance included</span><span class="feat-val">$900+</span></li>
           </ul>
+          <div class="pricing-total-row">
+            <span class="pricing-total-label">Total value</span>
+            <span class="pricing-total-val">$5,500+</span>
+          </div>
+          <div class="pricing-price-block">
+            <div class="pricing-you-pay">You pay</div>
+            <div class="pricing-price">$1,000</div>
+            <span class="pricing-save">You save $4,500+</span>
+          </div>
           <a href="#contact" class="btn-outline pricing-btn">Get Started</a>
         </div>
 
