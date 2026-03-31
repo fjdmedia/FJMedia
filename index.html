@@ -258,7 +258,8 @@
       background: var(--bg3);
     }
     .carousel-arrow svg { width: 16px; height: 16px; }
-    .carousel-viewport { flex: 1; overflow: hidden; }
+    .carousel-viewport { flex: 1; overflow: hidden; cursor: grab; }
+    .carousel-viewport:active { cursor: grabbing; }
     .portfolio-track {
       display: flex;
       gap: 20px;
@@ -526,12 +527,102 @@
     .pricing-addon-sub { font-size: 0.8rem; color: var(--text-light); margin-left: auto; }
     .pricing-card.reveal:nth-child(2) { transition-delay: 0.1s; }
     .pricing-card.reveal:nth-child(3) { transition-delay: 0.2s; }
+
+    /* Event track */
+    .event-track {
+      margin-top: 3rem; border-top: 1px solid var(--border);
+      padding-top: 2.4rem; text-align: center;
+    }
+    .event-track-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-family: var(--mono); margin-bottom: 0.5rem;
+    }
+    .event-track-heading {
+      font-size: 1.25rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem;
+    }
+    .event-track-sub {
+      font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.8rem;
+    }
+    .event-card {
+      display: inline-block; text-align: left;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem 2.2rem;
+      max-width: 420px; width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+    .event-card .pricing-tier { font-size: 1.1rem; }
+    .event-upgrade {
+      font-size: 0.8rem; color: var(--text-light); text-align: center;
+      margin-top: 1rem;
+    }
+    .event-upgrade a { color: var(--accent); text-decoration: none; }
+    .event-upgrade a:hover { text-decoration: underline; }
+
+    /* ── MOBILE ── */
     @media (max-width: 900px) {
+      /* Layout */
+      section { padding: 4rem 5%; }
+      #hero { padding: 7rem 5% 4rem; min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-right { display: none; }
+      .hero-sub { max-width: 100%; }
+
+      /* Offer */
+      .offer-pillars { flex-direction: column; align-items: stretch; gap: 1rem; }
+      .offer-pillar { max-width: 100%; }
+
+      /* Services / Why */
+      .services-grid, .why-grid { grid-template-columns: 1fr; }
+
+      /* Portfolio */
+      .carousel-arrow { width: 36px; height: 36px; }
+
+      /* Process */
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .step-line { display: none; }
+
+      /* ROI */
+      .roi-block { padding: 1.4rem 1.2rem; }
+      .roi-examples { grid-template-columns: 1fr; gap: 0.75rem; }
+      .roi-statement { font-size: 0.95rem; }
+
+      /* Scarcity */
+      .scarcity-bar { flex-wrap: wrap; font-size: 0.8rem; }
+
+      /* Pricing */
       .pricing-grid { grid-template-columns: 1fr; }
       .pricing-featured { transform: none; }
       .pricing-featured:hover { transform: translateY(-4px); }
+      .pricing-price { font-size: 2.2rem; }
+      .feat-val { display: none; }
       .pricing-addon { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .pricing-addon-sub { margin-left: 0; }
+
+      /* Event */
+      .event-track { margin-top: 2rem; padding-top: 1.8rem; }
+      .event-card { padding: 1.6rem 1.4rem; }
+
+      /* Contact */
+      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 3.5rem 4%; }
+      #hero { padding: 6.5rem 4% 3.5rem; }
+      .hero-title { font-size: 2rem; }
+      .offer-headline { font-size: 2rem; }
+      .offer-pillar-num { font-size: 1.6rem; }
+      .section-title { font-size: 1.5rem; }
+      .process-grid { grid-template-columns: 1fr; }
+      .roi-block { padding: 1.2rem 1rem; }
+      .pricing-card { padding: 1.6rem 1.4rem; }
+      .pricing-price { font-size: 2rem; }
+      .scarcity-bar { padding: 0.75rem 1rem; }
     }
 
     /* FOOTER */
@@ -658,17 +749,9 @@
     .process-step.reveal:nth-child(3) { transition-delay: 0.2s; }
     .process-step.reveal:nth-child(4) { transition-delay: 0.3s; }
 
-    /* MOBILE */
+    /* Nav mobile */
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-right { display: none; }
-      .services-grid, .why-grid { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: 1fr 1fr; }
-      .carousel-arrow { display: none; }
-      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
-      footer { flex-direction: column; text-align: center; }
-      .step-line { display: none; }
     }
   </style>
 </head>
@@ -1167,6 +1250,32 @@
         <span class="pricing-addon-text">Monthly Maintenance Retainer — <strong>from $150/month</strong></span>
         <span class="pricing-addon-sub">Maintain ($150/mo): updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates &amp; SEO monitoring.</span>
       </div>
+
+      <!-- Event Track -->
+      <div class="event-track reveal">
+        <p class="event-track-eyebrow">Hosting an Event?</p>
+        <h3 class="event-track-heading">We build event sites too.</h3>
+        <p class="event-track-sub">Wedding socials, fundraisers, ticketed events — a separate, simpler package built for one-time events.</p>
+        <div class="event-card reveal">
+          <div class="pricing-tier">Event Site</div>
+          <div class="pricing-tagline">Everything your event needs online — nothing it doesn't</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="feat-left"><span class="check">✓</span> Single-page event site, hand-coded</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Prize gallery with lightbox</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Event details — date, venue, tickets, prizes</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized + shareable link</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Hosted free for the duration of your event</span></li>
+          </ul>
+          <div class="pricing-price-block">
+            <div class="pricing-you-pay">One-time</div>
+            <div class="pricing-price">$300</div>
+          </div>
+          <a href="#contact" class="btn-primary pricing-btn">Book a Free Intro Call</a>
+        </div>
+        <p class="event-upgrade">Want to keep your site after the event? Upgrade to <a href="#pricing">Get Found ($600)</a> and turn it into a permanent business page.</p>
+      </div>
+
     </div>
   </section>
 
@@ -1209,6 +1318,7 @@
             <option>Get Found — $600</option>
             <option>Get Customers — $1,000</option>
             <option>Own the Market — $1,600</option>
+            <option>Event Site — $300</option>
             <option>Monthly Maintenance</option>
             <option>Not Sure Yet</option>
           </select>
@@ -1255,7 +1365,7 @@
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     })();
 
-    // Portfolio carousel
+    // Portfolio carousel — infinite loop (prepend + append clones)
     (function() {
       const viewport = document.querySelector('.carousel-viewport');
       const track    = document.querySelector('.portfolio-track');
@@ -1265,59 +1375,96 @@
       const origCards = Array.from(track.querySelectorAll('.portfolio-card'));
       const n = origCards.length;
 
-      // Clone all cards and append for infinite loop
-      origCards.forEach(card => track.appendChild(card.cloneNode(true)));
+      // Prepend clones in reverse order → positions 0..n-1 look like [...C, D] before real A
+      [...origCards].reverse().forEach(c => track.prepend(c.cloneNode(true)));
+      // Append clones → seamless rightward wrap
+      origCards.forEach(c => track.appendChild(c.cloneNode(true)));
 
-      let idx = 0;
+      // Real cards now start at index n
+      let idx  = n;
       let busy = false;
 
-      function cardWidth() {
-        return (viewport.offsetWidth - GAP * 2) / 3;
+      function visibleCount() {
+        return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
       }
-
+      function cardWidth() {
+        const vc = visibleCount();
+        return (viewport.offsetWidth - GAP * (vc - 1)) / vc;
+      }
       function setCardWidths() {
         const cw = cardWidth();
         track.querySelectorAll('.portfolio-card').forEach(c => { c.style.width = cw + 'px'; });
       }
-
       function moveTo(i, animate) {
         track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
-        track.style.transform = 'translateX(-' + (i * (cardWidth() + GAP)) + 'px)';
+        track.style.transform  = 'translateX(-' + (i * (cardWidth() + GAP)) + 'px)';
         idx = i;
       }
-
+      function afterMove() {
+        // Silently jump back into the real-card zone after crossing a boundary
+        if      (idx >= n + n) moveTo(idx - n, false);
+        else if (idx <  n)     moveTo(idx + n, false);
+        busy = false;
+      }
       function next() {
         if (busy) return;
         busy = true;
         moveTo(idx + 1, true);
-        if (idx >= n) {
-          setTimeout(() => { moveTo(0, false); busy = false; }, 460);
-        } else {
-          setTimeout(() => { busy = false; }, 460);
-        }
+        setTimeout(afterMove, 460);
       }
-
       function prev() {
         if (busy) return;
         busy = true;
-        if (idx === 0) {
-          moveTo(n, false);
-          requestAnimationFrame(() => requestAnimationFrame(() => {
-            moveTo(n - 1, true);
-            setTimeout(() => { busy = false; }, 460);
-          }));
-        } else {
-          moveTo(idx - 1, true);
-          setTimeout(() => { busy = false; }, 460);
-        }
+        moveTo(idx - 1, true);
+        setTimeout(afterMove, 460);
       }
 
       document.querySelector('.next-arrow').addEventListener('click', next);
       document.querySelector('.prev-arrow').addEventListener('click', prev);
 
+      // ── Drag / swipe ─────────────────────────────────────────────
+      let dragStartX = 0;
+      let dragging   = false;
+      let dragOffset = 0;
+      const THRESHOLD = 50;
+
+      function dragStart(x) {
+        if (busy) return;
+        dragStartX = x;
+        dragging   = true;
+        dragOffset = 0;
+        track.style.transition = 'none';
+      }
+      function dragMove(x) {
+        if (!dragging) return;
+        dragOffset = x - dragStartX;
+        const base = -(idx * (cardWidth() + GAP));
+        track.style.transform = 'translateX(' + (base + dragOffset) + 'px)';
+      }
+      function dragEnd() {
+        if (!dragging) return;
+        dragging = false;
+        if      (dragOffset < -THRESHOLD) next();
+        else if (dragOffset >  THRESHOLD) prev();
+        else moveTo(idx, true);
+      }
+
+      // Mouse
+      viewport.addEventListener('mousedown', e => { dragStart(e.clientX); });
+      window .addEventListener('mousemove',  e => { dragMove(e.clientX); });
+      window .addEventListener('mouseup',    ()  => { dragEnd(); });
+
+      // Touch
+      viewport.addEventListener('touchstart', e => { dragStart(e.touches[0].clientX); }, { passive: true });
+      viewport.addEventListener('touchmove',  e => { dragMove(e.touches[0].clientX); },  { passive: true });
+      viewport.addEventListener('touchend',   ()  => { dragEnd(); });
+
+      // Prevent card links firing on drag
+      viewport.addEventListener('click', e => { if (Math.abs(dragOffset) > 5) e.preventDefault(); }, true);
+
       window.addEventListener('resize', () => { setCardWidths(); moveTo(idx, false); });
       setCardWidths();
-      moveTo(0, false);
+      moveTo(idx, false);
     })();
 
     form.addEventListener('submit', function(e) {
