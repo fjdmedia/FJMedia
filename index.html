@@ -13,6 +13,8 @@
   <meta name="twitter:title" content="FJMedia — Web Design & Digital Solutions" />
   <meta name="twitter:description" content="Custom websites for local businesses. Built first, paid after approval. Winnipeg, MB." />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -743,30 +745,8 @@
       font-weight: 300;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .reveal.in-view { opacity: 1; transform: none; }
-
-    /* Card stagger delays */
-    .service-card.reveal:nth-child(2),
-    .why-card.reveal:nth-child(2),
-
-
-    .service-card.reveal:nth-child(3),
-    .why-card.reveal:nth-child(3),
-
-    .service-card.reveal:nth-child(4) { transition-delay: 0.1s; }
-    .service-card.reveal:nth-child(5) { transition-delay: 0.2s; }
-    .service-card.reveal:nth-child(6) { transition-delay: 0.3s; }
-    .service-card.reveal:nth-child(7) { transition-delay: 0.1s; }
-    .service-card.reveal:nth-child(8) { transition-delay: 0.2s; }
-
-    .process-step.reveal:nth-child(2) { transition-delay: 0.1s; }
-    .process-step.reveal:nth-child(3) { transition-delay: 0.2s; }
-    .process-step.reveal:nth-child(4) { transition-delay: 0.3s; }
+    .pricing-card.reveal:nth-child(2) { transition-delay: 0.1s; }
+    .pricing-card.reveal:nth-child(3) { transition-delay: 0.2s; }
 
     /* Nav mobile */
     @media (max-width: 900px) {
@@ -1373,21 +1353,75 @@
     const msg  = document.getElementById('formMsg');
     const btn  = document.getElementById('submitBtn');
 
-    // Scroll reveal
-    (function() {
-      [
-        '.service-card', '.process-step', '.portfolio-card', '.why-card',
-        '.contact-info', '.contact-form'
-      ].forEach(s => document.querySelectorAll(s).forEach(el => el.classList.add('reveal')));
+    // GSAP ScrollTrigger animations
+    gsap.registerPlugin(ScrollTrigger);
 
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.1 });
+    // Section header elements — fade up as sections enter
+    gsap.utils.toArray('.section-label, .section-title, .section-sub, .divider, .offer-headline, .offer-sub').forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        opacity: 0, y: 22, duration: 0.65, ease: 'power2.out'
+      });
+    });
 
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    })();
+    // Service cards — stagger in
+    gsap.from('.service-card', {
+      scrollTrigger: { trigger: '.services-grid', start: 'top 78%' },
+      opacity: 0, y: 35, duration: 0.55, stagger: 0.07, ease: 'power2.out'
+    });
+
+    // Process steps — stagger in
+    gsap.from('.process-step', {
+      scrollTrigger: { trigger: '.process-grid', start: 'top 78%' },
+      opacity: 0, y: 30, duration: 0.55, stagger: 0.1, ease: 'power2.out'
+    });
+
+    // Why cards — stagger in
+    gsap.from('.why-card', {
+      scrollTrigger: { trigger: '.why-grid', start: 'top 78%' },
+      opacity: 0, y: 30, duration: 0.5, stagger: 0.08, ease: 'power2.out'
+    });
+
+    // Offer pillars — bounce in with spring
+    gsap.from('.offer-pillar', {
+      scrollTrigger: { trigger: '.offer-pillars', start: 'top 82%' },
+      opacity: 0, y: 25, scale: 0.95, duration: 0.55, stagger: 0.12,
+      ease: 'back.out(1.5)'
+    });
+
+    // ROI block
+    gsap.from('.roi-block', {
+      scrollTrigger: { trigger: '.roi-block', start: 'top 82%' },
+      opacity: 0, y: 20, duration: 0.55, ease: 'power2.out'
+    });
+
+    // Scarcity bar
+    gsap.from('.scarcity-bar', {
+      scrollTrigger: { trigger: '.scarcity-bar', start: 'top 88%' },
+      opacity: 0, y: 15, duration: 0.5, ease: 'power2.out'
+    });
+
+    // Pricing cards — stagger in
+    gsap.from('.pricing-card', {
+      scrollTrigger: { trigger: '.pricing-grid', start: 'top 78%' },
+      opacity: 0, y: 40, duration: 0.6, stagger: 0.12, ease: 'power2.out'
+    });
+
+    // Event track
+    gsap.from('.event-track', {
+      scrollTrigger: { trigger: '.event-track', start: 'top 85%' },
+      opacity: 0, y: 20, duration: 0.55, ease: 'power2.out'
+    });
+
+    // Contact — slide in from both sides
+    gsap.from('.contact-info', {
+      scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%' },
+      opacity: 0, x: -40, duration: 0.7, ease: 'power2.out'
+    });
+    gsap.from('.contact-form', {
+      scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%' },
+      opacity: 0, x: 40, duration: 0.7, ease: 'power2.out'
+    });
 
     // Portfolio carousel — infinite loop (prepend + append clones)
     (function() {
