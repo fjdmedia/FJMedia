@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia Logo — V1 Badge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── LOGO NAV BAR ── */
+    .logo-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 46px;
+      background: #091929;
+      border-bottom: 1px solid #0c2236;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 6px;
+      z-index: 9999;
+    }
+    .logo-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 13px;
+      border-radius: 5px;
+      border: 1px solid #112a44;
+      color: #3a6080;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .logo-nav a:hover { border-color: #1b3a56; color: #888; background: #0d1f3c; }
+    .logo-nav a.active { background: #0d1f3c; border-color: #c9a84c; color: #f5f5f5; }
+    .logo-nav a.active .nav-num { color: #c9a84c; }
+    .logo-nav a .nav-num { font-size: 10px; color: #c9a84c; }
+    .logo-nav-sep { width: 1px; height: 18px; background: #0c2236; margin: 0 4px; }
+    .logo-nav a.back { color: #1b3a56; letter-spacing: 0.05em; }
+    .logo-nav a.back:hover { color: #666; }
+
+    body {
+      background: #071520;
+      padding-top: 46px;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 60px 40px;
+    }
+
+    .version-tag {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #183450;
+      margin-bottom: 64px;
+    }
+
+    .stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+
+    .stage-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #183450;
+      align-self: flex-start;
+    }
+
+    .canvas-dark {
+      width: 100%;
+      background: #0d1f3c;
+      border: 1px solid #0e2438;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 48px;
+    }
+
+    .canvas-light {
+      width: 100%;
+      background: #f9f9f9;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 48px;
+    }
+
+    .canvas-split {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .canvas-split .canvas-dark,
+    .canvas-split .canvas-light { max-width: 100%; }
+
+    /* ── THE LOGO ── */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .mark {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: transparent;
+      border: 2px solid #c9a84c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* corner cuts */
+    .mark::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 9px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .mark span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: #f5f5f5;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wordmark {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .wordmark .name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #f5f5f5;
+    }
+
+    .wordmark .name em {
+      font-style: normal;
+      color: #c9a84c;
+    }
+
+    .wordmark .sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #1b3a56;
+    }
+
+    /* light bg adjustments */
+    .on-light .mark {
+      background: #fff;
+      border-color: #c9a84c;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .on-light .mark span { color: #0d1f3c; }
+    .on-light .wordmark .name { color: #0d1f3c; }
+    .on-light .wordmark .sub { color: #bbb; }
+
+    /* small sizes */
+    .sizes {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mini-mark {
+      border-radius: 8px;
+      border: 1.5px solid #c9a84c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .mini-mark span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: #f5f5f5;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="logo-nav">
+    <a href="logo_viewer.html" class="back">← Viewer</a>
+    <div class="logo-nav-sep"></div>
+    <a href="logo_v1_badge.html" class="active"><span class="nav-num">V1</span> Badge</a>
+    <a href="logo_v2_bracket.html"><span class="nav-num">V2</span> Bracket</a>
+    <a href="logo_v3_wordmark.html"><span class="nav-num">V3</span> Wordmark</a>
+    <a href="logo_v4_bold.html"><span class="nav-num">V4</span> Bold</a>
+    <a href="logo_v5_slash.html"><span class="nav-num">V5</span> Slash</a>
+  </nav>
+
+  <div class="version-tag">V1 — The Badge</div>
+
+  <div class="stage">
+    <div class="stage-label">Primary — Dark</div>
+    <div class="canvas-dark">
+      <div class="logo">
+        <div class="mark"><span>FJ</span></div>
+        <div class="wordmark">
+          <div class="name">FJ<em>Media</em></div>
+          <div class="sub">Web Design &amp; Digital Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Reversed — Light</div>
+    <div class="canvas-light">
+      <div class="logo on-light">
+        <div class="mark"><span>FJ</span></div>
+        <div class="wordmark">
+          <div class="name">FJ<em>Media</em></div>
+          <div class="sub">Web Design &amp; Digital Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Favicon / Icon Scale</div>
+    <div class="canvas-dark">
+      <div class="sizes">
+        <div class="mini-mark" style="width:80px;height:80px;border-radius:13px;">
+          <span style="font-size:30px;">FJ</span>
+        </div>
+        <div class="mini-mark" style="width:56px;height:56px;border-radius:9px;">
+          <span style="font-size:21px;">FJ</span>
+        </div>
+        <div class="mini-mark" style="width:40px;height:40px;border-radius:7px;">
+          <span style="font-size:15px;">FJ</span>
+        </div>
+        <div class="mini-mark" style="width:28px;height:28px;border-radius:5px;">
+          <span style="font-size:10px;">FJ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

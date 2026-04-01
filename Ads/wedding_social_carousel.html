@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Social Carousel — FJMedia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 32px;
+      font-family: 'Jost', sans-serif;
+    }
+
+    .label {
+      color: #666;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      align-self: flex-start;
+      width: 1080px;
+      max-width: 100%;
+    }
+
+    /* 1080x1350 at 50% scale = 540x675 for screen preview */
+    .slide-wrapper {
+      width: 540px;
+      height: 675px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: scale(0.5);
+      transform-origin: top left;
+    }
+
+    /* ─── SHARED ─── */
+    .logo {
+      position: absolute;
+      bottom: 48px;
+      left: 64px;
+      font-family: 'Jost', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .slide-counter {
+      position: absolute;
+      bottom: 52px;
+      right: 64px;
+      font-family: 'Jost', sans-serif;
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+
+    .gold-line {
+      width: 80px;
+      height: 2px;
+      background: #c9a84c;
+      margin-bottom: 40px;
+    }
+
+    /* ─── SLIDE 1 — COVER ─── */
+    .slide-1 {
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 100px 96px;
+    }
+
+    .slide-1 .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 48px;
+    }
+
+    .slide-1 h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: #f5efe6;
+      line-height: 1.1;
+      margin-bottom: 56px;
+    }
+
+    .slide-1 .subtitle {
+      font-family: 'Jost', sans-serif;
+      font-size: 26px;
+      font-weight: 300;
+      color: #a89880;
+      letter-spacing: 0.05em;
+    }
+
+    .slide-1 .arrow {
+      color: #c9a84c;
+      font-size: 26px;
+      margin-left: 8px;
+    }
+
+    .slide-1 .logo { color: #a89880; }
+    .slide-1 .slide-counter { color: #a89880; }
+
+    /* Decorative corner accent */
+    .slide-1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle at top right, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+    .slide-1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at bottom left, rgba(201,168,76,0.07) 0%, transparent 70%);
+    }
+
+    /* ─── SLIDES 2–6 — CONTENT ─── */
+    .slide-content {
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 96px;
+      position: relative;
+    }
+
+    .slide-content .number-bg {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'Playfair Display', serif;
+      font-size: 320px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.06);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .slide-content .number-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 36px;
+    }
+
+    .slide-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: #f5efe6;
+      line-height: 1.15;
+      margin-bottom: 48px;
+    }
+
+    .slide-content .divider {
+      width: 72px;
+      height: 2px;
+      background: #c9a84c;
+      margin-bottom: 48px;
+    }
+
+    .slide-content p {
+      font-family: 'Jost', sans-serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: #a89880;
+      line-height: 1.7;
+      max-width: 820px;
+    }
+
+    .slide-content p strong {
+      color: #f5efe6;
+      font-weight: 500;
+    }
+
+    .slide-content .logo { color: #a89880; }
+    .slide-content .slide-counter { color: #a89880; }
+
+    /* ─── SLIDE 7 — CTA ─── */
+    .slide-cta {
+      background: #c9a84c;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 100px 96px;
+      position: relative;
+    }
+
+    .slide-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.12) 0%, transparent 65%);
+    }
+
+    .slide-cta .tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(26,26,46,0.6);
+      margin-bottom: 48px;
+    }
+
+    .slide-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1.15;
+      margin-bottom: 48px;
+      max-width: 860px;
+    }
+
+    .slide-cta .divider {
+      width: 72px;
+      height: 2px;
+      background: rgba(26,26,46,0.3);
+      margin-bottom: 48px;
+    }
+
+    .slide-cta p {
+      font-family: 'Jost', sans-serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: #1a1a2e;
+      line-height: 1.8;
+      margin-bottom: 72px;
+      max-width: 800px;
+    }
+
+    .slide-cta .cta-box {
+      background: #1a1a2e;
+      padding: 36px 56px;
+      border-radius: 4px;
+    }
+
+    .slide-cta .cta-box span {
+      font-family: 'Jost', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #f5efe6;
+      letter-spacing: 0.05em;
+    }
+
+    .slide-cta .cta-box .arrow {
+      color: #c9a84c;
+      margin-left: 12px;
+    }
+
+    .slide-cta .logo { color: rgba(26,26,46,0.5); }
+    .slide-cta .slide-counter { color: rgba(26,26,46,0.5); }
+
+    /* ─── PRINT / EXPORT HINT ─── */
+    .export-note {
+      color: #444;
+      font-size: 13px;
+      font-family: 'Jost', sans-serif;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ─── FOCUS MODE ─── */
+    .slide-wrapper { cursor: pointer; }
+    .slide-wrapper:hover { outline: 2px solid #c9a84c; }
+
+    #focus-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #focus-overlay.active { display: flex; }
+    #focus-overlay .slide-wrapper {
+      cursor: default;
+      width: 540px;
+      height: 675px;
+      flex-shrink: 0;
+    }
+    #focus-overlay .slide-wrapper:hover { outline: none; }
+
+    #focus-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #444;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="export-note">Screenshot each slide at this size — or zoom browser to 100% and screenshot for full 1080px resolution.</p>
+
+  <!-- ── SLIDE 1 ── -->
+  <div class="label">Slide 1 of 7 — Cover</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-1">
+      <div class="eyebrow">Winnipeg Wedding Socials</div>
+      <h1>5 Reasons Your<br>Wedding Social<br>Isn't Selling<br>Tickets Fast<br>Enough</h1>
+      <div class="subtitle">Fix these before your event <span class="arrow">→</span></div>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">1 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2 ── -->
+  <div class="label">Slide 2 of 7 — Your prizes are a text list</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-content">
+      <div class="number-bg">1</div>
+      <div class="number-label"># 01</div>
+      <h2>Your prizes are<br>a text list.</h2>
+      <div class="divider"></div>
+      <p>People don't get excited about words<br>
+      on a screen. They get excited about<br>
+      things they can <strong>actually see</strong>.<br><br>
+      Photos, packaging, real items —<br>
+      that's what makes someone say<br>
+      "I need to be at this event."</p>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">2 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3 ── -->
+  <div class="label">Slide 3 of 7 — No link to share</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-content">
+      <div class="number-bg">2</div>
+      <div class="number-label"># 02</div>
+      <h2>There's no link<br>to share.</h2>
+      <div class="divider"></div>
+      <p>Word of mouth is your biggest ticket seller.<br><br>
+      But if someone wants to send your event<br>
+      to a friend, <strong>there's nowhere to point them</strong>.<br><br>
+      One shareable link turns every guest<br>
+      into a promoter.</p>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">3 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4 ── -->
+  <div class="label">Slide 4 of 7 — DM for ticket info</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-content">
+      <div class="number-bg">3</div>
+      <div class="number-label"># 03</div>
+      <h2>People have to<br>DM you for<br>ticket info.</h2>
+      <div class="divider"></div>
+      <p>Most people won't DM. They'll see the event,<br>
+      get curious, and move on when they can't<br>
+      find the price in <strong>5 seconds</strong>.<br><br>
+      Ticket price, e-transfer info, event details —<br>
+      visible without asking. No friction. More sales.</p>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">4 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5 ── -->
+  <div class="label">Slide 5 of 7 — Looks like every other event</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-content">
+      <div class="number-bg">4</div>
+      <div class="number-label"># 04</div>
+      <h2>Your event looks<br>like every other<br>Facebook event.</h2>
+      <div class="divider"></div>
+      <p>You've put real money into prizes<br>
+      and a venue. That deserves more than<br>
+      a generic event page.<br><br>
+      A dedicated site with your photos,<br>
+      your story, your prizes —<br>
+      <strong>that's something people share</strong>.</p>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">5 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6 ── -->
+  <div class="label">Slide 6 of 7 — Manual updates</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-content">
+      <div class="number-bg">5</div>
+      <div class="number-label"># 05</div>
+      <h2>You're managing<br>everything<br>manually.</h2>
+      <div class="divider"></div>
+      <p>New prize added? You're rewriting posts,<br>
+      updating captions, answering<br>
+      <strong>the same DMs over and over</strong>.<br><br>
+      That's hours you should be spending<br>
+      on your actual event.<br>
+      One site. One update. Done.</p>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">6 / 7</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7 ── -->
+  <div class="label">Slide 7 of 7 — CTA</div>
+  <div class="slide-wrapper">
+    <div class="slide slide-cta">
+      <div class="tag">FJMedia — Winnipeg</div>
+      <h2>More tickets sold.<br>Done in 7 days.<br>Zero upfront.</h2>
+      <div class="divider"></div>
+      <p>Prize gallery + lightbox + ticket info +<br>
+      event details + one shareable link.<br>
+      You send us your info and prize photos —<br>
+      we handle everything else.<br>
+      <strong>You don't pay until you love it.</strong></p>
+      <div class="cta-box">
+        <span>DM "SOCIAL" to get started <span class="arrow">→</span></span>
+      </div>
+      <div class="logo">FJMedia</div>
+      <div class="slide-counter">7 / 7</div>
+    </div>
+  </div>
+
+  <p class="export-note">wedding_social_carousel.html — FJMedia Ads</p>
+
+  <!-- Focus overlay -->
+  <div id="focus-overlay">
+    <div class="slide-wrapper" id="focus-slide-inner"></div>
+    <div id="focus-hint">Click anywhere or press Esc to exit</div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('focus-overlay');
+    const focusInner = document.getElementById('focus-slide-inner');
+
+    document.querySelectorAll('body > .slide-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', () => {
+        focusInner.innerHTML = wrapper.innerHTML;
+        overlay.classList.add('active');
+      });
+    });
+
+    overlay.addEventListener('click', () => overlay.classList.remove('active'));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>

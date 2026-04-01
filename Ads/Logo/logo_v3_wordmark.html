@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia Logo — V3 Wordmark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .logo-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 46px;
+      background: #091929;
+      border-bottom: 1px solid #0c2236;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 6px;
+      z-index: 9999;
+    }
+    .logo-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 13px;
+      border-radius: 5px;
+      border: 1px solid #112a44;
+      color: #3a6080;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .logo-nav a:hover { border-color: #1b3a56; color: #888; background: #0d1f3c; }
+    .logo-nav a.active { background: #0d1f3c; border-color: #c9a84c; color: #f5f5f5; }
+    .logo-nav a.active .nav-num { color: #c9a84c; }
+    .logo-nav a .nav-num { font-size: 10px; color: #c9a84c; }
+    .logo-nav-sep { width: 1px; height: 18px; background: #0c2236; margin: 0 4px; }
+    .logo-nav a.back { color: #1b3a56; letter-spacing: 0.05em; }
+    .logo-nav a.back:hover { color: #666; }
+
+    body {
+      background: #071520;
+      padding-top: 46px;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      gap: 0;
+    }
+
+    .version-tag {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #183450;
+      margin-bottom: 64px;
+    }
+
+    .stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+
+    .stage-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #183450;
+      align-self: flex-start;
+    }
+
+    .canvas-dark {
+      width: 100%;
+      background: #0d1f3c;
+      border: 1px solid #0e2438;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 48px;
+    }
+
+    .canvas-light {
+      width: 100%;
+      background: #f9f9f9;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 48px;
+    }
+
+    /* ── THE LOGO ── */
+
+    /* Main wordmark — type only */
+    .logo-type {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .logo-type .line1 {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      line-height: 1;
+    }
+
+    .logo-type .fj {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      color: #f5f5f5;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .logo-type .media {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 64px;
+      color: #c9a84c;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .logo-type .underline {
+      width: 100%;
+      height: 1.5px;
+      background: linear-gradient(to right, #c9a84c, transparent);
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .logo-type .tagline {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #1b3a56;
+    }
+
+    /* condensed / tight version */
+    .logo-tight {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .logo-tight .fj {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 48px;
+      color: #f5f5f5;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .logo-tight .dot {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 48px;
+      color: #c9a84c;
+      line-height: 1;
+      margin: 0 1px;
+    }
+
+    .logo-tight .media {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 48px;
+      color: #c9a84c;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    /* light bg */
+    .on-light .logo-type .fj { color: #0d1f3c; }
+    .on-light .logo-type .tagline { color: #bbb; }
+    .on-light .logo-tight .fj { color: #0d1f3c; }
+  </style>
+</head>
+<body>
+
+  <nav class="logo-nav">
+    <a href="logo_viewer.html" class="back">← Viewer</a>
+    <div class="logo-nav-sep"></div>
+    <a href="logo_v1_badge.html"><span class="nav-num">V1</span> Badge</a>
+    <a href="logo_v2_bracket.html"><span class="nav-num">V2</span> Bracket</a>
+    <a href="logo_v3_wordmark.html" class="active"><span class="nav-num">V3</span> Wordmark</a>
+    <a href="logo_v4_bold.html"><span class="nav-num">V4</span> Bold</a>
+    <a href="logo_v5_slash.html"><span class="nav-num">V5</span> Slash</a>
+  </nav>
+
+  <div class="version-tag">V3 — Pure Wordmark</div>
+
+  <div class="stage">
+    <div class="stage-label">Primary — Dark</div>
+    <div class="canvas-dark">
+      <div class="logo-type">
+        <div class="line1">
+          <span class="fj">FJ</span><span class="media">Media</span>
+        </div>
+        <div class="underline"></div>
+        <div class="tagline">Web Design &amp; Digital Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Compact — No Tagline</div>
+    <div class="canvas-dark">
+      <div class="logo-tight">
+        <span class="fj">FJ</span><span class="media">Media</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-label">Reversed — Light</div>
+    <div class="canvas-light">
+      <div class="logo-type on-light">
+        <div class="line1">
+          <span class="fj">FJ</span><span class="media">Media</span>
+        </div>
+        <div class="underline"></div>
+        <div class="tagline">Web Design &amp; Digital Solutions</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

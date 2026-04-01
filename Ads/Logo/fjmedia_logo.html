@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FJMedia Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a14;
+      font-family: 'DM Sans', sans-serif;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .section-label {
+      width: 100%;
+      max-width: 900px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 24px;
+      margin-top: 56px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1a1a2a;
+    }
+
+    .preview-dark {
+      width: 100%;
+      max-width: 900px;
+      background: #0d0d1a;
+      border: 1px solid #1e1e30;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+    }
+
+    .preview-light {
+      width: 100%;
+      max-width: 900px;
+      background: #f8f8f8;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+    }
+
+    .preview-grid {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .preview-grid .preview-dark,
+    .preview-grid .preview-light {
+      max-width: 100%;
+    }
+
+    /* ─── LOGO COMPONENTS ─── */
+
+    /* MARK — square badge */
+    .fj-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      background: #0d0d1a;
+      border: 1.5px solid #c9a84c;
+      flex-shrink: 0;
+    }
+
+    .fj-mark span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #f5f5f5;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .fj-mark.large {
+      width: 96px;
+      height: 96px;
+      border-radius: 14px;
+      border-width: 2px;
+    }
+
+    .fj-mark.large span {
+      font-size: 38px;
+    }
+
+    .fj-mark.xl {
+      width: 160px;
+      height: 160px;
+      border-radius: 22px;
+      border-width: 2.5px;
+    }
+
+    .fj-mark.xl span {
+      font-size: 64px;
+    }
+
+    /* Mark on light bg */
+    .fj-mark.on-light {
+      background: #fff;
+      border-color: #c9a84c;
+    }
+
+    .fj-mark.on-light span {
+      color: #0d0d1a;
+    }
+
+    /* WORDMARK — horizontal lockup */
+    .fj-wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .fj-wordmark .text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .fj-wordmark .name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #f5f5f5;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .fj-wordmark .name .gold {
+      color: #c9a84c;
+    }
+
+    .fj-wordmark .tagline {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #666;
+      line-height: 1;
+    }
+
+    .fj-wordmark .divider {
+      width: 1px;
+      height: 44px;
+      background: #2a2a3a;
+      flex-shrink: 0;
+    }
+
+    /* Horizontal lockup — mark + name side by side */
+    .fj-logo-h {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .fj-logo-h .name-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .fj-logo-h .primary-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: #f5f5f5;
+    }
+
+    .fj-logo-h .primary-name .accent {
+      color: #c9a84c;
+    }
+
+    .fj-logo-h .sub-name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10.5px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* Light bg versions */
+    .on-light-text .primary-name { color: #0d0d1a; }
+    .on-light-text .sub-name { color: #999; }
+
+    /* STACKED lockup */
+    .fj-logo-stacked {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .fj-logo-stacked .stacked-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f5f5f5;
+    }
+
+    .fj-logo-stacked .stacked-name .accent { color: #c9a84c; }
+
+    .fj-logo-stacked.on-light-text .stacked-name { color: #0d0d1a; }
+
+    /* WORDMARK ONLY — no mark */
+    .fj-wordmark-only {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+    }
+
+    .fj-wordmark-only .fj-part {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 40px;
+      color: #f5f5f5;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .fj-wordmark-only .media-part {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 40px;
+      color: #c9a84c;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .fj-wordmark-only.on-light-text .fj-part { color: #0d0d1a; }
+
+    /* dot separator */
+    .dot-sep {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #c9a84c;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    /* ─── EXPORT NOTE ─── */
+    .export-note {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 56px;
+      padding: 24px 28px;
+      background: #0d0d1a;
+      border: 1px solid #1e1e30;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .export-note strong {
+      color: #888;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── PRIMARY HORIZONTAL (DARK) ── -->
+  <div class="section-label">Primary — Horizontal Lockup (Dark)</div>
+  <div class="preview-dark">
+    <div class="fj-logo-h">
+      <div class="fj-mark large">
+        <span>FJ</span>
+      </div>
+      <div class="name-group">
+        <div class="primary-name">FJ<span class="accent">Media</span></div>
+        <div class="sub-name">Web Design &amp; Digital Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WORDMARK ONLY (DARK) ── -->
+  <div class="section-label">Wordmark Only — No Mark</div>
+  <div class="preview-dark">
+    <div class="fj-wordmark-only">
+      <span class="fj-part">FJ</span><span class="media-part">Media</span>
+    </div>
+  </div>
+
+  <!-- ── STACKED + MARK ONLY SIDE BY SIDE ── -->
+  <div class="section-label">Stacked Lockup &amp; Mark Only</div>
+  <div class="preview-grid">
+    <div class="preview-dark">
+      <div class="fj-logo-stacked">
+        <div class="fj-mark large"><span>FJ</span></div>
+        <div class="stacked-name">FJ<span class="accent">Media</span></div>
+      </div>
+    </div>
+    <div class="preview-dark">
+      <div class="fj-mark xl"><span>FJ</span></div>
+    </div>
+  </div>
+
+  <!-- ── LIGHT BACKGROUND VERSIONS ── -->
+  <div class="section-label">Reversed — Light Background</div>
+  <div class="preview-light">
+    <div class="fj-logo-h on-light-text">
+      <div class="fj-mark large on-light">
+        <span>FJ</span>
+      </div>
+      <div class="name-group">
+        <div class="primary-name">FJ<span class="accent">Media</span></div>
+        <div class="sub-name">Web Design &amp; Digital Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Wordmark Only — Light Background</div>
+  <div class="preview-light">
+    <div class="fj-wordmark-only on-light-text">
+      <span class="fj-part">FJ</span><span class="media-part">Media</span>
+    </div>
+  </div>
+
+  <!-- ── SMALL SIZES / FAVICON SCALE ── -->
+  <div class="section-label">Small Scale — Favicon &amp; Watermark</div>
+  <div class="preview-dark" style="gap: 40px; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+    <div class="fj-mark" style="width:64px;height:64px;border-radius:10px;"><span style="font-size:24px;">FJ</span></div>
+    <div class="fj-mark" style="width:48px;height:48px;border-radius:8px;"><span style="font-size:18px;">FJ</span></div>
+    <div class="fj-mark" style="width:32px;height:32px;border-radius:5px;"><span style="font-size:12px;">FJ</span></div>
+    <div class="fj-mark" style="width:24px;height:24px;border-radius:4px;"><span style="font-size:9px;">FJ</span></div>
+  </div>
+
+  <!-- ── EXPORT NOTE ── -->
+  <div class="export-note">
+    <strong>How to export:</strong><br>
+    — Screenshot any version above for quick use (Win + Shift + S)<br>
+    — For a clean SVG: right-click the logo in browser DevTools → Inspect → copy the SVG node<br>
+    — To get a transparent PNG: screenshot on the dark bg, then remove background at <strong>remove.bg</strong><br>
+    — Favicon: screenshot the small 32×32 mark above → save as favicon.ico via <strong>favicon.io</strong>
+  </div>
+
+</body>
+</html>

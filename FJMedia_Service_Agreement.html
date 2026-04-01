@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FJMedia — Web Design Service Agreement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #f0ede8;
+      color: #1a1a1a;
+      padding: 40px 20px;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 72px 80px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #c9a84c;
+      margin-bottom: 36px;
+    }
+
+    .agency-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #c9a84c;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .agency-sub {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .doc-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── Parties block ── */
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .party-box {
+      background: #faf9f7;
+      border: 1px solid #e5e0d8;
+      border-left: 3px solid #c9a84c;
+      padding: 18px 20px;
+    }
+
+    .party-box .party-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 10px;
+    }
+
+    .party-box .party-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .party-box .party-detail {
+      font-size: 12.5px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .blank { border-bottom: 1px solid #999; display: inline-block; min-width: 180px; }
+    .blank-sm { border-bottom: 1px solid #999; display: inline-block; min-width: 100px; }
+    .blank-lg { border-bottom: 1px solid #999; display: inline-block; min-width: 280px; }
+
+    /* ── Package selection ── */
+    .package-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0 4px;
+    }
+
+    .pkg-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #faf9f7;
+      border: 1px solid #e5e0d8;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .pkg-option .checkbox {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #999;
+      flex-shrink: 0;
+    }
+
+    .pkg-option .pkg-name { font-weight: 600; color: #1a1a1a; }
+    .pkg-option .pkg-price { color: #c9a84c; font-weight: 600; margin-left: auto; }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e5e0d8;
+    }
+
+    .section p, .section li {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.85;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .section ul li {
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #c9a84c;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: #fdf6e3;
+      border: 1px solid #e8d89a;
+      border-left: 3px solid #c9a84c;
+      padding: 14px 18px;
+      margin: 10px 0;
+    }
+
+    .highlight-box p {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .highlight-box strong { color: #1a1a1a; }
+
+    /* ── Retainer section ── */
+    .retainer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    /* ── Signature block ── */
+    .sig-section {
+      margin-top: 44px;
+      padding-top: 28px;
+      border-top: 2px solid #c9a84c;
+    }
+
+    .sig-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 24px;
+    }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .sig-block .sig-party {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 48px;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .sig-label {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .date-line {
+      border-bottom: 1px solid #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e0d8;
+      text-align: center;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; padding: 48px 64px; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="agency-name">FJMedia</div>
+    <div class="agency-sub">Web Design &amp; Digital Solutions — Winnipeg, MB</div>
+    <div class="doc-title">Web Design Service Agreement</div>
+  </div>
+
+  <!-- Date line -->
+  <div class="section">
+    <p style="font-size:13px; color:#555; margin-bottom:24px;">
+      This Agreement is entered into as of &nbsp;<span class="blank-sm"></span>&nbsp; day of &nbsp;<span class="blank-sm"></span>&nbsp;, 20<span class="blank" style="min-width:40px;"></span>
+    </p>
+  </div>
+
+  <!-- Parties -->
+  <div class="parties">
+    <div class="party-box">
+      <div class="party-label">Service Provider</div>
+      <div class="party-name">FJMedia</div>
+      <div class="party-detail">
+        Operated by James Diaz<br>
+        Winnipeg, Manitoba<br>
+        diazfjamesc@gmail.com
+      </div>
+    </div>
+    <div class="party-box">
+      <div class="party-label">Client</div>
+      <div class="party-name"><span class="blank-lg"></span></div>
+      <div class="party-detail">
+        Business: <span class="blank"></span><br>
+        Email: <span class="blank"></span><br>
+        Phone: <span class="blank"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Package Selection -->
+  <div class="section">
+    <div class="section-title">1. Selected Package</div>
+    <div class="package-grid">
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Get Found</span>
+        <span class="pkg-price">$600</span>
+      </div>
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Get Customers</span>
+        <span class="pkg-price">$1,000</span>
+      </div>
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Own the Market</span>
+        <span class="pkg-price">$1,600</span>
+      </div>
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Event Site</span>
+        <span class="pkg-price">$300</span>
+      </div>
+    </div>
+    <p style="margin-top:10px;">
+      Additional scope or custom work agreed upon: <span class="blank-lg"></span>
+    </p>
+  </div>
+
+  <!-- Scope of Work -->
+  <div class="section">
+    <div class="section-title">2. Scope of Work</div>
+    <p>FJMedia will design and develop a custom website based on the package selected above. The scope is limited to the deliverables described in the FJMedia Service Packages document and any additional items noted in Section 1. Work outside this scope is not included and will require a written amendment.</p>
+  </div>
+
+  <!-- Payment Terms -->
+  <div class="section">
+    <div class="section-title">3. Payment Terms</div>
+    <div class="highlight-box">
+      <p><strong>No payment is due until Client has reviewed the completed website and provided written approval.</strong> Upon approval, full payment is due within <strong>5 business days</strong>. If Client chooses not to proceed after reviewing the site, no payment is owed and no further obligation exists.</p>
+    </div>
+    <ul style="margin-top:10px;">
+      <li>Accepted payment: e-Transfer to diazfjamesc@gmail.com</li>
+      <li>The website will not be connected to a live custom domain until payment is received in full.</li>
+      <li>No refunds are issued after written approval and payment have been received.</li>
+    </ul>
+  </div>
+
+  <!-- Approval Process -->
+  <div class="section">
+    <div class="section-title">4. Approval Process</div>
+    <ul>
+      <li>FJMedia will deliver a preview link (GitHub Pages) for Client review upon completion.</li>
+      <li>Client has <strong>7 calendar days</strong> from the delivery of the preview link to provide written approval or revision requests.</li>
+      <li>If no response is received within 7 days, the project will be placed on hold and the slot may be reassigned.</li>
+      <li>Written approval may be provided via email, text, or any digital message confirming acceptance.</li>
+    </ul>
+  </div>
+
+  <!-- Revisions -->
+  <div class="section">
+    <div class="section-title">5. Revisions</div>
+    <ul>
+      <li>This agreement includes <strong>2 rounds of revisions</strong> at no additional cost.</li>
+      <li>A revision round is defined as a single consolidated list of changes submitted at one time.</li>
+      <li>Additional revisions beyond the included rounds are billed at <strong>$60/hour</strong>, invoiced separately.</li>
+      <li>Requests that change the original agreed scope are considered new work, not revisions.</li>
+    </ul>
+  </div>
+
+  <!-- Content Delivery -->
+  <div class="section">
+    <div class="section-title">6. Client Content &amp; Responsibilities</div>
+    <ul>
+      <li>Client is responsible for providing all required content — including logo files, photos, business information, and any copy not written by FJMedia — within <strong>7 calendar days</strong> of signing this agreement.</li>
+      <li>The 14-day build timeline begins only after all required content has been received.</li>
+      <li>Delays caused by missing or late content are not the responsibility of FJMedia and will extend the delivery date accordingly.</li>
+      <li>Client warrants that all content provided is owned by them or licensed for use.</li>
+    </ul>
+  </div>
+
+  <!-- Intellectual Property -->
+  <div class="section">
+    <div class="section-title">7. Intellectual Property</div>
+    <ul>
+      <li>Upon receipt of full payment, Client owns all rights to the website design, content, and code specific to their project.</li>
+      <li>Until full payment is received, FJMedia retains all rights to the work produced.</li>
+      <li>FJMedia retains the right to display the completed website in its portfolio and marketing materials, unless Client requests otherwise in writing.</li>
+      <li>Third-party tools, fonts, or libraries used in the build remain subject to their respective licenses.</li>
+    </ul>
+  </div>
+
+  <!-- Hosting -->
+  <div class="section">
+    <div class="section-title">8. Hosting &amp; Domain</div>
+    <ul>
+      <li>The website is hosted on GitHub Pages at no additional cost for the duration of the engagement.</li>
+      <li>Custom domain connection is included in the <em>Own the Market</em> package. For other packages, domain connection is available as an add-on at <strong>$100</strong> (one-time).</li>
+      <li>Client is responsible for annual domain registration fees (typically $15–$20/yr) if a custom domain is used.</li>
+      <li>FJMedia is not responsible for domain downtime caused by third-party registrars or hosting providers.</li>
+    </ul>
+  </div>
+
+  <!-- Monthly Retainer -->
+  <div class="section">
+    <div class="section-title">9. Monthly Retainer (Optional)</div>
+    <p style="margin-bottom:10px;">If a retainer is selected, it begins after the included free-changes period expires.</p>
+    <div class="retainer-grid">
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Maintain</span>
+        <span class="pkg-price">$150/mo</span>
+      </div>
+      <div class="pkg-option">
+        <div class="checkbox"></div>
+        <span class="pkg-name">Grow</span>
+        <span class="pkg-price">$300/mo</span>
+      </div>
+    </div>
+    <ul style="margin-top:10px;">
+      <li>Either party may cancel the retainer with <strong>30 days written notice</strong>.</li>
+      <li>Retainer is billed monthly via e-Transfer on the same date each month.</li>
+    </ul>
+  </div>
+
+  <!-- Limitation of Liability -->
+  <div class="section">
+    <div class="section-title">10. Limitation of Liability</div>
+    <ul>
+      <li>FJMedia makes no guarantees regarding business outcomes such as increased revenue, leads, search rankings, or sales resulting from the website.</li>
+      <li>FJMedia's total liability under this agreement shall not exceed the total amount paid by Client.</li>
+      <li>FJMedia is not liable for indirect, incidental, or consequential damages of any kind.</li>
+    </ul>
+  </div>
+
+  <!-- Confidentiality -->
+  <div class="section">
+    <div class="section-title">11. Confidentiality</div>
+    <p>Both parties agree to keep confidential any proprietary business information shared during this engagement and not to disclose it to any third party without written consent.</p>
+  </div>
+
+  <!-- Termination -->
+  <div class="section">
+    <div class="section-title">12. Termination</div>
+    <ul>
+      <li>Client may terminate this agreement at any time before written approval is given — no payment is owed.</li>
+      <li>FJMedia may terminate this agreement if Client fails to provide required content within 30 days of signing, or engages in conduct that makes the working relationship untenable.</li>
+      <li>Upon termination before approval, all work produced remains the property of FJMedia.</li>
+    </ul>
+  </div>
+
+  <!-- Governing Law -->
+  <div class="section">
+    <div class="section-title">13. Governing Law</div>
+    <p>This Agreement is governed by the laws of the Province of Manitoba, Canada. Any disputes arising from this Agreement will be resolved in Winnipeg, Manitoba.</p>
+  </div>
+
+  <!-- Entire Agreement -->
+  <div class="section">
+    <div class="section-title">14. Entire Agreement</div>
+    <p>This document constitutes the entire agreement between the parties and supersedes all prior discussions or representations. Any amendments must be agreed to in writing by both parties.</p>
+  </div>
+
+  <!-- Signatures -->
+  <div class="sig-section">
+    <div class="sig-title">Signatures</div>
+    <p style="font-size:13px; color:#555; margin-bottom:28px;">By signing below, both parties agree to the terms set out in this Agreement.</p>
+    <div class="sig-grid">
+
+      <div class="sig-block">
+        <div class="sig-party">FJMedia — Service Provider</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Signature</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Printed Name</div>
+        <div class="date-line"></div>
+        <div class="sig-label">Date</div>
+      </div>
+
+      <div class="sig-block">
+        <div class="sig-party">Client</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Signature</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">Printed Name</div>
+        <div class="date-line"></div>
+        <div class="sig-label">Date</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    FJMedia — Winnipeg, MB &nbsp;|&nbsp; diazfjamesc@gmail.com &nbsp;|&nbsp; fjdmedia.github.io/FJMedia
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — V2 Bracket Logo Variations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@200;300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:    #071520;
+      --navy2:   #0d1f3c;
+      --navy3:   #112840;
+      --border:  #1b3a56;
+      --gold:    #c9a84c;
+      --gold-dim: rgba(201,168,76,0.12);
+      --cream:   #EDEAE5;
+      --mid:     #A09C96;
+      --dim:     #3a6080;
+    }
+
+    body {
+      background: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      padding: 56px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 56px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .page-header h1 span { color: var(--gold); }
+    .page-header p {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 48px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--border);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      opacity: 0.4;
+    }
+
+    /* ── CANVAS ── */
+    .canvas-dark {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+      width: 100%;
+    }
+    .canvas-light {
+      background: #f7f5f2;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+      width: 100%;
+    }
+    .canvas-gold {
+      background: var(--gold);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 48px;
+      width: 100%;
+    }
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+    .canvas-grid .canvas-dark,
+    .canvas-grid .canvas-light,
+    .canvas-grid .canvas-gold { padding: 56px 40px; }
+
+    /* ── LOGO COMPONENTS ── */
+
+    /* bracket + FJ mark */
+    .bk { color: var(--gold); font-family: 'Space Mono', monospace; font-weight: 400; line-height: 1; }
+    .fj { color: var(--cream); font-family: 'Syne', sans-serif; font-weight: 800; line-height: 1; letter-spacing: -0.01em; }
+    .media-word { color: var(--mid); font-family: 'DM Sans', sans-serif; font-weight: 300; letter-spacing: 0.32em; text-transform: uppercase; }
+
+    /* ── V1: PRIMARY STACKED ── */
+    .logo-stacked {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-stacked .mark-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      line-height: 1;
+    }
+
+    /* ── V2: HORIZONTAL ── */
+    .logo-h {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .logo-h .h-sep {
+      width: 1px;
+      height: 36px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .logo-h .h-text {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .logo-h .h-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--cream);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .logo-h .h-name em { font-style: normal; color: var(--gold); }
+    .logo-h .h-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ── V3: COMPACT INLINE — brackets tight to FJ, MEDIA beside ── */
+    .logo-compact {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .logo-compact .mark-inline {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    /* ── V4: ICON ONLY — small square ── */
+    .logo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy2);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+
+    /* ── V5: DARK BACKGROUND PILL / TAG ── */
+    .logo-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 10px 22px 10px 16px;
+    }
+    .logo-pill .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── V6: MONOGRAM ONLY (square stamp) ── */
+    .logo-stamp {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 18px 24px 14px;
+      position: relative;
+    }
+    .logo-stamp .stamp-mark {
+      display: flex;
+      align-items: center;
+    }
+    .logo-stamp .stamp-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+
+    /* ── ON-GOLD overrides ── */
+    .on-gold .bk { color: var(--navy); }
+    .on-gold .fj { color: var(--navy); }
+    .on-gold .media-word { color: rgba(7,21,32,0.5); }
+    .on-gold .h-name { color: var(--navy); }
+    .on-gold .h-name em { color: rgba(7,21,32,0.6); }
+    .on-gold .h-sub { color: rgba(7,21,32,0.45); }
+    .on-gold .h-sep { background: rgba(7,21,32,0.2); }
+
+    /* ── ON-LIGHT overrides ── */
+    .on-light .bk { color: #b8933e; }
+    .on-light .fj { color: #071520; }
+    .on-light .media-word { color: #999; }
+    .on-light .h-name { color: #071520; }
+    .on-light .h-name em { color: #b8933e; }
+    .on-light .h-sub { color: #bbb; }
+    .on-light .h-sep { background: #ddd; }
+    .on-light .logo-icon { background: #fff; border-color: #b8933e; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+
+    /* ── DOWNLOAD BUTTON ── */
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      padding: 7px 16px;
+      border-radius: 5px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      align-self: flex-end;
+    }
+    .dl-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .dl-btn svg { width: 12px; height: 12px; }
+    .dl-btn.loading { opacity: 0.5; pointer-events: none; }
+
+    /* ── SIZES ROW ── */
+    .sizes-row {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .size-label {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1><span>{</span>FJ<span>}</span> — V2 Bracket Variations</h1>
+    <p>FJMedia Logo Kit</p>
+  </div>
+
+  <!-- ── 1. PRIMARY STACKED ── -->
+  <div class="section">
+    <div class="section-label">Primary — Stacked (Dark Background)</div>
+    <div class="canvas-dark">
+      <div class="logo-stacked">
+        <div class="mark-row">
+          <span class="bk" style="font-size:60px;">{</span>
+          <span class="fj" style="font-size:60px; padding:0 8px;">FJ</span>
+          <span class="bk" style="font-size:60px;">}</span>
+        </div>
+        <div class="media-word" style="font-size:12px;">Media &nbsp;·&nbsp; Web Design &amp; Digital Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-stacked-dark')"></button>
+
+  <!-- ── 2. HORIZONTAL LOCKUP ── -->
+  <div class="section">
+    <div class="section-label">Horizontal Lockup — with Wordmark</div>
+    <div class="canvas-dark">
+      <div class="logo-h">
+        <div class="mark-row" style="display:flex;align-items:center;">
+          <span class="bk" style="font-size:48px;">{</span>
+          <span class="fj" style="font-size:48px; padding:0 6px;">FJ</span>
+          <span class="bk" style="font-size:48px;">}</span>
+        </div>
+        <div class="h-sep"></div>
+        <div class="h-text">
+          <div class="h-name">FJ<em>Media</em></div>
+          <div class="h-sub">Web Design &amp; Digital Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-horizontal-dark')"></button>
+
+  <!-- ── 3. COMPACT INLINE ── -->
+  <div class="section">
+    <div class="section-label">Compact Inline — Nav / Watermark Use</div>
+    <div class="canvas-dark">
+      <div class="logo-compact">
+        <div class="mark-inline">
+          <span class="bk" style="font-size:32px;">{</span>
+          <span class="fj" style="font-size:32px; padding:0 4px;">FJ</span>
+          <span class="bk" style="font-size:32px;">}</span>
+        </div>
+        <span class="media-word" style="font-size:11px; letter-spacing:0.28em; align-self:center;">Media</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-compact-inline')"></button>
+
+  <!-- ── 4. LIGHT + GOLD SIDE BY SIDE ── -->
+  <div class="section">
+    <div class="section-label">Reversed — Light &amp; Gold Backgrounds</div>
+    <div class="canvas-grid">
+      <div class="canvas-light">
+        <div class="logo-stacked on-light">
+          <div class="mark-row">
+            <span class="bk" style="font-size:52px;">{</span>
+            <span class="fj" style="font-size:52px; padding:0 8px;">FJ</span>
+            <span class="bk" style="font-size:52px;">}</span>
+          </div>
+          <div class="media-word" style="font-size:11px;">Media &nbsp;·&nbsp; Web Design &amp; Digital Solutions</div>
+        </div>
+      </div>
+      <div class="canvas-gold">
+        <div class="logo-stacked on-gold">
+          <div class="mark-row">
+            <span class="bk" style="font-size:52px;">{</span>
+            <span class="fj" style="font-size:52px; padding:0 8px;">FJ</span>
+            <span class="bk" style="font-size:52px;">}</span>
+          </div>
+          <div class="media-word" style="font-size:11px;">Media &nbsp;·&nbsp; Web Design &amp; Digital Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-light-gold')"></button>
+
+  <!-- ── 5. HORIZONTAL LIGHT + GOLD ── -->
+  <div class="section">
+    <div class="section-label">Horizontal — Light &amp; Gold Backgrounds</div>
+    <div class="canvas-grid">
+      <div class="canvas-light">
+        <div class="logo-h on-light">
+          <div class="mark-row" style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:40px;">{</span>
+            <span class="fj" style="font-size:40px; padding:0 5px;">FJ</span>
+            <span class="bk" style="font-size:40px;">}</span>
+          </div>
+          <div class="h-sep"></div>
+          <div class="h-text">
+            <div class="h-name">FJ<em>Media</em></div>
+            <div class="h-sub">Web Design &amp; Digital Solutions</div>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-gold">
+        <div class="logo-h on-gold">
+          <div class="mark-row" style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:40px;">{</span>
+            <span class="fj" style="font-size:40px; padding:0 5px;">FJ</span>
+            <span class="bk" style="font-size:40px;">}</span>
+          </div>
+          <div class="h-sep"></div>
+          <div class="h-text">
+            <div class="h-name">FJ<em>Media</em></div>
+            <div class="h-sub">Web Design &amp; Digital Solutions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-horizontal-light-gold')"></button>
+
+  <!-- ── 6. STAMP + PILL VARIANTS ── -->
+  <div class="section">
+    <div class="section-label">Stamp &amp; Pill — Badge / Social Profile Use</div>
+    <div class="canvas-dark" style="gap:48px; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+      <!-- Stamp -->
+      <div class="logo-stamp">
+        <div class="stamp-mark">
+          <span class="bk" style="font-size:36px;">{</span>
+          <span class="fj" style="font-size:36px; padding:0 5px;">FJ</span>
+          <span class="bk" style="font-size:36px;">}</span>
+        </div>
+        <div class="stamp-sub">Media</div>
+      </div>
+      <!-- Pill -->
+      <div class="logo-pill">
+        <div class="pill-dot"></div>
+        <span class="bk" style="font-size:20px;">{</span>
+        <span class="fj" style="font-size:20px; padding:0 3px;">FJ</span>
+        <span class="bk" style="font-size:20px;">}</span>
+        <span style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--dim); margin-left:6px;">Media</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-stamp-pill')"></button>
+
+  <!-- ── 7. SCALE / FAVICON ── -->
+  <div class="section">
+    <div class="section-label">Scale Reference — Favicon to Full Size</div>
+    <div class="canvas-dark">
+      <div class="sizes-row">
+        <div class="size-item">
+          <div style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:72px;">{</span>
+            <span class="fj" style="font-size:72px;padding:0 8px;">FJ</span>
+            <span class="bk" style="font-size:72px;">}</span>
+          </div>
+          <div class="size-label">Full</div>
+        </div>
+        <div class="size-item">
+          <div style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:48px;">{</span>
+            <span class="fj" style="font-size:48px;padding:0 6px;">FJ</span>
+            <span class="bk" style="font-size:48px;">}</span>
+          </div>
+          <div class="size-label">Medium</div>
+        </div>
+        <div class="size-item">
+          <div style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:30px;">{</span>
+            <span class="fj" style="font-size:30px;padding:0 4px;">FJ</span>
+            <span class="bk" style="font-size:30px;">}</span>
+          </div>
+          <div class="size-label">Small</div>
+        </div>
+        <div class="size-item">
+          <div style="display:flex;align-items:center;">
+            <span class="bk" style="font-size:18px;">{</span>
+            <span class="fj" style="font-size:18px;padding:0 2px;">FJ</span>
+            <span class="bk" style="font-size:18px;">}</span>
+          </div>
+          <div class="size-label">Nav</div>
+        </div>
+        <div class="size-item">
+          <div class="logo-stamp" style="padding:10px 14px;">
+            <div class="stamp-mark">
+              <span class="bk" style="font-size:18px;">{</span>
+              <span class="fj" style="font-size:18px;padding:0 3px;">FJ</span>
+              <span class="bk" style="font-size:18px;">}</span>
+            </div>
+            <div class="stamp-sub" style="font-size:6px;margin-top:4px;">Media</div>
+          </div>
+          <div class="size-label">Icon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="dl-btn" onclick="downloadLogo(this.previousElementSibling, 'fjmedia-scale-reference')"></button>
+
+  <script>
+    function downloadLogo(canvasEl, filename) {
+      const btn = canvasEl.parentElement.querySelector('.dl-btn');
+      if (btn) { btn.classList.add('loading'); btn.textContent = 'Saving…'; }
+
+      html2canvas(canvasEl, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: null,
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = filename + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        if (btn) { btn.classList.remove('loading'); btn.innerHTML = dlIcon() + ' Download PNG'; }
+      });
+    }
+
+    function dlIcon() {
+      return `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 2v8M5 7l3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/>
+      </svg>`;
+    }
+
+    // Wire up all download buttons after page loads
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.dl-btn').forEach(btn => {
+        btn.innerHTML = dlIcon() + ' Download PNG';
+      });
+    });
+  </script>
+
+</body>
+</html>
