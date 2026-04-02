@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — Sugar & Shai Client Reveal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:     #FDF6EE;
+      --blush:     #F2C4CE;
+      --rose:      #D4849A;
+      --mocha:     #8B5E52;
+      --chocolate: #5C3D35;
+      --olive:     #4A5E2A;
+      --olive-dark:#3A4A20;
+      --text:      #3D2B27;
+      --text-light:#7A5C56;
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: "Lato", sans-serif;
+    }
+
+    .post {
+      width: 540px;
+      height: 540px;
+      background: var(--cream);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Soft top band */
+    .band {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 180px;
+      background: var(--olive);
+    }
+
+    /* Blush accent circle */
+    .blush-circle {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--blush);
+      opacity: 0.25;
+      top: -60px;
+      right: -60px;
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding: 0 40px;
+    }
+
+    /* Client reveal label */
+    .label {
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: rgba(253,246,238,0.75);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--cream);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Client name */
+    .client-name {
+      font-family: "Fredoka One", cursive;
+      font-size: 38px;
+      color: var(--chocolate);
+      line-height: 1.05;
+      margin-bottom: 4px;
+    }
+
+    .client-sub {
+      font-family: "Pacifico", cursive;
+      font-size: 13px;
+      color: var(--rose);
+      margin-bottom: 28px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 36px;
+      height: 2px;
+      background: var(--blush);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    /* Features */
+    .built-label {
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
+      font-size: 9px;
+      color: var(--text-light);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1px solid var(--blush);
+      border-radius: 8px;
+      padding: 9px 16px;
+    }
+
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--olive);
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    /* Bottom tag */
+    .tag {
+      position: absolute;
+      bottom: 22px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: "Lato", sans-serif;
+      font-weight: 700;
+      font-size: 9px;
+      color: var(--text-light);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .tag span { color: var(--olive); }
+  </style>
+</head>
+<body>
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <div class="post">
+      <div class="band"></div>
+      <div class="blush-circle"></div>
+
+      <div class="content">
+        <div class="label">Client Reveal</div>
+
+        <div class="logo-wrap">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/7QCEUGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAGgcAigAYkZCTUQwYTAwMGFhZjAxMDAwMDE4MDMwMDAwNWYwNDAwMDA2NzA1MDAwMDBmMDYwMDAwNDQwNzAwMDA3ZDA5MDAwMGQ2MDkwMDAwY2YwYTAwMDA3OTBiMDAwMDc4MGUwMDAwAP/bAIQABQYGCwgLCwsLCw0LCwsNDg4NDQ4ODw0ODg4NDxAQEBEREBAQEA8TEhMPEBETFBQTERMWFhYTFhUVFhkWGRYWEgEFBQUKBwoICQkICwgKCAsKCgkJCgoMCQoJCgkMDQsKCwsKCw0MCwsICwsMDAwNDQwMDQoLCg0MDQ0MExQTExOc/8IAEQgAlgCWAwEiAAIRAQMRAf/EAHoAAQACAwEBAAAAAAAAAAAAAAAFBgEDBAIHEAABAwIDBAcFBgcAAAAAAAABAAIRAxIEITEQMEFRBRMgImFxgTJAodHhI0JQkbHBFGBicqKy8BEBAAIBAwMDBQADAQEAAAAAAQARITFBUWFxgTCRoRAgscHwUNHhQPH/2gAMAwEAAgADAAAAAaoI7QAAAAAAAAtdUtZVAADaanRznRz/AHL5bt9V89aseQwAAtdUtZVADYa7Pwx3rP1z5Jb6rsz9MpdZ96tvmegLdySHNXbbH6O2vtmuQrwZ8LXVLWVQCSjWc/V4SuY25h7nTPevH0SvQuc7OW0VixcExCdkxr0yEVEzkTvj9I64Ja6payqAXCn3j3ntoN7oHrM7YK9uZtlY4uHxtzYeHriLLySEdwY29kdJx3vXHiTqK11S1lUAJjOfHfOU71s06Ojdy9zfJxfNKSfnPLz9u6DnuXZ4xwb+LbyaR31la6payqAAdPiS55Xox17Y6wVfZZ+Dp5tW33r5+mDl9G3o08evxq3xHgdMOtdUtZVAAOzjeOmazDbuWZlvcf2c8h46I/a9bI/HL1Q4dcIDC11S1lUAAAA2a2NgZ8AwAAtdUtZVFrFUWsVRaxVFrFUWsVRaxVFrFUWsVRaxVLWH/9oACAEBAAEFAvw5tJz/AHBjC81KTqZVzmnpGOuQE73ot0VjQNdtakabn43qm4uk0VVhqedamCiI3LWlxrYKpRQupuxuMFQV67qzkDGzDhPCqMTmxuMLV6qpUvZU6TpBwWAw7XNbgminjMOymG6sYbajXMVBxIe3c0MbUorEYx9fYCQhXeFWqvqFutMpiLbU5P17VGnhmtp0cLiFUZY6hRaaVbAtDcRQsb0oD1tIIiA3Vycnjt0cZQtPSFGkCZWEqikndIOI/jKl1eu6qaCqFNXW7Km4w2FdXOI6OqUQx0IKDUXUwqTSFUKKaw3Aqp28JUpsc/FUaLDWe5dWmU0G2plUue9yzOw7Hnc0xszVRxVBNCcYHWOKGQIk1I3DQmhAwrgpDk9kbLlbCJROZM7lr1epQCuVygIlF+8lB6D1cirk53uF34h//9oACAEDAAE/Ad8QgJ3BVFzQ4F4lvLnl810axpdUdHs+zPCZ+KxWAFUS3uv/ANvP5p7CwlrhBHZnYaktDeAmPVdFtlj/ABd+eSZStdM5cl0rRECpxGR8R2AioiJGun6ItFk8Z9nQ+BjksOyxrG8gPmnOAieKxQBp1J0tPw7IaI1l0wGhNwlY9W0stDOJjiZz5+S6im0i8dY53E5k+mgCAT6QcWnkukKltJ3N2Xz+HZ6PwhcW1DFoOnHL67G0e9dOykwtmTJWLxDPthkXl1oymGgDQ+c+vZw+JdRMjTiOB+qp9KMd7Us+I/70TKjXiWmR4KVjukI7lM+bv2G4ZVc2Q1xbOsGFO/8A/9oACAECAAE/Ad8+naNdwO6QqpB+aqvLhA1y9OaxJIA+Ko17cjmP0QM9gIvBBTTHijbnDczCxJ08E6vc2CM+awzuHYZ6eqqRlpPgmubCdUnIafDiqrpJQYXTHDVUtR2AjA8ctZyRe0XGdUHOdNuTWrXNUqltw5qi3vdmtUiQrl18tttjyWpVRwdFogKmw93lHx7L2ByOHPDNOaRqEQqVHify3BaDw9w//9oACAEBAAY/Avw7utJ8hPuEASSocC07KbWNFhGZ5J8evnx348QQnNqjRxsd+/8A2qLXahYc8H+15R80+32YnLmdnxXjugBmSpcMvDNcnNKpPY6HDUclc7XsHdscdAV1kuqUD3oHeg8PRNrCRdEg+WWyXQbiWieQEmPFA8bO9/c6I/VAsu9pzc+NvEbDnE5LMz45rP03UNOXI5hC7QcBs1XtHh/jopeST47Dsy3INR9zj90Tl+StZLXev7ot5GPyVV5FxboBw/qVUhuVrHMP6qWNaDRttOWY4z6qeBAjehr6WngD9Uepp97nEfVSdSqjtXRA5Z81bGXV2fVFx++ADlyUuMr03sN4akq7IjwR7efDc/aNuaRHkiKGr/P91bcYPCctsyhy9yz0ROwrI7I3mnZ01/mb/9oACAEBAQE/If8AHXSGa2fh/wCAI7SBqzoDhPpkbR0ggVVYtubNrGHT+3z9E0F+qF/au6X+oX4ajVpsD4YDasHR4TokPAJHUAFnbV2l8BQzWGz758xKltuC36JldOUd0+iAVigN1hRksWqC7NRCaSGkpEzpGFqUXXjU01sOSYBYBgoo+ihDf6MlOlyplupLPoBypdnD7XKBMehWzXLJXmGclWszsbOKfokNiOq2versQYbZlrf/ADEoiZp5nSvE0O8U43iTUpzNQBwflxE1lL1Z75l1nol+DvY3PDKszUAovndX6ZQRV6Na4fcmk6z1vP6dpgKGNFHQxRDYqKB2/cQ2O8OgKOCaoPvPdBb7BQv3Ys4Ypo03qwxEsrLyqOkMCqy3Vmj9MTsZRWnaZ7PmZKMgsuBV5Nvclircm4rIefzLDuwayLLvGVNs3vvKbsApdedsphBW4HzlXaO1LRV5XWC0uD+69mJwUXl1OOlzJ1cAJp1/tZY7UovbsSvGyukrgcrvBqiAKg7xykWPQT1FL0Bx7xmqerbHcaxCzblVGCKWcQZnwR3i/MVyUVLviCxBqzWOpge3pNeL73fThfdX88S267LhR36MAQd7mvhL8xb5ZRUDmXlqtrxhZ/xlan0Gr1g1LH0cl8SmtmHQEstWjjiLL9iWZdYiDKEWUivELlyyg2LAMBXoEuYA6TuPoNAnv9ARBApSkWyu3EuejyQUvNw1mWzC2IJmpfOL1BEUl8bkU0S7H/gt/kP/2gAMAwEBAgEDAQAAEAQQQQQQQQQQQQy+gQQQQQQ01T/KCwQQQH0KKZGQQQR4MbrpZgQQRAmAsrXwQQQVxoZZeQQQQYEI78gAQQQQQcUQQQQQQQQQQQQQQf/aAAgBAwEBPxD1qYmAK8GX79H6VFlajPAfCANmG9V7t64vvMWuTbo6vdzL6BpP7b8/cGpzEro3TSaUF7DYdTfxMKdBy5/1HGwh1i68j+fs8PM/lTFgVvqLbe4+0Ok7VnDhwM1veUM2KXlcn3YzdVqJUG7PkWPcftVhYACre96a0VqyhhClyshyaHR4lwB2TsPsOgBgn4NOIyFzutnp7wwWYCbtv+z7XesqtadGNqo5zjSPaas2raTPvwRMJddZeHbqoHndiCkAjgA8GGh1X9t+bWr/AAdUxwTt8xmKheZX/MDnOkRoODzT+Q3fb0AwbQS3tLZbc69fX//aAAgBAgEBPxD1aqZDLNaecRa++yESkndPouAJXr7tPiM4IgJkfsVI8Z+mAK0+gAqUOi/mYi/x8zw0vz9lbb7Mqn8ATuH7+lA3fTGF1IaU62fL9gtC66zTvInBwf7mrB1mdsfzBNK9tP3OSIArHXclw6ZfGn2mMtpOwldy7/zeXsXW3SVgS1xn4lp6ZNd3T2+0XOuzuQ2z4MU/4VOHEOge37PoagGuSV6//9oACAEBAQE/EP8AHEaioY7oSJWHCeuhoqPf8GvExYi8KzkdE6iy46tpF7WoHPzE92cTD/27vohTLgLfVOf1VHvYhjUuePacMWpHbgfyASwl1tX93D4JWTJoyDR3U4h2jtMo5n+N4nuDR++Y4Ok+ep6Loxte0ATNfSl0lsF22dmUGeVNwWs/8j0N6aOXcBuz8Sf04t5d/iZeWviKBRRccTL1WW+Lajw/uVjvo+JTva8+I1Go6PoBFdne1LHUW8TSoJ/492r6JoXk1rG7Aodvomqs3AiNursMeb3gBe2B2muQ4j2ySC6eE43zKWe7TGZoF+5dzCKLpZY7ma0hDgydIlYdvQ3El4Q+zwErhrqDFWzQcuNvo6K8ClK4K00Hk1mOzXGpTld7SnQnHrR7RHYInAN+JdR0J0WPxBqTwcj0lUGfBQQZ9ZQvvGOnUXnkTowdt/VXIVtyKuJ40VLHeo2Hzqp6p7PwfkHmAwssuMeUu1Zv3BwQu7qBUU5Gw1xvGiGaiKuhndZ0Gj8R+sXaH8pacjP+/vOqKNFzcu7WYorVE/wMI3xhtUWvKx+4zn/QNDXeYCCCxcHg7fMMxFBGCxLaV8xdhbCBq0YMzoNx8veU+hn9EwBVoBQBLkOL71FT4LlC/tX0KkbIAbjQKq0CIHX37Xasay3Lm6J3yUsB8pgpDY1mOKnu/EQOhM/EK1aWPmPeBA4Kayu+o6k2O9spyy6e00D+x96CC+5amO7GGsI+P6KnexwS7mctHSsmTOh9mUviD8sxg5a6EOOiGQFY/UZF9kx7Ue3/AH6M5LqkrdYGPb0bnwY8zGMFGHacPgf9gdKDH/5VlfAHUzt8Q7ZrQgrBDmoQ6Ege1TId2ry8wlsIvsSjtj0Olu3MHAAuXLo7oFky8SlQzwJl136V+oACtJ1jtM+6/g4N4gpqiPS/jFufQGsk2dX5nM94vv7RKzdHMaG9CIL4r3SEAjxDSbeX4/76miM1AgLr7M8jvBuY0HDtNMe/rjWSL712Ity3n/Hf/9k=" alt="Sugar and Shai Logo"/>
+        </div>
+
+        <div class="client-name">Sugar &amp; Shai</div>
+        <div class="client-sub">Homemade Cookies · Winnipeg, MB</div>
+
+        <div class="divider"></div>
+
+        <div class="built-label">What we delivered</div>
+        <div class="features">
+          <div class="feature"><div class="feature-dot"></div><div class="feature-text">Form → Google Sheets → email. Fully automated</div></div>
+          <div class="feature"><div class="feature-dot"></div><div class="feature-text">SEO + Local Business schema markup</div></div>
+          <div class="feature"><div class="feature-dot"></div><div class="feature-text">Custom domain setup + full deployment</div></div>
+        </div>
+      </div>
+
+      <div class="tag">Powered by <span>FJMedia</span> &nbsp;·&nbsp; fjmedia.ca</div>
+    </div>
+  </div>
+</body>
+</html>
