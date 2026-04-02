@@ -551,6 +551,9 @@
     .event-track-sub {
       font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.8rem;
     }
+    .event-cards {
+      display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap;
+    }
     .event-card {
       display: inline-block; text-align: left;
       background: var(--bg3); border: 1px solid var(--border);
@@ -1313,30 +1316,50 @@
         <span class="pricing-addon-sub">Maintain ($150/mo): updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates, SEO monitoring &amp; a monthly 1-on-1 sit-down to review your data and keep your site growing.</span>
       </div>
 
-      <!-- Event Track -->
+      <!-- Event + Linktree Track -->
       <div class="event-track reveal">
-        <p class="event-track-eyebrow">Hosting an Event?</p>
-        <h3 class="event-track-heading">We build event sites too.</h3>
-        <p class="event-track-sub">Wedding socials, fundraisers, ticketed events — a separate, simpler package built for one-time events.</p>
-        <div class="event-card reveal">
-          <div class="pricing-tier">Event Site</div>
-          <div class="pricing-tagline">Everything your event needs online — nothing it doesn't</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Single-page event site, hand-coded</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Prize gallery with lightbox</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Event details — date, venue, tickets, prizes</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized + shareable link</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Hosted free for the duration of your event</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Delivered in 4 days</span></li>
-          </ul>
-          <div class="pricing-price-block">
-            <div class="pricing-you-pay">One-time</div>
-            <div class="pricing-price">$300</div>
+        <p class="event-track-eyebrow">One-Time Projects</p>
+        <h3 class="event-track-heading">Not ready for a full site? We've got you.</h3>
+        <p class="event-track-sub">Standalone packages for events and social media — built the same way, delivered fast, no long-term commitment.</p>
+        <div class="event-cards">
+          <div class="event-card reveal">
+            <div class="pricing-tier">Event Site</div>
+            <div class="pricing-tagline">Everything your event needs online — nothing it doesn't</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+              <li><span class="feat-left"><span class="check">✓</span> Single-page event site, hand-coded</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Prize gallery with lightbox</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Event details — date, venue, tickets, prizes</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized + shareable link</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Hosted free for the duration of your event</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Delivered in 4 days</span></li>
+            </ul>
+            <div class="pricing-price-block">
+              <div class="pricing-you-pay">One-time</div>
+              <div class="pricing-price">$300</div>
+            </div>
+            <a href="#contact" class="btn-primary pricing-btn">Book a Free Intro Call</a>
           </div>
-          <a href="#contact" class="btn-primary pricing-btn">Book a Free Intro Call</a>
+          <div class="event-card reveal">
+            <div class="pricing-tier">Custom Linktree</div>
+            <div class="pricing-tagline">A link-in-bio that actually matches your brand</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+              <li><span class="feat-left"><span class="check">✓</span> Custom-designed to match your IG aesthetic</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Your photo, colours, fonts — nothing generic</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> All real links — booking, phone, email, socials</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized, loads fast</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Hosted on your own link — no Linktree branding</span></li>
+              <li><span class="feat-left"><span class="check">✓</span> Delivered in 2 days</span></li>
+            </ul>
+            <div class="pricing-price-block">
+              <div class="pricing-you-pay">One-time</div>
+              <div class="pricing-price">$300</div>
+            </div>
+            <a href="#contact" class="btn-primary pricing-btn">Book a Free Intro Call</a>
+          </div>
         </div>
-        <p class="event-upgrade">Want to keep your site after the event? Upgrade to <a href="#pricing">Get Found ($600)</a> and turn it into a permanent business page.</p>
+        <p class="event-upgrade">Want more? Upgrade to <a href="#pricing">Get Found ($600)</a> and turn your linktree into a full website.</p>
       </div>
 
     </div>
@@ -1382,6 +1405,7 @@
             <option>Get Customers — $1,000</option>
             <option>Own the Market — $1,600</option>
             <option>Event Site — $300</option>
+            <option>Custom Linktree — $300</option>
             <option>Monthly Maintenance</option>
             <option>Not Sure Yet</option>
           </select>
