@@ -204,10 +204,11 @@ story.append(Paragraph("Analytics &amp; Tracking", SECTION_S))
 story.append(make_table(
     ["Service", "Industry Price"],
     [
-        ["Google Analytics setup",     "$150 – $500"],
-        ["Google Tag Manager setup",   "$300 – $800"],
-        ["Monthly reporting",          "$200 – $600/mo"],
-        ["Conversion tracking setup",  "$300 – $1,000"],
+        ["Google Analytics setup",              "$150 – $500"],
+        ["Google Tag Manager setup",            "$300 – $800"],
+        ["Monthly analytics report",                    "$200 – $600/mo"],
+        ["Monthly 1-on-1 client sit-down (data review)","$300 – $800/mo"],
+        ["Conversion tracking setup",           "$300 – $1,000"],
     ],
     [W * 0.62, W * 0.38]
 ))
@@ -319,7 +320,7 @@ story.append(make_table(
     ["Plan", "Price", "Includes"],
     [
         ["Maintain", "$150/mo", "Updates, form monitoring, GAS checks"],
-        ["Grow",     "$300/mo", "Everything in Maintain + content updates + SEO monitoring"],
+        ["Grow",     "$300/mo", "Everything in Maintain + content updates + SEO monitoring + monthly 1-on-1 sit-down (review data, what's working, what's next — keeps the relationship strong)"],
     ],
     [W * 0.20, W * 0.15, W * 0.65]
 ))
