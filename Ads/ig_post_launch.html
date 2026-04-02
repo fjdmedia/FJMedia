@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — IG Launch Post</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:  #071520;
+      --navy2: #0d1f3c;
+      --gold:  #c9a84c;
+      --cream: #EDEAE5;
+      --dim:   #3a6080;
+      --border: rgba(201,168,76,0.18);
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── CANVAS: 1080×1080 scaled to 540×540 for screen ── */
+    .post {
+      width: 540px;
+      height: 540px;
+      background: var(--navy);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Corner accent lines */
+    .post::before,
+    .post::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.4;
+    }
+    .post::before {
+      top: 28px;
+      left: 28px;
+      border-width: 1px 0 0 1px;
+    }
+    .post::after {
+      bottom: 28px;
+      right: 28px;
+      border-width: 0 1px 1px 0;
+    }
+
+    /* Subtle grid texture */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Glow behind logo */
+    .glow {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      text-align: center;
+    }
+
+    /* Logo mark */
+    .logo-mark {
+      font-family: 'Space Mono', monospace;
+      font-size: 52px;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .logo-word {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--cream);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .logo-word span {
+      color: var(--dim);
+      font-weight: 700;
+    }
+
+    /* Divider */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      margin-bottom: 40px;
+    }
+
+    /* Main headline */
+    .headline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 30px;
+      color: var(--cream);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      max-width: 380px;
+    }
+    .headline em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* Sub line */
+    .sub {
+      margin-top: 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* Bottom tag */
+    .tag {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(201,168,76,0.35);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    /* Print hint */
+    .hint {
+      margin-top: 20px;
+      font-family: sans-serif;
+      font-size: 12px;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <div class="post">
+      <div class="grid"></div>
+      <div class="glow"></div>
+
+      <div class="content">
+        <div class="logo-mark">{FJ}</div>
+        <div class="logo-word">FJ<span>Media</span></div>
+
+        <div class="divider"></div>
+
+        <div class="headline">
+          We build your<br>website <em>for free.</em>
+        </div>
+        <div class="sub">Built in 5 days. Pay only if you like it.</div>
+      </div>
+
+      <div class="tag">fjmedia &nbsp;·&nbsp; no upfront cost</div>
+    </div>
+
+    <p class="hint">Screenshot at 1× for Instagram · 540×540px</p>
+  </div>
+
+</body>
+</html>

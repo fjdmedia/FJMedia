@@ -137,8 +137,8 @@ story.append(Spacer(1, 6))
 
 # Model note box
 model_t = Table(
-    [[Paragraph("<b>Our model:</b> We build the site first. The client pays only after they see it and love it. "
-                "No upfront cost, no contracts. Reveal pricing only after client approves the build.", NOTE_S)]],
+    [[Paragraph("<b>Our model:</b> We build your website for free. Website preview delivered in 5 days — client pays only if they like it. "
+                "Full package (website + backend + SEO) live in 14 days. No upfront cost, no contracts. Reveal pricing only after client approves the build.", NOTE_S)]],
     colWidths=[W]
 )
 model_t.setStyle(TableStyle([
