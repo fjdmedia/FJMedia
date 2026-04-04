@@ -132,8 +132,8 @@
 
     /* HERO */
     #hero {
-      min-height: 100svh;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex; align-items: center;
       padding: 9rem 6% 6rem;
       border-bottom: 1px solid var(--border);
@@ -640,20 +640,21 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        gap: 1rem;
-        padding: 1.2rem 5% 0.5rem;
+        gap: 0.8rem;
+        padding: 1.4rem 7% 0.5rem;
         margin: 0 -5%;
       }
       .pricing-grid::-webkit-scrollbar { display: none; }
       .pricing-card {
         flex-shrink: 0;
-        width: calc(84vw - 1rem);
+        width: calc(86% - 0.8rem);
         scroll-snap-align: center;
       }
       .pricing-featured { transform: none; }
       .pricing-featured:hover { transform: none; }
       .pricing-price { font-size: 2.2rem; }
       .feat-val { display: none; }
+      .pricing-features li { justify-content: flex-start; }
       .pricing-addon { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .pricing-addon-sub { margin-left: 0; }
 
@@ -681,15 +682,17 @@
     }
 
     @media (max-width: 600px) {
-      /* Prevent horizontal scroll globally */
-      body { overflow-x: hidden; }
+      /* clip doesn't create a new scroll context — safe to use with scroll-snap children */
+      body { overflow-x: clip; }
 
       section { padding: 3.5rem 4%; }
       #hero {
         padding: 6.5rem 4% 3.5rem;
-        min-height: 100svh; /* reliable on mobile browsers */
-        min-height: 100vh;  /* fallback */
+        min-height: 100vh;   /* fallback for older browsers */
+        min-height: 100svh;  /* overrides above — reliable on mobile */
       }
+      /* Sync pricing-grid margin with 4% section padding */
+      .pricing-grid { margin: 0 -4%; }
       .hero-title { font-size: 2rem; }
       .hero-btns { flex-direction: column; align-items: stretch; }
       .hero-btns .btn-primary,
@@ -1599,10 +1602,13 @@
     });
 
     // Pricing cards — stagger in
-    gsap.from('.pricing-card', {
-      scrollTrigger: { trigger: '.pricing-grid', start: 'top 78%', once: true },
-      opacity: 0, y: 40, duration: 0.6, stagger: 0.12, ease: 'power2.out'
-    });
+    // Skip pricing card animation on mobile — y offset breaks carousel scroll position
+    if (window.innerWidth > 900) {
+      gsap.from('.pricing-card', {
+        scrollTrigger: { trigger: '.pricing-grid', start: 'top 78%', once: true },
+        opacity: 0, y: 40, duration: 0.6, stagger: 0.12, ease: 'power2.out'
+      });
+    }
 
     // Event track
     gsap.from('.event-track', {
