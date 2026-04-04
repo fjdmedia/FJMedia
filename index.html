@@ -483,6 +483,7 @@
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1.2rem; align-items: start;
     }
+    .pricing-dots { display: none; }
     .pricing-card {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 12px; padding: 2.2rem 2rem;
@@ -632,14 +633,40 @@
       /* Scarcity */
       .scarcity-bar { flex-wrap: wrap; font-size: 0.8rem; }
 
-      /* Pricing */
-      .pricing-grid { grid-template-columns: 1fr; }
+      /* Pricing — horizontal swipe carousel */
+      .pricing-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1rem;
+        padding: 1.2rem 5% 0.5rem;
+        margin: 0 -5%;
+      }
+      .pricing-grid::-webkit-scrollbar { display: none; }
+      .pricing-card {
+        flex-shrink: 0;
+        width: calc(84vw - 1rem);
+        scroll-snap-align: center;
+      }
       .pricing-featured { transform: none; }
-      .pricing-featured:hover { transform: translateY(-4px); }
+      .pricing-featured:hover { transform: none; }
       .pricing-price { font-size: 2.2rem; }
       .feat-val { display: none; }
       .pricing-addon { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .pricing-addon-sub { margin-left: 0; }
+
+      /* Dots */
+      .pricing-dots {
+        display: flex; justify-content: center; gap: 6px;
+        margin-top: 1.2rem;
+      }
+      .pdot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--border); transition: background 0.2s, transform 0.2s;
+      }
+      .pdot.active { background: var(--accent); transform: scale(1.3); }
 
       /* Event */
       .event-track { margin-top: 2rem; padding-top: 1.8rem; }
@@ -1379,6 +1406,11 @@
         </div>
 
       </div>
+      <div class="pricing-dots" id="pricingDots">
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+        <span class="pdot"></span>
+      </div>
       <div class="pricing-addon">
         <span class="pricing-addon-label">Add-on</span>
         <span class="pricing-addon-text">Monthly Maintenance Retainer — <strong>from $150/month</strong></span>
@@ -1695,6 +1727,53 @@
       overlay.classList.toggle('open');
       document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
     }
+
+    // Pricing carousel — mobile only
+    (function() {
+      const grid  = document.querySelector('.pricing-grid');
+      const dots  = document.querySelectorAll('#pricingDots .pdot');
+      const cards = grid ? grid.querySelectorAll('.pricing-card') : [];
+
+      if (!grid || !cards.length) return;
+
+      function isMobile() { return window.innerWidth <= 900; }
+
+      function setActiveDot(idx) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      function getActiveIndex() {
+        const center = grid.scrollLeft + grid.offsetWidth / 2;
+        let closest = 0, minDist = Infinity;
+        cards.forEach((c, i) => {
+          const dist = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        return closest;
+      }
+
+      function scrollToCard(idx) {
+        const card = cards[idx];
+        const target = card.offsetLeft - (grid.offsetWidth - card.offsetWidth) / 2;
+        grid.scrollTo({ left: target, behavior: 'smooth' });
+      }
+
+      function init() {
+        if (!isMobile()) { setActiveDot(1); return; }
+        // Start on Get Customers (index 1)
+        scrollToCard(1);
+        setActiveDot(1);
+      }
+
+      grid.addEventListener('scroll', function() {
+        if (!isMobile()) return;
+        setActiveDot(getActiveIndex());
+      }, { passive: true });
+
+      window.addEventListener('resize', init);
+      window.addEventListener('load', init);
+      init();
+    })();
 
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwhSzGHAARbwJtcjHKilO4iuGZIpeM-g0vo_60i-S7i8qpvnK4emOFgBL95BPHbECgjEQ/exec';
 
