@@ -1657,18 +1657,32 @@
       document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
     }
 
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwhSzGHAARbwJtcjHKilO4iuGZIpeM-g0vo_60i-S7i8qpvnK4emOFgBL95BPHbECgjEQ/exec';
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       btn.textContent = 'Sending\u2026';
       btn.disabled = true;
 
+      const formData = new FormData(form);
+
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(form)
+        body: formData
       })
       .then(r => r.json())
       .then(data => {
         if (data.success) {
+          // Log to Google Sheets in parallel — don't block on it
+          const params = new URLSearchParams({
+            name:     formData.get('name')     || '',
+            email:    formData.get('email')    || '',
+            business: formData.get('business') || '',
+            service:  formData.get('service')  || '',
+            message:  formData.get('message')  || ''
+          });
+          fetch(GAS_URL, { method: 'POST', body: params, mode: 'no-cors' });
+
           form.reset();
           msg.style.display = 'block';
           btn.textContent = 'Sent!';
