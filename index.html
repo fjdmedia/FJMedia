@@ -186,6 +186,13 @@
       transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block;
     }
     .btn-outline:hover { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
+    .btn-gold {
+      background: var(--accent); color: var(--bg);
+      border-radius: 8px; font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.01em; text-decoration: none;
+      display: inline-block; transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-2px); }
 
     .hero-right { display: flex; flex-direction: column; gap: 1rem; }
     .hero-stat-card {
@@ -407,6 +414,40 @@
     .contact-form select { color: var(--text-mid); }
     .contact-form select option { background: var(--bg3); color: var(--text); }
 
+    /* FREE AUDIT LEAD MAGNET */
+    #free-audit {
+      background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .audit-lm-wrap {
+      max-width: 720px; margin: 0 auto; text-align: center;
+    }
+    .audit-lm-badge {
+      display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent); background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3); padding: 0.25rem 0.75rem;
+      border-radius: 100px; font-family: var(--mono); margin-bottom: 1.4rem;
+    }
+    .audit-lm-headline {
+      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; color: var(--heading);
+      line-height: 1.15; margin-bottom: 1rem;
+    }
+    .audit-lm-headline em { font-style: normal; color: var(--accent); }
+    .audit-lm-sub {
+      font-size: 0.97rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1.8rem; max-width: 580px; margin-left: auto; margin-right: auto;
+    }
+    .audit-lm-points {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .audit-lm-point {
+      font-size: 0.88rem; color: var(--text-mid); display: flex; align-items: center; gap: 0.4rem;
+    }
+    .audit-check { color: var(--accent); font-weight: 700; }
+    .audit-lm-cta { display: inline-block; padding: 0.85rem 2rem; font-size: 0.95rem; }
+    .audit-lm-note {
+      margin-top: 1rem; font-size: 0.78rem; color: var(--text-light); font-family: var(--mono);
+    }
+
     /* PRICING */
     #pricing { background: var(--bg2); border-bottom: 1px solid var(--border); }
     .roi-block {
@@ -481,21 +522,29 @@
 
     .pricing-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem; align-items: start;
+      gap: 1.2rem; align-items: stretch;
     }
     .pricing-dots { display: none; }
     .pricing-card {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 12px; padding: 2.2rem 2rem;
       position: relative; transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
     }
     .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+    .pricing-guarantee {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.22);
+      border-radius: 8px; padding: 0.85rem 1.2rem;
+      margin: 1rem 0 1.5rem; font-size: 0.87rem;
+      color: var(--heading); font-weight: 600; line-height: 1.4;
+    }
+    .pricing-guarantee svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--accent); }
     .pricing-featured {
       border-color: var(--accent); background: var(--bg3);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(123,175,212,0.1);
+      box-shadow: 0 20px 50px rgba(201,168,76,0.12);
     }
-    .pricing-featured:hover { transform: translateY(-12px); }
+    .pricing-featured:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(201,168,76,0.18); }
     .pricing-badge {
       position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
       background: var(--accent); color: var(--bg);
@@ -524,7 +573,7 @@
     }
     .pricing-total-row {
       display: flex; justify-content: space-between; align-items: center;
-      margin-top: 1.2rem; padding-top: 1rem;
+      margin-top: auto; padding-top: 1.2rem;
       border-top: 1px solid var(--border);
     }
     .pricing-total-label {
@@ -554,9 +603,9 @@
       border: 1px solid rgba(201,168,76,0.25);
       padding: 0.18rem 0.55rem; border-radius: 4px;
     }
-    .pricing-btn { display: block; width: 100%; text-align: center; padding: 0.8rem 1rem; margin-top: 1.4rem; }
+    .pricing-btn { display: block; width: 100%; text-align: center; padding: 0.8rem 1rem; margin-top: 1.2rem; }
     .pricing-addon {
-      margin-top: 2.2rem; background: var(--bg); border: 1px solid var(--border);
+      margin-top: 3.5rem; background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; padding: 1.1rem 1.6rem;
       display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
     }
@@ -898,7 +947,7 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">
+    <a class="nav-logo" href="#hero">
       <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
       <span class="logo-media-word">Media</span>
     </a>
@@ -1291,12 +1340,32 @@
     </div>
   </section>
 
+  <!-- FREE AUDIT LEAD MAGNET -->
+  <section id="free-audit">
+    <div class="section-inner">
+      <div class="audit-lm-wrap">
+        <div class="audit-lm-badge">Free — No Strings Attached</div>
+        <h2 class="audit-lm-headline">Find out exactly what's costing you customers online.<br><em>Before you spend a cent.</em></h2>
+        <p class="audit-lm-sub">We run a full audit of your online presence — website speed, mobile experience, local SEO, and trust signals — then send you a straight-talking report. No pitch. No obligation. Just the truth about where you're losing customers to competitors.</p>
+        <div class="audit-lm-points">
+          <div class="audit-lm-point"><span class="audit-check">✓</span> Performance &amp; load speed</div>
+          <div class="audit-lm-point"><span class="audit-check">✓</span> Mobile experience (60% of searches)</div>
+          <div class="audit-lm-point"><span class="audit-check">✓</span> Local SEO &amp; Google visibility</div>
+          <div class="audit-lm-point"><span class="audit-check">✓</span> Trust &amp; credibility signals</div>
+          <div class="audit-lm-point"><span class="audit-check">✓</span> What your top competitor is doing better</div>
+        </div>
+        <a href="#contact" class="btn-gold audit-lm-cta reveal" onclick="prefillAudit()">Get My Free Audit →</a>
+        <p class="audit-lm-note">Takes 2 minutes to request. Report delivered within 24 hours.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- PRICING -->
   <section id="pricing">
     <div class="section-inner">
       <p class="section-label">Packages</p>
-      <h2 class="section-title">Transparent pricing.<br/>Real value.</h2>
-      <p class="section-sub">Every package includes a fully custom-built site. No templates, no shortcuts — just results.</p>
+      <h2 class="section-title">Pick your outcome.<br/>We handle everything else.</h2>
+      <p class="section-sub">Every package is built to bring your business more customers — not just a prettier page. No templates, no shortcuts.</p>
       <div class="divider"></div>
 
       <div class="roi-block">
@@ -1324,22 +1393,27 @@
         We take on a maximum of <strong>&nbsp;5 builds per month&nbsp;</strong> so every site gets the attention it deserves. <span class="scarcity-slots">4 spots open this month</span>
       </div>
 
+      <div class="pricing-guarantee">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Built in 5 days. You approve every detail before paying. Don't love it — you owe us nothing.
+      </div>
+
       <div class="pricing-grid">
 
         <!-- Get Found -->
         <div class="pricing-card reveal">
           <div class="pricing-tier">Get Found</div>
-          <div class="pricing-tagline">A professional presence that works</div>
+          <div class="pricing-tagline">Get found by customers already searching for you</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Custom website — Home, About, Services, Contact</span><span class="feat-val">$600+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Hand-coded — no templates, no page builders</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized across all devices</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Contact form + instant email alerts</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> We write all your website copy</span><span class="feat-val">$250+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> On-page SEO setup (title, meta, OG tags)</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> GitHub Pages hosting setup</span><span class="feat-val">$75+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 1 month of free changes after launch</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Look like the most credible business in your area — from day one</span><span class="feat-val">$600+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> A site no competitor can copy — 100% built for your brand</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Capture the 60% of customers who search on their phone</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Never miss an inquiry — alerted the second someone reaches out</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Words that speak to your customers — written for you, not by you</span><span class="feat-val">$250+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Set up to be found on Google the moment you go live</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Live on the internet with zero monthly hosting fees</span><span class="feat-val">$75+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Risk-free first month — change anything, we handle it</span><span class="feat-val">$150+</span></li>
           </ul>
           <div class="pricing-total-row">
             <span class="pricing-total-label">Total value</span>
@@ -1357,17 +1431,17 @@
         <div class="pricing-card pricing-featured reveal">
           <div class="pricing-badge">Most Popular</div>
           <div class="pricing-tier">Get Customers</div>
-          <div class="pricing-tagline">Turn your site into a lead machine</div>
+          <div class="pricing-tagline">Attract leads and turn visitors into paying customers</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Found</span><span class="feat-val">$1,725+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Order / booking form with live pricing</span><span class="feat-val">$300+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Google Sheets CRM — every lead auto-logged</span><span class="feat-val">$250+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Automated email notification on every inquiry</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> GA4 analytics + CTA click tracking</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Gallery / services showcase section</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Social media link integration</span><span class="feat-val">$75+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 3 months of free changes after launch</span><span class="feat-val">$450+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Found — plus a lead capture system</span><span class="feat-val">$1,725+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Order/booking form — capture revenue automatically</span><span class="feat-val">$300+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Google Sheets CRM — every lead logged, free forever</span><span class="feat-val">$250+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Instant alert on every inquiry — respond first, win more</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> GA4 analytics — see exactly what's driving customers</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Gallery section — show your work, upsell naturally</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Social links — turn visitors into followers</span><span class="feat-val">$75+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 3 months free changes — your site stays sharp</span><span class="feat-val">$450+</span></li>
           </ul>
           <div class="pricing-total-row">
             <span class="pricing-total-label">Total value</span>
@@ -1384,17 +1458,17 @@
         <!-- Own the Market -->
         <div class="pricing-card reveal">
           <div class="pricing-tier">Own the Market</div>
-          <div class="pricing-tagline">A full digital system, done for you</div>
+          <div class="pricing-tagline">Dominate your local market — fully built, fully yours</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Customers</span><span class="feat-val">$3,350+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 2–3 custom design versions to choose from</span><span class="feat-val">$500+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Auto-reply emails to every customer inquiry</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Customer reviews + testimonials section</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Custom domain + full DNS setup</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Local Business schema markup</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Open Graph + social sharing optimization</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 6 months of managed maintenance included</span><span class="feat-val">$900+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Customers — plus full local dominance</span><span class="feat-val">$3,350+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 2–3 custom designs to choose from — you pick the winner</span><span class="feat-val">$500+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Auto-reply on every inquiry — you look fast, always</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Reviews section — let happy customers sell for you</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Custom domain + full DNS setup — your .ca or .com</span><span class="feat-val">$200+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Schema markup — rank faster in local Google search</span><span class="feat-val">$150+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Open Graph setup — every share looks polished</span><span class="feat-val">$100+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> 6 months managed maintenance — fully hands-off</span><span class="feat-val">$900+</span></li>
           </ul>
           <div class="pricing-total-row">
             <span class="pricing-total-label">Total value</span>
@@ -1416,8 +1490,8 @@
       </div>
       <div class="pricing-addon">
         <span class="pricing-addon-label">Add-on</span>
-        <span class="pricing-addon-text">Monthly Maintenance Retainer — <strong>from $150/month</strong></span>
-        <span class="pricing-addon-sub">Maintain ($150/mo): updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates, SEO monitoring &amp; a monthly 1-on-1 sit-down to review your data and keep your site growing.</span>
+        <span class="pricing-addon-text">Keep Growing After Launch — <strong>from $150/month</strong></span>
+        <span class="pricing-addon-sub">Maintain ($150/mo): site updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates, SEO monitoring &amp; a monthly 1-on-1 to review your data and keep new customers coming in.</span>
       </div>
 
       <!-- Event + Linktree Track -->
@@ -1498,7 +1572,7 @@
           </div>
         </div>
         <form class="contact-form" id="contactForm">
-          <div id="pkgBanner" style="display:none; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 4px; font-size: 13px; color: var(--accent); display: none; align-items: center; justify-content: space-between; gap: 10px;">
+          <div id="pkgBanner" style="display:none; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 4px; font-size: 13px; color: var(--accent); align-items: center; justify-content: space-between; gap: 10px;">
             <span>&#10003; Package selected: <strong id="pkgBannerName"></strong></span>
             <button type="button" onclick="clearPkg()" style="background:none;border:none;color:var(--text-mid);cursor:pointer;font-size:16px;line-height:1;padding:0;">&times;</button>
           </div>
@@ -1654,6 +1728,24 @@
     function clearPkg() {
       document.getElementById('pkgBanner').style.display = 'none';
       document.querySelector('[name="service"]').value = '';
+    }
+
+    function prefillAudit() {
+      const select = document.querySelector('[name="service"]');
+      if (select) {
+        Array.from(select.options).forEach(opt => {
+          if (opt.value.toLowerCase().includes('audit') || opt.value.toLowerCase().includes('other')) {
+            select.value = opt.value;
+          }
+        });
+      }
+      const msg = document.querySelector('[name="message"]');
+      if (msg && !msg.value) msg.value = "I'd like a free website audit — here's my site: ";
+      const banner = document.getElementById('pkgBanner');
+      document.getElementById('pkgBannerName').textContent = 'Free Website Audit';
+      banner.style.display = 'flex';
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => { const n = document.querySelector('.contact-form input[name="name"]'); if (n) n.focus(); }, 600);
     }
 
     // Portfolio carousel — infinite loop (prepend + append clones)

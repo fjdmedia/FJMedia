@@ -10,76 +10,169 @@ export default async function handler(req, res) {
 
   if (!type || !data) return res.status(400).json({ error: 'Missing type or data' });
 
+  // Package data for value stacking
+  const packageDetails = {
+    'Get Found': {
+      price: 600, marketValue: 1725,
+      features: [
+        'Custom 4-page website (Home, About, Services, Contact) — $600+ if hired separately',
+        'Hand-coded from scratch, no templates — $200+ if hired separately',
+        'Mobile-optimized across all devices — $150+ if hired separately',
+        'Contact form + instant email alert on every inquiry — $150+ if hired separately',
+        'Professional copywriting (we write everything) — $250+ if hired separately',
+        'On-page SEO setup (title, meta, OG tags) — $150+ if hired separately',
+        'Free hosting setup (no monthly fees) — $75+ if hired separately',
+        '1 month of free changes after launch — $150+ if hired separately',
+      ]
+    },
+    'Get Customers': {
+      price: 1000, marketValue: 3350,
+      features: [
+        'Everything in Get Found — $1,725+ if hired separately',
+        'Order/booking form with live pricing logic — $300+ if hired separately',
+        'Google Sheets CRM — every lead auto-logged forever — $250+ if hired separately',
+        'Instant email alert on every customer inquiry — $200+ if hired separately',
+        'GA4 analytics + CTA click tracking — $200+ if hired separately',
+        'Photo gallery / services showcase section — $150+ if hired separately',
+        'Social media link integration — $75+ if hired separately',
+        '3 months of free changes after launch — $450+ if hired separately',
+      ]
+    },
+    'Own the Market': {
+      price: 1600, marketValue: 5500,
+      features: [
+        'Everything in Get Customers — $3,350+ if hired separately',
+        '2–3 full custom design versions to choose from — $500+ if hired separately',
+        'Auto-reply email on every customer inquiry — $150+ if hired separately',
+        'Customer reviews + testimonials section — $150+ if hired separately',
+        'Custom domain + full DNS setup — $200+ if hired separately',
+        'Local Business schema markup (Google ranking signal) — $150+ if hired separately',
+        'Open Graph + social sharing optimization — $100+ if hired separately',
+        '6 months of managed maintenance included — $900+ if hired separately',
+      ]
+    },
+    'Event Site': {
+      price: 300, marketValue: 900,
+      features: [
+        'Single-page event site, hand-coded — $400+ if hired separately',
+        'Prize gallery with lightbox — $150+ if hired separately',
+        'Event details section (date, venue, tickets, prizes) — $100+ if hired separately',
+        'Mobile-optimized + shareable link — $150+ if hired separately',
+        'Free hosting for the duration of your event — $50+ if hired separately',
+        'Delivered in 4 days — rush rate value $200+',
+      ]
+    },
+    'Custom Linktree': {
+      price: 300, marketValue: 750,
+      features: [
+        'Custom-designed to match your IG aesthetic — $300+ if hired separately',
+        'All real links (booking, phone, email, socials) — $100+ if hired separately',
+        'Mobile-optimized, loads fast, no Linktree branding — $150+ if hired separately',
+        'Hosted on your own link — $100+ if hired separately',
+        'Delivered in 2 days — rush rate value $100+',
+      ]
+    },
+  };
+
   let prompt = '';
 
   if (type === 'quote') {
-    prompt = `You are James from FJMedia, a web design agency in Winnipeg that builds custom websites for local small businesses. Write a short, professional quote message to send to a prospect.
+    const pkg = packageDetails[data.package] || {};
+
+    prompt = `You are James from FJMedia, a web design agency in Winnipeg. Write a short, confident quote message to send to a prospect.
 
 Client Info:
 - Name: ${data.clientName}
 - Business: ${data.businessName}
 - Industry: ${data.industry}
-- Package Interest: ${data.package}
+- Package: ${data.package} ($${pkg.price || 'TBD'})
+- Market value of package: $${pkg.marketValue || 'TBD'}+
 - Notes: ${data.notes || 'None'}
 
-FJMedia Packages:
-- Get Found: $600 — custom site, mobile-optimized, contact form, SEO setup, 1 month free changes
-- Get Customers: $1,000 — everything in Get Found + booking form, Google Sheets CRM, email alerts, GA4 analytics, 3 months free changes
-- Own the Market: $1,600 — everything in Get Customers + 2-3 design versions, auto-reply emails, custom domain setup, schema markup, 6 months maintenance
-- Event Site: $300 — single-page event site, prize gallery, delivered in 4 days
-- Custom Linktree: $300 — custom link-in-bio, delivered in 2 days
-- Monthly Maintenance: from $150/mo
-
-Key differentiator: No upfront cost — we build the site first, they see it, then they decide to pay.
+Core principle (Alex Hormozi — $100M Offers): Lead with the OUTCOME, not the service. They don't want a website — they want more customers, more bookings, more revenue, and to look like the best option in their market.
 
 Write a quote message that:
-1. Addresses them by first name, warm and direct
-2. References their business and what they need
-3. Clearly states the package and price
-4. Reminds them of the no-upfront-cost model
-5. Ends with a clear next step (book a quick call or reply to confirm)
+1. Opens by naming the specific outcome ${data.clientName}'s business will get — be specific to their industry (e.g. more detailing bookings, found when people Google barbers in Winnipeg, look more credible than competitors, etc.)
+2. States the package + price, and shows the value vs. price contrast ($${pkg.marketValue || 'X'}+ in value, $${pkg.price || 'X'} is what they pay)
+3. States the guarantee in one line: "We build it first. You see every detail. You only pay when you're ready to launch."
+4. Ends with ONE clear next step — reply to confirm or book a quick call
 
-Keep it under 150 words. Conversational, confident, no corporate fluff. Sign off as James — FJMedia.`;
+Under 150 words. Warm, direct, confident — no corporate fluff. Sign off as James — FJMedia.`;
 
   } else if (type === 'proposal') {
-    prompt = `You are James from FJMedia, a web design agency in Winnipeg. Write a short, clean proposal for a potential client.
+    const pkg = packageDetails[data.package] || {};
+    const savings = (pkg.marketValue && pkg.price) ? (pkg.marketValue - pkg.price) : null;
+
+    prompt = `You are James from FJMedia, a web design agency in Winnipeg. Write a Grand Slam Proposal using Alex Hormozi's value-stacking method from $100M Offers.
 
 Client Info:
 - Name: ${data.clientName}
 - Business: ${data.businessName}
 - Industry: ${data.industry}
 - Package: ${data.package}
+- FJMedia price: $${pkg.price || 'TBD'}
+- Total market value: $${pkg.marketValue || 'TBD'}+
+- They save: $${savings || 'TBD'}+
 - Notes: ${data.notes || 'None'}
 
-FJMedia core offer: No upfront cost. We build first, they see it, then they pay. Custom built from scratch, not templates.
+Value stack (list these with their individual market values):
+${pkg.features ? pkg.features.map(f => `• ${f}`).join('\n') : '• Custom website build'}
 
-Write a proposal with these sections:
-1. **What We'll Build** — brief description tailored to their industry and package
-2. **What's Included** — bullet list of deliverables for their package
-3. **Investment** — package name + price, with the no-upfront-cost guarantee called out clearly
-4. **Timeline** — realistic delivery estimate based on their package
-5. **Next Step** — one clear action (book a call, reply to confirm, etc.)
+Write the proposal with these exact sections:
 
-Keep it tight — under 300 words total. Professional but human. No filler. Sign off as James — FJMedia.`;
+**The Outcome**
+One powerful sentence naming the specific result ${data.clientName} will get — not the deliverables, the dream (e.g. "Royal Kings Auto Care will be the first detailer customers find when they search in Winnipeg — and the most credible one they see."). Make it specific to their business and industry.
+
+**What You're Getting**
+List every component as a bullet with its individual market value (use the value stack above). End with:
+Total market value: $${pkg.marketValue || 'X'}+
+You pay: $${pkg.price || 'X'}
+You save: $${savings || 'X'}+
+
+**The Guarantee**
+Write 2 sentences: We build the full site before they pay a cent. They see every detail, request any changes, and only pay when they're 100% happy — or they walk away owing nothing.
+
+**Timeline**
+Realistic delivery: 5 days to first design, 14 days fully live (or 4 days for Event Site / 2 days for Linktree). Tailor to their package.
+
+**After Launch — Keep the Customers Coming**
+3–4 sentences pitching the Monthly Maintenance Retainer ($150–$300/mo). Frame it as the system that keeps results coming in long-term. The site is the foundation — the retainer is what turns it into a customer machine. Without it, a site peaks and plateaus. With it, it keeps growing.
+
+**Your Next Step**
+One clear CTA. Reply to confirm, or book a quick 15-min call to go over details.
+
+Professional, human, no filler. Under 400 words. Sign off as James — FJMedia.`;
 
   } else if (type === 'followup') {
-    prompt = `You are James from FJMedia, a web design agency in Winnipeg. Write a follow-up message sequence for a prospect who hasn't replied.
+    prompt = `You are James from FJMedia, a web design agency in Winnipeg. Write a 5-message follow-up sequence for a prospect who hasn't replied yet.
 
 Client Info:
 - Name: ${data.clientName}
 - Business: ${data.businessName}
+- Industry: ${data.industry || 'local business'}
 - Last Contact: ${data.lastContact || 'a few days ago'}
 - Context: ${data.notes || 'Had initial interest, no reply yet'}
 
-Write 3 short follow-up messages:
+Core principle (Alex Hormozi — $100M Leads): Most sales happen on follow-up 5–12. Each message must add value or shift the prospect's perspective — never just "checking in." Every message should feel personal, not copy-paste. Reference ${data.businessName} by name in every message.
 
-**Follow-up 1 (Day 3):** Gentle check-in. Reference their business specifically. Keep it 2-3 sentences.
+Write exactly 5 follow-up messages:
 
-**Follow-up 2 (Day 7):** Add value — mention something relevant to their industry (a tip, a stat, or a reminder of the no-upfront offer). 3-4 sentences.
+**Follow-up 1 (Day 3):**
+Gentle re-open. Reference their specific business. Ask one simple question to restart the conversation (e.g. "Still thinking about getting [business] online?" or "Did you have any questions about the proposal?"). 2–3 sentences. No pressure.
 
-**Follow-up 3 (Day 14):** Last touch. Low pressure, leave the door open. 2-3 sentences.
+**Follow-up 2 (Day 7):**
+Add value. Share one sharp insight about businesses in their industry that don't have a strong online presence — a missed opportunity, a competitor advantage, or a stat. Remind them the site gets built before they pay a single dollar. End with a soft CTA. 3–4 sentences.
 
-Each message should feel personal, not copy-paste. Reference their business name. Confident but not pushy. Sign off as James — FJMedia.`;
+**Follow-up 3 (Day 14):**
+ROI math (Hormozi-style). Calculate how many extra customers it takes to cover the investment for their industry. Keep it simple: if the average sale in their industry is ~$X, then Y extra customers = the site pays for itself — everything after that is pure profit. Make it feel like the easiest decision they'll ever make. 3–4 sentences.
+
+**Follow-up 4 (Day 21):**
+Social proof + retainer pitch. Reference the type of result FJMedia has helped a local small business achieve (more bookings, first to show up on Google, inbox filling up). Mention that the clients who see the best long-term results are the ones who add the Monthly Maintenance Retainer ($150–$300/mo) after launch — because that's what keeps the customers coming in, not just a spike at launch. 3–4 sentences.
+
+**Follow-up 5 (Day 30):**
+The breakup message. No pressure, no guilt. Let them know you're wrapping up outreach, the door stays open whenever they're ready. Mention that you only take 5 builds a month and you'll hold their spot for a few more days before opening it up. Warm, respectful, final. 2–3 sentences.
+
+Confident, never desperate. No corporate fluff. Sign off every message as James — FJMedia.`;
 
   } else {
     return res.status(400).json({ error: 'Invalid type. Use: quote, proposal, followup' });
@@ -95,7 +188,7 @@ Each message should feel personal, not copy-paste. Reference their business name
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
+        max_tokens: 1500,
         messages: [{ role: 'user', content: prompt }]
       })
     });

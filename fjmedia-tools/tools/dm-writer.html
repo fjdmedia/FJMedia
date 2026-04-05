@@ -251,10 +251,14 @@
 
       const prompt = `You are writing Instagram DMs on behalf of James at FJMedia, a Winnipeg web design agency.
 
+CORE PRINCIPLE (Alex Hormozi — $100M Offers + $100M Leads):
+Never sell a website. Sell the OUTCOME — more customers, more bookings, more revenue, looking like the best option in their market. The website is just the vehicle.
+
 FJMedia's offer:
-- We design and build the website FIRST. The client only pays AFTER they see and approve the finished work.
-- No deposit. No contract upfront. Zero financial risk to the client.
-- Packages from $800. Optional monthly retainer for SEO and updates ($150–300/mo).
+- We design and build the full website FIRST — they only pay AFTER they see and approve the finished work
+- No deposit. No contract upfront. Zero financial risk to the prospect.
+- Packages from $600 (Get Found) to $1,600 (Own the Market). Delivered in 5 days to first design, live in 14 days.
+- Monthly Maintenance Retainer: $150–$300/mo — keeps the customers coming in long-term after launch
 - Winnipeg-based. We work with local small businesses.
 
 Prospect info:
@@ -268,19 +272,20 @@ Prospect info:
 Write 3 Instagram DM variations. Return ONLY valid JSON — no markdown, no backticks, no explanation.
 
 {
-  "short": "<First outreach DM, ~50 words. Open with a specific observation about their business or a pain point (not generic). Briefly introduce the zero-risk offer. Soft CTA like 'worth a quick chat?' or 'open to hearing more?'>",
-  "medium": "<First outreach DM, ~100 words. Reference their specific situation and 2 pain points. Explain what FJMedia does and the build-first zero-risk model in plain language. End with a low-pressure CTA.>",
-  "followup": "<Follow-up DM assuming no reply to first message, ~40 words. Reference that you messaged before. Re-hook with the zero-risk angle. Keep it light — no guilt-tripping. Easy to say yes.>"
+  "short": "<First outreach DM, ~50 words. Open by naming the specific OUTCOME they're missing — not just a pain point, but the dream they want (more bookings, showing up on Google, looking more credible than competitors). Introduce the zero-risk build-first offer in one line. Soft CTA: 'worth a quick chat?' or 'open to hearing more?'>",
+  "medium": "<First outreach DM, ~100 words. Open with the dream outcome specific to their industry. Reference 2 real pain points. Explain FJMedia's build-first model — we deliver the site, they only pay when they love it. Naturally mention that clients who add the monthly retainer ($150/mo) are the ones who see results keep growing after launch, not just at launch. End with low-pressure CTA.>",
+  "followup": "<Follow-up DM assuming no reply to first message, ~40 words. Use Hormozi ROI math — name how many extra customers from their industry would cover the investment (e.g. '3 extra bookings covers the whole site'). Re-hook with the zero-risk angle. Light and easy — no guilt. Easy to say yes.>"
 }
 
 Rules:
 - If owner name is known, open with their first name naturally (Hey ${ownerName || '[name]'})
 - If owner name unknown, use 'Hey!' or reference the business name
-- Be SPECIFIC to their situation — no generic filler
-- The zero-risk build-first model is the key differentiator — use it naturally, not mechanically
+- ALWAYS lead with outcome, never with "we build websites" or "I noticed your website"
+- The guarantee (build first, pay after) is the closer — use it naturally, not mechanically
 - Include Winnipeg when it adds local credibility
 - CTAs must be soft and low-pressure
-- No ALL CAPS, no excessive exclamation marks, no 'I hope this finds you well'`;
+- No ALL CAPS, no excessive exclamation marks, no 'I hope this finds you well'
+- Never mention templates, code, or technical deliverables — speak in business results`;
 
       const res = await fetch(API_URL, {
         method: 'POST',
