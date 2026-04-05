@@ -522,7 +522,7 @@
     }
 
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 1.2rem; align-items: stretch;
     }
     .pricing-dots { display: none; }
@@ -618,39 +618,6 @@
     .pricing-addon-text { font-size: 0.88rem; color: var(--heading); font-weight: 600; }
     .pricing-addon-text strong { color: var(--accent); }
     .pricing-addon-sub { font-size: 0.8rem; color: var(--text-light); margin-left: auto; }
-    /* Event track */
-    .event-track {
-      margin-top: 3rem; border-top: 1px solid var(--border);
-      padding-top: 2.4rem; text-align: center;
-    }
-    .event-track-eyebrow {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent); font-family: var(--mono); margin-bottom: 0.5rem;
-    }
-    .event-track-heading {
-      font-size: 1.25rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem;
-    }
-    .event-track-sub {
-      font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.8rem;
-    }
-    .event-cards {
-      display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap;
-    }
-    .event-card {
-      display: inline-block; text-align: left;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem 2.2rem;
-      max-width: 420px; width: 100%;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .event-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
-    .event-card .pricing-tier { font-size: 1.1rem; }
-    .event-upgrade {
-      font-size: 0.8rem; color: var(--text-light); text-align: center;
-      margin-top: 1rem;
-    }
-    .event-upgrade a { color: var(--accent); text-decoration: none; }
-    .event-upgrade a:hover { text-decoration: underline; }
 
     /* ── MOBILE ── */
     @media (max-width: 900px) {
@@ -719,10 +686,6 @@
       }
       .pdot.active { background: var(--accent); transform: scale(1.3); }
 
-      /* Event */
-      .event-track { margin-top: 2rem; padding-top: 1.8rem; }
-      .event-card { padding: 1.6rem 1.4rem; }
-
       /* Contact */
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
 
@@ -780,7 +743,6 @@
       .roi-block { padding: 1rem 0.9rem; }
       .roi-statement { font-size: 0.9rem; }
       .scarcity-bar { font-size: 0.78rem; }
-      .event-card { padding: 1.4rem 1.2rem; }
       .hero-stat-card { padding: 0.9rem 1rem; }
       .stat-text-num { font-size: 0.95rem; }
     }
@@ -1408,6 +1370,33 @@
 
       <div class="pricing-grid">
 
+        <!-- Get Online -->
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Get Online</div>
+          <div class="pricing-tagline">Need to be online fast? A clean, custom page — live in days.</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><span class="feat-left"><span class="check">✓</span> Custom design — your brand, your style</span><span class="feat-val">$300+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Looks perfect on every device</span><span class="feat-val">$100+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Content written to match your voice</span><span class="feat-val">$100+</span></li>
+            <li><span class="feat-left"><span class="check">✓</span> Hosted free — no monthly fees</span><span class="feat-val">$75+</span></li>
+          </ul>
+          <div class="pricing-total-row">
+            <span class="pricing-total-label">Total value</span>
+            <span class="pricing-total-val">$575+</span>
+          </div>
+          <div class="pricing-price-block">
+            <div class="pricing-you-pay">You pay</div>
+            <div class="pricing-price">$300</div>
+            <span class="pricing-save">You save $275+</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0.5rem 0;padding:6px;background:rgba(201,168,76,0.06);border-radius:6px;">
+            <span style="font-size:0.85rem;">&#128737;</span>
+            <span style="font-size:0.78rem;opacity:0.5;">Don't love it? $0.</span>
+          </div>
+          <a href="#contact" class="btn-outline pricing-btn" data-pkg="Get Online — $300">Book a Call</a>
+        </div>
+
         <!-- Get Found -->
         <div class="pricing-card reveal">
           <div class="pricing-tier">Get Found</div>
@@ -1507,6 +1496,7 @@
         <span class="pdot"></span>
         <span class="pdot"></span>
         <span class="pdot"></span>
+        <span class="pdot"></span>
       </div>
       <div class="pricing-addon">
         <span class="pricing-addon-label">Add-on</span>
@@ -1514,51 +1504,6 @@
         <span class="pricing-addon-sub">Maintain ($150/mo): site updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates, SEO monitoring &amp; a monthly 1-on-1 to review your data and keep new customers coming in.</span>
       </div>
 
-      <!-- Event + Linktree Track -->
-      <div class="event-track reveal">
-        <p class="event-track-eyebrow">One-Time Projects</p>
-        <h3 class="event-track-heading">Not ready for a full site? We've got you.</h3>
-        <p class="event-track-sub">Standalone packages for events and social media — built the same way, delivered fast, no long-term commitment.</p>
-        <div class="event-cards">
-          <div class="event-card reveal">
-            <div class="pricing-tier">Event Site</div>
-            <div class="pricing-tagline">Everything your event needs online — nothing it doesn't</div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-              <li><span class="feat-left"><span class="check">✓</span> Single-page event site, hand-coded</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Prize gallery with lightbox</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Event details — date, venue, tickets, prizes</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized + shareable link</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Hosted free for the duration of your event</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Delivered in 4 days</span></li>
-            </ul>
-            <div class="pricing-price-block">
-              <div class="pricing-you-pay">One-time</div>
-              <div class="pricing-price">$300</div>
-            </div>
-            <a href="#contact" class="btn-primary pricing-btn" data-pkg="Event Site — $300">Book a Call</a>
-          </div>
-          <div class="event-card reveal">
-            <div class="pricing-tier">Custom Linktree</div>
-            <div class="pricing-tagline">A link-in-bio that actually matches your brand</div>
-            <div class="pricing-divider"></div>
-            <ul class="pricing-features">
-              <li><span class="feat-left"><span class="check">✓</span> Custom-designed to match your IG aesthetic</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Your photo, colours, fonts — nothing generic</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> All real links — booking, phone, email, socials</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Mobile-optimized, loads fast</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Hosted on your own link — no Linktree branding</span></li>
-              <li><span class="feat-left"><span class="check">✓</span> Delivered in 2 days</span></li>
-            </ul>
-            <div class="pricing-price-block">
-              <div class="pricing-you-pay">One-time</div>
-              <div class="pricing-price">$300</div>
-            </div>
-            <a href="#contact" class="btn-primary pricing-btn" data-pkg="Custom Linktree — $300">Book a Call</a>
-          </div>
-        </div>
-        <p class="event-upgrade">Want more? Upgrade to <a href="#pricing">Get Found ($600)</a> and turn your linktree into a full website.</p>
-      </div>
 
     </div>
   </section>
@@ -1603,11 +1548,10 @@
           <input type="text"  name="business" placeholder="Business Name (optional)" />
           <select name="service">
             <option value="" disabled selected>What are you looking for?</option>
+            <option>Get Online — $300</option>
             <option>Get Found — $600</option>
             <option>Get Customers — $1,000</option>
             <option>Own the Market — $1,600</option>
-            <option>Event Site — $300</option>
-            <option>Custom Linktree — $300</option>
             <option>Monthly Maintenance</option>
             <option>Not Sure Yet</option>
           </select>
@@ -1708,11 +1652,6 @@
       });
     }
 
-    // Event track
-    gsap.from('.event-track', {
-      scrollTrigger: { trigger: '.event-track', start: 'top 85%', once: true },
-      opacity: 0, y: 20, duration: 0.55, ease: 'power2.out'
-    });
 
     // Contact — slide in from both sides
     gsap.from('.contact-info', {
