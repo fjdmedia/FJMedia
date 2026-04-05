@@ -20,7 +20,7 @@ def render(html_filename: str):
     ads_dir = Path(__file__).parent
     html_path = ads_dir / html_filename
     out_name = Path(html_filename).stem + ".png"
-    out_path = ads_dir / "30 Day Plan" / out_name
+    out_path = html_path.parent / out_name
 
     if not html_path.exists():
         print(f"File not found: {html_path}")

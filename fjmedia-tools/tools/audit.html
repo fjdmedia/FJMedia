@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Audit Agent — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Website Audit Agent</span>
+    </div>
+
+    <!-- ── TOOL PAGE ── -->
+    <div class="tool-page">
+
+      <div class="tool-header">
+        <h1>Website Audit Agent</h1>
+        <p>Enter any URL. Claude will analyze the site and generate a full audit report — performance, SEO, mobile, and trust signals.</p>
+      </div>
+
+      <!-- INPUT -->
+      <div class="audit-input-wrap">
+        <input
+          class="url-input"
+          id="urlInput"
+          type="url"
+          placeholder="https://example.com"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="btn-gold" id="runBtn" onclick="startAudit()">
+          Run Audit →
+        </button>
+      </div>
+      <p class="audit-note">Takes 15–30 seconds &nbsp;·&nbsp; Powered by Claude AI &nbsp;·&nbsp; Requires API key</p>
+
+      <!-- LOADING -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <div>
+          <p class="loading-text">Analyzing site…</p>
+          <p class="loading-step" id="loadingStep">Connecting to Claude</p>
+        </div>
+      </div>
+
+      <!-- ERROR -->
+      <div class="error-state" id="errorState"></div>
+
+      <!-- RESULTS -->
+      <div class="results-section" id="resultsSection">
+
+        <div class="report-header">
+          <p class="report-url">Audit for <strong id="reportUrl"></strong></p>
+          <p class="report-date" id="reportDate"></p>
+        </div>
+
+        <!-- OVERALL SCORE -->
+        <div class="overall-score-wrap">
+          <p class="overall-score-label">Overall Score</p>
+          <div class="overall-score-num" id="overallNum">—</div>
+          <p class="overall-summary" id="overallSummary"></p>
+        </div>
+
+        <!-- SCORE CARDS -->
+        <div class="score-grid">
+          <div class="score-card">
+            <p class="score-card-label">Performance</p>
+            <div class="score-card-num" id="perfNum">—</div>
+            <div class="score-bar-track"><div class="score-bar-fill" id="perfBar" style="width:0%"></div></div>
+          </div>
+          <div class="score-card">
+            <p class="score-card-label">SEO</p>
+            <div class="score-card-num" id="seoNum">—</div>
+            <div class="score-bar-track"><div class="score-bar-fill" id="seoBar" style="width:0%"></div></div>
+          </div>
+          <div class="score-card">
+            <p class="score-card-label">Mobile</p>
+            <div class="score-card-num" id="mobileNum">—</div>
+            <div class="score-bar-track"><div class="score-bar-fill" id="mobileBar" style="width:0%"></div></div>
+          </div>
+          <div class="score-card">
+            <p class="score-card-label">Trust & Security</p>
+            <div class="score-card-num" id="trustNum">—</div>
+            <div class="score-bar-track"><div class="score-bar-fill" id="trustBar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <!-- FINDINGS -->
+        <h3 class="results-section-title">Key Findings</h3>
+        <div class="findings-grid" id="findingsGrid"></div>
+
+        <!-- RECOMMENDATIONS -->
+        <h3 class="results-section-title">Recommendations</h3>
+        <div class="recs-list" id="recsList"></div>
+
+        <!-- PITCH -->
+        <div class="pitch-callout">
+          <p class="pitch-label">FJMedia Assessment</p>
+          <p class="pitch-text" id="pitchText"></p>
+        </div>
+
+        <!-- CTA -->
+        <div class="report-cta">
+          <div class="report-cta-text">
+            <h3>Want us to fix this?</h3>
+            <p>We build it first — you pay only after you approve it.</p>
+          </div>
+          <a href="mailto:diazfjamesc@gmail.com?subject=Website Audit Consult Request" class="btn-cta">Book a free consult →</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2026 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+  <script>
+
+    const API_URL = 'https://api.anthropic.com/v1/messages';
+    const MODEL   = 'claude-sonnet-4-6';
+
+    // Pre-fill URL from query param (when linked from Lead Prospector)
+    (function prefillFromParams() {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('url')) document.getElementById('urlInput').value = p.get('url');
+    })();
+
+    // Allow Enter key to trigger audit
+    document.getElementById('urlInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') startAudit();
+    });
+
+    function setLoadingStep(text) {
+      const el = document.getElementById('loadingStep');
+      if (el) el.textContent = text;
+    }
+
+    async function startAudit() {
+      const rawUrl = document.getElementById('urlInput').value.trim();
+      if (!rawUrl) {
+        showError('Please enter a URL to audit.');
+        return;
+      }
+
+      const url = rawUrl.startsWith('http') ? rawUrl : 'https://' + rawUrl;
+      document.getElementById('urlInput').value = url;
+
+      const apiKey = localStorage.getItem('fjmedia_api_key');
+      if (!apiKey) {
+        showError('No API key set. Click "Set API Key" in the top nav to add your Anthropic API key.');
+        return;
+      }
+
+      // Reset UI
+      hideResults();
+      hideError();
+      showLoading(true);
+      document.getElementById('runBtn').disabled = true;
+
+      try {
+        setLoadingStep('Connecting to Claude…');
+        const data = await runAudit(url, apiKey);
+        setLoadingStep('Rendering report…');
+        renderResults(url, data);
+      } catch (err) {
+        showError(err.message || 'Something went wrong. Check your API key and try again.');
+      } finally {
+        showLoading(false);
+        document.getElementById('runBtn').disabled = false;
+      }
+    }
+
+    async function runAudit(url, apiKey) {
+      const prompt = `You are a web auditor. Analyze the website at: ${url}
+
+Use web search to visit and inspect the actual site. Evaluate it across four dimensions:
+
+1. PERFORMANCE: page speed signals, image optimization, render-blocking resources, file sizes
+2. SEO: title tag quality, meta description, H1 usage, local keywords, mobile indexing signals, structured data
+3. MOBILE: responsive design, mobile-friendly layout, tap target sizes, font sizes on small screens
+4. TRUST & SECURITY: HTTPS/SSL, contact info visibility, professional design quality, social proof or reviews, clear business identity
+
+Return ONLY a valid JSON object — no markdown, no backticks, no explanation text. Use this exact shape:
+
+{
+  "performanceScore": <integer 0-100>,
+  "seoScore": <integer 0-100>,
+  "mobileScore": <integer 0-100>,
+  "trustScore": <integer 0-100>,
+  "overall": <integer 0-100, weighted average>,
+  "summary": "<One sentence verdict on the site's overall web presence>",
+  "findings": [
+    { "label": "<short category name>", "value": "<specific observation, 6-10 words>" },
+    { "label": "<short category name>", "value": "<specific observation, 6-10 words>" },
+    { "label": "<short category name>", "value": "<specific observation, 6-10 words>" },
+    { "label": "<short category name>", "value": "<specific observation, 6-10 words>" }
+  ],
+  "recommendations": [
+    { "priority": "High",   "title": "<action title>", "detail": "<1-2 sentences on what to fix and why>" },
+    { "priority": "High",   "title": "<action title>", "detail": "<1-2 sentences on what to fix and why>" },
+    { "priority": "Medium", "title": "<action title>", "detail": "<1-2 sentences on what to fix and why>" },
+    { "priority": "Medium", "title": "<action title>", "detail": "<1-2 sentences on what to fix and why>" },
+    { "priority": "Low",    "title": "<action title>", "detail": "<1-2 sentences on what to fix and why>" }
+  ],
+  "pitch": "<2-3 sentences from FJMedia's perspective. FJMedia is a Winnipeg web design agency. Reference the specific issues found and mention FJMedia's zero-risk model: the client only pays after approving the finished work. Keep it professional and specific to what was found.>"
+}`;
+
+      const messages = [{ role: 'user', content: prompt }];
+      let response;
+      let iterations = 0;
+      const MAX_ITER = 6;
+
+      while (iterations < MAX_ITER) {
+        iterations++;
+        if (iterations === 2) setLoadingStep('Searching the web…');
+        if (iterations === 3) setLoadingStep('Processing results…');
+        if (iterations >= 4) setLoadingStep('Generating audit report…');
+
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            max_tokens: 1500,
+            tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+            messages
+          })
+        });
+
+        if (!res.ok) {
+          let errMsg = `API error ${res.status}`;
+          try {
+            const errData = await res.json();
+            errMsg = errData.error?.message || errMsg;
+          } catch {}
+          throw new Error(errMsg);
+        }
+
+        response = await res.json();
+
+        // Done — extract text response
+        if (response.stop_reason === 'end_turn') break;
+
+        // Tool use — acknowledge and continue
+        if (response.stop_reason === 'tool_use') {
+          const toolResults = [];
+          for (const block of response.content) {
+            if (block.type === 'tool_use') {
+              toolResults.push({
+                type: 'tool_result',
+                tool_use_id: block.id,
+                content: 'Search executed. Use results to complete the audit.'
+              });
+            }
+          }
+          messages.push({ role: 'assistant', content: response.content });
+          messages.push({ role: 'user', content: toolResults });
+        } else {
+          // max_tokens or other stop
+          break;
+        }
+      }
+
+      if (!response) throw new Error('No response from API.');
+
+      // Find the text block
+      const textBlock = (response.content || []).find(b => b.type === 'text');
+      if (!textBlock || !textBlock.text) {
+        throw new Error('Claude returned no text. The model may have only used tools — try again.');
+      }
+
+      return parseAuditJSON(textBlock.text);
+    }
+
+    function parseAuditJSON(text) {
+      // Strip markdown code fences
+      let cleaned = text.trim()
+        .replace(/^```(?:json)?\s*/i, '')
+        .replace(/\s*```$/, '')
+        .trim();
+
+      try {
+        return JSON.parse(cleaned);
+      } catch {
+        // Regex fallback — grab outermost JSON object
+        const match = cleaned.match(/\{[\s\S]*\}/);
+        if (match) {
+          try { return JSON.parse(match[0]); } catch {}
+        }
+        throw new Error('Could not parse the audit response. Try running the audit again.');
+      }
+    }
+
+    // ── Score color helper ──
+    function scoreColor(n) {
+      if (n >= 80) return 'green';
+      if (n >= 50) return 'amber';
+      return 'red';
+    }
+
+    // ── Render results ──
+    function renderResults(url, data) {
+      // Report header
+      document.getElementById('reportUrl').textContent = url.replace(/^https?:\/\//, '');
+      document.getElementById('reportDate').textContent =
+        new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      // Overall
+      const overall = Math.round(data.overall ?? 0);
+      const overallEl = document.getElementById('overallNum');
+      overallEl.textContent = overall;
+      overallEl.className = 'overall-score-num ' + scoreColor(overall);
+      document.getElementById('overallSummary').textContent = data.summary || '';
+
+      // Score cards
+      const scores = [
+        { num: 'perfNum',   bar: 'perfBar',   val: data.performanceScore },
+        { num: 'seoNum',    bar: 'seoBar',    val: data.seoScore },
+        { num: 'mobileNum', bar: 'mobileBar', val: data.mobileScore },
+        { num: 'trustNum',  bar: 'trustBar',  val: data.trustScore },
+      ];
+      scores.forEach(({ num, bar, val }) => {
+        const v = Math.round(val ?? 0);
+        const col = scoreColor(v);
+        document.getElementById(num).textContent = v;
+        document.getElementById(num).className = 'score-card-num ' + col;
+        const barEl = document.getElementById(bar);
+        barEl.className = 'score-bar-fill ' + col;
+        // Animate bar after a tick
+        setTimeout(() => { barEl.style.width = v + '%'; }, 50);
+      });
+
+      // Findings
+      const findingsGrid = document.getElementById('findingsGrid');
+      findingsGrid.innerHTML = (data.findings || []).map(f => `
+        <div class="finding-card">
+          <p class="finding-label">${escHtml(f.label)}</p>
+          <p class="finding-value">${escHtml(f.value)}</p>
+        </div>
+      `).join('');
+
+      // Recommendations
+      const recsList = document.getElementById('recsList');
+      recsList.innerHTML = (data.recommendations || []).map(r => {
+        const p = (r.priority || 'medium').toLowerCase();
+        return `
+          <div class="rec-item">
+            <span class="priority-badge ${p}">${escHtml(r.priority)}</span>
+            <div>
+              <p class="rec-title">${escHtml(r.title)}</p>
+              <p class="rec-detail">${escHtml(r.detail)}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Pitch
+      document.getElementById('pitchText').textContent = data.pitch || '';
+
+      // Show results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function escHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function showLoading(visible) {
+      document.getElementById('loadingState').classList.toggle('visible', visible);
+    }
+    function showError(msg) {
+      const el = document.getElementById('errorState');
+      el.textContent = '⚠ ' + msg;
+      el.classList.add('visible');
+    }
+    function hideError() {
+      document.getElementById('errorState').classList.remove('visible');
+    }
+    function hideResults() {
+      document.getElementById('resultsSection').classList.remove('visible');
+    }
+
+  </script>
+
+</body>
+</html>

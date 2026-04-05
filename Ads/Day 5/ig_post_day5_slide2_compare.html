@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.post{width:540px;height:540px;background:#071520;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:44px 50px;}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:40px 40px;}
+.corner{position:absolute;width:60px;height:60px;border-color:#c9a84c;border-style:solid;opacity:0.4;}
+.corner.tl{top:28px;left:28px;border-width:1px 0 0 1px;}
+.corner.br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
+.inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;}
+.eyebrow{font-family:"DM Sans",sans-serif;font-weight:500;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;}
+.heading{font-family:"Syne",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
+.heading em{color:#c9a84c;font-style:normal;}
+.sub{font-family:"DM Sans",sans-serif;font-size:10px;color:rgba(237,234,229,0.4);line-height:1.5;margin-bottom:14px;}
+.divider{width:32px;height:1px;background:#c9a84c;opacity:0.4;margin-bottom:14px;}
+.byline{position:absolute;bottom:22px;right:36px;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,0.25);z-index:2;}
+.slide-num{position:absolute;bottom:22px;left:36px;font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,168,76,0.2);z-index:2;}
+.hint{margin-top:20px;font-family:sans-serif;font-size:12px;color:#444;text-align:center;}
+
+.compare{display:flex;gap:16px;margin-top:4px;}
+.col{flex:1;display:flex;flex-direction:column;gap:0;}
+.col-label{font-family:"DM Sans",sans-serif;font-weight:500;font-size:8px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid;}
+.col-label.them{color:rgba(237,234,229,0.3);border-color:rgba(237,234,229,0.1);}
+.col-label.us{color:#c9a84c;border-color:rgba(201,168,76,0.3);}
+.price-big{font-family:"Syne",sans-serif;font-weight:800;font-size:48px;line-height:1;margin-bottom:6px;}
+.price-big.them{color:rgba(237,234,229,0.25);}
+.price-big.us{color:#c9a84c;}
+.price-sub{font-family:"DM Sans",sans-serif;font-size:9px;color:rgba(237,234,229,0.35);line-height:1.5;margin-bottom:14px;}
+.price-sub.us{color:rgba(201,168,76,0.6);}
+.pill{display:inline-block;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
+.pill.them{border:1px solid rgba(237,234,229,0.1);color:rgba(237,234,229,0.25);}
+.pill.us{border:1px solid rgba(201,168,76,0.3);color:#c9a84c;}
+.row-items{display:flex;flex-direction:column;gap:5px;}
+.row-item{font-family:"DM Sans",sans-serif;font-size:9px;line-height:1.4;display:flex;align-items:center;gap:6px;}
+.row-item.them{color:rgba(237,234,229,0.25);}
+.row-item.us{color:rgba(237,234,229,0.6);}
+.row-item::before{content:"";width:4px;height:4px;border-radius:50%;flex-shrink:0;}
+.row-item.them::before{background:rgba(237,234,229,0.15);}
+.row-item.us::before{background:#c9a84c;}
+.vs{width:1px;background:rgba(201,168,76,0.12);align-self:stretch;margin:0 4px;}
+</style></head><body>
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div class="post">
+  <div class="grid"></div>
+  <div class="corner tl"></div>
+  <div class="corner br"></div>
+  <div class="inner">
+    <div class="eyebrow">The Honest Comparison</div>
+    <div class="heading">What others charge.<br><em>What we charge.</em></div>
+    <div class="divider"></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-label them">Other Agencies</div>
+        <div class="price-big them">$5K+</div>
+        <div class="price-sub them">Paid upfront.<br>Before you see a single page.</div>
+        <div class="pill them">2–3 month timeline</div>
+        <br/>
+        <div class="row-items">
+          <div class="row-item them">Large retainer to start</div>
+          <div class="row-item them">Multiple revisions billed</div>
+          <div class="row-item them">You wait, then pay</div>
+        </div>
+      </div>
+      <div class="vs"></div>
+      <div class="col">
+        <div class="col-label us">FJMedia</div>
+        <div class="price-big us">$0</div>
+        <div class="price-sub us">Upfront. We build first.<br>You pay after you love it.</div>
+        <div class="pill us">5 day delivery</div>
+        <br/>
+        <div class="row-items">
+          <div class="row-item us">No cost until approved</div>
+          <div class="row-item us">All 6 components included</div>
+          <div class="row-item us">You see it, then decide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="byline">By FJMedia</div>
+  <div class="slide-num">2 / 4</div>
+</div>
+<p class="hint">Rendered at 1080x1080 via Playwright</p>
+</div></body></html>

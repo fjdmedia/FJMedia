@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.post{width:540px;height:540px;background:#071520;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:44px 50px;}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:40px 40px;}
+.corner{position:absolute;width:60px;height:60px;border-color:#c9a84c;border-style:solid;opacity:0.4;}
+.corner.tl{top:28px;left:28px;border-width:1px 0 0 1px;}
+.corner.br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
+.inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;}
+.eyebrow{font-family:"DM Sans",sans-serif;font-weight:500;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;}
+.heading{font-family:"Syne",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
+.heading em{color:#c9a84c;font-style:normal;}
+.sub{font-family:"DM Sans",sans-serif;font-size:10px;color:rgba(237,234,229,0.4);line-height:1.5;margin-bottom:14px;}
+.divider{width:32px;height:1px;background:#c9a84c;opacity:0.4;margin-bottom:14px;}
+.byline{position:absolute;bottom:22px;right:36px;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,0.25);z-index:2;}
+.slide-num{position:absolute;bottom:22px;left:36px;font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,168,76,0.2);z-index:2;}
+.hint{margin-top:20px;font-family:sans-serif;font-size:12px;color:#444;text-align:center;}
+
+.cards{display:flex;flex-direction:column;gap:12px;}
+.card{display:flex;align-items:center;gap:20px;padding:14px 16px;border:1px solid rgba(201,168,76,0.12);background:rgba(201,168,76,0.03);}
+.card-num{font-family:"Space Mono",monospace;font-size:24px;font-weight:700;color:#c9a84c;line-height:1;flex-shrink:0;width:44px;}
+.card-label{font-family:"DM Sans",sans-serif;font-weight:600;font-size:11px;color:#EDEAE5;margin-bottom:3px;}
+.card-sub{font-family:"DM Sans",sans-serif;font-size:9.5px;color:rgba(237,234,229,0.4);line-height:1.4;}
+</style></head><body>
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div class="post">
+  <div class="grid"></div>
+  <div class="corner tl"></div>
+  <div class="corner br"></div>
+  <div class="inner">
+    <div class="eyebrow">How FJMedia Does It</div>
+    <div class="heading">Built different.<br><em>Charged different.</em></div>
+    <div class="sub">Three things no other agency in Winnipeg offers together.</div>
+    <div class="divider"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-num">5</div>
+        <div><div class="card-label">Days to deliver</div><div class="card-sub">Strategy to live site in one week — not 2 months</div></div>
+      </div>
+      <div class="card">
+        <div class="card-num">$0</div>
+        <div><div class="card-label">Upfront cost</div><div class="card-sub">We build it first. You pay only when you love it.</div></div>
+      </div>
+      <div class="card">
+        <div class="card-num">1</div>
+        <div><div class="card-label">Point of contact</div><div class="card-sub">No agencies, no handoffs, no surprises</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="byline">By FJMedia</div>
+  <div class="slide-num">3 / 4</div>
+</div>
+<p class="hint">Rendered at 1080x1080 via Playwright</p>
+</div></body></html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Coming Soon</span>
+    </div>
+
+    <div class="coming-soon-page">
+      <div class="coming-soon-icon">🚧</div>
+      <h1>In Development</h1>
+      <p>This tool is being built. Check back soon — FJMedia tools are added regularly as the platform grows.</p>
+      <a href="../index.html" class="btn-outline-navy">← Back to Tools</a>
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2025 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+
+</body>
+</html>

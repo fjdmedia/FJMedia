@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FJMedia Tools Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Internal Agency Platform</p>
+        <h1><span>FJMedia</span> Tools</h1>
+        <p class="hero-sub">Built for Winnipeg businesses. Used by FJMedia.</p>
+      </div>
+    </section>
+
+    <!-- ── TOOL GRID ── -->
+    <section class="tools-section">
+      <p class="section-label">Available Tools</p>
+      <div class="tool-grid">
+
+        <div class="tool-card" onclick="window.location='tools/audit.html'">
+          <div class="tool-card-top">
+            <div class="tool-icon">🔍</div>
+            <span class="status-badge live">Live</span>
+          </div>
+          <div class="tool-name">Website Audit Agent</div>
+          <p class="tool-desc">Score any website across performance, SEO, mobile, and trust in under 30 seconds.</p>
+          <a href="tools/audit.html" class="tool-link" onclick="event.stopPropagation()">Open Tool →</a>
+        </div>
+
+        <div class="tool-card coming-soon">
+          <div class="tool-card-top">
+            <div class="tool-icon">📋</div>
+            <span class="status-badge coming">Coming Soon</span>
+          </div>
+          <div class="tool-name">Proposal Generator</div>
+          <p class="tool-desc">Generate a tailored project proposal in minutes.</p>
+          <span class="tool-link" style="color:var(--text-light);cursor:default;">Coming Soon</span>
+        </div>
+
+        <div class="tool-card" onclick="window.location='tools/prospector.html'">
+          <div class="tool-card-top">
+            <div class="tool-icon">🎯</div>
+            <span class="status-badge live">Live</span>
+          </div>
+          <div class="tool-name">Lead Prospector</div>
+          <p class="tool-desc">Find Winnipeg businesses that need a new site — ranked by opportunity, with one-click DM and audit links.</p>
+          <a href="tools/prospector.html" class="tool-link" onclick="event.stopPropagation()">Open Tool →</a>
+        </div>
+
+        <div class="tool-card" onclick="window.location='tools/dm-writer.html'">
+          <div class="tool-card-top">
+            <div class="tool-icon">✉️</div>
+            <span class="status-badge live">Live</span>
+          </div>
+          <div class="tool-name">Cold DM Writer</div>
+          <p class="tool-desc">Generate 3 personalized Instagram pitch DMs for any prospect in seconds — short, medium, and follow-up.</p>
+          <a href="tools/dm-writer.html" class="tool-link" onclick="event.stopPropagation()">Open Tool →</a>
+        </div>
+
+        <div class="tool-card coming-soon">
+          <div class="tool-card-top">
+            <div class="tool-icon">📈</div>
+            <span class="status-badge coming">Coming Soon</span>
+          </div>
+          <div class="tool-name">SEO Keyword Finder</div>
+          <p class="tool-desc">Find local keywords your clients should rank for.</p>
+          <span class="tool-link" style="color:var(--text-light);cursor:default;">Coming Soon</span>
+        </div>
+
+        <div class="tool-card coming-soon">
+          <div class="tool-card-top">
+            <div class="tool-icon">📝</div>
+            <span class="status-badge coming">Coming Soon</span>
+          </div>
+          <div class="tool-name">Client Intake Form</div>
+          <p class="tool-desc">Smart discovery form that builds a project brief automatically.</p>
+          <span class="tool-link" style="color:var(--text-light);cursor:default;">Coming Soon</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2026 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/nav.js"></script>
+
+</body>
+</html>

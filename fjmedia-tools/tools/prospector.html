@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead Prospector — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Lead Prospector</span>
+    </div>
+
+    <!-- ── TOOL PAGE ── -->
+    <div class="tool-page">
+
+      <div class="tool-header">
+        <h1>Lead Prospector</h1>
+        <p>Enter a niche and city — Claude searches the web, finds real local businesses, evaluates their web presence, and ranks them by opportunity. Each result links directly to the DM Writer.</p>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div class="dm-form">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="niche">Niche / Industry *</label>
+            <input
+              class="form-input"
+              id="niche"
+              type="text"
+              placeholder="e.g. Auto detailing, dental clinic, roofing contractor"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="city">City</label>
+            <input
+              class="form-input"
+              id="city"
+              type="text"
+              value="Winnipeg, MB"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="numLeads">Number of Leads</label>
+            <select class="form-select" id="numLeads">
+              <option value="5">5 leads — fast</option>
+              <option value="10" selected>10 leads — recommended</option>
+              <option value="15">15 leads — thorough</option>
+            </select>
+          </div>
+          <div class="form-group form-actions">
+            <button class="btn-primary" id="searchBtn" onclick="findLeads()">Find Leads →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="audit-note">Takes 20–40 seconds &nbsp;·&nbsp; Powered by Claude AI + web search &nbsp;·&nbsp; Requires API key</p>
+
+      <!-- ── LOADING ── -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <div>
+          <p class="loading-text">Searching for prospects…</p>
+          <p class="loading-step" id="loadingStep">Connecting to Claude</p>
+        </div>
+      </div>
+
+      <!-- ── ERROR ── -->
+      <div class="error-state" id="errorState"></div>
+
+      <!-- ── RESULTS ── -->
+      <div class="results-section" id="resultsSection">
+
+        <div class="prospect-summary">
+          <p class="prospect-summary-text" id="summaryText"></p>
+          <div class="priority-tally" id="priorityTally"></div>
+        </div>
+
+        <div class="export-bar">
+          <button class="btn-sm btn-sm-outline" onclick="exportCSV()">Export CSV</button>
+        </div>
+
+        <div class="prospect-list" id="prospectList"></div>
+
+        <div style="text-align:center; margin-top: 0.5rem;">
+          <button class="btn-outline-back" onclick="findLeads()">Search Again →</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2026 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+  <script>
+
+    const API_URL = 'https://api.anthropic.com/v1/messages';
+    const MODEL   = 'claude-sonnet-4-6';
+    const MAX_ITER = 8;
+    const ITER_DELAY_MS = 3000; // pause between iterations to stay under rate limits
+
+    let lastResults = [];
+
+    document.getElementById('niche').addEventListener('keydown', e => {
+      if (e.key === 'Enter') findLeads();
+    });
+
+    async function findLeads() {
+      const niche    = document.getElementById('niche').value.trim();
+      const city     = document.getElementById('city').value.trim() || 'Winnipeg, MB';
+      const numLeads = document.getElementById('numLeads').value;
+
+      if (!niche) {
+        showError('Please enter a niche or industry to search.');
+        return;
+      }
+
+      const apiKey = localStorage.getItem('fjmedia_api_key');
+      if (!apiKey) {
+        showError('No API key set. Click "Set API Key" in the top nav to add your Anthropic API key.');
+        return;
+      }
+
+      hideResults();
+      hideError();
+      showLoading(true);
+      document.getElementById('searchBtn').disabled = true;
+
+      try {
+        setStep('Connecting to Claude…');
+        const data = await runProspector(niche, city, numLeads, apiKey);
+        lastResults = data.prospects || [];
+        renderResults(niche, city, data);
+      } catch (err) {
+        showError(err.message || 'Something went wrong. Check your API key and try again.');
+      } finally {
+        showLoading(false);
+        document.getElementById('searchBtn').disabled = false;
+      }
+    }
+
+    async function runProspector(niche, city, numLeads, apiKey) {
+      const prompt = `You are a lead prospector for FJMedia, a web design agency based in ${city}.
+
+Your task: Find ${numLeads} REAL, named local businesses in the "${niche}" industry in ${city} that would benefit from a new or improved website.
+
+Search steps:
+1. Search for "${niche} businesses in ${city}" and related queries
+2. Find real, specific businesses by name — not generic directories
+3. For each business: check if they have a website, find their Instagram handle if possible
+4. Evaluate their web presence honestly and assign priority
+
+Priority rules:
+- HIGH: No website at all — only a Facebook/Instagram page or Google listing
+- MEDIUM: Has a website but it's clearly outdated, not mobile-friendly, no booking, poor design, or very slow
+- LOW: Has a decent website but there are clear improvement opportunities (no SEO, no live chat, etc.)
+
+Only include REAL businesses you found through actual web searches. Do not fabricate names.
+
+Return ONLY valid JSON, no markdown, no backticks:
+{
+  "prospects": [
+    {
+      "name": "<exact business name>",
+      "website": "<URL or null if none>",
+      "instagram": "<@handle or null>",
+      "phone": "<phone number or null>",
+      "priority": "high|medium|low",
+      "reason": "<one specific sentence — why they are a prospect, e.g. 'No website found — only a Facebook page with 230 followers'>",
+      "issues": "<1-2 specific web issues or gaps, e.g. 'No online booking, no mobile optimization, missing Google Business Profile'>"
+    }
+  ]
+}`;
+
+      const messages = [{ role: 'user', content: prompt }];
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+      let response;
+      let iterations = 0;
+
+      while (iterations < MAX_ITER) {
+        if (iterations > 0) await sleep(ITER_DELAY_MS);
+        iterations++;
+        if (iterations === 1) setStep('Searching the web…');
+        if (iterations === 3) setStep('Finding businesses…');
+        if (iterations === 5) setStep('Evaluating web presence…');
+        if (iterations >= 7) setStep('Building your prospect list…');
+
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            max_tokens: 3000,
+            tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+            messages
+          })
+        });
+
+        if (!res.ok) {
+          let errMsg = `API error ${res.status}`;
+          try {
+            const errData = await res.json();
+            errMsg = errData.error?.message || errMsg;
+          } catch {}
+          throw new Error(errMsg);
+        }
+
+        response = await res.json();
+
+        if (response.stop_reason === 'end_turn') break;
+
+        if (response.stop_reason === 'tool_use') {
+          const toolResults = [];
+          for (const block of response.content) {
+            if (block.type === 'tool_use') {
+              toolResults.push({
+                type: 'tool_result',
+                tool_use_id: block.id,
+                content: 'Search executed successfully. Continue finding and evaluating businesses.'
+              });
+            }
+          }
+          messages.push({ role: 'assistant', content: response.content });
+          messages.push({ role: 'user', content: toolResults });
+        } else {
+          break;
+        }
+      }
+
+      if (!response) throw new Error('No response from API.');
+
+      // If Claude was still searching when the loop ended (no text block yet),
+      // make one final call WITHOUT web_search so it's forced to compile its findings into JSON.
+      let textBlock = (response.content || []).find(b => b.type === 'text');
+
+      if (!textBlock?.text) {
+        setStep('Compiling results…');
+
+        // messages already ends with the tool_results from the last iteration —
+        // just call again without any tools so Claude must write text.
+        const finalRes = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            max_tokens: 3000,
+            messages   // no tools array → Claude cannot search, must output text
+          })
+        });
+
+        if (!finalRes.ok) {
+          let errMsg = `API error ${finalRes.status}`;
+          try { const d = await finalRes.json(); errMsg = d.error?.message || errMsg; } catch {}
+          throw new Error(errMsg);
+        }
+
+        const finalResponse = await finalRes.json();
+        textBlock = (finalResponse.content || []).find(b => b.type === 'text');
+      }
+
+      if (!textBlock?.text) throw new Error('Could not generate prospect list. Try again.');
+
+      return parseJSON(textBlock.text);
+    }
+
+    function parseJSON(text) {
+      let cleaned = text.trim()
+        .replace(/^```(?:json)?\s*/i, '')
+        .replace(/\s*```$/, '')
+        .trim();
+      try {
+        return JSON.parse(cleaned);
+      } catch {
+        const match = cleaned.match(/\{[\s\S]*\}/);
+        if (match) try { return JSON.parse(match[0]); } catch {}
+        throw new Error('Could not parse the prospect list. Try again.');
+      }
+    }
+
+    function renderResults(niche, city, data) {
+      const prospects = data.prospects || [];
+      const high   = prospects.filter(p => p.priority === 'high').length;
+      const medium = prospects.filter(p => p.priority === 'medium').length;
+      const low    = prospects.filter(p => p.priority === 'low').length;
+
+      // Summary
+      document.getElementById('summaryText').innerHTML =
+        `Found <strong>${prospects.length}</strong> prospects &nbsp;·&nbsp; ${escHtml(niche)} &nbsp;·&nbsp; ${escHtml(city)} &nbsp;·&nbsp; ${new Date().toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+
+      document.getElementById('priorityTally').innerHTML = `
+        <span class="tally-high">${high} High</span>
+        <span class="tally-medium">${medium} Med</span>
+        <span class="tally-low">${low} Low</span>
+      `;
+
+      // Sort: high first, then medium, then low
+      const sorted = [...prospects].sort((a, b) => {
+        const order = { high: 0, medium: 1, low: 2 };
+        return (order[a.priority] ?? 3) - (order[b.priority] ?? 3);
+      });
+
+      // Cards
+      const list = document.getElementById('prospectList');
+      list.innerHTML = sorted.map(p => {
+        const pClass = (p.priority || 'low').toLowerCase();
+
+        const websiteMeta = p.website
+          ? `<span class="prospect-meta-item"><a href="${escHtml(p.website)}" target="_blank" rel="noopener">${escHtml(p.website.replace(/^https?:\/\//, ''))}</a></span>`
+          : `<span class="prospect-meta-item" style="color:var(--red);">No website</span>`;
+
+        const igMeta = p.instagram
+          ? `<span class="prospect-meta-item">${escHtml(p.instagram)}</span>`
+          : '';
+
+        const phoneMeta = p.phone
+          ? `<span class="prospect-meta-item">${escHtml(p.phone)}</span>`
+          : '';
+
+        // Build DM Writer URL with pre-fill params
+        const dmParams = new URLSearchParams({
+          biz:      p.name || '',
+          industry: `${niche}, ${city}`,
+          pain:     [p.reason, p.issues].filter(Boolean).join('\n')
+        });
+        const dmUrl = `dm-writer.html?${dmParams.toString()}`;
+
+        // Build Audit URL if they have a website
+        const auditUrl = p.website ? `audit.html?url=${encodeURIComponent(p.website)}` : null;
+
+        return `
+          <div class="prospect-card">
+            <div class="prospect-card-top">
+              <span class="prospect-name">${escHtml(p.name)}</span>
+              <span class="priority-badge ${pClass}">${escHtml(p.priority || 'low')}</span>
+            </div>
+            <div class="prospect-meta">
+              ${websiteMeta}
+              ${igMeta}
+              ${phoneMeta}
+            </div>
+            <p class="prospect-reason">${escHtml(p.reason || '')}</p>
+            ${p.issues ? `<p class="prospect-issues">${escHtml(p.issues)}</p>` : ''}
+            <div class="prospect-actions">
+              <a class="btn-sm btn-sm-gold" href="${dmUrl}">Write DM →</a>
+              ${auditUrl ? `<a class="btn-sm btn-sm-outline" href="${auditUrl}">Run Audit →</a>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function exportCSV() {
+      if (!lastResults.length) return;
+      const headers = ['Name', 'Priority', 'Website', 'Instagram', 'Phone', 'Reason', 'Issues'];
+      const rows = lastResults.map(p => [
+        p.name, p.priority, p.website || '', p.instagram || '', p.phone || '', p.reason, p.issues
+      ].map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(','));
+
+      const csv = [headers.join(','), ...rows].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url;
+      a.download = `prospects-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function escHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function setStep(text) {
+      const el = document.getElementById('loadingStep');
+      if (el) el.textContent = text;
+    }
+    function showLoading(v) { document.getElementById('loadingState').classList.toggle('visible', v); }
+    function showError(msg) {
+      const el = document.getElementById('errorState');
+      el.textContent = '⚠ ' + msg;
+      el.classList.add('visible');
+    }
+    function hideError()   { document.getElementById('errorState').classList.remove('visible'); }
+    function hideResults() { document.getElementById('resultsSection').classList.remove('visible'); }
+
+  </script>
+
+</body>
+</html>

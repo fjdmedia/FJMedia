@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cold DM Writer — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Cold DM Writer</span>
+    </div>
+
+    <!-- ── TOOL PAGE ── -->
+    <div class="tool-page">
+
+      <div class="tool-header">
+        <h1>Cold DM Writer</h1>
+        <p>Fill in what you know about the prospect — Claude writes 3 ready-to-send Instagram DMs tailored to their specific situation and your zero-risk offer.</p>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div class="dm-form">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="bizName">Business Name *</label>
+            <input class="form-input" id="bizName" type="text" placeholder="e.g. Tom's Auto Detailing" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ownerName">Owner First Name</label>
+            <input class="form-input" id="ownerName" type="text" placeholder="e.g. Tom (leave blank if unknown)" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="industry">Industry / What They Sell *</label>
+            <input class="form-input" id="industry" type="text" placeholder="e.g. Auto detailing, Winnipeg MB" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="website">Their Website</label>
+            <input class="form-input" id="website" type="text" placeholder="e.g. tomsdetailing.com (optional)" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="painPoints">Pain Points / What's Wrong With Their Web Presence *</label>
+          <textarea
+            class="form-textarea"
+            id="painPoints"
+            rows="4"
+            placeholder="e.g. No website — only a Facebook page with outdated posts. No online booking. Low review count. Poor mobile experience. Can paste findings from the Audit tool here."
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="tone">Tone</label>
+            <select class="form-select" id="tone">
+              <option value="casual">Casual — feels like a real DM, relaxed and friendly</option>
+              <option value="direct">Direct — straight to the point, no fluff</option>
+              <option value="professional">Professional — polished but still approachable</option>
+            </select>
+          </div>
+          <div class="form-group form-actions">
+            <button class="btn-primary" id="generateBtn" onclick="generateDMs()">Generate DMs →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="audit-note">Takes ~10 seconds &nbsp;·&nbsp; Powered by Claude AI &nbsp;·&nbsp; Requires API key</p>
+
+      <!-- ── LOADING ── -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <div>
+          <p class="loading-text">Writing your DMs…</p>
+          <p class="loading-step" id="loadingStep">Connecting to Claude</p>
+        </div>
+      </div>
+
+      <!-- ── ERROR ── -->
+      <div class="error-state" id="errorState"></div>
+
+      <!-- ── RESULTS ── -->
+      <div class="results-section" id="resultsSection">
+
+        <h3 class="results-section-title">Generated DMs</h3>
+        <p class="dm-results-note">Click any message to select all text, or use the Copy button.</p>
+
+        <div class="dm-cards">
+
+          <div class="dm-card">
+            <div class="dm-card-header">
+              <span class="dm-label">Short</span>
+              <span class="dm-char" id="charShort"></span>
+              <button class="btn-copy" onclick="copyDM('Short', this)">Copy</button>
+            </div>
+            <p class="dm-sublabel">~50 words · First outreach</p>
+            <textarea class="dm-text" id="dmShort" readonly onclick="this.select()"></textarea>
+          </div>
+
+          <div class="dm-card">
+            <div class="dm-card-header">
+              <span class="dm-label">Medium</span>
+              <span class="dm-char" id="charMedium"></span>
+              <button class="btn-copy" onclick="copyDM('Medium', this)">Copy</button>
+            </div>
+            <p class="dm-sublabel">~100 words · More context</p>
+            <textarea class="dm-text" id="dmMedium" readonly onclick="this.select()"></textarea>
+          </div>
+
+          <div class="dm-card">
+            <div class="dm-card-header">
+              <span class="dm-label">Follow-up</span>
+              <span class="dm-char" id="charFollowup"></span>
+              <button class="btn-copy" onclick="copyDM('Followup', this)">Copy</button>
+            </div>
+            <p class="dm-sublabel">~40 words · Re-engage if no reply</p>
+            <textarea class="dm-text" id="dmFollowup" readonly onclick="this.select()"></textarea>
+          </div>
+
+        </div>
+
+        <div style="text-align:center; margin-top: 0.5rem;">
+          <button class="btn-outline-back" onclick="generateDMs()">Regenerate →</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2026 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+  <script>
+
+    // ── Enter key on inputs ──
+    ['bizName', 'ownerName', 'industry', 'website'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') generateDMs();
+      });
+    });
+
+    // ── Pre-fill from URL params (when linked from Lead Prospector) ──
+    (function prefillFromParams() {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('biz'))      document.getElementById('bizName').value    = p.get('biz');
+      if (p.get('industry')) document.getElementById('industry').value   = p.get('industry');
+      if (p.get('pain'))     document.getElementById('painPoints').value = p.get('pain');
+    })();
+
+    const API_URL = 'https://api.anthropic.com/v1/messages';
+    const MODEL   = 'claude-sonnet-4-6';
+
+    async function generateDMs() {
+      const bizName    = document.getElementById('bizName').value.trim();
+      const ownerName  = document.getElementById('ownerName').value.trim();
+      const industry   = document.getElementById('industry').value.trim();
+      const website    = document.getElementById('website').value.trim();
+      const painPoints = document.getElementById('painPoints').value.trim();
+      const tone       = document.getElementById('tone').value;
+
+      if (!bizName || !industry || !painPoints) {
+        showError('Please fill in Business Name, Industry, and Pain Points.');
+        return;
+      }
+
+      const apiKey = localStorage.getItem('fjmedia_api_key');
+      if (!apiKey) {
+        showError('No API key set. Click "Set API Key" in the top nav to add your Anthropic API key.');
+        return;
+      }
+
+      hideResults();
+      hideError();
+      showLoading(true);
+      document.getElementById('generateBtn').disabled = true;
+
+      try {
+        document.getElementById('loadingStep').textContent = 'Connecting to Claude';
+        const data = await callClaude(bizName, ownerName, industry, website, painPoints, tone, apiKey);
+        document.getElementById('loadingStep').textContent = 'Rendering DMs…';
+        renderDMs(data);
+      } catch (err) {
+        showError(err.message || 'Something went wrong. Check your API key and try again.');
+      } finally {
+        showLoading(false);
+        document.getElementById('generateBtn').disabled = false;
+      }
+    }
+
+    async function callClaude(bizName, ownerName, industry, website, painPoints, tone, apiKey) {
+      const ownerRef   = ownerName ? `Owner's first name: ${ownerName}` : 'Owner name: unknown';
+      const websiteRef = website   ? `Their website: ${website}` : 'Website: none found';
+
+      const toneGuide = {
+        casual:       'Casual — sounds like a normal DM from a real person, relaxed and conversational',
+        direct:       'Direct — straight to the point, short sentences, respects their time, no filler',
+        professional: 'Professional — polished and credible but still warm and approachable'
+      }[tone];
+
+      const prompt = `You are writing Instagram DMs on behalf of James at FJMedia, a Winnipeg web design agency.
+
+FJMedia's offer:
+- We design and build the website FIRST. The client only pays AFTER they see and approve the finished work.
+- No deposit. No contract upfront. Zero financial risk to the client.
+- Packages from $800. Optional monthly retainer for SEO and updates ($150–300/mo).
+- Winnipeg-based. We work with local small businesses.
+
+Prospect info:
+- Business: ${bizName}
+- ${ownerRef}
+- Industry: ${industry}
+- ${websiteRef}
+- Issues with their web presence: ${painPoints}
+- Tone: ${toneGuide}
+
+Write 3 Instagram DM variations. Return ONLY valid JSON — no markdown, no backticks, no explanation.
+
+{
+  "short": "<First outreach DM, ~50 words. Open with a specific observation about their business or a pain point (not generic). Briefly introduce the zero-risk offer. Soft CTA like 'worth a quick chat?' or 'open to hearing more?'>",
+  "medium": "<First outreach DM, ~100 words. Reference their specific situation and 2 pain points. Explain what FJMedia does and the build-first zero-risk model in plain language. End with a low-pressure CTA.>",
+  "followup": "<Follow-up DM assuming no reply to first message, ~40 words. Reference that you messaged before. Re-hook with the zero-risk angle. Keep it light — no guilt-tripping. Easy to say yes.>"
+}
+
+Rules:
+- If owner name is known, open with their first name naturally (Hey ${ownerName || '[name]'})
+- If owner name unknown, use 'Hey!' or reference the business name
+- Be SPECIFIC to their situation — no generic filler
+- The zero-risk build-first model is the key differentiator — use it naturally, not mechanically
+- Include Winnipeg when it adds local credibility
+- CTAs must be soft and low-pressure
+- No ALL CAPS, no excessive exclamation marks, no 'I hope this finds you well'`;
+
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          max_tokens: 1200,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      if (!res.ok) {
+        let errMsg = `API error ${res.status}`;
+        try {
+          const errData = await res.json();
+          errMsg = errData.error?.message || errMsg;
+        } catch {}
+        throw new Error(errMsg);
+      }
+
+      const response = await res.json();
+      const textBlock = (response.content || []).find(b => b.type === 'text');
+      if (!textBlock?.text) throw new Error('No response from Claude. Try again.');
+
+      return parseJSON(textBlock.text);
+    }
+
+    function parseJSON(text) {
+      let cleaned = text.trim()
+        .replace(/^```(?:json)?\s*/i, '')
+        .replace(/\s*```$/, '')
+        .trim();
+      try {
+        return JSON.parse(cleaned);
+      } catch {
+        const match = cleaned.match(/\{[\s\S]*\}/);
+        if (match) try { return JSON.parse(match[0]); } catch {}
+        throw new Error('Could not parse the response. Try generating again.');
+      }
+    }
+
+    function renderDMs(data) {
+      [
+        ['Short',   data.short],
+        ['Medium',  data.medium],
+        ['Followup', data.followup]
+      ].forEach(([cap, text]) => {
+        const ta      = document.getElementById('dm' + cap);
+        const charEl  = document.getElementById('char' + cap);
+        ta.value      = text || '';
+        ta.style.height = 'auto';
+        ta.style.height = ta.scrollHeight + 'px';
+        charEl.textContent = (text || '').length + ' chars';
+      });
+
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function copyDM(cap, btn) {
+      const text = document.getElementById('dm' + cap).value;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function showLoading(visible) {
+      document.getElementById('loadingState').classList.toggle('visible', visible);
+    }
+    function showError(msg) {
+      const el = document.getElementById('errorState');
+      el.textContent = '⚠ ' + msg;
+      el.classList.add('visible');
+    }
+    function hideError()   { document.getElementById('errorState').classList.remove('visible'); }
+    function hideResults() { document.getElementById('resultsSection').classList.remove('visible'); }
+
+  </script>
+
+</body>
+</html>
