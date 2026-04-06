@@ -1,291 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FJMedia — (Bug) Proof Gallery</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#071520; --bg2:#0d1f3c; --bg3:#112840;
-  --border:#1b3a56; --gold:#c9a84c;
-  --text:#EDEAE5; --muted:rgba(237,234,229,0.45);
-}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:"DM Sans",sans-serif;min-height:100vh;
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
-  background-size:40px 40px;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FJMedia — (Bug) Proof Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── TITLEBAR ── */
-.titlebar{
-  position:relative;z-index:10;
-  display:flex;align-items:center;gap:10px;
-  padding:13px 28px;
-  background:var(--bg2);border-bottom:1px solid var(--border);
-}
-.logo{font-family:"Space Mono",monospace;font-size:13px;color:var(--gold);}
-.sep{color:var(--border);}
-.crumb{
-  font-family:"Space Mono",monospace;font-size:10px;
-  color:var(--muted);letter-spacing:.06em;cursor:pointer;
-  transition:color .15s;
-}
-.crumb:hover{color:var(--text);}
-.crumb.active{color:var(--text);cursor:default;pointer-events:none;}
+    :root {
+      --heading:    #EDEAE5;
+      --accent:     #c9a84c;
+      --accent-mid: rgba(201,168,76,0.1);
+      --bg:         #071520;
+      --bg2:        #0d1f3c;
+      --bg3:        #112840;
+      --text:       #EDEAE5;
+      --text-mid:   #A09C96;
+      --text-light: #888480;
+      --border:     #1b3a56;
+      --mono:       'Space Mono', monospace;
+    }
 
-/* ── VIEWS ── */
-.view{position:relative;z-index:2;display:none;padding:36px 32px 60px;}
-.view.active{display:block;}
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-/* ── FOLDER VIEW ── */
-.view-label{
-  font-family:"Space Mono",monospace;font-size:9px;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(201,168,76,0.4);margin-bottom:24px;
-  padding-bottom:12px;border-bottom:1px solid var(--border);
-}
-.folder-grid{
-  display:flex;flex-wrap:wrap;gap:8px;
-}
-.folder-item{
-  display:flex;flex-direction:column;align-items:center;
-  padding:18px 14px 14px;border-radius:8px;cursor:pointer;
-  border:1px solid transparent;transition:all .18s;
-  width:140px;
-}
-.folder-item:hover{
-  background:rgba(201,168,76,0.05);
-  border-color:rgba(201,168,76,0.2);
-}
-.folder-icon{position:relative;width:78px;height:62px;margin-bottom:11px;}
-.folder-tab{
-  position:absolute;top:0;left:0;width:34px;height:11px;
-  background:var(--gold);border-radius:3px 3px 0 0;opacity:.9;
-}
-.folder-body{
-  position:absolute;bottom:0;left:0;right:0;height:52px;
-  background:var(--gold);border-radius:2px 7px 7px 7px;opacity:.9;
-  display:flex;align-items:center;justify-content:center;
-}
-.folder-item:hover .folder-tab,
-.folder-item:hover .folder-body{opacity:1;}
-.folder-emoji{font-size:20px;}
-.folder-name{
-  font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:11px;font-weight:700;color:var(--text);
-  text-align:center;line-height:1.35;
-}
-.folder-count{
-  margin-top:5px;font-family:"DM Sans",sans-serif;
-  font-size:10px;color:var(--muted);text-align:center;
-}
+    /* NAV — identical to main site */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 6%;
+      background: rgba(7,21,32,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: inline-flex; align-items: baseline; gap: 9px; text-decoration: none; line-height: 1; }
+    .logo-mark { display: inline-flex; align-items: baseline; }
+    .logo-bk { color: var(--accent); font-family: 'Space Mono', monospace; font-weight: 400; font-size: 1.25rem; line-height: 1; }
+    .logo-fj { color: var(--heading); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; line-height: 1; padding: 0 3px; }
+    .logo-media-word { color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; align-self: center; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--heading); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-cta { background: var(--heading) !important; color: var(--bg) !important; padding: 0.5rem 1.3rem; border-radius: 5px; font-weight: 600 !important; font-size: 0.85rem !important; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #D8D4CE !important; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { width: 22px; height: 2px; background: var(--text-mid); border-radius: 2px; transition: all 0.3s; display: block; }
+    .nav-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .nav-overlay.open { display: flex; }
+    .nav-overlay a { color: var(--text-mid); text-decoration: none; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-overlay a:hover { color: var(--accent); }
+    .overlay-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; font-size: 2rem; color: var(--text-light); cursor: pointer; }
 
-/* ── GALLERY VIEW ── */
-.gallery-header{
-  display:flex;align-items:center;gap:14px;margin-bottom:28px;
-}
-.back-btn{
-  display:flex;align-items:center;gap:6px;
-  background:none;border:1px solid var(--border);
-  color:var(--muted);cursor:pointer;
-  padding:6px 14px;border-radius:6px;font-size:12px;
-  font-family:"DM Sans",sans-serif;transition:all .2s;
-}
-.back-btn:hover{border-color:var(--gold);color:var(--gold);}
-.gallery-title{
-  font-family:"Plus Jakarta Sans",sans-serif;
-  font-size:18px;font-weight:800;color:var(--text);
-}
+    /* SECTIONS */
+    section { padding: 5rem 6%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; font-family: var(--mono); }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; letter-spacing: -0.03em; color: var(--heading); line-height: 1.1; margin-bottom: 0.8rem; }
+    .section-title em { font-style: normal; color: var(--accent); }
+    .section-sub { font-size: 0.95rem; color: var(--text-mid); max-width: 540px; line-height: 1.7; margin-bottom: 1rem; }
+    .divider { width: 32px; height: 2px; background: var(--accent); opacity: 0.4; margin: 1.4rem 0; }
 
-/* ── FIX CARD ── */
-.fix-card{
-  margin-bottom:32px;
-  border:1px solid var(--border);border-radius:10px;overflow:hidden;
-}
-.fix-card-header{
-  display:flex;align-items:center;gap:10px;
-  padding:13px 20px;background:var(--bg2);
-  border-bottom:1px solid var(--border);
-}
-.fix-row{display:flex;align-items:baseline;gap:10px;}
-.fix-badge{
-  font-family:"Space Mono",monospace;font-size:8px;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:2px 8px;border-radius:3px;flex-shrink:0;
-}
-.fix-badge.bug{
-  background:rgba(237,234,229,0.06);
-  border:1px solid rgba(237,234,229,0.15);
-  color:rgba(237,234,229,0.45);
-}
-.fix-badge.fixed{
-  background:rgba(201,168,76,0.1);
-  border:1px solid rgba(201,168,76,0.25);
-  color:var(--gold);
-}
-.fix-text{
-  font-family:"DM Sans",sans-serif;
-  font-size:12px;color:rgba(237,234,229,0.6);line-height:1.4;
-}
-.fix-text-fixed{color:var(--text);font-weight:500;}
-.fix-panels{display:flex;}
-.panel{flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border);}
-.panel:last-child{border-right:none;}
-.panel-label{
-  display:flex;align-items:center;gap:7px;
-  padding:9px 16px;background:var(--bg3);
-  border-bottom:1px solid var(--border);
-}
-.dot{width:7px;height:7px;border-radius:50%;}
-.dot.before{background:rgba(237,234,229,0.2);}
-.dot.after{background:var(--gold);}
-.panel-label span{
-  font-family:"Space Mono",monospace;font-size:8px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
-}
-.panel-img{
-  background:var(--bg);padding:16px;
-  display:flex;align-items:flex-start;justify-content:center;
-}
-.panel-img img{
-  width:100%;height:auto;border-radius:4px;
-  border:1px solid var(--border);display:block;
-}
-.panel-img .empty{
-  width:100%;min-height:180px;
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:8px;
-  border:1px dashed var(--border);border-radius:6px;
-  color:var(--muted);font-size:11px;text-align:center;padding:20px;
-}
-</style>
+    /* HERO SECTION */
+    #proof-hero {
+      padding-top: 9rem;
+      border-bottom: 1px solid var(--border);
+      background-image: radial-gradient(circle, rgba(27,58,86,0.5) 1px, transparent 1px);
+      background-size: 24px 24px;
+      position: relative;
+    }
+    #proof-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+
+    /* FOLDER GRID */
+    #folder-view { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .site-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .site-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.8rem 1.6rem;
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .site-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
+    .site-card-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .site-card-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--heading); }
+    .site-card-count { font-size: 0.78rem; color: var(--text-light); font-family: var(--mono); }
+    .site-card-arrow { margin-top: auto; padding-top: 1rem; color: var(--accent); font-size: 0.8rem; font-family: var(--mono); }
+
+    /* GALLERY VIEW */
+    #gallery-view { display: none; background: var(--bg); border-bottom: 1px solid var(--border); }
+    #gallery-view.active { display: block; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--border);
+      color: var(--text-light); cursor: pointer; padding: 0.5rem 1rem;
+      border-radius: 6px; font-size: 0.82rem; font-family: inherit;
+      transition: all 0.2s; margin-bottom: 2rem; text-decoration: none;
+    }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .fix-block { margin-bottom: 5rem; }
+    .fix-block:last-child { margin-bottom: 0; }
+    .fix-meta { margin-bottom: 2rem; }
+    .fix-bug-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-light); font-family: var(--mono); margin-bottom: 0.4rem; }
+    .fix-bug-text { font-size: 1rem; color: var(--text-mid); line-height: 1.5; margin-bottom: 1rem; }
+    .fix-resolved-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-family: var(--mono); margin-bottom: 0.4rem; }
+    .fix-resolved-text { font-size: 1rem; color: var(--heading); font-weight: 600; line-height: 1.5; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .compare-panel { display: flex; flex-direction: column; gap: 0.6rem; }
+    .compare-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; font-family: var(--mono);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .compare-label.before { color: var(--text-light); }
+    .compare-label.after  { color: var(--accent); }
+    .compare-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .compare-dot.before { background: var(--text-light); }
+    .compare-dot.after  { background: var(--accent); }
+    .compare-img {
+      border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; background: var(--bg2);
+    }
+    .compare-img img { width: 100%; height: auto; display: block; }
+    .compare-img .no-img {
+      padding: 3rem 2rem; text-align: center;
+      font-size: 0.82rem; color: var(--text-light);
+      border: 1px dashed var(--border); border-radius: 8px;
+    }
+
+    .fix-divider { height: 1px; background: var(--border); margin: 5rem 0; }
+
+    /* FOOTER — identical to main site */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 6%; border-top: 1px solid var(--border);
+    }
+    .footer-logo { display: inline-flex; align-items: baseline; gap: 9px; }
+    .footer-copy { font-size: 0.78rem; color: var(--text-light); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .compare-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 5%; }
+      #proof-hero { padding-top: 7rem; }
+    }
+    @media (max-width: 600px) {
+      footer { flex-direction: column; text-align: center; gap: 1rem; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- TITLEBAR -->
-<div class="titlebar">
-  <div class="logo">{FJ}</div>
-  <div class="sep">/</div>
-  <div class="crumb" onclick="showFolders()"><span style="color:var(--gold)">(Bug)</span> Proof Gallery</div>
-  <div class="sep" id="gallerySep" style="display:none;">/</div>
-  <div class="crumb active" id="gallerycrumb" style="display:none;"></div>
-</div>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#process">Process</a></li>
+      <li><a href="/#why">Why Us</a></li>
+      <li><a href="/#pricing">Get a Quote</a></li>
+      <li><a href="/proof.html" class="active">Pest Control 🐛</a></li>
+      <li><a href="/#contact" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-<!-- FOLDER VIEW -->
-<div class="view active" id="folderView">
-  <div style="margin-bottom:32px;">
-    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;font-weight:800;color:var(--text);line-height:1.1;margin-bottom:8px;">
-      <span style="color:var(--gold);">(Bug)</span> Proof Gallery
-    </div>
-    <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);line-height:1.5;">
-      Every bug we've caught and fixed — before our clients ever had to see it.
-    </div>
+  <!-- Mobile Nav -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="overlay-close" onclick="toggleNav()">×</button>
+    <a href="/#work"       onclick="toggleNav()">Work</a>
+    <a href="/#process"    onclick="toggleNav()">Process</a>
+    <a href="/#why"        onclick="toggleNav()">Why Us</a>
+    <a href="/#pricing"    onclick="toggleNav()">Get a Quote</a>
+    <a href="/proof.html"  onclick="toggleNav()">Pest Control 🐛</a>
+    <a href="/#contact"    onclick="toggleNav()">Book a Call</a>
   </div>
-  <div class="view-label">Sites</div>
-  <div class="folder-grid" id="folderGrid"></div>
-</div>
 
-<!-- GALLERY VIEW -->
-<div class="view" id="galleryView">
-  <div class="gallery-header">
-    <button class="back-btn" onclick="showFolders()">← Back</button>
-    <div class="gallery-title" id="galleryTitle"></div>
-  </div>
-  <div id="fixCards"></div>
-</div>
+  <!-- HERO -->
+  <section id="proof-hero">
+    <div class="section-inner hero-content">
+      <p class="section-label">Attention to Detail</p>
+      <h1 class="section-title"><em>(Bug)</em> Proof Gallery</h1>
+      <p class="section-sub">Every bug we've caught and fixed — before our clients ever had to see it. Click a site to see the before and after.</p>
+      <div class="divider"></div>
+    </div>
+  </section>
 
-<script>
-const sites = [
-  {
-    id: 'fjmedia',
-    name: 'FJMedia.ca',
-    emoji: '🌐',
-    fixes: [
+  <!-- FOLDER VIEW -->
+  <section id="folder-view">
+    <div class="section-inner">
+      <p class="section-label">Sites</p>
+      <div class="site-grid" id="siteGrid"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY VIEW -->
+  <section id="gallery-view">
+    <div class="section-inner">
+      <button class="back-btn" onclick="showFolders()">← All Sites</button>
+      <p class="section-label" id="galleryLabel">Site</p>
+      <h2 class="section-title" id="galleryTitle"></h2>
+      <div class="divider"></div>
+      <div id="fixList"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <div class="footer-copy">&#169; 2026 FJMedia. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="/#work">Work</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const sites = [
       {
-        bug:   'Service cards were not showing up on the page',
-        fixed: 'All service cards are now fully visible and clickable when scrolling to the section',
-        before: 'Ads/Proof/Before_calculator.png',
-        after:  'Ads/Proof/after_calculator.png'
-      },
-      {
-        bug:   'The dividers between the Why FJMedia cards only appeared when hovering over them',
-        fixed: 'Dividers between every card are now always visible — no hover required',
-        before: 'Ads/Proof/Why FJMedia Grid Before.png',
-        after:  'Ads/Proof/Why FJMedia Grid After.png'
+        id: 'fjmedia',
+        name: 'FJMedia.ca',
+        icon: '🌐',
+        fixes: [
+          {
+            bug:    'Service cards were not showing up on the page',
+            fixed:  'All service cards are now fully visible and clickable when scrolling to the section',
+            before: 'Ads/Proof/Before_calculator.png',
+            after:  'Ads/Proof/after_calculator.png'
+          },
+          {
+            bug:    'The dividers between the Why FJMedia cards only appeared when hovering over them',
+            fixed:  'Dividers between every card are now always visible — no hover required',
+            before: 'Ads/Proof/Why FJMedia Grid Before.png',
+            after:  'Ads/Proof/Why FJMedia Grid After.png'
+          }
+        ]
       }
-    ]
-  }
-];
+    ];
 
-function showFolders() {
-  document.getElementById('folderView').classList.add('active');
-  document.getElementById('galleryView').classList.remove('active');
-  document.getElementById('gallerySep').style.display = 'none';
-  document.getElementById('gallerycrumb').style.display = 'none';
-}
+    function toggleNav() {
+      const overlay = document.getElementById('navOverlay');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+    }
 
-function openSite(id) {
-  const site = sites.find(s => s.id === id);
-  if (!site) return;
+    function showFolders() {
+      document.getElementById('folder-view').style.display = 'block';
+      document.getElementById('gallery-view').classList.remove('active');
+      window.scrollTo({ top: document.getElementById('folder-view').offsetTop - 80, behavior: 'smooth' });
+    }
 
-  document.getElementById('galleryTitle').textContent = site.name;
-  document.getElementById('gallerycrumb').textContent = site.name;
-  document.getElementById('gallerycrumb').style.display = 'block';
-  document.getElementById('gallerySep').style.display = 'block';
+    function openSite(id) {
+      const site = sites.find(s => s.id === id);
+      if (!site) return;
 
-  document.getElementById('fixCards').innerHTML = site.fixes.map(f => `
-    <div class="fix-card">
-      <div class="fix-card-header">
-        <div>
-          <div class="fix-row">
-            <div class="fix-badge bug">Bug</div>
-            <div class="fix-text">${f.bug}</div>
+      document.getElementById('galleryLabel').textContent = site.name;
+      document.getElementById('galleryTitle').textContent = 'Bug fixes & improvements';
+
+      document.getElementById('fixList').innerHTML = site.fixes.map((f, i) => `
+        <div class="fix-block">
+          ${i > 0 ? '<div class="fix-divider"></div>' : ''}
+          <div class="fix-meta">
+            <div class="fix-bug-label">// The bug</div>
+            <div class="fix-bug-text">${f.bug}</div>
+            <div class="fix-resolved-label">// What changed</div>
+            <div class="fix-resolved-text">${f.fixed}</div>
           </div>
-          <div class="fix-row" style="margin-top:6px;">
-            <div class="fix-badge fixed">Fixed</div>
-            <div class="fix-text fix-text-fixed">${f.fixed}</div>
+          <div class="compare-grid">
+            <div class="compare-panel">
+              <div class="compare-label before"><div class="compare-dot before"></div>Before</div>
+              <div class="compare-img">
+                <img src="${f.before}" alt="Before" onerror="this.parentElement.innerHTML='<div class=\\'no-img\\'>Before screenshot not added yet</div>'"/>
+              </div>
+            </div>
+            <div class="compare-panel">
+              <div class="compare-label after"><div class="compare-dot after"></div>After</div>
+              <div class="compare-img">
+                <img src="${f.after}" alt="After"/>
+              </div>
+            </div>
           </div>
         </div>
+      `).join('');
+
+      document.getElementById('folder-view').style.display = 'none';
+      document.getElementById('gallery-view').classList.add('active');
+      window.scrollTo({ top: document.getElementById('gallery-view').offsetTop - 80, behavior: 'smooth' });
+    }
+
+    // Render site cards
+    document.getElementById('siteGrid').innerHTML = sites.map(s => `
+      <div class="site-card" onclick="openSite('${s.id}')">
+        <div class="site-card-icon">${s.icon}</div>
+        <div class="site-card-name">${s.name}</div>
+        <div class="site-card-count">${s.fixes.length} fix${s.fixes.length !== 1 ? 'es' : ''} logged</div>
+        <div class="site-card-arrow">View fixes →</div>
       </div>
-      <div class="fix-panels">
-        <div class="panel">
-          <div class="panel-label"><div class="dot before"></div><span>Before</span></div>
-          <div class="panel-img">
-            <img src="${f.before}" alt="Before"
-              onerror="this.outerHTML='<div class=\\'empty\\'>Add before screenshot to this folder</div>'"/>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="panel-label"><div class="dot after"></div><span>After</span></div>
-          <div class="panel-img"><img src="${f.after}" alt="After"/></div>
-        </div>
-      </div>
-    </div>
-  `).join('');
+    `).join('');
 
-  document.getElementById('folderView').classList.remove('active');
-  document.getElementById('galleryView').classList.add('active');
-}
-
-// Render folder grid
-document.getElementById('folderGrid').innerHTML = sites.map(s => `
-  <div class="folder-item" onclick="openSite('${s.id}')">
-    <div class="folder-icon">
-      <div class="folder-tab"></div>
-      <div class="folder-body"><div class="folder-emoji">${s.emoji}</div></div>
-    </div>
-    <div class="folder-name">${s.name}</div>
-    <div class="folder-count">${s.fixes.length} fix${s.fixes.length !== 1 ? 'es' : ''}</div>
-  </div>
-`).join('');
-</script>
+    // GSAP
+    gsap.from('.hero-content', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.2 });
+    gsap.from('.site-card', {
+      scrollTrigger: { trigger: '.site-grid', start: 'top 80%', once: true },
+      opacity: 0, y: 20, duration: 0.5, stagger: 0.1, ease: 'power2.out'
+    });
+  </script>
 </body>
 </html>
