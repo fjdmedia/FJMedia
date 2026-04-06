@@ -1460,6 +1460,172 @@
       ease: 'back.out(1.5)'
     });
 
+    // ── CALCULATOR ────────────────────────────────────────────────
+    const comboMap = {
+      getOnline:    ['website'],
+      getFound:     ['website', 'seo', 'domain'],
+      getCustomers: ['website', 'ordering', 'seo', 'domain'],
+      ownTheMarket: ['website', 'ordering', 'seo', 'domain', 'retainer']
+    };
+    const comboNames = {
+      getOnline: 'Get Online', getFound: 'Get Found',
+      getCustomers: 'Get Customers', ownTheMarket: 'Own the Market'
+    };
+    const upsellMessages = {
+      getOnline:    'Add SEO &amp; Domain to get found on Google — upgrade to Get Found.',
+      getFound:     'Add Ordering/Booking to start capturing revenue — upgrade to Get Customers.',
+      getCustomers: 'Add a Monthly Retainer to keep growing — upgrade to Own the Market.',
+      ownTheMarket: null
+    };
+    const svcDisplayNames = {
+      website: 'Custom Website', ordering: 'Ordering / Booking',
+      seo: 'SEO &amp; Google Setup', domain: 'Domain Setup', retainer: 'Monthly Retainer'
+    };
+
+    function getSelectedSvcs() {
+      return Array.from(document.querySelectorAll('.svc-card.selected:not(.placeholder)'))
+        .map(c => c.dataset.svc);
+    }
+
+    function arraysEqual(a, b) {
+      return a.length === b.length && [...a].sort().every((v, i) => v === [...b].sort()[i]);
+    }
+
+    function findExactCombo(svcs) {
+      return Object.keys(comboMap).find(k => arraysEqual(comboMap[k], svcs)) || null;
+    }
+
+    function findClosestCombo(svcs) {
+      const order = ['getOnline','getFound','getCustomers','ownTheMarket'];
+      for (const k of order) {
+        if (svcs.every(s => comboMap[k].includes(s))) return k;
+      }
+      return 'ownTheMarket';
+    }
+
+    function updateCalcUI() {
+      const svcs = getSelectedSvcs();
+      const statusBar = document.getElementById('statusBar');
+      const calcForm  = document.getElementById('calcForm');
+
+      // Show/hide lead form: only if a non-locked (non-website-only) service is selected
+      const nonLocked = svcs.filter(s => s !== 'website');
+      calcForm.classList.toggle('visible', nonLocked.length > 0);
+
+      if (svcs.length === 0 || (svcs.length === 1 && svcs[0] === 'website')) {
+        statusBar.innerHTML = '<span class="status-empty">Select services above to see your package match.</span>';
+        // Clear active combo tabs
+        document.querySelectorAll('.combo-tab').forEach(t => t.classList.remove('active'));
+        return;
+      }
+
+      const exact  = findExactCombo(svcs);
+      const closest = exact || findClosestCombo(svcs);
+
+      // Highlight matching combo tab
+      document.querySelectorAll('.combo-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.combo === closest);
+      });
+
+      let html = '';
+      if (exact) {
+        html = `<span class="status-bar-text"><strong>${comboNames[exact]}</strong>`;
+        if (upsellMessages[exact]) {
+          html += `<span class="status-nudge">${upsellMessages[exact]}</span>`;
+        }
+        html += '</span>';
+      } else {
+        const svcList = svcs.map(s => svcDisplayNames[s]).join(', ');
+        html = `<span class="status-bar-text">${svcList}<span class="status-nudge">Closest match: <strong>${comboNames[closest]}</strong> — save even more by completing the bundle.</span></span>`;
+      }
+      statusBar.innerHTML = html;
+    }
+
+    function selectCombo(comboKey) {
+      const svcs = comboMap[comboKey];
+      document.querySelectorAll('.svc-card:not(.placeholder)').forEach(card => {
+        const s = card.dataset.svc;
+        if (svcs.includes(s)) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+      updateCalcUI();
+    }
+
+    let toastTimer = null;
+    function showDepToast(msg) {
+      const toast = document.getElementById('depToast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function toggleSvc(svc) {
+      const card = document.querySelector(`.svc-card[data-svc="${svc}"]`);
+      if (!card || card.classList.contains('locked') || card.classList.contains('placeholder')) return;
+
+      if (card.classList.contains('selected')) {
+        // Deselecting: check if others depend on this service
+        // All services require website, but website can't be deselected (locked)
+        card.classList.remove('selected');
+      } else {
+        // Selecting: website is auto-selected (locked), just add
+        card.classList.add('selected');
+      }
+      updateCalcUI();
+    }
+
+    function submitCalcForm() {
+      const name    = document.querySelector('[name="calc_name"]').value.trim();
+      const contact = document.querySelector('[name="calc_contact"]').value.trim();
+      if (!name || !contact) { showDepToast('Please fill in both fields.'); return; }
+
+      const svcs   = getSelectedSvcs();
+      const combo  = findExactCombo(svcs) || findClosestCombo(svcs);
+      const btn    = document.getElementById('calcSubmit');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      const payload = { name, contact, services: svcs.join(', '), combo: comboNames[combo] };
+
+      fetch('REPLACE_WITH_GAS_URL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        btn.textContent = '✓ Sent! James will reply within 12 hours.';
+        document.querySelector('[name="calc_name"]').value = '';
+        document.querySelector('[name="calc_contact"]').value = '';
+      })
+      .catch(() => {
+        btn.textContent = 'Send failed — DM @fjmedia.ca on Instagram instead.';
+        btn.disabled = false;
+      });
+    }
+
+    // Calculator GSAP
+    gsap.from('.calc-scarcity', {
+      scrollTrigger: { trigger: '#pricing', start: 'top 82%', once: true },
+      opacity: 0, y: 15, duration: 0.5, ease: 'power2.out'
+    });
+    gsap.from('.combo-tabs', {
+      scrollTrigger: { trigger: '#pricing', start: 'top 78%', once: true },
+      opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out'
+    });
+    gsap.from('.svc-card:not(.placeholder)', {
+      scrollTrigger: { trigger: '.svc-grid', start: 'top 80%', once: true },
+      opacity: 0, y: 25, duration: 0.45, stagger: 0.07, ease: 'power2.out'
+    });
+    gsap.from('.status-bar', {
+      scrollTrigger: { trigger: '.status-bar', start: 'top 88%', once: true },
+      opacity: 0, y: 10, duration: 0.4, ease: 'power2.out'
+    });
+    // ── END CALCULATOR ──────────────────────────────────────────────
+
     // Contact — slide in from both sides
     gsap.from('.contact-info', {
       scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%', once: true },
