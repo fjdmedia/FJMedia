@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FJMedia — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0b1120; --navy2: #111827; --navy3: #1e293b;
+    --gold: #c9a84c; --gold-light: #e8c96d;
+    --text: #e2e8f0; --muted: #6b7280; --border: rgba(255,255,255,.08);
+    --green: #22c55e; --red: #ef4444;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; }
+
+  /* Lock screen */
+  #lockScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .lock-card {
+    background: var(--navy2); border: 1px solid var(--border); border-radius: 20px;
+    padding: 40px 36px; width: 100%; max-width: 360px; text-align: center;
+  }
+  .lock-logo {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px; color: var(--navy); margin: 0 auto 20px;
+  }
+  .lock-card h2 { font-size: 1.2rem; margin-bottom: 6px; }
+  .lock-card p { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  .lock-input {
+    width: 100%; background: var(--navy3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px; color: var(--text);
+    font-size: 14px; font-family: inherit; outline: none;
+    transition: border-color .2s; margin-bottom: 12px; text-align: center; letter-spacing: 3px;
+  }
+  .lock-input:focus { border-color: rgba(201,168,76,.5); }
+  .lock-btn {
+    width: 100%; padding: 12px; border-radius: 10px; border: none;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: opacity .2s;
+  }
+  .lock-btn:hover { opacity: .88; }
+  .lock-err { color: var(--red); font-size: 12px; margin-top: 8px; display: none; }
+
+  /* Main app */
+  #app { display: none; }
+
+  header {
+    padding: 16px 28px; background: var(--navy2); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .h-logo {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: var(--navy);
+  }
+  .header-left .title { font-weight: 600; font-size: 15px; }
+  .header-left .sub { color: var(--muted); font-size: 12px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+
+  .client-select {
+    background: var(--navy3); border: 1px solid var(--border); border-radius: 10px;
+    padding: 8px 14px; color: var(--text); font-size: 13px; font-family: inherit;
+    outline: none; cursor: pointer; min-width: 180px;
+  }
+  .client-select:focus { border-color: rgba(201,168,76,.45); }
+  .client-select option { background: var(--navy2); }
+
+  .lock-out { background: none; border: 1px solid var(--border); color: var(--muted); padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: inherit; transition: color .2s; }
+  .lock-out:hover { color: var(--text); }
+
+  .app-body { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* Date range */
+  .date-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 10px; }
+  .date-label { color: var(--muted); font-size: 13px; }
+  .date-range-btns { display: flex; gap: 4px; }
+  .dr-btn {
+    background: var(--navy2); border: 1px solid var(--border); color: var(--muted);
+    padding: 6px 14px; border-radius: 8px; font-size: 12px; cursor: pointer;
+    font-family: inherit; transition: all .2s;
+  }
+  .dr-btn.on { background: var(--navy3); color: var(--text); border-color: rgba(201,168,76,.3); }
+
+  /* KPI cards */
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi-card {
+    background: var(--navy2); border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px 20px;
+  }
+  .kpi-label { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 8px; }
+  .kpi-value { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .kpi-trend { font-size: 12px; font-weight: 600; }
+  .kpi-trend.up { color: var(--green); }
+  .kpi-trend.down { color: var(--red); }
+  .kpi-trend.flat { color: var(--muted); }
+
+  /* Two-col grid */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+
+  .panel {
+    background: var(--navy2); border: 1px solid var(--border); border-radius: 16px;
+    padding: 22px 20px;
+  }
+  .panel-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+
+  /* Traffic sources */
+  .source-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .source-label { font-size: 13px; min-width: 80px; }
+  .source-bar-wrap { flex: 1; height: 8px; background: var(--navy3); border-radius: 4px; overflow: hidden; }
+  .source-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 4px; transition: width .6s ease; }
+  .source-pct { font-size: 12px; color: var(--muted); min-width: 36px; text-align: right; }
+
+  /* Top pages */
+  .page-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .page-row:last-child { border-bottom: none; }
+  .page-path { color: var(--text); }
+  .page-views { color: var(--muted); }
+
+  /* Submissions table */
+  .subs-panel { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px; }
+  .subs-panel .panel-title { display: flex; justify-content: space-between; align-items: center; }
+  .subs-count { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .subs-table { width: 100%; border-collapse: collapse; }
+  .subs-table th {
+    text-align: left; font-size: 11px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .5px; padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .subs-table td {
+    font-size: 13px; padding: 10px; border-bottom: 1px solid var(--border);
+  }
+  .subs-table tr:last-child td { border-bottom: none; }
+  .subs-table .empty-row td { color: var(--muted); font-style: italic; text-align: center; padding: 24px; }
+
+  /* Loading state */
+  .loading-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(11,17,32,.6);
+    z-index: 100; align-items: center; justify-content: center;
+  }
+  .loading-overlay.on { display: flex; }
+  .loading-spinner {
+    width: 40px; height: 40px; border: 3px solid var(--navy3);
+    border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error banner */
+  .error-banner {
+    display: none; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: var(--red);
+  }
+  .error-banner.on { display: block; }
+
+  /* Setup banner */
+  .setup-banner {
+    display: none; background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.25);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: var(--gold);
+  }
+  .setup-banner.on { display: block; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .kpi-row { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    header { padding: 14px 16px; }
+    .app-body { padding: 24px 16px 60px; }
+    .client-select { min-width: 140px; }
+    .subs-table th, .subs-table td { padding: 8px 6px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Lock Screen -->
+<div id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-logo">FJ</div>
+    <h2>FJMedia Dashboard</h2>
+    <p>Client performance data. Enter password to continue.</p>
+    <input type="password" class="lock-input" id="passInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="lock-btn" onclick="unlock()">Enter</button>
+    <div class="lock-err" id="lockErr">Wrong password.</div>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Main App -->
+<div id="app">
+  <header>
+    <div class="header-left">
+      <div class="h-logo">FJ</div>
+      <div>
+        <div class="title">Dashboard</div>
+        <div class="sub">Client Performance</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <select class="client-select" id="clientSelect" onchange="switchClient()">
+        <option value="fjmedia">FJMedia</option>
+      </select>
+      <button class="lock-out" onclick="lockApp()">Lock</button>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Setup banner (shows when GAS URL not set) -->
+    <div class="setup-banner" id="setupBanner">
+      GAS backend not connected yet. Follow the setup steps to deploy the dashboard script.
+    </div>
+
+    <!-- Error banner -->
+    <div class="error-banner" id="errorBanner"></div>
+
+    <!-- Date range -->
+    <div class="date-bar">
+      <div class="date-label" id="dateLabel">Last 30 days</div>
+      <div class="date-range-btns">
+        <button class="dr-btn" data-days="7" onclick="setRange(7)">7d</button>
+        <button class="dr-btn on" data-days="30" onclick="setRange(30)">30d</button>
+        <button class="dr-btn" data-days="90" onclick="setRange(90)">90d</button>
+      </div>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Visitors</div>
+        <div class="kpi-value" id="kpiVisitors">—</div>
+        <div class="kpi-trend flat" id="kpiVisitorsTrend">Loading...</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Form Submissions</div>
+        <div class="kpi-value" id="kpiLeads">—</div>
+        <div class="kpi-trend flat" id="kpiLeadsTrend">Loading...</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Top Traffic Source</div>
+        <div class="kpi-value" id="kpiTopSource">—</div>
+        <div class="kpi-trend flat" id="kpiTopSourcePct"></div>
+      </div>
+    </div>
+
+    <!-- Traffic Sources + Top Pages -->
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-title">Traffic Sources</div>
+        <div id="trafficSources">
+          <div class="source-row"><span class="source-label" style="color:var(--muted);font-style:italic">Loading...</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Top Pages</div>
+        <div id="topPages">
+          <div class="page-row"><span class="page-path" style="color:var(--muted);font-style:italic">Loading...</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Submissions -->
+    <div class="subs-panel">
+      <div class="panel-title">
+        Recent Submissions
+        <span class="subs-count" id="subsCount"></span>
+      </div>
+      <table class="subs-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="subsBody">
+          <tr class="empty-row"><td colspan="4">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== CONFIG =====
+  const PASS = 'password1234';
+  // Replace with your deployed GAS web app URL:
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwdTGiCLs7KxnZNil2caVvBl5O317Pa7zgiOolo6uGCw6mjv69wXrNHcQqMEjg4WIh-/exec';
+
+  let currentClient = 'fjmedia';
+  let currentDays = 30;
+
+  // ===== LOCK SCREEN =====
+  function unlock() {
+    if (document.getElementById('passInput').value === PASS) {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('lockErr').style.display = 'none';
+      sessionStorage.setItem('fjdash', '1');
+      loadDashboard();
+    } else {
+      document.getElementById('lockErr').style.display = 'block';
+      document.getElementById('passInput').value = '';
+      document.getElementById('passInput').focus();
+    }
+  }
+
+  function lockApp() {
+    sessionStorage.removeItem('fjdash');
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('lockScreen').style.display = 'flex';
+    document.getElementById('passInput').value = '';
+  }
+
+  if (sessionStorage.getItem('fjdash')) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadDashboard();
+  }
+
+  // ===== CLIENT SWITCH =====
+  function switchClient() {
+    currentClient = document.getElementById('clientSelect').value;
+    loadDashboard();
+  }
+
+  function setRange(days) {
+    currentDays = days;
+    document.querySelectorAll('.dr-btn').forEach(b => b.classList.remove('on'));
+    document.querySelector(`.dr-btn[data-days="${days}"]`).classList.add('on');
+    document.getElementById('dateLabel').textContent = `Last ${days} days`;
+    loadDashboard();
+  }
+
+  // ===== LOAD DATA =====
+  async function loadDashboard() {
+    if (GAS_URL === 'REPLACE_WITH_GAS_URL') {
+      document.getElementById('setupBanner').classList.add('on');
+      renderEmpty();
+      return;
+    }
+
+    document.getElementById('setupBanner').classList.remove('on');
+    document.getElementById('errorBanner').classList.remove('on');
+    document.getElementById('loadingOverlay').classList.add('on');
+
+    try {
+      const url = `${GAS_URL}?client=${currentClient}&days=${currentDays}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (data.error) {
+        showError(data.error);
+        renderEmpty();
+        return;
+      }
+
+      renderKPIs(data);
+      renderSources(data.sources || []);
+      renderPages(data.pages || []);
+      renderSubmissions(data.submissions || []);
+    } catch (err) {
+      showError('Could not connect to dashboard backend. Check your GAS deployment.');
+      renderEmpty();
+    } finally {
+      document.getElementById('loadingOverlay').classList.remove('on');
+    }
+  }
+
+  // ===== RENDER FUNCTIONS =====
+  function renderKPIs(data) {
+    const v = data.visitors || {};
+    document.getElementById('kpiVisitors').textContent = formatNum(v.current || 0);
+    setTrend('kpiVisitorsTrend', v.current, v.previous);
+
+    const l = data.leads || {};
+    document.getElementById('kpiLeads').textContent = formatNum(l.current || 0);
+    setTrend('kpiLeadsTrend', l.current, l.previous);
+
+    const top = (data.sources || [])[0];
+    if (top) {
+      document.getElementById('kpiTopSource').textContent = top.name;
+      document.getElementById('kpiTopSourcePct').textContent = top.pct + '% of traffic';
+    } else {
+      document.getElementById('kpiTopSource').textContent = '—';
+      document.getElementById('kpiTopSourcePct').textContent = '';
+    }
+  }
+
+  function setTrend(id, current, previous) {
+    const el = document.getElementById(id);
+    if (!previous || previous === 0) {
+      el.textContent = current > 0 ? 'New' : 'No data';
+      el.className = 'kpi-trend flat';
+      return;
+    }
+    const pct = Math.round(((current - previous) / previous) * 100);
+    if (pct > 0) {
+      el.innerHTML = `&#9650; ${pct}% vs. previous period`;
+      el.className = 'kpi-trend up';
+    } else if (pct < 0) {
+      el.innerHTML = `&#9660; ${Math.abs(pct)}% vs. previous period`;
+      el.className = 'kpi-trend down';
+    } else {
+      el.textContent = 'No change';
+      el.className = 'kpi-trend flat';
+    }
+  }
+
+  function renderSources(sources) {
+    const wrap = document.getElementById('trafficSources');
+    if (!sources.length) {
+      wrap.innerHTML = '<div class="source-row"><span class="source-label" style="color:var(--muted);font-style:italic">No data yet</span></div>';
+      return;
+    }
+    wrap.innerHTML = sources.map(s => `
+      <div class="source-row">
+        <span class="source-label">${s.name}</span>
+        <div class="source-bar-wrap"><div class="source-bar" style="width:${s.pct}%"></div></div>
+        <span class="source-pct">${s.pct}%</span>
+      </div>
+    `).join('');
+  }
+
+  function renderPages(pages) {
+    const wrap = document.getElementById('topPages');
+    if (!pages.length) {
+      wrap.innerHTML = '<div class="page-row"><span class="page-path" style="color:var(--muted);font-style:italic">No data yet</span></div>';
+      return;
+    }
+    wrap.innerHTML = pages.map(p => `
+      <div class="page-row">
+        <span class="page-path">${p.path}</span>
+        <span class="page-views">${formatNum(p.views)} views</span>
+      </div>
+    `).join('');
+  }
+
+  function renderSubmissions(subs) {
+    const tbody = document.getElementById('subsBody');
+    const countEl = document.getElementById('subsCount');
+
+    if (!subs.length) {
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="4">No submissions in this period</td></tr>';
+      countEl.textContent = '';
+      return;
+    }
+
+    countEl.textContent = `${subs.length} in period`;
+    tbody.innerHTML = subs.map(s => `
+      <tr>
+        <td>${esc(s.name)}</td>
+        <td>${esc(s.contact)}</td>
+        <td>${esc(s.date)}</td>
+        <td>${esc(s.details)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderEmpty() {
+    document.getElementById('kpiVisitors').textContent = '—';
+    document.getElementById('kpiVisitorsTrend').textContent = '';
+    document.getElementById('kpiLeads').textContent = '—';
+    document.getElementById('kpiLeadsTrend').textContent = '';
+    document.getElementById('kpiTopSource').textContent = '—';
+    document.getElementById('kpiTopSourcePct').textContent = '';
+    document.getElementById('trafficSources').innerHTML = '<div class="source-row"><span class="source-label" style="color:var(--muted);font-style:italic">Connect GAS backend to see data</span></div>';
+    document.getElementById('topPages').innerHTML = '<div class="page-row"><span class="page-path" style="color:var(--muted);font-style:italic">Connect GAS backend to see data</span></div>';
+    document.getElementById('subsBody').innerHTML = '<tr class="empty-row"><td colspan="4">Connect GAS backend to see data</td></tr>';
+    document.getElementById('subsCount').textContent = '';
+  }
+
+  // ===== HELPERS =====
+  function formatNum(n) { return Number(n).toLocaleString(); }
+  function esc(str) { const d = document.createElement('div'); d.textContent = str || '—'; return d.innerHTML; }
+
+  function showError(msg) {
+    const el = document.getElementById('errorBanner');
+    el.textContent = msg;
+    el.classList.add('on');
+  }
+</script>
+</body>
+</html>
