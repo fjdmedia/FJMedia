@@ -386,6 +386,26 @@
       font-size: 0.82rem; color: var(--text-light); line-height: 1.65;
     }
 
+    /* CLIENT STRIP */
+    .client-strip {
+      text-align: center; padding: 1.5rem 0 0;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-light); opacity: 0.5;
+      font-family: var(--mono);
+    }
+
+    /* FOUNDER */
+    #founder { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .founder-content { max-width: 560px; }
+    .founder-text {
+      font-size: 0.92rem; color: var(--text-light); line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .founder-highlight {
+      font-size: 0.92rem; color: var(--accent); line-height: 1.75;
+      font-weight: 600; margin-top: 1.5rem;
+    }
+
     /* CONTACT */
     #contact { background: var(--bg2); }
     .contact-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
@@ -1251,6 +1271,9 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
+      <div class="client-strip">
+        Sugar and Shai Cookies &middot; Royal Kings Auto Care &middot; Diego &amp; Andrea &middot; Linda Quach Photography
+      </div>
     </div>
   </section>
 
@@ -1266,44 +1289,58 @@
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
-          <div class="why-title">Fast Turnaround</div>
+          <div class="why-title">Your site is ready before most agencies even send a proposal</div>
           <div class="why-desc">First draft in 1–2 days. Full site live in under 5. No waiting weeks to see something.</div>
         </div>
         <div class="why-card">
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <div class="why-title">Zero Risk to You</div>
+          <div class="why-title">You'll never pay for something you don't love</div>
           <div class="why-desc">You don't pay until you see and approve the finished site. No contracts, no deposits upfront.</div>
         </div>
         <div class="why-card">
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
-          <div class="why-title">100% Custom Built</div>
+          <div class="why-title">No templates. No Wix. Handcrafted, every time.</div>
           <div class="why-desc">No Wix. No Squarespace. Every site is hand-coded to match your brand exactly.</div>
         </div>
         <div class="why-card">
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <div class="why-title">Direct Communication</div>
+          <div class="why-title">You text the person building your site</div>
           <div class="why-desc">You work directly with us — no account managers or support tickets. Fast replies, always.</div>
         </div>
         <div class="why-card">
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </div>
-          <div class="why-title">Built to Convert</div>
+          <div class="why-title">Designed to bring you customers, not just compliments</div>
           <div class="why-desc">Every site is designed with one goal: turning visitors into paying customers.</div>
         </div>
         <div class="why-card">
           <div class="icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
-          <div class="why-title">Low Overhead for You</div>
+          <div class="why-title">No $50/month hosting bills. Ever.</div>
           <div class="why-desc">Sites hosted on GitHub Pages — no $30&#8211;50/month bills. You only pay for your domain (~$15/yr).</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET THE FOUNDER -->
+  <section id="founder">
+    <div class="section-inner">
+      <p class="section-label">Who's Behind FJMedia</p>
+      <h2 class="section-title">One person. Start to finish.</h2>
+      <div class="divider"></div>
+      <div class="founder-content">
+        <p class="founder-text">When you message FJMedia, you're talking to the person who designs, builds, and launches your site. No account managers. No handoffs. No "I'll pass that along."</p>
+        <p class="founder-text">I'm James — a Winnipeg-based web designer who works directly with every client. You get fast replies, honest feedback, and a site built by someone who actually knows your project inside and out.</p>
+        <p class="founder-highlight">You'll always know exactly who's working on your site — because it's the same person from the first message to launch day.</p>
       </div>
     </div>
   </section>
@@ -1605,10 +1642,22 @@
       opacity: 0, y: 30, duration: 0.55, stagger: 0.1, ease: 'power2.out'
     });
 
+    // Client name strip — fade in
+    gsap.from('.client-strip', {
+      scrollTrigger: { trigger: '.client-strip', start: 'top 90%', once: true },
+      opacity: 0, y: 15, duration: 0.6, ease: 'power2.out'
+    });
+
     // Why cards — stagger in
     gsap.from('.why-card', {
       scrollTrigger: { trigger: '.why-grid', start: 'top 78%', once: true },
       opacity: 0, scale: 0.96, duration: 0.5, stagger: 0.08, ease: 'power2.out'
+    });
+
+    // Founder content — fade in
+    gsap.from('.founder-text, .founder-highlight', {
+      scrollTrigger: { trigger: '.founder-content', start: 'top 82%', once: true },
+      opacity: 0, y: 20, duration: 0.6, stagger: 0.12, ease: 'power2.out'
     });
 
     // Why cards — hover: icon bounce
@@ -1693,7 +1742,7 @@
       const select = document.querySelector('[name="service"]');
       if (select) {
         Array.from(select.options).forEach(opt => {
-          if (opt.value.toLowerCase().includes('audit') || opt.value.toLowerCase().includes('other')) {
+          if (opt.value.toLowerCase().includes('not sure')) {
             select.value = opt.value;
           }
         });
