@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FJMedia — Pest Control 🐛</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#071520; --bg2:#0d1f3c; --bg3:#112840;
+  --border:#1b3a56; --gold:#c9a84c;
+  --text:#EDEAE5; --muted:rgba(237,234,229,0.45);
+}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:"DM Sans",sans-serif;min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+/* ── TITLEBAR ── */
+.titlebar{
+  position:relative;z-index:10;
+  display:flex;align-items:center;gap:10px;
+  padding:13px 28px;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+}
+.logo{font-family:"Space Mono",monospace;font-size:13px;color:var(--gold);}
+.sep{color:var(--border);}
+.crumb{
+  font-family:"Space Mono",monospace;font-size:10px;
+  color:var(--muted);letter-spacing:.06em;cursor:pointer;
+  transition:color .15s;
+}
+.crumb:hover{color:var(--text);}
+.crumb.active{color:var(--text);cursor:default;pointer-events:none;}
+
+/* ── VIEWS ── */
+.view{position:relative;z-index:2;display:none;padding:36px 32px 60px;}
+.view.active{display:block;}
+
+/* ── FOLDER VIEW ── */
+.view-label{
+  font-family:"Space Mono",monospace;font-size:9px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(201,168,76,0.4);margin-bottom:24px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+.folder-grid{
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.folder-item{
+  display:flex;flex-direction:column;align-items:center;
+  padding:18px 14px 14px;border-radius:8px;cursor:pointer;
+  border:1px solid transparent;transition:all .18s;
+  width:140px;
+}
+.folder-item:hover{
+  background:rgba(201,168,76,0.05);
+  border-color:rgba(201,168,76,0.2);
+}
+.folder-icon{position:relative;width:78px;height:62px;margin-bottom:11px;}
+.folder-tab{
+  position:absolute;top:0;left:0;width:34px;height:11px;
+  background:var(--gold);border-radius:3px 3px 0 0;opacity:.9;
+}
+.folder-body{
+  position:absolute;bottom:0;left:0;right:0;height:52px;
+  background:var(--gold);border-radius:2px 7px 7px 7px;opacity:.9;
+  display:flex;align-items:center;justify-content:center;
+}
+.folder-item:hover .folder-tab,
+.folder-item:hover .folder-body{opacity:1;}
+.folder-emoji{font-size:20px;}
+.folder-name{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:11px;font-weight:700;color:var(--text);
+  text-align:center;line-height:1.35;
+}
+.folder-count{
+  margin-top:5px;font-family:"DM Sans",sans-serif;
+  font-size:10px;color:var(--muted);text-align:center;
+}
+
+/* ── GALLERY VIEW ── */
+.gallery-header{
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;
+}
+.back-btn{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;
+  padding:6px 14px;border-radius:6px;font-size:12px;
+  font-family:"DM Sans",sans-serif;transition:all .2s;
+}
+.back-btn:hover{border-color:var(--gold);color:var(--gold);}
+.gallery-title{
+  font-family:"Plus Jakarta Sans",sans-serif;
+  font-size:18px;font-weight:800;color:var(--text);
+}
+
+/* ── FIX CARD ── */
+.fix-card{
+  margin-bottom:32px;
+  border:1px solid var(--border);border-radius:10px;overflow:hidden;
+}
+.fix-card-header{
+  display:flex;align-items:center;gap:10px;
+  padding:13px 20px;background:var(--bg2);
+  border-bottom:1px solid var(--border);
+}
+.fix-row{display:flex;align-items:baseline;gap:10px;}
+.fix-badge{
+  font-family:"Space Mono",monospace;font-size:8px;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:2px 8px;border-radius:3px;flex-shrink:0;
+}
+.fix-badge.bug{
+  background:rgba(237,234,229,0.06);
+  border:1px solid rgba(237,234,229,0.15);
+  color:rgba(237,234,229,0.45);
+}
+.fix-badge.fixed{
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.25);
+  color:var(--gold);
+}
+.fix-text{
+  font-family:"DM Sans",sans-serif;
+  font-size:12px;color:rgba(237,234,229,0.6);line-height:1.4;
+}
+.fix-text-fixed{color:var(--text);font-weight:500;}
+.fix-panels{display:flex;}
+.panel{flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border);}
+.panel:last-child{border-right:none;}
+.panel-label{
+  display:flex;align-items:center;gap:7px;
+  padding:9px 16px;background:var(--bg3);
+  border-bottom:1px solid var(--border);
+}
+.dot{width:7px;height:7px;border-radius:50%;}
+.dot.before{background:rgba(237,234,229,0.2);}
+.dot.after{background:var(--gold);}
+.panel-label span{
+  font-family:"Space Mono",monospace;font-size:8px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+.panel-img{
+  background:var(--bg);padding:16px;
+  display:flex;align-items:flex-start;justify-content:center;
+}
+.panel-img img{
+  width:100%;height:auto;border-radius:4px;
+  border:1px solid var(--border);display:block;
+}
+.panel-img .empty{
+  width:100%;min-height:180px;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;
+  border:1px dashed var(--border);border-radius:6px;
+  color:var(--muted);font-size:11px;text-align:center;padding:20px;
+}
+</style>
+</head>
+<body>
+
+<!-- TITLEBAR -->
+<div class="titlebar">
+  <div class="logo">{FJ}</div>
+  <div class="sep">/</div>
+  <div class="crumb" onclick="showFolders()">Proof</div>
+  <div class="sep" id="gallerySep" style="display:none;">/</div>
+  <div class="crumb active" id="gallerycrumb" style="display:none;"></div>
+</div>
+
+<!-- FOLDER VIEW -->
+<div class="view active" id="folderView">
+  <div class="view-label">Sites</div>
+  <div class="folder-grid" id="folderGrid"></div>
+</div>
+
+<!-- GALLERY VIEW -->
+<div class="view" id="galleryView">
+  <div class="gallery-header">
+    <button class="back-btn" onclick="showFolders()">← Back</button>
+    <div class="gallery-title" id="galleryTitle"></div>
+  </div>
+  <div id="fixCards"></div>
+</div>
+
+<script>
+const sites = [
+  {
+    id: 'fjmedia',
+    name: 'FJMedia.ca',
+    emoji: '🌐',
+    fixes: [
+      {
+        bug:   'Service cards were not showing up on the page',
+        fixed: 'All service cards are now fully visible and clickable when scrolling to the section',
+        before: 'Ads/Proof/Before_calculator.png',
+        after:  'Ads/Proof/after_calculator.png'
+      },
+      {
+        bug:   'The dividers between the Why FJMedia cards only appeared when hovering over them',
+        fixed: 'Dividers between every card are now always visible — no hover required',
+        before: 'Ads/Proof/Why FJMedia Grid Before.png',
+        after:  'Ads/Proof/Why FJMedia Grid After.png'
+      }
+    ]
+  }
+];
+
+function showFolders() {
+  document.getElementById('folderView').classList.add('active');
+  document.getElementById('galleryView').classList.remove('active');
+  document.getElementById('gallerySep').style.display = 'none';
+  document.getElementById('gallerycrumb').style.display = 'none';
+}
+
+function openSite(id) {
+  const site = sites.find(s => s.id === id);
+  if (!site) return;
+
+  document.getElementById('galleryTitle').textContent = site.name;
+  document.getElementById('gallerycrumb').textContent = site.name;
+  document.getElementById('gallerycrumb').style.display = 'block';
+  document.getElementById('gallerySep').style.display = 'block';
+
+  document.getElementById('fixCards').innerHTML = site.fixes.map(f => `
+    <div class="fix-card">
+      <div class="fix-card-header">
+        <div>
+          <div class="fix-row">
+            <div class="fix-badge bug">Bug</div>
+            <div class="fix-text">${f.bug}</div>
+          </div>
+          <div class="fix-row" style="margin-top:6px;">
+            <div class="fix-badge fixed">Fixed</div>
+            <div class="fix-text fix-text-fixed">${f.fixed}</div>
+          </div>
+        </div>
+      </div>
+      <div class="fix-panels">
+        <div class="panel">
+          <div class="panel-label"><div class="dot before"></div><span>Before</span></div>
+          <div class="panel-img">
+            <img src="${f.before}" alt="Before"
+              onerror="this.outerHTML='<div class=\\'empty\\'>Add before screenshot to this folder</div>'"/>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-label"><div class="dot after"></div><span>After</span></div>
+          <div class="panel-img"><img src="${f.after}" alt="After"/></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('folderView').classList.remove('active');
+  document.getElementById('galleryView').classList.add('active');
+}
+
+// Render folder grid
+document.getElementById('folderGrid').innerHTML = sites.map(s => `
+  <div class="folder-item" onclick="openSite('${s.id}')">
+    <div class="folder-icon">
+      <div class="folder-tab"></div>
+      <div class="folder-body"><div class="folder-emoji">${s.emoji}</div></div>
+    </div>
+    <div class="folder-name">${s.name}</div>
+    <div class="folder-count">${s.fixes.length} fix${s.fixes.length !== 1 ? 'es' : ''}</div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
