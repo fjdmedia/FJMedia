@@ -157,9 +157,39 @@ def build():
     story.append(PageBreak())
 
     # ══════════════════════════════════════════════════════════════════════════
-    # PACKAGE 1 — GET FOUND
+    # PACKAGE 0 — GET ONLINE (entry ramp)
     # ══════════════════════════════════════════════════════════════════════════
-    story += package_header("PACKAGE 01", "Get Found", "$600  ·  One-time",
+    story += package_header("PACKAGE 01", "Get Online", "$300  ·  One-time",
+        "Need to be online fast? A clean, custom page — live in days. Covers event sites, landing pages, linktrees, and simple one-page sites.")
+
+    story.extend(service_block(
+        "Custom One-Page Site",
+        "A single, hand-coded page designed for one purpose — whether that's an event, a link hub, or a quick-launch landing page.",
+        "Like a pop-up shop vs. a full storefront. Fast to set up, designed to do one thing well, and gets you online immediately.",
+        "Not every business needs a 7-page site on day one. But every business needs to exist online. A clean one-page site beats no site every time.",
+        "We build a focused, mobile-ready page with your branding, live in days. No templates, no drag-and-drop — hand-coded to look professional from the start."
+    ))
+
+    story.extend(service_block(
+        "Mobile Optimization",
+        "Your page is coded to look and work perfectly on phones, tablets, and desktops.",
+        "Over 60% of web traffic comes from phones. If your page breaks on mobile, most of your audience never sees it properly.",
+        "Google ranks mobile-friendly sites higher. A page that doesn't work on a phone loses the customer and the ranking.",
+        "Every page we build is responsive from the first line of code — tested across screen sizes before it goes live."
+    ))
+
+    story.extend(service_block(
+        "Free Hosting",
+        "Your page hosted on GitHub Pages at no monthly cost — fast, reliable, and included in the price.",
+        "Like free rent for your digital storefront. No $30–50/month hosting bills eating into your bottom line.",
+        "Monthly hosting fees add up fast and create friction for small businesses. Eliminating that cost means the site pays for itself sooner.",
+        "We deploy to GitHub Pages with SSL included. Fast load times, no downtime, no bills."
+    ))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # PACKAGE 2 — GET FOUND
+    # ══════════════════════════════════════════════════════════════════════════
+    story += package_header("PACKAGE 02", "Get Found", "$600  ·  One-time",
         "The foundation. A clean, professional website that makes your business look legitimate and findable online.")
 
     story.extend(service_block(
@@ -195,9 +225,9 @@ def build():
     ))
 
     # ══════════════════════════════════════════════════════════════════════════
-    # PACKAGE 2 — GET CUSTOMERS
+    # PACKAGE 3 — GET CUSTOMERS
     # ══════════════════════════════════════════════════════════════════════════
-    story += package_header("PACKAGE 02", "Get Customers", "$1,000  ·  One-time  ·  Most Popular",
+    story += package_header("PACKAGE 03", "Get Customers", "$1,000  ·  One-time  ·  Most Popular",
         "Everything in Get Found — plus the backend that turns your website into a lead machine. Forms that think, data that logs itself, and Google knowing your business exists.")
 
     story.extend(service_block(
@@ -241,9 +271,9 @@ def build():
     ))
 
     # ══════════════════════════════════════════════════════════════════════════
-    # PACKAGE 3 — OWN THE MARKET
+    # PACKAGE 4 — OWN THE MARKET
     # ══════════════════════════════════════════════════════════════════════════
-    story += package_header("PACKAGE 03", "Own the Market", "$1,600  ·  One-time",
+    story += package_header("PACKAGE 04", "Own the Market", "$1,600  ·  One-time",
         "Everything in Get Customers — plus the data layer that shows you exactly what's working, where customers are finding you, and how your site performs month over month.")
 
     story.extend(service_block(
@@ -271,25 +301,10 @@ def build():
     ))
 
     # ══════════════════════════════════════════════════════════════════════════
-    # ADD-ONS
+    # NOTE — Get Online is now the entry tier in the main ascension ladder
+    # Event sites, landing pages, and linktrees all fall under Get Online ($300)
+    # No separate add-ons section needed
     # ══════════════════════════════════════════════════════════════════════════
-    story += section_header("ADD-ONS", "Standalone Options", "Available with any package or on their own")
-
-    story.extend(service_block(
-        "Event Site — $300",
-        "A single-page event website built for weddings, socials, fundraisers, or ticketed events — with event details, prize gallery, countdown timer, and a shareable link.",
-        "Like a digital invitation and event program combined. Something guests can open on their phone, share with everyone they know, and reference throughout the night.",
-        "Facebook events get buried in feeds and look generic. A dedicated event site looks professional, stays live for the full run of the event, and works as a direct shareable link.",
-        "We build a custom event page with your details, prize gallery, and any registration or RSVP components needed — live within 48 hours. After the event, it can upgrade to a permanent business site."
-    ))
-
-    story.extend(service_block(
-        "Custom Linktree — $300",
-        "A branded single-page hub with all your important links — booking, socials, contact, website — all in one place, living in your Instagram bio.",
-        "Like a business card that lives in your Instagram bio. One link, every destination. Instead of telling people to 'check the link in my bio' and showing them a generic page, they land on something that looks like you.",
-        "The default Linktree looks unbranded and forgettable. A custom version matches your identity, builds trust the second someone taps it, and sets you apart from every competitor using the same template.",
-        "We build a fully branded link hub using your colors, logo, and real content — delivered in 24–48 hours. Often the first step before a full site, with a clear upsell path built in."
-    ))
 
     # ══════════════════════════════════════════════════════════════════════════
     # RETAINERS

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
@@ -9,19 +9,23 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
 .corner.br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
 .inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;}
 .eyebrow{font-family:"DM Sans",sans-serif;font-weight:500;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;}
-.heading{font-family:"Syne",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
+.heading{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
 .heading em{color:#c9a84c;font-style:normal;}
-.sub{font-family:"DM Sans",sans-serif;font-size:10px;color:rgba(237,234,229,0.4);line-height:1.5;margin-bottom:14px;}
+.sub{font-family:"DM Sans",sans-serif;font-size:11px;color:rgba(237,234,229,0.55);line-height:1.5;margin-bottom:14px;}
 .divider{width:32px;height:1px;background:#c9a84c;opacity:0.4;margin-bottom:14px;}
 .byline{position:absolute;bottom:22px;right:36px;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,0.25);z-index:2;}
 .slide-num{position:absolute;bottom:22px;left:36px;font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,168,76,0.2);z-index:2;}
 .hint{margin-top:20px;font-family:sans-serif;font-size:12px;color:#444;text-align:center;}
 
-.steps{display:flex;flex-direction:column;gap:7px;}
-.step{display:flex;align-items:center;gap:14px;padding:7px 12px;border-left:1px solid rgba(201,168,76,0.2);}
-.step-num{font-family:"Space Mono",monospace;font-size:10px;color:#c9a84c;flex-shrink:0;width:20px;opacity:.7;}
-.step-label{font-family:"DM Sans",sans-serif;font-weight:600;font-size:10.5px;color:#EDEAE5;flex-shrink:0;min-width:90px;}
-.step-desc{font-family:"DM Sans",sans-serif;font-size:9.5px;color:rgba(237,234,229,0.4);line-height:1.4;}
+.menu{display:flex;flex-direction:column;gap:8px;}
+.menu-row{display:flex;align-items:center;gap:12px;padding:9px 14px;border:1px solid rgba(201,168,76,0.14);background:rgba(201,168,76,0.03);border-radius:4px;}
+.check{font-family:"Space Mono",monospace;font-size:10px;color:#c9a84c;flex-shrink:0;width:16px;}
+.menu-label{font-family:"DM Sans",sans-serif;font-weight:600;font-size:12px;color:#EDEAE5;flex:1;}
+.menu-tag{font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,168,76,0.55);white-space:nowrap;}
+.menu-row.plus{border-color:rgba(201,168,76,0.08);background:transparent;}
+.menu-row.plus .check{color:rgba(201,168,76,0.3);}
+.menu-row.plus .menu-label{color:rgba(237,234,229,0.4);}
+.menu-row.plus .menu-tag{color:rgba(201,168,76,0.3);}
 </style></head><body>
 <div style="display:flex;flex-direction:column;align-items:center;">
 <div class="post">
@@ -29,17 +33,16 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
   <div class="corner tl"></div>
   <div class="corner br"></div>
   <div class="inner">
-    <div class="eyebrow">What You're Actually Paying For</div>
-    <div class="heading">6 things go into<br>every <em>website.</em></div>
-    <div class="sub">Most agencies bill you for all of this upfront. Here's what they charge for.</div>
+    <div class="eyebrow">Winnipeg Web Design · FJMedia</div>
+    <div class="heading">Pick only what<br>you <em>actually need.</em></div>
+    <div class="sub">Most agencies lock you into packages starting at $3,000. We don't.</div>
     <div class="divider"></div>
-    <div class="steps">
-      <div class="step"><div class="step-num">01</div><div class="step-label">Strategy</div><div class="step-desc">Who you're targeting and what you want them to do</div></div>
-      <div class="step"><div class="step-num">02</div><div class="step-label">Design</div><div class="step-desc">Layout, colours, fonts, and brand feel</div></div>
-      <div class="step"><div class="step-num">03</div><div class="step-label">Copy</div><div class="step-desc">Every word on the page, written to convert</div></div>
-      <div class="step"><div class="step-num">04</div><div class="step-label">Development</div><div class="step-desc">Fast, mobile-ready, works on every device</div></div>
-      <div class="step"><div class="step-num">05</div><div class="step-label">SEO</div><div class="step-desc">Set up so Google can actually find you</div></div>
-      <div class="step"><div class="step-num">06</div><div class="step-label">Backend</div><div class="step-desc">Forms, email notifications, booking logic</div></div>
+    <div class="menu">
+      <div class="menu-row"><div class="check">✓</div><div class="menu-label">Custom Website</div><div class="menu-tag">Always included</div></div>
+      <div class="menu-row"><div class="check">✓</div><div class="menu-label">SEO &amp; Google Setup</div><div class="menu-tag">Get found</div></div>
+      <div class="menu-row"><div class="check">✓</div><div class="menu-label">Ordering &amp; Booking System</div><div class="menu-tag">Capture revenue</div></div>
+      <div class="menu-row"><div class="check">✓</div><div class="menu-label">Domain Setup</div><div class="menu-tag">Bring yours or we grab one</div></div>
+      <div class="menu-row plus"><div class="check">+</div><div class="menu-label">Monthly Retainer</div><div class="menu-tag">Keep growing</div></div>
     </div>
   </div>
   <div class="byline">By FJMedia</div>

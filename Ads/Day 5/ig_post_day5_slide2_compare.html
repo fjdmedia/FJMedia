@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
@@ -9,9 +9,9 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
 .corner.br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
 .inner{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;}
 .eyebrow{font-family:"DM Sans",sans-serif;font-weight:500;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#c9a84c;margin-bottom:10px;}
-.heading{font-family:"Syne",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
+.heading{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:28px;color:#EDEAE5;line-height:1.15;margin-bottom:8px;}
 .heading em{color:#c9a84c;font-style:normal;}
-.sub{font-family:"DM Sans",sans-serif;font-size:10px;color:rgba(237,234,229,0.4);line-height:1.5;margin-bottom:14px;}
+.sub{font-family:"DM Sans",sans-serif;font-size:11px;color:rgba(237,234,229,0.55);line-height:1.5;margin-bottom:14px;}
 .divider{width:32px;height:1px;background:#c9a84c;opacity:0.4;margin-bottom:14px;}
 .byline{position:absolute;bottom:22px;right:36px;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,0.25);z-index:2;}
 .slide-num{position:absolute;bottom:22px;left:36px;font-family:"Space Mono",monospace;font-size:8px;letter-spacing:.1em;color:rgba(201,168,76,0.2);z-index:2;}
@@ -19,21 +19,21 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
 
 .compare{display:flex;gap:16px;margin-top:4px;}
 .col{flex:1;display:flex;flex-direction:column;gap:0;}
-.col-label{font-family:"DM Sans",sans-serif;font-weight:500;font-size:8px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid;}
-.col-label.them{color:rgba(237,234,229,0.3);border-color:rgba(237,234,229,0.1);}
+.col-label{font-family:"DM Sans",sans-serif;font-weight:500;font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid;}
+.col-label.them{color:rgba(237,234,229,0.4);border-color:rgba(237,234,229,0.12);}
 .col-label.us{color:#c9a84c;border-color:rgba(201,168,76,0.3);}
-.price-big{font-family:"Syne",sans-serif;font-weight:800;font-size:48px;line-height:1;margin-bottom:6px;}
-.price-big.them{color:rgba(237,234,229,0.25);}
+.price-big{font-family:"Syne",sans-serif;font-weight:800;font-size:42px;line-height:1;margin-bottom:6px;}
+.price-big.them{color:rgba(237,234,229,0.3);text-decoration:line-through;text-decoration-color:rgba(237,234,229,0.15);}
 .price-big.us{color:#c9a84c;}
-.price-sub{font-family:"DM Sans",sans-serif;font-size:9px;color:rgba(237,234,229,0.35);line-height:1.5;margin-bottom:14px;}
-.price-sub.us{color:rgba(201,168,76,0.6);}
-.pill{display:inline-block;font-family:"DM Sans",sans-serif;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
-.pill.them{border:1px solid rgba(237,234,229,0.1);color:rgba(237,234,229,0.25);}
+.price-sub{font-family:"DM Sans",sans-serif;font-size:10px;color:rgba(237,234,229,0.5);line-height:1.5;margin-bottom:14px;}
+.price-sub.us{color:rgba(201,168,76,0.7);}
+.pill{display:inline-block;font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
+.pill.them{border:1px solid rgba(237,234,229,0.15);color:rgba(237,234,229,0.35);}
 .pill.us{border:1px solid rgba(201,168,76,0.3);color:#c9a84c;}
-.row-items{display:flex;flex-direction:column;gap:5px;}
-.row-item{font-family:"DM Sans",sans-serif;font-size:9px;line-height:1.4;display:flex;align-items:center;gap:6px;}
-.row-item.them{color:rgba(237,234,229,0.25);}
-.row-item.us{color:rgba(237,234,229,0.6);}
+.row-items{display:flex;flex-direction:column;gap:7px;margin-top:12px;}
+.row-item{font-family:"DM Sans",sans-serif;font-size:10.5px;line-height:1.4;display:flex;align-items:center;gap:6px;}
+.row-item.them{color:rgba(237,234,229,0.35);}
+.row-item.us{color:rgba(237,234,229,0.78);}
 .row-item::before{content:"";width:4px;height:4px;border-radius:50%;flex-shrink:0;}
 .row-item.them::before{background:rgba(237,234,229,0.15);}
 .row-item.us::before{background:#c9a84c;}
@@ -46,19 +46,18 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
   <div class="corner br"></div>
   <div class="inner">
     <div class="eyebrow">The Honest Comparison</div>
-    <div class="heading">What others charge.<br><em>What we charge.</em></div>
+    <div class="heading">What they charge.<br><em>What we charge.</em></div>
     <div class="divider"></div>
     <div class="compare">
       <div class="col">
         <div class="col-label them">Other Agencies</div>
         <div class="price-big them">$5K+</div>
-        <div class="price-sub them">Paid upfront.<br>Before you see a single page.</div>
-        <div class="pill them">2–3 month timeline</div>
-        <br/>
+        <div class="price-sub them">Paid upfront.<br>Before you see a thing.</div>
+        <div class="pill them">6–10 week timeline</div>
         <div class="row-items">
-          <div class="row-item them">Large retainer to start</div>
-          <div class="row-item them">Multiple revisions billed</div>
-          <div class="row-item them">You wait, then pay</div>
+          <div class="row-item them">Large deposit to start</div>
+          <div class="row-item them">Cookie-cutter templates</div>
+          <div class="row-item them">You wait. Then you pay.</div>
         </div>
       </div>
       <div class="vs"></div>
@@ -67,11 +66,10 @@ body{background:#000;display:flex;align-items:center;justify-content:center;min-
         <div class="price-big us">$0</div>
         <div class="price-sub us">Upfront. We build first.<br>You pay after you love it.</div>
         <div class="pill us">5 day delivery</div>
-        <br/>
         <div class="row-items">
-          <div class="row-item us">No cost until approved</div>
-          <div class="row-item us">All 6 components included</div>
-          <div class="row-item us">You see it, then decide</div>
+          <div class="row-item us">No cost until you approve</div>
+          <div class="row-item us">100% custom, hand-coded</div>
+          <div class="row-item us">You see it. Then decide.</div>
         </div>
       </div>
     </div>

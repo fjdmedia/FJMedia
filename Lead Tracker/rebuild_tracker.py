@@ -101,7 +101,7 @@ def build():
 
     dv('"Cold,Contacted,Replied,Call Booked,Preview Sent,Approved,Paid,Dead,Revisit Later"', "F2:F1000")
     dv('"Instagram,WPG Explore,Referral,Cold DM,Comment,Word of Mouth,Other"', "E2:E1000")
-    dv('"Launch $800,Foundation $1400,Authority $2200,Event Site $300,Linktree $300,Retainer Maintain $150,Retainer Grow $300,TBD"', "I2:I1000")
+    dv('"Get Online $300,Get Found $600,Get Customers $1000,Own the Market $1600,Retainer Maintain $150,Retainer Grow $300,TBD"', "I2:I1000")
     dv('"Yes,No,Unknown"', "J2:J1000")
 
     for r_idx, row in enumerate(SEED_DATA, 2):

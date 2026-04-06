@@ -337,50 +337,47 @@ make_pdf(
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# EVENT SITE — $300
+# GET ONLINE — $300
 # ─────────────────────────────────────────────────────────────────────────────
 make_pdf(
-    "Fulfillment_EventSite_300.pdf",
-    "Event Site — $300",
+    "Fulfillment_GetOnline_300.pdf",
+    "Get Online — $300",
     "$300 One-Time",
-    "Wedding socials, fundraisers, ticketed events. Single-page site with prize gallery + event details.",
+    "Entry-level package: event sites, landing pages, linktrees, simple one-page sites. Clean, custom, live in days.",
     [
-        "Single-page event website",
-        "Prize gallery with lightbox (click to expand images)",
-        "Event details section (date, venue, address, time)",
-        "Shareable link via GitHub Pages",
-        "Hosting for duration of the event",
-        "Upsell path: Get Found ($600) after event for permanent business/brand page",
+        "Clean, custom one-page site (hand-coded, no templates)",
+        "Mobile-optimized across all devices",
+        "GitHub Pages hosting (free, no monthly fees)",
+        "Delivered in days, not weeks",
+        "Upsell path: Get Found ($600) for a full multi-page site with SEO",
     ],
     [
-        ("Intake — Gather Everything Upfront", [
-            "Event name, date, venue name, full address, time (doors open, event start)",
-            "Ticket price (if applicable)",
-            "Prize list — names + photos of all prizes (regular + grand prizes)",
-            "Brand colors or theme preference (dark/light, color scheme)",
-            "Client's contact info for the site (optional)",
-            "Any special sections needed: schedule, performers, sponsors",
+        ("Intake — Determine Site Type", [
+            "What type of page? Event site, linktree/link hub, landing page, or simple info page",
+            "Client name, business name, brand colors or vibe preference",
+            "For events: event name, date, venue, address, time, prize list + photos",
+            "For linktrees: Instagram handle, all links (phone, email, socials, booking), avatar/photo",
+            "For landing pages: business info, key message, contact method, any images",
         ]),
         ("Build the Site", [
             "Create folder: FJDMedia/Websites/[Client Name]/",
-            "Build Website.html — single page",
-            "Sections: Hero (event name + date), Event Details, Prize Gallery, Footer",
-            "Prize gallery: polaroid-style cards with lightbox on click",
-            "Separate prizes into tiers if applicable (regular prizes, grand prizes, golden ticket)",
-            "Mobile-first — this site gets shared on Instagram, must look perfect on phone",
+            "Build Website.html — single page, branded to their vibe",
+            "Mobile-first — must look perfect on phone (most traffic from Instagram shares)",
+            "For events: Hero, Event Details, Prize Gallery (polaroid cards + lightbox), Footer",
+            "For linktrees: Avatar, bio, branded link buttons, all contact/social links",
+            "For landing pages: Hero, key info section, contact form or CTA, Footer",
         ]),
-        ("Prize Images", [
-            "Process all prize images through Pillow if needed (resize, crop, optimize)",
+        ("Images & Assets", [
+            "Process all images through Pillow if needed (resize, crop, optimize)",
             "Set object-position per image — faces must never be cut off",
-            "Name files clearly: prize_1.jpg, prize_grand_1.jpg, etc.",
             "Place all images in assets/images/ subfolder",
         ]),
         ("Internal QA Before Preview", [
-            "Lightbox opens and closes on all prizes",
-            "Event details are accurate (date, time, venue, address)",
-            "All prize images load correctly on mobile",
-            "Sharing the link on mobile shows a proper preview (OG tags set)",
-            "No broken images or placeholder content",
+            "All links/buttons work correctly",
+            "All images load on mobile",
+            "OG tags set for proper social sharing previews",
+            "No placeholder content or broken elements",
+            "If event site: lightbox works, all details accurate",
         ]),
         ("Deploy to GitHub Pages", [
             "Create empty public repo on GitHub under fjdmedia account",
@@ -390,66 +387,14 @@ make_pdf(
         ]),
         ("Client Approval + Payment", [
             "Send preview URL — give client 24hrs to review",
-            "Make any last changes (prize updates, typo fixes)",
-            "Collect payment via e-transfer before sharing the public link",
-            "Confirm the link is shareable and correct before client posts it",
-        ]),
-        ("Post-Event Upsell", [
-            "After the event, reach out: 'Hope it went great! If you ever want a permanent site for your business, I can build that for $600.'",
-            "Reference the event site as proof of what you can do",
-            "If they're interested, start the Get Found ($600) intake process",
-        ]),
-    ]
-)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# LINKTREE — $300
-# ─────────────────────────────────────────────────────────────────────────────
-make_pdf(
-    "Fulfillment_Linktree_300.pdf",
-    "Linktree — $300",
-    "$300 One-Time",
-    "Branded link-in-bio for realtors, creators, and small businesses. Replaces generic Linktree or Canva links.",
-    [
-        "Custom branded single-page link hub",
-        "Client avatar + bio",
-        "All real links: phone, email, socials, booking",
-        "72-hour spec preview countdown (used as pitch mechanic for cold prospects)",
-        "GitHub Pages hosting",
-        "Upsell path: Get Found ($600) or Get Customers ($1,000) for a full site",
-    ],
-    [
-        ("Prospect Research (Cold DM strategy)", [
-            "Use FJMedia Prospector tool to find target businesses by niche + city",
-            "Identify prospects with weak or no link-in-bio",
-            "Gather: their Instagram handle, bio, website (if any), contact info from profile",
-            "Note their niche, vibe, colors — build to match their brand before reaching out",
-        ]),
-        ("Build the Linktree Spec (before contacting)", [
-            "Create folder: FJDMedia/Websites/[Client Name]/",
-            "Build Website.html — single page, branded to their vibe",
-            "Include: avatar/photo, name, tagline, all visible social links, phone, email, booking link",
-            "Set a 72-hour countdown timer (expires after 72hrs from send time)",
-            "Deploy to GitHub Pages immediately after build",
-        ]),
-        ("Cold DM Pitch", [
-            "Use FJMedia DM Writer tool to generate the outreach message",
-            "Short version first: mention you built something for them, include the live link",
-            "72hr countdown creates urgency — they need to click to see it",
-            "If no reply in 3–4 days, send follow-up: 'Just circling back — link's still up if you want to see it.'",
-        ]),
-        ("Client Approval + Payment", [
-            "If they reply positively, offer to keep it live permanently for $300",
+            "Make any last changes requested",
             "Collect payment via e-transfer",
-            "Remove the countdown timer after payment",
-            "Update any links they want changed",
+            "Confirm the link is live and shareable",
         ]),
-        ("Handoff", [
-            "Confirm the live GitHub Pages link is their permanent link",
-            "Remind them to update their Instagram bio link",
-            "Pitch the upgrade: 'This is just the starting point — I can build you a full site for $600'",
-            "Request a quick testimonial or screenshot to use as a case study",
+        ("Post-Delivery Upsell", [
+            "After delivery, pitch upgrade: 'Now that you're online, want a full site with SEO and lead capture? That's Get Found at $600.'",
+            "Reference the Get Online build as proof of quality",
+            "If interested, start the Get Found ($600) intake process",
         ]),
     ]
 )

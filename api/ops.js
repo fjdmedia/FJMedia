@@ -51,25 +51,13 @@ export default async function handler(req, res) {
         '6 months of managed maintenance included — $900+ if hired separately',
       ]
     },
-    'Event Site': {
-      price: 300, marketValue: 900,
+    'Get Online': {
+      price: 300, marketValue: 575,
       features: [
-        'Single-page event site, hand-coded — $400+ if hired separately',
-        'Prize gallery with lightbox — $150+ if hired separately',
-        'Event details section (date, venue, tickets, prizes) — $100+ if hired separately',
-        'Mobile-optimized + shareable link — $150+ if hired separately',
-        'Free hosting for the duration of your event — $50+ if hired separately',
-        'Delivered in 4 days — rush rate value $200+',
-      ]
-    },
-    'Custom Linktree': {
-      price: 300, marketValue: 750,
-      features: [
-        'Custom-designed to match your IG aesthetic — $300+ if hired separately',
-        'All real links (booking, phone, email, socials) — $100+ if hired separately',
-        'Mobile-optimized, loads fast, no Linktree branding — $150+ if hired separately',
-        'Hosted on your own link — $100+ if hired separately',
-        'Delivered in 2 days — rush rate value $100+',
+        'Clean, custom one-page site — hand-coded, no templates — $300+ if hired separately',
+        'Mobile-optimized across all devices — $100+ if hired separately',
+        'Hosted free on GitHub Pages — $100+ if hired separately',
+        'Delivered in days, not weeks — rush rate value $75+',
       ]
     },
   };
@@ -133,7 +121,7 @@ You save: $${savings || 'X'}+
 Write 2 sentences: We build the full site before they pay a cent. They see every detail, request any changes, and only pay when they're 100% happy — or they walk away owing nothing.
 
 **Timeline**
-Realistic delivery: 5 days to first design, 14 days fully live (or 4 days for Event Site / 2 days for Linktree). Tailor to their package.
+Realistic delivery: 5 days to first design, 14 days fully live (or a few days for Get Online). Tailor to their package.
 
 **After Launch — Keep the Customers Coming**
 3–4 sentences pitching the Monthly Maintenance Retainer ($150–$300/mo). Frame it as the system that keeps results coming in long-term. The site is the foundation — the retainer is what turns it into a customer machine. Without it, a site peaks and plateaus. With it, it keeps growing.

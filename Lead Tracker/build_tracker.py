@@ -72,7 +72,7 @@ def build():
     )
     package_dv = DataValidation(
         type="list",
-        formula1='"Launch $800,Foundation $1400,Authority $2200,Event Site $300,Linktree $300,Retainer Maintain $150,Retainer Grow $300,TBD"',
+        formula1='"Get Online $300,Get Found $600,Get Customers $1000,Own the Market $1600,Retainer Maintain $150,Retainer Grow $300,TBD"',
         allow_blank=True, showDropDown=False
     )
 
@@ -91,6 +91,10 @@ def build():
         ["", "Gold Prime Renovations", "Renovations", "@goldprimerenovations", "Instagram", "Cold", today, "", "TBD", "No website. Solid portfolio — bathrooms, basements, commercial. Growing (hiring). B2C pitch angle."],
         ["", "MB Contracting",         "Construction", "@mbgeneralcontracting", "Instagram", "Cold", today, "", "TBD", "No website. Found via WPG Explore."],
         ["", "Elara Petals",           "Gifts / Florals", "@elarapetals",       "WPG Explore", "Cold", today, "", "TBD", "No website. Ribbon bouquets, custom orders via DM. Winnipeg-based. 257 followers, consistent content."],
+        ["", "FAYNA Pekarnya",         "Bakery", "@fayna__pekarnya",             "Instagram", "Cold", today, "", "TBD", "No website (Canva link only). 321 followers. Commercial kitchen, licensed. Winnipeg — Nobside Cafe. Cakes, pastries, custom desserts. Already following."],
+        ["", "Sugar + Salt Bakeshoppe","Bakery", "@sugarandsaltbakeshoppe",      "Instagram", "Cold", today, "", "TBD", "Has Squarespace site (sugarandsaltbakeshoppe.com) — redesign opportunity. 10.7K followers, 897 Corydon Ave. Sweet tables page has no booking form, no pricing, buried lead times. Pitch: better conversion + online ordering flow."],
+        ["", "Gibson's Goodies",       "Bakery / Cookies", "@gibsons.goodies",   "Instagram", "Cold", today, "", "TBD", "No website. 362 followers. Self-taught cookie decorator. Email: gibsons.goodies.wpg@gmail.com. DM for orders. Winnipeg-based."],
+        ["Rochelle", "For Sweet's Sake","Bakery / Cookies", "@forsweetssakewpg", "Instagram", "Cold", today, "", "TBD", "Linktree only (linktr.ee/forsweetssake). 2,644 followers, 409 posts. 'No DMs — email or form.' Strong content, zero web presence. Perfect full site candidate."],
     ]
 
     for r_idx, row in enumerate(rows, 2):

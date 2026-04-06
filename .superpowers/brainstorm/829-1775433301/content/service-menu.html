@@ -1,0 +1,358 @@
+<h2>Section 1: The Service Menu</h2>
+<p class="subtitle">Step 1 of the calculator — visitor toggles the services they need. Website is pre-selected since everything depends on it.</p>
+
+<style>
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .service-grid .service-item {
+    background: #0a1a2a;
+    border: 2px solid #1a2a3a;
+    border-radius: 12px;
+    padding: 20px 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    text-align: center;
+  }
+  .service-item:hover {
+    border-color: #c9a84c55;
+    background: #0d1f30;
+  }
+  .service-item.selected {
+    border-color: #c9a84c;
+    background: #0d1f30;
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+  }
+  .service-item.selected .svc-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .svc-check {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background: #c9a84c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #071520;
+    font-size: 12px;
+    font-weight: 800;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
+  }
+  .svc-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 12px;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c9a84c;
+  }
+  .svc-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #edeae5;
+    margin-bottom: 6px;
+  }
+  .svc-desc {
+    font-size: 11px;
+    color: #8a9bb0;
+    line-height: 1.5;
+  }
+  .svc-required {
+    font-size: 10px;
+    color: #c9a84c;
+    margin-top: 8px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .service-item.selected .svc-required {
+    opacity: 0;
+  }
+  .service-item:not(.selected) .svc-required.show {
+    opacity: 1;
+  }
+
+  /* Bottom row: 2 items centered */
+  .service-grid-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 0 auto 24px;
+    max-width: 66.666%;
+  }
+
+  /* Stack summary */
+  .value-stack {
+    background: #0a1a2a;
+    border: 1px solid #1a2a3a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .stack-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 12px;
+  }
+  .stack-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stack-item {
+    font-size: 13px;
+    color: #8a9bb0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .stack-item.active {
+    color: #edeae5;
+  }
+  .stack-item .si-check {
+    color: #c9a84c;
+    font-weight: 800;
+    width: 16px;
+  }
+  .stack-item .si-dash {
+    color: #2a3a4a;
+    width: 16px;
+    text-align: center;
+  }
+
+  /* Combo nudge */
+  .combo-nudge {
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .combo-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #c9a84c;
+    margin-bottom: 4px;
+  }
+  .combo-desc {
+    font-size: 12px;
+    color: #8a9bb0;
+  }
+
+  /* Dependency warning */
+  .dep-warning {
+    background: rgba(201, 168, 76, 0.08);
+    border-left: 3px solid #c9a84c;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 12px;
+    color: #c9a84c;
+    border-radius: 0 8px 8px 0;
+    display: none;
+  }
+
+  /* Guarantee + scarcity */
+  .guarantee-bar {
+    text-align: center;
+    font-size: 12px;
+    color: #8a9bb0;
+    padding: 12px;
+    border-top: 1px solid #1a2a3a;
+    margin-top: 16px;
+  }
+  .guarantee-bar strong {
+    color: #c9a84c;
+  }
+
+  @media (max-width: 600px) {
+    .service-grid { grid-template-columns: 1fr; }
+    .service-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+  }
+</style>
+
+<div class="section">
+  <p class="label">What the visitor sees when they scroll to the pricing section</p>
+
+  <div style="background: #071520; border-radius: 16px; padding: 28px 24px; border: 1px solid #1a2a3a;">
+
+    <div style="text-align: center; margin-bottom: 8px;">
+      <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #c9a84c; margin-bottom: 8px; font-family: monospace;">Build Your Package</div>
+      <div style="font-size: 22px; font-weight: 800; color: #edeae5; margin-bottom: 6px;">What does your business need?</div>
+      <div style="font-size: 13px; color: #8a9bb0; max-width: 400px; margin: 0 auto 8px;">Select the services that fit. We'll show you the best package and what's included.</div>
+      <div style="width: 36px; height: 3px; background: #c9a84c; border-radius: 2px; margin: 0 auto 20px;"></div>
+    </div>
+
+    <!-- 3-item top row -->
+    <div class="service-grid" id="serviceGrid">
+      <div class="service-item selected" data-svc="website" onclick="toggleService(this)">
+        <div class="svc-check">&#10003;</div>
+        <div class="svc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="svc-name">Custom Website</div>
+        <div class="svc-desc">Your brand, hand-coded, mobile-ready. Live in days.</div>
+        <div class="svc-required">REQUIRED</div>
+      </div>
+      <div class="service-item" data-svc="ordering" data-requires="website" onclick="toggleService(this)">
+        <div class="svc-check">&#10003;</div>
+        <div class="svc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+        </div>
+        <div class="svc-name">Online Ordering / Booking</div>
+        <div class="svc-desc">Smart forms, instant notifications, every order tracked.</div>
+        <div class="svc-required">Requires website</div>
+      </div>
+      <div class="service-item" data-svc="seo" data-requires="website" onclick="toggleService(this)">
+        <div class="svc-check">&#10003;</div>
+        <div class="svc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="svc-name">SEO & Google Setup</div>
+        <div class="svc-desc">Show up when locals search. Google-ready from day one.</div>
+        <div class="svc-required">Requires website</div>
+      </div>
+    </div>
+
+    <!-- 2-item bottom row centered -->
+    <div class="service-grid-bottom">
+      <div class="service-item" data-svc="domain" data-requires="website" onclick="toggleService(this)">
+        <div class="svc-check">&#10003;</div>
+        <div class="svc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="svc-name">Domain Setup</div>
+        <div class="svc-desc">Your own .ca or .com — fully connected.</div>
+        <div class="svc-required">Requires website</div>
+      </div>
+      <div class="service-item" data-svc="retainer" data-requires="website" onclick="toggleService(this)">
+        <div class="svc-check">&#10003;</div>
+        <div class="svc-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9"/></svg>
+        </div>
+        <div class="svc-name">Monthly Retainer</div>
+        <div class="svc-desc">Updates, monitoring, and a monthly check-in.</div>
+        <div class="svc-required">Requires website</div>
+      </div>
+    </div>
+
+    <!-- Dependency warning -->
+    <div class="dep-warning" id="depWarning">
+      These services require a website to work. Website has been kept selected.
+    </div>
+
+    <!-- Value stack -->
+    <div class="value-stack" id="valueStack">
+      <div class="stack-title">Your selections</div>
+      <div class="stack-items" id="stackItems">
+        <div class="stack-item active" data-stack="website"><span class="si-check">&#10003;</span> Custom website — design, copy, mobile, hosting</div>
+        <div class="stack-item" data-stack="ordering"><span class="si-dash">&mdash;</span> Online ordering / booking system</div>
+        <div class="stack-item" data-stack="seo"><span class="si-dash">&mdash;</span> SEO & Google Business setup</div>
+        <div class="stack-item" data-stack="domain"><span class="si-dash">&mdash;</span> Custom domain (.ca / .com)</div>
+        <div class="stack-item" data-stack="retainer"><span class="si-dash">&mdash;</span> Monthly maintenance retainer</div>
+      </div>
+    </div>
+
+    <!-- Combo nudge -->
+    <div class="combo-nudge" id="comboNudge">
+      <div class="combo-name" id="comboName">Get Online</div>
+      <div class="combo-desc" id="comboDesc">You're building a basic web presence. This matches our Get Online combo.</div>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee-bar">
+      Built in 5 days. You approve every detail before paying. <strong>Don't love it — you owe nothing.</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+  const combos = {
+    'website': { name: 'Get Online', desc: 'A clean, custom site — live in days. The foundation everything else builds on.' },
+    'website+seo+domain': { name: 'Get Found', desc: 'Your site + SEO + custom domain. Customers searching locally will find you.' },
+    'website+ordering+seo+domain': { name: 'Get Customers', desc: 'Full lead capture system. Forms, tracking, SEO, your own domain — the most popular combo.' },
+    'website+ordering+seo+domain+retainer': { name: 'Own the Market', desc: 'The complete system, fully managed. Your brand runs on autopilot.' },
+  };
+
+  function getSelectedServices() {
+    return Array.from(document.querySelectorAll('.service-item.selected')).map(el => el.dataset.svc).sort();
+  }
+
+  function updateStack() {
+    const selected = getSelectedServices();
+    document.querySelectorAll('.stack-item').forEach(item => {
+      const svc = item.dataset.stack;
+      const isActive = selected.includes(svc);
+      item.classList.toggle('active', isActive);
+      item.querySelector('.si-check, .si-dash').outerHTML = isActive
+        ? '<span class="si-check">&#10003;</span>'
+        : '<span class="si-dash">&mdash;</span>';
+    });
+
+    // Combo matching
+    const key = selected.join('+');
+    const nudge = document.getElementById('comboNudge');
+    if (combos[key]) {
+      nudge.style.display = 'block';
+      document.getElementById('comboName').textContent = combos[key].name;
+      document.getElementById('comboDesc').textContent = combos[key].desc;
+    } else if (selected.length > 1) {
+      nudge.style.display = 'block';
+      document.getElementById('comboName').textContent = 'Custom Build';
+      document.getElementById('comboDesc').textContent = "This doesn't match a standard combo — we'll put together a custom quote for you.";
+    } else {
+      nudge.style.display = selected.length ? 'block' : 'none';
+      if (selected.length) {
+        document.getElementById('comboName').textContent = combos['website']?.name || '';
+        document.getElementById('comboDesc').textContent = combos['website']?.desc || '';
+      }
+    }
+  }
+
+  function toggleService(el) {
+    const svc = el.dataset.svc;
+
+    if (svc === 'website') {
+      // Check if other services are selected
+      const others = document.querySelectorAll('.service-item.selected:not([data-svc="website"])');
+      if (others.length > 0 && el.classList.contains('selected')) {
+        // Can't deselect — show warning
+        const warn = document.getElementById('depWarning');
+        warn.style.display = 'block';
+        setTimeout(() => warn.style.display = 'none', 3000);
+        return;
+      }
+    }
+
+    el.classList.toggle('selected');
+
+    // If selecting a service that requires website, auto-select website
+    if (el.classList.contains('selected') && el.dataset.requires === 'website') {
+      const websiteEl = document.querySelector('[data-svc="website"]');
+      if (!websiteEl.classList.contains('selected')) {
+        websiteEl.classList.add('selected');
+      }
+    }
+
+    updateStack();
+  }
+</script>
