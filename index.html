@@ -1613,8 +1613,9 @@
       opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out'
     });
     gsap.from('.svc-card:not(.placeholder)', {
-      scrollTrigger: { trigger: '.svc-grid', start: 'top 80%', once: true },
-      opacity: 0, y: 25, duration: 0.45, stagger: 0.07, ease: 'power2.out'
+      scrollTrigger: { trigger: '#pricing', start: 'top center', once: true },
+      opacity: 0, y: 25, duration: 0.45, stagger: 0.07, ease: 'power2.out',
+      immediateRender: false
     });
     gsap.from('.status-bar', {
       scrollTrigger: { trigger: '.status-bar', start: 'top 88%', once: true },
