@@ -1604,7 +1604,7 @@
 
       const payload = { name, contact, services: svcs.join(', '), combo: comboNames[combo] };
 
-      fetch('REPLACE_WITH_GAS_URL', {
+      fetch('https://script.google.com/macros/s/AKfycbzh4dPD6nQX_s3k__y60papwnyTf4a46OziZNRZV45GI77vEFoptgcxkO77-mkyAcm1/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
