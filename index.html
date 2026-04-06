@@ -508,10 +508,10 @@
     }
     .combo-tab.active .combo-tab-sub { opacity: 0.8; }
     .combo-pop {
-      position: absolute; top: -6px; right: 6px;
+      position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
       font-size: 0.52rem; font-weight: 800; letter-spacing: 0.1em;
       background: var(--accent); color: var(--bg);
-      padding: 1px 5px; border-radius: 3px;
+      padding: 1px 6px; border-radius: 3px; white-space: nowrap;
     }
 
     .svc-grid {
@@ -1509,13 +1509,6 @@
       const nonLocked = svcs.filter(s => s !== 'website');
       calcForm.classList.toggle('visible', nonLocked.length > 0);
 
-      if (svcs.length === 0 || (svcs.length === 1 && svcs[0] === 'website')) {
-        statusBar.innerHTML = '<span class="status-empty">Select services above to see your package match.</span>';
-        // Clear active combo tabs
-        document.querySelectorAll('.combo-tab').forEach(t => t.classList.remove('active'));
-        return;
-      }
-
       const exact  = findExactCombo(svcs);
       const closest = exact || findClosestCombo(svcs);
 
@@ -1608,12 +1601,13 @@
     ScrollTrigger.create({
       trigger: '#pricing', start: 'top 75%', once: true,
       onEnter: () => {
-        gsap.from('.calc-scarcity', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' });
-        gsap.from('.combo-tabs',    { opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
+        gsap.from('.calc-scarcity', { y: 15, duration: 0.5, ease: 'power2.out' });
+        gsap.from('.combo-tabs',    { y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
         gsap.from('.svc-card:not(.placeholder)', { y: 25, duration: 0.45, stagger: 0.07, delay: 0.15, ease: 'power2.out' });
         gsap.from('.status-bar',    { opacity: 0, y: 10, duration: 0.4, delay: 0.55, ease: 'power2.out' });
       }
     });
+    updateCalcUI(); // set initial state (Get Online tab + status bar) on page load
     // ── END CALCULATOR ──────────────────────────────────────────────
 
     // Contact — slide in from both sides
