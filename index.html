@@ -357,7 +357,7 @@
     #why { background: var(--bg); border-bottom: 1px solid var(--border); }
     .why-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: rgba(201,168,76,0.18); border: 1px solid rgba(201,168,76,0.18);
+      background: rgba(201,168,76,0.4); border: 1px solid rgba(201,168,76,0.4);
       border-radius: 10px; overflow: hidden;
     }
     .why-card {
@@ -1603,7 +1603,7 @@
       onEnter: () => {
         gsap.from('.calc-scarcity', { y: 15, duration: 0.5, ease: 'power2.out' });
         gsap.from('.combo-tabs',    { y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
-        gsap.from('.svc-card:not(.placeholder)', { y: 25, duration: 0.45, stagger: 0.07, delay: 0.15, ease: 'power2.out' });
+        gsap.from('.svc-card', { y: 12, duration: 0.45, stagger: 0.06, delay: 0.15, ease: 'power2.out' });
         gsap.from('.status-bar',    { opacity: 0, y: 10, duration: 0.4, delay: 0.55, ease: 'power2.out' });
       }
     });
