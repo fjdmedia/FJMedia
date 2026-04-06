@@ -244,18 +244,6 @@
     }
     .icon-wrap svg { width: 20px; height: 20px; }
 
-    /* SERVICES */
-    #services { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
-    }
-    .service-card { background: var(--bg); padding: 2rem 1.8rem; transition: background 0.2s; }
-    .service-card:hover { background: var(--bg2); }
-    .service-name { font-size: 0.95rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
-    .service-desc { font-size: 0.83rem; color: var(--text-light); line-height: 1.65; }
-
     /* PROCESS */
     #process { background: var(--bg); border-bottom: 1px solid var(--border); }
     .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
@@ -652,8 +640,8 @@
       .offer-pillars { flex-direction: column; align-items: stretch; gap: 1rem; }
       .offer-pillar { max-width: 100%; }
 
-      /* Services / Why */
-      .services-grid, .why-grid { grid-template-columns: 1fr; }
+      /* Why */
+      .why-grid { grid-template-columns: 1fr; }
 
       /* Portfolio */
       .carousel-arrow { width: 36px; height: 36px; }
@@ -935,11 +923,10 @@
       <span class="logo-media-word">Media</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#why">Why Us</a></li>
-      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#pricing">Get a Quote</a></li>
       <li><a href="#contact" class="nav-cta">Book a Call</a></li>
     </ul>
     <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
@@ -950,11 +937,10 @@
   <!-- Mobile Nav Overlay -->
   <div class="nav-overlay" id="navOverlay">
     <button class="overlay-close" onclick="toggleNav()">×</button>
-    <a href="#services" onclick="toggleNav()">Services</a>
     <a href="#work"     onclick="toggleNav()">Work</a>
     <a href="#process"  onclick="toggleNav()">Process</a>
     <a href="#why"      onclick="toggleNav()">Why Us</a>
-    <a href="#pricing"  onclick="toggleNav()">Pricing</a>
+    <a href="#pricing"  onclick="toggleNav()">Get a Quote</a>
     <a href="#contact"  onclick="toggleNav()">Book a Call</a>
   </div>
 
@@ -1041,74 +1027,6 @@
         </div>
       </div>
       <a href="#contact" class="btn-primary" style="background:var(--accent);color:var(--bg);border-color:var(--accent);">Book a Call — See Your Site in 5 Days</a>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="section-inner">
-      <p class="section-label">What We Build</p>
-      <h2 class="section-title">Everything your business needs online</h2>
-      <p class="section-sub">From first design to live deployment — we handle the full picture.</p>
-      <div class="divider"></div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="service-name">Custom Website Design</div>
-          <div class="service-desc">Hand-coded, mobile-ready websites tailored to your brand. No templates — built from scratch every time.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
-          </div>
-          <div class="service-name">Order &amp; Booking Forms</div>
-          <div class="service-desc">Smart forms with live pricing logic and instant email notifications so you never miss a customer.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div class="service-name">Google Sheets CRM</div>
-          <div class="service-desc">Every order automatically logged in a clean Google Sheet — your own free dashboard, no subscriptions.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="service-name">Domain &amp; Hosting Setup</div>
-          <div class="service-desc">We handle DNS, GitHub Pages hosting, and SSL. Your site live with a professional URL at minimal cost.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="service-name">Email Notifications</div>
-          <div class="service-desc">Instant alerts every time a customer submits an order or inquiry — straight to your inbox.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </div>
-          <div class="service-name">Ongoing Maintenance</div>
-          <div class="service-desc">Pricing updates, new photos, seasonal changes — fast turnaround with no tech headaches on your end.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="9" height="14" rx="1.5"/><rect x="13" y="3" width="9" height="14" rx="1.5"/><line x1="6" y1="21" x2="18" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div class="service-name">Multiple Design Options</div>
-          <div class="service-desc">We build 2–3 unique versions of your site so you can see the options side by side and choose what fits — before you pay a cent.</div>
-        </div>
-        <div class="service-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </div>
-          <div class="service-name">On-Page SEO Setup</div>
-          <div class="service-desc">Title tags, meta descriptions, Open Graph, and Local Business schema — the foundation that helps Google find and trust your site.</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1608,7 +1526,6 @@
     </div>
     <div class="footer-copy">&#169; 2026 FJMedia. All rights reserved.</div>
     <div class="footer-links">
-      <a href="#services">Services</a>
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </div>
@@ -1628,12 +1545,6 @@
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
         opacity: 0, y: 22, duration: 0.65, ease: 'power2.out'
       });
-    });
-
-    // Service cards — stagger in
-    gsap.from('.service-card', {
-      scrollTrigger: { trigger: '.services-grid', start: 'top 78%', once: true },
-      opacity: 0, y: 35, duration: 0.55, stagger: 0.07, ease: 'power2.out'
     });
 
     // Process steps — stagger in
