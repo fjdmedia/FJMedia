@@ -700,6 +700,21 @@
       .stat-text-num { font-size: 0.95rem; }
     }
 
+    /* MOBILE STICKY CTA BAR */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 12px 20px;
+    }
+    .mobile-cta-bar a {
+      display: block; width: 100%; text-align: center;
+      background: var(--accent); color: var(--bg);
+      font-weight: 700; font-size: 0.9rem; padding: 0.75rem;
+      border-radius: 6px; text-decoration: none;
+    }
+    @media (max-width: 900px) { .mobile-cta-bar { display: block; } }
+
     /* FOOTER */
     footer {
       background: var(--bg); border-top: 1px solid var(--border);
@@ -1195,6 +1210,13 @@
       </div>
     </div>
   </section>
+
+  <!-- PROOF CALLOUT -->
+  <div style="text-align:center;padding:1.2rem 6%;background:var(--bg);border-bottom:1px solid var(--border);">
+    <a href="/proof.html" style="font-family:'Segoe UI',sans-serif;font-size:0.82rem;color:var(--text-mid);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color=''">
+      The details are what we're known for — see every bug we caught before our clients did &nbsp;<span style="color:#c9a84c;">→ (Bug) Proof Gallery</span>
+    </a>
+  </div>
 
   <!-- MEET THE FOUNDER -->
   <section id="founder">
@@ -1780,5 +1802,8 @@
 
 
   <script src="/widget.js"></script>
+  <div class="mobile-cta-bar">
+    <a href="#contact">Book a Call</a>
+  </div>
 </body>
 </html>
