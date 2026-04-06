@@ -531,7 +531,8 @@
       background: rgba(201,168,76,0.07);
       box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
     }
-    .svc-card.locked { cursor: not-allowed; opacity: 0.6; }
+    .svc-card.locked { cursor: default; }
+    .svc-card.locked:not(.selected) { opacity: 0.6; }
     .svc-card.placeholder { cursor: default; opacity: 0.4; }
     .svc-card.placeholder:hover { border-color: var(--border); background: var(--bg3); }
     .svc-icon { font-size: 1.25rem; line-height: 1; }
@@ -624,13 +625,14 @@
     .dep-toast.show { opacity: 1; }
 
     @media (max-width: 900px) {
-      .combo-tabs { overflow-x: auto; flex-wrap: nowrap; }
+      .combo-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .combo-tabs::-webkit-scrollbar { display: none; }
       .combo-tab { flex-shrink: 0; min-width: 80px; }
       .svc-grid { grid-template-columns: 1fr 1fr; }
       .calc-form-fields { grid-template-columns: 1fr; }
     }
-    @media (max-width: 600px) {
-      .svc-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 480px) {
+      .svc-grid { grid-template-columns: 1fr; }
     }
 
     /* ── MOBILE ── */
@@ -1322,9 +1324,8 @@
           <input type="text" name="calc_contact" placeholder="Instagram handle or email" autocomplete="off" />
         </div>
         <button class="calc-submit" id="calcSubmit" onclick="submitCalcForm()">Get My Custom Quote →</button>
+        <p class="calc-risk">Don't love it — you owe nothing.</p>
       </div>
-
-      <p class="calc-risk">Don't love it — you owe nothing.</p>
 
     </div>
   </section>
@@ -1598,28 +1599,20 @@
         document.querySelector('[name="calc_contact"]').value = '';
       })
       .catch(() => {
-        btn.textContent = 'Send failed — DM @fjmedia.ca on Instagram instead.';
+        btn.textContent = 'Send failed — DM @fjmedia on Instagram instead.';
         btn.disabled = false;
       });
     }
 
-    // Calculator GSAP
-    gsap.from('.calc-scarcity', {
-      scrollTrigger: { trigger: '#pricing', start: 'top 82%', once: true },
-      opacity: 0, y: 15, duration: 0.5, ease: 'power2.out'
-    });
-    gsap.from('.combo-tabs', {
-      scrollTrigger: { trigger: '#pricing', start: 'top 78%', once: true },
-      opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out'
-    });
-    gsap.from('.svc-card:not(.placeholder)', {
-      scrollTrigger: { trigger: '#pricing', start: 'top center', once: true },
-      opacity: 0, y: 25, duration: 0.45, stagger: 0.07, ease: 'power2.out',
-      immediateRender: false
-    });
-    gsap.from('.status-bar', {
-      scrollTrigger: { trigger: '.status-bar', start: 'top 88%', once: true },
-      opacity: 0, y: 10, duration: 0.4, ease: 'power2.out'
+    // Calculator GSAP — onEnter callbacks prevent opacity:0 stuck state
+    ScrollTrigger.create({
+      trigger: '#pricing', start: 'top 75%', once: true,
+      onEnter: () => {
+        gsap.from('.calc-scarcity', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' });
+        gsap.from('.combo-tabs',    { opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
+        gsap.from('.svc-card:not(.placeholder)', { opacity: 0, y: 25, duration: 0.45, stagger: 0.07, delay: 0.15, ease: 'power2.out' });
+        gsap.from('.status-bar',    { opacity: 0, y: 10, duration: 0.4, delay: 0.55, ease: 'power2.out' });
+      }
     });
     // ── END CALCULATOR ──────────────────────────────────────────────
 
