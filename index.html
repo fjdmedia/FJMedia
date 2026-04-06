@@ -457,175 +457,7 @@
       margin-top: 1rem; font-size: 0.78rem; color: var(--text-light); font-family: var(--mono);
     }
 
-    /* PRICING */
-    #pricing { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .roi-block {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem 2.4rem;
-      margin-bottom: 1.5rem;
-    }
-    .roi-header {
-      display: flex; align-items: center; gap: 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .roi-label {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--accent);
-      font-family: var(--mono);
-    }
-    .roi-statement {
-      font-size: 1.1rem; font-weight: 700; color: var(--heading);
-      margin-bottom: 1.5rem; line-height: 1.4;
-    }
-    .roi-statement strong { color: var(--accent); }
-    .roi-examples {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin-bottom: 1.5rem;
-    }
-    .roi-example {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem 1.2rem;
-      display: flex; flex-direction: column; gap: 0.4rem;
-    }
-    .roi-sale {
-      font-size: 0.78rem; font-weight: 700; color: var(--text-mid);
-      font-family: var(--mono);
-    }
-    .roi-calc {
-      font-size: 0.82rem; color: var(--text-light); line-height: 1.4;
-    }
-    .roi-calc strong { color: var(--heading); font-weight: 700; }
-    .roi-footer {
-      font-size: 0.85rem; color: var(--text-mid); font-weight: 300;
-      border-top: 1px solid var(--border); padding-top: 1rem;
-      font-style: italic;
-    }
-
-    .scarcity-bar {
-      display: flex; align-items: center; gap: 0.75rem;
-      background: rgba(201,168,76,0.07);
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 8px;
-      padding: 0.85rem 1.25rem;
-      margin-bottom: 2rem;
-      font-size: 0.85rem;
-      color: var(--text-mid);
-      line-height: 1.5;
-    }
-    .scarcity-bar svg { color: var(--accent); flex-shrink: 0; width: 16px; height: 16px; }
-    .scarcity-bar strong { color: var(--accent); }
-    .scarcity-slots {
-      display: inline-block;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      padding: 0.1rem 0.55rem;
-      border-radius: 100px;
-      margin-left: 0.4rem;
-    }
-
-    .pricing-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem; align-items: stretch;
-    }
-    .pricing-dots { display: none; }
-    .pricing-card {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 12px; padding: 2.2rem 2rem;
-      position: relative; transition: transform 0.2s, box-shadow 0.2s;
-      display: flex; flex-direction: column;
-    }
-    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
-    .pricing-guarantee {
-      display: flex; align-items: center; gap: 0.75rem;
-      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.22);
-      border-radius: 8px; padding: 0.85rem 1.2rem;
-      margin: 1rem 0 1.5rem; font-size: 0.87rem;
-      color: var(--heading); font-weight: 600; line-height: 1.4;
-    }
-    .pricing-guarantee svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--accent); }
-    .pricing-featured {
-      border-color: var(--accent); background: var(--bg3);
-      box-shadow: 0 20px 50px rgba(201,168,76,0.12);
-    }
-    .pricing-featured:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(201,168,76,0.18); }
-    .pricing-badge {
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: var(--bg);
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 0.28rem 0.9rem;
-      border-radius: 100px; white-space: nowrap;
-      font-family: var(--mono);
-    }
-    .pricing-tier {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.3rem; font-family: var(--mono);
-    }
-    .pricing-tagline { font-size: 1.15rem; font-weight: 800; color: var(--heading); margin-bottom: 1.2rem; }
-    .pricing-divider { height: 1px; background: var(--border); margin-bottom: 1.3rem; }
-    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 0; }
-    .pricing-features li {
-      font-size: 0.84rem; color: var(--text-mid);
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;
-    }
-    .feat-left { display: flex; align-items: flex-start; gap: 0.55rem; }
-    .check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
-    .feat-val {
-      font-size: 0.73rem; font-weight: 600; color: var(--text-light);
-      white-space: nowrap; margin-top: 2px; flex-shrink: 0;
-    }
-    .pricing-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: auto; padding-top: 1.2rem;
-      border-top: 1px solid var(--border);
-    }
-    .pricing-total-label {
-      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em;
-      color: var(--text-light); font-weight: 600;
-    }
-    .pricing-total-val {
-      font-size: 0.85rem; color: var(--text-mid); font-weight: 700;
-      text-decoration: line-through; text-decoration-color: var(--border);
-    }
-    .pricing-price-block {
-      margin-top: 1rem; padding-top: 1rem;
-      border-top: 1px solid var(--border);
-      margin-bottom: 1.4rem;
-    }
-    .pricing-you-pay {
-      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.18em;
-      color: var(--text-light); font-family: var(--mono); margin-bottom: 0.15rem;
-    }
-    .pricing-price {
-      font-size: 2.8rem; font-weight: 900; color: var(--heading);
-      letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.5rem;
-    }
-    .pricing-save {
-      display: inline-block; font-size: 0.7rem; font-weight: 700;
-      background: rgba(201,168,76,0.1); color: var(--accent);
-      border: 1px solid rgba(201,168,76,0.25);
-      padding: 0.18rem 0.55rem; border-radius: 4px;
-    }
-    .pricing-btn { display: block; width: 100%; text-align: center; padding: 0.8rem 1rem; margin-top: 1.2rem; }
-    .pricing-addon {
-      margin-top: 3.5rem; background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.1rem 1.6rem;
-      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
-    }
-    .pricing-addon-label {
-      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent); background: var(--accent-mid); border: 1px solid rgba(123,175,212,0.2);
-      padding: 0.18rem 0.55rem; border-radius: 4px; flex-shrink: 0; font-family: var(--mono);
-    }
-    .pricing-addon-text { font-size: 0.88rem; color: var(--heading); font-weight: 600; }
-    .pricing-addon-text strong { color: var(--accent); }
-    .pricing-addon-sub { font-size: 0.8rem; color: var(--text-light); margin-left: auto; }
+    /* CALCULATOR — added in Task 3 */
 
     /* ── MOBILE ── */
     @media (max-width: 900px) {
@@ -650,50 +482,6 @@
       .process-grid { grid-template-columns: 1fr 1fr; }
       .step-line { display: none; }
 
-      /* ROI */
-      .roi-block { padding: 1.4rem 1.2rem; }
-      .roi-examples { grid-template-columns: 1fr; gap: 0.75rem; }
-      .roi-statement { font-size: 0.95rem; }
-
-      /* Scarcity */
-      .scarcity-bar { flex-wrap: wrap; font-size: 0.8rem; }
-
-      /* Pricing — horizontal swipe carousel */
-      .pricing-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 0.8rem;
-        padding: 1.4rem 7% 0.5rem;
-        margin: 0 -5%;
-      }
-      .pricing-grid::-webkit-scrollbar { display: none; }
-      .pricing-card {
-        flex-shrink: 0;
-        width: calc(86% - 0.8rem);
-        scroll-snap-align: center;
-      }
-      .pricing-featured { transform: none; }
-      .pricing-featured:hover { transform: none; }
-      .pricing-price { font-size: 2.2rem; }
-      .feat-val { display: none; }
-      .pricing-features li { justify-content: flex-start; }
-      .pricing-addon { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      .pricing-addon-sub { margin-left: 0; }
-
-      /* Dots */
-      .pricing-dots {
-        display: flex; justify-content: center; gap: 6px;
-        margin-top: 1.2rem;
-      }
-      .pdot {
-        width: 6px; height: 6px; border-radius: 50%;
-        background: var(--border); transition: background 0.2s, transform 0.2s;
-      }
-      .pdot.active { background: var(--accent); transform: scale(1.3); }
-
       /* Contact */
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
 
@@ -712,8 +500,6 @@
         min-height: 100vh;   /* fallback for older browsers */
         min-height: 100svh;  /* overrides above — reliable on mobile */
       }
-      /* Sync pricing-grid margin with 4% section padding */
-      .pricing-grid { margin: 0 -4%; }
       .hero-title { font-size: 2rem; }
       .hero-btns { flex-direction: column; align-items: stretch; }
       .hero-btns .btn-primary,
@@ -722,10 +508,6 @@
       .offer-pillar-num { font-size: 1.6rem; }
       .section-title { font-size: 1.5rem; }
       .process-grid { grid-template-columns: 1fr; }
-      .roi-block { padding: 1.2rem 1rem; }
-      .pricing-card { padding: 1.6rem 1.4rem; }
-      .pricing-price { font-size: 2rem; }
-      .scarcity-bar { padding: 0.75rem 1rem; }
 
       /* iOS: prevent auto-zoom on form focus — must be 16px+ */
       .contact-form input,
@@ -737,7 +519,6 @@
         min-height: 44px;
         display: flex; align-items: center; justify-content: center;
       }
-      .pricing-btn { min-height: 44px; }
     }
 
     @media (max-width: 480px) {
@@ -746,11 +527,6 @@
       .hero-title { font-size: 1.8rem; }
       .section-title { font-size: 1.35rem; }
       .offer-headline { font-size: 1.75rem; }
-      .pricing-price { font-size: 1.8rem; }
-      .pricing-card { padding: 1.4rem 1.2rem; }
-      .roi-block { padding: 1rem 0.9rem; }
-      .roi-statement { font-size: 0.9rem; }
-      .scarcity-bar { font-size: 0.78rem; }
       .hero-stat-card { padding: 0.9rem 1rem; }
       .stat-text-num { font-size: 0.95rem; }
     }
@@ -1286,180 +1062,7 @@
   <!-- PRICING -->
   <section id="pricing">
     <div class="section-inner">
-      <p class="section-label">Packages</p>
-      <h2 class="section-title">Your site is built.<br/>Now make it work.</h2>
-      <p class="section-sub">The free build gets you the design. Pick a package to turn it into a customer machine.</p>
-      <div class="divider"></div>
-
-      <p style="text-align:center;font-size:1.05rem;opacity:0.6;margin:1.5rem 0 0.5rem;font-style:italic;">Most agencies charge $3,000–$5,000 for what we include in every package.</p>
-
-      <div class="roi-block">
-        <div class="roi-label">The math</div>
-        <p class="roi-statement">Most clients break even within <strong>30 days</strong> of launch — then every new customer your site brings in is pure profit.</p>
-        <div class="roi-examples">
-          <div class="roi-example">
-            <span class="roi-sale">$150 avg sale</span>
-            <span class="roi-calc"><strong>7 extra customers</strong> covers the site. Everything after that is profit.</span>
-          </div>
-          <div class="roi-example">
-            <span class="roi-sale">$300 avg sale</span>
-            <span class="roi-calc"><strong>4 extra customers</strong> covers the site. Everything after that is profit.</span>
-          </div>
-          <div class="roi-example">
-            <span class="roi-sale">$500 avg sale</span>
-            <span class="roi-calc"><strong>2 extra customers</strong> covers the site. Everything after that is profit.</span>
-          </div>
-        </div>
-        <p class="roi-footer">"What we charge is a fraction of what one month of new customers would bring you."</p>
-      </div>
-
-      <div class="scarcity-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        We take on a maximum of <strong>&nbsp;5 builds per month&nbsp;</strong> so every site gets the attention it deserves. <span class="scarcity-slots">4 spots open this month</span>
-      </div>
-
-      <div class="pricing-guarantee">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Built in 5 days. You approve every detail before paying. Don't love it — you owe us nothing.
-      </div>
-
-      <div class="pricing-grid">
-
-        <!-- Get Online -->
-        <div class="pricing-card reveal">
-          <div class="pricing-tier">Get Online</div>
-          <div class="pricing-tagline">Need to be online fast? A clean, custom page — live in days.</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Custom design — your brand, your style</span><span class="feat-val">$300+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Looks perfect on every device</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Content written to match your voice</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Hosted free — no monthly fees</span><span class="feat-val">$75+</span></li>
-          </ul>
-          <div class="pricing-total-row">
-            <span class="pricing-total-label">Total value</span>
-            <span class="pricing-total-val">$575+</span>
-          </div>
-          <div class="pricing-price-block">
-            <div class="pricing-you-pay">You pay</div>
-            <div class="pricing-price">$300</div>
-            <span class="pricing-save">You save $275+</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0.5rem 0;padding:6px;background:rgba(201,168,76,0.06);border-radius:6px;">
-            <span style="font-size:0.85rem;">&#128737;</span>
-            <span style="font-size:0.78rem;opacity:0.5;">Don't love it? $0.</span>
-          </div>
-          <a href="#contact" class="btn-outline pricing-btn" data-pkg="Get Online — $300">Book a Call</a>
-        </div>
-
-        <!-- Get Found -->
-        <div class="pricing-card reveal">
-          <div class="pricing-tier">Get Found</div>
-          <div class="pricing-tagline">Customers searching for you will find a site that makes you look like the best option</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Look like the most credible option in your area</span><span class="feat-val">$600+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 100% custom — no templates, no cookie-cutter</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Looks perfect on every phone and screen</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Visitors can reach you instantly</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Words written to convert, not just fill space</span><span class="feat-val">$250+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Set up to show on Google from day one</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Hosted free — no monthly fees</span><span class="feat-val">$75+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 1 month free changes after launch</span><span class="feat-val">$150+</span></li>
-          </ul>
-          <div class="pricing-total-row">
-            <span class="pricing-total-label">Total value</span>
-            <span class="pricing-total-val">$1,725+</span>
-          </div>
-          <div class="pricing-price-block">
-            <div class="pricing-you-pay">You pay</div>
-            <div class="pricing-price">$600</div>
-            <span class="pricing-save">You save $1,125+</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0.5rem 0;padding:6px;background:rgba(201,168,76,0.06);border-radius:6px;">
-            <span style="font-size:0.85rem;">&#128737;</span>
-            <span style="font-size:0.78rem;opacity:0.5;">Don't love it? $0.</span>
-          </div>
-          <a href="#contact" class="btn-outline pricing-btn" data-pkg="Get Found — $600">Book a Call</a>
-        </div>
-
-        <!-- Get Customers -->
-        <div class="pricing-card pricing-featured reveal">
-          <div class="pricing-badge">Most Popular</div>
-          <div class="pricing-tier">Get Customers</div>
-          <div class="pricing-tagline">Your site doesn't just look good — it captures leads and tells you who's interested</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Found</span><span class="feat-val">$1,725+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Booking/order form that captures revenue</span><span class="feat-val">$300+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Every lead logged automatically — free CRM</span><span class="feat-val">$250+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Instant alert when someone reaches out</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> See exactly what's driving customers to you</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Gallery section — show your work, upsell naturally</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Social links — turn visitors into followers</span><span class="feat-val">$75+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 3 months free changes — your site stays sharp</span><span class="feat-val">$450+</span></li>
-          </ul>
-          <div class="pricing-total-row">
-            <span class="pricing-total-label">Total value</span>
-            <span class="pricing-total-val">$3,350+</span>
-          </div>
-          <div class="pricing-price-block">
-            <div class="pricing-you-pay">You pay</div>
-            <div class="pricing-price">$1,000</div>
-            <span class="pricing-save">You save $2,350+</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0.5rem 0;padding:6px;background:rgba(201,168,76,0.06);border-radius:6px;">
-            <span style="font-size:0.85rem;">&#128737;</span>
-            <span style="font-size:0.78rem;opacity:0.5;">Don't love it? $0.</span>
-          </div>
-          <a href="#contact" class="btn-primary pricing-btn" style="background:var(--accent);color:var(--bg);border-color:var(--accent);" data-pkg="Get Customers — $1,000">Book a Call</a>
-        </div>
-
-        <!-- Own the Market -->
-        <div class="pricing-card reveal">
-          <div class="pricing-tier">Own the Market</div>
-          <div class="pricing-tagline">Full digital system — your brand dominates local search and runs on autopilot</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li><span class="feat-left"><span class="check">✓</span> Everything in Get Customers</span><span class="feat-val">$3,350+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 2–3 designs to choose from — you pick the winner</span><span class="feat-val">$500+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Auto-reply on every inquiry — you look fast, always</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Reviews section — happy customers sell for you</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Your own .ca or .com — fully set up</span><span class="feat-val">$200+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Rank faster in local Google search</span><span class="feat-val">$150+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> Every share looks polished — auto-previews</span><span class="feat-val">$100+</span></li>
-            <li><span class="feat-left"><span class="check">✓</span> 6 months fully managed — hands off</span><span class="feat-val">$900+</span></li>
-          </ul>
-          <div class="pricing-total-row">
-            <span class="pricing-total-label">Total value</span>
-            <span class="pricing-total-val">$5,500+</span>
-          </div>
-          <div class="pricing-price-block">
-            <div class="pricing-you-pay">You pay</div>
-            <div class="pricing-price">$1,600</div>
-            <span class="pricing-save">You save $3,900+</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin:0.5rem 0;padding:6px;background:rgba(201,168,76,0.06);border-radius:6px;">
-            <span style="font-size:0.85rem;">&#128737;</span>
-            <span style="font-size:0.78rem;opacity:0.5;">Don't love it? $0.</span>
-          </div>
-          <a href="#contact" class="btn-outline pricing-btn" data-pkg="Own the Market — $1,600">Book a Call</a>
-        </div>
-
-      </div>
-      <div class="pricing-dots" id="pricingDots">
-        <span class="pdot"></span>
-        <span class="pdot"></span>
-        <span class="pdot"></span>
-        <span class="pdot"></span>
-      </div>
-      <div class="pricing-addon">
-        <span class="pricing-addon-label">Add-on</span>
-        <span class="pricing-addon-text">Keep Growing After Launch — <strong>from $150/month</strong></span>
-        <span class="pricing-addon-sub">Maintain ($150/mo): site updates, form monitoring &amp; checks. Grow ($300/mo): adds content updates, SEO monitoring &amp; a monthly 1-on-1 to review your data and keep new customers coming in.</span>
-      </div>
-
-
+      <!-- Calculator will be added in Task 4 -->
     </div>
   </section>
 
@@ -1591,28 +1194,6 @@
       ease: 'back.out(1.5)'
     });
 
-    // ROI block
-    gsap.from('.roi-block', {
-      scrollTrigger: { trigger: '.roi-block', start: 'top 82%', once: true },
-      opacity: 0, y: 20, duration: 0.55, ease: 'power2.out'
-    });
-
-    // Scarcity bar
-    gsap.from('.scarcity-bar', {
-      scrollTrigger: { trigger: '.scarcity-bar', start: 'top 88%', once: true },
-      opacity: 0, y: 15, duration: 0.5, ease: 'power2.out'
-    });
-
-    // Pricing cards — stagger in
-    // Skip pricing card animation on mobile — y offset breaks carousel scroll position
-    if (window.innerWidth > 900) {
-      gsap.from('.pricing-card', {
-        scrollTrigger: { trigger: '.pricing-grid', start: 'top 78%', once: true },
-        opacity: 0, y: 40, duration: 0.6, stagger: 0.12, ease: 'power2.out'
-      });
-    }
-
-
     // Contact — slide in from both sides
     gsap.from('.contact-info', {
       scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%', once: true },
@@ -1622,32 +1203,6 @@
       scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%', once: true },
       opacity: 0, x: 40, duration: 0.7, ease: 'power2.out'
     });
-
-    // Package pre-fill — pricing buttons → contact form
-    document.querySelectorAll('.pricing-btn[data-pkg]').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const pkg = this.dataset.pkg;
-        const select = document.querySelector('[name="service"]');
-        // Match the select option that starts with the package name
-        Array.from(select.options).forEach(opt => {
-          if (opt.value.startsWith(pkg.split(' —')[0])) select.value = opt.value;
-        });
-        // Show banner
-        const banner = document.getElementById('pkgBanner');
-        document.getElementById('pkgBannerName').textContent = pkg;
-        banner.style.display = 'flex';
-        // Scroll to contact
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        // Focus first input
-        setTimeout(() => document.querySelector('.contact-form input[name="name"]').focus(), 600);
-      });
-    });
-
-    function clearPkg() {
-      document.getElementById('pkgBanner').style.display = 'none';
-      document.querySelector('[name="service"]').value = '';
-    }
 
     function prefillAudit() {
       const select = document.querySelector('[name="service"]');
@@ -1775,52 +1330,6 @@
       document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
     }
 
-    // Pricing carousel — mobile only
-    (function() {
-      const grid  = document.querySelector('.pricing-grid');
-      const dots  = document.querySelectorAll('#pricingDots .pdot');
-      const cards = grid ? grid.querySelectorAll('.pricing-card') : [];
-
-      if (!grid || !cards.length) return;
-
-      function isMobile() { return window.innerWidth <= 900; }
-
-      function setActiveDot(idx) {
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-      }
-
-      function getActiveIndex() {
-        const center = grid.scrollLeft + grid.offsetWidth / 2;
-        let closest = 0, minDist = Infinity;
-        cards.forEach((c, i) => {
-          const dist = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
-          if (dist < minDist) { minDist = dist; closest = i; }
-        });
-        return closest;
-      }
-
-      function scrollToCard(idx) {
-        const card = cards[idx];
-        const target = card.offsetLeft - (grid.offsetWidth - card.offsetWidth) / 2;
-        grid.scrollTo({ left: target, behavior: 'smooth' });
-      }
-
-      function init() {
-        if (!isMobile()) { setActiveDot(1); return; }
-        // Start on Get Customers (index 1)
-        scrollToCard(1);
-        setActiveDot(1);
-      }
-
-      grid.addEventListener('scroll', function() {
-        if (!isMobile()) return;
-        setActiveDot(getActiveIndex());
-      }, { passive: true });
-
-      window.addEventListener('resize', init);
-      window.addEventListener('load', init);
-      init();
-    })();
 
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbwhSzGHAARbwJtcjHKilO4iuGZIpeM-g0vo_60i-S7i8qpvnK4emOFgBL95BPHbECgjEQ/exec';
 
