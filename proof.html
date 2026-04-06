@@ -150,6 +150,56 @@
     .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* LIGHTBOX */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(7,21,32,0.96); backdrop-filter: blur(12px);
+      align-items: center; justify-content: center; gap: 1.5rem;
+    }
+    #lightbox.open { display: flex; }
+    .lb-content {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      max-width: 80vw; max-height: 85vh;
+    }
+    .lb-label-wrap {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .lb-dot.before { background: var(--text-light); }
+    .lb-dot.after  { background: var(--accent); }
+    .lb-label {
+      font-family: var(--mono); font-size: 9px; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--text-light);
+    }
+    .lb-counter {
+      font-family: var(--mono); font-size: 9px; color: var(--border);
+      letter-spacing: .1em; margin-left: 8px;
+    }
+    #lbImg {
+      max-width: 80vw; max-height: 80vh;
+      border: 1px solid var(--border); border-radius: 8px;
+      object-fit: contain; display: block;
+      transition: opacity 0.18s ease;
+    }
+    .lb-nav {
+      background: none; border: 1px solid var(--border);
+      color: var(--text-light); cursor: pointer;
+      width: 44px; height: 44px; border-radius: 50%;
+      font-size: 1.1rem; flex-shrink: 0;
+      transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .lb-nav:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      background: none; border: 1px solid var(--border);
+      color: var(--text-light); cursor: pointer;
+      width: 36px; height: 36px; border-radius: 6px;
+      font-size: 14px; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lb-close:hover { border-color: var(--accent); color: var(--accent); }
+    .compare-img img { cursor: zoom-in; }
+
     /* MOBILE */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -224,6 +274,21 @@
       <div id="fixList"></div>
     </div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="lbClickOutside(event)">
+    <button class="lb-close" onclick="lbClose()">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8592;</button>
+    <div class="lb-content">
+      <div class="lb-label-wrap">
+        <span class="lb-dot" id="lbDot"></span>
+        <span class="lb-label" id="lbLabel"></span>
+        <span class="lb-counter" id="lbCounter"></span>
+      </div>
+      <img id="lbImg" src="" alt=""/>
+    </div>
+    <button class="lb-nav lb-next" onclick="lbNav(1)">&#8594;</button>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -309,6 +374,20 @@
       document.getElementById('folder-view').style.display = 'none';
       document.getElementById('gallery-view').classList.add('active');
       window.scrollTo({ top: document.getElementById('gallery-view').offsetTop - 80, behavior: 'smooth' });
+
+      // Build lightbox image list for this site
+      lbImages = [];
+      site.fixes.forEach(f => {
+        lbImages.push({ src: f.before, label: 'Before', type: 'before' });
+        lbImages.push({ src: f.after,  label: 'After',  type: 'after'  });
+      });
+
+      // Wire up click handlers after render
+      setTimeout(() => {
+        document.querySelectorAll('.compare-img img').forEach((img, i) => {
+          img.addEventListener('click', () => lbOpen(i));
+        });
+      }, 50);
     }
 
     // Render site cards
@@ -320,6 +399,51 @@
         <div class="site-card-arrow">View fixes →</div>
       </div>
     `).join('');
+
+    // ── LIGHTBOX ──────────────────────────────────────────
+    let lbImages = [];
+    let lbIndex  = 0;
+
+    function lbOpen(i) {
+      lbIndex = i;
+      lbRender();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function lbClose() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function lbNav(dir) {
+      lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+      lbRender();
+    }
+
+    function lbRender() {
+      const item = lbImages[lbIndex];
+      const img  = document.getElementById('lbImg');
+      const dot  = document.getElementById('lbDot');
+      img.style.opacity = '0';
+      img.src = item.src;
+      img.onload = () => { img.style.opacity = '1'; };
+      dot.className = 'lb-dot ' + item.type;
+      document.getElementById('lbLabel').textContent   = item.label;
+      document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+
+    function lbClickOutside(e) {
+      if (e.target === document.getElementById('lightbox')) lbClose();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'Escape')     lbClose();
+    });
+    // ── END LIGHTBOX ──────────────────────────────────────
 
     // GSAP
     gsap.from('.hero-content', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.2 });
