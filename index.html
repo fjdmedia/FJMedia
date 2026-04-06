@@ -357,19 +357,17 @@
     #why { background: var(--bg); border-bottom: 1px solid var(--border); }
     .why-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      border: 1px solid rgba(201,168,76,0.35);
-      border-radius: 10px; overflow: hidden;
     }
     .why-card {
       padding: 2rem 1.8rem;
       background: var(--bg);
       transition: background 0.2s;
       cursor: default;
-      border-right: 1px solid rgba(201,168,76,0.35);
-      border-bottom: 1px solid rgba(201,168,76,0.35);
+      border-right: 1px solid rgba(201,168,76,0.3);
+      border-bottom: 1px solid rgba(201,168,76,0.3);
     }
-    .why-card:nth-child(3n)   { border-right: none; }
-    .why-card:nth-child(n+4)  { border-bottom: none; }
+    .why-card:nth-child(3n)  { border-right: none; }
+    .why-card:nth-child(n+4) { border-bottom: none; }
     .why-card:hover { background: var(--bg2); }
     .why-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
     .why-desc {
