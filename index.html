@@ -1361,10 +1361,6 @@
           </div>
         </div>
         <form class="contact-form" id="contactForm">
-          <div id="pkgBanner" style="display:none; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 4px; font-size: 13px; color: var(--accent); align-items: center; justify-content: space-between; gap: 10px;">
-            <span>&#10003; Package selected: <strong id="pkgBannerName"></strong></span>
-            <button type="button" onclick="clearPkg()" style="background:none;border:none;color:var(--text-mid);cursor:pointer;font-size:16px;line-height:1;padding:0;">&times;</button>
-          </div>
           <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
           <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
           <input type="text"  name="name"     placeholder="Your Name"               required />
@@ -1372,11 +1368,11 @@
           <input type="text"  name="business" placeholder="Business Name (optional)" />
           <select name="service">
             <option value="" disabled selected>What are you looking for?</option>
-            <option>Get Online — $300</option>
-            <option>Get Found — $600</option>
-            <option>Get Customers — $1,000</option>
-            <option>Own the Market — $1,600</option>
-            <option>Monthly Maintenance</option>
+            <option>Custom Website</option>
+            <option>Website + SEO &amp; Google Setup</option>
+            <option>Website + Ordering / Booking System</option>
+            <option>Full Package (Website, SEO, Ordering, Domain)</option>
+            <option>Monthly Retainer / Ongoing Support</option>
             <option>Not Sure Yet</option>
           </select>
           <textarea name="message" placeholder="Tell us about your business and what you need..."></textarea>
@@ -1647,9 +1643,6 @@
       }
       const msg = document.querySelector('[name="message"]');
       if (msg && !msg.value) msg.value = "I'd like a free website audit — here's my site: ";
-      const banner = document.getElementById('pkgBanner');
-      document.getElementById('pkgBannerName').textContent = 'Free Website Audit';
-      banner.style.display = 'flex';
       document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       setTimeout(() => { const n = document.querySelector('.contact-form input[name="name"]'); if (n) n.focus(); }, 600);
     }
