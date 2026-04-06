@@ -174,14 +174,22 @@ body::before{
 <div class="titlebar">
   <div class="logo">{FJ}</div>
   <div class="sep">/</div>
-  <div class="crumb" onclick="showFolders()">(Bug) Proof Gallery</div>
+  <div class="crumb" onclick="showFolders()"><span style="color:var(--gold)">(Bug)</span> Proof Gallery</div>
   <div class="sep" id="gallerySep" style="display:none;">/</div>
   <div class="crumb active" id="gallerycrumb" style="display:none;"></div>
 </div>
 
 <!-- FOLDER VIEW -->
 <div class="view active" id="folderView">
-  <div class="view-label">(Bug) Proof Gallery — Sites</div>
+  <div style="margin-bottom:32px;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:42px;font-weight:800;color:var(--text);line-height:1.1;margin-bottom:8px;">
+      <span style="color:var(--gold);">(Bug)</span> Proof Gallery
+    </div>
+    <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);line-height:1.5;">
+      Every bug we've caught and fixed — before our clients ever had to see it.
+    </div>
+  </div>
+  <div class="view-label">Sites</div>
   <div class="folder-grid" id="folderGrid"></div>
 </div>
 
