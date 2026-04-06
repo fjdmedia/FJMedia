@@ -1604,13 +1604,13 @@
       });
     }
 
-    // Calculator GSAP — onEnter callbacks prevent opacity:0 stuck state
+    // Calculator GSAP — y-only (no opacity) so cards are never invisible
     ScrollTrigger.create({
       trigger: '#pricing', start: 'top 75%', once: true,
       onEnter: () => {
         gsap.from('.calc-scarcity', { opacity: 0, y: 15, duration: 0.5, ease: 'power2.out' });
         gsap.from('.combo-tabs',    { opacity: 0, y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
-        gsap.from('.svc-card:not(.placeholder)', { opacity: 0, y: 25, duration: 0.45, stagger: 0.07, delay: 0.15, ease: 'power2.out' });
+        gsap.from('.svc-card:not(.placeholder)', { y: 25, duration: 0.45, stagger: 0.07, delay: 0.15, ease: 'power2.out' });
         gsap.from('.status-bar',    { opacity: 0, y: 10, duration: 0.4, delay: 0.55, ease: 'power2.out' });
       }
     });
