@@ -1233,12 +1233,104 @@
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- PRICING / CALCULATOR -->
   <section id="pricing">
     <div class="section-inner">
-      <!-- Calculator will be added in Task 4 -->
+      <p class="section-label">Build Your Package</p>
+      <h2 class="section-title">What Do You Need?</h2>
+      <p class="section-sub">Build your perfect package.</p>
+      <div class="divider"></div>
+
+      <p class="calc-speed">Most sites launch in under a week.</p>
+
+      <div class="calc-scarcity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>We take on a max of <strong>5 builds per month.</strong> <span id="calcSpotsText">4 spots open this month.</span></span>
+      </div>
+
+      <!-- Combo tabs -->
+      <div class="combo-tabs" id="comboTabs">
+        <button class="combo-tab" data-combo="getOnline" onclick="selectCombo('getOnline')">
+          <div class="combo-tab-name">Get Online</div>
+          <div class="combo-tab-sub">Start here</div>
+        </button>
+        <button class="combo-tab" data-combo="getFound" onclick="selectCombo('getFound')">
+          <div class="combo-tab-name">Get Found</div>
+          <div class="combo-tab-sub">+ SEO</div>
+        </button>
+        <button class="combo-tab" data-combo="getCustomers" onclick="selectCombo('getCustomers')">
+          <div class="combo-tab-name">Get Customers</div>
+          <div class="combo-tab-sub">Most picked</div>
+          <span class="combo-pop">POPULAR</span>
+        </button>
+        <button class="combo-tab" data-combo="ownTheMarket" onclick="selectCombo('ownTheMarket')">
+          <div class="combo-tab-name">Own the Market</div>
+          <div class="combo-tab-sub">Full system</div>
+        </button>
+      </div>
+
+      <!-- Service grid -->
+      <div class="svc-grid" id="svcGrid">
+        <div class="svc-card locked selected" data-svc="website" onclick="toggleSvc('website')">
+          <div class="svc-check"></div>
+          <div class="svc-icon">🖥️</div>
+          <div class="svc-name">Custom Website</div>
+          <div class="svc-desc">Hand-coded, mobile-ready, built from scratch.</div>
+        </div>
+        <div class="svc-card" data-svc="ordering" onclick="toggleSvc('ordering')">
+          <div class="svc-check"></div>
+          <div class="svc-icon">📋</div>
+          <div class="svc-name">Ordering / Booking</div>
+          <div class="svc-desc">Smart forms with live pricing and instant alerts.</div>
+        </div>
+        <div class="svc-card" data-svc="seo" onclick="toggleSvc('seo')">
+          <div class="svc-check"></div>
+          <div class="svc-icon">📈</div>
+          <div class="svc-name">SEO &amp; Google Setup</div>
+          <div class="svc-desc">Show up on Google from day one.</div>
+        </div>
+        <div class="svc-card" data-svc="domain" onclick="toggleSvc('domain')">
+          <div class="svc-check"></div>
+          <div class="svc-icon">🌐</div>
+          <div class="svc-name">Domain Setup</div>
+          <div class="svc-desc">Your own .ca or .com — fully configured.</div>
+        </div>
+        <div class="svc-card" data-svc="retainer" onclick="toggleSvc('retainer')">
+          <div class="svc-check"></div>
+          <div class="svc-icon">🔄</div>
+          <div class="svc-name">Monthly Retainer</div>
+          <div class="svc-desc">Ongoing updates, SEO monitoring, and support.</div>
+        </div>
+        <div class="svc-card placeholder">
+          <div class="svc-icon">💬</div>
+          <div class="svc-name">Need something else?</div>
+          <div class="svc-desc">Tell us in the form below — we'll figure it out.</div>
+        </div>
+      </div>
+
+      <!-- Status bar -->
+      <div class="status-bar" id="statusBar">
+        <span class="status-empty">Select services above to see your package match.</span>
+      </div>
+
+      <!-- Lead capture form (hidden until at least one non-locked service selected) -->
+      <div class="calc-form" id="calcForm">
+        <div class="calc-form-title">Get Your Custom Quote</div>
+        <div class="calc-form-sub">Drop your name and Instagram or email — James gets back within 12 hours.</div>
+        <div class="calc-form-fields">
+          <input type="text" name="calc_name" placeholder="Your name" autocomplete="name" />
+          <input type="text" name="calc_contact" placeholder="Instagram handle or email" autocomplete="off" />
+        </div>
+        <button class="calc-submit" id="calcSubmit" onclick="submitCalcForm()">Get My Custom Quote →</button>
+      </div>
+
+      <p class="calc-risk">Don't love it — you owe nothing.</p>
+
     </div>
   </section>
+
+  <!-- Dependency toast -->
+  <div class="dep-toast" id="depToast"></div>
 
   <!-- CONTACT -->
   <section id="contact">
