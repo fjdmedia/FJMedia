@@ -322,6 +322,12 @@
             fixed:  'Dividers between every card are now always visible — no hover required',
             before: base + '/assets/proof/fjmedia/whygrid_before.jpg?v=5',
             after:  base + '/assets/proof/fjmedia/whygrid_after.jpg?v=5'
+          },
+          {
+            bug:    'Proof gallery images were not loading in Edge — the page showed broken images and placeholders',
+            fixed:  'Moved all images out of /Ads/ folder — Edge\'s built-in ad filter was silently blocking any URL containing "/Ads/" in the path',
+            before: base + '/assets/proof/fjmedia/bug_proof_before.jpg?v=5',
+            after:  base + '/assets/proof/fjmedia/bug_proof_after.jpg?v=5'
           }
         ]
       }
