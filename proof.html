@@ -331,6 +331,20 @@
           }
         ]
       }
+      },
+      {
+        id: 'diego-andrea',
+        name: 'Diego & Andrea',
+        icon: '💍',
+        fixes: [
+          {
+            bug:    'Clicking "See Prizes" skipped past the Golden Ticket section and jumped straight to regular prizes',
+            fixed:  'Clicking "See Prizes" now starts at Golden Ticket, then scrolls through grand prizes and regular prizes in order',
+            before: base + '/assets/proof/diego-andrea/golden_req_before.png?v=5',
+            after:  base + '/assets/proof/diego-andrea/golden_req_after_opt.gif?v=5'
+          }
+        ]
+      }
     ];
 
     function toggleNav() {
