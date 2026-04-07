@@ -1,0 +1,2956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FJMedia · Visual Reference Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #071520;
+    --navy2: #0d2035;
+    --gold: #C9A84C;
+    --gold-dim: #a8893a;
+    --cream: #EDEAE5;
+    --white: #ffffff;
+    --muted: #6b7a8d;
+    --border: rgba(201,168,76,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--navy); color: var(--cream); font-family: 'Outfit', sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* LAYOUT */
+  .shell { display: flex; min-height: 100vh; }
+  .sidebar { width: 220px; min-width: 220px; background: var(--navy2); border-right: 1px solid var(--border); padding: 1.5rem 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .main { flex: 1; padding: 2.5rem 2rem; overflow-x: hidden; }
+
+  /* SIDEBAR */
+  .logo { padding: 0 1.25rem 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+  .logo-mark { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); }
+  .logo-sub { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .nav-section { padding: .25rem 1.25rem; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 1rem 0 .25rem; }
+  .nav-item { display: block; padding: .5rem 1.25rem; color: var(--cream); opacity: .7; cursor: pointer; transition: all .2s; text-decoration: none; font-size: 13px; border-left: 2px solid transparent; }
+  .nav-item:hover, .nav-item.active { opacity: 1; color: var(--gold); border-left-color: var(--gold); background: rgba(201,168,76,.05); }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--white); margin-bottom: .25rem; }
+  .page-sub { color: var(--muted); font-size: 13px; margin-bottom: 2.5rem; }
+  .prompt-tip { background: rgba(201,168,76,.08); border: 1px solid var(--border); border-radius: 8px; padding: .75rem 1rem; font-size: 12px; color: var(--gold); margin-bottom: 2rem; line-height: 1.6; }
+  .prompt-tip strong { color: var(--gold); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+
+  /* CARD */
+  .ref-card { background: var(--navy2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .ref-card:hover { border-color: rgba(201,168,76,.35); }
+  .preview { height: 160px; display: flex; align-items: center; justify-content: center; background: #0a1a28; position: relative; overflow: hidden; cursor: pointer; }
+  .preview:hover .play-hint { opacity: 1; }
+  .play-hint { position: absolute; bottom: 8px; right: 8px; font-size: 10px; color: var(--gold); opacity: 0; transition: opacity .2s; letter-spacing: .05em; }
+  .card-body { padding: .875rem 1rem; }
+  .card-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+  .card-prompt { font-size: 11px; color: var(--muted); font-family: monospace; background: rgba(0,0,0,.3); padding: 3px 6px; border-radius: 4px; display: inline-block; margin-bottom: 6px; cursor: pointer; }
+  .card-prompt:hover { color: var(--gold); }
+  .card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .copied { color: var(--gold) !important; }
+
+  /* ── ANIMATION PREVIEWS ── */
+  .demo-box { width: 60px; height: 60px; border-radius: 8px; background: var(--gold); }
+  .demo-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); }
+  .demo-circle { width: 50px; height: 50px; border-radius: 50%; background: var(--gold); }
+  .demo-bar { width: 120px; height: 4px; background: var(--gold); border-radius: 2px; }
+  .demo-card { width: 100px; height: 60px; background: rgba(201,168,76,.15); border: 1px solid var(--gold); border-radius: 8px; }
+
+  /* Fade Up */
+  @keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+  .anim-fade-up { animation: fadeUp .6s ease-out both; }
+  .preview:hover .anim-fade-up { animation: none; }
+  .preview:hover .trigger-fade-up { animation: fadeUp .6s ease-out both; }
+
+  /* Fade In */
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  /* Scale Up */
+  @keyframes scaleUp { from { opacity:0; transform: scale(.6); } to { opacity:1; transform: scale(1); } }
+
+  /* Slide In Left */
+  @keyframes slideLeft { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
+
+  /* Slide In Right */
+  @keyframes slideRight { from { opacity:0; transform: translateX(40px); } to { opacity:1; transform: translateX(0); } }
+
+  /* Rotate In */
+  @keyframes rotateIn { from { opacity:0; transform: rotate(-180deg) scale(.5); } to { opacity:1; transform: rotate(0) scale(1); } }
+
+  /* Flip */
+  @keyframes flipX { from { opacity:0; transform: rotateX(-90deg); } to { opacity:1; transform: rotateX(0); } }
+
+  /* Bounce */
+  @keyframes bounceIn { 0%{opacity:0;transform:scale(.3)} 50%{opacity:1;transform:scale(1.08)} 70%{transform:scale(.95)} 100%{transform:scale(1)} }
+
+  /* Elastic */
+  @keyframes elastic { 0%{transform:scale(0)} 55%{transform:scale(1.15)} 75%{transform:scale(.9)} 100%{transform:scale(1)} }
+
+  /* Blur In */
+  @keyframes blurIn { from { opacity:0; filter: blur(12px); transform: scale(1.05); } to { opacity:1; filter: blur(0); transform: scale(1); } }
+
+  /* Stagger demo */
+  @keyframes staggerFade { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+  /* Typewriter */
+  @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+  @keyframes blink { 50% { border-color: transparent; } }
+
+  /* Pulse */
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+
+  /* Shimmer */
+  @keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+
+  /* Float */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+  /* Spin */
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Reveal (wipe) */
+  @keyframes wipeReveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0% 0 0); } }
+
+  /* Parallax hint */
+  @keyframes parallaxHint { 0%{transform:translateY(0)} 50%{transform:translateY(-8px)} 100%{transform:translateY(0)} }
+
+  /* Hover lift */
+  .hover-lift { transition: transform .25s ease, box-shadow .25s ease; cursor: pointer; }
+  .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,.4); }
+
+  /* Hover glow */
+  .hover-glow { transition: box-shadow .3s ease; cursor: pointer; }
+  .hover-glow:hover { box-shadow: 0 0 20px rgba(201,168,76,.5); }
+
+  /* Hover scale */
+  .hover-scale { transition: transform .2s ease; cursor: pointer; }
+  .hover-scale:hover { transform: scale(1.06); }
+
+  /* ── TYPOGRAPHY DEMOS ── */
+  .typo-preview { padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 160px; }
+
+  /* ── LAYOUT DEMOS ── */
+  .layout-preview { padding: 1rem; display: flex; flex-direction: column; gap: 6px; height: 160px; justify-content: center; }
+  .l-row { display: flex; gap: 6px; }
+  .l-block { background: rgba(201,168,76,.2); border-radius: 4px; flex: 1; height: 20px; }
+  .l-block.tall { height: 80px; }
+  .l-block.hero { height: 40px; width: 100%; }
+  .l-block.nav { height: 14px; width: 100%; background: rgba(201,168,76,.35); }
+  .l-block.accent { background: var(--gold); }
+  .l-block.sm { flex: 0 0 30px; }
+  .l-block.lg { flex: 2; }
+  .l-block.full { width: 100%; flex: none; }
+  .l-block.half { flex: 0 0 48%; }
+  .l-text { height: 8px; background: rgba(255,255,255,.15); border-radius: 2px; width: 100%; }
+  .l-text.short { width: 60%; }
+  .l-text.med { width: 80%; }
+
+  /* ── COLOR THEMES ── */
+  .theme-preview { height: 160px; display: flex; flex-direction: column; }
+  .theme-bar { flex: 1; }
+  .theme-info { padding: .875rem 1rem; }
+
+  /* ── HERO STYLES ── */
+  .hero-preview { height: 160px; display: flex; align-items: center; justify-content: center; padding: 1.25rem; position: relative; overflow: hidden; }
+
+  /* ── CARD STYLES ── */
+  .card-style-preview { height: 160px; display: flex; align-items: center; justify-content: center; padding: 1.25rem; }
+
+  /* Section label */
+  .section-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; margin-top: 2rem; }
+  .section-label:first-child { margin-top: 0; }
+
+  /* ── NEW ANIMATIONS ── */
+
+  /* Slide Down */
+  @keyframes slideDown { from { opacity:0; transform: translateY(-30px); } to { opacity:1; transform: translateY(0); } }
+
+  /* Slide Up Out (exit) */
+  @keyframes slideUpOut { from { opacity:1; transform: translateY(0); } to { opacity:0; transform: translateY(-30px); } }
+
+  /* Zoom In */
+  @keyframes zoomIn { from { opacity:0; transform: scale(1.3); } to { opacity:1; transform: scale(1); } }
+
+  /* Swing In */
+  @keyframes swingIn { 0%{opacity:0;transform:rotateX(-90deg) translateY(-20px);transform-origin:top center;}
+    50%{transform:rotateX(15deg);} 70%{transform:rotateX(-7deg);} 100%{opacity:1;transform:rotateX(0);} }
+
+  /* Rubber Band */
+  @keyframes rubberBand { 0%{transform:scaleX(1)} 30%{transform:scaleX(1.25) scaleY(.75)} 40%{transform:scaleX(.75) scaleY(1.25)} 50%{transform:scaleX(1.15) scaleY(.85)} 65%{transform:scaleX(.95) scaleY(1.05)} 75%{transform:scaleX(1.05) scaleY(.95)} 100%{transform:scaleX(1)} }
+
+  /* Jello */
+  @keyframes jello { 0%,100%{transform:none} 22%{transform:skewX(-12.5deg) skewY(-12.5deg)} 33%{transform:skewX(6.25deg) skewY(6.25deg)} 44%{transform:skewX(-3.13deg) skewY(-3.13deg)} 55%{transform:skewX(1.56deg) skewY(1.56deg)} 66%{transform:skewX(-.78deg) skewY(-.78deg)} }
+
+  /* Shake */
+  @keyframes shake { 0%,100%{transform:translateX(0)} 10%,30%,50%,70%,90%{transform:translateX(-4px)} 20%,40%,60%,80%{transform:translateX(4px)} }
+
+  /* Heartbeat */
+  @keyframes heartbeat { 0%{transform:scale(1)} 14%{transform:scale(1.15)} 28%{transform:scale(1)} 42%{transform:scale(1.15)} 70%{transform:scale(1)} }
+
+  /* Draw Line */
+  @keyframes drawLine { from { stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+
+  /* Counter tick */
+  @keyframes counterTick { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+  /* Gradient shift */
+  @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+  /* Marquee */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Morph blob */
+  @keyframes morphBlob { 0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%} 50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%} }
+
+  /* Tilt */
+  @keyframes tilt { 0%{transform:perspective(500px) rotateY(0)} 50%{transform:perspective(500px) rotateY(8deg)} 100%{transform:perspective(500px) rotateY(0)} }
+
+  /* Unfold */
+  @keyframes unfold { from { max-height:0; opacity:0; } to { max-height:200px; opacity:1; } }
+
+  /* Text Reveal Mask */
+  @keyframes textRevealMask { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0% 0 0); } }
+
+  /* Split text spread */
+  @keyframes splitLeft { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes splitRight { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+
+  /* Glow pulse */
+  @keyframes glowPulse { 0%,100%{box-shadow:0 0 5px rgba(201,168,76,.3)} 50%{box-shadow:0 0 20px rgba(201,168,76,.6),0 0 40px rgba(201,168,76,.2)} }
+
+  /* Border draw */
+  @keyframes borderDraw {
+    0%{border-color:transparent} 25%{border-top-color:var(--gold)} 50%{border-right-color:var(--gold)}
+    75%{border-bottom-color:var(--gold)} 100%{border-left-color:var(--gold);border-color:var(--gold)}
+  }
+
+  /* Hover tilt 3D */
+  .hover-tilt { transition: transform .3s ease; cursor: pointer; }
+  .hover-tilt:hover { transform: perspective(600px) rotateY(8deg) rotateX(4deg); }
+
+  /* Hover underline slide */
+  .hover-underline-slide { position: relative; display: inline-block; cursor: pointer; }
+  .hover-underline-slide::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--gold); transition:width .3s ease; }
+  .hover-underline-slide:hover::after { width:100%; }
+
+  /* Hover color shift */
+  .hover-color-shift { transition: filter .3s ease; cursor: pointer; }
+  .hover-color-shift:hover { filter: hue-rotate(30deg) brightness(1.1); }
+
+  /* ── SECTION PREVIEWS ── */
+  .section-preview { height: 180px; display: flex; flex-direction: column; padding: 10px; overflow: hidden; background: #0a1a28; border-radius: 8px 8px 0 0; position: relative; }
+  .nav-preview { height: 180px; display: flex; align-items: center; justify-content: center; background: #0a1a28; position: relative; overflow: hidden; padding: 12px; }
+
+  /* ── MISC UTILITY ── */
+  .demo-tag { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; display: inline-block; }
+  .demo-divider { width: 30px; height: 2px; background: var(--gold); border-radius: 1px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.3); border-radius: 3px; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .shell { flex-direction: column; }
+    .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; padding: 1rem 0; display: flex; flex-wrap: wrap; gap: 0; align-items: center; }
+    .logo { padding: 0 1rem .75rem; border-bottom: 1px solid var(--border); margin-bottom: .5rem; width: 100%; }
+    .nav-section { display: none; }
+    .nav-item { padding: .4rem .75rem; font-size: 12px; border-left: none; border-bottom: 2px solid transparent; }
+    .nav-item:hover, .nav-item.active { border-left: none; border-bottom-color: var(--gold); }
+    .main { padding: 1.5rem 1rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .page-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">{FJ}Media</div>
+    <div class="logo-sub">Visual Reference Library</div>
+  </div>
+  <div class="nav-section">Categories</div>
+  <a class="nav-item active" onclick="show('animations')">Animations</a>
+  <a class="nav-item" onclick="show('hover')">Hover Effects</a>
+  <a class="nav-item" onclick="show('typography')">Typography</a>
+  <a class="nav-item" onclick="show('layouts')">Layouts</a>
+  <a class="nav-item" onclick="show('heroes')">Heroes</a>
+  <a class="nav-item" onclick="show('cards')">Cards</a>
+  <a class="nav-item" onclick="show('colors')">Colors</a>
+  <a class="nav-item" onclick="show('motion')">Motion</a>
+  <a class="nav-item" onclick="show('sections')">Sections</a>
+  <a class="nav-item" onclick="show('navs')">Navigation</a>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ANIMATIONS -->
+  <div id="sec-animations" class="section active">
+    <h1 class="page-title">Animations</h1>
+    <p class="page-sub">Click any card to replay. Copy the prompt tag and paste it into Claude Code.</p>
+    <div class="prompt-tip">
+      <strong>How to use:</strong> Click the <code style="background:rgba(0,0,0,.3);padding:2px 5px;border-radius:3px;">prompt tag</code> on any card to copy it, then paste into Claude Code like:<br>
+      <em style="color:var(--cream);opacity:.8;">"Animate the service cards with <strong>fade-up</strong>, staggered 100ms apart, 0.6s duration."</em>
+    </div>
+
+    <div class="section-label">Entrance Animations</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'fade-up-demo')">
+          <div class="demo-box" id="fade-up-demo" style="animation: fadeUp .6s ease-out both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Fade Up</div>
+          <div class="card-prompt" onclick="copyTag(this,'fade-up')">fade-up</div>
+          <div class="card-desc">Element rises from below while fading in. Most versatile — use on cards, headings, CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'fade-in-demo')">
+          <div class="demo-box" id="fade-in-demo" style="animation: fadeIn .7s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Fade In</div>
+          <div class="card-prompt" onclick="copyTag(this,'fade-in')">fade-in</div>
+          <div class="card-desc">Pure opacity reveal. Subtle and clean — great for background images and full sections.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'scale-demo')">
+          <div class="demo-box" id="scale-demo" style="animation: scaleUp .5s cubic-bezier(.34,1.56,.64,1) both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scale Up</div>
+          <div class="card-prompt" onclick="copyTag(this,'scale-up-center')">scale-up-center</div>
+          <div class="card-desc">Pops in from the center. Great for icons, pricing cards, feature highlights.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'slide-left-demo')">
+          <div class="demo-box" id="slide-left-demo" style="animation: slideLeft .5s ease-out both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Slide In Left</div>
+          <div class="card-prompt" onclick="copyTag(this,'slide-in-left')">slide-in-left</div>
+          <div class="card-desc">Enters from left. Use on left-column content in two-column layouts.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'slide-right-demo')">
+          <div class="demo-box" id="slide-right-demo" style="animation: slideRight .5s ease-out both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Slide In Right</div>
+          <div class="card-prompt" onclick="copyTag(this,'slide-in-right')">slide-in-right</div>
+          <div class="card-desc">Enters from right. Pair with slide-in-left for opposing columns.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'bounce-demo')">
+          <div class="demo-circle" id="bounce-demo" style="animation: bounceIn .6s cubic-bezier(.215,.61,.355,1) both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Bounce In</div>
+          <div class="card-prompt" onclick="copyTag(this,'bounce-in')">bounce-in</div>
+          <div class="card-desc">Playful overshoot on entry. Good for icons, badges, CTA buttons on fun/casual sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'elastic-demo')">
+          <div class="demo-box" id="elastic-demo" style="animation: elastic .7s cubic-bezier(.68,-.55,.265,1.55) both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Elastic</div>
+          <div class="card-prompt" onclick="copyTag(this,'elastic-scale')">elastic-scale</div>
+          <div class="card-desc">Stretches past its final size then snaps back. More dramatic than bounce — use sparingly.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'blur-demo')">
+          <div class="demo-text" id="blur-demo" style="animation: blurIn .7s ease both;">FJMedia</div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Blur In</div>
+          <div class="card-prompt" onclick="copyTag(this,'blur-in')">blur-in</div>
+          <div class="card-desc">Text or image sharpens into focus on entry. Premium feel — great for hero headings.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'flip-demo')">
+          <div class="demo-card" id="flip-demo" style="animation: flipX .6s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Flip In</div>
+          <div class="card-prompt" onclick="copyTag(this,'flip-in-x')">flip-in-x</div>
+          <div class="card-desc">Card rotates in on the X axis. Dramatic — use on portfolio cards or feature reveals.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'wipe-demo')">
+          <div class="demo-text" id="wipe-demo" style="animation: wipeReveal .7s cubic-bezier(.77,0,.18,1) both; white-space:nowrap;">Your Brand Here</div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Wipe Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'wipe-reveal')">wipe-reveal</div>
+          <div class="card-desc">Text or image wipes in from left like a curtain pull. Very premium — great for hero text reveals.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Looping Animations</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-circle" style="animation: float 3s ease-in-out infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Float</div>
+          <div class="card-prompt" onclick="copyTag(this,'float')">float</div>
+          <div class="card-desc">Gentle up-down bob. Use on hero images, icons, or decorative elements to add life.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-circle" style="animation: pulse 1.8s ease-in-out infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Pulse</div>
+          <div class="card-prompt" onclick="copyTag(this,'pulse')">pulse</div>
+          <div class="card-desc">Subtle breathing scale. Draw attention to a CTA button or live indicator dot.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:140px;height:20px;border-radius:4px;background:linear-gradient(90deg,rgba(201,168,76,.1) 25%,rgba(201,168,76,.4) 50%,rgba(201,168,76,.1) 75%);background-size:200% 100%;animation:shimmer 1.8s linear infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Shimmer / Skeleton</div>
+          <div class="card-prompt" onclick="copyTag(this,'shimmer')">shimmer</div>
+          <div class="card-desc">Gold light sweeps across an element. Use as loading skeleton or accent on cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:32px;height:32px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Spinner</div>
+          <div class="card-prompt" onclick="copyTag(this,'spinner')">spinner</div>
+          <div class="card-desc">Classic loading spinner in gold. Use during API calls, form submissions, page loads.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Stagger Pattern</div>
+    <div class="ref-card" style="max-width:600px;">
+      <div class="preview" style="gap:12px;flex-direction:row;align-items:center;justify-content:center;" id="stagger-preview" onclick="replayStagger()">
+        <div class="demo-card" id="s1" style="animation: staggerFade .5s ease both; animation-delay:0s;"></div>
+        <div class="demo-card" id="s2" style="animation: staggerFade .5s ease both; animation-delay:.1s;"></div>
+        <div class="demo-card" id="s3" style="animation: staggerFade .5s ease both; animation-delay:.2s;"></div>
+        <div class="demo-card" id="s4" style="animation: staggerFade .5s ease both; animation-delay:.3s;"></div>
+        <span class="play-hint" style="opacity:1;">click to replay</span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Staggered Cards</div>
+        <div class="card-prompt" onclick="copyTag(this,'stagger 100ms')">stagger 100ms</div>
+        <div class="card-desc">Cards animate in one after another. Signature pattern for service grids, pricing cards, testimonials.</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Entrance Animations</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'slide-down-demo')">
+          <div class="demo-box" id="slide-down-demo" style="animation: slideDown .5s ease-out both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Slide Down</div>
+          <div class="card-prompt" onclick="copyTag(this,'slide-down')">slide-down</div>
+          <div class="card-desc">Drops in from above. Great for dropdown menus, notification banners, nav reveals.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'zoom-in-demo')">
+          <div class="demo-box" id="zoom-in-demo" style="animation: zoomIn .6s ease-out both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Zoom In (Ken Burns)</div>
+          <div class="card-prompt" onclick="copyTag(this,'zoom-in')">zoom-in</div>
+          <div class="card-desc">Starts zoomed in and scales down to normal. Cinematic feel for hero images and backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'swing-demo')">
+          <div class="demo-card" id="swing-demo" style="animation: swingIn .7s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Swing In</div>
+          <div class="card-prompt" onclick="copyTag(this,'swing-in')">swing-in</div>
+          <div class="card-desc">Card swings down from top like a hinged door. Great for dropdown cards, notices, feature reveals.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'rubber-demo')">
+          <div class="demo-box" id="rubber-demo" style="animation: rubberBand .8s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Rubber Band</div>
+          <div class="card-prompt" onclick="copyTag(this,'rubber-band')">rubber-band</div>
+          <div class="card-desc">Element stretches and snaps back. Attention-grabbing — use on badges, sale tags, or CTA buttons.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'jello-demo')">
+          <div class="demo-box" id="jello-demo" style="animation: jello .9s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Jello</div>
+          <div class="card-prompt" onclick="copyTag(this,'jello')">jello</div>
+          <div class="card-desc">Wobbly skew effect like jello. Playful and fun — bakeries, kids brands, casual sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'shake-demo')">
+          <div class="demo-box" id="shake-demo" style="animation: shake .5s ease both;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Shake</div>
+          <div class="card-prompt" onclick="copyTag(this,'shake')">shake</div>
+          <div class="card-desc">Quick horizontal shake. Use for form validation errors, wrong password, or attention cues.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Text Animations</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayTypewriter()" style="overflow:hidden;">
+          <div id="typewriter-demo" style="font-family:monospace;font-size:16px;color:var(--cream);overflow:hidden;white-space:nowrap;border-right:2px solid var(--gold);width:0;animation: typewriter 2s steps(18) forwards, blink .7s step-end infinite;">We build websites.</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Typewriter</div>
+          <div class="card-prompt" onclick="copyTag(this,'typewriter')">typewriter</div>
+          <div class="card-desc">Text types out character by character with blinking cursor. Premium for hero headings and intros.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this, 'text-mask-demo')">
+          <div id="text-mask-demo" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);animation: textRevealMask .8s cubic-bezier(.77,0,.18,1) both;">FJMedia</div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Text Mask Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'text-mask-reveal')">text-mask-reveal</div>
+          <div class="card-desc">Text reveals left-to-right with clip-path mask. Sleek and modern — hero headings and brand names.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replaySplitText()" style="overflow:hidden;">
+          <div style="display:flex;gap:0;">
+            <span id="split-l" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);animation:splitLeft .5s ease both;">FJ</span>
+            <span id="split-r" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);animation:splitRight .5s ease both;">Media</span>
+          </div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Split Text</div>
+          <div class="card-prompt" onclick="copyTag(this,'split-text')">split-text</div>
+          <div class="card-desc">Two halves of text slide in from opposite sides and meet. Great for brand names and taglines.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayLetterStagger()">
+          <div id="letter-stagger" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);display:flex;gap:2px;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Letter Stagger</div>
+          <div class="card-prompt" onclick="copyTag(this,'letter-stagger')">letter-stagger</div>
+          <div class="card-desc">Each letter fades/rises in one by one. GSAP SplitText pattern — premium hero headings.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayWordStagger()">
+          <div id="word-stagger" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;"></div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Word Stagger</div>
+          <div class="card-prompt" onclick="copyTag(this,'word-stagger')">word-stagger</div>
+          <div class="card-desc">Each word in a sentence fades up sequentially. Less intense than letter stagger — good for subtitles.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;background:linear-gradient(90deg,var(--gold),var(--cream),var(--gold));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 3s linear infinite;">FJMedia</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gradient Text Shift</div>
+          <div class="card-prompt" onclick="copyTag(this,'gradient-text-shift')">gradient-text-shift</div>
+          <div class="card-desc">Text color cycles through a gradient. Eye-catching for hero headings or featured labels.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Attention & Micro-interactions</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-circle" style="animation: heartbeat 1.5s ease-in-out infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Heartbeat</div>
+          <div class="card-prompt" onclick="copyTag(this,'heartbeat')">heartbeat</div>
+          <div class="card-desc">Double-pulse like a heartbeat. Use on notification dots, live indicators, or featured badges.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:100px;height:60px;border:2px solid transparent;border-radius:8px;animation:borderDraw 1.5s ease forwards infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Border Draw</div>
+          <div class="card-prompt" onclick="copyTag(this,'border-draw')">border-draw</div>
+          <div class="card-desc">Border draws itself around the element one side at a time. Premium card reveal or focus state.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-box" style="animation: glowPulse 2s ease-in-out infinite; border-radius:8px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Glow Pulse</div>
+          <div class="card-prompt" onclick="copyTag(this,'glow-pulse')">glow-pulse</div>
+          <div class="card-desc">Gold glow breathes in and out. Use on featured cards, active states, or CTA buttons.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-box" style="animation: morphBlob 4s ease-in-out infinite; background: var(--gold);"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Morph Blob</div>
+          <div class="card-prompt" onclick="copyTag(this,'morph-blob')">morph-blob</div>
+          <div class="card-desc">Shape morphs between organic blob forms. Modern background accent or decorative element.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-card" style="animation: tilt 3s ease-in-out infinite;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gentle Tilt</div>
+          <div class="card-prompt" onclick="copyTag(this,'gentle-tilt')">gentle-tilt</div>
+          <div class="card-desc">Subtle 3D perspective tilt. Adds depth to cards, images, and hero elements.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="overflow:hidden;">
+          <div style="display:flex;white-space:nowrap;animation:marquee 6s linear infinite;">
+            <span style="font-size:13px;color:var(--muted);padding-right:40px;">Web Design&nbsp;&nbsp;·&nbsp;&nbsp;SEO&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Hosting&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+            <span style="font-size:13px;color:var(--muted);padding-right:40px;">Web Design&nbsp;&nbsp;·&nbsp;&nbsp;SEO&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Hosting&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Marquee / Infinite Scroll</div>
+          <div class="card-prompt" onclick="copyTag(this,'marquee-scroll')">marquee-scroll</div>
+          <div class="card-desc">Text or logos scroll infinitely. Use for client logos, services, or social proof strips.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Reveal Patterns</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" onclick="replay(this,'unfold-demo')">
+          <div id="unfold-demo" style="width:140px;overflow:hidden;animation:unfold .6s ease both;">
+            <div style="padding:12px;background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:8px;">
+              <div style="font-size:11px;color:var(--cream);">Expanded content</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:4px;">Details appear here</div>
+            </div>
+          </div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Accordion Unfold</div>
+          <div class="card-prompt" onclick="copyTag(this,'accordion-unfold')">accordion-unfold</div>
+          <div class="card-desc">Content unfolds from max-height:0. Standard for FAQ accordions, expandable details.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayLineReveal()">
+          <svg id="line-reveal-demo" width="120" height="60" viewBox="0 0 120 60">
+            <line x1="10" y1="50" x2="110" y2="10" stroke="#C9A84C" stroke-width="2" stroke-dasharray="200" stroke-dashoffset="0" style="animation:drawLine 1.2s ease both;">
+            </line>
+          </svg>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">SVG Line Draw</div>
+          <div class="card-prompt" onclick="copyTag(this,'svg-line-draw')">svg-line-draw</div>
+          <div class="card-desc">SVG stroke draws itself on scroll. Use for decorative lines, borders, icons, or underlines.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayGradientReveal()">
+          <div id="gradient-reveal-demo" style="width:160px;height:50px;border-radius:8px;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,.3));background-size:200% 100%;background-position:100% 0;transition:background-position .8s ease;">
+          </div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gradient Wipe</div>
+          <div class="card-prompt" onclick="copyTag(this,'gradient-wipe')">gradient-wipe</div>
+          <div class="card-desc">Background gradient slides across on reveal. Use on section backgrounds, cards, or CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayFlipCard()" style="perspective:500px;">
+          <div id="flip-card-demo" style="width:100px;height:60px;position:relative;transform-style:preserve-3d;transition:transform .6s ease;">
+            <div style="position:absolute;inset:0;background:var(--gold);border-radius:8px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--navy);">Front</div>
+            <div style="position:absolute;inset:0;background:rgba(201,168,76,.2);border:1px solid var(--gold);border-radius:8px;backface-visibility:hidden;transform:rotateY(180deg);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--cream);">Back</div>
+          </div>
+          <span class="play-hint">click to flip</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Flip Card (Front/Back)</div>
+          <div class="card-prompt" onclick="copyTag(this,'flip-card')">flip-card</div>
+          <div class="card-desc">Card flips to reveal back content on hover/click. Team bios, feature reveals, pricing details.</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HOVER EFFECTS -->
+  <div id="sec-hover" class="section">
+    <h1 class="page-title">Hover Effects</h1>
+    <p class="page-sub">Hover over each demo. Copy the prompt tag to reference in Claude Code.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-card hover-lift" style="width:120px;height:70px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Lift on Hover</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-lift')">hover-lift</div>
+          <div class="card-desc">Card rises 6px with a shadow on hover. The go-to for service/pricing cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-card hover-glow" style="width:120px;height:70px;border-color:var(--gold);"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gold Glow</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-glow-gold')">hover-glow-gold</div>
+          <div class="card-desc">Gold shadow radiates out on hover. Use on featured cards, CTA buttons, or portfolio items.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-box hover-scale"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scale on Hover</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-scale')">hover-scale</div>
+          <div class="card-desc">Element scales up slightly on hover. Use on images, icons, gallery items.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:140px;height:44px;border:1.5px solid var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--gold);cursor:pointer;position:relative;overflow:hidden;transition:all .2s;" onmouseenter="this.style.background='var(--gold)';this.style.color='var(--navy)'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'">Book a Call</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Button Fill</div>
+          <div class="card-prompt" onclick="copyTag(this,'button-fill-gold')">button-fill-gold</div>
+          <div class="card-desc">Outline button fills gold on hover. Classic CTA style for dark backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:140px;height:44px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;transition:transform .2s,letter-spacing .2s;" onmouseenter="this.style.letterSpacing='.08em';this.style.transform='scale(1.03)'" onmouseleave="this.style.letterSpacing='0';this.style.transform='scale(1)'">Get Started</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Button Expand</div>
+          <div class="card-prompt" onclick="copyTag(this,'button-expand')">button-expand</div>
+          <div class="card-desc">Button slightly scales and letter-spacing widens on hover. Adds energy to solid CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);cursor:pointer;border-bottom:1px solid transparent;transition:all .2s;display:inline-block;" onmouseenter="this.style.color='var(--gold)';this.style.borderBottomColor='var(--gold)';this.style.paddingBottom='2px'" onmouseleave="this.style.color='var(--cream)';this.style.borderBottomColor='transparent';this.style.paddingBottom='0'">View Our Work</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Underline Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'underline-reveal-gold')">underline-reveal-gold</div>
+          <div class="card-desc">Gold underline slides in on hover with color change. Use on nav links and text CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:120px;height:70px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);" onmouseenter="this.style.borderColor='var(--gold)';this.style.background='rgba(201,168,76,.12)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,168,76,.2)';this.style.background='rgba(201,168,76,.08)';this.style.color='var(--muted)'">Service Card</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Border Highlight</div>
+          <div class="card-prompt" onclick="copyTag(this,'border-highlight-gold')">border-highlight-gold</div>
+          <div class="card-desc">Border intensifies to full gold on hover with background tint. Elegant for service cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:120px;height:70px;overflow:hidden;border-radius:8px;position:relative;cursor:pointer;" onmouseenter="this.querySelector('.overlay').style.opacity='1'" onmouseleave="this.querySelector('.overlay').style.opacity='0'">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(201,168,76,.3),rgba(7,21,32,.8));"></div>
+            <div class="overlay" style="position:absolute;inset:0;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--white);opacity:0;transition:opacity .3s;">View</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image Overlay</div>
+          <div class="card-prompt" onclick="copyTag(this,'image-overlay-reveal')">image-overlay-reveal</div>
+          <div class="card-desc">Tinted overlay with CTA text appears on hover. Standard for portfolio/work grid items.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Advanced Hover Effects</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="demo-card hover-tilt" style="width:120px;height:70px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">3D Tilt</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-tilt-3d')">hover-tilt-3d</div>
+          <div class="card-desc">Card tilts in 3D perspective on hover. Modern portfolio sites, feature cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div class="hover-underline-slide" style="font-size:16px;color:var(--cream);cursor:pointer;">Our Services</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Underline Slide</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-underline-slide')">hover-underline-slide</div>
+          <div class="card-desc">Gold underline grows from left on hover. Clean nav links and text CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:120px;height:70px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);" onmouseenter="this.querySelector('.shine').style.left='120%'" onmouseleave="this.querySelector('.shine').style.left='-40%'">Card<div class="shine" style="position:absolute;top:0;left:-40%;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,168,76,.15),transparent);transition:left .5s ease;pointer-events:none;"></div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Shine Sweep</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-shine-sweep')">hover-shine-sweep</div>
+          <div class="card-desc">Light streak sweeps across the card on hover. Luxury feel for pricing and feature cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:140px;height:44px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--cream);cursor:pointer;position:relative;overflow:hidden;background:transparent;border:1.5px solid var(--gold);transition:color .3s;" onmouseenter="this.style.color='var(--navy)';this.querySelector('.fill').style.width='100%'" onmouseleave="this.style.color='var(--cream)';this.querySelector('.fill').style.width='0'"><span style="position:relative;z-index:1;">Learn More</span><div class="fill" style="position:absolute;top:0;left:0;width:0;height:100%;background:var(--gold);transition:width .3s ease;z-index:0;"></div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Button Wipe Fill</div>
+          <div class="card-prompt" onclick="copyTag(this,'button-wipe-fill')">button-wipe-fill</div>
+          <div class="card-desc">Gold fill wipes across the button from left. More dramatic than instant fill.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:120px;height:70px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(7,21,32,.8));border-radius:10px;cursor:pointer;transition:all .3s;overflow:hidden;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.transform='scale(1.04)';this.style.boxShadow='0 8px 32px rgba(201,168,76,.2)';this.querySelector('.img-inner').style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none';this.querySelector('.img-inner').style.transform='scale(1)'"><div class="img-inner" style="width:100%;height:100%;background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(13,32,53,.6));transition:transform .4s ease;"></div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image Zoom on Hover</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-image-zoom')">hover-image-zoom</div>
+          <div class="card-desc">Image scales up inside its container on hover. Standard for portfolio grids and gallery items.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="display:flex;gap:8px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:14px;" onmouseenter="this.style.background='var(--gold)';this.style.transform='translateY(-3px)';this.style.color='var(--navy)'" onmouseleave="this.style.background='rgba(201,168,76,.15)';this.style.transform='translateY(0)';this.style.color='var(--cream)'">📷</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s .05s;font-size:14px;" onmouseenter="this.style.background='var(--gold)';this.style.transform='translateY(-3px)';this.style.color='var(--navy)'" onmouseleave="this.style.background='rgba(201,168,76,.15)';this.style.transform='translateY(0)';this.style.color='var(--cream)'">🔗</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s .1s;font-size:14px;" onmouseenter="this.style.background='var(--gold)';this.style.transform='translateY(-3px)';this.style.color='var(--navy)'" onmouseleave="this.style.background='rgba(201,168,76,.15)';this.style.transform='translateY(0)';this.style.color='var(--cream)'">✉️</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Social Icon Pop</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-social-pop')">hover-social-pop</div>
+          <div class="card-desc">Social/icon circles lift and fill on hover. Standard for footer social links.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div id="sec-typography" class="section">
+    <h1 class="page-title">Typography Styles</h1>
+    <p class="page-sub">Reference these styles by name when prompting Claude Code about headings and text.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--white);line-height:1.1;">We Build <em>Websites</em><br>That Convert.</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Editorial Hero</div>
+          <div class="card-prompt" onclick="copyTag(this,'editorial-hero')">editorial-hero</div>
+          <div class="card-desc">Cormorant Garamond large, italic keyword in gold. Premium and confident.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Web Design</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);line-height:1.2;">Built for Winnipeg Businesses</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Label + Heading</div>
+          <div class="card-prompt" onclick="copyTag(this,'label-heading')">label-heading</div>
+          <div class="card-desc">Small gold uppercase label above the main heading. Great for section openers.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:600;color:var(--white);line-height:1;letter-spacing:-.02em;">$0<br><span style="font-size:16px;font-weight:400;color:var(--muted);">upfront cost to you</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Big Stat</div>
+          <div class="card-prompt" onclick="copyTag(this,'big-stat')">big-stat</div>
+          <div class="card-desc">Giant number with small label below. Use in stats sections, pricing, or social proof.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--muted);border-left:2px solid var(--gold);padding-left:12px;line-height:1.7;">"Made the whole process<br>so smooth."<br><span style="font-size:12px;font-style:normal;color:var(--gold);">— Sarah & Mike T.</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Testimonial Quote</div>
+          <div class="card-prompt" onclick="copyTag(this,'testimonial-quote')">testimonial-quote</div>
+          <div class="card-desc">Italic serif quote with gold left border and attribution. Clean and trustworthy.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-size:80px;font-weight:700;color:rgba(201,168,76,.08);line-height:1;font-family:'Outfit',sans-serif;position:relative;">01<div style="position:absolute;top:50%;left:60px;transform:translateY(-50%);font-size:15px;font-weight:500;color:var(--white);">Discovery Call</div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ghost Number</div>
+          <div class="card-prompt" onclick="copyTag(this,'ghost-number')">ghost-number</div>
+          <div class="card-desc">Giant faded number behind real content. Great for process steps or numbered sections.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview" style="overflow:hidden;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;width:100%;"><span style="color:var(--cream);">Custom Website</span><span style="color:var(--gold);">$600</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;width:100%;"><span style="color:var(--cream);">SEO Setup</span><span style="color:var(--gold);">$300</span></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;display:flex;justify-content:space-between;align-items:baseline;width:100%;"><span style="color:var(--cream);">Maintenance</span><span style="color:var(--gold);">$150/mo</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Price List</div>
+          <div class="card-prompt" onclick="copyTag(this,'price-list-serif')">price-list-serif</div>
+          <div class="card-desc">Serif item names with gold prices, separated by thin lines. Elegant for pricing breakdowns.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Typography Patterns</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:600;color:transparent;-webkit-text-stroke:1.5px var(--gold);line-height:1.1;">OUTLINE<br>TEXT</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Outlined / Stroke Text</div>
+          <div class="card-prompt" onclick="copyTag(this,'outlined-text')">outlined-text</div>
+          <div class="card-desc">Text with stroke, no fill. Modern and editorial — hero headings, decorative backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;background:linear-gradient(135deg,var(--gold),#e8c96d,var(--cream));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2;">Gradient<br>Heading</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gradient Heading</div>
+          <div class="card-prompt" onclick="copyTag(this,'gradient-heading')">gradient-heading</div>
+          <div class="card-desc">Text filled with gradient. Use sparingly on hero headings or featured labels. Gold-to-cream is safe.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;line-height:2;">const brand = "FJMedia";<br>const speed = "48 hours";<br>const risk = null;</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Monospace Accent</div>
+          <div class="card-prompt" onclick="copyTag(this,'monospace-accent')">monospace-accent</div>
+          <div class="card-desc">Code-style monospace for technical or modern feel. Good for stats, features, tech brands.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <span style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:200;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);">STARTING AT</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:var(--white);line-height:1;">$200</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Mixed Weight Pair</div>
+          <div class="card-prompt" onclick="copyTag(this,'mixed-weight')">mixed-weight</div>
+          <div class="card-desc">Ultra-light label next to bold number or heading. Creates visual hierarchy through weight contrast.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-size:13px;color:var(--cream);">
+            <span style="text-decoration:line-through;color:var(--muted);">$5,000</span>
+            <span style="color:var(--gold);font-weight:600;margin-left:8px;">$300</span>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">Save 94% vs. traditional agencies</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Strikethrough Price</div>
+          <div class="card-prompt" onclick="copyTag(this,'strikethrough-price')">strikethrough-price</div>
+          <div class="card-desc">Crossed-out old price next to new price in gold. Classic for sales, comparisons, pricing pages.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--cream);line-height:1.8;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:48px;float:left;line-height:.85;margin-right:8px;color:var(--gold);font-weight:600;">W</span>e build websites that convert visitors into paying customers for Winnipeg businesses.
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Drop Cap</div>
+          <div class="card-prompt" onclick="copyTag(this,'drop-cap')">drop-cap</div>
+          <div class="card-desc">Oversized first letter in gold. Editorial and premium — about sections, blog intros, long-form content.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview" style="align-items:center;">
+          <div style="display:flex;align-items:center;gap:12px;width:100%;">
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;">Our Process</div>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Divider Label</div>
+          <div class="card-prompt" onclick="copyTag(this,'divider-label')">divider-label</div>
+          <div class="card-desc">Centered label with horizontal lines on both sides. Section separators, used on FJMedia agency site.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview">
+          <div style="font-family:'Outfit',sans-serif;">
+            <div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:2px;">Custom Website</div>
+            <div style="font-size:11px;color:var(--muted);font-weight:300;line-height:1.5;">Hand-coded, mobile-ready,<br>tailored to your brand.</div>
+          </div>
+          <div style="margin-top:12px;font-family:'Outfit',sans-serif;">
+            <div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:2px;">SEO Setup</div>
+            <div style="font-size:11px;color:var(--muted);font-weight:300;line-height:1.5;">Google indexing, meta tags,<br>local search optimization.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Sans-Serif Service List</div>
+          <div class="card-prompt" onclick="copyTag(this,'sans-service-list')">sans-service-list</div>
+          <div class="card-desc">Bold name + light description pairs. Clean for services, features, or process steps.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview" style="justify-content:center;align-items:center;">
+          <div style="text-align:center;">
+            <div style="font-family:'Outfit',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:300;">— ESTABLISHED —</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin:6px 0;">Winnipeg, MB</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:300;">— SINCE 2024 —</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Serif + Sans Lockup</div>
+          <div class="card-prompt" onclick="copyTag(this,'serif-sans-lockup')">serif-sans-lockup</div>
+          <div class="card-desc">Serif heading sandwiched between tracked sans-serif labels. Classic for local brands, restaurants, barbershops.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="typo-preview" style="justify-content:center;">
+          <div style="font-size:10px;color:var(--cream);line-height:1.8;font-family:'Outfit',sans-serif;">
+            <span style="display:inline-block;background:rgba(201,168,76,.15);color:var(--gold);padding:1px 8px;border-radius:4px;font-size:9px;font-weight:500;margin-right:6px;">NEW</span> Now offering monthly retainers
+            <br>
+            <span style="display:inline-block;background:rgba(34,197,94,.12);color:#22c55e;padding:1px 8px;border-radius:4px;font-size:9px;font-weight:500;margin-right:6px;">LIVE</span> Portfolio updated weekly
+            <br>
+            <span style="display:inline-block;background:rgba(239,68,68,.12);color:#ef4444;padding:1px 8px;border-radius:4px;font-size:9px;font-weight:500;margin-right:6px;">SOLD</span> March intake full
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Inline Status Badges</div>
+          <div class="card-prompt" onclick="copyTag(this,'inline-badges')">inline-badges</div>
+          <div class="card-desc">Colored pill badges inline with text. Use for status indicators, feature labels, or announcements.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LAYOUTS -->
+  <div id="sec-layouts" class="section">
+    <h1 class="page-title">Page Layouts</h1>
+    <p class="page-sub">Structural blueprints. Reference by name when describing page structure to Claude Code.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div class="l-block nav"></div>
+          <div class="l-block hero" style="height:50px;background:rgba(201,168,76,.25);"></div>
+          <div class="l-row"><div class="l-text"></div></div>
+          <div class="l-row"><div class="l-text short"></div></div>
+          <div class="l-row" style="gap:6px;margin-top:4px;">
+            <div class="l-block accent" style="height:22px;flex:0 0 70px;border-radius:4px;"></div>
+            <div class="l-block" style="height:22px;flex:0 0 70px;border-radius:4px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Full-Width Hero</div>
+          <div class="card-prompt" onclick="copyTag(this,'full-width-hero')">full-width-hero</div>
+          <div class="card-desc">Nav + large centered hero text + two CTA buttons. Your FJMedia homepage structure.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div class="l-block nav"></div>
+          <div class="l-row" style="gap:8px;flex:1;align-items:center;">
+            <div style="flex:1;display:flex;flex-direction:column;gap:5px;">
+              <div class="l-text" style="width:80%;height:10px;background:rgba(201,168,76,.4);"></div>
+              <div class="l-text"></div>
+              <div class="l-text short"></div>
+              <div class="l-block accent" style="height:20px;width:70px;border-radius:4px;margin-top:4px;"></div>
+            </div>
+            <div class="l-block" style="flex:0 0 80px;height:80px;border-radius:8px;background:rgba(201,168,76,.15);"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Split Hero (Text + Image)</div>
+          <div class="card-prompt" onclick="copyTag(this,'split-hero')">split-hero</div>
+          <div class="card-desc">Text left, image or card right. Great for realtor, service, and personal brand sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;">
+            <div class="l-block" style="height:60px;border-radius:6px;"></div>
+            <div class="l-block" style="height:60px;border-radius:6px;background:rgba(201,168,76,.25);"></div>
+            <div class="l-block" style="height:60px;border-radius:6px;"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px;">
+            <div class="l-block" style="height:60px;border-radius:6px;"></div>
+            <div class="l-block" style="height:60px;border-radius:6px;"></div>
+            <div class="l-block" style="height:60px;border-radius:6px;background:rgba(201,168,76,.15);"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">3-Column Card Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'3-col-card-grid')">3-col-card-grid</div>
+          <div class="card-desc">Three equal columns. Use for services, features, team members. Stacks to 1-col on mobile.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:flex;gap:8px;height:100%;align-items:stretch;">
+            <div style="width:50px;background:var(--navy2);border-right:1px solid var(--border);border-radius:6px 0 0 6px;display:flex;flex-direction:column;gap:8px;padding:8px 6px;">
+              <div style="height:6px;background:var(--gold);border-radius:2px;"></div>
+              <div style="height:6px;background:rgba(255,255,255,.1);border-radius:2px;"></div>
+              <div style="height:6px;background:rgba(255,255,255,.1);border-radius:2px;"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px;justify-content:center;">
+              <div class="l-text" style="height:10px;background:rgba(201,168,76,.3);"></div>
+              <div class="l-text"></div>
+              <div class="l-text short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Sidebar + Content</div>
+          <div class="card-prompt" onclick="copyTag(this,'sidebar-content')">sidebar-content</div>
+          <div class="card-desc">Left sidebar nav with main content area. Good for tools, dashboards, and reference pages.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Layout Patterns</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="l-row" style="gap:8px;align-items:center;">
+              <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                <div class="l-text" style="height:8px;background:rgba(201,168,76,.3);width:70%;"></div>
+                <div class="l-text"></div>
+                <div class="l-text short"></div>
+              </div>
+              <div class="l-block" style="flex:0 0 50px;height:40px;border-radius:6px;background:rgba(201,168,76,.15);"></div>
+            </div>
+            <div class="l-row" style="gap:8px;align-items:center;">
+              <div class="l-block" style="flex:0 0 50px;height:40px;border-radius:6px;background:rgba(201,168,76,.15);"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                <div class="l-text" style="height:8px;background:rgba(201,168,76,.3);width:70%;"></div>
+                <div class="l-text"></div>
+                <div class="l-text short"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Zig-Zag (Alternating)</div>
+          <div class="card-prompt" onclick="copyTag(this,'zigzag-layout')">zigzag-layout</div>
+          <div class="card-desc">Text/image alternates sides each row. Classic for services, about pages, feature showcases.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;height:100%;">
+            <div style="grid-row:1/3;background:rgba(201,168,76,.25);border-radius:6px;"></div>
+            <div style="background:rgba(201,168,76,.12);border-radius:6px;"></div>
+            <div style="background:rgba(201,168,76,.08);border-radius:6px;"></div>
+            <div style="grid-column:2/4;background:rgba(201,168,76,.15);border-radius:6px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Bento Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'bento-grid')">bento-grid</div>
+          <div class="card-desc">Mixed-size cards in an asymmetric grid. Trending for portfolios, features, and dashboards (Apple style).</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:flex;gap:4px;height:100%;align-items:flex-start;">
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+              <div style="height:55px;background:rgba(201,168,76,.2);border-radius:4px;"></div>
+              <div style="height:35px;background:rgba(201,168,76,.12);border-radius:4px;"></div>
+              <div style="height:45px;background:rgba(201,168,76,.18);border-radius:4px;"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+              <div style="height:35px;background:rgba(201,168,76,.15);border-radius:4px;"></div>
+              <div style="height:50px;background:rgba(201,168,76,.25);border-radius:4px;"></div>
+              <div style="height:40px;background:rgba(201,168,76,.1);border-radius:4px;"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+              <div style="height:45px;background:rgba(201,168,76,.18);border-radius:4px;"></div>
+              <div style="height:40px;background:rgba(201,168,76,.12);border-radius:4px;"></div>
+              <div style="height:50px;background:rgba(201,168,76,.2);border-radius:4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Masonry Gallery</div>
+          <div class="card-prompt" onclick="copyTag(this,'masonry-gallery')">masonry-gallery</div>
+          <div class="card-desc">Pinterest-style staggered columns. Photographers, portfolios, gallery pages. CSS columns or JS.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview" style="justify-content:center;align-items:center;">
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--navy);">1</div>
+              <div style="width:30px;height:1px;background:var(--gold);"></div>
+              <div style="width:20px;height:20px;border-radius:50%;background:rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);">2</div>
+              <div style="width:30px;height:1px;background:rgba(201,168,76,.15);"></div>
+              <div style="width:20px;height:20px;border-radius:50%;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);">3</div>
+            </div>
+            <div style="display:flex;gap:4px;width:100%;">
+              <div class="l-text" style="background:rgba(201,168,76,.2);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Horizontal Timeline</div>
+          <div class="card-prompt" onclick="copyTag(this,'timeline-horizontal')">timeline-horizontal</div>
+          <div class="card-desc">Numbered circles with connecting lines. Process steps, onboarding, project timeline. Used on FJMedia.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:flex;gap:4px;height:100%;">
+            <div style="width:3px;background:var(--border);border-radius:2px;position:relative;">
+              <div style="position:absolute;top:10%;width:8px;height:8px;border-radius:50%;background:var(--gold);left:-2.5px;"></div>
+              <div style="position:absolute;top:45%;width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.3);left:-2.5px;"></div>
+              <div style="position:absolute;top:80%;width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.15);left:-2.5px;"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding-left:8px;justify-content:center;">
+              <div><div class="l-text" style="width:60%;height:6px;background:rgba(201,168,76,.3);margin-bottom:3px;"></div><div class="l-text" style="height:5px;"></div></div>
+              <div><div class="l-text" style="width:50%;height:6px;background:rgba(201,168,76,.2);margin-bottom:3px;"></div><div class="l-text" style="height:5px;"></div></div>
+              <div><div class="l-text" style="width:55%;height:6px;background:rgba(201,168,76,.15);margin-bottom:3px;"></div><div class="l-text" style="height:5px;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Vertical Timeline</div>
+          <div class="card-prompt" onclick="copyTag(this,'timeline-vertical')">timeline-vertical</div>
+          <div class="card-desc">Vertical line with dots and content at each stop. Project history, about page milestones.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;height:100%;">
+            <div style="background:rgba(201,168,76,.2);border-radius:6px;display:flex;flex-direction:column;gap:3px;padding:8px;justify-content:center;">
+              <div class="l-text" style="height:6px;background:rgba(201,168,76,.4);width:60%;"></div>
+              <div class="l-text" style="height:5px;"></div>
+            </div>
+            <div style="background:rgba(201,168,76,.12);border-radius:6px;display:flex;flex-direction:column;gap:3px;padding:8px;justify-content:center;">
+              <div class="l-text" style="height:6px;background:rgba(201,168,76,.3);width:60%;"></div>
+              <div class="l-text" style="height:5px;"></div>
+            </div>
+            <div style="background:rgba(201,168,76,.08);border-radius:6px;display:flex;flex-direction:column;gap:3px;padding:8px;justify-content:center;">
+              <div class="l-text" style="height:6px;background:rgba(201,168,76,.25);width:60%;"></div>
+              <div class="l-text" style="height:5px;"></div>
+            </div>
+            <div style="background:rgba(201,168,76,.15);border-radius:6px;display:flex;flex-direction:column;gap:3px;padding:8px;justify-content:center;">
+              <div class="l-text" style="height:6px;background:rgba(201,168,76,.35);width:60%;"></div>
+              <div class="l-text" style="height:5px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">2x2 Feature Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'2x2-feature-grid')">2x2-feature-grid</div>
+          <div class="card-desc">Four equal cards in a 2x2 grid. Why-us sections, feature highlights, comparison quadrants.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div class="l-block nav" style="margin-bottom:4px;"></div>
+          <div style="display:flex;gap:0;height:70%;margin-bottom:4px;">
+            <div style="flex:1;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;"><div class="l-text" style="width:60%;height:6px;background:rgba(201,168,76,.4);"></div></div>
+            <div style="flex:1;background:rgba(201,168,76,.08);display:flex;align-items:center;justify-content:center;"><div class="l-text" style="width:60%;height:6px;"></div></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">50/50 Split Screen</div>
+          <div class="card-prompt" onclick="copyTag(this,'split-screen-50-50')">split-screen-50-50</div>
+          <div class="card-desc">Two equal halves, different backgrounds. Compare before/after, two options, or text + image.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="layout-preview">
+          <div style="display:flex;flex-direction:column;gap:4px;height:100%;">
+            <div style="display:flex;gap:4px;">
+              <div style="flex:0 0 60px;height:18px;background:rgba(201,168,76,.3);border-radius:4px;"></div>
+              <div style="flex:0 0 60px;height:18px;background:rgba(201,168,76,.1);border-radius:4px;"></div>
+              <div style="flex:0 0 60px;height:18px;background:rgba(201,168,76,.1);border-radius:4px;"></div>
+            </div>
+            <div style="flex:1;background:rgba(201,168,76,.12);border-radius:6px;display:flex;flex-direction:column;gap:4px;padding:8px;justify-content:center;">
+              <div class="l-text" style="height:6px;background:rgba(201,168,76,.3);width:50%;"></div>
+              <div class="l-text" style="height:5px;"></div>
+              <div class="l-text short" style="height:5px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Tab Content Layout</div>
+          <div class="card-prompt" onclick="copyTag(this,'tab-content-layout')">tab-content-layout</div>
+          <div class="card-desc">Tab buttons above, content below swaps on click. Used on FJMedia ops, service sections, dashboards.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HEROES -->
+  <div id="sec-heroes" class="section">
+    <h1 class="page-title">Hero Section Styles</h1>
+    <p class="page-sub">The first thing visitors see. Reference by name to define the hero style for any client site.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:linear-gradient(135deg,#071520 0%,#0d2035 100%);">
+          <div style="text-align:center;">
+            <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Winnipeg Web Design</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:white;line-height:1.2;margin-bottom:10px;">We Build Websites<br><em>That Convert</em></div>
+            <div style="display:inline-block;padding:6px 16px;background:var(--gold);border-radius:4px;font-size:10px;font-weight:600;color:var(--navy);">Book a Call</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Dark Centered</div>
+          <div class="card-prompt" onclick="copyTag(this,'dark-centered-hero')">dark-centered-hero</div>
+          <div class="card-desc">Navy background, centered editorial heading, gold CTA. Current FJMedia style.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#f5f0e8;">
+          <div style="display:flex;gap:16px;align-items:center;width:100%;">
+            <div style="flex:1;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#071520;line-height:1.3;margin-bottom:8px;">Your Winnipeg<br><em style="color:#C9A84C;">Home Story</em><br>Starts Here.</div>
+              <div style="font-size:9px;color:#6b7a8d;">Licensed Realtor</div>
+            </div>
+            <div style="width:60px;height:80px;background:rgba(7,21,32,.1);border-radius:8px;flex-shrink:0;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Light Split (Realtor Style)</div>
+          <div class="card-prompt" onclick="copyTag(this,'light-split-hero')">light-split-hero</div>
+          <div class="card-desc">Cream background, text left, photo right. Warm and personal.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,.12) 0%,transparent 65%);"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:white;line-height:1.2;margin-bottom:8px;">Premium <em>Auto Detailing</em></div>
+            <div style="font-size:9px;color:var(--muted);">Mobile · Available 7 days</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Dark + Radial Glow</div>
+          <div class="card-prompt" onclick="copyTag(this,'dark-radial-glow-hero')">dark-radial-glow-hero</div>
+          <div class="card-desc">Navy bg with subtle gold radial glow behind the heading. Adds depth without images.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;padding:0;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(7,21,32,.95) 50%,transparent);z-index:1;"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(13,32,53,.8));"></div>
+          <div style="position:relative;z-index:2;padding:1.5rem;width:60%;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:white;line-height:1.3;margin-bottom:8px;">Hand-Crafted<br><em style="color:var(--gold);">Sweet Creations</em></div>
+            <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">Winnipeg, MB</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image Background + Overlay</div>
+          <div class="card-prompt" onclick="copyTag(this,'image-overlay-hero')">image-overlay-hero</div>
+          <div class="card-desc">Full-bleed background image with dark overlay. Great for food, events, photography.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Hero Styles</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(59,130,246,.06),rgba(201,168,76,.06));background-size:400% 400%;animation:gradientShift 6s ease infinite;"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:white;line-height:1.2;margin-bottom:6px;">Your Brand.<br><em style="color:var(--gold);">Elevated.</em></div>
+            <div style="display:inline-block;padding:5px 14px;border:1px solid var(--gold);border-radius:4px;font-size:9px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;">Get Started</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Animated Gradient BG</div>
+          <div class="card-prompt" onclick="copyTag(this,'animated-gradient-hero')">animated-gradient-hero</div>
+          <div class="card-desc">Subtle gradient shifts behind the hero text. Modern and alive without being distracting.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;">
+          <div style="text-align:center;position:relative;">
+            <div style="font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">FJMedia</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:white;line-height:1.1;">Websites That<br>Work.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Minimal Text-Only</div>
+          <div class="card-prompt" onclick="copyTag(this,'minimal-text-hero')">minimal-text-hero</div>
+          <div class="card-desc">No images, no effects — just centered text on dark. Maximum sophistication through restraint.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:16px;width:100%;">
+            <div style="flex:1;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:white;line-height:1.3;margin-bottom:8px;">Premium <em style="color:var(--gold);">Auto Care</em></div>
+              <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">Winnipeg's trusted detailer</div>
+              <div style="display:flex;gap:12px;">
+                <div style="text-align:center;"><div style="font-size:16px;font-weight:700;color:var(--gold);">500+</div><div style="font-size:7px;color:var(--muted);">Cars Done</div></div>
+                <div style="text-align:center;"><div style="font-size:16px;font-weight:700;color:var(--gold);">4.9</div><div style="font-size:7px;color:var(--muted);">Google</div></div>
+                <div style="text-align:center;"><div style="font-size:16px;font-weight:700;color:var(--gold);">48h</div><div style="font-size:7px;color:var(--muted);">Booking</div></div>
+              </div>
+            </div>
+            <div style="width:60px;height:80px;background:rgba(201,168,76,.1);border-radius:8px;flex-shrink:0;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Split Hero + Stats Row</div>
+          <div class="card-prompt" onclick="copyTag(this,'split-hero-stats')">split-hero-stats</div>
+          <div class="card-desc">Text + image with stat counters below heading. Detailers, contractors, service businesses with numbers to show.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#0a0a0a;overflow:hidden;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="font-family:'Outfit',sans-serif;font-size:80px;font-weight:700;color:rgba(201,168,76,.04);letter-spacing:-.02em;">FJMEDIA</div>
+          </div>
+          <div style="text-align:center;position:relative;">
+            <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:600;color:white;margin-bottom:4px;">Built Different.</div>
+            <div style="font-size:9px;color:var(--muted);">Websites in 48 hours, not 48 days.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Ghost Watermark Hero</div>
+          <div class="card-prompt" onclick="copyTag(this,'ghost-watermark-hero')">ghost-watermark-hero</div>
+          <div class="card-desc">Giant faded brand name behind the real content. Bold and confident — great for portfolio sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;padding:0;">
+          <div style="width:100%;height:100%;display:flex;">
+            <div style="flex:1;background:rgba(201,168,76,.05);display:flex;flex-direction:column;justify-content:center;padding:12px 16px;">
+              <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Before</div>
+              <div style="font-size:10px;color:var(--muted);line-height:1.5;">Generic template<br>No mobile<br>No SEO</div>
+            </div>
+            <div style="width:1px;background:var(--gold);"></div>
+            <div style="flex:1;background:rgba(201,168,76,.12);display:flex;flex-direction:column;justify-content:center;padding:12px 16px;">
+              <div style="font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">After</div>
+              <div style="font-size:10px;color:var(--cream);line-height:1.5;font-weight:500;">Custom coded<br>Mobile-first<br>SEO-ready</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Before / After Split Hero</div>
+          <div class="card-prompt" onclick="copyTag(this,'before-after-hero')">before-after-hero</div>
+          <div class="card-desc">Side-by-side comparison in the hero. Powerful for agencies, detailers, renovators — anything with transformations.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="hero-preview" style="background:#071520;overflow:hidden;">
+          <div style="position:absolute;top:20%;left:15%;width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,.06);animation:float 4s ease-in-out infinite;"></div>
+          <div style="position:absolute;top:60%;right:20%;width:25px;height:25px;border-radius:50%;background:rgba(201,168,76,.04);animation:float 3s ease-in-out infinite 1s;"></div>
+          <div style="position:absolute;bottom:15%;left:40%;width:15px;height:15px;border-radius:50%;background:rgba(201,168,76,.08);animation:float 5s ease-in-out infinite .5s;"></div>
+          <div style="text-align:center;position:relative;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:white;line-height:1.2;">Floating<br><em style="color:var(--gold);">Particles</em></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Floating Particles Hero</div>
+          <div class="card-prompt" onclick="copyTag(this,'floating-particles-hero')">floating-particles-hero</div>
+          <div class="card-desc">Soft floating circles in background. Adds life without distraction. Tech, creative, and modern brands.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CARD STYLES -->
+  <div id="sec-cards" class="section">
+    <h1 class="page-title">Card Styles</h1>
+    <p class="page-sub">Reference these when describing service cards, pricing cards, or testimonial layouts.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px;">
+            <div style="width:28px;height:2px;background:var(--gold);margin-bottom:10px;"></div>
+            <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:5px;">Custom Website</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.5;">Hand-coded, mobile-ready, tailored to your brand.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gold Border Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'gold-border-card')">gold-border-card</div>
+          <div class="card-desc">Dark card with subtle gold border and 2px gold top accent line.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:var(--navy2);border-radius:10px;overflow:hidden;">
+            <div style="height:4px;background:var(--gold);"></div>
+            <div style="padding:14px;">
+              <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Most Popular</div>
+              <div style="font-size:22px;font-weight:600;color:var(--white);margin-bottom:3px;">$1,000</div>
+              <div style="font-size:10px;color:var(--muted);">Get Customers package</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Pricing Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'pricing-card-gold-top')">pricing-card-gold-top</div>
+          <div class="card-desc">Gold top bar, label, large price, description. Current pricing section style.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:155px;background:rgba(201,168,76,.05);border-left:2px solid var(--gold);padding:14px;border-radius:0 8px 8px 0;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--cream);line-height:1.6;margin-bottom:8px;">"Delivered in 5 days, exactly what we needed."</div>
+            <div style="font-size:10px;color:var(--gold);">— Sarah & Mike T.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Testimonial Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'testimonial-card')">testimonial-card</div>
+          <div class="card-desc">Gold left border, italic serif quote, gold attribution. Clean and credible.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:155px;background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;align-items:flex-start;gap:10px;">
+            <div style="width:32px;height:32px;border-radius:6px;background:rgba(201,168,76,.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+              <div style="width:14px;height:10px;background:var(--gold);border-radius:2px;"></div>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:4px;">Zero Risk</div>
+              <div style="font-size:10px;color:var(--muted);line-height:1.5;">Pay only after you approve.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Icon + Feature Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'icon-feature-card')">icon-feature-card</div>
+          <div class="card-desc">Small icon box left, title + description right. Great for "Why Us" sections.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Card Styles</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;">
+            <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:5px;">Glass Card</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.6);line-height:1.5;">Frosted glass effect with blur.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Glassmorphism Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'glass-card')">glass-card</div>
+          <div class="card-desc">Frosted glass with backdrop-filter blur. Modern, trendy — over images or gradient backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;padding:2px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(201,168,76,.2),var(--gold));">
+            <div style="background:var(--navy2);border-radius:10px;padding:14px;">
+              <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:5px;">Gradient Border</div>
+              <div style="font-size:10px;color:var(--muted);line-height:1.5;">Gold gradient outline.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gradient Border Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'gradient-border-card')">gradient-border-card</div>
+          <div class="card-desc">Background gradient trick for gradient borders. Featured cards, pricing highlights, CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:var(--navy2);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div style="height:50px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(13,32,53,.8));"></div>
+            <div style="padding:10px 12px;">
+              <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:4px;">Barber Shop</div>
+              <div style="font-size:10px;color:var(--muted);line-height:1.5;">Custom website with booking.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image-Top Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'image-top-card')">image-top-card</div>
+          <div class="card-desc">Image/preview on top, content below. Portfolio items, blog posts, project showcases. Used on FJMedia.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:170px;background:var(--navy2);border:1px solid var(--border);border-radius:10px;display:flex;overflow:hidden;">
+            <div style="width:60px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(13,32,53,.8));flex-shrink:0;"></div>
+            <div style="padding:10px 12px;">
+              <div style="font-size:11px;font-weight:500;color:var(--white);margin-bottom:3px;">Horizontal</div>
+              <div style="font-size:9px;color:var(--muted);line-height:1.5;">Image left, text right.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Horizontal Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'horizontal-card')">horizontal-card</div>
+          <div class="card-desc">Image on left, content on right in a row. Blog lists, team members, service items.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:120px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:16px;text-align:center;">
+            <div style="font-size:28px;font-weight:700;color:var(--gold);line-height:1;">48h</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;">Average Delivery</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stat / Metric Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'stat-metric-card')">stat-metric-card</div>
+          <div class="card-desc">Big centered number with label below. Stats sections, dashboards, social proof. Used on FJMedia.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:120px;text-align:center;">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(201,168,76,.12);border:2px solid rgba(201,168,76,.25);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px;">J</div>
+            <div style="font-size:12px;font-weight:500;color:var(--white);">James Fehr</div>
+            <div style="font-size:9px;color:var(--gold);margin-top:2px;">Founder</div>
+            <div style="font-size:9px;color:var(--muted);margin-top:4px;">Web designer & developer based in Winnipeg.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Team Member Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'team-member-card')">team-member-card</div>
+          <div class="card-desc">Circular avatar, name, role, and short bio centered. Team pages, about sections.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--navy);flex-shrink:0;">01</div>
+            <div>
+              <div style="font-size:12px;font-weight:500;color:var(--white);margin-bottom:3px;">Book a Call</div>
+              <div style="font-size:9px;color:var(--muted);line-height:1.5;">15-minute call to discuss your business needs.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Process Step Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'process-step-card')">process-step-card</div>
+          <div class="card-desc">Numbered circle + title + description. How-it-works sections, onboarding steps. Used on FJMedia.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:var(--navy2);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;cursor:pointer;" onmouseenter="this.querySelector('.card-overlay').style.opacity='1'" onmouseleave="this.querySelector('.card-overlay').style.opacity='0'">
+            <div style="height:65px;background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(7,21,32,.8));"></div>
+            <div class="card-overlay" style="position:absolute;inset:0;background:rgba(7,21,32,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;transition:opacity .3s;">
+              <div style="font-size:11px;font-weight:500;color:var(--white);">View Project</div>
+              <div style="font-size:9px;color:var(--gold);">barber-site.com</div>
+            </div>
+            <div style="padding:8px 10px;">
+              <div style="font-size:11px;font-weight:500;color:var(--white);">Barber Portfolio</div>
+              <div style="font-size:9px;color:var(--muted);">Dark minimal theme</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Portfolio Card + Overlay</div>
+          <div class="card-prompt" onclick="copyTag(this,'portfolio-card-overlay')">portfolio-card-overlay</div>
+          <div class="card-desc">Image with hover overlay showing project details + link. Used on FJMedia portfolio section.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:155px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div style="padding:10px;background:rgba(201,168,76,.04);border-right:1px solid var(--border);">
+              <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Agency</div>
+              <div style="font-size:14px;font-weight:600;color:var(--muted);text-decoration:line-through;">$5K</div>
+              <div style="font-size:8px;color:var(--muted);margin-top:3px;">4-6 weeks</div>
+            </div>
+            <div style="padding:10px;background:rgba(201,168,76,.08);">
+              <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">FJMedia</div>
+              <div style="font-size:14px;font-weight:600;color:var(--gold);">$300</div>
+              <div style="font-size:8px;color:var(--cream);margin-top:3px;">48 hours</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Comparison Card (vs.)</div>
+          <div class="card-prompt" onclick="copyTag(this,'comparison-card-vs')">comparison-card-vs</div>
+          <div class="card-desc">Two-column split comparing two options. Agency vs FJMedia, before/after, plan comparisons.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="card-style-preview">
+          <div style="width:150px;background:var(--navy2);border-radius:10px;padding:12px;transform:rotate(-2deg);border:1px solid rgba(201,168,76,.15);box-shadow:0 4px 12px rgba(0,0,0,.3);">
+            <div style="height:55px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(13,32,53,.5));border-radius:6px;margin-bottom:8px;"></div>
+            <div style="font-size:10px;color:var(--cream);text-align:center;font-family:'Cormorant Garamond',serif;">Wedding Social</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Polaroid / Tilted Card</div>
+          <div class="card-prompt" onclick="copyTag(this,'polaroid-card')">polaroid-card</div>
+          <div class="card-desc">Slightly rotated card with shadow. Scrapbook feel — used on Diego & Andrea wedding social site.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COLORS -->
+  <div id="sec-colors" class="section">
+    <h1 class="page-title">Color Themes</h1>
+    <p class="page-sub">Pre-built palettes for different client vibes. Reference by name.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#071520,#0d2035);"></div>
+          <div class="theme-bar" style="background:var(--gold);flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#EDEAE5;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">FJMedia Default</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-fjmedia')">theme-fjmedia</div>
+          <div class="card-desc">Navy + Gold + Cream. Premium, confident, masculine. Your agency standard.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a);"></div>
+          <div class="theme-bar" style="background:#ffffff;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#333;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Monochrome Dark</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-mono-dark')">theme-mono-dark</div>
+          <div class="card-desc">Black + White. Ultra-clean, modern. Barbers, photographers, minimalist brands.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#f5f0e8,#ede5d8);"></div>
+          <div class="theme-bar" style="background:#C9A84C;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#071520;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Warm Cream</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-warm-cream')">theme-warm-cream</div>
+          <div class="card-desc">Cream bg + Gold accents + Dark text. Warm, approachable. Bakeries, realtors, spas.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#0f172a,#1e293b);"></div>
+          <div class="theme-bar" style="background:#3b82f6;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#e2e8f0;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Tech Blue</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-tech-blue')">theme-tech-blue</div>
+          <div class="card-desc">Slate + Blue accents. Clean and professional. SaaS, tech, consulting.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">More Color Themes</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#1a1a2e,#16213e);"></div>
+          <div class="theme-bar" style="background:#e8b4b8;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#2d2d2d;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Rose Gold + Dark</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-rose-dark')">theme-rose-dark</div>
+          <div class="card-desc">Deep navy + rose gold accents. Feminine luxury — beauty salons, bakeries, florists, photographers.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#0f1f0f,#1a2e1a);"></div>
+          <div class="theme-bar" style="background:#4ade80;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#f0f4e8;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Forest Green</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-forest')">theme-forest</div>
+          <div class="card-desc">Dark green + bright green accent + cream. Organic, natural — landscapers, wellness, eco brands.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#f5e6d3,#fdf2e9);"></div>
+          <div class="theme-bar" style="background:#8b6f47;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#3d2b1f;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Earth Tones</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-earth')">theme-earth</div>
+          <div class="card-desc">Warm tan + brown + dark chocolate. Rustic, grounded — coffee shops, woodworkers, boutiques.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);"></div>
+          <div class="theme-bar" style="background:#ef4444;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#f5f5f5;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Red + Black</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-red-black')">theme-red-black</div>
+          <div class="card-desc">Black + red accent + white. Bold and aggressive — barbers, auto, fitness, martial arts.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e);"></div>
+          <div class="theme-bar" style="background:#a78bfa;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#e2e8f0;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Deep Purple</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-purple')">theme-purple</div>
+          <div class="card-desc">Dark purple + lavender accent. Creative, artistic — studios, DJs, nightlife, creative agencies.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#0d1117,#161b22);"></div>
+          <div class="theme-bar" style="background:linear-gradient(90deg,#00d4ff,#7c3aed);flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#e2e8f0;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Neon Gradient</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-neon')">theme-neon</div>
+          <div class="card-desc">Dark bg + neon cyan/purple gradient accent. Electric, modern — gaming, music, nightlife, tech startups.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#fffbf0,#fef3e2);"></div>
+          <div class="theme-bar" style="background:#f97316;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#1c1917;flex:0 0 20px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Sunset Warm</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-sunset')">theme-sunset</div>
+          <div class="card-desc">Light warm bg + orange accent + dark text. Friendly, energetic — restaurants, food trucks, events.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="theme-preview">
+          <div class="theme-bar" style="background:linear-gradient(135deg,#0a1628,#0d2137);"></div>
+          <div class="theme-bar" style="background:#10b981;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#d4af37;flex:0 0 8px;"></div>
+          <div class="theme-bar" style="background:#f0f0f0;flex:0 0 12px;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Emerald + Gold</div>
+          <div class="card-prompt" onclick="copyTag(this,'theme-emerald-gold')">theme-emerald-gold</div>
+          <div class="card-desc">Dark navy + emerald green + gold. Luxury with a twist — high-end service, finance, real estate.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MOTION PATTERNS -->
+  <div id="sec-motion" class="section">
+    <h1 class="page-title">Motion Patterns</h1>
+    <p class="page-sub">Compound effects and scroll-based patterns. Reference by name for complex interactions.</p>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:8px;">
+          <div style="font-size:11px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;">Scroll Reveal</div>
+          <div style="width:100px;height:40px;background:rgba(201,168,76,.15);border:1px solid var(--gold);border-radius:6px;animation:fadeUp .6s ease both;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll Trigger + Fade Up</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-reveal-fade-up')">scroll-reveal-fade-up</div>
+          <div class="card-desc">Elements animate in when they enter the viewport. Your FJMedia standard using GSAP ScrollTrigger.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:4px;">
+          <div style="font-size:11px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Counter</div>
+          <div style="font-size:32px;font-weight:700;color:var(--white);">48h</div>
+          <div style="font-size:10px;color:var(--muted);">delivery time</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Number Counter</div>
+          <div class="card-prompt" onclick="copyTag(this,'count-up')">count-up</div>
+          <div class="card-desc">Number counts up from 0 to target on scroll. Use on stats, pricing, social proof numbers.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="display:flex;gap:6px;align-items:flex-end;">
+            <div style="width:14px;background:rgba(201,168,76,.3);border-radius:3px 3px 0 0;animation:fadeUp .4s ease both;height:30px;"></div>
+            <div style="width:14px;background:rgba(201,168,76,.5);border-radius:3px 3px 0 0;animation:fadeUp .4s ease both .1s;height:50px;"></div>
+            <div style="width:14px;background:var(--gold);border-radius:3px 3px 0 0;animation:fadeUp .4s ease both .2s;height:70px;"></div>
+            <div style="width:14px;background:rgba(201,168,76,.5);border-radius:3px 3px 0 0;animation:fadeUp .4s ease both .3s;height:45px;"></div>
+            <div style="width:14px;background:rgba(201,168,76,.3);border-radius:3px 3px 0 0;animation:fadeUp .4s ease both .4s;height:55px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stagger Bars</div>
+          <div class="card-prompt" onclick="copyTag(this,'stagger-bars')">stagger-bars</div>
+          <div class="card-desc">Bars grow up sequentially. Use on chart sections, skill bars, or comparison visuals.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="width:160px;height:6px;background:var(--navy2);border-radius:3px;overflow:hidden;">
+            <div style="height:100%;width:75%;background:linear-gradient(90deg,var(--gold),var(--gold-dim));border-radius:3px;animation:slideLeft .8s ease both;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Progress Bar Fill</div>
+          <div class="card-prompt" onclick="copyTag(this,'progress-fill')">progress-fill</div>
+          <div class="card-desc">Bar fills to a percentage on scroll. Use for skill levels, project progress, loading states.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="overflow:hidden;">
+          <div style="display:flex;white-space:nowrap;animation:marquee 8s linear infinite;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(201,168,76,.3);padding-right:40px;">Web Design&nbsp;&nbsp;·&nbsp;&nbsp;SEO&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Hosting&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(201,168,76,.3);padding-right:40px;">Web Design&nbsp;&nbsp;·&nbsp;&nbsp;SEO&nbsp;&nbsp;·&nbsp;&nbsp;Branding&nbsp;&nbsp;·&nbsp;&nbsp;Hosting&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Logo / Service Marquee</div>
+          <div class="card-prompt" onclick="copyTag(this,'marquee-strip')">marquee-strip</div>
+          <div class="card-desc">Infinite horizontal scroll. Use for client logos, services strip, or trust indicators.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayParallaxDemo()">
+          <div style="position:relative;width:140px;height:80px;overflow:hidden;border-radius:8px;">
+            <div id="parallax-bg" style="position:absolute;inset:-10px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(7,21,32,.8));transition:transform .3s ease;"></div>
+            <div id="parallax-fg" style="position:relative;display:flex;align-items:center;justify-content:center;height:100%;font-size:12px;color:var(--cream);transition:transform .3s ease;">Content</div>
+          </div>
+          <span class="play-hint">hover to see</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Parallax Layers</div>
+          <div class="card-prompt" onclick="copyTag(this,'parallax-layers')">parallax-layers</div>
+          <div class="card-desc">Background and foreground move at different speeds on scroll. Adds depth to hero and section backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayStaggerGrid()">
+          <div id="stagger-grid-demo" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+            <div class="sg-item" style="width:30px;height:30px;background:rgba(201,168,76,.2);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:0s;"></div>
+            <div class="sg-item" style="width:30px;height:30px;background:rgba(201,168,76,.3);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:.08s;"></div>
+            <div class="sg-item" style="width:30px;height:30px;background:rgba(201,168,76,.2);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:.16s;"></div>
+            <div class="sg-item" style="width:30px;height:30px;background:rgba(201,168,76,.3);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:.24s;"></div>
+            <div class="sg-item" style="width:30px;height:30px;background:var(--gold);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:.32s;"></div>
+            <div class="sg-item" style="width:30px;height:30px;background:rgba(201,168,76,.3);border-radius:4px;animation:staggerFade .4s ease both;animation-delay:.40s;"></div>
+          </div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stagger Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'stagger-grid')">stagger-grid</div>
+          <div class="card-desc">Grid items appear in sequence (left-to-right, top-to-bottom). Portfolio grids, gallery, features.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:8px;width:140px;">
+            <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);font-weight:700;">1</div>
+            <div style="flex:1;height:2px;background:var(--gold);animation:slideLeft .6s ease both;"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;width:140px;">
+            <div style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);font-weight:700;">2</div>
+            <div style="flex:1;height:2px;background:rgba(201,168,76,.15);"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;width:140px;">
+            <div style="width:28px;height:28px;border-radius:50%;border:2px solid rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);font-weight:700;">3</div>
+            <div style="flex:1;height:2px;background:rgba(201,168,76,.08);"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Step Progress</div>
+          <div class="card-prompt" onclick="copyTag(this,'step-progress')">step-progress</div>
+          <div class="card-desc">Numbered steps with connecting lines that fill on scroll. Process sections, onboarding flows.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" onclick="replayRevealStack()">
+          <div style="position:relative;width:100px;height:70px;" id="reveal-stack-demo">
+            <div class="rs-card" style="position:absolute;width:100px;height:50px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:8px;top:0;left:0;animation:staggerFade .4s ease both;"></div>
+            <div class="rs-card" style="position:absolute;width:100px;height:50px;background:rgba(201,168,76,.25);border:1px solid rgba(201,168,76,.4);border-radius:8px;top:8px;left:8px;animation:staggerFade .4s ease both .15s;"></div>
+            <div class="rs-card" style="position:absolute;width:100px;height:50px;background:var(--gold);border-radius:8px;top:16px;left:16px;animation:staggerFade .4s ease both .3s;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--navy);">Top</div>
+          </div>
+          <span class="play-hint">click to replay</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stacked Card Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'stacked-reveal')">stacked-reveal</div>
+          <div class="card-desc">Cards stack behind each other and reveal in sequence. Testimonials, pricing tiers, feature cards.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTIONS -->
+  <div id="sec-sections" class="section">
+    <h1 class="page-title">Section Patterns</h1>
+    <p class="page-sub">Full-width section blueprints. Reference by name to quickly scaffold common page sections.</p>
+
+    <div class="section-label">Social Proof & Trust</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);">What Clients Say</div>
+            <div style="background:rgba(201,168,76,.06);border-left:2px solid var(--gold);padding:8px 10px;border-radius:0 6px 6px 0;margin:0 16px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:10px;font-style:italic;color:var(--cream);line-height:1.5;">"Best investment for my business."</div>
+              <div style="font-size:8px;color:var(--gold);margin-top:4px;">— Sarah T., Bakery Owner</div>
+            </div>
+            <div style="display:flex;gap:4px;justify-content:center;margin-top:2px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);"></div>
+              <div style="width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.3);"></div>
+              <div style="width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.3);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Testimonial Carousel</div>
+          <div class="card-prompt" onclick="copyTag(this,'testimonial-carousel')">testimonial-carousel</div>
+          <div class="card-desc">Single testimonial with dot pagination. Auto-rotates or swipeable. Standard for social proof sections.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:8px;padding:0 10px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);">Results</div>
+            <div style="display:flex;gap:8px;justify-content:center;">
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:20px;font-weight:700;color:var(--gold);">48h</div>
+                <div style="font-size:7px;color:var(--muted);">Delivery</div>
+              </div>
+              <div style="width:1px;background:var(--border);"></div>
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:20px;font-weight:700;color:var(--gold);">$0</div>
+                <div style="font-size:7px;color:var(--muted);">Upfront</div>
+              </div>
+              <div style="width:1px;background:var(--border);"></div>
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:20px;font-weight:700;color:var(--gold);">100%</div>
+                <div style="font-size:7px;color:var(--muted);">Satisfaction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stats / Numbers Bar</div>
+          <div class="card-prompt" onclick="copyTag(this,'stats-bar')">stats-bar</div>
+          <div class="card-desc">3-4 big numbers in a row with labels. Count-up on scroll. Used on FJMedia hero and agency sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;">Trusted By</div>
+            <div style="display:flex;gap:16px;justify-content:center;align-items:center;opacity:.5;">
+              <div style="width:40px;height:16px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+              <div style="width:40px;height:16px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+              <div style="width:40px;height:16px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+              <div style="width:40px;height:16px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Logo Trust Strip</div>
+          <div class="card-prompt" onclick="copyTag(this,'logo-trust-strip')">logo-trust-strip</div>
+          <div class="card-desc">Row of client/partner logos, muted. Optional marquee scroll. Builds credibility instantly.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="display:flex;gap:4px;justify-content:center;">
+              <div style="font-size:14px;color:var(--gold);">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <div style="font-size:16px;font-weight:700;color:var(--white);text-align:center;">4.9 / 5.0</div>
+            <div style="font-size:8px;color:var(--muted);text-align:center;">Based on 47 Google Reviews</div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:6px;">
+              <div style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.1);"></div>
+              <div style="width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.1);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Review Score Block</div>
+          <div class="card-prompt" onclick="copyTag(this,'review-score-block')">review-score-block</div>
+          <div class="card-desc">Star rating + score + source. Links to Google/Yelp. Instant trust for local businesses.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Content Sections</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:8px;padding:0 12px;">
+            <div style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <div style="font-size:10px;color:var(--gold);flex-shrink:0;">+</div>
+              <div style="font-size:10px;color:var(--cream);flex:1;">Is there really no upfront cost?</div>
+            </div>
+            <div style="border-top:1px solid var(--border);padding-top:6px;display:flex;align-items:flex-start;gap:8px;">
+              <div style="font-size:10px;color:var(--gold);flex-shrink:0;">−</div>
+              <div>
+                <div style="font-size:10px;color:var(--cream);margin-bottom:4px;">How long does a site take?</div>
+                <div style="font-size:8px;color:var(--muted);line-height:1.5;">Most sites are delivered within 48 hours of our call.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-size:10px;color:var(--gold);flex-shrink:0;">+</div>
+              <div style="font-size:10px;color:var(--cream);">Can I edit the site myself?</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">FAQ Accordion</div>
+          <div class="card-prompt" onclick="copyTag(this,'faq-accordion')">faq-accordion</div>
+          <div class="card-desc">Expandable Q&A rows with +/- toggle. Standard FAQ pattern used on most client sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">How It Works</div>
+            <div style="display:flex;gap:6px;justify-content:center;">
+              <div style="text-align:center;flex:1;">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--navy);margin:0 auto 4px;">1</div>
+                <div style="font-size:8px;color:var(--cream);">Book a Call</div>
+              </div>
+              <div style="width:20px;display:flex;align-items:center;justify-content:center;"><div style="width:100%;height:1px;background:rgba(201,168,76,.3);margin-top:-12px;"></div></div>
+              <div style="text-align:center;flex:1;">
+                <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);margin:0 auto 4px;">2</div>
+                <div style="font-size:8px;color:var(--cream);">We Build</div>
+              </div>
+              <div style="width:20px;display:flex;align-items:center;justify-content:center;"><div style="width:100%;height:1px;background:rgba(201,168,76,.15);margin-top:-12px;"></div></div>
+              <div style="text-align:center;flex:1;">
+                <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.1);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);margin:0 auto 4px;">3</div>
+                <div style="font-size:8px;color:var(--cream);">You Approve</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Process Steps (Horizontal)</div>
+          <div class="card-prompt" onclick="copyTag(this,'process-steps-horizontal')">process-steps-horizontal</div>
+          <div class="card-desc">Numbered circles with connecting lines. Used on FJMedia agency site — the standard process section.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0;">
+            <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;padding:8px 12px;">
+              <div style="display:flex;align-items:center;gap:6px;"><div style="font-size:9px;color:rgba(237,234,229,.25);">✕ MYTH</div></div>
+              <div style="font-size:9px;color:var(--muted);text-decoration:line-through;line-height:1.4;">A good site takes 4-8 weeks and costs $5K+</div>
+            </div>
+            <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;padding:8px 12px;background:rgba(201,168,76,.04);border-left:2px solid rgba(201,168,76,.25);">
+              <div style="display:flex;align-items:center;gap:6px;"><div style="font-size:9px;color:var(--gold);">✓ REALITY</div></div>
+              <div style="font-size:9px;color:var(--cream);line-height:1.4;"><strong style="color:var(--gold);">48 hours</strong>, hand-coded, from $200</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Myth vs. Reality</div>
+          <div class="card-prompt" onclick="copyTag(this,'myth-vs-reality')">myth-vs-reality</div>
+          <div class="card-desc">Split-row myth (left) vs reality (right). Currently live on FJMedia agency site replacing the FAQ.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:4px;padding:0 8px;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;">
+              <div style="height:48px;background:rgba(201,168,76,.15);border-radius:6px;"></div>
+              <div style="height:48px;background:rgba(201,168,76,.1);border-radius:6px;"></div>
+              <div style="height:48px;background:rgba(201,168,76,.2);border-radius:6px;"></div>
+              <div style="height:48px;background:rgba(201,168,76,.08);border-radius:6px;"></div>
+              <div style="height:48px;background:rgba(201,168,76,.18);border-radius:6px;"></div>
+              <div style="height:48px;background:rgba(201,168,76,.12);border-radius:6px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Portfolio / Work Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'portfolio-work-grid')">portfolio-work-grid</div>
+          <div class="card-desc">Grid of project cards with hover overlay. Used on FJMedia. Optional category filter tabs above.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">CTA & Conversion</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;align-items:center;gap:8px;background:rgba(201,168,76,.06);border-radius:8px;margin:6px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--white);text-align:center;">Ready to Get Started?</div>
+            <div style="font-size:9px;color:var(--muted);text-align:center;">Book a free 15-minute call.</div>
+            <div style="display:inline-block;padding:6px 18px;background:var(--gold);border-radius:5px;font-size:9px;font-weight:600;color:var(--navy);">Book a Call</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CTA Banner</div>
+          <div class="card-prompt" onclick="copyTag(this,'cta-banner')">cta-banner</div>
+          <div class="card-desc">Full-width centered heading + subtitle + button. Goes before footer on every client site.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0;">
+            <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;padding:10px 14px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--white);line-height:1.3;">Let's Build<br>Something Great.</div>
+              <div style="display:inline-block;padding:5px 12px;background:var(--gold);border-radius:4px;font-size:8px;font-weight:600;color:var(--navy);width:fit-content;margin-top:4px;">Get Started</div>
+            </div>
+            <div style="display:flex;flex-direction:column;justify-content:center;gap:6px;padding:10px 14px;background:rgba(201,168,76,.04);">
+              <div style="font-size:8px;color:var(--muted);">
+                <div style="margin-bottom:4px;">📧 hello@fjmedia.ca</div>
+                <div style="margin-bottom:4px;">📱 (204) 555-0100</div>
+                <div>📍 Winnipeg, MB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Contact Split (CTA + Info)</div>
+          <div class="card-prompt" onclick="copyTag(this,'contact-split')">contact-split</div>
+          <div class="card-desc">Heading + CTA on left, contact details on right. Standard contact section pattern.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:8px;padding:0 12px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Free Download</div>
+            <div style="display:flex;gap:8px;align-items:center;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:10px;">
+              <div style="flex:1;">
+                <div style="font-size:10px;font-weight:500;color:var(--white);margin-bottom:3px;">Website Audit Checklist</div>
+                <div style="font-size:8px;color:var(--muted);">10-point checklist to evaluate any business website.</div>
+              </div>
+              <div style="padding:5px 10px;background:var(--gold);border-radius:4px;font-size:8px;font-weight:600;color:var(--navy);white-space:nowrap;">Get It Free</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Lead Magnet Block</div>
+          <div class="card-prompt" onclick="copyTag(this,'lead-magnet-block')">lead-magnet-block</div>
+          <div class="card-desc">Download offer with title + description + CTA. Used on FJMedia for audit lead magnet capture.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Choose Your Package</div>
+            <div style="display:flex;gap:4px;justify-content:center;">
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:8px;color:var(--muted);margin-bottom:2px;">Starter</div>
+                <div style="font-size:14px;font-weight:700;color:var(--white);">$300</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:7px;background:var(--gold);color:var(--navy);padding:1px 5px;border-radius:3px;display:inline-block;font-weight:600;margin-bottom:3px;">POPULAR</div>
+                <div style="font-size:14px;font-weight:700;color:var(--gold);">$600</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:8px;color:var(--muted);margin-bottom:2px;">Premium</div>
+                <div style="font-size:14px;font-weight:700;color:var(--white);">$1,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Pricing Table (3-Tier)</div>
+          <div class="card-prompt" onclick="copyTag(this,'pricing-table-3-tier')">pricing-table-3-tier</div>
+          <div class="card-desc">Three pricing columns with highlighted middle option. Standard pricing section for any service site.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Footer & Utility</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:flex-end;gap:8px;">
+            <div style="border-top:1px solid var(--border);padding:10px 12px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                <div>
+                  <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px;">{FJ}Media</div>
+                  <div style="font-size:7px;color:var(--muted);">Winnipeg Web Design</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:3px;">
+                  <div style="font-size:7px;color:var(--cream);">Services</div>
+                  <div style="font-size:7px;color:var(--cream);">Portfolio</div>
+                  <div style="font-size:7px;color:var(--cream);">Contact</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:3px;">
+                  <div style="font-size:7px;color:var(--cream);">Instagram</div>
+                  <div style="font-size:7px;color:var(--cream);">Email</div>
+                </div>
+              </div>
+              <div style="border-top:1px solid var(--border);padding-top:6px;font-size:7px;color:var(--muted);text-align:center;">© 2026 FJMedia · Winnipeg, MB</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Footer (3-Column Dark)</div>
+          <div class="card-prompt" onclick="copyTag(this,'footer-3-col-dark')">footer-3-col-dark</div>
+          <div class="card-desc">Logo + nav links + social in columns, copyright below. Standard dark footer for all client sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:flex-end;">
+            <div style="text-align:center;padding:16px;border-top:1px solid var(--border);">
+              <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px;">{FJ}Media</div>
+              <div style="display:flex;gap:10px;justify-content:center;margin-bottom:8px;">
+                <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);"></div>
+                <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);"></div>
+                <div style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.2);"></div>
+              </div>
+              <div style="font-size:7px;color:var(--muted);">© 2026 FJMedia</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Footer (Centered Minimal)</div>
+          <div class="card-prompt" onclick="copyTag(this,'footer-centered-minimal')">footer-centered-minimal</div>
+          <div class="card-desc">Logo + social icons + copyright centered. Simpler option for single-page or minimal client sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="display:flex;gap:6px;justify-content:center;">
+              <div style="flex:1;max-width:120px;">
+                <div style="font-size:7px;color:var(--muted);margin-bottom:3px;">Name</div>
+                <div style="height:20px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;"></div>
+              </div>
+              <div style="flex:1;max-width:120px;">
+                <div style="font-size:7px;color:var(--muted);margin-bottom:3px;">Email</div>
+                <div style="height:20px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;"></div>
+              </div>
+            </div>
+            <div style="max-width:248px;margin:0 auto;width:100%;">
+              <div style="font-size:7px;color:var(--muted);margin-bottom:3px;">Message</div>
+              <div style="height:36px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;"></div>
+            </div>
+            <div style="text-align:center;">
+              <div style="display:inline-block;padding:5px 16px;background:var(--gold);border-radius:4px;font-size:8px;font-weight:600;color:var(--navy);">Send</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Contact Form</div>
+          <div class="card-prompt" onclick="copyTag(this,'contact-form')">contact-form</div>
+          <div class="card-desc">Name + email + message + submit. Web3Forms or GAS backend. Standard for all client sites.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="section-preview">
+          <div style="display:flex;flex-direction:column;height:100%;justify-content:center;gap:6px;padding:0 10px;">
+            <div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+              <div style="font-size:18px;">📍</div>
+              <div>
+                <div style="font-size:10px;font-weight:500;color:var(--white);">Visit Us</div>
+                <div style="font-size:8px;color:var(--muted);">123 Main St, Winnipeg MB</div>
+              </div>
+            </div>
+            <div style="height:50px;background:rgba(201,168,76,.06);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);">[ Google Maps Embed ]</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Location / Map Section</div>
+          <div class="card-prompt" onclick="copyTag(this,'location-map-section')">location-map-section</div>
+          <div class="card-desc">Address card + embedded Google Map. Good for brick-and-mortar: barbers, bakeries, restaurants.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div id="sec-navs" class="section">
+    <h1 class="page-title">Navigation Patterns</h1>
+    <p class="page-sub">Nav bars, mobile menus, and header patterns. Reference by name to scaffold navigation quickly.</p>
+
+    <div class="section-label">Desktop Navigation</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;background:rgba(7,21,32,.95);border:1px solid var(--border);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11px;color:var(--gold);font-weight:600;">{FJ}</div>
+            <div style="display:flex;gap:12px;font-size:8px;color:var(--cream);">
+              <span>Services</span><span>Portfolio</span><span>About</span>
+            </div>
+            <div style="padding:4px 10px;background:var(--gold);border-radius:4px;font-size:7px;font-weight:600;color:var(--navy);">Book a Call</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Floating Fixed Nav</div>
+          <div class="card-prompt" onclick="copyTag(this,'floating-fixed-nav')">floating-fixed-nav</div>
+          <div class="card-desc">Fixed at top, semi-transparent bg. Logo left, links center, CTA right. Current FJMedia standard.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;">
+            <div style="background:transparent;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:var(--white);font-weight:600;">Brand</div>
+              <div style="display:flex;gap:12px;font-size:8px;color:rgba(255,255,255,.7);">
+                <span>Home</span><span>Work</span><span>Contact</span>
+              </div>
+            </div>
+            <div style="margin-top:8px;background:rgba(7,21,32,.95);backdrop-filter:blur(8px);padding:6px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:6px;border:1px solid var(--border);">
+              <div style="font-size:11px;color:var(--white);font-weight:600;">Brand</div>
+              <div style="display:flex;gap:12px;font-size:8px;color:var(--cream);">
+                <span>Home</span><span>Work</span><span>Contact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Transparent → Solid on Scroll</div>
+          <div class="card-prompt" onclick="copyTag(this,'nav-transparent-to-solid')">nav-transparent-to-solid</div>
+          <div class="card-desc">Starts transparent over hero, becomes solid/blurred on scroll. Premium feel for image-heavy heroes.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;text-align:center;">
+            <div style="font-size:14px;color:var(--gold);font-weight:600;margin-bottom:8px;">{FJ}Media</div>
+            <div style="display:flex;gap:16px;justify-content:center;font-size:8px;color:var(--cream);">
+              <span style="border-bottom:1px solid var(--gold);padding-bottom:2px;">Services</span>
+              <span>Portfolio</span>
+              <span>About</span>
+              <span>Contact</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Centered Logo + Links Below</div>
+          <div class="card-prompt" onclick="copyTag(this,'nav-centered-stacked')">nav-centered-stacked</div>
+          <div class="card-desc">Logo centered on top, nav links below. Editorial, elegant — photographers, boutiques, restaurants.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;background:rgba(7,21,32,.95);border:1px solid var(--border);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11px;color:var(--gold);font-weight:600;">{FJ}</div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <div style="padding:4px 10px;border:1px solid var(--gold);border-radius:4px;font-size:7px;color:var(--gold);">Portfolio</div>
+              <div style="padding:4px 10px;background:var(--gold);border-radius:4px;font-size:7px;font-weight:600;color:var(--navy);">Hire Me</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Minimal (Logo + CTAs Only)</div>
+          <div class="card-prompt" onclick="copyTag(this,'nav-minimal-cta')">nav-minimal-cta</div>
+          <div class="card-desc">Logo left, 1-2 buttons right, no nav links. Clean for single-page sites or landing pages.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Mobile Navigation</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="nav-preview" style="flex-direction:column;gap:8px;">
+          <div style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 4px;">
+            <div style="font-size:11px;color:var(--gold);font-weight:600;">{FJ}</div>
+            <div style="display:flex;flex-direction:column;gap:3px;cursor:pointer;">
+              <div style="width:16px;height:1.5px;background:var(--cream);"></div>
+              <div style="width:12px;height:1.5px;background:var(--cream);"></div>
+              <div style="width:16px;height:1.5px;background:var(--cream);"></div>
+            </div>
+          </div>
+          <div style="width:100%;background:rgba(7,21,32,.98);border:1px solid var(--border);border-radius:8px;padding:10px;">
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:9px;">
+              <div style="color:var(--gold);border-bottom:1px solid var(--border);padding-bottom:6px;">Services</div>
+              <div style="color:var(--cream);border-bottom:1px solid var(--border);padding-bottom:6px;">Portfolio</div>
+              <div style="color:var(--cream);border-bottom:1px solid var(--border);padding-bottom:6px;">About</div>
+              <div style="padding:5px 0;text-align:center;background:var(--gold);border-radius:4px;color:var(--navy);font-weight:600;font-size:8px;">Book a Call</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hamburger → Dropdown</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-hamburger-dropdown')">mobile-hamburger-dropdown</div>
+          <div class="card-desc">Hamburger icon opens a dropdown panel below nav. Current FJMedia mobile pattern — clean and simple.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview" style="flex-direction:row;gap:4px;">
+          <div style="width:40%;display:flex;align-items:center;justify-content:space-between;padding:0 4px;">
+            <div style="font-size:11px;color:var(--gold);font-weight:600;">{FJ}</div>
+            <div style="display:flex;flex-direction:column;gap:3px;cursor:pointer;">
+              <div style="width:16px;height:1.5px;background:var(--cream);transform:rotate(45deg) translate(2px,2px);"></div>
+              <div style="width:16px;height:1.5px;background:var(--cream);transform:rotate(-45deg) translate(1px,-1px);"></div>
+            </div>
+          </div>
+          <div style="flex:1;background:rgba(7,21,32,.98);border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:10px;padding:10px 16px;">
+            <div style="font-size:14px;color:var(--cream);font-family:'Cormorant Garamond',serif;">Services</div>
+            <div style="font-size:14px;color:var(--cream);font-family:'Cormorant Garamond',serif;">Portfolio</div>
+            <div style="font-size:14px;color:var(--gold);font-family:'Cormorant Garamond',serif;">Contact</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Full-Screen Overlay Menu</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-fullscreen-overlay')">mobile-fullscreen-overlay</div>
+          <div class="card-desc">Hamburger opens a full-screen overlay with large nav links. Premium and dramatic on mobile.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview" style="align-items:flex-end;">
+          <div style="width:100%;background:rgba(7,21,32,.98);border:1px solid var(--border);border-radius:12px 12px 0 0;padding:8px 0;display:flex;justify-content:space-around;">
+            <div style="text-align:center;">
+              <div style="font-size:12px;margin-bottom:2px;">🏠</div>
+              <div style="font-size:6px;color:var(--gold);">Home</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:12px;margin-bottom:2px;">💼</div>
+              <div style="font-size:6px;color:var(--muted);">Services</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:12px;margin-bottom:2px;">📞</div>
+              <div style="font-size:6px;color:var(--muted);">Call</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:12px;margin-bottom:2px;">📍</div>
+              <div style="font-size:6px;color:var(--muted);">Location</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Bottom Tab Bar</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-bottom-tab-bar')">mobile-bottom-tab-bar</div>
+          <div class="card-desc">Fixed bottom bar with icon + label tabs. App-like feel for mobile — great for service businesses.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:11px;color:var(--gold);font-weight:600;">{FJ}</div>
+            <div style="display:flex;gap:6px;overflow-x:auto;">
+              <div style="padding:4px 10px;background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:20px;font-size:7px;color:var(--gold);white-space:nowrap;">Services</div>
+              <div style="padding:4px 10px;border:1px solid var(--border);border-radius:20px;font-size:7px;color:var(--cream);white-space:nowrap;">Work</div>
+              <div style="padding:4px 10px;border:1px solid var(--border);border-radius:20px;font-size:7px;color:var(--cream);white-space:nowrap;">About</div>
+              <div style="padding:4px 10px;border:1px solid var(--border);border-radius:20px;font-size:7px;color:var(--cream);white-space:nowrap;">Contact</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Pill Nav (Horizontal Scroll)</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-pill-nav')">mobile-pill-nav</div>
+          <div class="card-desc">Horizontally scrollable pill-shaped buttons. Good for mobile when 4-6+ nav items without hamburger.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function replay(previewEl, demoId) {
+    const el = document.getElementById(demoId);
+    if (!el) return;
+    const anim = el.style.animation;
+    el.style.animation = 'none';
+    el.offsetHeight; // force reflow
+    el.style.animation = anim;
+  }
+
+  function replayStagger() {
+    ['s1','s2','s3','s4'].forEach(id => {
+      const el = document.getElementById(id);
+      const anim = el.style.animation;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = anim;
+    });
+  }
+
+  function copyTag(el, tag) {
+    event.stopPropagation();
+    navigator.clipboard.writeText(tag).then(() => {
+      el.classList.add('copied');
+      el.textContent = 'copied!';
+      setTimeout(() => { el.classList.remove('copied'); el.textContent = tag; }, 1500);
+    });
+  }
+
+  // Typewriter replay
+  function replayTypewriter() {
+    const el = document.getElementById('typewriter-demo');
+    el.style.animation = 'none';
+    el.style.width = '0';
+    el.offsetHeight;
+    el.style.animation = 'typewriter 2s steps(18) forwards, blink .7s step-end infinite';
+  }
+
+  // Split text replay
+  function replaySplitText() {
+    ['split-l','split-r'].forEach(id => {
+      const el = document.getElementById(id);
+      const anim = el.style.animation;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = anim;
+    });
+  }
+
+  // Letter stagger
+  function replayLetterStagger() {
+    const container = document.getElementById('letter-stagger');
+    const text = 'FJMedia';
+    container.innerHTML = '';
+    text.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.textContent = ch;
+      span.style.cssText = `opacity:0; animation: staggerFade .3s ease both; animation-delay: ${i * 0.06}s;`;
+      if (ch === 'F' || ch === 'J') span.style.color = 'var(--gold)';
+      container.appendChild(span);
+    });
+  }
+  replayLetterStagger();
+
+  // Word stagger
+  function replayWordStagger() {
+    const container = document.getElementById('word-stagger');
+    const words = ['We', 'build', 'websites', 'that', 'convert.'];
+    container.innerHTML = '';
+    words.forEach((w, i) => {
+      const span = document.createElement('span');
+      span.textContent = w;
+      span.style.cssText = `font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--cream); opacity:0; animation: staggerFade .4s ease both; animation-delay: ${i * 0.12}s;`;
+      if (w === 'convert.') span.style.color = 'var(--gold)';
+      container.appendChild(span);
+    });
+  }
+  replayWordStagger();
+
+  // SVG line draw replay
+  function replayLineReveal() {
+    const line = document.querySelector('#line-reveal-demo line');
+    line.style.animation = 'none';
+    line.offsetHeight;
+    line.style.animation = 'drawLine 1.2s ease both';
+  }
+
+  // Gradient reveal
+  function replayGradientReveal() {
+    const el = document.getElementById('gradient-reveal-demo');
+    el.style.backgroundPosition = '100% 0';
+    el.offsetHeight;
+    el.style.backgroundPosition = '0% 0';
+    setTimeout(() => { el.style.backgroundPosition = '100% 0'; }, 900);
+  }
+
+  // Flip card
+  let flipState = false;
+  function replayFlipCard() {
+    const el = document.getElementById('flip-card-demo');
+    flipState = !flipState;
+    el.style.transform = flipState ? 'rotateY(180deg)' : 'rotateY(0)';
+  }
+
+  // Stagger grid replay
+  function replayStaggerGrid() {
+    document.querySelectorAll('.sg-item').forEach(el => {
+      const anim = el.style.animation;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = anim;
+    });
+  }
+
+  // Parallax demo (mouse-based)
+  const parallaxPreview = document.querySelector('#parallax-bg')?.closest('.preview');
+  if (parallaxPreview) {
+    parallaxPreview.addEventListener('mousemove', (e) => {
+      const rect = parallaxPreview.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      document.getElementById('parallax-bg').style.transform = `translate(${x*15}px, ${y*15}px)`;
+      document.getElementById('parallax-fg').style.transform = `translate(${x*-5}px, ${y*-5}px)`;
+    });
+    parallaxPreview.addEventListener('mouseleave', () => {
+      document.getElementById('parallax-bg').style.transform = 'translate(0,0)';
+      document.getElementById('parallax-fg').style.transform = 'translate(0,0)';
+    });
+  }
+  function replayParallaxDemo() {} // click handled by mousemove
+
+  // Stacked card reveal
+  function replayRevealStack() {
+    document.querySelectorAll('.rs-card').forEach(el => {
+      const anim = el.style.animation;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = anim;
+    });
+  }
+</script>
+</body>
+</html>
