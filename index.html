@@ -675,6 +675,13 @@
     }
     @media (max-width: 900px) { .mobile-cta-bar { display: block; } }
 
+    /* Push bot widget above sticky CTA bar on mobile */
+    @media (max-width: 900px) {
+      #fjm-widget-btn { bottom: 76px !important; }
+      #fjm-widget-badge { bottom: 128px !important; }
+      #fjm-chat-panel { bottom: 148px !important; }
+    }
+
     /* FOOTER */
     footer {
       background: var(--bg); border-top: 1px solid var(--border);
