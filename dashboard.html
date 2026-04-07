@@ -292,7 +292,7 @@
 
 <script>
   // ===== CONFIG =====
-  const PASS = 'password1234';
+  const PASS = '1781';
   // Replace with your deployed GAS web app URL:
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbwdTGiCLs7KxnZNil2caVvBl5O317Pa7zgiOolo6uGCw6mjv69wXrNHcQqMEjg4WIh-/exec';
 
@@ -321,7 +321,9 @@
     document.getElementById('passInput').value = '';
   }
 
-  if (sessionStorage.getItem('fjdash')) {
+  // Auto-unlock when embedded in ops iframe
+  const inIframe = window.self !== window.top;
+  if (inIframe || sessionStorage.getItem('fjdash')) {
     document.getElementById('lockScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadDashboard();

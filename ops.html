@@ -132,6 +132,12 @@
 
   /* Bold markdown */
   .output-box strong { font-weight: 700; color: var(--gold); }
+
+  /* Embed frame (Dashboard / Reference Library) */
+  .embed-frame {
+    width: 100%; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--navy); min-height: calc(100vh - 180px);
+  }
 </style>
 </head>
 <body>
@@ -165,7 +171,9 @@
     <div class="tabs">
       <button class="tab-btn on" data-tab="quote">Quote</button>
       <button class="tab-btn" data-tab="proposal">Proposal</button>
-      <button class="tab-btn" data-tab="followup">Follow-Up Sequence</button>
+      <button class="tab-btn" data-tab="followup">Follow-Up</button>
+      <button class="tab-btn" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="reflib">Reference Library</button>
     </div>
 
     <!-- Quote Tab -->
@@ -241,12 +249,22 @@
       </div>
     </div>
 
+    <!-- Dashboard Tab -->
+    <div class="tab-panel" id="tab-dashboard">
+      <iframe class="embed-frame" src="dashboard.html" id="dashFrame"></iframe>
+    </div>
+
+    <!-- Reference Library Tab -->
+    <div class="tab-panel" id="tab-reflib">
+      <iframe class="embed-frame" src="reference-library.html" id="refFrame"></iframe>
+    </div>
+
   </div>
 </div>
 
 <script>
   const API_URL = '/api/ops';
-  const PASS = 'fjmedia2026'; // Change this to whatever you want
+  const PASS = '1781';
 
   function unlock() {
     const val = document.getElementById('passInput').value;
@@ -281,7 +299,14 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
       btn.classList.add('on');
-      document.getElementById('tab-' + btn.dataset.tab).classList.add('on');
+      const panel = document.getElementById('tab-' + btn.dataset.tab);
+      panel.classList.add('on');
+      // Lazy-load iframes — only set src when tab first opens
+      const frame = panel.querySelector('iframe');
+      if (frame && !frame.dataset.loaded) {
+        frame.src = frame.src; // force reload
+        frame.dataset.loaded = '1';
+      }
     });
   });
 
