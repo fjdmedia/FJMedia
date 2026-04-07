@@ -561,6 +561,8 @@
     }
     .status-bar-text { font-size: 0.85rem; color: var(--text-mid); line-height: 1.4; }
     .status-bar-text strong { color: var(--accent); font-weight: 700; }
+    .status-bar-text .status-suggestion { color: var(--accent); font-size: 0.75rem; display: block; margin-top: 0.25rem; font-style: italic; }
+    .status-bar-text .status-benefit { color: var(--text-light); font-size: 0.72rem; display: block; margin-top: 0.15rem; }
     .status-bar-text .status-nudge { color: var(--text-light); font-size: 0.78rem; display: block; margin-top: 0.2rem; }
     .status-empty { color: var(--text-light); font-size: 0.85rem; font-style: italic; }
 
@@ -1453,6 +1455,34 @@
       getCustomers: 'Add analytics &amp; managed maintenance — upgrade to Own the Market.',
       ownTheMarket: null
     };
+    const comboSuggestions = {
+      goLive:       'Websites for event pages, linktrees, and personal brands.',
+      getFound:     'Websites for barbers, salons, restaurants, and local shops.',
+      getCustomers: 'Websites for caterers, contractors, and businesses taking bookings.',
+      ownTheMarket: 'For established businesses ready to own their market.'
+    };
+    const comboBenefits = {
+      goLive:       'A custom hand-coded site — live and mobile-ready.',
+      getFound:     'Show up on Google and get found by local customers.',
+      getCustomers: 'Capture leads, take orders, and automate follow-ups.',
+      ownTheMarket: 'Full visibility, lead capture, and data-driven growth.'
+    };
+    function getCustomSuggestion(svcs) {
+      const has = s => svcs.includes(s);
+      if (has('analytics') && !has('seo') && !has('ordering'))
+        return 'Websites for photographers, artists, and portfolio sites.';
+      if (has('ordering') && !has('analytics') && !has('seo'))
+        return 'Websites for food trucks, event planners, and pop-ups.';
+      return 'A flexible setup tailored to your business.';
+    }
+    function getCustomBenefit(svcs) {
+      const has = s => svcs.includes(s);
+      if (has('analytics') && !has('seo') && !has('ordering'))
+        return 'Track your audience and see what\'s working.';
+      if (has('ordering') && !has('analytics') && !has('seo'))
+        return 'Take orders and bookings right from your site.';
+      return 'Pick what you need — nothing you don\'t.';
+    }
     const svcDisplayNames = {
       website: 'Custom Website', ordering: 'Ordering / Booking',
       seo: 'SEO &amp; Google Setup', analytics: 'Analytics &amp; Maintenance'
@@ -1472,11 +1502,15 @@
     }
 
     function findClosestCombo(svcs) {
+      // Only nudge when user is exactly 1 service away from completing a package
       const order = ['goLive','getFound','getCustomers','ownTheMarket'];
       for (const k of order) {
-        if (svcs.every(s => comboMap[k].includes(s))) return k;
+        const combo = comboMap[k];
+        const isSubset = svcs.every(s => combo.includes(s));
+        const missing = combo.filter(s => !svcs.includes(s));
+        if (isSubset && missing.length === 1) return k;
       }
-      return 'ownTheMarket';
+      return null; // no close match — treat as custom package
     }
 
     function updateCalcUI() {
@@ -1486,30 +1520,34 @@
       const exact  = findExactCombo(svcs);
       const closest = exact || findClosestCombo(svcs);
 
-      // Highlight matching combo tab
-      document.querySelectorAll('.combo-tab').forEach(t => {
-        t.classList.toggle('active', t.dataset.combo === closest);
-      });
+      // Missing services for nudge (only when closest exists)
+      const missingSvcs = closest ? comboMap[closest].filter(s => !svcs.includes(s)) : [];
 
-      // Find missing services for the closest combo
-      const missingSvcs = comboMap[closest].filter(s => !svcs.includes(s));
+      // Highlight matching combo tab (none if custom)
+      document.querySelectorAll('.combo-tab').forEach(t => {
+        t.classList.toggle('active', !!closest && t.dataset.combo === closest);
+      });
 
       // Add/remove nudge highlight on missing service cards
       document.querySelectorAll('.svc-card:not(.placeholder)').forEach(card => {
-        card.classList.toggle('nudge', !exact && missingSvcs.includes(card.dataset.svc));
+        card.classList.toggle('nudge', !exact && closest && missingSvcs.includes(card.dataset.svc));
       });
 
       let html = '';
-      if (exact) {
-        html = `<span class="status-bar-text"><strong>${comboNames[exact]}</strong>`;
+      if (svcs.length === 0) {
+        html = '<span class="status-bar-text">Select services to build your package.</span>';
+      } else if (exact) {
+        html = `<span class="status-bar-text"><strong>${comboNames[exact]}</strong><span class="status-suggestion">${comboSuggestions[exact]}</span><span class="status-benefit">${comboBenefits[exact]}</span>`;
         if (upsellMessages[exact]) {
           html += `<span class="status-nudge">${upsellMessages[exact]}</span>`;
         }
         html += '</span>';
-      } else {
+      } else if (closest) {
         const missingNames = missingSvcs.map(s => svcDisplayNames[s]).join(' + ');
-        const count = missingSvcs.length;
-        html = `<span class="status-bar-text">You're ${count} service${count > 1 ? 's' : ''} away from <strong>${comboNames[closest]}</strong><span class="status-nudge">Add ${missingNames} to get the full package at a bundled rate.</span></span>`;
+        html = `<span class="status-bar-text">1 service away from <strong>${comboNames[closest]}</strong><span class="status-suggestion">${comboSuggestions[closest]}</span><span class="status-benefit">${comboBenefits[closest]}</span><span class="status-nudge">Add ${missingNames} to get the full package at a bundled rate.</span></span>`;
+      } else {
+        const svcList = svcs.map(s => svcDisplayNames[s]).join(', ');
+        html = `<span class="status-bar-text"><strong>Custom Package:</strong> ${svcList}<span class="status-suggestion">${getCustomSuggestion(svcs)}</span><span class="status-benefit">${getCustomBenefit(svcs)}</span></span>`;
       }
       statusBar.innerHTML = html;
     }
