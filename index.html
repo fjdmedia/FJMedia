@@ -368,22 +368,34 @@
     .why-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; }
 
     /* FAQ / OBJECTIONS */
-    #faq { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .faq-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem;
-      max-width: 900px; margin: 0 auto;
+    /* MYTH VS REALITY */
+    #myths { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .myth-stack { display: flex; flex-direction: column; gap: 1rem; max-width: 900px; margin: 0 auto; }
+    .myth-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
     }
-    .faq-card {
-      padding: 2rem 1.8rem;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; transition: background 0.2s, border-color 0.2s;
+    .myth-row:hover { border-color: rgba(201,168,76,0.25); }
+    .myth-side, .reality-side { padding: 1.5rem 1.6rem; }
+    .myth-side { background: rgba(7,21,32,0.8); }
+    .reality-side { background: var(--bg3); border-left: 2px solid rgba(201,168,76,0.25); }
+    .myth-tag, .reality-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; margin-bottom: 0.55rem;
     }
-    .faq-card:hover { background: var(--bg2); border-color: rgba(201,168,76,0.3); }
-    .faq-q {
-      font-size: 0.95rem; font-weight: 700; color: var(--accent);
-      margin-bottom: 0.6rem; line-height: 1.35;
+    .myth-tag { color: rgba(237,234,229,0.25); }
+    .myth-tag::before { content: '✕'; font-size: 0.7rem; }
+    .reality-tag { color: var(--accent); }
+    .reality-tag::before { content: '✓'; font-size: 0.7rem; }
+    .myth-text {
+      font-size: 0.88rem; color: var(--text-light); line-height: 1.55;
+      text-decoration: line-through; text-decoration-color: rgba(237,234,229,0.12);
     }
-    .faq-a { font-size: 0.85rem; color: var(--text-mid); line-height: 1.7; }
+    .reality-text { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
+    .reality-text strong { color: var(--accent); font-weight: 600; }
 
     /* GROWTH / RETAINER */
     #growth { background: var(--bg2); border-bottom: 1px solid var(--border); }
@@ -678,8 +690,9 @@
       /* Why */
       .why-grid { grid-template-columns: 1fr; }
 
-      /* FAQ */
-      .faq-grid { grid-template-columns: 1fr; }
+      /* Myths */
+      .myth-row { grid-template-columns: 1fr; }
+      .reality-side { border-left: none; border-top: 2px solid rgba(201,168,76,0.25); }
 
       /* Growth */
       .growth-grid { grid-template-columns: 1fr; }
@@ -940,7 +953,7 @@
       <li><a href="#process">Process</a></li>
       <li><a href="#why">Why Us</a></li>
       <li><a href="#pricing">Get a Quote</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#myths">Myths</a></li>
       <li><a href="/proof.html">Bug Off 🪲 (Hehe)</a></li>
       <li><a href="#contact" class="nav-cta">Book a Call</a></li>
     </ul>
@@ -956,7 +969,7 @@
     <a href="#process"     onclick="toggleNav()">Process</a>
     <a href="#why"         onclick="toggleNav()">Why Us</a>
     <a href="#pricing"     onclick="toggleNav()">Get a Quote</a>
-    <a href="#faq"         onclick="toggleNav()">FAQ</a>
+    <a href="#myths"       onclick="toggleNav()">Myths</a>
     <a href="/proof.html"  onclick="toggleNav()">Bug Off 🪲 (Hehe)</a>
     <a href="#contact"  onclick="toggleNav()">Book a Call</a>
   </div>
@@ -1433,34 +1446,69 @@
     </div>
   </section>
 
-  <!-- FAQ / OBJECTIONS -->
-  <section id="faq">
+  <!-- MYTH VS REALITY -->
+  <section id="myths">
     <div class="section-inner">
-      <p class="section-label">Questions</p>
-      <h2 class="section-title">You're thinking it. We'll answer it.</h2>
-      <p class="section-sub">The stuff people actually want to know before they book a call.</p>
+      <p class="section-label">Myth vs. Reality</p>
+      <h2 class="section-title">What the industry tells you. What we actually do.</h2>
       <div class="divider"></div>
-      <div class="faq-grid">
-        <div class="faq-card reveal">
-          <div class="faq-q">"How do you deliver in 48 hours?"</div>
-          <div class="faq-a">Every line is real HTML, CSS, and JavaScript — no page builders, no WordPress, no drag-and-drop. We use AI to write and refine the code faster, the same way a carpenter uses power tools instead of hand tools. The result is still custom-built from scratch. The tool just makes it faster.</div>
+      <div class="myth-stack">
+
+        <div class="myth-row reveal">
+          <div class="myth-side">
+            <div class="myth-tag">Myth</div>
+            <div class="myth-text">"A good website takes 4–8 weeks to build."</div>
+          </div>
+          <div class="reality-side">
+            <div class="reality-tag">Reality</div>
+            <div class="reality-text">Yours is done in <strong>48 hours</strong>. Hand-coded. Live link in your inbox before most agencies finish their first meeting.</div>
+          </div>
         </div>
-        <div class="faq-card reveal">
-          <div class="faq-q">"How is it so affordable?"</div>
-          <div class="faq-a">No office. No project managers. No account managers. You work directly with the person writing the code. Lower overhead, lower cost — without cutting corners.</div>
+
+        <div class="myth-row reveal">
+          <div class="myth-side">
+            <div class="myth-tag">Myth</div>
+            <div class="myth-text">"You have to pay thousands before you see anything."</div>
+          </div>
+          <div class="reality-side">
+            <div class="reality-tag">Reality</div>
+            <div class="reality-text">We build first. You review a finished site. <strong>Pay only if you're satisfied.</strong> Don't like it? Walk away — no invoice, no strings.</div>
+          </div>
         </div>
-        <div class="faq-card reveal">
-          <div class="faq-q">"What if I don't like it?"</div>
-          <div class="faq-a">You don't pay. We send you a live link. Share it with whoever you want. If it's not right, walk away — no invoice, no awkward conversation, no strings.</div>
+
+        <div class="myth-row reveal">
+          <div class="myth-side">
+            <div class="myth-tag">Myth</div>
+            <div class="myth-text">"Affordable means templates and page builders."</div>
+          </div>
+          <div class="reality-side">
+            <div class="reality-tag">Reality</div>
+            <div class="reality-text">Every line is <strong>hand-written code</strong> — HTML, CSS, JavaScript. No WordPress. No Wix. No Squarespace. We use AI the way a carpenter uses power tools — the result is still built from scratch.</div>
+          </div>
         </div>
-        <div class="faq-card reveal">
-          <div class="faq-q">"Is it really custom if it's that fast?"</div>
-          <div class="faq-a">Every site is hand-coded from scratch — no page builders, no drag-and-drop. Browse our portfolio. Every site looks different because every business is different.</div>
+
+        <div class="myth-row reveal">
+          <div class="myth-side">
+            <div class="myth-tag">Myth</div>
+            <div class="myth-text">"You need discovery calls, strategy phases, and proposals before anything gets built."</div>
+          </div>
+          <div class="reality-side">
+            <div class="reality-tag">Reality</div>
+            <div class="reality-text"><strong>15-minute call.</strong> We learn your business, then we build. No phases, no decks, no 40-page proposals. You talk to a person, not a process.</div>
+          </div>
         </div>
-        <div class="faq-card reveal">
-          <div class="faq-q">"Why not go with a bigger agency?"</div>
-          <div class="faq-a">You can. You'll wait 4–8 weeks, sit through discovery calls, and pay thousands before you see anything. Or you can see a finished site in 48 hours, built by the person you're texting, and pay only if you're satisfied.</div>
+
+        <div class="myth-row reveal">
+          <div class="myth-side">
+            <div class="myth-tag">Myth</div>
+            <div class="myth-text">"You need a team of designers, developers, and project managers."</div>
+          </div>
+          <div class="reality-side">
+            <div class="reality-tag">Reality</div>
+            <div class="reality-text">One person builds it, maintains it, and picks up when you text. <strong>That's James.</strong> No handoffs, no ticket systems, no waiting for "the developer" to get back to you.</div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -1572,8 +1620,8 @@
     });
 
     // FAQ cards — stagger in
-    gsap.from('.faq-card', {
-      scrollTrigger: { trigger: '.faq-grid', start: 'top 78%', once: true },
+    gsap.from('.myth-row', {
+      scrollTrigger: { trigger: '.myth-stack', start: 'top 78%', once: true },
       opacity: 0, y: 20, duration: 0.5, stagger: 0.1, ease: 'power2.out'
     });
 
