@@ -367,6 +367,63 @@
     .why-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
     .why-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; }
 
+    /* FAQ / OBJECTIONS */
+    #faq { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .faq-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .faq-card {
+      padding: 2rem 1.8rem;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; transition: background 0.2s, border-color 0.2s;
+    }
+    .faq-card:hover { background: var(--bg2); border-color: rgba(201,168,76,0.3); }
+    .faq-q {
+      font-size: 0.95rem; font-weight: 700; color: var(--accent);
+      margin-bottom: 0.6rem; line-height: 1.35;
+    }
+    .faq-a { font-size: 0.85rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* GROWTH / RETAINER */
+    #growth { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .growth-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+      max-width: 960px; margin: 0 auto;
+    }
+    .growth-card {
+      padding: 2rem 1.6rem;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; transition: background 0.2s, border-color 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .growth-card:hover { background: rgba(17,40,64,0.8); border-color: rgba(201,168,76,0.3); }
+    .growth-card.featured { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
+    .growth-card-name {
+      font-size: 1rem; font-weight: 700; color: var(--heading);
+      margin-bottom: 0.3rem;
+    }
+    .growth-card-sub {
+      font-size: 0.78rem; color: var(--text-light);
+      margin-bottom: 1.2rem; line-height: 1.5;
+    }
+    .growth-list { list-style: none; margin: 0; padding: 0; flex: 1; }
+    .growth-list li {
+      font-size: 0.82rem; color: var(--text-mid);
+      padding: 0.4rem 0; border-bottom: 1px solid rgba(27,58,86,0.3);
+      line-height: 1.5;
+    }
+    .growth-list li:last-child { border-bottom: none; }
+    .growth-list li::before {
+      content: '✓ '; color: var(--accent); font-weight: 600;
+    }
+    .growth-pop {
+      display: inline-block; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--accent); color: var(--bg);
+      padding: 3px 8px; border-radius: 3px; margin-bottom: 0.8rem;
+    }
+
     /* CLIENT STRIP */
     .client-strip {
       text-align: center; padding: 1.5rem 0 0;
@@ -620,6 +677,12 @@
 
       /* Why */
       .why-grid { grid-template-columns: 1fr; }
+
+      /* FAQ */
+      .faq-grid { grid-template-columns: 1fr; }
+
+      /* Growth */
+      .growth-grid { grid-template-columns: 1fr; }
 
       /* Portfolio */
       .carousel-arrow { width: 36px; height: 36px; }
@@ -877,6 +940,7 @@
       <li><a href="#process">Process</a></li>
       <li><a href="#why">Why Us</a></li>
       <li><a href="#pricing">Get a Quote</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="/proof.html">Bug Off 🪲 (Hehe)</a></li>
       <li><a href="#contact" class="nav-cta">Book a Call</a></li>
     </ul>
@@ -892,6 +956,7 @@
     <a href="#process"     onclick="toggleNav()">Process</a>
     <a href="#why"         onclick="toggleNav()">Why Us</a>
     <a href="#pricing"     onclick="toggleNav()">Get a Quote</a>
+    <a href="#faq"         onclick="toggleNav()">FAQ</a>
     <a href="/proof.html"  onclick="toggleNav()">Bug Off 🪲 (Hehe)</a>
     <a href="#contact"  onclick="toggleNav()">Book a Call</a>
   </div>
@@ -902,7 +967,7 @@
       <div>
         <span class="hero-label">Hand-Coded Web Design · Winnipeg</span>
         <h1 class="hero-title">We'll cook you up a website<br /><em>in 48 hours.</em></h1>
-        <p class="hero-sub">Free to see it. Pay if you're satisfied.</p>
+        <p class="hero-sub">No discovery calls. No proposals. No 6-week wait.<br>Free to see it. Pay if you're satisfied.</p>
         <div class="hero-btns">
           <a href="#contact" class="btn-primary">Book a Call</a>
           <a href="#work" class="btn-outline">See Our Work</a>
@@ -925,7 +990,7 @@
           </div>
           <div>
             <div class="stat-text-num">48 Hours</div>
-            <div class="stat-text-label">From call to custom design</div>
+            <div class="stat-text-label">Not 6 weeks. Call to finished design.</div>
           </div>
         </div>
         <div class="hero-stat-card">
@@ -987,21 +1052,21 @@
   <section id="process">
     <div class="section-inner">
       <p class="section-label">How It Works</p>
-      <h2 class="section-title">A process built around your confidence.</h2>
-      <p class="section-sub">We removed the risk. You don't pay for anything until you're ready to move forward.</p>
+      <h2 class="section-title">No phases. No milestones. Just results.</h2>
+      <p class="section-sub">Most agencies sell you a process — discovery, strategy, revisions, timelines. We skip to the part where you see a finished website.</p>
       <div class="divider"></div>
       <div class="process-grid">
         <div class="process-step">
           <div class="step-line"></div>
           <div class="step-num">01 — Quick Call</div>
-          <div class="step-title">15 minutes. That's it.</div>
-          <div class="step-desc">A quick call to learn about your business and what you need. No pitch, no commitment — just seeing if we're the right fit.</div>
+          <div class="step-title">15 minutes. Not a sales pitch.</div>
+          <div class="step-desc">We learn about your business and what you need. No strategy sessions, no questionnaires, no follow-up calls — just a straight conversation.</div>
         </div>
         <div class="process-step">
           <div class="step-line"></div>
           <div class="step-num">02 — We Design It</div>
-          <div class="step-title">48 hours. No payment. No contract.</div>
-          <div class="step-desc">We get to work and hand-code your website from scratch. 48 hours later, you're looking at a live preview — before you've spent a cent.</div>
+          <div class="step-title">48 hours. Your site is ready.</div>
+          <div class="step-desc">While most agencies are still scheduling their second meeting, you're already looking at a finished, hand-coded website — live, clickable, yours to review.</div>
         </div>
         <div class="process-step">
           <div class="step-line"></div>
@@ -1239,12 +1304,12 @@
     <div class="section-inner">
       <p class="section-label">Packages</p>
       <h2 class="section-title">Your design is ready. <em>Now choose what happens next.</em></h2>
-      <p class="section-sub">Love the design? You can go live as-is, or add the backend that turns it into a customer machine.</p>
+      <p class="section-sub">Everything agencies charge thousands for — delivered lean, fast, and built to grow with your business.</p>
       <div class="divider"></div>
 
       <div class="calc-scarcity">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>Design delivered in 48 hours. Full builds launch in under a week.</span>
+        <span>No retainers required. No monthly platform fees. You own everything we build.</span>
       </div>
 
       <!-- Combo tabs -->
@@ -1309,7 +1374,7 @@
       <!-- CTA — scrolls to contact & passes selected services -->
       <div class="pricing-cta-wrap">
         <a href="#contact" class="btn-primary" onclick="pricingToContact()">Get My Free Design →</a>
-        <p class="pricing-cta-sub">One call. 48 hours. Yours — before you spend a dime.</p>
+        <p class="pricing-cta-sub">What agencies charge $3K–$5K for, we deliver at a fraction of the cost. See it before you pay.</p>
       </div>
 
     </div>
@@ -1317,6 +1382,88 @@
 
   <!-- Dependency toast -->
   <div class="dep-toast" id="depToast"></div>
+
+  <!-- GROWTH / RETAINER -->
+  <section id="growth">
+    <div class="section-inner">
+      <p class="section-label">After Launch</p>
+      <h2 class="section-title">Your site is live. <em>Now let's make it work.</em></h2>
+      <p class="section-sub">Most agencies disappear after launch. We stick around — updating your content, tracking what's working, and making sure your site keeps bringing in customers.</p>
+      <div class="divider"></div>
+      <div class="growth-grid">
+        <div class="growth-card reveal">
+          <div class="growth-card-name">Keep It Running</div>
+          <div class="growth-card-sub">For businesses that just need it maintained.</div>
+          <ul class="growth-list">
+            <li>Hosting &amp; uptime support</li>
+            <li>Minor edits (up to 2/month)</li>
+            <li>SSL &amp; domain renewals</li>
+            <li>Security &amp; performance checks</li>
+          </ul>
+        </div>
+        <div class="growth-card featured reveal">
+          <span class="growth-pop">Most Popular</span>
+          <div class="growth-card-name">Keep It Growing</div>
+          <div class="growth-card-sub">For businesses that want more customers, not just a website.</div>
+          <ul class="growth-list">
+            <li>Everything in Keep It Running</li>
+            <li>Monthly analytics report</li>
+            <li>SEO tweaks &amp; content updates</li>
+            <li>Google Business Profile management</li>
+            <li>Seasonal content refreshes</li>
+          </ul>
+        </div>
+        <div class="growth-card reveal">
+          <div class="growth-card-name">Own Your Market</div>
+          <div class="growth-card-sub">For businesses ready to dominate their niche locally.</div>
+          <ul class="growth-list">
+            <li>Everything in Keep It Growing</li>
+            <li>Monthly 1-on-1 sit-down</li>
+            <li>Social media content (4 posts/mo)</li>
+            <li>Competitor monitoring</li>
+            <li>Ad strategy &amp; review</li>
+            <li>Priority support — same-day replies</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="#contact" class="btn-primary" style="background:var(--accent);color:var(--bg);border-color:var(--accent);">Book a Call — Ask About Growth Plans</a>
+        <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.8rem;">No commitment. We'll walk you through what makes sense for your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / OBJECTIONS -->
+  <section id="faq">
+    <div class="section-inner">
+      <p class="section-label">Questions</p>
+      <h2 class="section-title">You're thinking it. We'll answer it.</h2>
+      <p class="section-sub">The stuff people actually want to know before they book a call.</p>
+      <div class="divider"></div>
+      <div class="faq-grid">
+        <div class="faq-card reveal">
+          <div class="faq-q">"How do you deliver in 48 hours?"</div>
+          <div class="faq-a">We use AI-assisted development and proven frameworks refined across dozens of Winnipeg businesses — barbers, bakeries, detailers, photographers. Not templates. Hand-coded every time, but with a system built for speed.</div>
+        </div>
+        <div class="faq-card reveal">
+          <div class="faq-q">"How is it so affordable?"</div>
+          <div class="faq-a">No office. No project managers. No account managers. You work directly with the person writing the code. Lower overhead, lower cost — without cutting corners.</div>
+        </div>
+        <div class="faq-card reveal">
+          <div class="faq-q">"What if I don't like it?"</div>
+          <div class="faq-a">You don't pay. We send you a live link. Share it with whoever you want. If it's not right, walk away — no invoice, no awkward conversation, no strings.</div>
+        </div>
+        <div class="faq-card reveal">
+          <div class="faq-q">"Is it really custom if it's that fast?"</div>
+          <div class="faq-a">Every site is hand-coded from scratch — no page builders, no drag-and-drop. Browse our portfolio. Every site looks different because every business is different.</div>
+        </div>
+        <div class="faq-card reveal">
+          <div class="faq-q">"Why not go with a bigger agency?"</div>
+          <div class="faq-a">You can. You'll wait 4–8 weeks, sit through discovery calls, and pay thousands before you see anything. Or you can see a finished site in 48 hours, built by the person you're texting, and pay only if you're satisfied.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section id="contact">
@@ -1416,6 +1563,18 @@
     gsap.from('.why-card', {
       scrollTrigger: { trigger: '.why-grid', start: 'top 78%', once: true },
       opacity: 0, scale: 0.96, duration: 0.5, stagger: 0.08, ease: 'power2.out'
+    });
+
+    // Growth cards — stagger in
+    gsap.from('.growth-card', {
+      scrollTrigger: { trigger: '.growth-grid', start: 'top 78%', once: true },
+      opacity: 0, y: 20, duration: 0.5, stagger: 0.12, ease: 'power2.out'
+    });
+
+    // FAQ cards — stagger in
+    gsap.from('.faq-card', {
+      scrollTrigger: { trigger: '.faq-grid', start: 'top 78%', once: true },
+      opacity: 0, y: 20, duration: 0.5, stagger: 0.1, ease: 'power2.out'
     });
 
     // Why cards — hover: icon bounce

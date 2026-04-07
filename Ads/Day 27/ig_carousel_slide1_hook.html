@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.post{width:540px;height:540px;background:#071520;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:44px 50px;}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:40px 40px;}
+.corner{position:absolute;width:60px;height:60px;border-color:#c9a84c;border-style:solid;opacity:0.4;}
+.corner.tl{top:28px;left:28px;border-width:1px 0 0 1px;}
+.corner.br{bottom:28px;right:28px;border-width:0 1px 1px 0;}
+.center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;height:100%;justify-content:center;}
+.logo-mark{font-family:"Space Mono",monospace;font-size:24px;color:#c9a84c;letter-spacing:-0.01em;margin-bottom:6px;}
+.logo-word{font-family:"Syne",sans-serif;font-weight:800;font-size:11px;color:#EDEAE5;letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px;}
+.big-heading{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:30px;color:#EDEAE5;line-height:1.2;margin-bottom:10px;}
+.big-heading em{color:#c9a84c;font-style:normal;}
+.sub{font-family:"DM Sans",sans-serif;font-size:12px;color:rgba(237,234,229,0.5);letter-spacing:.06em;margin-bottom:24px;line-height:1.6;}
+.divider{width:40px;height:1px;background:#c9a84c;opacity:0.4;margin-bottom:24px;}
+.swipe{font-family:"DM Sans",sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,168,76,0.5);margin-top:auto;}
+.swipe span{display:inline-block;animation:nudge 1.5s ease-in-out infinite;}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.logo{position:absolute;bottom:28px;left:0;right:0;text-align:center;font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,0.25);z-index:2;}
+.hint{margin-top:20px;font-family:sans-serif;font-size:12px;color:#444;text-align:center;}
+</style></head><body>
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div class="post">
+  <div class="grid"></div>
+  <div class="corner tl"></div>
+  <div class="corner br"></div>
+  <div class="center">
+    <div class="logo-mark">{FJ}</div>
+    <div class="logo-word">FJMedia</div>
+    <div class="big-heading">Hiring a web agency<br>in 2026 looks like this.</div>
+    <div class="divider"></div>
+    <div class="sub">Discovery call. Strategy phase. Wireframes.<br>Revisions. 6 weeks. Thousands of dollars.<br><em style="color:#c9a84c;font-style:normal;">Before you even see a design.</em></div>
+    <div class="swipe">Swipe to see the alternative <span>&rarr;</span></div>
+  </div>
+  <div class="logo">fjmedia &middot; winnipeg</div>
+</div>
+<p class="hint">Rendered at 1080x1080 via Playwright</p>
+</div></body></html>
