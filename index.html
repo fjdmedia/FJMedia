@@ -1331,7 +1331,7 @@
           <p class="section-label">Book a Call</p>
           <h2 class="section-title">Let's see if we're a fit.</h2>
           <div class="divider"></div>
-          <p>The first step is a quick, no-pressure conversation. Tell us about your business and what you're looking for — we'll take it from there.</p>
+          <p>Drop your name and how to reach you — James gets back within 12 hours.</p>
           <div class="contact-detail">
             <span class="d-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1348,27 +1348,17 @@
             <span class="d-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </span>
-            <span>Response within 24 hours</span>
+            <span>James gets back within 12 hours</span>
           </div>
         </div>
         <form class="contact-form" id="contactForm">
           <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
           <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
-          <input type="text"  name="name"     placeholder="Your Name"               required />
-          <input type="email" name="email"    placeholder="Your Email"              required />
-          <input type="text"  name="business" placeholder="Business Name (optional)" />
-          <select name="service">
-            <option value="" disabled selected>What are you looking for?</option>
-            <option>Custom Website</option>
-            <option>Website + SEO &amp; Google Setup</option>
-            <option>Website + Ordering / Booking System</option>
-            <option>Full Package (Website, SEO, Ordering, Domain)</option>
-            <option>Monthly Retainer / Ongoing Support</option>
-            <option>Not Sure Yet</option>
-          </select>
-          <textarea name="message" placeholder="Tell us about your business and what you need..."></textarea>
-          <button type="submit" class="btn-primary" id="submitBtn">Book a Call</button>
-          <p id="formMsg" style="font-size:0.85rem;color:var(--accent);display:none;text-align:center;">Message sent &#8212; we'll reach out within 24 hours to schedule your call.</p>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="text" name="contact" placeholder="Instagram handle or email" required />
+          <textarea name="message" placeholder="Tell us about your business (optional)"></textarea>
+          <button type="submit" class="btn-primary" id="submitBtn">Get My Free Design</button>
+          <p id="formMsg" style="font-size:0.85rem;color:var(--accent);display:none;text-align:center;">Message sent &#8212; James will get back within 12 hours.</p>
         </form>
       </div>
     </div>
@@ -1605,14 +1595,6 @@
     });
 
     function prefillAudit() {
-      const select = document.querySelector('[name="service"]');
-      if (select) {
-        Array.from(select.options).forEach(opt => {
-          if (opt.value.toLowerCase().includes('not sure')) {
-            select.value = opt.value;
-          }
-        });
-      }
       const msg = document.querySelector('[name="message"]');
       if (msg && !msg.value) msg.value = "I'd like a free website audit — here's my site: ";
       document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
@@ -1746,11 +1728,9 @@
         if (data.success) {
           // Log to Google Sheets in parallel — don't block on it
           const params = new URLSearchParams({
-            name:     formData.get('name')     || '',
-            email:    formData.get('email')    || '',
-            business: formData.get('business') || '',
-            service:  formData.get('service')  || '',
-            message:  formData.get('message')  || ''
+            name:    formData.get('name')    || '',
+            contact: formData.get('contact') || '',
+            message: formData.get('message') || ''
           });
           fetch(GAS_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
