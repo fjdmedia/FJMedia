@@ -65,13 +65,24 @@
       --mono:       'Courier New', 'Consolas', monospace;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scrollbar-width: none; }
+    html::-webkit-scrollbar { display: none; }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+    }
+
+    /* SCROLL PROGRESS BAR */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0;
+      width: 0%; height: 3px;
+      background: var(--accent);
+      z-index: 101;
+      transition: none;
+      pointer-events: none;
     }
 
     /* NAV */
@@ -689,13 +700,16 @@
 
       /* Why */
       .why-grid { grid-template-columns: 1fr; }
+      .why-card { padding: 1.5rem 1.4rem; }
 
       /* Myths */
       .myth-row { grid-template-columns: 1fr; }
       .reality-side { border-left: none; border-top: 2px solid rgba(201,168,76,0.25); }
+      .myth-side, .reality-side { padding: 1.2rem 1.3rem; }
 
       /* Growth */
       .growth-grid { grid-template-columns: 1fr; }
+      .growth-card { padding: 1.5rem 1.3rem; }
 
       /* Portfolio */
       .carousel-arrow { width: 36px; height: 36px; }
@@ -703,6 +717,10 @@
       /* Process */
       .process-grid { grid-template-columns: 1fr 1fr; }
       .step-line { display: none; }
+
+      /* Pricing */
+      .calc-scarcity { font-size: 0.78rem; padding: 0.65rem 1rem; gap: 0.5rem; }
+      .pricing-cta-sub { font-size: 0.75rem; }
 
       /* Contact */
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -724,13 +742,36 @@
         min-height: 100svh;  /* overrides above — reliable on mobile */
       }
       .hero-title { font-size: 2rem; }
+      .hero-sub { font-size: 0.9rem; line-height: 1.65; }
       .hero-btns { flex-direction: column; align-items: stretch; }
       .hero-btns .btn-primary,
       .hero-btns .btn-outline { text-align: center; width: 100%; box-sizing: border-box; }
       .offer-headline { font-size: 2rem; }
+      .offer-sub { font-size: 0.85rem; }
       .offer-pillar-num { font-size: 1.6rem; }
       .section-title { font-size: 1.5rem; }
+      .section-sub { font-size: 0.85rem; margin-bottom: 2rem; }
       .process-grid { grid-template-columns: 1fr; }
+      .step-desc { font-size: 0.8rem; }
+
+      /* Myth rows — tighter on small screens */
+      .myth-side, .reality-side { padding: 1rem 1.1rem; }
+      .myth-text, .reality-text { font-size: 0.82rem; }
+
+      /* Portfolio body */
+      .portfolio-body { padding: 1rem 1.1rem; }
+      .portfolio-desc { font-size: 0.78rem; }
+
+      /* Why cards */
+      .why-desc { font-size: 0.78rem; }
+
+      /* Growth cards */
+      .growth-card-sub { font-size: 0.74rem; }
+      .growth-list li { font-size: 0.78rem; }
+
+      /* Audit section */
+      .audit-lm-sub { font-size: 0.85rem; }
+      .audit-lm-point { font-size: 0.82rem; }
 
       /* iOS: prevent auto-zoom on form focus — must be 16px+ */
       .contact-form input,
@@ -745,13 +786,33 @@
     }
 
     @media (max-width: 480px) {
-      section { padding: 3rem 4%; }
+      section { padding: 2.5rem 4%; }
       #hero { padding: 5.5rem 4% 3rem; }
-      .hero-title { font-size: 1.8rem; }
-      .section-title { font-size: 1.35rem; }
-      .offer-headline { font-size: 1.75rem; }
+      .hero-title { font-size: 1.7rem; }
+      .hero-sub { font-size: 0.85rem; }
+      .section-title { font-size: 1.3rem; }
+      .section-sub { font-size: 0.8rem; margin-bottom: 1.8rem; }
+      .offer-headline { font-size: 1.7rem; }
+      .offer-sub { font-size: 0.8rem; }
       .hero-stat-card { padding: 0.9rem 1rem; }
       .stat-text-num { font-size: 0.95rem; }
+
+      /* Pricing tabs — compact */
+      .combo-tab { padding: 0.55rem 0.3rem; }
+      .combo-tab-name { font-size: 0.68rem; }
+      .combo-tab-sub { font-size: 0.55rem; }
+      .combo-pop { font-size: 0.45rem; padding: 1px 4px; top: -7px; }
+
+      /* Service cards */
+      .svc-name { font-size: 0.78rem; }
+      .svc-desc { font-size: 0.68rem; }
+
+      /* Myth rows — even tighter */
+      .myth-side, .reality-side { padding: 0.9rem 1rem; }
+      .myth-tag, .reality-tag { font-size: 0.55rem; margin-bottom: 0.4rem; }
+
+      /* Contact */
+      .contact-detail { font-size: 0.82rem; }
     }
 
     /* MOBILE STICKY CTA BAR */
@@ -943,6 +1004,7 @@
   </div>
 
   <!-- NAV -->
+  <div class="scroll-progress" id="scrollProgress"></div>
   <nav>
     <a class="nav-logo" href="#hero">
       <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
@@ -1583,6 +1645,13 @@
     const form = document.getElementById('contactForm');
     const msg  = document.getElementById('formMsg');
     const btn  = document.getElementById('submitBtn');
+
+    // Scroll progress bar
+    const scrollBar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      scrollBar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    }, { passive: true });
 
     // GSAP ScrollTrigger animations
     gsap.registerPlugin(ScrollTrigger);
