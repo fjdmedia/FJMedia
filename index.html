@@ -548,45 +548,15 @@
     .status-bar-text .status-nudge { color: var(--text-light); font-size: 0.78rem; display: block; margin-top: 0.2rem; }
     .status-empty { color: var(--text-light); font-size: 0.85rem; font-style: italic; }
 
-    .calc-form {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.8rem 2rem;
-      margin-top: 0.5rem;
-      display: none;
+    .pricing-cta-wrap {
+      text-align: center; margin-top: 2rem;
     }
-    .calc-form.visible { display: block; }
-    .calc-form-title {
-      font-size: 1rem; font-weight: 700; color: var(--heading);
-      margin-bottom: 0.3rem;
+    .pricing-cta-wrap .btn-primary {
+      display: inline-block; font-size: 1rem; padding: 1rem 2.4rem;
     }
-    .calc-form-sub {
-      font-size: 0.8rem; color: var(--text-light);
-      margin-bottom: 1.2rem;
-    }
-    .calc-form-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
-    .calc-form-fields input {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.65rem 0.9rem;
-      font-size: 0.88rem; color: var(--heading);
-      width: 100%; box-sizing: border-box;
-      font-family: inherit; outline: none; transition: border-color 0.2s;
-    }
-    .calc-form-fields input:focus { border-color: var(--accent); }
-    .calc-form-fields input::placeholder { color: var(--text-light); }
-    .calc-submit {
-      width: 100%; padding: 0.85rem 1rem;
-      background: var(--accent); color: var(--bg);
-      border: none; border-radius: 8px;
-      font-size: 0.9rem; font-weight: 700;
-      cursor: pointer; transition: background 0.2s;
-      font-family: inherit;
-    }
-    .calc-submit:hover { background: #b8973e; }
-
-    .calc-risk {
-      text-align: center; font-size: 0.78rem;
-      color: var(--accent); font-weight: 600;
-      margin-top: 1.2rem;
+    .pricing-cta-sub {
+      font-size: 0.82rem; color: var(--accent); font-weight: 600;
+      margin-top: 0.8rem;
     }
 
     .dep-toast {
@@ -601,11 +571,12 @@
     .dep-toast.show { opacity: 1; }
 
     @media (max-width: 900px) {
-      .combo-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .combo-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-top: 14px; margin-top: -14px; }
       .combo-tabs::-webkit-scrollbar { display: none; }
       .combo-tab { flex-shrink: 0; min-width: 80px; }
-      .svc-grid { grid-template-columns: 1fr 1fr; }
-      .calc-form-fields { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .svc-card { padding: 1rem 0.9rem; }
+      .status-bar { padding: 0.8rem 1rem; margin-bottom: 1.2rem; }
     }
     @media (max-width: 480px) {
       .svc-grid { grid-template-columns: 1fr; }
@@ -621,8 +592,13 @@
       .hero-sub { max-width: 100%; }
 
       /* Offer */
-      .offer-pillars { flex-direction: column; align-items: stretch; gap: 1rem; }
-      .offer-pillar { max-width: 100%; }
+      .offer-pillars { flex-direction: row; flex-wrap: nowrap; gap: 0.5rem; }
+      .offer-pillar { min-width: 0; max-width: none; flex: 1; padding: 1rem 0.4rem; text-align: center; background: transparent; border: none; }
+      .offer-pillar-num { font-size: 1.3rem; }
+      .offer-pillar-label { font-size: 0.58rem; }
+
+      /* Divider — wider on mobile so it doesn't look lost */
+      .divider { width: 56px; }
 
       /* Why */
       .why-grid { grid-template-columns: 1fr; }
@@ -636,10 +612,11 @@
 
       /* Contact */
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      #contact { padding-bottom: 5rem; }
 
       /* Footer */
-      footer { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+      footer { padding-bottom: 4.5rem; }
+      .footer-mid { flex-direction: column; gap: 1rem; }
     }
 
     @media (max-width: 600px) {
@@ -701,15 +678,20 @@
     /* FOOTER */
     footer {
       background: var(--bg); border-top: 1px solid var(--border);
-      padding: 2rem 6%;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
+      padding: 2.5rem 6% 2rem;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1.2rem; text-align: center;
     }
+    .footer-top { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
     .footer-logo { display: inline-flex; align-items: baseline; gap: 9px; }
-    .footer-copy { font-size: 0.78rem; color: var(--text-light); }
+    .footer-tagline { font-size: 0.82rem; color: var(--text-light); }
+    .footer-mid { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; justify-content: center; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
+    .footer-social { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+    .footer-social:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-light); opacity: 0.6; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -1290,7 +1272,7 @@
         <div class="svc-card placeholder">
           <div class="svc-icon">💬</div>
           <div class="svc-name">Need something else?</div>
-          <div class="svc-desc">Tell us in the form below — we'll figure it out.</div>
+          <div class="svc-desc">Tell us when you reach out — we'll figure it out.</div>
         </div>
       </div>
 
@@ -1299,17 +1281,10 @@
         <span class="status-empty">Select services above to see your package match.</span>
       </div>
 
-      <!-- Lead capture form (hidden until at least one non-locked service selected) -->
-      <div class="calc-form" id="calcForm">
-        <div class="calc-form-title">Get My Free Design</div>
-        <div class="calc-form-sub">Drop your info — James gets back within 12 hours.</div>
-        <div class="calc-form-fields">
-          <input type="text" name="calc_name" placeholder="Your name" autocomplete="name" />
-          <input type="text" name="calc_contact" placeholder="Instagram handle or email" autocomplete="off" />
-          <textarea name="calc_about" placeholder="Tell us about your business (optional)" rows="3" style="resize:vertical;"></textarea>
-        </div>
-        <button class="calc-submit" id="calcSubmit" onclick="submitCalcForm()">Get My Free Design →</button>
-        <p class="calc-risk">One call. 48 hours. Yours — before you spend a dime.</p>
+      <!-- CTA — scrolls to contact & passes selected services -->
+      <div class="pricing-cta-wrap">
+        <a href="#contact" class="btn-primary" onclick="pricingToContact()">Get My Free Design →</a>
+        <p class="pricing-cta-sub">One call. 48 hours. Yours — before you spend a dime.</p>
       </div>
 
     </div>
@@ -1349,6 +1324,8 @@
         <form class="contact-form" id="contactForm">
           <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
           <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
+          <input type="hidden" name="services" id="contactServices" value="" />
+          <input type="hidden" name="combo" id="contactCombo" value="" />
           <input type="text" name="name" placeholder="Your Name" required />
           <input type="text" name="contact" placeholder="Instagram handle or email" required />
           <textarea name="message" placeholder="Tell us about your business (optional)"></textarea>
@@ -1361,15 +1338,25 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">
-      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
-      <span class="logo-media-word">Media</span>
+    <div class="footer-top">
+      <div class="footer-logo">
+        <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
+        <span class="logo-media-word">Media</span>
+      </div>
+      <p class="footer-tagline">Hand-coded websites for Winnipeg businesses.</p>
+    </div>
+    <div class="footer-mid">
+      <div class="footer-links">
+        <a href="#work">Work</a>
+        <a href="#pricing">Packages</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="https://instagram.com/fjmedia" target="_blank" rel="noopener" class="footer-social" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        @fjmedia
+      </a>
     </div>
     <div class="footer-copy">&#169; 2026 FJMedia. All rights reserved.</div>
-    <div class="footer-links">
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </div>
   </footer>
 
   <script>
@@ -1472,10 +1459,6 @@
     function updateCalcUI() {
       const svcs = getSelectedSvcs();
       const statusBar = document.getElementById('statusBar');
-      const calcForm  = document.getElementById('calcForm');
-
-      // Always show the lead form
-      calcForm.classList.add('visible');
 
       const exact  = findExactCombo(svcs);
       const closest = exact || findClosestCombo(svcs);
@@ -1536,34 +1519,13 @@
       updateCalcUI();
     }
 
-    function submitCalcForm() {
-      const name    = document.querySelector('[name="calc_name"]').value.trim();
-      const contact = document.querySelector('[name="calc_contact"]').value.trim();
-      if (!name || !contact) { showDepToast('Please fill in your name and contact.'); return; }
-
-      const svcs   = getSelectedSvcs();
-      const combo  = findExactCombo(svcs) || findClosestCombo(svcs);
-      const btn    = document.getElementById('calcSubmit');
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-
-      const about = document.querySelector('[name="calc_about"]')?.value.trim() || '';
-      const payload = { name, contact, about, services: svcs.join(', '), combo: comboNames[combo] };
-
-      fetch('https://script.google.com/macros/s/AKfycbzh4dPD6nQX_s3k__y60papwnyTf4a46OziZNRZV45GI77vEFoptgcxkO77-mkyAcm1/exec', {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload)
-      })
-      .then(() => {
-        btn.textContent = '✓ Sent! James will reply within 12 hours.';
-        document.querySelector('[name="calc_name"]').value = '';
-        document.querySelector('[name="calc_contact"]').value = '';
-      })
-      .catch(() => {
-        btn.textContent = 'Send failed — DM @fjmedia on Instagram instead.';
-        btn.disabled = false;
-      });
+    function pricingToContact() {
+      const svcs  = getSelectedSvcs();
+      const combo = findExactCombo(svcs) || findClosestCombo(svcs);
+      document.getElementById('contactServices').value = svcs.map(s => svcDisplayNames[s]).join(', ');
+      document.getElementById('contactCombo').value = comboNames[combo] || '';
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => { const n = document.querySelector('.contact-form input[name="name"]'); if (n) n.focus(); }, 600);
     }
 
     // Calculator GSAP — y-only (no opacity) so cards are never invisible
@@ -1618,9 +1580,11 @@
       function visibleCount() {
         return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
       }
+      function peekPx() { return window.innerWidth < 640 ? 32 : 0; }
       function cardWidth() {
         const vc = visibleCount();
-        return (viewport.offsetWidth - GAP * (vc - 1)) / vc;
+        const pk = peekPx();
+        return (viewport.offsetWidth - GAP * (vc - 1) - pk * 2) / vc;
       }
       function setCardWidths() {
         const cw = cardWidth();
@@ -1628,7 +1592,8 @@
       }
       function moveTo(i, animate) {
         track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
-        track.style.transform  = 'translateX(-' + (i * (cardWidth() + GAP)) + 'px)';
+        const offset = i * (cardWidth() + GAP) - peekPx();
+        track.style.transform  = 'translateX(-' + offset + 'px)';
         idx = i;
       }
       function afterMove() {
@@ -1669,7 +1634,7 @@
       function dragMove(x) {
         if (!dragging) return;
         dragOffset = x - dragStartX;
-        const base = -(idx * (cardWidth() + GAP));
+        const base = -(idx * (cardWidth() + GAP) - peekPx());
         track.style.transform = 'translateX(' + (base + dragOffset) + 'px)';
       }
       function dragEnd() {
@@ -1723,19 +1688,23 @@
         if (data.success) {
           // Log to Google Sheets in parallel — don't block on it
           const params = new URLSearchParams({
-            name:    formData.get('name')    || '',
-            contact: formData.get('contact') || '',
-            message: formData.get('message') || ''
+            name:     formData.get('name')     || '',
+            contact:  formData.get('contact')  || '',
+            message:  formData.get('message')  || '',
+            services: formData.get('services') || '',
+            combo:    formData.get('combo')    || ''
           });
           fetch(GAS_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
           form.reset();
+          document.getElementById('contactServices').value = '';
+          document.getElementById('contactCombo').value = '';
           msg.style.display = 'block';
           btn.textContent = 'Sent!';
         } else { throw new Error(); }
       })
       .catch(() => {
-        btn.textContent = 'Book a Call';
+        btn.textContent = 'Get My Free Design';
         btn.disabled = false;
         alert('Something went wrong. Please email us directly.');
       });
