@@ -1443,24 +1443,24 @@
 
     // ── CALCULATOR ────────────────────────────────────────────────
     const comboMap = {
-      getOnline:    ['website'],
-      getFound:     ['website', 'seo', 'domain'],
-      getCustomers: ['website', 'ordering', 'seo', 'domain'],
-      ownTheMarket: ['website', 'ordering', 'seo', 'domain', 'retainer']
+      goLive:       ['website'],
+      getFound:     ['website', 'seo'],
+      getCustomers: ['website', 'seo', 'ordering'],
+      ownTheMarket: ['website', 'seo', 'ordering', 'analytics']
     };
     const comboNames = {
-      getOnline: 'Get Online', getFound: 'Get Found',
+      goLive: 'Go Live', getFound: 'Get Found',
       getCustomers: 'Get Customers', ownTheMarket: 'Own the Market'
     };
     const upsellMessages = {
-      getOnline:    'Add SEO &amp; Domain to get found on Google — upgrade to Get Found.',
-      getFound:     'Add Ordering/Booking to start capturing revenue — upgrade to Get Customers.',
-      getCustomers: 'Add a Monthly Retainer to keep growing — upgrade to Own the Market.',
+      goLive:       'Add SEO to get found on Google — upgrade to Get Found.',
+      getFound:     'Add ordering forms &amp; CRM to start capturing leads — upgrade to Get Customers.',
+      getCustomers: 'Add analytics &amp; managed maintenance — upgrade to Own the Market.',
       ownTheMarket: null
     };
     const svcDisplayNames = {
       website: 'Custom Website', ordering: 'Ordering / Booking',
-      seo: 'SEO &amp; Google Setup', domain: 'Domain Setup', retainer: 'Monthly Retainer'
+      seo: 'SEO &amp; Google Setup', analytics: 'Analytics &amp; Maintenance'
     };
 
     function getSelectedSvcs() {
@@ -1477,7 +1477,7 @@
     }
 
     function findClosestCombo(svcs) {
-      const order = ['getOnline','getFound','getCustomers','ownTheMarket'];
+      const order = ['goLive','getFound','getCustomers','ownTheMarket'];
       for (const k of order) {
         if (svcs.every(s => comboMap[k].includes(s))) return k;
       }
@@ -1489,9 +1489,8 @@
       const statusBar = document.getElementById('statusBar');
       const calcForm  = document.getElementById('calcForm');
 
-      // Show/hide lead form: only if a non-locked (non-website-only) service is selected
-      const nonLocked = svcs.filter(s => s !== 'website');
-      calcForm.classList.toggle('visible', nonLocked.length > 0);
+      // Always show the lead form
+      calcForm.classList.add('visible');
 
       const exact  = findExactCombo(svcs);
       const closest = exact || findClosestCombo(svcs);
@@ -1555,7 +1554,7 @@
     function submitCalcForm() {
       const name    = document.querySelector('[name="calc_name"]').value.trim();
       const contact = document.querySelector('[name="calc_contact"]').value.trim();
-      if (!name || !contact) { showDepToast('Please fill in both fields.'); return; }
+      if (!name || !contact) { showDepToast('Please fill in your name and contact.'); return; }
 
       const svcs   = getSelectedSvcs();
       const combo  = findExactCombo(svcs) || findClosestCombo(svcs);
@@ -1563,7 +1562,8 @@
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
-      const payload = { name, contact, services: svcs.join(', '), combo: comboNames[combo] };
+      const about = document.querySelector('[name="calc_about"]')?.value.trim() || '';
+      const payload = { name, contact, about, services: svcs.join(', '), combo: comboNames[combo] };
 
       fetch('https://script.google.com/macros/s/AKfycbzh4dPD6nQX_s3k__y60papwnyTf4a46OziZNRZV45GI77vEFoptgcxkO77-mkyAcm1/exec', {
         method: 'POST',
