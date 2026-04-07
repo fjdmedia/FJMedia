@@ -511,6 +511,22 @@
     .svc-card.locked:not(.selected) { opacity: 0.6; }
     .svc-card.placeholder { cursor: default; opacity: 0.4; }
     .svc-card.placeholder:hover { border-color: var(--border); background: var(--bg3); }
+    .svc-card.nudge {
+      border-color: rgba(201,168,76,0.5);
+      animation: nudge-pulse 1.8s ease-in-out infinite;
+      position: relative;
+    }
+    .svc-card.nudge::after {
+      content: '+ complete the bundle';
+      position: absolute; top: -10px; right: 10px;
+      background: var(--accent); color: var(--bg);
+      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 4px; letter-spacing: 0.03em;
+    }
+    @keyframes nudge-pulse {
+      0%, 100% { border-color: rgba(201,168,76,0.25); }
+      50% { border-color: rgba(201,168,76,0.6); box-shadow: 0 0 8px rgba(201,168,76,0.15); }
+    }
     .svc-icon { font-size: 1.25rem; line-height: 1; }
     .svc-name {
       font-size: 0.82rem; font-weight: 700;
@@ -1475,6 +1491,14 @@
         t.classList.toggle('active', t.dataset.combo === closest);
       });
 
+      // Find missing services for the closest combo
+      const missingSvcs = comboMap[closest].filter(s => !svcs.includes(s));
+
+      // Add/remove nudge highlight on missing service cards
+      document.querySelectorAll('.svc-card:not(.placeholder)').forEach(card => {
+        card.classList.toggle('nudge', !exact && missingSvcs.includes(card.dataset.svc));
+      });
+
       let html = '';
       if (exact) {
         html = `<span class="status-bar-text"><strong>${comboNames[exact]}</strong>`;
@@ -1483,8 +1507,9 @@
         }
         html += '</span>';
       } else {
-        const svcList = svcs.map(s => svcDisplayNames[s]).join(', ');
-        html = `<span class="status-bar-text">${svcList}<span class="status-nudge">Closest match: <strong>${comboNames[closest]}</strong> — save even more by completing the bundle.</span></span>`;
+        const missingNames = missingSvcs.map(s => svcDisplayNames[s]).join(' + ');
+        const count = missingSvcs.length;
+        html = `<span class="status-bar-text">You're ${count} service${count > 1 ? 's' : ''} away from <strong>${comboNames[closest]}</strong><span class="status-nudge">Add ${missingNames} to get the full package at a bundled rate.</span></span>`;
       }
       statusBar.innerHTML = html;
     }
