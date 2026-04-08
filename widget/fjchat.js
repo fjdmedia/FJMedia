@@ -124,19 +124,21 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .fjchat-header-left {
-      display: flex; align-items: center; gap: 3px !important;
+      display: flex; align-items: center; gap: 12px !important;
       margin-left: 0 !important;
     }
     .fjchat-header-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; color: #0b1120;
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      overflow: hidden;
       flex-shrink: 0;
       margin: 0 !important;
     }
-    .fjchat-header-info { margin-left: 8px; }
+    .fjchat-header-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .fjchat-header-info { margin-left: 0; }
     .fjchat-header-info h3 {
       font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px;
     }
@@ -146,7 +148,7 @@
     .fjchat-online {
       display: inline-block; width: 7px; height: 7px;
       background: #22c55e; border-radius: 50%;
-      margin-right: 4px; vertical-align: middle;
+      margin-right: 6px; vertical-align: middle;
       animation: fjchat-pulse 2s infinite;
     }
     @keyframes fjchat-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
@@ -357,7 +359,7 @@
     <div id="fjchat-window">
       <div class="fjchat-header">
         <div class="fjchat-header-left">
-          <div class="fjchat-header-avatar">${CFG.initials}</div>
+          <div class="fjchat-header-avatar"><img src="/favicon-192.png" alt="${CFG.business}" /></div>
           <div class="fjchat-header-info">
             <h3>${CFG.business} AI</h3>
             <p><span class="fjchat-online"></span>Online now &middot; Typically replies instantly</p>
