@@ -57,47 +57,49 @@
       position: fixed;
       bottom: 24px;
       ${CFG.position === 'left' ? 'left: 24px;' : 'right: 24px;'}
-      width: 60px; height: 60px;
+      width: 56px; height: 56px;
       border-radius: 50%;
-      background: ${CFG.accent};
-      color: #fff;
+      background: #0d1f3c;
+      border: 1.5px solid rgba(201,168,76,0.4);
+      color: ${CFG.accent};
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       z-index: 99998;
     }
-    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.35); }
-    #fjchat-bubble svg { width: 28px; height: 28px; fill: #fff; }
+    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(0,0,0,0.5); border-color: ${CFG.accent}; }
+    #fjchat-bubble svg { width: 24px; height: 24px; fill: ${CFG.accent}; }
     #fjchat-bubble.open svg.chat-icon { display: none; }
     #fjchat-bubble.open svg.close-icon { display: block; }
     #fjchat-bubble:not(.open) svg.close-icon { display: none; }
 
     /* Notification dot */
     #fjchat-dot {
-      position: absolute; top: -2px; right: -2px;
-      width: 14px; height: 14px;
-      background: #EF4444; border-radius: 50%;
-      border: 2px solid #fff;
+      position: absolute; top: -3px; right: -3px;
+      width: 12px; height: 12px;
+      background: ${CFG.accent}; border-radius: 50%;
+      border: 2px solid #0d1f3c;
       animation: fjchat-pulse 2s infinite;
     }
     #fjchat-bubble.open #fjchat-dot { display: none; }
-    @keyframes fjchat-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+    @keyframes fjchat-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
 
     /* Window */
     #fjchat-window {
       position: fixed;
-      bottom: 100px;
+      bottom: 92px;
       ${CFG.position === 'left' ? 'left: 24px;' : 'right: 24px;'}
-      width: 380px;
-      max-height: 520px;
-      border-radius: 16px;
-      background: #fff;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+      width: 360px;
+      max-height: 500px;
+      border-radius: 14px;
+      background: #0d1f3c;
+      border: 1px solid rgba(27,58,86,0.8);
+      box-shadow: 0 16px 56px rgba(0,0,0,0.5);
       display: flex; flex-direction: column;
       overflow: hidden;
       z-index: 99999;
-      opacity: 0; transform: translateY(16px) scale(0.95);
+      opacity: 0; transform: translateY(12px) scale(0.96);
       pointer-events: none;
       transition: opacity 0.25s, transform 0.25s;
     }
@@ -108,24 +110,31 @@
 
     /* Header */
     .fjchat-header {
-      background: ${CFG.accent};
-      color: #fff;
-      padding: 18px 20px;
+      background: #071520;
+      border-bottom: 1px solid rgba(27,58,86,0.8);
+      padding: 16px 18px;
       display: flex; align-items: center; gap: 12px;
     }
     .fjchat-header-avatar {
-      width: 38px; height: 38px;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; font-weight: 700;
+      font-size: 15px; font-weight: 700;
+      color: ${CFG.accent};
       flex-shrink: 0;
     }
     .fjchat-header-info h3 {
-      font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px;
+      font-size: 14px; font-weight: 700; color: #EDEAE5; margin-bottom: 1px;
     }
     .fjchat-header-info p {
-      font-size: 12px; opacity: 0.85;
+      font-size: 11px; color: #888480;
+    }
+    .fjchat-header-info .fjchat-online {
+      display: inline-block; width: 6px; height: 6px;
+      background: #22C55E; border-radius: 50;
+      margin-right: 4px; vertical-align: middle;
     }
 
     /* Messages */
@@ -134,30 +143,34 @@
       overflow-y: auto;
       padding: 16px;
       display: flex; flex-direction: column; gap: 10px;
-      min-height: 200px;
-      max-height: 320px;
-      background: #f8f8f8;
+      min-height: 180px;
+      max-height: 300px;
+      background: #0a1929;
     }
+    .fjchat-messages::-webkit-scrollbar { width: 4px; }
+    .fjchat-messages::-webkit-scrollbar-track { background: transparent; }
+    .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 4px; }
     .fjchat-msg {
       max-width: 82%;
       padding: 10px 14px;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.5;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.55;
       word-wrap: break-word;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
     .fjchat-msg.assistant {
-      background: #fff;
-      color: #333;
-      border: 1px solid #e8e8e8;
+      background: #112840;
+      color: #EDEAE5;
+      border: 1px solid rgba(27,58,86,0.6);
       align-self: flex-start;
       border-bottom-left-radius: 4px;
     }
     .fjchat-msg.user {
-      background: ${CFG.accent};
-      color: #fff;
+      background: rgba(201,168,76,0.15);
+      color: #EDEAE5;
+      border: 1px solid rgba(201,168,76,0.3);
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
@@ -166,44 +179,45 @@
     .fjchat-typing {
       display: flex; gap: 4px; align-items: center;
       padding: 10px 14px;
-      background: #fff; border: 1px solid #e8e8e8;
-      border-radius: 14px; border-bottom-left-radius: 4px;
+      background: #112840; border: 1px solid rgba(27,58,86,0.6);
+      border-radius: 12px; border-bottom-left-radius: 4px;
       align-self: flex-start;
       max-width: 60px;
     }
     .fjchat-typing span {
-      width: 7px; height: 7px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: #aaa;
+      background: ${CFG.accent};
+      opacity: 0.6;
       animation: fjchat-bounce 1.4s infinite;
     }
     .fjchat-typing span:nth-child(2) { animation-delay: 0.2s; }
     .fjchat-typing span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes fjchat-bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+    @keyframes fjchat-bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-4px)} }
 
     /* Input area */
     .fjchat-input-area {
       display: flex; align-items: center;
       padding: 12px 14px;
-      border-top: 1px solid #eee;
-      background: #fff;
+      border-top: 1px solid rgba(27,58,86,0.6);
+      background: #071520;
       gap: 8px;
     }
     .fjchat-input {
       flex: 1;
-      border: 1px solid #ddd;
-      border-radius: 24px;
-      padding: 10px 16px;
-      font-size: 14px;
+      border: 1px solid rgba(27,58,86,0.8);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-size: 13.5px;
       outline: none;
-      background: #f8f8f8;
-      color: #333;
+      background: #0a1929;
+      color: #EDEAE5;
       transition: border-color 0.2s;
     }
-    .fjchat-input:focus { border-color: ${CFG.accent}; }
-    .fjchat-input::placeholder { color: #999; }
+    .fjchat-input:focus { border-color: rgba(201,168,76,0.5); }
+    .fjchat-input::placeholder { color: #888480; }
     .fjchat-send {
-      width: 38px; height: 38px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: ${CFG.accent};
       border: none;
@@ -213,56 +227,62 @@
       flex-shrink: 0;
     }
     .fjchat-send:hover { opacity: 0.85; }
-    .fjchat-send:disabled { opacity: 0.4; cursor: default; }
-    .fjchat-send svg { width: 18px; height: 18px; fill: #fff; }
+    .fjchat-send:disabled { opacity: 0.3; cursor: default; }
+    .fjchat-send svg { width: 16px; height: 16px; fill: #071520; }
 
     /* Lead capture */
     .fjchat-lead {
-      padding: 20px;
-      background: #fff;
+      padding: 18px;
+      background: #0d1f3c;
+      border-top: 1px solid rgba(27,58,86,0.6);
       display: flex; flex-direction: column; gap: 10px;
     }
     .fjchat-lead p {
-      font-size: 14px; color: #555; line-height: 1.5;
+      font-size: 13px; color: #A09C96; line-height: 1.5;
     }
     .fjchat-lead input {
-      border: 1px solid #ddd;
+      border: 1px solid rgba(27,58,86,0.8);
       border-radius: 8px;
       padding: 10px 14px;
-      font-size: 14px;
+      font-size: 13.5px;
       outline: none;
-      color: #333;
-      background: #f8f8f8;
+      color: #EDEAE5;
+      background: #0a1929;
       transition: border-color 0.2s;
     }
-    .fjchat-lead input:focus { border-color: ${CFG.accent}; }
+    .fjchat-lead input:focus { border-color: rgba(201,168,76,0.5); }
+    .fjchat-lead input::placeholder { color: #888480; }
     .fjchat-lead button {
       background: ${CFG.accent};
-      color: #fff;
+      color: #071520;
       border: none;
       border-radius: 8px;
-      padding: 11px;
-      font-size: 14px;
-      font-weight: 600;
+      padding: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
       cursor: pointer;
       transition: opacity 0.2s;
+      letter-spacing: 0.01em;
     }
     .fjchat-lead button:hover { opacity: 0.88; }
     .fjchat-lead .fjchat-skip {
-      background: none; color: #999;
-      font-size: 12px; padding: 4px;
+      background: none; color: #888480;
+      font-size: 11.5px; padding: 4px;
       text-decoration: underline;
+      cursor: pointer;
     }
+    .fjchat-lead .fjchat-skip:hover { color: #A09C96; }
 
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 6px;
-      font-size: 11px;
-      color: #bbb;
-      background: #fff;
+      padding: 7px;
+      font-size: 10.5px;
+      color: #555;
+      background: #071520;
+      border-top: 1px solid rgba(27,58,86,0.4);
     }
-    .fjchat-powered a { color: #999; text-decoration: none; }
+    .fjchat-powered a { color: #888480; text-decoration: none; transition: color 0.2s; }
     .fjchat-powered a:hover { color: ${CFG.accent}; }
 
     /* Mobile */
@@ -270,7 +290,7 @@
       #fjchat-window {
         width: calc(100vw - 24px);
         ${CFG.position === 'left' ? 'left: 12px;' : 'right: 12px;'}
-        bottom: 90px;
+        bottom: 88px;
         max-height: 70vh;
       }
     }
