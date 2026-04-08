@@ -116,7 +116,7 @@
 
     /* Header */
     .fjchat-header {
-      padding: 20px 26px;
+      padding: 24px 28px;
       background: #0b1120;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex; align-items: center; justify-content: space-between;
@@ -160,15 +160,15 @@
     .fjchat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 24px;
-      display: flex; flex-direction: column; gap: 8px;
+      padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 10px;
       scroll-behavior: smooth;
     }
     .fjchat-messages::-webkit-scrollbar { width: 3px; }
     .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
     .fjchat-msg-row {
-      display: flex; gap: 8px; max-width: 75%;
+      display: flex; gap: 12px; max-width: 75%;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
@@ -185,7 +185,7 @@
     }
     .fjchat-msg-av.hidden { visibility: hidden; }
     .fjchat-bubble {
-      padding: 12px 16px;
+      padding: 14px 20px;
       border-radius: 20px;
       font-size: 14px;
       line-height: 1.45;
@@ -233,9 +233,9 @@
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 0 16px;
-      height: 42px;
-      line-height: 42px;
+      padding: 0 20px;
+      height: 44px;
+      line-height: 44px;
       color: #e2e8f0;
       font-size: 14px;
       font-family: inherit;
