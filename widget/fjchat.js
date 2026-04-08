@@ -116,7 +116,7 @@
 
     /* Header */
     .fjchat-header {
-      padding: 20px 22px;
+      padding: 20px 26px;
       background: #0b1120;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex; align-items: center; justify-content: space-between;
@@ -156,7 +156,7 @@
     .fjchat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 18px;
+      padding: 20px 24px;
       display: flex; flex-direction: column; gap: 14px;
       scroll-behavior: smooth;
     }
@@ -218,7 +218,7 @@
 
     /* Input area */
     .fjchat-input-area {
-      padding: 14px 18px;
+      padding: 14px 24px;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; gap: 8px;
       background: #0b1120;
@@ -253,7 +253,7 @@
 
     /* Lead capture */
     .fjchat-lead {
-      padding: 20px 18px;
+      padding: 20px 24px;
       background: #0b1120;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; gap: 12px;
@@ -298,7 +298,7 @@
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 8px;
+      padding: 10px 24px;
       font-size: 10px;
       color: #374151;
       background: #0b1120;
