@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Widget Builder — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+      <button class="nav-api-btn" id="apiKeyBtn" onclick="openApiModal()">Set API Key</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Chat Widget Builder</span>
+    </div>
+
+    <!-- ── TOOL PAGE ── -->
+    <div class="tool-page">
+
+      <div class="tool-header">
+        <h1>Chat Widget Builder</h1>
+        <p>Configure an AI chat assistant for any client site. Fill in the business details, get an embed snippet + GAS backend script — deploy in minutes.</p>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div class="dm-form">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="bizName">Business Name *</label>
+            <input class="form-input" id="bizName" type="text" placeholder="e.g. Tom's Auto Detailing" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="accentColor">Accent Color</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input class="form-input" id="accentColor" type="text" placeholder="#c9a84c" value="#c9a84c" autocomplete="off" style="flex:1;" />
+              <input type="color" id="colorPicker" value="#c9a84c" style="width:40px;height:36px;border:1px solid var(--border);border-radius:6px;background:transparent;cursor:pointer;padding:2px;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="greeting">Greeting Message</label>
+          <input class="form-input" id="greeting" type="text" placeholder="Hi! Ask us anything about our services." autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="bizContext">Business Context *</label>
+          <textarea
+            class="form-textarea"
+            id="bizContext"
+            rows="8"
+            placeholder="Paste everything the AI should know about this business:
+
+• What they do / services offered
+• Location and hours
+• Pricing (general ranges)
+• FAQs customers ask
+• How to book / contact info
+• Any specials or promos
+
+The more detail here, the smarter the widget."
+          ></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="position">Widget Position</label>
+            <select class="form-select" id="position">
+              <option value="right">Bottom Right</option>
+              <option value="left">Bottom Left</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="sheetUrl">Google Sheet URL (for leads)</label>
+            <input class="form-input" id="sheetUrl" type="text" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group form-actions">
+            <button class="btn-primary" id="generateBtn" onclick="generateOutput()">Generate Embed Code →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── OUTPUT SECTIONS ── -->
+      <div id="outputSection" style="display:none;">
+
+        <!-- Embed Code -->
+        <div style="margin-top:2.5rem;">
+          <h3 class="results-section-title">1. Embed Code</h3>
+          <p style="color:var(--text-light);font-size:0.83rem;margin-bottom:0.8rem;line-height:1.6;">Add this one line to the client's HTML, right before <code style="background:var(--bg3);padding:2px 6px;border-radius:3px;font-size:0.8rem;">&lt;/body&gt;</code>:</p>
+          <div style="position:relative;">
+            <pre id="embedCode" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);overflow-x:auto;white-space:pre-wrap;word-break:break-all;line-height:1.7;"></pre>
+            <button class="btn-copy" style="position:absolute;top:8px;right:8px;" onclick="copyBlock('embedCode', this)">Copy</button>
+          </div>
+        </div>
+
+        <!-- GAS Script -->
+        <div style="margin-top:2.5rem;">
+          <h3 class="results-section-title">2. Google Apps Script (Backend)</h3>
+          <p style="color:var(--text-light);font-size:0.83rem;margin-bottom:0.8rem;line-height:1.6;">Create a new Apps Script project, paste this code, add your Anthropic API key as a script property (<code style="background:var(--bg3);padding:2px 6px;border-radius:3px;font-size:0.8rem;">ANTHROPIC_KEY</code>), and deploy as a Web App.</p>
+          <div style="position:relative;">
+            <pre id="gasCode" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1rem;font-family:var(--mono);font-size:0.72rem;color:var(--text);overflow-x:auto;white-space:pre-wrap;line-height:1.7;max-height:400px;overflow-y:auto;"></pre>
+            <button class="btn-copy" style="position:absolute;top:8px;right:8px;" onclick="copyBlock('gasCode', this)">Copy</button>
+          </div>
+        </div>
+
+        <!-- Quick Test -->
+        <div style="margin-top:2.5rem;">
+          <h3 class="results-section-title">3. Quick Test (Direct API)</h3>
+          <p style="color:var(--text-light);font-size:0.83rem;margin-bottom:0.8rem;line-height:1.6;">Test the widget right now using your API key (stored in this browser). <strong>For testing only</strong> — client sites use the GAS proxy above.</p>
+          <div style="position:relative;">
+            <pre id="testCode" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1rem;font-family:var(--mono);font-size:0.78rem;color:var(--text);overflow-x:auto;white-space:pre-wrap;word-break:break-all;line-height:1.7;"></pre>
+            <button class="btn-copy" style="position:absolute;top:8px;right:8px;" onclick="copyBlock('testCode', this)">Copy</button>
+          </div>
+        </div>
+
+        <!-- Deploy Steps -->
+        <div style="margin-top:2.5rem;margin-bottom:3rem;">
+          <h3 class="results-section-title">4. Deploy Checklist</h3>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.4rem 1.2rem;font-size:0.83rem;color:var(--text-mid);line-height:1.8;">
+            <div>☐ Go to <strong>script.google.com</strong> → New Project</div>
+            <div>☐ Paste the GAS code from step 2</div>
+            <div>☐ Project Settings → Script Properties → Add <code style="background:var(--bg);padding:2px 6px;border-radius:3px;">ANTHROPIC_KEY</code> = your key</div>
+            <div>☐ Deploy → Web App → Execute as: Me → Access: Anyone</div>
+            <div>☐ Copy the deployment URL</div>
+            <div>☐ Replace <code style="background:var(--bg);padding:2px 6px;border-radius:3px;">YOUR_GAS_URL</code> in the embed code with the deployment URL</div>
+            <div>☐ Add the embed code to the client's site before &lt;/body&gt;</div>
+            <div>☐ Test it live</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </div>
+    <p class="footer-copy">© 2026 FJMedia · Winnipeg, MB</p>
+  </footer>
+
+  <!-- ── API KEY MODAL ── -->
+  <div class="modal-backdrop" id="apiModal">
+    <div class="modal">
+      <h2>Anthropic API Key</h2>
+      <p>Your key is saved to your browser's local storage and only sent directly to Anthropic's API — never to any third party.</p>
+      <input class="modal-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      <p class="modal-warning">⚠ Internal use only. Never share this key or use it on a public-facing site.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeApiModal()">Cancel</button>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/nav.js"></script>
+  <script>
+
+    // Color picker sync
+    const colorInput = document.getElementById('accentColor');
+    const colorPicker = document.getElementById('colorPicker');
+    colorPicker.addEventListener('input', () => { colorInput.value = colorPicker.value; });
+    colorInput.addEventListener('input', () => {
+      if (/^#[0-9a-fA-F]{6}$/.test(colorInput.value)) colorPicker.value = colorInput.value;
+    });
+
+    function escAttr(str) {
+      return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function generateOutput() {
+      const biz      = document.getElementById('bizName').value.trim();
+      const accent   = document.getElementById('accentColor').value.trim() || '#c9a84c';
+      const greeting = document.getElementById('greeting').value.trim();
+      const context  = document.getElementById('bizContext').value.trim();
+      const position = document.getElementById('position').value;
+      const sheetUrl = document.getElementById('sheetUrl').value.trim();
+
+      if (!biz || !context) {
+        alert('Business Name and Business Context are required.');
+        return;
+      }
+
+      // 1. Embed code (GAS proxy version)
+      let embed = `<script src="https://fjmedia.ca/widget/fjchat.js"\n`;
+      embed += `  data-endpoint="YOUR_GAS_URL"\n`;
+      embed += `  data-business="${escAttr(biz)}"\n`;
+      if (greeting) embed += `  data-greeting="${escAttr(greeting)}"\n`;
+      embed += `  data-accent="${escAttr(accent)}"\n`;
+      if (position === 'left') embed += `  data-position="left"\n`;
+      embed += `><\/script>`;
+      document.getElementById('embedCode').textContent = embed;
+
+      // 2. GAS script
+      const gasScript = buildGAS(biz, context, accent, sheetUrl);
+      document.getElementById('gasCode').textContent = gasScript;
+
+      // 3. Quick test (direct API)
+      let test = `<!-- Drop this in any HTML file to test locally -->\n`;
+      test += `<script src="https://fjmedia.ca/widget/fjchat.js"\n`;
+      test += `  data-api-key="YOUR_ANTHROPIC_KEY"\n`;
+      test += `  data-business="${escAttr(biz)}"\n`;
+      if (greeting) test += `  data-greeting="${escAttr(greeting)}"\n`;
+      test += `  data-accent="${escAttr(accent)}"\n`;
+      test += `  data-context="${escAttr(context.substring(0, 500))}${context.length > 500 ? '...' : ''}"\n`;
+      if (position === 'left') test += `  data-position="left"\n`;
+      test += `><\/script>`;
+      document.getElementById('testCode').textContent = test;
+
+      document.getElementById('outputSection').style.display = 'block';
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function buildGAS(biz, context, accent, sheetUrl) {
+      return `// ── FJChat GAS Backend for ${biz} ──
+// Deploy as Web App: Execute as Me, Access Anyone
+
+const ANTHROPIC_KEY = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_KEY');
+const MODEL = 'claude-sonnet-4-6';
+const SHEET_ID = '${sheetUrl ? extractSheetId(sheetUrl) : 'YOUR_SHEET_ID'}';
+
+const SYSTEM_PROMPT = \`You are a friendly, helpful chat assistant for ${biz.replace(/`/g,"'")}.
+Keep responses SHORT (2-3 sentences max). Be warm and conversational.
+If someone asks something you don't know, say you'll have the team follow up.
+Never make up information. Guide the conversation toward booking or visiting.
+
+Business info:
+${context.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`;
+
+function doPost(e) {
+  try {
+    const body = JSON.parse(e.postData.contents);
+
+    if (body.action === 'log_lead') {
+      logLead(body);
+      return json({ ok: true });
+    }
+
+    if (body.action === 'chat') {
+      const reply = callClaude(body.message, body.history || []);
+      logChat(body);
+      return json({ reply: reply });
+    }
+
+    return json({ error: 'Unknown action' });
+  } catch (err) {
+    return json({ error: err.message });
+  }
+}
+
+function callClaude(message, history) {
+  // Build messages array
+  const msgs = [];
+  history.forEach(function(m) {
+    if (m.role === 'user' || m.role === 'assistant') {
+      msgs.push({ role: m.role, content: m.content });
+    }
+  });
+  msgs.push({ role: 'user', content: message });
+
+  const res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01'
+    },
+    payload: JSON.stringify({
+      model: MODEL,
+      max_tokens: 300,
+      system: SYSTEM_PROMPT,
+      messages: msgs
+    }),
+    muteHttpExceptions: true
+  });
+
+  const data = JSON.parse(res.getContentText());
+  if (data.content && data.content[0]) {
+    return data.content[0].text;
+  }
+  return "I'm having trouble right now. Please try again in a moment!";
+}
+
+function logLead(body) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('Leads');
+  if (!sheet) {
+    sheet = ss.insertSheet('Leads');
+    sheet.appendRow(['Timestamp', 'Name', 'Email', 'Event', 'Page']);
+  }
+  sheet.appendRow([
+    body.timestamp || new Date().toISOString(),
+    body.name || '',
+    body.email || '',
+    body.event || '',
+    body.page || ''
+  ]);
+}
+
+function logChat(body) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let sheet = ss.getSheetByName('Chats');
+  if (!sheet) {
+    sheet = ss.insertSheet('Chats');
+    sheet.appendRow(['Timestamp', 'Name', 'Email', 'Message']);
+  }
+  sheet.appendRow([
+    new Date().toISOString(),
+    body.leadName || '',
+    body.leadEmail || '',
+    body.message || ''
+  ]);
+}
+
+function json(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Allow CORS preflight
+function doGet(e) {
+  return json({ status: 'FJChat backend running' });
+}`;
+    }
+
+    function extractSheetId(url) {
+      const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : 'YOUR_SHEET_ID';
+    }
+
+    function copyBlock(id, btn) {
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 1500);
+      });
+    }
+
+  </script>
+</body>
+</html>
