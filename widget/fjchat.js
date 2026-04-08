@@ -95,7 +95,7 @@
       position: fixed;
       bottom: 100px;
       ${CFG.position === 'left' ? 'left: 28px;' : 'right: 28px;'}
-      width: 400px;
+      width: min(400px, calc(100vw - 24px));
       height: 560px;
       max-height: calc(100vh - 140px);
       border-radius: 20px;
@@ -311,11 +311,12 @@
       #fjchat-window {
         width: calc(100vw - 24px);
         ${CFG.position === 'left' ? 'left: 12px;' : 'right: 12px;'}
-        bottom: 90px;
+        bottom: 96px;
+        height: calc(100vh - 130px);
       }
       #fjchat-bubble {
         ${CFG.position === 'left' ? 'left: 16px;' : 'right: 16px;'}
-        bottom: 20px;
+        bottom: 24px;
       }
     }
   `;
