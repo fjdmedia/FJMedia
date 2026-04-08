@@ -95,8 +95,8 @@
       position: fixed;
       bottom: 100px;
       ${CFG.position === 'left' ? 'left: 28px;' : 'right: 28px;'}
-      width: 360px;
-      max-height: 540px;
+      width: 400px;
+      max-height: 600px;
       border-radius: 20px;
       background: #111827;
       border: 1px solid rgba(255,255,255,0.08);
@@ -115,7 +115,7 @@
 
     /* Header */
     .fjchat-header {
-      padding: 16px 20px;
+      padding: 20px 22px;
       background: #0b1120;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex; align-items: center; justify-content: space-between;
@@ -124,7 +124,7 @@
       display: flex; align-items: center; gap: 12px;
     }
     .fjchat-header-avatar {
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       display: flex; align-items: center; justify-content: center;
@@ -132,10 +132,10 @@
       flex-shrink: 0;
     }
     .fjchat-header-info h3 {
-      font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px;
+      font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 3px;
     }
     .fjchat-header-info p {
-      font-size: 11px; color: #6b7280;
+      font-size: 12px; color: #6b7280;
     }
     .fjchat-online {
       display: inline-block; width: 7px; height: 7px;
@@ -155,15 +155,15 @@
     .fjchat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 14px;
-      display: flex; flex-direction: column; gap: 10px;
+      padding: 20px 18px;
+      display: flex; flex-direction: column; gap: 14px;
       scroll-behavior: smooth;
     }
     .fjchat-messages::-webkit-scrollbar { width: 3px; }
     .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
     .fjchat-msg-row {
-      display: flex; gap: 7px; max-width: 85%;
+      display: flex; gap: 10px; max-width: 85%;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
@@ -171,7 +171,7 @@
     .fjchat-msg-row.user { align-self: flex-end; flex-direction: row-reverse; }
 
     .fjchat-msg-av {
-      width: 26px; height: 26px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       display: flex; align-items: center; justify-content: center;
@@ -179,10 +179,10 @@
       flex-shrink: 0; margin-top: 2px;
     }
     .fjchat-bubble {
-      padding: 10px 13px;
-      border-radius: 14px;
-      font-size: 13px;
-      line-height: 1.55;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.6;
       word-wrap: break-word;
     }
     .fjchat-msg-row.assistant .fjchat-bubble {
@@ -217,7 +217,7 @@
 
     /* Input area */
     .fjchat-input-area {
-      padding: 12px 14px;
+      padding: 14px 18px;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; gap: 8px;
       background: #0b1120;
@@ -226,10 +226,10 @@
       flex: 1;
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 10px 13px;
+      border-radius: 12px;
+      padding: 12px 16px;
       color: #e2e8f0;
-      font-size: 13px;
+      font-size: 14px;
       font-family: inherit;
       outline: none;
       transition: border-color 0.2s;
@@ -237,8 +237,8 @@
     .fjchat-input:focus { border-color: rgba(201,168,76,0.4); }
     .fjchat-input::placeholder { color: #4b5563; }
     .fjchat-send {
-      width: 38px; height: 38px;
-      border-radius: 10px;
+      width: 42px; height: 42px;
+      border-radius: 12px;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       border: none;
       cursor: pointer;
@@ -252,20 +252,20 @@
 
     /* Lead capture */
     .fjchat-lead {
-      padding: 16px 14px;
+      padding: 20px 18px;
       background: #0b1120;
       border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; gap: 10px;
+      display: flex; flex-direction: column; gap: 12px;
     }
     .fjchat-lead p {
-      font-size: 12px; color: #6b7280; line-height: 1.5;
+      font-size: 13px; color: #9ca3af; line-height: 1.5;
     }
     .fjchat-lead input {
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 10px 13px;
-      font-size: 13px;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
       font-family: inherit;
       outline: none;
       color: #e2e8f0;
@@ -277,9 +277,9 @@
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120;
       border: none;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 13px;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       transition: opacity 0.2s;
@@ -297,7 +297,7 @@
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 6px;
+      padding: 8px;
       font-size: 10px;
       color: #374151;
       background: #0b1120;
