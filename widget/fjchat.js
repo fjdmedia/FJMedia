@@ -160,7 +160,7 @@
     .fjchat-online {
       display: inline-block; width: 7px; height: 7px;
       background: #22c55e; border-radius: 50%;
-      margin-right: 6px; vertical-align: middle;
+      margin-right: 6px !important; vertical-align: middle;
       animation: fjchat-pulse 2s infinite;
     }
     @keyframes fjchat-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
@@ -216,7 +216,8 @@
     }
     .fjchat-msg-row.assistant .fjchat-bubble {
       background: #1c2640; color: #e2e8f0;
-      border-radius: 4px 16px 16px 16px !important;
+      border-radius: 2px 18px 18px 2px !important;
+      max-width: 85%;
     }
     .fjchat-msg-row.user .fjchat-bubble {
       background: ${CFG.accent};
@@ -296,7 +297,7 @@
     .fjchat-lead input {
       background: #1c2640;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
+      border-radius: 4px;
       padding: 12px 16px;
       font-size: 14px;
       font-family: inherit;
