@@ -11,6 +11,7 @@
   },
   "rewrites": [
     { "source": "/ops", "destination": "/ops.html" },
-    { "source": "/dashboard", "destination": "/dashboard.html" }
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/proof", "destination": "/proof.html" }
   ]
 }
