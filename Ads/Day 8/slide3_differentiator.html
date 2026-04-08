@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+
+.post{
+  width:540px;height:675px;
+  background:#FDF6EE;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:40px 32px;
+}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;height:100%;width:100%;}
+
+.section-label{
+  font-family:"DM Sans",sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;margin-bottom:18px;align-self:flex-start;
+  background:#4A5E2A;padding:5px 14px;border-radius:20px;display:inline-block;
+}
+
+.heading{
+  font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;
+  color:#3D2B27;line-height:1.35;margin-bottom:24px;text-align:center;
+}
+.heading em{color:#4A5E2A;font-style:normal;}
+
+/* Before / After columns */
+.compare{display:flex;gap:16px;width:100%;margin-bottom:24px;flex:1;}
+
+.col{
+  flex:1;display:flex;flex-direction:column;
+  background:#fff;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(74,94,42,0.08);
+}
+
+.col-header{
+  padding:12px 16px;text-align:center;
+  font-family:"DM Sans",sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+}
+.col.before .col-header{background:#f5ede5;color:#3D2B27;}
+.col.after .col-header{background:#4A5E2A;color:#FDF6EE;}
+
+.col-body{padding:16px 14px;display:flex;flex-direction:column;gap:12px;flex:1;}
+
+.col-item{
+  font-family:"DM Sans",sans-serif;font-size:10px;
+  line-height:1.45;
+  padding-left:16px;position:relative;
+}
+.col-item::before{
+  content:'';position:absolute;left:0;top:5px;
+  width:7px;height:7px;border-radius:50%;
+}
+.col.before .col-item{color:#3D2B27;}
+.col.before .col-item::before{background:#9E4A62;opacity:0.35;}
+.col.after .col-item{color:#3D2B27;}
+.col.after .col-item::before{background:#4A5E2A;}
+.col.after .col-item em{color:#4A5E2A;font-style:normal;font-weight:600;}
+
+/* Bottom quote */
+.quote-box{
+  width:100%;
+  background:rgba(74,94,42,0.06);
+  border-radius:12px;
+  padding:18px 20px;text-align:center;
+  margin-top:auto;
+}
+
+.quote{
+  font-family:"Cormorant Garamond",serif;font-size:15px;font-style:italic;
+  color:#4A5E2A;line-height:1.5;margin-bottom:6px;
+}
+
+.quote-attr{
+  font-family:"DM Sans",sans-serif;font-size:8px;font-weight:500;
+  color:#3D2B27;letter-spacing:.12em;text-transform:uppercase;
+}
+
+.byline{
+  position:absolute;bottom:18px;right:24px;
+  font-family:"DM Sans",sans-serif;font-size:8px;font-weight:500;
+  color:#3D2B27;opacity:0.3;letter-spacing:.14em;text-transform:uppercase;
+}
+
+.hint{margin-top:16px;font-family:sans-serif;font-size:11px;color:#444;text-align:center;}
+</style></head><body>
+<div style="display:flex;flex-direction:column;align-items:center;">
+<div class="post">
+  <div class="content">
+    <div class="section-label">The Difference</div>
+    <div class="heading">From "DM for pricing"<br>to <em>a real storefront.</em></div>
+
+    <div class="compare">
+      <div class="col before">
+        <div class="col-header">Before</div>
+        <div class="col-body">
+          <div class="col-item">Instagram DMs for every single order</div>
+          <div class="col-item">Manually tracking who wants what</div>
+          <div class="col-item">Customers asking "how much?" every time</div>
+          <div class="col-item">No way to find her on Google</div>
+          <div class="col-item">Missed orders when she's busy baking</div>
+        </div>
+      </div>
+      <div class="col after">
+        <div class="col-header">After</div>
+        <div class="col-body">
+          <div class="col-item"><em>Orders come in automatically</em></div>
+          <div class="col-item"><em>Every order logged</em> to a spreadsheet</div>
+          <div class="col-item">Pricing visible on the site</div>
+          <div class="col-item">Showing up on <em>Google</em> for "cookies Winnipeg"</div>
+          <div class="col-item"><em>Orders arrive while she sleeps</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <div class="quote">"She paid nothing until she saw the finished site<br>and decided she loved it."</div>
+      <div class="quote-attr">The FJMedia model</div>
+    </div>
+  </div>
+
+  <div class="byline">By FJMedia</div>
+</div>
+<p class="hint">Slide 3 of 4 &mdash; 1080x1350 via Playwright</p>
+</div></body></html>

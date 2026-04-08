@@ -55,8 +55,8 @@ var CLIENT_CONFIG = {
 
 // ===== WEB APP ENTRY POINT =====
 function doGet(e) {
-  var client = (e.parameter.client || 'fjmedia').toLowerCase();
-  var days   = parseInt(e.parameter.days) || 30;
+  var client = (e && e.parameter && e.parameter.client) ? e.parameter.client.toLowerCase() : 'fjmedia';
+  var days = (e && e.parameter && e.parameter.days) ? parseInt(e.parameter.days) : 30;
 
   var config = CLIENT_CONFIG[client];
   if (!config) {

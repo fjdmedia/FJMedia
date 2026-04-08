@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — IG Profile Picture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 40px;
+    }
+
+    .dp {
+      width: 1080px;
+      height: 1080px;
+      background: #071520;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Subtle grid texture */
+    .dp::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Circle safe zone guide (won't render in final) */
+    .safe-zone {
+      position: absolute;
+      width: 76%;
+      height: 76%;
+      border-radius: 50%;
+      /* border: 1px dashed rgba(201,168,76,0.15); */
+    }
+
+    .logo-stack {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .mark {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bracket {
+      font-family: 'Space Mono', monospace;
+      font-weight: 400;
+      font-size: 180px;
+      color: #c9a84c;
+      line-height: 1;
+    }
+
+    .fj {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 200px;
+      color: #EDEAE5;
+      letter-spacing: -4px;
+      line-height: 1;
+    }
+
+    .word {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 52px;
+      color: #EDEAE5;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      text-indent: 0.32em; /* center visually with letter-spacing */
+    }
+
+    .tagline {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 22px;
+      color: rgba(201,168,76,0.45);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 18px;
+      text-indent: 0.18em;
+    }
+
+    /* Gold corner accents — inside safe zone */
+    .corner {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-color: #c9a84c;
+      border-style: solid;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    .corner.tl { top: 160px; left: 160px; border-width: 1px 0 0 1px; }
+    .corner.br { bottom: 160px; right: 160px; border-width: 0 1px 1px 0; }
+
+    .hint {
+      font-family: sans-serif;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="dp" id="dp">
+    <div class="safe-zone"></div>
+    <div class="corner tl"></div>
+    <div class="corner br"></div>
+    <div class="logo-stack">
+      <div class="mark">
+        <span class="bracket">{</span>
+        <span class="fj">FJ</span>
+        <span class="bracket">}</span>
+      </div>
+      <div class="word">Media</div>
+    </div>
+  </div>
+  <p class="hint">1080 × 1080 — optimized for Instagram circle crop</p>
+</body>
+</html>
