@@ -218,16 +218,18 @@
       background: #1c2640; color: #e2e8f0;
       border-radius: 2px 18px 18px 2px !important;
       max-width: 85%;
+      margin-left: 8px !important;
     }
     .fjchat-msg-row.user .fjchat-bubble {
       background: ${CFG.accent};
       color: #fff; font-weight: 500;
-      border-radius: 16px 4px 16px 16px !important;
+      border-radius: 18px 2px 2px 18px !important;
+      text-align: left !important;
     }
 
     /* Typing indicator */
     .fjchat-typing-row {
-      display: flex; gap: 6px; align-self: flex-start;
+      display: flex; gap: 6px; align-self: flex-start; align-items: center;
       margin-left: 0 !important;
       animation: fjchat-fadeIn 0.2s ease;
     }
