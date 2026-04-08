@@ -69,11 +69,11 @@
       color: #0b1120;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      box-shadow: 0 6px 24px rgba(201,168,76,0.45);
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35), 0 0 48px rgba(201,168,76,0.12);
       transition: transform 0.2s, box-shadow 0.2s;
       z-index: 99998;
     }
-    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(201,168,76,0.55); }
+    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(201,168,76,0.45), 0 0 56px rgba(201,168,76,0.18); }
     #fjchat-bubble svg { width: 26px; height: 26px; fill: #0b1120; }
     #fjchat-bubble.open svg.chat-icon { display: none; }
     #fjchat-bubble.open svg.close-icon { display: block; }
@@ -116,13 +116,13 @@
 
     /* Header */
     .fjchat-header {
-      padding: 24px 28px;
+      padding: 28px 16px;
       background: #0b1120;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex; align-items: center; justify-content: space-between;
     }
     .fjchat-header-left {
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: center; gap: 10px;
     }
     .fjchat-header-avatar {
       width: 40px; height: 40px;
@@ -160,15 +160,15 @@
     .fjchat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 24px 28px;
-      display: flex; flex-direction: column; gap: 10px;
+      padding: 20px 16px;
+      display: flex; flex-direction: column; gap: 14px;
       scroll-behavior: smooth;
     }
     .fjchat-messages::-webkit-scrollbar { width: 3px; }
     .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
     .fjchat-msg-row {
-      display: flex; gap: 12px; max-width: 75%;
+      display: flex; gap: 8px; max-width: 82%;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
@@ -185,8 +185,8 @@
     }
     .fjchat-msg-av.hidden { visibility: hidden; }
     .fjchat-bubble {
-      padding: 14px 20px;
-      border-radius: 20px;
+      padding: 10px 14px;
+      border-radius: 18px;
       font-size: 14px;
       line-height: 1.45;
       word-wrap: break-word;
@@ -223,9 +223,9 @@
 
     /* Input area */
     .fjchat-input-area {
-      padding: 14px 24px;
+      padding: 16px 16px;
       border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex; gap: 8px;
+      display: flex; gap: 10px;
       background: #0b1120;
     }
     .fjchat-input {
@@ -233,9 +233,9 @@
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 0 20px;
-      height: 44px;
-      line-height: 44px;
+      padding: 0 16px;
+      height: 46px;
+      line-height: 46px;
       color: #e2e8f0;
       font-size: 14px;
       font-family: inherit;
@@ -245,7 +245,7 @@
     .fjchat-input:focus { border-color: rgba(201,168,76,0.4); }
     .fjchat-input::placeholder { color: #4b5563; }
     .fjchat-send {
-      width: 42px; height: 42px;
+      width: 46px; height: 46px;
       border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       border: none;
@@ -260,7 +260,7 @@
 
     /* Lead capture */
     .fjchat-lead {
-      padding: 20px 24px;
+      padding: 20px 16px;
       background: #0b1120;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; gap: 12px;
@@ -305,7 +305,7 @@
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 10px 24px;
+      padding: 10px 16px;
       font-size: 10px;
       color: #6b7280;
       background: #0b1120;
