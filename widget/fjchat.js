@@ -96,7 +96,8 @@
       bottom: 100px;
       ${CFG.position === 'left' ? 'left: 28px;' : 'right: 28px;'}
       width: 400px;
-      max-height: 600px;
+      height: 560px;
+      max-height: calc(100vh - 140px);
       border-radius: 20px;
       background: #111827;
       border: 1px solid rgba(255,255,255,0.08);
