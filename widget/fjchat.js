@@ -52,6 +52,18 @@
   let messages = [];
   let isTyping = false;
 
+  /* ── SESSION AVATAR ── */
+  let avatarUrl;
+  if (sessionStorage.getItem('chatAvatar')) {
+    avatarUrl = sessionStorage.getItem('chatAvatar');
+  } else {
+    const avatarStyles = ['bottts', 'fun-emoji', 'adventurer', 'pixel-art', 'lorelei', 'micah'];
+    const randomStyle = avatarStyles[Math.floor(Math.random() * avatarStyles.length)];
+    const randomSeed = Math.random().toString(36).substring(2, 10);
+    avatarUrl = `https://api.dicebear.com/7.x/${randomStyle}/svg?seed=${randomSeed}`;
+    sessionStorage.setItem('chatAvatar', avatarUrl);
+  }
+
   /* ── INJECT CSS ── */
   const style = document.createElement('style');
   style.textContent = `
@@ -185,13 +197,13 @@
     .fjchat-msg-row.user { align-self: flex-end; flex-direction: row-reverse; }
 
     .fjchat-msg-av {
-      width: 28px; height: 28px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 700; color: #0b1120;
+      background: none;
+      overflow: hidden;
       flex-shrink: 0; margin: 2px 0 0 0 !important;
     }
+    .fjchat-msg-av img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .fjchat-msg-av.hidden { visibility: hidden; }
 
     /* Bubbles — rounded, padded, shadowed */
@@ -275,10 +287,11 @@
       padding: 18px 12px !important;
       background: #0b1120;
       border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex; flex-direction: column; gap: 12px;
+      display: flex; flex-direction: column; gap: 10px;
     }
     .fjchat-lead p {
       font-size: 13px; color: #9ca3af; line-height: 1.5;
+      margin-bottom: 2px;
     }
     .fjchat-lead input {
       background: #1c2640;
@@ -293,6 +306,7 @@
     }
     .fjchat-lead input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
     .fjchat-lead input::placeholder { color: #4b5563; }
+    .fjchat-lead input { width: 100%; }
     .fjchat-lead button {
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120;
@@ -303,6 +317,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: opacity 0.2s;
+      width: 60%; margin: 0 auto;
     }
     .fjchat-lead button:hover { opacity: 0.88; }
     .fjchat-lead .fjchat-skip {
@@ -451,6 +466,13 @@
     addMessage('assistant', 'No problem! How can I help you today?');
   });
 
+  // Enter key submits lead form
+  ['fjchat-lead-name', 'fjchat-lead-email'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); document.getElementById('fjchat-lead-submit').click(); }
+    });
+  });
+
   /* ── SEND MESSAGE ── */
   function handleSend() {
     const text = chatInput.value.trim();
@@ -475,7 +497,7 @@
       // Only show avatar on first message in a sequence from the same sender
       const prev = msgArea.querySelector('.fjchat-msg-row:last-child');
       const showAvatar = !prev || !prev.classList.contains('assistant');
-      row.innerHTML = `<div class="fjchat-msg-av${showAvatar ? '' : ' hidden'}">${CFG.initials}</div><div class="fjchat-bubble">${escHtml(content)}</div>`;
+      row.innerHTML = `<div class="fjchat-msg-av${showAvatar ? '' : ' hidden'}"><img src="${avatarUrl}" alt="" /></div><div class="fjchat-bubble">${escHtml(content)}</div>`;
     } else {
       row.innerHTML = `<div class="fjchat-bubble">${escHtml(content)}</div>`;
     }
@@ -497,7 +519,7 @@
     const row = document.createElement('div');
     row.className = 'fjchat-typing-row';
     row.id = 'fjchat-typing';
-    row.innerHTML = `<div class="fjchat-msg-av">${CFG.initials}</div><div class="fjchat-typing-bubble"><div class="fjchat-dot"></div><div class="fjchat-dot"></div><div class="fjchat-dot"></div></div>`;
+    row.innerHTML = `<div class="fjchat-msg-av"><img src="${avatarUrl}" alt="" /></div><div class="fjchat-typing-bubble"><div class="fjchat-dot"></div><div class="fjchat-dot"></div><div class="fjchat-dot"></div></div>`;
     msgArea.appendChild(row);
     msgArea.scrollTop = msgArea.scrollHeight;
   }
