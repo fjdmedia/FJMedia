@@ -157,14 +157,14 @@
       flex: 1;
       overflow-y: auto;
       padding: 20px 24px;
-      display: flex; flex-direction: column; gap: 14px;
+      display: flex; flex-direction: column; gap: 8px;
       scroll-behavior: smooth;
     }
     .fjchat-messages::-webkit-scrollbar { width: 3px; }
     .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
     .fjchat-msg-row {
-      display: flex; gap: 10px; max-width: 85%;
+      display: flex; gap: 8px; max-width: 75%;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
@@ -180,20 +180,20 @@
       flex-shrink: 0; margin-top: 2px;
     }
     .fjchat-bubble {
-      padding: 12px 16px;
-      border-radius: 16px;
+      padding: 10px 18px;
+      border-radius: 20px;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.45;
       word-wrap: break-word;
     }
     .fjchat-msg-row.assistant .fjchat-bubble {
       background: #1e293b; color: #e2e8f0;
-      border-bottom-left-radius: 3px;
+      border-bottom-left-radius: 4px;
     }
     .fjchat-msg-row.user .fjchat-bubble {
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120; font-weight: 500;
-      border-bottom-right-radius: 3px;
+      border-bottom-right-radius: 4px;
     }
 
     /* Typing indicator */
