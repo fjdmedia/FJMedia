@@ -67,7 +67,8 @@
   /* ── INJECT CSS ── */
   const style = document.createElement('style');
   style.textContent = `
-    #fjchat-widget, #fjchat-widget * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+    #fjchat-widget, #fjchat-widget * { box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+    :where(#fjchat-widget) :where(*) { margin: 0; padding: 0; }
 
     /* Bubble */
     #fjchat-bubble {
@@ -235,7 +236,7 @@
     }
     .fjchat-typing-bubble {
       background: #1c2640;
-      border-radius: 4px 14px 14px 14px;
+      border-radius: 2px 18px 18px 2px;
       padding: 12px 16px;
       display: flex; gap: 5px; align-items: center;
     }
@@ -297,6 +298,7 @@
       margin-bottom: 2px;
     }
     .fjchat-lead input {
+      width: 100%;
       background: #1c2640;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 4px;
@@ -309,7 +311,6 @@
     }
     .fjchat-lead input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
     .fjchat-lead input::placeholder { color: #4b5563; }
-    .fjchat-lead input { width: 100%; }
     .fjchat-lead button {
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120;
