@@ -114,26 +114,31 @@
       pointer-events: all;
     }
 
+    /* ── FLUSH-LEFT SYSTEM: 12px universal left inset ── */
+
     /* Header */
     .fjchat-header {
-      padding: 28px 16px;
+      padding: 20px 12px !important;
       background: #0b1120;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex; align-items: center; justify-content: space-between;
     }
     .fjchat-header-left {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 3px !important;
+      margin-left: 0 !important;
     }
     .fjchat-header-avatar {
-      width: 40px; height: 40px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #0b1120;
+      font-size: 12px; font-weight: 700; color: #0b1120;
       flex-shrink: 0;
+      margin: 0 !important;
     }
+    .fjchat-header-info { margin-left: 8px; }
     .fjchat-header-info h3 {
-      font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 3px;
+      font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 2px;
     }
     .fjchat-header-info p {
       font-size: 12px; color: #6b7280;
@@ -151,24 +156,26 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, color 0.2s;
+      margin-right: 0;
     }
     .fjchat-close svg { width: 16px; height: 16px; stroke: #6b7280; stroke-width: 2.5; stroke-linecap: round; fill: none; }
     .fjchat-close:hover { background: rgba(255,255,255,0.08); }
     .fjchat-close:hover svg { stroke: #fff; }
 
-    /* Messages */
+    /* Messages — flush left, generous vertical gaps */
     .fjchat-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 16px;
-      display: flex; flex-direction: column; gap: 14px;
+      padding: 18px 12px !important;
+      display: flex; flex-direction: column; gap: 16px;
       scroll-behavior: smooth;
     }
     .fjchat-messages::-webkit-scrollbar { width: 3px; }
     .fjchat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 
     .fjchat-msg-row {
-      display: flex; gap: 8px; max-width: 82%;
+      display: flex; gap: 6px; max-width: 85%;
+      margin-left: 0 !important; margin-right: 0 !important;
       animation: fjchat-fadeIn 0.2s ease;
     }
     @keyframes fjchat-fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
@@ -176,40 +183,42 @@
     .fjchat-msg-row.user { align-self: flex-end; flex-direction: row-reverse; }
 
     .fjchat-msg-av {
-      width: 30px; height: 30px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 700; color: #0b1120;
-      flex-shrink: 0; margin-top: 2px;
+      font-size: 9px; font-weight: 700; color: #0b1120;
+      flex-shrink: 0; margin: 2px 0 0 0 !important;
     }
     .fjchat-msg-av.hidden { visibility: hidden; }
+
+    /* Bubbles — sharp left edge, tight text */
     .fjchat-bubble {
-      padding: 10px 14px;
-      border-radius: 18px;
+      padding: 10px 14px 10px 10px !important;
       font-size: 14px;
-      line-height: 1.45;
+      line-height: 1.5;
       word-wrap: break-word;
     }
     .fjchat-msg-row.assistant .fjchat-bubble {
       background: #1e293b; color: #e2e8f0;
-      border-bottom-left-radius: 4px;
+      border-radius: 2px 18px 18px 2px !important;
     }
     .fjchat-msg-row.user .fjchat-bubble {
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120; font-weight: 500;
-      border-bottom-right-radius: 4px;
+      border-radius: 18px 2px 2px 18px !important;
     }
 
     /* Typing indicator */
     .fjchat-typing-row {
-      display: flex; gap: 7px; align-self: flex-start;
+      display: flex; gap: 6px; align-self: flex-start;
+      margin-left: 0 !important;
       animation: fjchat-fadeIn 0.2s ease;
     }
     .fjchat-typing-bubble {
       background: #1e293b;
-      border-radius: 14px; border-bottom-left-radius: 3px;
-      padding: 12px 15px;
+      border-radius: 2px 14px 14px 2px;
+      padding: 10px 14px 10px 10px;
       display: flex; gap: 4px; align-items: center;
     }
     .fjchat-dot {
@@ -221,9 +230,9 @@
     .fjchat-dot:nth-child(3) { animation-delay: 0.3s; }
     @keyframes fjchat-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-4px)} }
 
-    /* Input area */
+    /* Input area — flush */
     .fjchat-input-area {
-      padding: 16px 16px;
+      padding: 14px 12px !important;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; gap: 10px;
       background: #0b1120;
@@ -233,7 +242,7 @@
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 0 16px;
+      padding: 0 14px;
       height: 46px;
       line-height: 46px;
       color: #e2e8f0;
@@ -258,9 +267,9 @@
     .fjchat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
     .fjchat-send svg { width: 16px; height: 16px; fill: #0b1120; margin-left: 2px; }
 
-    /* Lead capture */
+    /* Lead capture — flush */
     .fjchat-lead {
-      padding: 20px 16px;
+      padding: 18px 12px !important;
       background: #0b1120;
       border-top: 1px solid rgba(255,255,255,0.06);
       display: flex; flex-direction: column; gap: 12px;
@@ -271,8 +280,8 @@
     .fjchat-lead input {
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 12px 14px;
       font-size: 14px;
       font-family: inherit;
       outline: none;
@@ -285,7 +294,7 @@
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       color: #0b1120;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 12px;
       font-size: 14px;
       font-weight: 600;
@@ -305,7 +314,7 @@
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 10px 16px;
+      padding: 8px 12px;
       font-size: 10px;
       color: #6b7280;
       background: #0b1120;
