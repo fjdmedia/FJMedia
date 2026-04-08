@@ -99,9 +99,9 @@
       height: 560px;
       max-height: calc(100vh - 140px);
       border-radius: 20px;
-      background: #111827;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      background: #151d2e;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.55);
       display: flex; flex-direction: column;
       overflow: hidden;
       z-index: 99999;
@@ -192,21 +192,22 @@
     }
     .fjchat-msg-av.hidden { visibility: hidden; }
 
-    /* Bubbles — sharp left edge, tight text */
+    /* Bubbles — rounded, padded, shadowed */
     .fjchat-bubble {
-      padding: 10px 14px 10px 10px !important;
+      padding: 12px 16px !important;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.6;
       word-wrap: break-word;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
     }
     .fjchat-msg-row.assistant .fjchat-bubble {
-      background: #1e293b; color: #e2e8f0;
-      border-radius: 2px 18px 18px 2px !important;
+      background: #1c2640; color: #e2e8f0;
+      border-radius: 4px 16px 16px 16px !important;
     }
     .fjchat-msg-row.user .fjchat-bubble {
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
-      color: #0b1120; font-weight: 500;
-      border-radius: 18px 2px 2px 18px !important;
+      background: ${CFG.accent};
+      color: #fff; font-weight: 500;
+      border-radius: 16px 4px 16px 16px !important;
     }
 
     /* Typing indicator */
@@ -216,19 +217,19 @@
       animation: fjchat-fadeIn 0.2s ease;
     }
     .fjchat-typing-bubble {
-      background: #1e293b;
-      border-radius: 2px 14px 14px 2px;
-      padding: 10px 14px 10px 10px;
-      display: flex; gap: 4px; align-items: center;
+      background: #1c2640;
+      border-radius: 4px 14px 14px 14px;
+      padding: 12px 16px;
+      display: flex; gap: 5px; align-items: center;
     }
     .fjchat-dot {
       width: 6px; height: 6px;
       background: #6b7280; border-radius: 50%;
-      animation: fjchat-bounce 0.8s infinite;
+      animation: fjchat-fade 1.4s ease-in-out infinite;
     }
-    .fjchat-dot:nth-child(2) { animation-delay: 0.15s; }
-    .fjchat-dot:nth-child(3) { animation-delay: 0.3s; }
-    @keyframes fjchat-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-4px)} }
+    .fjchat-dot:nth-child(2) { animation-delay: 0.2s; }
+    .fjchat-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes fjchat-fade { 0%,100%{opacity:0.25} 50%{opacity:1} }
 
     /* Input area — flush */
     .fjchat-input-area {
@@ -239,23 +240,23 @@
     }
     .fjchat-input {
       flex: 1;
-      background: #1e293b;
+      background: #1c2640;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 0 14px;
-      height: 46px;
-      line-height: 46px;
+      padding: 0 16px;
+      height: 48px;
+      line-height: 48px;
       color: #e2e8f0;
       font-size: 14px;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .fjchat-input:focus { border-color: rgba(201,168,76,0.4); }
+    .fjchat-input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
     .fjchat-input::placeholder { color: #4b5563; }
     .fjchat-send {
-      width: 46px; height: 46px;
-      border-radius: 50%;
+      width: 48px; height: 48px;
+      border-radius: 12px;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       border: none;
       cursor: pointer;
@@ -278,17 +279,17 @@
       font-size: 13px; color: #9ca3af; line-height: 1.5;
     }
     .fjchat-lead input {
-      background: #1e293b;
+      background: #1c2640;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 12px 16px;
       font-size: 14px;
       font-family: inherit;
       outline: none;
       color: #e2e8f0;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .fjchat-lead input:focus { border-color: rgba(201,168,76,0.4); }
+    .fjchat-lead input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
     .fjchat-lead input::placeholder { color: #4b5563; }
     .fjchat-lead button {
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
@@ -314,12 +315,15 @@
     /* Powered by */
     .fjchat-powered {
       text-align: center;
-      padding: 8px 12px;
-      font-size: 10px;
-      color: #6b7280;
+      padding: 7px 12px;
+      font-size: 9px;
+      color: #4b5563;
       background: #0b1120;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      letter-spacing: 0.2px;
     }
-    .fjchat-powered a { color: #9ca3af; text-decoration: none; transition: color 0.2s; }
+    .fjchat-powered svg { width: 10px; height: 10px; stroke: #4b5563; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .fjchat-powered a { color: #6b7280; text-decoration: none; transition: color 0.2s; }
     .fjchat-powered a:hover { color: ${CFG.accent}; }
 
     /* Mobile */
@@ -356,7 +360,7 @@
           <div class="fjchat-header-avatar">${CFG.initials}</div>
           <div class="fjchat-header-info">
             <h3>${CFG.business} AI</h3>
-            <p><span class="fjchat-online"></span>Online now</p>
+            <p><span class="fjchat-online"></span>Online now &middot; Typically replies instantly</p>
           </div>
         </div>
         <button class="fjchat-close" id="fjchat-close"><svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
@@ -370,12 +374,12 @@
         <button class="fjchat-skip" id="fjchat-lead-skip">Skip for now</button>
       </div>
       <div class="fjchat-input-area" id="fjchat-input-area" style="display:none;">
-        <input class="fjchat-input" id="fjchat-input" type="text" placeholder="Type your message..." autocomplete="off" />
+        <input class="fjchat-input" id="fjchat-input" type="text" placeholder="Ask me anything..." autocomplete="off" />
         <button class="fjchat-send" id="fjchat-send" aria-label="Send">
           <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
         </button>
       </div>
-      <div class="fjchat-powered">Powered by <a href="https://fjmedia.ca" target="_blank" rel="noopener">FJMedia AI</a></div>
+      <div class="fjchat-powered"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Secure &amp; Private</span> &middot; Powered by <a href="https://fjmedia.ca" target="_blank" rel="noopener">FJMedia AI</a></div>
     </div>
   `;
   document.body.appendChild(wrapper);
