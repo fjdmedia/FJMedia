@@ -122,7 +122,7 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .fjchat-header-left {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 16px;
     }
     .fjchat-header-avatar {
       width: 40px; height: 40px;
@@ -147,10 +147,14 @@
     @keyframes fjchat-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .fjchat-close {
       background: none; border: none; cursor: pointer;
-      color: #6b7280; font-size: 20px; line-height: 1;
-      padding: 4px; transition: color 0.2s;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
     }
-    .fjchat-close:hover { color: #fff; }
+    .fjchat-close svg { width: 16px; height: 16px; stroke: #6b7280; stroke-width: 2.5; stroke-linecap: round; fill: none; }
+    .fjchat-close:hover { background: rgba(255,255,255,0.08); }
+    .fjchat-close:hover svg { stroke: #fff; }
 
     /* Messages */
     .fjchat-messages {
@@ -179,8 +183,9 @@
       font-size: 10px; font-weight: 700; color: #0b1120;
       flex-shrink: 0; margin-top: 2px;
     }
+    .fjchat-msg-av.hidden { visibility: hidden; }
     .fjchat-bubble {
-      padding: 10px 18px;
+      padding: 12px 16px;
       border-radius: 20px;
       font-size: 14px;
       line-height: 1.45;
@@ -228,7 +233,9 @@
       background: #1e293b;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 12px 16px;
+      padding: 0 16px;
+      height: 42px;
+      line-height: 42px;
       color: #e2e8f0;
       font-size: 14px;
       font-family: inherit;
@@ -239,7 +246,7 @@
     .fjchat-input::placeholder { color: #4b5563; }
     .fjchat-send {
       width: 42px; height: 42px;
-      border-radius: 12px;
+      border-radius: 50%;
       background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
       border: none;
       cursor: pointer;
@@ -249,7 +256,7 @@
     }
     .fjchat-send:hover { opacity: 0.88; transform: scale(1.05); }
     .fjchat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-    .fjchat-send svg { width: 16px; height: 16px; fill: #0b1120; }
+    .fjchat-send svg { width: 16px; height: 16px; fill: #0b1120; margin-left: 2px; }
 
     /* Lead capture */
     .fjchat-lead {
@@ -300,10 +307,10 @@
       text-align: center;
       padding: 10px 24px;
       font-size: 10px;
-      color: #374151;
+      color: #6b7280;
       background: #0b1120;
     }
-    .fjchat-powered a { color: #4b5563; text-decoration: none; transition: color 0.2s; }
+    .fjchat-powered a { color: #9ca3af; text-decoration: none; transition: color 0.2s; }
     .fjchat-powered a:hover { color: ${CFG.accent}; }
 
     /* Mobile */
@@ -343,7 +350,7 @@
             <p><span class="fjchat-online"></span>Online now</p>
           </div>
         </div>
-        <button class="fjchat-close" id="fjchat-close">&#x2715;</button>
+        <button class="fjchat-close" id="fjchat-close"><svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
       </div>
       <div class="fjchat-messages" id="fjchat-messages"></div>
       <div id="fjchat-lead-form" class="fjchat-lead" style="display:none;">
@@ -450,7 +457,10 @@
     row.className = `fjchat-msg-row ${role}`;
 
     if (role === 'assistant') {
-      row.innerHTML = `<div class="fjchat-msg-av">${CFG.initials}</div><div class="fjchat-bubble">${escHtml(content)}</div>`;
+      // Only show avatar on first message in a sequence from the same sender
+      const prev = msgArea.querySelector('.fjchat-msg-row:last-child');
+      const showAvatar = !prev || !prev.classList.contains('assistant');
+      row.innerHTML = `<div class="fjchat-msg-av${showAvatar ? '' : ' hidden'}">${CFG.initials}</div><div class="fjchat-bubble">${escHtml(content)}</div>`;
     } else {
       row.innerHTML = `<div class="fjchat-bubble">${escHtml(content)}</div>`;
     }
