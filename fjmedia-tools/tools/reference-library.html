@@ -2881,14 +2881,14 @@
       </div>
 
       <div class="ref-card">
-        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('wipe-demo')">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('modal-wipe-demo')">
           <div class="modal-demo-wrap">
             <div style="display:flex;align-items:center;justify-content:center;height:100%;">
-              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('wipe-demo')">Open</button>
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('modal-wipe-demo')">Open</button>
             </div>
-            <div id="wipe-demo" class="modal-demo-overlay" style="clip-path:polygon(0 0,0 0,0 100%,0 100%);transition:clip-path .5s cubic-bezier(0.76,0,0.24,1);">
+            <div id="modal-wipe-demo" class="modal-demo-overlay" style="clip-path:polygon(0 0,0 0,0 100%,0 100%);transition:clip-path .5s cubic-bezier(0.76,0,0.24,1);">
               <div class="modal-demo-label">Modal Content</div>
-              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('wipe-demo')">Close</button>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('modal-wipe-demo')">Close</button>
             </div>
           </div>
           <span class="play-hint">click to preview</span>
@@ -2897,6 +2897,86 @@
           <div class="card-name">Diagonal Wipe</div>
           <div class="card-prompt" onclick="copyTag(this,'diagonal-wipe-modal')">diagonal-wipe-modal</div>
           <div class="card-desc">Clip-path polygon wipes diagonally across the screen. Dramatic, cinematic feel. Great for portfolio reveals.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('slideup-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('slideup-demo')">Open</button>
+            </div>
+            <div id="slideup-demo" class="modal-demo-overlay" style="clip-path:none;transform:translateY(100%);opacity:0;transition:transform .5s cubic-bezier(0.76,0,0.24,1),opacity .3s ease;">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('slideup-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Slide Up (Bottom Sheet)</div>
+          <div class="card-prompt" onclick="copyTag(this,'slide-up-modal')">slide-up-modal</div>
+          <div class="card-desc">Modal slides up from the bottom edge. Natural for mobile bottom sheets, confirmations, and quick actions.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('fadescale-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('fadescale-demo')">Open</button>
+            </div>
+            <div id="fadescale-demo" class="modal-demo-overlay" style="clip-path:none;transform:scale(0.8);opacity:0;transition:transform .4s cubic-bezier(0.34,1.56,0.64,1),opacity .3s ease;">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('fadescale-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Fade + Scale Pop</div>
+          <div class="card-prompt" onclick="copyTag(this,'fade-scale-modal')">fade-scale-modal</div>
+          <div class="card-desc">Fades in while scaling up with an elastic overshoot. Classic dialog/alert pattern. Clean and quick.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('curtain-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('curtain-demo')">Open</button>
+            </div>
+            <div id="curtain-demo" class="modal-demo-overlay" style="clip-path:polygon(50% 0,50% 0,50% 100%,50% 100%);transition:clip-path .6s cubic-bezier(0.76,0,0.24,1);">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('curtain-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Curtain Split</div>
+          <div class="card-prompt" onclick="copyTag(this,'curtain-split-modal')">curtain-split-modal</div>
+          <div class="card-desc">Content reveals from center outward like curtains opening. Dramatic for portfolio reveals and galleries.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('drawer-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('drawer-demo')">Open</button>
+            </div>
+            <div id="drawer-demo" class="modal-demo-overlay" style="clip-path:none;transform:translateX(100%);opacity:0;transition:transform .5s cubic-bezier(0.76,0,0.24,1),opacity .3s ease;">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('drawer-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Slide From Right (Drawer)</div>
+          <div class="card-prompt" onclick="copyTag(this,'drawer-modal-right')">drawer-modal-right</div>
+          <div class="card-desc">Panel slides in from the right edge. Standard for side drawers, cart panels, mobile nav overlays.</div>
         </div>
       </div>
 
@@ -2941,11 +3021,19 @@
       el.classList.remove('open');
       // Reset non-circle demos to their closed clip-path
       if (id === 'inset-demo') el.style.clipPath = 'inset(100%)';
-      if (id === 'wipe-demo') el.style.clipPath = 'polygon(0 0,0 0,0 100%,0 100%)';
+      if (id === 'modal-wipe-demo') el.style.clipPath = 'polygon(0 0,0 0,0 100%,0 100%)';
+      if (id === 'slideup-demo') { el.style.transform = 'translateY(100%)'; el.style.opacity = '0'; }
+      if (id === 'fadescale-demo') { el.style.transform = 'scale(0.8)'; el.style.opacity = '0'; }
+      if (id === 'curtain-demo') el.style.clipPath = 'polygon(50% 0,50% 0,50% 100%,50% 100%)';
+      if (id === 'drawer-demo') { el.style.transform = 'translateX(100%)'; el.style.opacity = '0'; }
     } else {
       el.classList.add('open');
       if (id === 'inset-demo') el.style.clipPath = 'inset(0%)';
-      if (id === 'wipe-demo') el.style.clipPath = 'polygon(0 0,100% 0,100% 100%,0 100%)';
+      if (id === 'modal-wipe-demo') el.style.clipPath = 'polygon(0 0,100% 0,100% 100%,0 100%)';
+      if (id === 'slideup-demo') { el.style.transform = 'translateY(0)'; el.style.opacity = '1'; }
+      if (id === 'fadescale-demo') { el.style.transform = 'scale(1)'; el.style.opacity = '1'; }
+      if (id === 'curtain-demo') el.style.clipPath = 'polygon(0 0,100% 0,100% 100%,0 100%)';
+      if (id === 'drawer-demo') { el.style.transform = 'translateX(0)'; el.style.opacity = '1'; }
     }
   }
 
