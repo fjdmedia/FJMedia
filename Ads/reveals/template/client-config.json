@@ -1,0 +1,60 @@
+{
+  "client": {
+    "name": "Client Name",
+    "name_font": "Pacifico",
+    "tagline": "What they do",
+    "city": "City, Province",
+    "url": "clientwebsite.com",
+    "quote": "A real quote from the client about the result.",
+    "quote_attribution": "First Name, Business Name, City"
+  },
+  "palette": {
+    "bg": "#F7F3EE",
+    "accent": "#3d5a2a",
+    "text": "#2c2c2c",
+    "card_bg": "#ffffff",
+    "subtext": "#6b6b6b"
+  },
+  "stats": [
+    { "value": "5", "label": "Days" },
+    { "value": "Full", "label": "Backend" },
+    { "value": "24/7", "label": "Orders" }
+  ],
+  "features": [
+    { "icon": "🍪", "title": "Feature Name", "desc": "What it does and why it matters." },
+    { "icon": "💰", "title": "Feature Name", "desc": "What it does and why it matters." },
+    { "icon": "✨", "title": "Feature Name", "desc": "What it does and why it matters." },
+    { "icon": "📊", "title": "Feature Name", "desc": "What it does and why it matters." },
+    { "icon": "📅", "title": "Feature Name", "desc": "What it does and why it matters." }
+  ],
+  "before_after": {
+    "heading": "From \"old way\"\nto a real solution.",
+    "before": [
+      "Pain point 1",
+      "Pain point 2",
+      "Pain point 3",
+      "Pain point 4",
+      "Pain point 5"
+    ],
+    "after": [
+      "Solution 1",
+      "Solution 2",
+      "Solution 3",
+      "Solution 4",
+      "Solution 5"
+    ],
+    "bottom_quote": "Transformation summary line."
+  },
+  "cover": {
+    "headline": "A full online ordering system.",
+    "headline_emphasis": "Built in 5 days.",
+    "subline": "From Instagram DMs to a real storefront."
+  },
+  "cta": {
+    "headline": "Your bakery. Your detailing shop.\nYour entire business online.",
+    "subtext": "Custom site. Order forms. Booking systems.\nBuilt in 5 days. You pay nothing until you love it.",
+    "trigger_word": "FREE Webby",
+    "niches": "Bakeries \u00b7 Detailing \u00b7 Cleaning \u00b7 Photography \u00b7 Events",
+    "scarcity": "Next build starts [date]"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "client": {
+    "name": "Sugar & Shai",
+    "name_font": "Pacifico",
+    "tagline": "Homemade Cookies",
+    "city": "Winnipeg, MB",
+    "url": "sugarandshaicookies.com",
+    "quote": "",
+    "quote_attribution": ""
+  },
+  "palette": {
+    "bg": "#F7F3EE",
+    "accent": "#3d5a2a",
+    "text": "#2c2c2c",
+    "card_bg": "#ffffff",
+    "subtext": "#6b6b6b"
+  },
+  "stats": [
+    { "value": "5", "label": "Days" },
+    { "value": "Full", "label": "Backend" },
+    { "value": "24/7", "label": "Orders" }
+  ],
+  "features": [
+    { "icon": "\ud83c\udf6a", "title": "Per-Flavour Quantity Picker", "desc": "Customers pick exactly how many of each flavour. Quantities in steps of 3 \u2014 matching how she actually packages them." },
+    { "icon": "\ud83d\udcb0", "title": "Live Pricing Calculator", "desc": "Total updates in real time. 12pc = $20, 24pc = $35. Mix pricing with Flavour of the Month built in." },
+    { "icon": "\u2728", "title": "Flavour of the Month", "desc": "Rotates every month \u2014 new accent colors, new photos, new copy. This month: Ube Bliss." },
+    { "icon": "\ud83d\udcca", "title": "Auto Order Pipeline", "desc": "Every order hits a Google Sheet + triggers an email to Shai instantly. No DMs. No manual tracking." },
+    { "icon": "\ud83d\udcc5", "title": "Smart Pickup Scheduling", "desc": "Wednesdays default. Sunday 7PM cutoff. Non-Wednesday dates get flagged for Shai to confirm." }
+  ],
+  "before_after": {
+    "heading": "From \"DM for pricing\"\nto a real storefront.",
+    "before": [
+      "Instagram DMs for every single order",
+      "Manually tracking who wants what",
+      "Customers asking \"how much?\" every time",
+      "No way to find her on Google",
+      "Missed orders when she's busy baking"
+    ],
+    "after": [
+      "Orders come in automatically",
+      "Every order logged to a spreadsheet",
+      "Pricing visible on the site",
+      "Showing up on Google for \"cookies Winnipeg\"",
+      "Orders arrive while she sleeps"
+    ],
+    "bottom_quote": "From chasing DMs to receiving orders on autopilot \u2014 in 5 days."
+  },
+  "cover": {
+    "headline": "A full online ordering system.",
+    "headline_emphasis": "Built in 5 days.",
+    "subline": "From Instagram DMs to a real storefront."
+  },
+  "cta": {
+    "headline": "Your bakery. Your detailing shop.\nYour entire business online.",
+    "subtext": "Custom site. Order forms. Booking systems.\nBuilt in 5 days. You pay nothing until you love it.",
+    "trigger_word": "FREE Webby",
+    "niches": "Bakeries \u00b7 Detailing \u00b7 Cleaning \u00b7 Photography \u00b7 Events",
+    "scarcity": "Next build starts [date]"
+  }
+}

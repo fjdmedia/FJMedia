@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<!--
+  FJMedia — Client Reveal Base Template
+  ======================================
+  CSS variable system for client reveal carousels.
+  Each slide is a self-contained HTML file at 1080x1350 (IG portrait).
+  Screenshot at 1x with Playwright — no device_scale_factor needed.
+
+  USAGE:
+  1. Copy this file for each slide type you need.
+  2. Replace {{placeholders}} with client-specific content.
+  3. Override CSS variables in :root to match the client's brand.
+  4. The CTA slide always uses the FJMedia navy palette (override vars).
+
+  SLIDE TYPES:
+  - before-after  (pain → transformation)
+  - cover         (client name, headline, stats, mockup)
+  - features      (what was built, 3-5 feature cards)
+  - quote         (client testimonial, social proof)
+  - cta           (FJMedia navy, DM trigger, scarcity)
+-->
+<link href="https://fonts.googleapis.com/css2?family={{client_name_font}}&family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ── CSS Variable System ─────────────────────────────────────────────── */
+:root{
+  /* Client brand (slides 1-4) — override per client */
+  --bg:         {{client_bg}};       /* e.g. #F7F3EE */
+  --accent:     {{client_accent}};   /* e.g. #3d5a2a */
+  --text:       {{client_text}};     /* e.g. #2c2c2c */
+  --card-bg:    {{client_card_bg}};  /* e.g. #ffffff */
+  --subtext:    {{client_subtext}};  /* e.g. #6b6b6b */
+
+  /* FJMedia navy palette (CTA slide) — locked, never change */
+  --navy-bg:    #071520;
+  --navy-card:  #0d1f3c;
+  --navy-border:#1b3a56;
+  --gold:       #c9a84c;
+  --cream:      #EDEAE5;
+  --mid-text:   #A09C96;
+}
+
+/* ── Base Post Container ─────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+
+.post{
+  width:1080px;height:1350px;
+  position:relative;overflow:hidden;
+  font-family:"DM Sans",sans-serif;
+}
+
+/* Client slides use client palette */
+.post.client{background:var(--bg);color:var(--text);}
+
+/* CTA slide uses navy palette */
+.post.navy{background:var(--navy-bg);color:var(--cream);}
+
+/* ── Watermark (every slide) ─────────────────────────────────────────── */
+.watermark{
+  position:absolute;bottom:36px;right:48px;
+  font-family:"Space Mono",monospace;font-size:14px;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;
+  z-index:10;
+}
+.post.client .watermark{color:var(--subtext);opacity:0.3;}
+.post.navy .watermark{color:var(--gold);opacity:0.25;}
+
+/* ── Pill Label ──────────────────────────────────────────────────────── */
+.pill{
+  display:inline-block;
+  font-family:"DM Sans",sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;background:var(--accent);
+  padding:10px 28px;border-radius:40px;
+}
+
+/* ── Stat Card ───────────────────────────────────────────────────────── */
+.stat{
+  text-align:center;
+  background:var(--card-bg);
+  border:2px solid rgba(0,0,0,0.06);
+  border-top:3px solid var(--accent);
+  border-radius:24px;padding:28px 36px;min-width:200px;
+}
+.stat-num{
+  font-family:"DM Sans",sans-serif;font-size:48px;font-weight:700;
+  color:var(--accent);line-height:1;margin-bottom:6px;
+}
+.stat-label{
+  font-family:"DM Sans",sans-serif;font-size:16px;font-weight:500;
+  color:var(--subtext);letter-spacing:.14em;text-transform:uppercase;
+}
+
+/* ── Feature Card ────────────────────────────────────────────────────── */
+.feature{
+  background:var(--card-bg);
+  border:2px solid rgba(0,0,0,0.04);
+  border-left:6px solid var(--accent);
+  padding:28px 32px;border-radius:0 20px 20px 0;
+  display:flex;gap:24px;align-items:flex-start;
+}
+.feature-icon{
+  flex-shrink:0;width:64px;height:64px;
+  background:var(--accent);border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+}
+.feature-title{font-size:22px;font-weight:600;color:var(--text);margin-bottom:6px;}
+.feature-desc{font-size:19px;font-weight:400;color:var(--text);line-height:1.5;}
+.feature-desc em{color:var(--accent);font-style:normal;font-weight:500;}
+
+/* ── Before/After Columns ────────────────────────────────────────────── */
+.compare{display:flex;gap:32px;width:100%;}
+.col{flex:1;display:flex;flex-direction:column;background:var(--card-bg);border-radius:24px;overflow:hidden;border:2px solid rgba(0,0,0,0.06);}
+.col-header{padding:24px 32px;text-align:center;font-size:18px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;}
+.col.before .col-header{background:rgba(0,0,0,0.04);color:var(--subtext);}
+.col.after .col-header{background:var(--accent);color:#fff;}
+.col-body{padding:32px 28px;display:flex;flex-direction:column;gap:24px;}
+.col-item{font-size:20px;line-height:1.45;padding-left:32px;position:relative;}
+.col-item::before{content:'';position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:50%;}
+.col.before .col-item{color:var(--subtext);}
+.col.before .col-item::before{background:var(--subtext);opacity:0.2;}
+.col.after .col-item{color:var(--text);}
+.col.after .col-item::before{background:var(--accent);}
+.col.after .col-item em{color:var(--accent);font-style:normal;font-weight:600;}
+
+/* ── Quote Block ─────────────────────────────────────────────────────── */
+.quote-box{
+  width:100%;background:rgba(0,0,0,0.03);border-radius:24px;
+  padding:40px 48px;text-align:center;
+}
+.quote{
+  font-family:"Syne",sans-serif;font-size:36px;font-weight:700;
+  color:var(--accent);line-height:1.4;margin-bottom:12px;
+}
+.quote-attr{
+  font-family:"DM Sans",sans-serif;font-size:18px;font-weight:500;
+  color:var(--subtext);letter-spacing:.1em;
+}
+
+/* ── Navy CTA Elements ───────────────────────────────────────────────── */
+.grid-overlay{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.corner{position:absolute;width:120px;height:120px;border-color:var(--gold);border-style:solid;opacity:0.4;}
+.corner.tl{top:56px;left:56px;border-width:1px 0 0 1px;}
+.corner.br{bottom:56px;right:56px;border-width:0 1px 1px 0;}
+.cta-box{border:1px solid rgba(201,168,76,0.35);padding:36px 72px;}
+.cta-label{font-family:"DM Sans",sans-serif;font-size:18px;letter-spacing:.18em;text-transform:uppercase;color:rgba(237,234,229,0.45);margin-bottom:12px;}
+.cta-word{font-family:"Space Mono",monospace;font-weight:700;font-size:36px;letter-spacing:.04em;color:var(--gold);}
+
+</style></head><body>
+<div class="post client">
+
+  <!-- ============================================================= -->
+  <!-- Replace this section with the slide-specific content.         -->
+  <!-- Available slide layouts: before-after, cover, features,       -->
+  <!-- quote, cta (use .post.navy for cta).                          -->
+  <!-- ============================================================= -->
+
+  <div style="display:flex;align-items:center;justify-content:center;height:100%;padding:80px;">
+    <div style="text-align:center;">
+      <div class="pill" style="margin-bottom:40px;">Template</div>
+      <div style="font-size:40px;font-weight:700;line-height:1.3;margin-bottom:20px;">
+        {{client_name}}<br>Client Reveal Template
+      </div>
+      <div style="font-size:22px;color:var(--subtext);line-height:1.6;">
+        Replace this content with slide-specific layout.<br>
+        See /reveals/template/client-config.json for data schema.<br>
+        See /reveals/sugar-shai/ for a working example.
+      </div>
+    </div>
+  </div>
+
+  <div class="watermark">By FJMedia</div>
+</div>
+</body></html>

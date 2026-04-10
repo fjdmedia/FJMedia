@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy-bg:#071520;--navy-card:#0d1f3c;--navy-border:#1b3a56;
+  --gold:#c9a84c;--cream:#EDEAE5;--mid-text:#A09C96;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+
+.post{
+  width:1080px;height:1350px;
+  background:var(--navy-bg);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:96px 80px;
+}
+
+/* Grid texture */
+.grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+
+/* Corner accents */
+.corner{position:absolute;width:120px;height:120px;border-color:var(--gold);border-style:solid;opacity:0.4;}
+.corner.tl{top:56px;left:56px;border-width:1px 0 0 1px;}
+.corner.br{bottom:56px;right:56px;border-width:0 1px 1px 0;}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+
+.logo-mark{
+  font-family:"Space Mono",monospace;font-size:64px;
+  color:var(--gold);letter-spacing:-0.01em;margin-bottom:12px;
+}
+
+.logo-word{
+  font-family:"Syne",sans-serif;font-weight:800;font-size:26px;
+  color:var(--cream);letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:72px;
+}
+
+.heading{
+  font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:48px;
+  color:var(--cream);line-height:1.3;margin-bottom:16px;
+}
+.heading em{color:var(--gold);font-style:normal;}
+
+.sub{
+  font-family:"DM Sans",sans-serif;font-size:24px;
+  color:rgba(237,234,229,0.5);letter-spacing:.06em;
+  line-height:1.7;margin-bottom:64px;
+}
+
+.divider{width:80px;height:1px;background:var(--gold);opacity:0.4;margin-bottom:64px;}
+
+.cta-box{
+  border:1px solid rgba(201,168,76,0.35);
+  padding:36px 72px;margin-bottom:24px;
+}
+
+.cta-label{
+  font-family:"DM Sans",sans-serif;font-size:18px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(237,234,229,0.45);margin-bottom:12px;
+}
+
+.cta-word{
+  font-family:"Space Mono",monospace;font-weight:700;font-size:36px;
+  letter-spacing:.04em;color:var(--gold);
+}
+
+.niches{
+  font-family:"DM Sans",sans-serif;font-size:20px;
+  color:rgba(237,234,229,0.4);letter-spacing:.08em;
+  margin-top:16px;
+}
+
+.scarcity{
+  margin-top:56px;
+  font-family:"DM Sans",sans-serif;font-size:22px;
+  color:rgba(201,168,76,0.6);letter-spacing:.06em;
+}
+
+.logo-bottom{
+  position:absolute;bottom:56px;left:0;right:0;text-align:center;
+  font-family:"DM Sans",sans-serif;font-size:18px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(201,168,76,0.25);z-index:2;
+}
+</style></head><body>
+<div class="post">
+  <div class="grid"></div>
+  <div class="corner tl"></div>
+  <div class="corner br"></div>
+
+  <div class="content">
+    <div class="logo-mark">{FJ}</div>
+    <div class="logo-word">FJMedia</div>
+
+    <div class="heading">Your bakery. Your detailing shop.<br>Your <em>entire business online.</em></div>
+    <div class="sub">Custom site. Order forms. Booking systems.<br>Built in 5 days. You pay nothing until you love it.</div>
+
+    <div class="divider"></div>
+
+    <div class="cta-box">
+      <div class="cta-label">DM us the word</div>
+      <div class="cta-word">"FREE Webby"</div>
+    </div>
+
+    <div class="niches">Bakeries &middot; Detailing &middot; Cleaning &middot; Photography &middot; Events</div>
+    <div class="scarcity">Next build starts [date]</div>
+  </div>
+
+  <div class="logo-bottom">fjmedia &middot; winnipeg</div>
+</div>
+</body></html>

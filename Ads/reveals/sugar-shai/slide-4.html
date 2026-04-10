@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#F7F3EE;--accent:#3d5a2a;--text:#2c2c2c;
+  --card-bg:#ffffff;--subtext:#6b6b6b;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+
+.post{
+  width:1080px;height:1350px;
+  background:var(--bg);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:80px 72px;
+}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;}
+
+.pill{
+  display:inline-block;align-self:flex-start;
+  font-family:"DM Sans",sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:#fff;background:var(--accent);
+  padding:10px 28px;border-radius:40px;margin-bottom:36px;
+}
+
+.heading{
+  font-family:"DM Sans",sans-serif;font-size:44px;font-weight:800;
+  color:var(--text);line-height:1.25;margin-bottom:8px;
+}
+.heading em{color:var(--accent);font-style:normal;}
+
+.heading-sub{
+  font-family:"DM Sans",sans-serif;font-size:22px;font-weight:400;
+  color:var(--subtext);margin-bottom:44px;
+}
+
+.timeline{display:flex;flex-direction:column;gap:0;flex:1;}
+
+.step{
+  display:flex;align-items:stretch;gap:0;
+  flex:1;
+}
+
+/* Left: day number + connector line */
+.step-left{
+  width:80px;display:flex;flex-direction:column;align-items:center;flex-shrink:0;
+}
+.step-day{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-family:"DM Sans",sans-serif;font-size:20px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.step-line{
+  width:3px;flex:1;background:var(--accent);opacity:0.15;
+}
+.step:last-child .step-line{display:none;}
+
+/* Right: content card */
+.step-card{
+  flex:1;
+  background:var(--card-bg);
+  border:2px solid rgba(0,0,0,0.04);
+  border-left:5px solid var(--accent);
+  border-radius:0 18px 18px 0;
+  padding:24px 32px;
+  margin-left:20px;
+  margin-bottom:16px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.step:last-child .step-card{margin-bottom:0;}
+
+.step-title{
+  font-family:"DM Sans",sans-serif;font-size:22px;font-weight:700;
+  color:var(--text);margin-bottom:4px;
+}
+
+.step-desc{
+  font-family:"DM Sans",sans-serif;font-size:18px;font-weight:400;
+  color:var(--subtext);line-height:1.5;
+}
+.step-desc em{color:var(--accent);font-style:normal;font-weight:500;}
+
+.bottom-bar{
+  margin-top:36px;padding-top:24px;
+  border-top:2px solid rgba(61,90,42,0.1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+
+.bottom-note{
+  font-family:"DM Sans",sans-serif;font-size:18px;font-weight:500;
+  color:var(--accent);
+}
+.bottom-note em{font-style:italic;font-weight:400;}
+
+.watermark{
+  font-family:"Space Mono",monospace;font-size:14px;font-weight:400;
+  color:var(--subtext);opacity:0.3;letter-spacing:.14em;text-transform:uppercase;
+}
+</style></head><body>
+<div class="post">
+  <div class="content">
+    <div class="pill">The Process</div>
+    <div class="heading">5 days. <em>Start to finish.</em></div>
+    <div class="heading-sub">This is how every FJMedia build works.</div>
+
+    <div class="timeline">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-day">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-title">Discovery</div>
+          <div class="step-desc">We learn your business, your customers, and what you actually need. <em>No fluff meetings.</em></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-day">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-title">First Draft</div>
+          <div class="step-desc">You see a <em>real working site</em> — not a mockup. Live link, real pages, real layout.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-day">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-title">Revisions</div>
+          <div class="step-desc">Your feedback, <em>same-day turnaround</em>. No tickets. No waiting until next week.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-day">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-title">Backend</div>
+          <div class="step-desc">Forms, orders, automation — <em>all wired up</em>. Everything connects to your inbox or spreadsheet.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-day">5</div>
+        </div>
+        <div class="step-card">
+          <div class="step-title">Launch</div>
+          <div class="step-desc"><em>Live site. Real customers. Done.</em> You don't pay until you love it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-note">sugarandshaicookies.com went live on <em>Day 5</em>.</div>
+      <div class="watermark">By FJMedia</div>
+    </div>
+  </div>
+</div>
+</body></html>
