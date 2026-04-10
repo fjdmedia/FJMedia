@@ -1,2098 +1,1248 @@
+<!--
+  aesthetic_dna: Dark Editorial High-Tech. Deep spatial gradients, glassmorphic brutalism, and severe typographic contrast. 
+  ui_paradigm: Multi-layered architectural single-page application. Features a sticky macro-shell with expansive, hidden micro-environments (full-screen case study modals) triggered by purely CSS-driven interactions.
+  palette: Deep Navy (#071520), Midnight Card (#0D1F3C), Gold/Brass Accent (#C9A84C), Cream Text (#EDEAE5).
+-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia</title>
-  <meta name="description" content="100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied." />
-  <meta property="og:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
-  <meta property="og:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
-  <meta property="og:url" content="https://fjmedia.ca" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
-  <meta name="twitter:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
-  <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="canonical" href="https://fjmedia.ca/" />
-  <meta name="geo.region" content="CA-MB" />
-  <meta name="geo.placename" content="Winnipeg" />
-  <meta name="geo.position" content="49.8951;-97.1384" />
-  <meta name="ICBM" content="49.8951, -97.1384" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "FJMedia",
-    "url": "https://fjmedia.ca",
-    "logo": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
-    "image": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
-    "description": "100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied.",
-    "founder": {
-      "@type": "Person",
-      "name": "James Diaz"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Winnipeg",
-      "addressRegion": "MB",
-      "addressCountry": "CA"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Winnipeg",
-      "addressRegion": "MB",
-      "addressCountry": "CA"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 49.8951,
-      "longitude": -97.1384
-    },
-    "serviceType": ["Hand-Coded Websites", "Custom Web Development", "Web Design", "SEO", "Google Business Profile Setup", "Digital Marketing"],
-    "priceRange": "$$",
-    "knowsLanguage": ["en"],
-    "slogan": "Your site is live before their discovery call is over.",
-    "sameAs": [
-      "https://www.instagram.com/fjmedia.ca"
-    ]
-  }
-  </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HH2JF4NCCF');
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia</title>
+    <meta name="description" content="100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied." />
+    <meta property="og:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
+    <meta property="og:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
+    <meta property="og:url" content="https://fjmedia.ca" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
+    <meta name="twitter:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
+    <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://fjmedia.ca/" />
+    <meta name="geo.region" content="CA-MB" />
+    <meta name="geo.placename" content="Winnipeg" />
+    <meta name="geo.position" content="49.8951;-97.1384" />
+    <meta name="ICBM" content="49.8951, -97.1384" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "FJMedia",
+      "url": "https://fjmedia.ca",
+      "logo": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
+      "image": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
+      "description": "100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied.",
+      "founder": { "@type": "Person", "name": "James Diaz" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
+      "areaServed": { "@type": "City", "name": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 49.8951, "longitude": -97.1384 },
+      "serviceType": ["Hand-Coded Websites", "Custom Web Development", "Web Design", "SEO", "Google Business Profile Setup", "Digital Marketing"],
+      "priceRange": "$$",
+      "knowsLanguage": ["en"],
+      "slogan": "Your site is live before their discovery call is over.",
+      "sameAs": ["https://www.instagram.com/fjmedia.ca"]
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HH2JF4NCCF');
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#071520',
+                            card: '#0D1F3C',
+                            gold: '#C9A84C',
+                            goldHover: '#e0c26c',
+                            textBase: '#EDEAE5',
+                            textMuted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': 'linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)',
+                        'glow-radial': 'radial-gradient(circle at 50% 0%, rgba(13, 31, 60, 0.8) 0%, rgba(7, 21, 32, 0) 50%)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* CSS Architecture & Advanced Utilities */
+        body {
+            background-color: #071520;
+            color: #EDEAE5;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    :root {
-      --heading:    #EDEAE5;
-      --accent:     #c9a84c;
-      --accent-mid: rgba(201,168,76,0.1);
-      --btn-bg:     #EDEAE5;
-      --btn-text:   #071520;
-      --btn-hover:  #D8D4CE;
-      --bg:         #071520;
-      --bg2:        #0d1f3c;
-      --bg3:        #112840;
-      --text:       #EDEAE5;
-      --text-mid:   #A09C96;
-      --text-light: #888480;
-      --border:     #1b3a56;
-      --mono:       'Courier New', 'Consolas', monospace;
-    }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #071520;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0D1F3C;
+            border-radius: 4px;
+            border: 1px solid #071520;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C9A84C;
+        }
 
-    html { scroll-behavior: smooth; scrollbar-width: none; }
-    html::-webkit-scrollbar { display: none; }
+        .bg-grid {
+            background-size: 40px 40px;
+        }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+        .glass-panel {
+            background: rgba(13, 31, 60, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
 
-    /* SCROLL PROGRESS BAR */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0;
-      width: 0%; height: 3px;
-      background: var(--accent);
-      z-index: 101;
-      transition: none;
-      pointer-events: none;
-    }
+        .text-gradient {
+            background: linear-gradient(135deg, #FFF 0%, #C9A84C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 6%;
-      background: rgba(7,21,32,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      display: inline-flex; align-items: baseline; gap: 9px;
-      text-decoration: none; line-height: 1;
-    }
-    .logo-mark {
-      display: inline-flex; align-items: baseline;
-    }
-    .logo-bk {
-      color: var(--accent);
-      font-family: 'Space Mono', monospace;
-      font-weight: 400;
-      font-size: 1.25rem;
-      line-height: 1;
-    }
-    .logo-fj {
-      color: var(--heading);
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.01em;
-      line-height: 1;
-      padding: 0 3px;
-    }
-    .logo-media-word {
-      color: var(--text-mid);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      align-self: center;
-    }
-    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
-    .nav-links a {
-      color: var(--text-mid); text-decoration: none; font-size: 0.88rem;
-      font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--heading); }
-    .nav-cta {
-      background: var(--btn-bg) !important;
-      color: var(--btn-text) !important;
-      padding: 0.5rem 1.3rem; border-radius: 5px;
-      font-weight: 600 !important; font-size: 0.85rem !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--btn-hover) !important; }
+        /* Pure CSS Modal / Case Study Expansion Logic */
+        .case-study-modal {
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.5s ease;
+        }
+        input[type="checkbox"].case-toggle:checked ~ .case-study-modal {
+            clip-path: circle(150% at 50% 50%);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Pure CSS Tabs for Packages */
+        .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease; }
+        #tab-golive:checked ~ #content-golive,
+        #tab-getfound:checked ~ #content-getfound,
+        #tab-ownmarket:checked ~ #content-ownmarket {
+            display: grid;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex; align-items: center;
-      padding: 9rem 6% 6rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      background-image: radial-gradient(circle, rgba(27,58,86,0.5) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-    #hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-      position: relative; z-index: 1;
-    }
-    .hero-label {
-      display: inline-block;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 1.2rem; font-family: var(--mono);
-    }
-    .hero-label::before { content: '// '; opacity: 0.5; }
-    .hero-title {
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
-      font-weight: 900; line-height: 1.1;
-      letter-spacing: -0.03em; color: var(--heading); margin-bottom: 1.2rem;
-    }
-    .hero-title em { font-style: normal; color: var(--accent); }
-    .hero-sub {
-      font-size: 1rem; color: var(--text-mid);
-      max-width: 420px; margin-bottom: 2.2rem; line-height: 1.7;
-    }
-    .hero-btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--btn-bg); color: var(--btn-text);
-      padding: 0.75rem 1.8rem; border-radius: 5px;
-      font-weight: 700; font-size: 0.9rem;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s; display: inline-block;
-    }
-    .btn-primary:hover { background: var(--btn-hover); transform: translateY(-2px); }
-    .btn-primary[style*="--accent"]:hover { background: #b8973e; }
-    .btn-outline {
-      border: 1.5px solid #1b3a56; color: var(--text-mid);
-      padding: 0.75rem 1.8rem; border-radius: 5px;
-      font-weight: 600; font-size: 0.9rem; text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block;
-    }
-    .btn-outline:hover { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
-    .btn-gold {
-      background: var(--accent); color: var(--bg);
-      border-radius: 8px; font-weight: 700; font-size: 0.9rem;
-      letter-spacing: 0.01em; text-decoration: none;
-      display: inline-block; transition: opacity 0.2s, transform 0.2s;
-    }
-    .btn-gold:hover { opacity: 0.88; transform: translateY(-2px); }
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 1rem;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 4; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
 
-    .hero-right { display: flex; flex-direction: column; gap: 1rem; }
-    .hero-stat-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.2rem 1.5rem;
-      display: flex; align-items: center; gap: 1rem;
-      transition: border-color 0.2s;
-    }
-    .hero-stat-card:hover { border-color: rgba(201,168,76,0.3); }
-    .stat-icon {
-      width: 44px; height: 44px;
-      background: var(--accent-mid); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; color: var(--accent);
-    }
-    .stat-icon svg { width: 20px; height: 20px; }
-    .stat-text-num { font-size: 1.1rem; font-weight: 800; color: var(--heading); }
-    .stat-text-label { font-size: 0.8rem; color: var(--text-light); }
-
-    /* SECTION COMMON */
-    section { padding: 6rem 6%; }
-    .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 0.6rem; font-family: var(--mono);
-    }
-    .section-title {
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
-      font-weight: 800; line-height: 1.2;
-      letter-spacing: -0.02em; color: var(--heading); margin-bottom: 0.8rem;
-    }
-    .section-sub {
-      color: var(--text-light); font-size: 0.95rem;
-      max-width: 480px; margin-bottom: 3rem; line-height: 1.7;
-    }
-    .divider {
-      width: 36px; height: 3px;
-      background: var(--accent); border-radius: 2px; margin-bottom: 2.5rem;
-    }
-
-    /* ICON WRAP */
-    .icon-wrap {
-      width: 44px; height: 44px;
-      background: var(--accent-mid); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent); margin-bottom: 0.9rem;
-    }
-    .icon-wrap svg { width: 20px; height: 20px; }
-
-    /* PROCESS */
-    #process { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-    .process-step { position: relative; padding-top: 1.4rem; }
-    .step-num {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 0.8rem;
-      font-family: var(--mono);
-    }
-    .step-title { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
-    .step-desc { font-size: 0.83rem; color: var(--text-light); line-height: 1.65; }
-    .step-line {
-      position: absolute; top: 0.3rem; right: 0;
-      width: calc(100% - 2.5rem); height: 1px; background: var(--border);
-    }
-    .process-step:last-child .step-line { display: none; }
-
-    /* PORTFOLIO */
-    #work { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .carousel-outer {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .carousel-arrow {
-      flex-shrink: 0;
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--text-mid);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      z-index: 2;
-    }
-    .carousel-arrow:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--bg3);
-    }
-    .carousel-arrow svg { width: 16px; height: 16px; }
-    .carousel-viewport { flex: 1; overflow: hidden; cursor: grab; }
-    .carousel-viewport:active { cursor: grabbing; }
-    .portfolio-track {
-      display: flex;
-      gap: 20px;
-      will-change: transform;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .portfolio-card {
-      flex-shrink: 0;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-    }
-    .portfolio-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-      border-color: rgba(201,168,76,0.2);
-    }
-
-    /* Browser mockup */
-    .browser-mockup { border-bottom: 1px solid var(--border); overflow: hidden; }
-    .browser-bar {
-      display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.55rem 0.8rem;
-      background: var(--bg3); border-bottom: 1px solid var(--border);
-    }
-    .browser-dots { display: flex; gap: 0.3rem; flex-shrink: 0; }
-    .browser-dots span { width: 8px; height: 8px; border-radius: 50%; background: #1b3a56; }
-    .browser-url-bar {
-      flex: 1; background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 4px; padding: 0.18rem 0.6rem;
-      font-size: 0.66rem; color: var(--text-light);
-      font-family: var(--mono);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .browser-viewport { position: relative; height: 170px; overflow: hidden; background: var(--bg3); }
-    .browser-viewport iframe {
-      width: 200%; height: 200%;
-      transform: scale(0.5); transform-origin: top left;
-      border: none; pointer-events: none;
-    }
-
-    .portfolio-body { padding: 1.3rem 1.4rem; }
-    .portfolio-tag {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
-      font-family: var(--mono);
-    }
-    .portfolio-name { font-size: 1rem; font-weight: 700; color: var(--heading); margin-bottom: 0.4rem; }
-    .portfolio-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; margin-bottom: 1rem; }
-    .portfolio-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
-    .pill {
-      font-size: 0.68rem; font-weight: 600;
-      background: var(--bg2); color: var(--text-mid);
-      border: 1px solid var(--border);
-      padding: 0.18rem 0.6rem; border-radius: 100px;
-    }
-    .portfolio-link {
-      font-size: 0.82rem; font-weight: 600; color: var(--accent);
-      text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.3rem;
-      transition: gap 0.2s;
-    }
-    .portfolio-link:hover { gap: 0.55rem; }
-
-    /* WHY */
-    #why { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-    }
-    .why-card {
-      padding: 2rem 1.8rem;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; transition: background 0.2s, border-color 0.2s;
-    }
-    .why-card:hover { background: var(--bg2); border-color: rgba(201,168,76,0.3); }
-    .why-title { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
-    .why-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.65; }
-
-    /* FAQ / OBJECTIONS */
-    /* MYTH VS REALITY */
-    #myths { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .myth-stack { display: flex; flex-direction: column; gap: 1rem; max-width: 900px; margin: 0 auto; }
-    .myth-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      border-radius: 10px; overflow: hidden;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s;
-    }
-    .myth-row:hover { border-color: rgba(201,168,76,0.25); }
-    .myth-side, .reality-side { padding: 1.5rem 1.6rem; }
-    .myth-side { background: rgba(7,21,32,0.8); }
-    .reality-side { background: var(--bg3); border-left: 2px solid rgba(201,168,76,0.25); }
-    .myth-tag, .reality-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; margin-bottom: 0.55rem;
-    }
-    .myth-tag { color: rgba(237,234,229,0.25); }
-    .myth-tag::before { content: '✕'; font-size: 0.7rem; }
-    .reality-tag { color: var(--accent); }
-    .reality-tag::before { content: '✓'; font-size: 0.7rem; }
-    .myth-text {
-      font-size: 0.88rem; color: var(--text-light); line-height: 1.55;
-      text-decoration: line-through; text-decoration-color: rgba(237,234,229,0.12);
-    }
-    .reality-text { font-size: 0.88rem; color: var(--text); line-height: 1.55; }
-    .reality-text strong { color: var(--accent); font-weight: 600; }
-
-    /* GROWTH / RETAINER */
-    #growth { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .growth-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
-      max-width: 960px; margin: 0 auto;
-    }
-    .growth-card {
-      padding: 2rem 1.6rem;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; transition: background 0.2s, border-color 0.2s;
-      display: flex; flex-direction: column;
-    }
-    .growth-card:hover { background: rgba(17,40,64,0.8); border-color: rgba(201,168,76,0.3); }
-    .growth-card.featured { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
-    .growth-card-name {
-      font-size: 1rem; font-weight: 700; color: var(--heading);
-      margin-bottom: 0.3rem;
-    }
-    .growth-card-sub {
-      font-size: 0.78rem; color: var(--text-light);
-      margin-bottom: 1.2rem; line-height: 1.5;
-    }
-    .growth-list { list-style: none; margin: 0; padding: 0; flex: 1; }
-    .growth-list li {
-      font-size: 0.82rem; color: var(--text-mid);
-      padding: 0.4rem 0; border-bottom: 1px solid rgba(27,58,86,0.3);
-      line-height: 1.5;
-    }
-    .growth-list li:last-child { border-bottom: none; }
-    .growth-list li::before {
-      content: '✓ '; color: var(--accent); font-weight: 600;
-    }
-    .growth-pop {
-      display: inline-block; font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      background: var(--accent); color: var(--bg);
-      padding: 3px 8px; border-radius: 3px; margin-bottom: 0.8rem;
-    }
-
-    /* CLIENT STRIP */
-    .client-strip {
-      text-align: center; padding: 1.5rem 0 0;
-      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--text-light); opacity: 0.5;
-      font-family: var(--mono);
-    }
-
-    /* CONTACT */
-    #contact { background: var(--bg2); }
-    .contact-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
-    .contact-info .section-title { margin-bottom: 0.8rem; }
-    .contact-info p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; }
-    .contact-detail {
-      display: flex; align-items: flex-start; gap: 0.8rem;
-      font-size: 0.85rem; color: var(--text-mid); margin-bottom: 0.6rem;
-    }
-    .contact-detail .d-icon { color: var(--accent); margin-top: 2px; }
-    .contact-detail .d-icon svg { width: 15px; height: 15px; }
-    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
-    .contact-form input,
-    .contact-form textarea,
-    .contact-form select {
-      background: var(--bg3); border: 1px solid var(--border);
-      color: var(--text); padding: 0.8rem 1rem;
-      border-radius: 6px; font-size: 0.88rem; font-family: inherit;
-      transition: border-color 0.2s; width: 100%;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus,
-    .contact-form select:focus { outline: none; border-color: var(--accent); }
-    .contact-form textarea { resize: vertical; min-height: 110px; }
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: var(--text-light); }
-    .contact-form select { color: var(--text-mid); }
-    .contact-form select option { background: var(--bg3); color: var(--text); }
-
-    /* FREE AUDIT LEAD MAGNET */
-    #free-audit {
-      background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    }
-    .audit-lm-wrap {
-      max-width: 720px; margin: 0 auto; text-align: center;
-    }
-    .audit-lm-badge {
-      display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--accent); background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.3); padding: 0.25rem 0.75rem;
-      border-radius: 100px; font-family: var(--mono); margin-bottom: 1.4rem;
-    }
-    .audit-lm-headline {
-      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; color: var(--heading);
-      line-height: 1.15; margin-bottom: 1rem;
-    }
-    .audit-lm-headline em { font-style: normal; color: var(--accent); }
-    .audit-lm-sub {
-      font-size: 0.97rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1.8rem; max-width: 580px; margin-left: auto; margin-right: auto;
-    }
-    .audit-lm-points {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.4rem;
-      margin-bottom: 2rem;
-    }
-    .audit-lm-point {
-      font-size: 0.88rem; color: var(--text-mid); display: flex; align-items: center; gap: 0.4rem;
-    }
-    .audit-check { color: var(--accent); font-weight: 700; }
-    .audit-lm-cta { display: inline-block; padding: 0.85rem 2rem; font-size: 0.95rem; }
-    .audit-lm-note {
-      margin-top: 1rem; font-size: 0.78rem; color: var(--text-light); font-family: var(--mono);
-    }
-
-    /* CALCULATOR */
-    #pricing { background: var(--bg2); border-bottom: 1px solid var(--border); }
-
-    .calc-scarcity {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 8px;
-      padding: 0.75rem 1.2rem;
-      margin-bottom: 2rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--heading);
-      line-height: 1.5;
-    }
-    .calc-scarcity svg { color: var(--accent); flex-shrink: 0; width: 16px; height: 16px; }
-    .calc-scarcity strong { color: var(--accent); }
-
-    .combo-tabs {
-      display: flex; gap: 4px;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; padding: 4px;
-      margin-bottom: 1.5rem;
-    }
-    .combo-tab {
-      flex: 1; background: transparent; border: none;
-      border-radius: 8px; padding: 0.7rem 0.5rem;
-      cursor: pointer; transition: all 0.25s ease;
-      text-align: center; position: relative;
-    }
-    .combo-tab:hover { background: rgba(201,168,76,0.05); }
-    .combo-tab.active {
-      background: rgba(201,168,76,0.1);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    }
-    .combo-tab-name {
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--text-light); transition: color 0.2s;
-    }
-    .combo-tab.active .combo-tab-name { color: var(--accent); }
-    .combo-tab-sub {
-      font-size: 0.62rem; color: var(--text-light); opacity: 0.5;
-      margin-top: 2px; letter-spacing: 0.03em; transition: color 0.2s;
-    }
-    .combo-tab.active .combo-tab-sub { opacity: 0.8; }
-    .combo-pop {
-      position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-      font-size: 0.52rem; font-weight: 800; letter-spacing: 0.1em;
-      background: var(--accent); color: var(--bg);
-      padding: 1px 6px; border-radius: 3px; white-space: nowrap;
-    }
-
-    .svc-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem; margin-bottom: 1.5rem;
-    }
-    .svc-card {
-      background: var(--bg3); border: 2px solid var(--border);
-      border-radius: 10px; padding: 1.1rem 1rem;
-      cursor: pointer; transition: all 0.2s ease;
-      display: flex; flex-direction: column; gap: 0.35rem;
-      user-select: none;
-    }
-    .svc-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.03); }
-    .svc-card.selected {
-      border-color: var(--accent);
-      background: rgba(201,168,76,0.07);
-      box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
-    }
-    .svc-card.locked { cursor: default; }
-    .svc-card.locked:not(.selected) { opacity: 0.6; }
-    .svc-card.placeholder { cursor: default; opacity: 0.4; }
-    .svc-card.placeholder:hover { border-color: var(--border); background: var(--bg3); }
-    .svc-card.nudge {
-      border-color: rgba(201,168,76,0.5);
-      animation: nudge-pulse 1.8s ease-in-out infinite;
-      position: relative;
-    }
-    .svc-card.nudge::after {
-      content: '+ complete the bundle';
-      position: absolute; top: -10px; right: 10px;
-      background: var(--accent); color: var(--bg);
-      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 4px; letter-spacing: 0.03em;
-    }
-    @keyframes nudge-pulse {
-      0%, 100% { border-color: rgba(201,168,76,0.25); }
-      50% { border-color: rgba(201,168,76,0.6); box-shadow: 0 0 8px rgba(201,168,76,0.15); }
-    }
-    .svc-icon { font-size: 1.25rem; line-height: 1; }
-    .svc-name {
-      font-size: 0.82rem; font-weight: 700;
-      color: var(--heading);
-    }
-    .svc-desc {
-      font-size: 0.72rem; color: var(--text-light); line-height: 1.4;
-    }
-    .svc-check {
-      width: 16px; height: 16px; border-radius: 50%;
-      border: 1.5px solid var(--border); margin-left: auto;
-      flex-shrink: 0; transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center;
-      align-self: flex-start;
-    }
-    .svc-card.selected .svc-check {
-      background: var(--accent); border-color: var(--accent);
-    }
-    .svc-card.selected .svc-check::after {
-      content: ''; width: 5px; height: 8px;
-      border: 2px solid var(--bg); border-top: none; border-left: none;
-      transform: rotate(45deg) translate(-1px,-1px);
-      display: block;
-    }
-
-    .status-bar {
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1rem 1.4rem;
-      margin-bottom: 1.5rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      min-height: 56px;
-    }
-    .status-bar-text { font-size: 0.85rem; color: var(--text-mid); line-height: 1.4; }
-    .status-bar-text strong { color: var(--accent); font-weight: 700; }
-    .status-bar-text .status-suggestion { color: var(--accent); font-size: 0.75rem; display: block; margin-top: 0.25rem; font-style: italic; }
-    .status-bar-text .status-benefit { color: var(--text-light); font-size: 0.72rem; display: block; margin-top: 0.15rem; }
-    .status-bar-text .status-nudge { color: var(--text-light); font-size: 0.78rem; display: block; margin-top: 0.2rem; }
-    .status-empty { color: var(--text-light); font-size: 0.85rem; font-style: italic; }
-
-    .pricing-cta-wrap {
-      text-align: center; margin-top: 2rem;
-    }
-    .pricing-cta-wrap .btn-primary {
-      display: inline-block; font-size: 1rem; padding: 1rem 2.4rem;
-    }
-    .pricing-cta-sub {
-      font-size: 0.82rem; color: var(--accent); font-weight: 600;
-      margin-top: 0.8rem;
-    }
-
-    .dep-toast {
-      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.75rem 1.2rem;
-      font-size: 0.82rem; color: var(--text-mid);
-      z-index: 9999; pointer-events: none;
-      opacity: 0; transition: opacity 0.3s;
-      white-space: nowrap;
-    }
-    .dep-toast.show { opacity: 1; }
-
-    @media (max-width: 900px) {
-      .combo-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-top: 14px; margin-top: -14px; }
-      .combo-tabs::-webkit-scrollbar { display: none; }
-      .combo-tab { flex-shrink: 0; min-width: 80px; }
-      .svc-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-      .svc-card { padding: 1rem 0.9rem; }
-      .status-bar { padding: 0.8rem 1rem; margin-bottom: 1.2rem; }
-    }
-    @media (max-width: 480px) {
-      .svc-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── MOBILE ── */
-    @media (max-width: 900px) {
-      /* Layout */
-      section { padding: 4rem 5%; }
-      #hero { padding: 7rem 5% 4rem; min-height: auto; }
-      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-right { display: none; }
-      .hero-sub { max-width: 100%; }
-
-      /* Offer */
-      .offer-pillars { flex-direction: row; flex-wrap: nowrap; gap: 0.5rem; }
-      .offer-pillar { min-width: 0; max-width: none; flex: 1; padding: 1rem 0.4rem; text-align: center; background: transparent; border: none; }
-      .offer-pillar-num { font-size: 1.3rem; }
-      .offer-pillar-label { font-size: 0.58rem; }
-
-      /* Divider — wider on mobile so it doesn't look lost */
-      .divider { width: 56px; }
-
-      /* Why */
-      .why-grid { grid-template-columns: 1fr; }
-      .why-card { padding: 1.5rem 1.4rem; }
-
-      /* Myths */
-      .myth-row { grid-template-columns: 1fr; }
-      .reality-side { border-left: none; border-top: 2px solid rgba(201,168,76,0.25); }
-      .myth-side, .reality-side { padding: 1.2rem 1.3rem; }
-
-      /* Growth */
-      .growth-grid { grid-template-columns: 1fr; }
-      .growth-card { padding: 1.5rem 1.3rem; }
-
-      /* Portfolio */
-      .carousel-arrow { width: 36px; height: 36px; }
-
-      /* Process */
-      .process-grid { grid-template-columns: 1fr 1fr; }
-      .step-line { display: none; }
-
-      /* Pricing */
-      .calc-scarcity { font-size: 0.78rem; padding: 0.65rem 1rem; gap: 0.5rem; }
-      .pricing-cta-sub { font-size: 0.75rem; }
-
-      /* Contact */
-      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
-      #contact { padding-bottom: 5rem; }
-
-      /* Footer */
-      footer { padding-bottom: 4.5rem; }
-      .footer-mid { flex-direction: column; gap: 1rem; }
-    }
-
-    @media (max-width: 600px) {
-      /* clip doesn't create a new scroll context — safe to use with scroll-snap children */
-      body { overflow-x: clip; }
-
-      section { padding: 3.5rem 4%; }
-      #hero {
-        padding: 6.5rem 4% 3.5rem;
-        min-height: 100vh;   /* fallback for older browsers */
-        min-height: 100svh;  /* overrides above — reliable on mobile */
-      }
-      .hero-title { font-size: 2rem; }
-      .hero-sub { font-size: 0.9rem; line-height: 1.65; }
-      .hero-btns { flex-direction: column; align-items: stretch; }
-      .hero-btns .btn-primary,
-      .hero-btns .btn-outline { text-align: center; width: 100%; box-sizing: border-box; }
-      .offer-headline { font-size: 2rem; }
-      .offer-sub { font-size: 0.85rem; }
-      .offer-pillar-num { font-size: 1.6rem; }
-      .section-title { font-size: 1.5rem; }
-      .section-sub { font-size: 0.85rem; margin-bottom: 2rem; }
-      .process-grid { grid-template-columns: 1fr; }
-      .step-desc { font-size: 0.8rem; }
-
-      /* Myth rows — tighter on small screens */
-      .myth-side, .reality-side { padding: 1rem 1.1rem; }
-      .myth-text, .reality-text { font-size: 0.82rem; }
-
-      /* Portfolio body */
-      .portfolio-body { padding: 1rem 1.1rem; }
-      .portfolio-desc { font-size: 0.78rem; }
-
-      /* Why cards */
-      .why-desc { font-size: 0.78rem; }
-
-      /* Growth cards */
-      .growth-card-sub { font-size: 0.74rem; }
-      .growth-list li { font-size: 0.78rem; }
-
-      /* Audit section */
-      .audit-lm-sub { font-size: 0.85rem; }
-      .audit-lm-point { font-size: 0.82rem; }
-
-      /* iOS: prevent auto-zoom on form focus — must be 16px+ */
-      .contact-form input,
-      .contact-form textarea,
-      .contact-form select { font-size: 16px; }
-
-      /* Touch targets — min 44px height */
-      .btn-primary, .btn-outline {
-        min-height: 44px;
-        display: flex; align-items: center; justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      section { padding: 2.5rem 4%; }
-      #hero { padding: 5.5rem 4% 3rem; }
-      .hero-title { font-size: 1.7rem; }
-      .hero-sub { font-size: 0.85rem; }
-      .section-title { font-size: 1.3rem; }
-      .section-sub { font-size: 0.8rem; margin-bottom: 1.8rem; }
-      .offer-headline { font-size: 1.7rem; }
-      .offer-sub { font-size: 0.8rem; }
-      .hero-stat-card { padding: 0.9rem 1rem; }
-      .stat-text-num { font-size: 0.95rem; }
-
-      /* Pricing tabs — compact */
-      .combo-tab { padding: 0.55rem 0.3rem; }
-      .combo-tab-name { font-size: 0.68rem; }
-      .combo-tab-sub { font-size: 0.55rem; }
-      .combo-pop { font-size: 0.45rem; padding: 1px 4px; top: -7px; }
-
-      /* Service cards */
-      .svc-name { font-size: 0.78rem; }
-      .svc-desc { font-size: 0.68rem; }
-
-      /* Myth rows — even tighter */
-      .myth-side, .reality-side { padding: 0.9rem 1rem; }
-      .myth-tag, .reality-tag { font-size: 0.55rem; margin-bottom: 0.4rem; }
-
-      /* Contact */
-      .contact-detail { font-size: 0.82rem; }
-    }
-
-    /* MOBILE STICKY CTA BAR */
-    .mobile-cta-bar {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
-      background: var(--bg2); border-top: 1px solid var(--border);
-      padding: 12px 20px;
-    }
-    .mobile-cta-bar a {
-      display: block; width: 100%; text-align: center;
-      background: var(--accent); color: var(--bg);
-      font-weight: 700; font-size: 0.9rem; padding: 0.75rem;
-      border-radius: 6px; text-decoration: none;
-    }
-    @media (max-width: 900px) { .mobile-cta-bar { display: block; } }
-
-    /* Push bot widget above sticky CTA bar on mobile */
-    @media (max-width: 900px) {
-      #fjm-widget-btn { bottom: 76px !important; }
-      #fjm-widget-badge { bottom: 128px !important; }
-      #fjm-chat-panel { bottom: 148px !important; }
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--bg); border-top: 1px solid var(--border);
-      padding: 2.5rem 6% 2rem;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 1.2rem; text-align: center;
-    }
-    .footer-top { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-    .footer-logo { display: inline-flex; align-items: baseline; gap: 9px; }
-    .footer-tagline { font-size: 0.82rem; color: var(--text-light); }
-    .footer-mid { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-social { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
-    .footer-social:hover { color: var(--accent); }
-    .footer-copy { font-size: 0.72rem; color: var(--text-light); opacity: 0.6; }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes dotDrift {
-      0%   { background-position: 0 0; }
-      100% { background-position: 24px 24px; }
-    }
-    @keyframes cursorBlink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    /* Hero entrance — staggered */
-    .hero-label { animation: fadeUp 0.55s ease both 0.1s; }
-    .hero-title  { animation: fadeUp 0.55s ease both 0.28s; }
-    .hero-sub    { animation: fadeUp 0.55s ease both 0.44s; }
-    .hero-btns   { animation: fadeUp 0.55s ease both 0.58s; }
-    .hero-stat-card:nth-child(1) { animation: fadeUp 0.5s ease both 0.35s; }
-    .hero-stat-card:nth-child(2) { animation: fadeUp 0.5s ease both 0.5s; }
-    .hero-stat-card:nth-child(3) { animation: fadeUp 0.5s ease both 0.65s; }
-    .hero-stat-card:nth-child(4) { animation: fadeUp 0.5s ease both 0.8s; }
-
-    /* Blinking cursor on label */
-    .hero-label::after { content: '_'; margin-left: 1px; animation: cursorBlink 1s step-end infinite; }
-
-    /* Dot grid slow drift */
-    #hero { animation: dotDrift 16s linear infinite; }
-
-    /* Scroll reveal */
-    /* OFFER */
-    #offer {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 5rem 6%;
-      text-align: center;
-    }
-    .offer-headline {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      color: var(--heading);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-    .offer-headline em { color: var(--accent); font-style: normal; }
-    .offer-sub {
-      font-size: 0.95rem;
-      color: var(--text-mid);
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      margin-bottom: 3rem;
-    }
-    .offer-pillars {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-    .offer-pillar {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.75rem 2rem;
-      flex: 1;
-      min-width: 180px;
-      max-width: 240px;
-    }
-    .offer-pillar-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .offer-pillar-label {
-      font-size: 0.72rem;
-      color: var(--text-mid);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 300;
-    }
-
-    /* Nav mobile */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text);
-    }
-    .nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 99;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2.2rem;
-    }
-    .nav-overlay.open { display: flex; }
-    .nav-overlay a {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--heading);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      transition: color 0.2s;
-    }
-    .nav-overlay a:hover { color: var(--accent); }
-    .overlay-close {
-      position: absolute;
-      top: 22px; right: 5%;
-      font-size: 2rem;
-      background: none;
-      border: none;
-      color: var(--text);
-      cursor: pointer;
-      opacity: 0.6;
-      line-height: 1;
-    }
-    .overlay-close:hover { opacity: 1; }
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
-    }
-  </style>
+        /* Floating Animation — disabled for scroll performance */
+        .animate-float { animation: none; }
+        
+        /* Interactive Card Glow */
+        .glow-card {
+            position: relative;
+        }
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(to bottom, rgba(201, 168, 76, 0.4), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-card:hover::before {
+            opacity: 1;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-brand-bg relative min-h-screen text-brand-textBase font-sans selection:bg-brand-gold selection:text-brand-bg uppercase-tracking overflow-x-hidden">
 
-  <!-- BACKGROUND ANIMATION -->
-  <div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0.18;">
-    <svg id="eWSLi8rbaTl1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 700 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%"><style><![CDATA[#eWSLi8rbaTl2 {animation: eWSLi8rbaTl2_s_do 12000ms linear infinite normal forwards}@keyframes eWSLi8rbaTl2_s_do { 0% {stroke-dashoffset: 0} 100% {stroke-dashoffset: 300}} #eWSLi8rbaTl3 {animation: eWSLi8rbaTl3_s_do 12000ms linear infinite normal forwards}@keyframes eWSLi8rbaTl3_s_do { 0% {stroke-dashoffset: 0} 100% {stroke-dashoffset: 360}} #eWSLi8rbaTl4 {animation: eWSLi8rbaTl4_s_do 12000ms linear infinite normal forwards}@keyframes eWSLi8rbaTl4_s_do { 0% {stroke-dashoffset: 0} 100% {stroke-dashoffset: 500}} #eWSLi8rbaTl5 {animation: eWSLi8rbaTl5_s_do 12000ms linear infinite normal forwards}@keyframes eWSLi8rbaTl5_s_do { 0% {stroke-dashoffset: 0} 100% {stroke-dashoffset: 360}}]]></style><defs><linearGradient id="eWSLi8rbaTl2-stroke" x1="0" y1="0.5" x2="1" y2="0.5" spreadMethod="pad" gradientUnits="objectBoundingBox" gradientTransform="translate(0 0)"><stop id="eWSLi8rbaTl2-stroke-0" offset="0%" stop-color="#0036a4"/><stop id="eWSLi8rbaTl2-stroke-1" offset="49%" stop-color="#6a2364"/><stop id="eWSLi8rbaTl2-stroke-2" offset="100%" stop-color="#4cceff"/></linearGradient><linearGradient id="eWSLi8rbaTl3-stroke" x1="0" y1="0.5" x2="1" y2="0.5" spreadMethod="pad" gradientUnits="objectBoundingBox" gradientTransform="translate(0 0)"><stop id="eWSLi8rbaTl3-stroke-0" offset="0%" stop-color="#fff"/><stop id="eWSLi8rbaTl3-stroke-1" offset="48%" stop-color="#359fad"/><stop id="eWSLi8rbaTl3-stroke-2" offset="100%" stop-color="#fff"/></linearGradient><linearGradient id="eWSLi8rbaTl4-stroke" x1="0" y1="0.5" x2="1" y2="0.5" spreadMethod="pad" gradientUnits="objectBoundingBox" gradientTransform="translate(0 0)"><stop id="eWSLi8rbaTl4-stroke-0" offset="0%" stop-color="#ae3bd4"/><stop id="eWSLi8rbaTl4-stroke-1" offset="48%" stop-color="#2bc4c3"/><stop id="eWSLi8rbaTl4-stroke-2" offset="100%" stop-color="#ff00f6"/></linearGradient><radialGradient id="eWSLi8rbaTl5-stroke" cx="0" cy="0" r="0.5" spreadMethod="pad" gradientUnits="objectBoundingBox" gradientTransform="translate(0.5 0.5)"><stop id="eWSLi8rbaTl5-stroke-0" offset="0%" stop-color="rgba(34,56,133,0.52)"/><stop id="eWSLi8rbaTl5-stroke-1" offset="100%" stop-color="rgba(255,176,195,0.77)"/></radialGradient></defs><path id="eWSLi8rbaTl2" d="M60.541022,192.774999C21.003392,149.132773,93.618712,74.10143,146.858559,55.491904c25.3958-8.876883,61.369124-18.889738,84.461248-.683004c42.516928,33.522007,12.613092,96.213556-20.419205,126.355089-13.578345,12.390061-44.521289,36.551454-69.610911,27.320018-33.103858-12.180175-16.823018-54.569106-5.568868-73.081053c24.07487-39.600761,95.400244-87.472814,159.641028-71.715053c82.361973,20.202746-34.858651,121.117467,5.568868,152.992112c5.987432,4.720727,20.191563,5.768409,27.844362,5.464007c79.76103-3.172666,61.156692-66.684253,111.37746-71.032049c39.016973-3.377841,25.565954,56.863245,91.886406,71.032049c51.281274,10.955813,113.471303-35.496578,103.024153-72.398049-11.110162-39.243393-64.628714-56.266562-100.239713-19.807016-63.22493,64.731463-24.457648,130.034964-131.796666,180.995126-33.182731,15.753795-73.719869,28.091627-113.23375,30.735022-67.502613,4.515784-159.249621-31.311075-119.730779-89.473065" opacity="0.16" fill="none" stroke="url(#eWSLi8rbaTl2-stroke)" stroke-width="40" stroke-linecap="round" stroke-dasharray="0.01,300"/><path id="eWSLi8rbaTl3" d="M548.836753,44.624992c26.916212-47.425639,99.388234-12.558714,103.049491,22.466344c3.251243,31.102646-70.55417,52.435347-66.826483,90.839065.879618,9.062024,10.329678,16.183054,16.706615,23.222019c22.659712,25.01212,36.15069,53.012162,25.059934,83.326063-6.256675,17.101086-71.228523,57.873574-88.173827,41.663027-16.765407-16.038445,14.01447-20.909212,28.772513-18.441016c44.400398,7.42573,39.199862,48.178358,11.137747,65.568042-18.861882,11.68843-40.657433,17.627774-64.970182,18.441016-12.759071.426775-28.762073.008452-38.05397-7.513002-14.587089-11.807732-11.245004-34.497301-15.778476-49.176038-8.945896-28.965543-56.379513-49.881526-94.670845-41.663027-50.048296,10.741896-52.094214,78.458176-20.419205,101.76707c15.367315,11.308446,43.972474,9.148501,51.048007-7.513002c2.032339-4.785771-3.04294-10.393113-5.568868-14.343009-15.043565-23.524194-33.730117-41.728469-71.467212-43.712031-33.131218-1.741464-71.203717,3.688551-103.024153,10.24501-46.009639,9.480073-118.415138,48.817966-164.281757,18.441016-30.66551-20.309424,12.75807-68.343305,39.91026-79.911059c32.212799-13.723741,72.026579-3.504685,106.736732-6.147003c52.230596-3.976064,154.450764-47.459715,159.641028-89.473065c2.788051-22.568321-26.790438-36.532239-53.832435-40.297027-66.712859-9.287755-138.894203-1.825607-204.192017-19.124012-38.477878-10.193385-22.449204-66.152738,9.281458-77.179052C202.82374,-6.519584,308.91142,55.028095,392.933642,79.385358c32.624072,9.457415,97.636197-12.294022,85.5703-86.837121" fill="none" stroke="url(#eWSLi8rbaTl3-stroke)" stroke-width="2" stroke-linecap="round" stroke-dasharray="0.01,72"/><path id="eWSLi8rbaTl4" d="M24.64077,109.435733c9.77732-43.169398,95.29382-75.504329,126.227798-37.565028c28.480004,34.929606-79.556979,105.03965-48.263567,133.185096c9.979064,8.975215,99.164752-4.578146,116.018189-5.464007c93.293239-4.903741,184.235846,9.270784,259.880752,51.908037c26.810744,15.111878,73.176735,45.294034,53.832447,73.764048-7.509408,11.051993-27.178976,16.53514-41.766549,20.490012-72.26474,19.591865-195.886634,17.364906-222.754932-49.859033-8.777012-21.959907-7.219284-41.875131,11.137747-60.787039c36.960368-38.077569,109.24079-44.427048,143.862563-82.643059c45.553107-50.282182-10.10387-104.320783-87.245677-99.718067-42.685767,2.546875-79.978052,61.797144-30.628802,76.496056c68.896959,20.521288,142.09535-9.350216,213.473474,30.735022c43.562291,24.464147,12.890189,75.964408,54.760586,100.401071c23.011575,13.43016,92.927235,11.470796,80.748659,45.07803-20.769684,57.314699-107.56676,28.154064-159.641028,20.490012-63.418102-9.333576-87.982399-26.344666-135.509244-55.32304-16.857656-10.278555-35.484888-18.599492-51.048007-30.052018-14.029983-10.324335-24.884098-23.547639-42.694699-30.735022-32.915602-13.282934-81.457256-4.09275-112.305611,8.87901-107.102691,45.03677-54.968135,97.087033,39.91026,113.37808c52.629079,9.03665,163.631469-6.14701,185.91444,89.462991" opacity="0.2" fill="none" stroke="url(#eWSLi8rbaTl4-stroke)" stroke-width="20" stroke-linecap="round" stroke-dasharray="0.01,500"/><path id="eWSLi8rbaTl5" d="M26.29082,129.844858c0-15.465818,7.021983-31.880026,10.209597-47.127034c3.675859-17.58235-1.283208-51.871363,15.778476-65.56805c7.254969-5.824098,10.187693-4.438835,21.347344-4.781003c44.095413-1.352034,75.299062,40.167369,79.82052,67.617046c1.684616,10.227286-7.824934,56.033877,0,59.421039c46.395702,20.083237,166.202722-38.329998,186.557251,28.003022c16.764631,54.633952-138.807219,98.865783-184.700962,120.891082-12.842152,6.163195-58.920516,25.248961-51.048007,41.663027c12.518042,26.099919,135.02659,10.700867,161.497328.683004c11.657414-4.411755,21.731033-12.191202,30.628802-19.124012c4.358671-3.39612,8.747459-6.772835,12.994036-10.24501c1.034833-.846116,2.481064-3.848227,2.78444-2.731999c2.48778,9.153485-67.929412,74.694531-32.485091,79.911059c27.169751,3.998715,71.619907-44.941691,80.748659-56.006036c41.237613-49.981299,50.820725-106.474792,80.748659-159.139115c9.536583-16.781576,28.861241-53.792314,57.545025-59.421039c39.209864-7.694294,46.88703,27.19233,50.119857,47.81003c2.460285,15.690696,3.503162,32.738444,1.856289,48.493034-2.884946,27.598558-40.408551,109.494404-6.497018,129.770093c12.529584,7.491428,29.336909,7.793429,44.550989,6.147003c65.550531-7.093686,40.139814-69.395391,71.467201-99.035071c10.725607-10.147787,32.654965,15.333999,24.131784,34.150025" fill="none" stroke="url(#eWSLi8rbaTl5-stroke)" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.01,72"/></svg>
-  </div>
-
-  <!-- NAV -->
-  <div class="scroll-progress" id="scrollProgress"></div>
-  <nav>
-    <a class="nav-logo" href="#hero">
-      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
-      <span class="logo-media-word">Media</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#why">Why Us</a></li>
-      <li><a href="#pricing">Get a Quote</a></li>
-      <li><a href="#myths">Myths</a></li>
-      <li><a href="/proof.html">Bug Off 🪲 (Hehe)</a></li>
-      <li><a href="#contact" class="nav-cta">Book a Call</a></li>
-    </ul>
-    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Nav Overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <button class="overlay-close" onclick="toggleNav()">×</button>
-    <a href="#work"        onclick="toggleNav()">Work</a>
-    <a href="#process"     onclick="toggleNav()">Process</a>
-    <a href="#why"         onclick="toggleNav()">Why Us</a>
-    <a href="#pricing"     onclick="toggleNav()">Get a Quote</a>
-    <a href="#myths"       onclick="toggleNav()">Myths</a>
-    <a href="/proof.html"  onclick="toggleNav()">Bug Off 🪲 (Hehe)</a>
-    <a href="#contact"  onclick="toggleNav()">Book a Call</a>
-  </div>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-inner">
-      <div>
-        <span class="hero-label">Hand-Coded Web Design · Winnipeg</span>
-        <h1 class="hero-title">We'll cook you up a website<br /><em>in 48 hours.</em></h1>
-        <p class="hero-sub">No discovery calls. No proposals. No 6-week wait.<br>Free to see it. Pay if you're satisfied.</p>
-        <div class="hero-btns">
-          <a href="#contact" class="btn-primary">Book a Call</a>
-          <a href="#work" class="btn-outline">See Our Work</a>
-        </div>
-        <p class="hero-seo" style="font-size:0.78rem;color:rgba(237,234,229,0.4);margin-top:1.2rem;max-width:440px;line-height:1.5;">Custom web design for Winnipeg businesses — no Wix, no Shopify, no templates. 100% hand-coded, every time.</p>
-      </div>
-      <div class="hero-right">
-        <div class="hero-stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div>
-            <div class="stat-text-num">$0 Upfront</div>
-            <div class="stat-text-label">Pay only if you're satisfied</div>
-          </div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div>
-            <div class="stat-text-num">48 Hours</div>
-            <div class="stat-text-label">Not 6 weeks. Call to finished design.</div>
-          </div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <div>
-            <div class="stat-text-num">No Builders</div>
-            <div class="stat-text-label">No Wix. No Shopify. Hand-coded.</div>
-          </div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div>
-            <div class="stat-text-num">Full Backend</div>
-            <div class="stat-text-label">Forms, CRM &amp; automation — when you need it</div>
-          </div>
-        </div>
-      </div>
+    <!-- Macro Shell: Background Environment -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-[0.15]"></div>
+        <div class="absolute inset-0 bg-glow-radial opacity-60"></div>
     </div>
-  </section>
 
-  <!-- OFFER -->
-  <section id="offer">
-    <div class="section-inner">
-      <p class="section-label" style="justify-content:center;">The Offer</p>
-      <h2 class="offer-headline">Your website is already done.<br><em>You just haven't seen it yet.</em></h2>
-      <p class="offer-sub">One call. 48 hours. You get a fully designed website — hand-coded from scratch, not dragged and dropped from some template. Don't like it? You don't pay. Simple.</p>
-      <div style="max-width:520px;margin:1.5rem auto;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:1.4rem 1.8rem;text-align:left;">
-        <p style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:0.6rem;font-weight:600;">What you get free:</p>
-        <p style="font-size:0.95rem;line-height:2;color:var(--text);">
-          <span style="color:var(--accent);">✓</span> A custom website — coded by hand, not built on Wix<br>
-          <span style="color:var(--accent);">✓</span> Every page designed and mobile-ready<br>
-          <span style="color:var(--accent);">✓</span> A live link you can show off before you spend a dime<br>
-          <span style="color:var(--accent);">✓</span> No contracts. No deposits. Not feeling it? Walk away.
-        </p>
-      </div>
-      <div class="offer-pillars">
-        <div class="offer-pillar reveal">
-          <div class="offer-pillar-num">48 Hours</div>
-          <div class="offer-pillar-label">Your design is ready</div>
+    <!-- Global Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 glass-panel border-t-0 border-x-0 border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="text-brand-gold font-display font-bold text-2xl tracking-tighter">
+                { FJ } <span class="text-white text-sm font-sans tracking-widest uppercase ml-1 opacity-50 group-hover:opacity-100 transition-opacity">Media</span>
+            </div>
         </div>
-        <div class="offer-pillar reveal">
-          <div class="offer-pillar-num">$0</div>
-          <div class="offer-pillar-label">Until you're satisfied</div>
+        <div class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wide">
+            <a href="work.html" class="hover:text-brand-gold transition-colors">Work</a>
+            <a href="#process" class="hover:text-brand-gold transition-colors">Process</a>
+            <a href="#pricing" class="hover:text-brand-gold transition-colors">Packages</a>
+            <a href="#myths" class="hover:text-brand-gold transition-colors">Why Us</a>
+            <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
         </div>
-        <div class="offer-pillar reveal">
-          <div class="offer-pillar-num">0 Risk</div>
-          <div class="offer-pillar-label">Not satisfied? Walk away.</div>
+        <a href="#contact" class="bg-white text-brand-bg px-6 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)]">
+            Book a Call
+        </a>
+    </nav>
+
+    <!-- Main Content Canvas -->
+    <main class="relative z-10 pt-32 px-6 md:px-12 max-w-[1600px] mx-auto">
+
+        <!-- SECTION: HERO -->
+        <section class="min-h-[85vh] flex flex-col lg:flex-row items-center gap-16 lg:gap-24 py-12">
+            <!-- Hero Typography -->
+            <div class="flex-1 space-y-8">
+                <div class="flex items-center gap-4 text-brand-gold text-xs font-bold tracking-[0.2em] uppercase">
+                    <span class="w-8 h-px bg-brand-gold"></span>
+                    Hand-Coded Web Design · Winnipeg
+                </div>
+                <h1 class="font-display font-bold text-5xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
+                    We'll cook you <br/>
+                    up a website <br/>
+                    <span class="text-gradient italic block mt-2">in 48 hours.</span>
+                </h1>
+                <p class="text-xl text-brand-textMuted max-w-lg leading-relaxed font-light">
+                    No discovery calls. No proposals. No 6-week wait. <br>
+                    <span class="text-white font-medium">Free to see it. Pay if you're satisfied.</span>
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#contact" class="bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all transform hover:-translate-y-1">
+                        Book a Call
+                    </a>
+                    <a href="#work" class="glass-panel text-white border border-white/10 px-8 py-4 rounded-md font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
+                        See Our Work <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+                <p class="text-xs text-brand-textMuted max-w-md pt-8 border-t border-white/10">
+                    Custom web design for Winnipeg businesses — no Wix, no Shopify, no templates. 100% hand-coded, every time.
+                </p>
+            </div>
+
+            <!-- Hero Bento Features -->
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full relative">
+                <!-- Decorative element -->
+                <div class="absolute -inset-10 bg-brand-gold/5 rounded-full z-0 pointer-events-none"></div>
+                
+                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 0s;">
+                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
+                        <i class="ph ph-money text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">$0 Upfront</h3>
+                        <p class="text-sm text-brand-textMuted mt-1">Pay only if you're satisfied</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 1.5s;">
+                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
+                        <i class="ph ph-lightning text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">48 Hours</h3>
+                        <p class="text-sm text-brand-textMuted mt-1">Not 6 weeks. Call to finished design.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 0.5s;">
+                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
+                        <i class="ph ph-code text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">No Builders</h3>
+                        <p class="text-sm text-brand-textMuted mt-1">No Wix. No Shopify. Hand-coded.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 2s;">
+                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
+                        <i class="ph ph-database text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">Full Backend</h3>
+                        <p class="text-sm text-brand-textMuted mt-1">Forms, CRM & automation — when you need it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: THE OFFER -->
+        <section class="py-32 relative border-y border-white/5 my-20">
+            <div class="absolute inset-0 bg-brand-card/20 z-0"></div>
+            <div class="relative z-10 text-center max-w-4xl mx-auto space-y-8">
+                <div class="text-xs font-bold tracking-[0.2em] text-brand-textMuted uppercase">The Offer</div>
+                <h2 class="font-display font-bold text-4xl md:text-6xl text-white">
+                    Your website is already done. <br>
+                    <span class="text-brand-textMuted italic font-normal">You just haven't seen it yet.</span>
+                </h2>
+                <p class="text-lg text-brand-textMuted max-w-2xl mx-auto">
+                    One call. 48 hours. You get a fully designed website — hand-coded from scratch, not dragged and dropped from some template. Don't like it? You don't pay. Simple.
+                </p>
+                
+                <div class="glass-panel inline-block text-left p-8 rounded-xl border border-brand-gold/20 mt-8">
+                    <p class="text-xs font-bold tracking-[0.1em] text-brand-gold mb-6 uppercase">What you get free:</p>
+                    <ul class="space-y-4 text-sm md:text-base">
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> A custom website — coded by hand, not built on Wix</li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> Every page designed and mobile-ready</li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> A live link you can show off before you spend a dime</li>
+                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> No contracts. No deposits. Not feeling it? Walk away.</li>
+                    </ul>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 max-w-3xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-3xl font-display font-bold text-white mb-2">48 Hours</div>
+                        <div class="text-xs tracking-widest text-brand-textMuted uppercase">Your design is ready</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-display font-bold text-white mb-2">$0</div>
+                        <div class="text-xs tracking-widest text-brand-textMuted uppercase">Until you're satisfied</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-display font-bold text-white mb-2">0 Risk</div>
+                        <div class="text-xs tracking-widest text-brand-textMuted uppercase">Not satisfied? Walk away.</div>
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <a href="#contact" class="inline-block bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all shadow-[0_0_30px_rgba(201,168,76,0.2)]">
+                        Book a Call — See Your Site in 48 Hours
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PROCESS -->
+        <section id="process" class="py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <!-- Sticky Left -->
+                <div class="lg:col-span-4 lg:sticky top-32 self-start space-y-6">
+                    <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase">How It Works</div>
+                    <h2 class="font-display font-bold text-4xl text-white">No phases. No milestones. Just results.</h2>
+                    <p class="text-brand-textMuted">Most agencies sell you a process — discovery, strategy, revisions, timelines. We skip to the part where you see a finished website.</p>
+                </div>
+                
+                <!-- Timeline Right -->
+                <div class="lg:col-span-8 space-y-12 relative before:absolute before:inset-0 before:ml-[1.4rem] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-gold before:via-brand-gold/20 before:to-transparent">
+                    
+                    <!-- Step 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-gold bg-brand-bg text-brand-gold font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:bg-brand-gold group-hover:text-brand-bg">
+                            01
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                            <h3 class="font-display font-bold text-xl text-white mb-2">Quick Call</h3>
+                            <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">15 MINUTES. NOT A SALES PITCH.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">We learn about your business and what you need. No strategy sessions, no questionnaires, no follow-up calls — just a straight conversation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                            02
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                            <h3 class="font-display font-bold text-xl text-white mb-2">We Design It</h3>
+                            <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">48 HOURS. YOUR SITE IS READY.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">While most agencies are still scheduling their second meeting, you're already looking at a finished, hand-coded website — live, clickable, yours to review.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                            03
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                            <h3 class="font-display font-bold text-xl text-white mb-2">You Decide</h3>
+                            <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">LOVE IT OR LEAVE IT.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">We send you the link. Share it with whoever you want. If you're satisfied, we move forward. If not — walk away, no charge.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                            04
+                        </div>
+                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                            <h3 class="font-display font-bold text-xl text-white mb-2">Go Live</h3>
+                            <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">YOUR SITE. YOUR RULES.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Happy with the design? You're live. Need more — ordering forms, lead capture, SEO, the full backend? We walk you through packages built on top of what we already made together. Everything adds on. Nothing starts over.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: OUR WORK (The Complex Micro-Architecture) -->
+        <section id="work" class="py-24 border-t border-white/5">
+            <div class="text-center mb-16">
+                <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Our Work</div>
+                <h2 class="font-display font-bold text-4xl text-white mb-4">Real sites. Real businesses.</h2>
+                <p class="text-brand-textMuted max-w-xl mx-auto">Every project is fully custom and built to convert visitors into customers.</p>
+            </div>
+
+            <!-- Bento Grid of Projects -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Project 1: Sugar & Shai -->
+                <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
+                    <div class="h-48 bg-gradient-to-br from-[#f8e5e5] to-[#e8d5d5] p-6 flex flex-col justify-between items-center relative overflow-hidden">
+                        <img src="https://sugarandshaicookies.com/Logo.jpg" alt="Sugar &amp; Shai Cookies" class="w-24 h-24 object-contain rounded-full shadow-lg z-10 mix-blend-multiply">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <div class="z-10 text-center w-full mt-4">
+                            <span class="text-[10px] uppercase font-bold text-black/60 tracking-widest bg-white/50 px-2 py-1 rounded">Featured Project</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[10px] text-brand-textMuted mb-2 uppercase tracking-widest">Food & Bakery · Winnipeg</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Sugar and Shai Cookies</h3>
+                        <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Pre-order site with live pricing, flavour selectors, Google Sheets tracking, and automated email notifications.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Order Form</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Live Pricing</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Sheets CRM</span>
+                        </div>
+                        <!-- Pure CSS Modal Trigger -->
+                        <label for="modal-sugar" class="block w-full text-center bg-white border border-white text-brand-bg py-3 text-sm font-bold rounded hover:bg-transparent hover:text-white transition-colors cursor-pointer">
+                            View Full Case Study →
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Project 2: Royal Kings -->
+                <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
+                    <div class="h-48 bg-gradient-to-br from-[#111] to-[#222] p-6 flex flex-col justify-between items-center relative overflow-hidden">
+                        <img src="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" alt="Royal Kings Auto Care" class="w-32 h-auto object-contain z-10">
+                        <div class="absolute inset-0 bg-brand-gold/5 mix-blend-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[10px] text-brand-textMuted mb-2 uppercase tracking-widest">Auto Detailing · Winnipeg</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Royal Kings Auto Care</h3>
+                        <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Convenience meets quality — wherever you are, we deliver royal results. Complete booking system.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Packages</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Booking Form</span>
+                        </div>
+                        <label for="modal-royal" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg transition-colors cursor-pointer">
+                            View Full Case Study →
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Project 3: Diego & Andrea (Inferred from images) -->
+                <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
+                    <div class="h-48 bg-gradient-to-br from-[#0c2415] to-[#06140b] p-6 flex flex-col justify-between items-center relative overflow-hidden">
+                        <div class="text-white font-display text-2xl z-10 italic">Diego & Andrea</div>
+                        <div class="absolute inset-0 bg-[url('https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference.jpg')] bg-cover opacity-20 mix-blend-luminosity"></div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-[10px] text-brand-textMuted mb-2 uppercase tracking-widest">Event Platform · Winnipeg</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Social Event & Raffle</h3>
+                        <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Scrapbook-style event site with an interactive prize gallery, ticket info, and grand prize reveal.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Event Site</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Prize Gallery</span>
+                        </div>
+                        <label for="modal-diego" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg transition-colors cursor-pointer">
+                            View Full Case Study →
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PORTFOLIO MODALS (HIDDEN ARCHITECTURE) -->
+        
+        <!-- Modal 1: Sugar & Shai Content Dump -->
+        <input type="checkbox" id="modal-sugar" class="case-toggle hidden">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#faf6f0] text-[#4a3f3a] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+            <div class="max-w-5xl mx-auto p-6 md:p-12">
+                <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#faf6f0]/90 py-4 z-50 border-b border-[#4a3f3a]/10">
+                    <div class="text-sm font-bold uppercase tracking-widest text-[#a87a6b]">Case Study: Sugar & Shai</div>
+                    <label for="modal-sugar" class="cursor-pointer bg-[#4a3f3a] text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#a87a6b] transition"><i class="ph ph-x"></i> Close</label>
+                </div>
+
+                <!-- Raw Content from Prompt Preserved & Styled -->
+                <div class="text-center space-y-6">
+                    <p class="text-sm uppercase tracking-widest">sugarandshaicookies.com</p>
+                    <h2 class="text-4xl font-display font-medium">Sugar & Shai Cookies</h2>
+                    <p class="text-2xl">🍪🌸✨🍪🌷</p>
+                    <img src="https://sugarandshaicookies.com/Logo.jpg" alt="Sugar & Shai Cookies Logo" class="mx-auto w-48 rounded-full border-4 border-white shadow-xl my-8">
+                    <p class="italic font-display text-xl text-[#a87a6b]">✦ Handcrafted with love ✦</p>
+                    <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight">Sweet Cookies, <br><span class="italic text-[#a87a6b] font-light">Beautiful</span> Designs</h1>
+                    <p class="max-w-xl mx-auto text-lg pt-4">Custom decorated sugar cookies for every occasion — birthdays, weddings, baby showers, holidays & more.</p>
+                    <div class="flex justify-center gap-4 pt-4">
+                        <a href="https://sugarandshaicookies.com/#order-form" class="bg-[#a87a6b] text-white px-6 py-3 rounded-full font-bold">🍪 Place an Order</a>
+                        <a href="https://sugarandshaicookies.com/#gallery" class="border border-[#a87a6b] text-[#a87a6b] px-6 py-3 rounded-full font-bold">View Gallery</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-20 masonry-grid">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies_1.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies_3.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies_4.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies_5.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img src="https://sugarandshaicookies.com/Gallery/Main/Cookies_6.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                </div>
+
+                <div class="my-20 text-center bg-white p-12 rounded-2xl shadow-sm border border-black/5">
+                    <h2 class="text-3xl font-display font-bold mb-6">Our Story <br> <span class="italic font-normal">Where Every Cookie is a Work of Art</span></h2>
+                    <p class="max-w-2xl mx-auto text-lg mb-6 leading-relaxed">Hi, I'm Shai! Sugar & Shai is my home-based cookie business where baking meets artistry. Every cookie is hand-decorated with royal icing, made to order, and crafted with serious love and attention to detail.</p>
+                    <p class="max-w-2xl mx-auto text-lg mb-12 leading-relaxed">Whether you need a dozen for a birthday or a hundred for a wedding — I'm here to make your sweetest moments even sweeter.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+                        <div class="bg-[#faf6f0] p-4 rounded-xl"><div class="text-3xl mb-2">👩‍🍳</div> Home-based bakery</div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl"><div class="text-3xl mb-2">🥚</div> Made from scratch with quality ingredients</div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl"><div class="text-3xl mb-2">📦</div> Beautifully packaged, ready to gift</div>
+                        <div class="bg-[#faf6f0] p-4 rounded-xl"><div class="text-3xl mb-2">📍</div> Pickup only — Tyndall area</div>
+                    </div>
+                </div>
+
+                <!-- Flavor of month -->
+                <div class="flex flex-col md:flex-row gap-12 items-center my-20 bg-[#f4e8eb] p-8 md:p-12 rounded-3xl">
+                    <div class="flex-1">
+                        <span class="bg-[#8b5c85] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block">April 2026 Flavour of the Month</span>
+                        <h2 class="text-5xl font-display font-bold text-[#4a2e45] mb-4">Ube Bliss</h2>
+                        <p class="text-lg text-[#61455b] mb-6">A little nutty, a little creamy, a whole lot of ube 💜 Made with real ube halaya and finished with toasted coconut + ube cream cheese filling</p>
+                        <div class="flex gap-4 font-bold text-xl text-[#4a2e45] mb-8">
+                            <span>12 mixed — $25</span><span>✦</span><span>24 mixed — $45</span>
+                        </div>
+                        <a href="https://sugarandshaicookies.com/#order-form" class="bg-[#8b5c85] text-white px-8 py-4 rounded-full font-bold shadow-lg">Order This Month's Flavour</a>
+                    </div>
+                    <div class="flex-1">
+                        <img src="https://sugarandshaicookies.com/Cookies/April/Ube.jpg" alt="Ube Bliss Cookie" class="w-full max-w-md mx-auto rounded-full shadow-2xl border-8 border-white origin-center rotate-6">
+                    </div>
+                </div>
+
+                <!-- Current Menu -->
+                <div class="my-20">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-display font-bold">Current Menu ✦ Available Flavors</h2>
+                        <p class="text-lg mt-4 max-w-xl mx-auto">Flavors rotate seasonally — DM on Instagram to ask what's available right now!</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
+                            <img src="https://sugarandshaicookies.com/Cookies/Bischoff.png" alt="Biscoff Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <div>
+                                <h3 class="text-xl font-bold font-display">Biscoff</h3>
+                                <p class="text-sm mt-2">That iconic caramelized speculoos flavour baked right into every bite.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
+                            <img src="https://sugarandshaicookies.com/Cookies/Mini%20Eggs.png" alt="Mini Eggs Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <div>
+                                <h3 class="text-xl font-bold font-display">Mini Eggs</h3>
+                                <p class="text-sm mt-2">Crunchy, chocolatey mini eggs folded into a soft, chewy cookie. A seasonal favourite.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
+                            <img src="https://sugarandshaicookies.com/Cookies/Matcha%20Chocolate.png" alt="Matcha with White Chocolate Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <div>
+                                <h3 class="text-xl font-bold font-display">Matcha with White Chocolate</h3>
+                                <p class="text-sm mt-2">Earthy matcha balanced with creamy white chocolate chips — elegant and delicious.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
+                            <img src="https://sugarandshaicookies.com/Cookies/Chocolate%20Chunk.png" alt="Chocolate Chunk with Sea Salt Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <div>
+                                <h3 class="text-xl font-bold font-display">Chocolate Chunk with Sea Salt</h3>
+                                <p class="text-sm mt-2">Gooey dark chocolate chunks finished with a sprinkle of flaky sea salt. Pure perfection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center text-sm font-medium">
+                        <p>Flavours rotate seasonally — follow <a href="https://www.instagram.com/sugarandshaicookies/" class="text-[#a87a6b] font-bold">@sugarandshaicookies</a> on Instagram to stay up to date!</p>
+                        <div class="bg-white inline-block px-8 py-4 rounded-full mt-6 shadow-sm font-bold text-lg border border-black/5">
+                            12pc $20.00 ✦ 24pc $35.00 <br>
+                            <span class="text-xs font-normal text-gray-500">Minimum of 3pc per flavour ✦ Mix with Flavour of the Month: 12pc $25 / 24pc $45</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Dump -->
+                <div class="my-20">
+                    <h2 class="text-3xl font-display font-bold text-center mb-8">Sweet Creations ✦ Cookie Gallery</h2>
+                    <p class="text-center mb-8">A peek at our cookies — follow us on Instagram for more!</p>
+                    <div class="masonry-grid">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies.jpg" alt="Packaged cookies" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies_1.jpg" alt="All flavours" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies_3.jpg" alt="Matcha cookies" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies_4.jpg" alt="Mini eggs cookies" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies_5.jpg" alt="Biscoff cookies" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/Cookies_6.jpg" alt="Chocolate chunk cookies" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/BTS.jpg" alt="New cookie" class="masonry-item rounded shadow">
+                        <img src="https://sugarandshaicookies.com/Gallery/BTS_2.jpg" alt="Dough prep" class="masonry-item rounded shadow">
+                    </div>
+                    <div class="text-center mt-8">
+                        <a href="https://www.instagram.com/sugarandshaicookies/" class="inline-block border-2 border-[#4a3f3a] text-[#4a3f3a] px-6 py-2 rounded-full font-bold hover:bg-[#4a3f3a] hover:text-white transition">📸 See More on Instagram</a>
+                    </div>
+                </div>
+
+                <!-- Process / Order Form Text -->
+                 <div class="bg-white p-12 rounded-3xl shadow-sm border border-black/5 my-20">
+                    <h2 class="text-3xl font-display font-bold mb-2">The Process ✦ How to Order</h2>
+                    <p class="text-sm font-bold text-[#a87a6b] mb-12">Pre-orders only · Pickup in the Tyndall area · Minimum 3pc per flavour</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="text-4xl font-display text-[#a87a6b]/30 font-bold">1</div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Choose Your Flavours</h3>
+                                <p class="text-sm">Browse our flavours including the <strong>Flavour of the Month</strong>. Select quantities in multiples of 3 — minimum 3pc per flavour. Need more than 24 pieces? Slide into our DMs on Instagram!</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="text-4xl font-display text-[#a87a6b]/30 font-bold">2</div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Submit Your Order</h3>
+                                <p class="text-sm">Fill out the order form with your details, preferred pickup date, and payment method. <strong>Wednesdays</strong> are our regular pickup day — order cutoff is <strong>Sunday at 7PM</strong> the week before. Orders after cutoff are automatically moved to the following Wednesday.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="text-4xl font-display text-[#a87a6b]/30 font-bold">3</div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Get Confirmed</h3>
+                                <p class="text-sm">Once your order is in, secure your spot with <strong>e-transfer or cash</strong>. Non-Wednesday pickups are subject to Shai's confirmation. Need it sooner? DM Shai on Instagram.</p>
+                            </div>
+                        </div>
+                         <div class="flex gap-6">
+                            <div class="text-4xl font-display text-[#a87a6b]/30 font-bold">4</div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2">Pick Up & Enjoy</h3>
+                                <p class="text-sm">Shai will reach out <strong>on pickup day</strong> to coordinate a time. Pick up your freshly baked cookies in the <strong>Tyndall area</strong> and enjoy!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews -->
+                <div class="my-20">
+                    <h2 class="text-3xl font-display font-bold text-center mb-8">Happy Customers ✦ What People Are Saying</h2>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <img src="https://sugarandshaicookies.com/Reviews/Review_2.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                        <img src="https://sugarandshaicookies.com/Reviews/Review_4.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                        <img src="https://sugarandshaicookies.com/Reviews/Review_5.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                    </div>
+                </div>
+
+                <!-- Order form UI replica (Non-functional) -->
+                <div class="max-w-2xl mx-auto bg-[#f8f5f2] p-8 rounded-2xl border border-[#e2d8d0]">
+                     <h2 class="text-2xl font-bold mb-4">Place Your Order ✦ Ready to Order? 🍪</h2>
+                     <p class="text-sm mb-6">Fill out the form below and Shai will get back to you to confirm your spot!</p>
+                     <div class="space-y-4 opacity-50 pointer-events-none">
+                         <div class="h-12 bg-white border border-[#e2d8d0] rounded w-full flex items-center px-4 text-sm text-gray-400">Your Name</div>
+                         <div class="h-12 bg-white border border-[#e2d8d0] rounded w-full flex items-center px-4 text-sm text-gray-400">Email Address</div>
+                         <div class="h-12 bg-white border border-[#e2d8d0] rounded w-full flex items-center px-4 text-sm text-gray-400">Phone / Instagram</div>
+                         <div class="p-4 bg-white border border-[#e2d8d0] rounded">
+                             <div class="text-xs font-bold mb-2">Flavours & Quantities (min. 3 per flavour)</div>
+                             <div class="text-xs">🍪 Biscoff - +</div>
+                             <div class="text-xs">🍵 Matcha White Chocolate - +</div>
+                             <div class="text-xs">🍫 Chocolate Chunk Sea Salt - +</div>
+                             <div class="text-xs">🥚 Mini Eggs - +</div>
+                             <div class="text-xs">🍠 Ube Bliss Flavour of the Month - +</div>
+                         </div>
+                         <div class="h-12 bg-[#a87a6b] text-white rounded w-full flex items-center justify-center font-bold">🍪 Send My Order</div>
+                     </div>
+                </div>
+
+                <div class="text-center mt-12 text-sm">
+                    <h2 class="font-bold text-xl mb-2">Skip the Form ✦ Prefer to Order Your Way?</h2>
+                    <p>Not a form person? No worries — slide into our DMs or drop us an email and we'll get your order sorted just the same.</p>
+                    <div class="flex justify-center gap-4 mt-4">
+                        <a href="#" class="font-bold text-[#a87a6b]">📩 DM @sugarandshaicookies</a>
+                        <a href="#" class="font-bold text-[#a87a6b]">📧 sugarandshaicookies@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- Agency footer backlink -->
+                <div class="mt-24 pt-8 border-t border-black/10 text-center flex flex-col items-center">
+                    <a href="https://sugarandshaicookies.com/" class="inline-flex items-center gap-2 bg-[#071520] text-white px-6 py-3 rounded text-sm font-bold shadow-lg hover:bg-[#0D1F3C] transition">Visit Live Site →</a>
+                    <label for="modal-sugar" class="mt-4 text-xs font-bold uppercase tracking-widest text-gray-400 cursor-pointer hover:text-black">← Back to FJ Media</label>
+                </div>
+            </div>
         </div>
-      </div>
-      <a href="#contact" class="btn-primary" style="background:var(--accent);color:var(--bg);border-color:var(--accent);">Book a Call — See Your Site in 48 Hours</a>
+
+        <!-- Modal 2: Royal Kings -->
+        <input type="checkbox" id="modal-royal" class="case-toggle hidden">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#0a0a0a] text-gray-300 overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+             <div class="max-w-4xl mx-auto p-6 md:p-12">
+                <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0a0a0a]/90 py-4 z-50 border-b border-white/10">
+                    <div class="text-sm font-bold uppercase tracking-widest text-[#d4af37]">Case Study: Royal Kings</div>
+                    <label for="modal-royal" class="cursor-pointer border border-[#d4af37] text-[#d4af37] px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#d4af37] hover:text-black transition"><i class="ph ph-x"></i> Close</label>
+                </div>
+
+                <div class="text-center space-y-6">
+                    <p class="text-xs uppercase tracking-widest">fjdmedia.github.io/royal-kings-auto-care</p>
+                    <img src="https://fjdmedia.github.io/royal-kings-auto-care/Logo.jpg" alt="Royal Kings Auto Care" class="mx-auto w-64 my-8 relative z-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <h1 class="text-4xl md:text-6xl font-display font-medium text-white tracking-tight uppercase">Royal Kings <br> <span class="font-light text-[#d4af37]">Auto Care</span></h1>
+                    <p class="text-[#d4af37] tracking-widest uppercase text-sm">Premium Detailing Service · Winnipeg, MB</p>
+                    <p class="max-w-xl mx-auto text-lg pt-4 text-gray-400">Convenience meets quality — wherever you are, we deliver royal results.</p>
+                    <div class="flex justify-center gap-4 pt-4">
+                        <a href="https://fjdmedia.github.io/royal-kings-auto-care/#booking" class="bg-[#d4af37] text-black px-8 py-3 rounded font-bold uppercase tracking-wide">♚ Book Your Detail</a>
+                        <a href="https://fjdmedia.github.io/royal-kings-auto-care/#pricing" class="border border-white/20 text-white px-8 py-3 rounded font-bold uppercase tracking-wide">View Pricing</a>
+                    </div>
+                </div>
+
+                <div class="my-24">
+                    <h2 class="text-3xl font-display font-bold text-center text-white mb-2 uppercase">Full Service Packages ✦ Choose Your Package</h2>
+                    <p class="text-center text-sm mb-12">Select your vehicle class — prices update instantly. No hidden fees.</p>
+                    
+                    <div class="flex justify-center gap-4 mb-12 border-b border-white/10 pb-4">
+                        <span class="text-white font-bold border-b-2 border-[#d4af37] pb-2">Coupes & Sedans</span>
+                        <span class="text-gray-500 pb-2">SUVs & Crossovers</span>
+                        <span class="text-gray-500 pb-2">Trucks & 7-Seaters</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/5 border border-white/10 p-8 rounded-xl relative">
+                            <div class="text-[10px] text-gray-400 uppercase tracking-widest mb-4">Base price — no surcharge</div>
+                            <h3 class="text-2xl text-white font-display mb-2">Minimal</h3>
+                            <div class="text-4xl text-[#d4af37] font-bold mb-6">$110</div>
+                            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Interior Essentials</h4>
+                            <ul class="text-sm space-y-2 mb-8 text-gray-400">
+                                <li>- Interior Vacuuming</li>
+                                <li>- General Wipe-Down & Cleaning</li>
+                            </ul>
+                            <a href="#" class="block text-center border border-[#d4af37] text-[#d4af37] py-2 w-full uppercase text-xs font-bold hover:bg-[#d4af37] hover:text-black">Book Now</a>
+                        </div>
+
+                        <div class="bg-[#d4af37]/10 border border-[#d4af37]/50 p-8 rounded-xl relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#d4af37] text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded">Best Value</div>
+                            <h3 class="text-2xl text-white font-display mb-2 mt-4">Premium</h3>
+                            <div class="text-4xl text-[#d4af37] font-bold mb-6">$195</div>
+                            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Full Royal Treatment</h4>
+                            <ul class="text-sm space-y-2 mb-8 text-gray-300">
+                                <li>- Intensive Fabric Care</li>
+                                <li>- Odor & Stain Management</li>
+                                <li>- Additional Protective Treatments</li>
+                            </ul>
+                             <a href="#" class="block text-center bg-[#d4af37] text-black py-2 w-full uppercase text-xs font-bold hover:bg-white">Book Now</a>
+                        </div>
+
+                        <div class="bg-white/5 border border-white/10 p-8 rounded-xl relative">
+                            <div class="text-[10px] text-gray-400 uppercase tracking-widest mb-4">The Standard</div>
+                            <h3 class="text-2xl text-white font-display mb-2">Standard</h3>
+                            <div class="text-4xl text-[#d4af37] font-bold mb-6">$165</div>
+                            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Deep Interior Clean</h4>
+                            <ul class="text-sm space-y-2 mb-8 text-gray-400">
+                                <li>- Basic Deep Cleaning of Fabrics</li>
+                                <li>- Surface Treatment for Interior Materials</li>
+                            </ul>
+                            <a href="#" class="block text-center border border-[#d4af37] text-[#d4af37] py-2 w-full uppercase text-xs font-bold hover:bg-[#d4af37] hover:text-black">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-xl mx-auto bg-white/5 border border-white/10 p-8 rounded-xl my-24">
+                     <h2 class="text-2xl font-bold mb-4 text-white uppercase font-display">Appointments ✦ Book Your Detail</h2>
+                     <p class="text-sm mb-6 text-gray-400">Fill out the form below. We'll review your request and confirm your appointment within 24 hours.</p>
+                     <div class="space-y-4 opacity-50 pointer-events-none">
+                         <div class="h-12 bg-black/50 border border-white/10 rounded w-full flex items-center px-4 text-sm">Full Name</div>
+                         <div class="h-12 bg-black/50 border border-white/10 rounded w-full flex items-center px-4 text-sm">Email Address</div>
+                         <div class="h-12 bg-black/50 border border-white/10 rounded w-full flex items-center px-4 text-sm">Phone Number</div>
+                         <div class="h-12 bg-black/50 border border-white/10 rounded w-full flex items-center px-4 text-sm">Service Package Select</div>
+                         <div class="h-12 bg-[#d4af37] text-black rounded w-full flex items-center justify-center font-bold uppercase text-sm mt-4">Submit Request</div>
+                     </div>
+                </div>
+
+                 <div class="mt-24 pt-8 border-t border-white/10 text-center flex flex-col items-center">
+                    <a href="https://fjdmedia.github.io/royal-kings-auto-care/" class="inline-flex items-center gap-2 bg-[#d4af37] text-black px-6 py-3 rounded text-sm font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:bg-white transition">Visit Live Site →</a>
+                    <label for="modal-royal" class="mt-4 text-xs font-bold uppercase tracking-widest text-[#d4af37] cursor-pointer hover:text-white">← Back to FJ Media</label>
+                </div>
+             </div>
+        </div>
+
+        <!-- Modal 3: Diego & Andrea (Prizes inference) -->
+        <input type="checkbox" id="modal-diego" class="case-toggle hidden">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#0d161b] text-[#e0eab] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+            <div class="max-w-6xl mx-auto p-6 md:p-12">
+                <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0d161b]/90 py-4 z-50 border-b border-white/10">
+                    <div class="text-sm font-bold uppercase tracking-widest text-[#7dd3fc]">Case Study: Event Platform</div>
+                    <label for="modal-diego" class="cursor-pointer bg-white/10 text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-white hover:text-black transition"><i class="ph ph-x"></i> Close</label>
+                </div>
+
+                <div class="text-center space-y-6 mb-16">
+                    <h1 class="text-5xl font-display font-medium text-white tracking-tight italic">Diego & Andrea</h1>
+                    <p class="text-[#7dd3fc] tracking-widest uppercase text-sm">Event Ticketing & Digital Prize Gallery</p>
+                    <p class="max-w-2xl mx-auto text-gray-400">A custom interactive platform treating a wedding social like a high-end digital event. Complete with tiered tickets and a massive interactive prize showcase.</p>
+                </div>
+
+                <!-- Tickets -->
+                <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Tickets & Admission</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference.jpg" alt="Admission Ticket" class="rounded-xl border border-white/10 shadow-2xl">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference_2.jpg" alt="Support Ticket" class="rounded-xl border border-white/10 shadow-2xl">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GoldenTicket1.jpg" alt="Golden Ticket" class="rounded-xl border border-[#d4af37]/50 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                </div>
+
+                <!-- Grand Prizes Data Density -->
+                <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Grand Prizes</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize1.jpg" alt="Yeti Package" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize2.jpg" alt="AirPods Pro 3" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize3.jpg" alt="iPad A16" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize4.jpg" alt="Apple Watch Series 11" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize5.jpg" alt="Rayban Meta Sunglasses" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize6.jpg" alt="Dyson V12 Vacuum" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize7.jpg" alt="Nintendo Switch" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize8.jpg" alt="PlayStation 5" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize9.jpg" alt="Philips 55&quot; QLED Roku TV" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize10.jpg" alt="Bikes His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize11.jpg" alt="Electric Scooter" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize12.jpg" alt="Kayak" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize13.jpg" alt="Brussels 3 Piece Luggage Set" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize14.jpg" alt="Diamond Stud Earrings" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize15.jpg" alt="Ten Spa Gift Card" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize16.jpg" alt="Paddle Boards His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                </div>
+
+                <!-- Regular Prizes Data Density -->
+                 <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Regular Prizes</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize1.jpg" alt="Gym Package" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize2.jpg" alt="Walking Pad" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize3.jpg" alt="Lottery Tree" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize4.jpg" alt="Pokemon Card Package" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize5.jpg" alt="Coffee Package" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize6.jpg" alt="Ninja Delux Kitchen System" class="rounded border border-white/5">
+                    <img src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize7.jpg" alt="Air Fryer &amp; Pots &amp; Pan Set" class="rounded border border-white/5">
+                </div>
+                 <div class="text-center">
+                    <label for="modal-diego" class="text-xs font-bold uppercase tracking-widest text-[#7dd3fc] cursor-pointer hover:text-white">← Back to FJ Media</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: WHY US (Reconstructed from visual context to ensure completeness) -->
+        <section id="why" class="py-24 border-t border-white/5 mt-24">
+            <div class="mb-16">
+                <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Why FJMedia</div>
+                <h2 class="font-display font-bold text-4xl text-white max-w-xl">More than a web designer.</h2>
+                <p class="text-brand-textMuted mt-4">We build complete digital systems — not just pretty pages.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-8 rounded-xl border-l-2 border-brand-gold">
+                    <i class="ph ph-rocket-launch text-3xl text-brand-gold mb-4 block"></i>
+                    <h3 class="text-white font-bold text-xl mb-2">48 hours. Not 4-8 weeks.</h3>
+                    <p class="text-brand-textMuted text-sm">It typically takes 4-8 weeks to get a website. We send you a finished design in 48 hours.</p>
+                </div>
+                <div class="glass-panel p-8 rounded-xl">
+                    <i class="ph ph-handshake text-3xl text-brand-gold mb-4 block"></i>
+                    <h3 class="text-white font-bold text-xl mb-2">$0 until you're satisfied.</h3>
+                    <p class="text-brand-textMuted text-sm">We build it first. You see it first. You decide if it's worth paying for.</p>
+                </div>
+                <div class="md:col-span-2 bg-[#0a1219] p-8 rounded-xl border border-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="text-brand-gold text-[10px] font-bold tracking-[0.2em] uppercase mb-2">// One person. Full accountability.</div>
+                        <h3 class="text-white font-bold text-lg">You talk to James. James builds it. That's it.</h3>
+                        <p class="text-brand-textMuted text-sm mt-1">No handoffs. No account managers. No waiting on "the developer."</p>
+                    </div>
+                    <a href="#contact" class="text-xs font-bold tracking-widest hover:text-brand-gold transition-colors flex items-center gap-2 shrink-0 ml-8">
+                        Book a Call <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: AUDIT CTA (Breakout Section) -->
+        <section class="py-24 relative overflow-hidden my-12 rounded-3xl group">
+            <div class="absolute inset-0 bg-brand-gold z-0 transform scale-[1.02] group-hover:scale-100 transition-transform duration-700"></div>
+            <div class="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay z-0"></div>
+            <div class="relative z-10 text-center text-brand-bg py-12 px-6 max-w-4xl mx-auto">
+                <div class="inline-block border border-brand-bg px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-8">Free — No Strings Attached</div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Find out exactly what's costing you customers online. <br><span class="italic font-normal">Before you spend a cent.</span></h2>
+                <p class="text-brand-bg/80 max-w-2xl mx-auto mb-8 font-medium">We run a full audit of your online presence — website speed, mobile experience, local SEO, and trust signals — then send you a straight-talking report. No pitch. No obligation. Just the truth about where you're losing customers to competitors.</p>
+                
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-bold mb-10">
+                    <span>✓ Performance & load speed</span>
+                    <span>✓ Mobile experience</span>
+                    <span>✓ Local SEO & Google visibility</span>
+                    <span>✓ Trust signals</span>
+                </div>
+
+                <a href="#contact" class="inline-block bg-brand-bg text-brand-gold px-8 py-4 rounded-md font-bold hover:bg-white hover:text-brand-bg transition-colors shadow-2xl">
+                    Get My Free Audit →
+                </a>
+                <p class="text-[10px] uppercase tracking-widest mt-6 opacity-70">Takes 2 minutes to request. Report delivered within 24 hours.</p>
+            </div>
+        </section>
+
+        <!-- SECTION: PACKAGES (Interactive Macro-Architecture) -->
+        <section id="pricing" class="py-24 border-t border-white/5">
+            <div class="mb-12">
+                <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Packages</div>
+                <h2 class="font-display font-bold text-4xl text-white">Your design is ready. <span class="italic text-brand-textMuted font-normal">Now choose what happens next.</span></h2>
+                <p class="text-brand-textMuted mt-4">Everything agencies charge thousands for — delivered lean, fast, and built to grow with your business.</p>
+            </div>
+
+            <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-12 border-brand-gold/30">
+                <i class="ph ph-lock-key text-brand-gold"></i> No retainers required. No monthly platform fees. You own everything we build.
+            </div>
+
+            <!-- CSS Tabs Implementation -->
+            <div class="relative">
+                <!-- Radio Inputs hidden -->
+                <input type="radio" name="pkg-tabs" id="tab-golive" class="hidden peer/golive" checked>
+                <input type="radio" name="pkg-tabs" id="tab-getfound" class="hidden peer/getfound">
+                <input type="radio" name="pkg-tabs" id="tab-ownmarket" class="hidden peer/ownmarket">
+
+                <!-- Tab Labels -->
+                <div class="flex gap-2 mb-8 bg-brand-bg border border-white/10 p-1 rounded-lg">
+                    <label for="tab-golive" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/golive:bg-brand-card peer-checked/golive:text-white text-brand-textMuted hover:text-white">
+                        Go Live <span class="block text-[10px] font-normal opacity-70">Design only</span>
+                    </label>
+                    <label for="tab-getfound" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/getfound:bg-brand-card peer-checked/getfound:text-white text-brand-textMuted hover:text-white relative">
+                        Get Found
+                    </label>
+                    <label for="tab-ownmarket" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/ownmarket:bg-brand-card peer-checked/ownmarket:text-white text-brand-textMuted hover:text-white">
+                        Own the Market <span class="block text-[10px] font-normal opacity-70">Full System</span>
+                    </label>
+                </div>
+
+                <!-- Tab Contents -->
+                <!-- Content: Go Live -->
+                <div id="content-golive" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
+                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
+                        <i class="ph ph-desktop text-3xl mb-4 text-white"></i>
+                        <h3 class="text-white font-bold text-lg mb-2">Custom Website</h3>
+                        <p class="text-sm text-brand-textMuted">Hand-coded, mobile-ready, live preview link, domain connection.</p>
+                    </div>
+                     <div class="glass-panel p-8 rounded-xl border border-white/5 opacity-50">
+                        <i class="ph ph-chart-line-up text-3xl mb-4 text-white"></i>
+                        <h3 class="text-white font-bold text-lg mb-2">Analytics & Maintenance</h3>
+                        <p class="text-sm text-brand-textMuted">Analytics setup, monthly reports, seasonal updates, managed maintenance, priority support.</p>
+                    </div>
+                </div>
+
+                <!-- Content: Get Found (Simulated) -->
+                <div id="content-getfound" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
+                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
+                        <i class="ph ph-magnifying-glass text-3xl mb-4 text-white"></i>
+                        <h3 class="text-white font-bold text-lg mb-2">SEO & Google Setup</h3>
+                        <p class="text-sm text-brand-textMuted">On-page SEO, Google Business Profile optimization, local search visibility.</p>
+                    </div>
+                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 flex flex-col justify-center items-center text-center">
+                        <h3 class="text-white font-bold text-lg mb-2">Everything in Go Live</h3>
+                        <p class="text-sm text-brand-gold">+ Plus tailored visibility</p>
+                    </div>
+                </div>
+
+                 <!-- Content: Own Market (Simulated) -->
+                <div id="content-ownmarket" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
+                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
+                        <i class="ph ph-calendar-check text-3xl mb-4 text-white"></i>
+                        <h3 class="text-white font-bold text-lg mb-2">Ordering / Booking</h3>
+                        <p class="text-sm text-brand-textMuted">Forms with live pricing, Google Sheets CRM, automated email notifications.</p>
+                    </div>
+                    <div class="glass-panel p-8 rounded-xl border border-white/5 flex flex-col justify-center items-center text-center opacity-70">
+                        <i class="ph ph-chat-circle-dots text-3xl mb-4 text-brand-textMuted"></i>
+                        <h3 class="text-white font-bold text-lg mb-2">Need something else?</h3>
+                        <p class="text-sm text-brand-textMuted">Tell us when you reach out — we'll figure it out.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block bg-white text-brand-bg px-8 py-4 rounded font-bold hover:bg-brand-gold transition-colors">
+                    Get My Free Design →
+                </a>
+                <p class="text-[10px] text-brand-gold uppercase tracking-widest mt-4">What agencies charge $3k-$5k for, we deliver at a fraction of the cost. See it before you pay.</p>
+            </div>
+        </section>
+
+        <!-- SECTION: MYTHS VS REALITY -->
+        <section id="myths" class="py-24 border-t border-white/5">
+            <div class="mb-16">
+                 <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Myth Vs. Reality</div>
+                 <h2 class="font-display font-bold text-4xl text-white">What the industry tells you. What we actually do.</h2>
+            </div>
+
+            <div class="space-y-4 pt-8 border-t border-white/10">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
+                    <div class="p-8 bg-[#0a1219]">
+                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
+                        <p class="text-lg text-white font-display">"A good website takes 4–8 weeks to build."</p>
+                    </div>
+                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-gold/5"></div>
+                        <div class="relative z-10">
+                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-lg text-white font-display mb-2">Yours is done in 48 hours.</p>
+                            <p class="text-sm text-brand-textMuted">Hand-coded. Live link in your inbox before most agencies finish their first meeting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
+                    <div class="p-8 bg-[#0a1219]">
+                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
+                        <p class="text-lg text-white font-display">"You have to pay thousands just to see what you're getting."</p>
+                    </div>
+                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-gold/5"></div>
+                        <div class="relative z-10">
+                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-lg text-white font-display mb-2">You see the finished site before you pay anything.</p>
+                            <p class="text-sm text-brand-textMuted">No deposit. No contract. No "discovery fee." We build it — you decide if it's worth it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
+                    <div class="p-8 bg-[#0a1219]">
+                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
+                        <p class="text-lg text-white font-display">"You need a team of designers, developers, and project managers."</p>
+                    </div>
+                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-gold/5"></div>
+                        <div class="relative z-10">
+                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-lg text-white font-display mb-2">One person builds it, maintains it, and picks up when you text.</p>
+                            <p class="text-sm text-brand-textMuted">That's James. No handoffs. No ticket systems. No waiting on "the developer."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
+                    <div class="p-8 bg-[#0a1219]">
+                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
+                        <p class="text-lg text-white font-display">"You need discovery calls, strategy phases, and proposals before anything gets built."</p>
+                    </div>
+                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-gold/5"></div>
+                        <div class="relative z-10">
+                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-lg text-white font-display mb-2">15-minute call. We learn your business, then we build.</p>
+                            <p class="text-sm text-brand-textMuted">No phases, no decks, no 40-page proposals. You talk to a person, not a process.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SECTION: FOOTER / CONTACT — outside main so bg bleeds full viewport width -->
+    <section id="contact" style="width:100%;background:#050c12;border-top:1px solid rgba(255,255,255,0.05);position:relative;">
+
+            <!-- Inner content constrained to content width -->
+            <div style="max-width:1200px;margin:0 auto;padding:80px 40px;position:relative;z-index:10;">
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch;">
+
+                    <!-- LEFT: Info + Steps — stretches to match form card height -->
+                    <div style="display:flex;flex-direction:column;justify-content:space-between;">
+
+                        <!-- Top block: label + heading + body -->
+                        <div>
+                            <div class="text-brand-gold text-xs font-bold uppercase mb-4" style="letter-spacing:0.12em;">Book a call</div>
+                            <h2 class="font-display font-bold text-white mb-5" style="font-size:3rem;line-height:1.15;">Let's see if<br>we're a fit.</h2>
+                            <p class="text-brand-textMuted text-base leading-relaxed" style="max-width:22rem;">No commitments, no pressure. James reviews your business and tells you exactly what a site would do for you — for free.</p>
+                        </div>
+
+                        <!-- Middle block: steps -->
+                        <div>
+                            <div class="text-brand-gold text-xs font-bold uppercase mb-6" style="letter-spacing:0.12em;">What happens next</div>
+                            <div style="display:flex;flex-direction:column;gap:28px;">
+
+                                <div style="display:flex;align-items:flex-start;gap:12px;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">1</span>
+                                    </div>
+                                    <div style="padding-top:4px;">
+                                        <div class="text-white text-sm font-semibold mb-1">You fill out the form</div>
+                                        <div class="text-brand-textMuted text-xs leading-relaxed">Name, how to reach you, and a quick line about your business. Takes 60 seconds.</div>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex;align-items:flex-start;gap:12px;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">2</span>
+                                    </div>
+                                    <div style="padding-top:4px;">
+                                        <div class="text-white text-sm font-semibold mb-1">James reviews within 12 hours</div>
+                                        <div class="text-brand-textMuted text-xs leading-relaxed">A real person looks at your business and reaches out — not a bot, not a VA.</div>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex;align-items:flex-start;gap:12px;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">3</span>
+                                    </div>
+                                    <div style="padding-top:4px;">
+                                        <div class="text-white text-sm font-semibold mb-1">Quick call — we align on the build</div>
+                                        <div class="text-brand-textMuted text-xs leading-relaxed">15 minutes. You explain your business, James explains exactly what gets built and when.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Bottom block: contact info anchored to bottom -->
+                        <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:28px;">
+                            <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;margin:0;padding:0;">
+                                <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
+                                    <i class="ph ph-envelope text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                    diazfjamesc@gmail.com
+                                </li>
+                                <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
+                                    <i class="ph ph-map-pin text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                    Winnipeg, MB — Local &amp; remote clients
+                                </li>
+                                <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
+                                    <i class="ph ph-instagram-logo text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                    @fjmedia.ca
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT: Form card — form + stat row unified -->
+                    <div style="background:rgba(13,31,60,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
+
+                        <!-- Form body -->
+                        <div style="padding:40px;flex:1;">
+                            <div class="text-white font-display font-bold text-xl mb-1">Start with a free design consult</div>
+                            <p class="text-brand-textMuted text-xs mb-6">No credit card. No commitment. Just answers.</p>
+
+                            <form style="display:flex;flex-direction:column;gap:16px;" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
+                                <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
+                                <input type="text" name="name" placeholder="Your Name" required
+                                    style="border-radius:4px;width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);padding:12px 16px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;"
+                                    class="placeholder-gray-500 focus:border-brand-gold transition-colors">
+                                <input type="text" name="contact" placeholder="Instagram handle or email" required
+                                    style="border-radius:4px;width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);padding:12px 16px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;"
+                                    class="placeholder-gray-500 focus:border-brand-gold transition-colors">
+                                <textarea name="message" placeholder="Tell us about your business (optional)"
+                                    style="height:120px;border-radius:4px;width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);padding:12px 16px;color:#fff;font-size:14px;outline:none;resize:none;box-sizing:border-box;"
+                                    class="placeholder-gray-500 focus:border-brand-gold transition-colors"></textarea>
+                                <button type="submit" id="submitBtn"
+                                    style="height:52px;font-size:16px;font-weight:600;border-radius:6px;width:100%;background:#C9A84C;color:#071520;border:none;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s;"
+                                    onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#C9A84C'">
+                                    Get My Free Design Consult
+                                </button>
+                                <p id="formMsg" style="font-size:0.8rem;color:#c9a84c;display:none;text-align:center;">Sent — James will be in touch within 12 hours.</p>
+                            </form>
+                        </div>
+
+                        <!-- Stat footer — inside card, separated by border -->
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(255,255,255,0.1);">
+                            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 12px;border-right:1px solid rgba(255,255,255,0.1);text-align:center;">
+                                <div class="text-brand-gold font-display font-bold" style="font-size:24px;margin-bottom:4px;">48h</div>
+                                <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Avg delivery</div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 12px;border-right:1px solid rgba(255,255,255,0.1);text-align:center;">
+                                <div class="text-brand-gold font-display font-bold" style="font-size:24px;margin-bottom:4px;">$0</div>
+                                <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">To start</div>
+                            </div>
+                            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 12px;text-align:center;">
+                                <div class="text-brand-gold font-display font-bold" style="font-size:24px;margin-bottom:4px;">100%</div>
+                                <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Hand-coded</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <!-- FOOTER — outside main, full width -->
+    <footer style="width:100%;background:#050c12;border-top:1px solid rgba(255,255,255,0.05);padding:40px 0;display:flex;flex-direction:column;align-items:center;">
+        <div class="text-white font-display font-bold text-lg tracking-tighter mb-2">
+            { FJ } <span class="text-brand-textMuted text-xs font-sans tracking-widest uppercase ml-1">Media</span>
+        </div>
+        <p class="text-xs text-brand-textMuted mb-6">Hand-coded websites for Winnipeg businesses.</p>
+        <div class="flex gap-6 text-xs uppercase tracking-widest text-brand-textMuted mb-6">
+            <a href="work.html" class="hover:text-white transition">Work</a>
+            <a href="#pricing" class="hover:text-white transition">Packages</a>
+            <a href="#contact" class="hover:text-white transition">Contact</a>
+            <a href="https://www.instagram.com/fjmedia.ca" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><i class="ph ph-instagram-logo text-lg"></i> @fjmedia.ca</a>
+        </div>
+        <p class="text-[10px] text-brand-textMuted/50">© 2026 FJMedia. All rights reserved.</p>
+    </footer>
+
+    <!-- Persistent Floating CTA -->
+    <div class="fixed bottom-6 right-6 z-40">
+         <div class="relative group">
+             <a href="#contact" class="flex items-center justify-center w-14 h-14 bg-brand-gold text-brand-bg rounded-full shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:scale-110 transition-transform duration-300">
+                <i class="ph-fill ph-chat-circle-dots text-2xl"></i>
+             </a>
+         </div>
     </div>
-  </section>
 
-  <!-- PROCESS -->
-  <section id="process">
-    <div class="section-inner">
-      <p class="section-label">How It Works</p>
-      <h2 class="section-title">No phases. No milestones. Just results.</h2>
-      <p class="section-sub">Most agencies sell you a process — discovery, strategy, revisions, timelines. We skip to the part where you see a finished website.</p>
-      <div class="divider"></div>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-line"></div>
-          <div class="step-num">01 — Quick Call</div>
-          <div class="step-title">15 minutes. Not a sales pitch.</div>
-          <div class="step-desc">We learn about your business and what you need. No strategy sessions, no questionnaires, no follow-up calls — just a straight conversation.</div>
-        </div>
-        <div class="process-step">
-          <div class="step-line"></div>
-          <div class="step-num">02 — We Design It</div>
-          <div class="step-title">48 hours. Your site is ready.</div>
-          <div class="step-desc">While most agencies are still scheduling their second meeting, you're already looking at a finished, hand-coded website — live, clickable, yours to review.</div>
-        </div>
-        <div class="process-step">
-          <div class="step-line"></div>
-          <div class="step-num">03 — You Decide</div>
-          <div class="step-title">Love it or leave it.</div>
-          <div class="step-desc">We send you the link. Share it with whoever you want. If you're satisfied, we move forward. If not — walk away, no charge.</div>
-        </div>
-        <div class="process-step">
-          <div class="step-line"></div>
-          <div class="step-num">04 — Go Live</div>
-          <div class="step-title">Your site. Your rules.</div>
-          <div class="step-desc">Happy with the design? You're live. Need more — ordering forms, lead capture, SEO, the full backend? We walk you through packages built on top of what we already made together. Everything adds on. Nothing starts over.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="work">
-    <div class="section-inner">
-      <p class="section-label">Our Work</p>
-      <h2 class="section-title">Real sites. Real businesses.</h2>
-      <p class="section-sub">Every project is fully custom and built to convert visitors into customers.</p>
-      <div class="divider"></div>
-      <div class="carousel-outer">
-        <button class="carousel-arrow prev-arrow" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="carousel-viewport">
-        <div class="portfolio-track">
-
-        <div class="portfolio-card">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url-bar">sugarandshaicookies.com</div>
-            </div>
-            <div class="browser-viewport">
-              <iframe src="https://sugarandshaicookies.com" loading="lazy" scrolling="no" tabindex="-1" title="Sugar and Shai Cookies"></iframe>
-            </div>
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-tag">Food &amp; Bakery · Winnipeg, MB</div>
-            <div class="portfolio-name">Sugar and Shai Cookies</div>
-            <div class="portfolio-desc">Pre-order site with live pricing, flavour selectors, Google Sheets tracking, and automated email notifications.</div>
-            <div class="portfolio-pills">
-              <span class="pill">Order Form</span>
-              <span class="pill">Live Pricing</span>
-              <span class="pill">Sheets CRM</span>
-              <span class="pill">Custom Domain</span>
-            </div>
-            <a href="https://sugarandshaicookies.com" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
-          </div>
-        </div>
-
-        <div class="portfolio-card">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url-bar">fjdmedia.github.io/royal-kings-auto-care</div>
-            </div>
-            <div class="browser-viewport">
-              <iframe src="https://fjdmedia.github.io/royal-kings-auto-care" loading="lazy" scrolling="no" tabindex="-1" title="Royal Kings Auto Care"></iframe>
-            </div>
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-tag">Auto Detailing · Winnipeg, MB</div>
-            <div class="portfolio-name">Royal Kings Auto Care</div>
-            <div class="portfolio-desc">Mobile detailing site with service packages, live vehicle class pricing toggle, and a booking form.</div>
-            <div class="portfolio-pills">
-              <span class="pill">Packages</span>
-              <span class="pill">Price Toggle</span>
-              <span class="pill">Booking Form</span>
-              <span class="pill">Mobile Ready</span>
-            </div>
-            <a href="https://fjdmedia.github.io/royal-kings-auto-care" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
-          </div>
-        </div>
-
-        <div class="portfolio-card">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url-bar">fjdmedia.github.io/Diego_n_Andrea</div>
-            </div>
-            <div class="browser-viewport">
-              <iframe src="https://fjdmedia.github.io/Diego_n_Andrea" loading="lazy" scrolling="no" tabindex="-1" title="Diego and Andrea Wedding Social"></iframe>
-            </div>
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-tag">Event · Winnipeg, MB</div>
-            <div class="portfolio-name">Diego &amp; Andrea Wedding Social</div>
-            <div class="portfolio-desc">Scrapbook-style event site with an interactive prize gallery, ticket info, grand prize reveal, and Facebook DM integration for ticket sales.</div>
-            <div class="portfolio-pills">
-              <span class="pill">Event Site</span>
-              <span class="pill">Prize Gallery</span>
-              <span class="pill">Scrapbook Design</span>
-              <span class="pill">Mobile Ready</span>
-            </div>
-            <a href="https://fjdmedia.github.io/Diego_n_Andrea" target="_blank" class="portfolio-link">Visit Site &#8594;</a>
-          </div>
-        </div>
-
-        <div class="portfolio-card">
-          <div class="browser-mockup">
-            <div class="browser-bar">
-              <div class="browser-dots"><span></span><span></span><span></span></div>
-              <div class="browser-url-bar">fjdmedia.github.io/LindaQuach</div>
-            </div>
-            <div class="browser-viewport" style="position:relative; height:170px; overflow:hidden; background:#1a1008;">
-              <img src="https://fjdmedia.github.io/LindaQuach/images/Brian and Mae/BandM_2.jpg"
-                   style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; filter:blur(3px) brightness(0.45); transform:scale(1.08);" alt="Linda Quach photography portfolio preview"/>
-              <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-                <div style="font-size:0.58rem; letter-spacing:0.26em; text-transform:uppercase; color:rgba(201,168,76,0.55);">Preview Protected</div>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-body">
-            <div class="portfolio-tag">Photography · Winnipeg, MB</div>
-            <div class="portfolio-name">?&nbsp;&nbsp;?&nbsp;&nbsp;?</div>
-            <div class="portfolio-desc">Warm editorial portfolio for a Winnipeg wedding and couples photographer. Filterable session gallery, polaroid hero, film strip aesthetic.</div>
-            <div class="portfolio-pills">
-              <span class="pill">Photo Gallery</span>
-              <span class="pill">Session Filter</span>
-              <span class="pill">Editorial Design</span>
-              <span class="pill">Mobile Ready</span>
-            </div>
-            <a href="https://fjdmedia.github.io/LindaQuach" target="_blank" class="portfolio-link">Preview &#8594;</a>
-          </div>
-        </div>
-
-        </div>
-        </div>
-        <button class="carousel-arrow next-arrow" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-      <div class="client-strip">
-        Sugar and Shai Cookies &middot; Royal Kings Auto Care &middot; Diego &amp; Andrea &middot; Linda Quach Photography
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section id="why">
-    <div class="section-inner">
-      <p class="section-label">Why FJMedia</p>
-      <h2 class="section-title">More than a web designer.</h2>
-      <p class="section-sub">We build complete digital systems — not just pretty pages.</p>
-      <div class="divider"></div>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div class="why-title">48 hours. Not 4-8 weeks.</div>
-          <div class="why-desc">It typically takes 4-8 weeks to get a website. We send you a finished design in 48 hours.</div>
-        </div>
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="why-title">$0 until you're satisfied.</div>
-          <div class="why-desc">We build it first. You see it first. You decide if it's worth paying for.</div>
-        </div>
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          </div>
-          <div class="why-title">The details are what we're known for.</div>
-          <div class="why-desc">Every pixel, every link, every word — reviewed before you ever see it. We catch the things most agencies ship and forget.</div>
-        </div>
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <div class="why-title">You text the person building your site</div>
-          <div class="why-desc">You work directly with us — no account managers or support tickets. Fast replies, always.</div>
-        </div>
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <div class="why-title">Designed to bring you customers, not just compliments</div>
-          <div class="why-desc">Every site is designed with one goal: turning visitors into paying customers.</div>
-        </div>
-        <div class="why-card">
-          <div class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="why-title">No Wix. No Shopify. No shortcuts.</div>
-          <div class="why-desc">Every site is hand-coded from scratch — no page builders, no templates, no monthly platform fees. Hosted free. You only pay for your domain.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROOF CALLOUT -->
-  <div style="padding:2rem 6%;background:var(--bg);border-bottom:1px solid var(--border);">
-    <a href="/proof.html" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;max-width:1100px;margin:0 auto;padding:1.2rem 1.8rem;border:1px solid rgba(201,168,76,0.35);border-radius:10px;background:rgba(201,168,76,0.04);text-decoration:none;transition:border-color 0.2s,background 0.2s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)';this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.35)';this.style.background='rgba(201,168,76,0.04)'">
-      <div>
-        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#c9a84c;font-family:monospace;margin-bottom:0.3rem;">// Attention to Detail</div>
-        <div style="font-size:0.95rem;font-weight:700;color:#EDEAE5;font-family:'Segoe UI',sans-serif;">The details are what we're known for.</div>
-        <div style="font-size:0.82rem;color:rgba(237,234,229,0.5);margin-top:0.2rem;font-family:'Segoe UI',sans-serif;">See every bug we caught before our clients ever had to.</div>
-      </div>
-      <div style="font-size:0.85rem;font-weight:700;color:#c9a84c;white-space:nowrap;font-family:'Segoe UI',sans-serif;">(Bug) Proof Gallery →</div>
-    </a>
-  </div>
-
-  <!-- FREE AUDIT LEAD MAGNET -->
-  <section id="free-audit">
-    <div class="section-inner">
-      <div class="audit-lm-wrap">
-        <div class="audit-lm-badge">Free — No Strings Attached</div>
-        <h2 class="audit-lm-headline">Find out exactly what's costing you customers online.<br><em>Before you spend a cent.</em></h2>
-        <p class="audit-lm-sub">We run a full audit of your online presence — website speed, mobile experience, local SEO, and trust signals — then send you a straight-talking report. No pitch. No obligation. Just the truth about where you're losing customers to competitors.</p>
-        <div class="audit-lm-points">
-          <div class="audit-lm-point"><span class="audit-check">✓</span> Performance &amp; load speed</div>
-          <div class="audit-lm-point"><span class="audit-check">✓</span> Mobile experience (60% of searches)</div>
-          <div class="audit-lm-point"><span class="audit-check">✓</span> Local SEO &amp; Google visibility</div>
-          <div class="audit-lm-point"><span class="audit-check">✓</span> Trust &amp; credibility signals</div>
-          <div class="audit-lm-point"><span class="audit-check">✓</span> What your top competitor is doing better</div>
-        </div>
-        <a href="#contact" class="btn-gold audit-lm-cta reveal" onclick="prefillAudit()">Get My Free Audit →</a>
-        <p class="audit-lm-note">Takes 2 minutes to request. Report delivered within 24 hours.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING / CALCULATOR -->
-  <section id="pricing">
-    <div class="section-inner">
-      <p class="section-label">Packages</p>
-      <h2 class="section-title">Your design is ready. <em>Now choose what happens next.</em></h2>
-      <p class="section-sub">Everything agencies charge thousands for — delivered lean, fast, and built to grow with your business.</p>
-      <div class="divider"></div>
-
-      <div class="calc-scarcity">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>No retainers required. No monthly platform fees. You own everything we build.</span>
-      </div>
-
-      <!-- Combo tabs -->
-      <div class="combo-tabs" id="comboTabs">
-        <button class="combo-tab" data-combo="goLive" onclick="selectCombo('goLive')">
-          <div class="combo-tab-name">Go Live</div>
-          <div class="combo-tab-sub">Design only</div>
-        </button>
-        <button class="combo-tab" data-combo="getFound" onclick="selectCombo('getFound')">
-          <div class="combo-tab-name">Get Found</div>
-          <div class="combo-tab-sub">+ SEO</div>
-        </button>
-        <button class="combo-tab" data-combo="getCustomers" onclick="selectCombo('getCustomers')">
-          <div class="combo-tab-name">Get Customers</div>
-          <div class="combo-tab-sub">+ Lead capture</div>
-          <span class="combo-pop">POPULAR</span>
-        </button>
-        <button class="combo-tab" data-combo="ownTheMarket" onclick="selectCombo('ownTheMarket')">
-          <div class="combo-tab-name">Own the Market</div>
-          <div class="combo-tab-sub">Full system</div>
-        </button>
-      </div>
-
-      <!-- Service grid -->
-      <div class="svc-grid" id="svcGrid">
-        <div class="svc-card locked selected" data-svc="website" onclick="toggleSvc('website')">
-          <div class="svc-check"></div>
-          <div class="svc-icon">🖥️</div>
-          <div class="svc-name">Custom Website</div>
-          <div class="svc-desc">Hand-coded, mobile-ready, live preview link, domain connection.</div>
-        </div>
-        <div class="svc-card" data-svc="seo" onclick="toggleSvc('seo')">
-          <div class="svc-check"></div>
-          <div class="svc-icon">📈</div>
-          <div class="svc-name">SEO &amp; Google Setup</div>
-          <div class="svc-desc">On-page SEO, Google Business Profile optimization, local search visibility.</div>
-        </div>
-        <div class="svc-card" data-svc="ordering" onclick="toggleSvc('ordering')">
-          <div class="svc-check"></div>
-          <div class="svc-icon">📋</div>
-          <div class="svc-name">Ordering / Booking</div>
-          <div class="svc-desc">Forms with live pricing, Google Sheets CRM, automated email notifications.</div>
-        </div>
-        <div class="svc-card" data-svc="analytics" onclick="toggleSvc('analytics')">
-          <div class="svc-check"></div>
-          <div class="svc-icon">📊</div>
-          <div class="svc-name">Analytics &amp; Maintenance</div>
-          <div class="svc-desc">Analytics setup, monthly reports, seasonal updates, managed maintenance, priority support.</div>
-        </div>
-        <div class="svc-card placeholder">
-          <div class="svc-icon">💬</div>
-          <div class="svc-name">Need something else?</div>
-          <div class="svc-desc">Tell us when you reach out — we'll figure it out.</div>
-        </div>
-      </div>
-
-      <!-- Status bar -->
-      <div class="status-bar" id="statusBar">
-        <span class="status-empty">Select services above to see your package match.</span>
-      </div>
-
-      <!-- CTA — scrolls to contact & passes selected services -->
-      <div class="pricing-cta-wrap">
-        <a href="#contact" class="btn-primary" onclick="pricingToContact()">Get My Free Design →</a>
-        <p class="pricing-cta-sub">What agencies charge $3K–$5K for, we deliver at a fraction of the cost. See it before you pay.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Dependency toast -->
-  <div class="dep-toast" id="depToast"></div>
-
-  <!-- GROWTH / RETAINER -->
-  <section id="growth">
-    <div class="section-inner">
-      <p class="section-label">After Launch</p>
-      <h2 class="section-title">Your site is live. <em>Now let's make it work.</em></h2>
-      <p class="section-sub">Most agencies disappear after launch. We stick around — updating your content, tracking what's working, and making sure your site keeps bringing in customers.</p>
-      <div class="divider"></div>
-      <div class="growth-grid">
-        <div class="growth-card reveal">
-          <div class="growth-card-name">Keep It Running</div>
-          <div class="growth-card-sub">For businesses that just need it maintained.</div>
-          <ul class="growth-list">
-            <li>Hosting &amp; uptime support</li>
-            <li>Minor edits (up to 2/month)</li>
-            <li>SSL &amp; domain renewals</li>
-            <li>Security &amp; performance checks</li>
-          </ul>
-        </div>
-        <div class="growth-card featured reveal">
-          <span class="growth-pop">Most Popular</span>
-          <div class="growth-card-name">Keep It Growing</div>
-          <div class="growth-card-sub">For businesses that want more customers, not just a website.</div>
-          <ul class="growth-list">
-            <li>Everything in Keep It Running</li>
-            <li>Monthly analytics report</li>
-            <li>SEO tweaks &amp; content updates</li>
-            <li>Google Business Profile management</li>
-            <li>Seasonal content refreshes</li>
-          </ul>
-        </div>
-        <div class="growth-card reveal">
-          <div class="growth-card-name">Own Your Market</div>
-          <div class="growth-card-sub">For businesses ready to dominate their niche locally.</div>
-          <ul class="growth-list">
-            <li>Everything in Keep It Growing</li>
-            <li>Monthly 1-on-1 sit-down</li>
-            <li>Social media content (4 posts/mo)</li>
-            <li>Competitor monitoring</li>
-            <li>Ad strategy &amp; review</li>
-            <li>Priority support — same-day replies</li>
-          </ul>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:2rem;">
-        <a href="#contact" class="btn-primary" style="background:var(--accent);color:var(--bg);border-color:var(--accent);">Book a Call — Ask About Growth Plans</a>
-        <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.8rem;">No commitment. We'll walk you through what makes sense for your business.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MYTH VS REALITY -->
-  <section id="myths">
-    <div class="section-inner">
-      <p class="section-label">Myth vs. Reality</p>
-      <h2 class="section-title">What the industry tells you. What we actually do.</h2>
-      <div class="divider"></div>
-      <div class="myth-stack">
-
-        <div class="myth-row reveal">
-          <div class="myth-side">
-            <div class="myth-tag">Myth</div>
-            <div class="myth-text">"A good website takes 4–8 weeks to build."</div>
-          </div>
-          <div class="reality-side">
-            <div class="reality-tag">Reality</div>
-            <div class="reality-text">Yours is done in <strong>48 hours</strong>. Hand-coded. Live link in your inbox before most agencies finish their first meeting.</div>
-          </div>
-        </div>
-
-        <div class="myth-row reveal">
-          <div class="myth-side">
-            <div class="myth-tag">Myth</div>
-            <div class="myth-text">"You have to pay thousands before you see anything."</div>
-          </div>
-          <div class="reality-side">
-            <div class="reality-tag">Reality</div>
-            <div class="reality-text">We build first. You review a finished site. <strong>Pay only if you're satisfied.</strong> Don't like it? Walk away — no invoice, no strings.</div>
-          </div>
-        </div>
-
-        <div class="myth-row reveal">
-          <div class="myth-side">
-            <div class="myth-tag">Myth</div>
-            <div class="myth-text">"Affordable means templates and page builders."</div>
-          </div>
-          <div class="reality-side">
-            <div class="reality-tag">Reality</div>
-            <div class="reality-text">Every line is <strong>hand-written code</strong> — HTML, CSS, JavaScript. No WordPress. No Wix. No Squarespace. We use AI the way a carpenter uses power tools — the result is still built from scratch.</div>
-          </div>
-        </div>
-
-        <div class="myth-row reveal">
-          <div class="myth-side">
-            <div class="myth-tag">Myth</div>
-            <div class="myth-text">"You need discovery calls, strategy phases, and proposals before anything gets built."</div>
-          </div>
-          <div class="reality-side">
-            <div class="reality-tag">Reality</div>
-            <div class="reality-text"><strong>15-minute call.</strong> We learn your business, then we build. No phases, no decks, no 40-page proposals. You talk to a person, not a process.</div>
-          </div>
-        </div>
-
-        <div class="myth-row reveal">
-          <div class="myth-side">
-            <div class="myth-tag">Myth</div>
-            <div class="myth-text">"You need a team of designers, developers, and project managers."</div>
-          </div>
-          <div class="reality-side">
-            <div class="reality-tag">Reality</div>
-            <div class="reality-text">One person builds it, maintains it, and picks up when you text. <strong>That's James.</strong> No handoffs, no ticket systems, no waiting for "the developer" to get back to you.</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-inner">
-      <div class="contact-wrap">
-        <div class="contact-info">
-          <p class="section-label">Book a Call</p>
-          <h2 class="section-title">Let's see if we're a fit.</h2>
-          <div class="divider"></div>
-          <p>Drop your name and how to reach you — James gets back within 12 hours.</p>
-          <div class="contact-detail">
-            <span class="d-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </span>
-            <span>diazfjamesc@gmail.com</span>
-          </div>
-          <div class="contact-detail">
-            <span class="d-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </span>
-            <span>Winnipeg, MB &#8212; Serving local &amp; remote clients</span>
-          </div>
-          <div class="contact-detail">
-            <span class="d-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </span>
-            <span>James gets back within 12 hours</span>
-          </div>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
-          <input type="hidden" name="subject" value="New Inquiry — FJMedia" />
-          <input type="hidden" name="services" id="contactServices" value="" />
-          <input type="hidden" name="combo" id="contactCombo" value="" />
-          <input type="text" name="name" placeholder="Your Name" required aria-label="Your name" />
-          <input type="text" name="contact" placeholder="Instagram handle or email" required aria-label="Instagram handle or email" />
-          <textarea name="message" placeholder="Tell us about your business (optional)" aria-label="Tell us about your business"></textarea>
-          <button type="submit" class="btn-primary" id="submitBtn">Get My Free Design</button>
-          <p id="formMsg" style="font-size:0.85rem;color:var(--accent);display:none;text-align:center;">Message sent &#8212; James will get back within 12 hours.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-logo">
-        <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
-        <span class="logo-media-word">Media</span>
-      </div>
-      <p class="footer-tagline">Hand-coded websites for Winnipeg businesses.</p>
-    </div>
-    <div class="footer-mid">
-      <div class="footer-links">
-        <a href="#work">Work</a>
-        <a href="#pricing">Packages</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <a href="https://www.instagram.com/fjmedia.ca" target="_blank" rel="noopener" class="footer-social" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-        @fjmedia.ca
-      </a>
-    </div>
-    <div class="footer-copy">&#169; 2026 FJMedia. All rights reserved.</div>
-  </footer>
-
-  <script>
-    const form = document.getElementById('contactForm');
-    const msg  = document.getElementById('formMsg');
-    const btn  = document.getElementById('submitBtn');
-
-    // Scroll progress bar
-    const scrollBar = document.getElementById('scrollProgress');
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      scrollBar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
-    }, { passive: true });
-
-    // GSAP ScrollTrigger animations
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Section header elements — fade up as sections enter
-    gsap.utils.toArray('.section-label, .section-title, .section-sub, .divider, .offer-headline, .offer-sub').forEach(el => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-        opacity: 0, y: 22, duration: 0.65, ease: 'power2.out'
-      });
-    });
-
-    // Process steps — stagger in
-    gsap.from('.process-step', {
-      scrollTrigger: { trigger: '.process-grid', start: 'top 78%', once: true },
-      opacity: 0, y: 30, duration: 0.55, stagger: 0.1, ease: 'power2.out'
-    });
-
-    // Client name strip — fade in
-    gsap.from('.client-strip', {
-      scrollTrigger: { trigger: '.client-strip', start: 'top 90%', once: true },
-      opacity: 0, y: 15, duration: 0.6, ease: 'power2.out'
-    });
-
-    // Why cards — stagger in
-    gsap.from('.why-card', {
-      scrollTrigger: { trigger: '.why-grid', start: 'top 78%', once: true },
-      opacity: 0, scale: 0.96, duration: 0.5, stagger: 0.08, ease: 'power2.out'
-    });
-
-    // Growth cards — stagger in
-    gsap.from('.growth-card', {
-      scrollTrigger: { trigger: '.growth-grid', start: 'top 78%', once: true },
-      opacity: 0, y: 20, duration: 0.5, stagger: 0.12, ease: 'power2.out'
-    });
-
-    // FAQ cards — stagger in
-    gsap.from('.myth-row', {
-      scrollTrigger: { trigger: '.myth-stack', start: 'top 78%', once: true },
-      opacity: 0, y: 20, duration: 0.5, stagger: 0.1, ease: 'power2.out'
-    });
-
-    // Why cards — hover: icon bounce
-    document.querySelectorAll('.why-card').forEach(card => {
-      const iconWrap = card.querySelector('.icon-wrap');
-      card.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(iconWrap);
-        gsap.to(iconWrap, { scale: 1.18, duration: 0.35, ease: 'back.out(2)' });
-      });
-      card.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(iconWrap);
-        gsap.to(iconWrap, { scale: 1, duration: 0.18, ease: 'power2.in' });
-      });
-    });
-
-    // Offer pillars — bounce in with spring
-    gsap.from('.offer-pillar', {
-      scrollTrigger: { trigger: '.offer-pillars', start: 'top 82%', once: true },
-      opacity: 0, y: 25, scale: 0.95, duration: 0.55, stagger: 0.12,
-      ease: 'back.out(1.5)'
-    });
-
-    // ── CALCULATOR ────────────────────────────────────────────────
-    const comboMap = {
-      goLive:       ['website'],
-      getFound:     ['website', 'seo'],
-      getCustomers: ['website', 'seo', 'ordering'],
-      ownTheMarket: ['website', 'seo', 'ordering', 'analytics']
-    };
-    const comboNames = {
-      goLive: 'Go Live', getFound: 'Get Found',
-      getCustomers: 'Get Customers', ownTheMarket: 'Own the Market'
-    };
-    const upsellMessages = {
-      goLive:       'Add SEO to get found on Google — upgrade to Get Found.',
-      getFound:     'Add ordering forms &amp; CRM to start capturing leads — upgrade to Get Customers.',
-      getCustomers: 'Add analytics &amp; managed maintenance — upgrade to Own the Market.',
-      ownTheMarket: null
-    };
-    const comboSuggestions = {
-      goLive:       'Websites for event pages, linktrees, and personal brands.',
-      getFound:     'Websites for barbers, salons, restaurants, and local shops.',
-      getCustomers: 'Websites for caterers, contractors, and businesses taking bookings.',
-      ownTheMarket: 'For established businesses ready to own their market.'
-    };
-    const comboBenefits = {
-      goLive:       'A custom hand-coded site — live and mobile-ready.',
-      getFound:     'Show up on Google and get found by local customers.',
-      getCustomers: 'Capture leads, take orders, and automate follow-ups.',
-      ownTheMarket: 'Full visibility, lead capture, and data-driven growth.'
-    };
-    function getCustomSuggestion(svcs) {
-      const has = s => svcs.includes(s);
-      if (has('analytics') && !has('seo') && !has('ordering'))
-        return 'Websites for photographers, artists, and portfolio sites.';
-      if (has('ordering') && !has('analytics') && !has('seo'))
-        return 'Websites for food trucks, event planners, and pop-ups.';
-      return 'A flexible setup tailored to your business.';
-    }
-    function getCustomBenefit(svcs) {
-      const has = s => svcs.includes(s);
-      if (has('analytics') && !has('seo') && !has('ordering'))
-        return 'Track your audience and see what\'s working.';
-      if (has('ordering') && !has('analytics') && !has('seo'))
-        return 'Take orders and bookings right from your site.';
-      return 'Pick what you need — nothing you don\'t.';
-    }
-    const svcDisplayNames = {
-      website: 'Custom Website', ordering: 'Ordering / Booking',
-      seo: 'SEO &amp; Google Setup', analytics: 'Analytics &amp; Maintenance'
-    };
-
-    function getSelectedSvcs() {
-      return Array.from(document.querySelectorAll('.svc-card.selected:not(.placeholder)'))
-        .map(c => c.dataset.svc);
-    }
-
-    function arraysEqual(a, b) {
-      return a.length === b.length && [...a].sort().every((v, i) => v === [...b].sort()[i]);
-    }
-
-    function findExactCombo(svcs) {
-      return Object.keys(comboMap).find(k => arraysEqual(comboMap[k], svcs)) || null;
-    }
-
-    function findClosestCombo(svcs) {
-      // Only nudge when user is exactly 1 service away from completing a package
-      const order = ['goLive','getFound','getCustomers','ownTheMarket'];
-      for (const k of order) {
-        const combo = comboMap[k];
-        const isSubset = svcs.every(s => combo.includes(s));
-        const missing = combo.filter(s => !svcs.includes(s));
-        if (isSubset && missing.length === 1) return k;
-      }
-      return null; // no close match — treat as custom package
-    }
-
-    function updateCalcUI() {
-      const svcs = getSelectedSvcs();
-      const statusBar = document.getElementById('statusBar');
-
-      const exact  = findExactCombo(svcs);
-      const closest = exact || findClosestCombo(svcs);
-
-      // Missing services for nudge (only when closest exists)
-      const missingSvcs = closest ? comboMap[closest].filter(s => !svcs.includes(s)) : [];
-
-      // Highlight matching combo tab (none if custom)
-      document.querySelectorAll('.combo-tab').forEach(t => {
-        t.classList.toggle('active', !!closest && t.dataset.combo === closest);
-      });
-
-      // Add/remove nudge highlight on missing service cards
-      document.querySelectorAll('.svc-card:not(.placeholder)').forEach(card => {
-        card.classList.toggle('nudge', !exact && closest && missingSvcs.includes(card.dataset.svc));
-      });
-
-      let html = '';
-      if (svcs.length === 0) {
-        html = '<span class="status-bar-text">Select services to build your package.</span>';
-      } else if (exact) {
-        html = `<span class="status-bar-text"><strong>${comboNames[exact]}</strong><span class="status-suggestion">${comboSuggestions[exact]}</span><span class="status-benefit">${comboBenefits[exact]}</span>`;
-        if (upsellMessages[exact]) {
-          html += `<span class="status-nudge">${upsellMessages[exact]}</span>`;
-        }
-        html += '</span>';
-      } else if (closest) {
-        const missingNames = missingSvcs.map(s => svcDisplayNames[s]).join(' + ');
-        html = `<span class="status-bar-text">1 service away from <strong>${comboNames[closest]}</strong><span class="status-suggestion">${comboSuggestions[closest]}</span><span class="status-benefit">${comboBenefits[closest]}</span><span class="status-nudge">Add ${missingNames} to get the full package at a bundled rate.</span></span>`;
-      } else {
-        const svcList = svcs.map(s => svcDisplayNames[s]).join(', ');
-        html = `<span class="status-bar-text"><strong>Custom Package:</strong> ${svcList}<span class="status-suggestion">${getCustomSuggestion(svcs)}</span><span class="status-benefit">${getCustomBenefit(svcs)}</span></span>`;
-      }
-      statusBar.innerHTML = html;
-    }
-
-    function selectCombo(comboKey) {
-      const svcs = comboMap[comboKey];
-      document.querySelectorAll('.svc-card:not(.placeholder)').forEach(card => {
-        const s = card.dataset.svc;
-        if (svcs.includes(s)) {
-          card.classList.add('selected');
-        } else {
-          card.classList.remove('selected');
-        }
-      });
-      updateCalcUI();
-    }
-
-    let toastTimer = null;
-    function showDepToast(msg) {
-      const toast = document.getElementById('depToast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    function toggleSvc(svc) {
-      const card = document.querySelector(`.svc-card[data-svc="${svc}"]`);
-      if (!card || card.classList.contains('locked') || card.classList.contains('placeholder')) return;
-
-      if (card.classList.contains('selected')) {
-        // Deselecting: check if others depend on this service
-        // All services require website, but website can't be deselected (locked)
-        card.classList.remove('selected');
-      } else {
-        // Selecting: website is auto-selected (locked), just add
-        card.classList.add('selected');
-      }
-      updateCalcUI();
-    }
-
-    function pricingToContact() {
-      const svcs  = getSelectedSvcs();
-      const combo = findExactCombo(svcs) || findClosestCombo(svcs);
-      document.getElementById('contactServices').value = svcs.map(s => svcDisplayNames[s]).join(', ');
-      document.getElementById('contactCombo').value = comboNames[combo] || '';
-      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => { const n = document.querySelector('.contact-form input[name="name"]'); if (n) n.focus(); }, 600);
-    }
-
-    // Calculator GSAP — y-only (no opacity) so cards are never invisible
-    ScrollTrigger.create({
-      trigger: '#pricing', start: 'top 75%', once: true,
-      onEnter: () => {
-        gsap.from('.calc-scarcity', { y: 15, duration: 0.5, ease: 'power2.out' });
-        gsap.from('.combo-tabs',    { y: 20, duration: 0.5, delay: 0.1, ease: 'power2.out' });
-        gsap.from('.svc-card', { y: 12, duration: 0.45, stagger: 0.06, delay: 0.15, ease: 'power2.out' });
-        gsap.from('.status-bar',    { opacity: 0, y: 10, duration: 0.4, delay: 0.55, ease: 'power2.out' });
-      }
-    });
-    updateCalcUI(); // set initial state (Get Online tab + status bar) on page load
-    // ── END CALCULATOR ──────────────────────────────────────────────
-
-    // Contact — slide in from both sides
-    gsap.from('.contact-info', {
-      scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%', once: true },
-      opacity: 0, x: -40, duration: 0.7, ease: 'power2.out'
-    });
-    gsap.from('.contact-form', {
-      scrollTrigger: { trigger: '.contact-wrap', start: 'top 80%', once: true },
-      opacity: 0, x: 40, duration: 0.7, ease: 'power2.out'
-    });
-
-    function prefillAudit() {
-      const msg = document.querySelector('[name="message"]');
-      if (msg && !msg.value) msg.value = "I'd like a free website audit — here's my site: ";
-      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => { const n = document.querySelector('.contact-form input[name="name"]'); if (n) n.focus(); }, 600);
-    }
-
-    // Portfolio carousel — infinite loop (prepend + append clones)
-    (function() {
-      const viewport = document.querySelector('.carousel-viewport');
-      const track    = document.querySelector('.portfolio-track');
-      if (!track) return;
-
-      const GAP = 20;
-      const origCards = Array.from(track.querySelectorAll('.portfolio-card'));
-      const n = origCards.length;
-
-      // Prepend clones in reverse order → positions 0..n-1 look like [...C, D] before real A
-      [...origCards].reverse().forEach(c => track.prepend(c.cloneNode(true)));
-      // Append clones → seamless rightward wrap
-      origCards.forEach(c => track.appendChild(c.cloneNode(true)));
-
-      // Real cards now start at index n
-      let idx  = n;
-      let busy = false;
-
-      function visibleCount() {
-        return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
-      }
-      function peekPx() { return window.innerWidth < 640 ? 32 : 0; }
-      function cardWidth() {
-        const vc = visibleCount();
-        const pk = peekPx();
-        return (viewport.offsetWidth - GAP * (vc - 1) - pk * 2) / vc;
-      }
-      function setCardWidths() {
-        const cw = cardWidth();
-        track.querySelectorAll('.portfolio-card').forEach(c => { c.style.width = cw + 'px'; });
-      }
-      function moveTo(i, animate) {
-        track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
-        const offset = i * (cardWidth() + GAP) - peekPx();
-        track.style.transform  = 'translateX(-' + offset + 'px)';
-        idx = i;
-      }
-      function afterMove() {
-        // Silently jump back into the real-card zone after crossing a boundary
-        if      (idx >= n + n) moveTo(idx - n, false);
-        else if (idx <  n)     moveTo(idx + n, false);
-        busy = false;
-      }
-      function next() {
-        if (busy) return;
-        busy = true;
-        moveTo(idx + 1, true);
-        setTimeout(afterMove, 460);
-      }
-      function prev() {
-        if (busy) return;
-        busy = true;
-        moveTo(idx - 1, true);
-        setTimeout(afterMove, 460);
-      }
-
-      document.querySelector('.next-arrow').addEventListener('click', next);
-      document.querySelector('.prev-arrow').addEventListener('click', prev);
-
-      // ── Drag / swipe ─────────────────────────────────────────────
-      let dragStartX = 0;
-      let dragging   = false;
-      let dragOffset = 0;
-      const THRESHOLD = 50;
-
-      function dragStart(x) {
-        if (busy) return;
-        dragStartX = x;
-        dragging   = true;
-        dragOffset = 0;
-        track.style.transition = 'none';
-      }
-      function dragMove(x) {
-        if (!dragging) return;
-        dragOffset = x - dragStartX;
-        const base = -(idx * (cardWidth() + GAP) - peekPx());
-        track.style.transform = 'translateX(' + (base + dragOffset) + 'px)';
-      }
-      function dragEnd() {
-        if (!dragging) return;
-        dragging = false;
-        if      (dragOffset < -THRESHOLD) next();
-        else if (dragOffset >  THRESHOLD) prev();
-        else moveTo(idx, true);
-      }
-
-      // Mouse
-      viewport.addEventListener('mousedown', e => { dragStart(e.clientX); });
-      window .addEventListener('mousemove',  e => { dragMove(e.clientX); });
-      window .addEventListener('mouseup',    ()  => { dragEnd(); });
-
-      // Touch
-      viewport.addEventListener('touchstart', e => { dragStart(e.touches[0].clientX); }, { passive: true });
-      viewport.addEventListener('touchmove',  e => { dragMove(e.touches[0].clientX); },  { passive: true });
-      viewport.addEventListener('touchend',   ()  => { dragEnd(); });
-
-      // Prevent card links firing on drag
-      viewport.addEventListener('click', e => { if (Math.abs(dragOffset) > 5) e.preventDefault(); }, true);
-
-      window.addEventListener('resize', () => { setCardWidths(); moveTo(idx, false); });
-      setCardWidths();
-      moveTo(idx, false);
-    })();
-
-    function toggleNav() {
-      const overlay = document.getElementById('navOverlay');
-      overlay.classList.toggle('open');
-      document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
-    }
-
-
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxbByZrMIP7Mr3fE5jtCw8FlEw7Tiari-DcqH19U79dP24LffAk3cXEGLOFc47UFQsZ/exec';
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      btn.textContent = 'Sending\u2026';
-      btn.disabled = true;
-
-      const formData = new FormData(form);
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      })
-      .then(r => r.json())
-      .then(data => {
-        if (data.success) {
-          // Log to Google Sheets in parallel — don't block on it
-          const params = new URLSearchParams({
-            name:     formData.get('name')     || '',
-            contact:  formData.get('contact')  || '',
-            message:  formData.get('message')  || '',
-            services: formData.get('services') || '',
-            combo:    formData.get('combo')    || ''
+    <script>
+      const form = document.getElementById('contactForm');
+      const msg  = document.getElementById('formMsg');
+      const btn  = document.getElementById('submitBtn');
+      if (form) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          btn.textContent = 'Sending…';
+          btn.disabled = true;
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
           });
-          fetch(GAS_URL, { method: 'POST', body: params, mode: 'no-cors' });
-
-          form.reset();
-          document.getElementById('contactServices').value = '';
-          document.getElementById('contactCombo').value = '';
-          msg.style.display = 'block';
-          btn.textContent = 'Sent!';
-        } else { throw new Error(); }
-      })
-      .catch(() => {
-        btn.textContent = 'Get My Free Design';
-        btn.disabled = false;
-        alert('Something went wrong. Please email us directly.');
-      });
-    });
-  </script>
-
-
-  <script src="/widget/fjchat.js?v=8"
-    data-endpoint="https://script.google.com/macros/s/AKfycbzNo2GGNQ7H73iU7kuS1UldbQuJEnslCp2YmAFMCxf0g35qfj8x36v7JxGiBZ6fUcvu/exec"
-    data-business="FJMedia"
-    data-initials="FJ"
-    data-accent="#c9a84c"
-    data-greeting="Hey! I'm FJ, your guide to working with FJMedia. What kind of business do you run?">
-  </script>
-  <div class="mobile-cta-bar">
-    <a href="#contact">Get My Free Design</a>
-  </div>
+          if (res.ok) {
+            msg.style.display = 'block';
+            form.reset();
+          } else {
+            btn.textContent = 'Error — try again';
+          }
+          btn.disabled = false;
+          btn.textContent = 'Get My Free Design';
+        });
+      }
+    </script>
 </body>
 </html>

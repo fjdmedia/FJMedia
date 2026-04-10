@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Work & Results | FJMedia — Winnipeg Web Design</title>
+    <meta name="description" content="Real sites, real results. See the work FJMedia has delivered for Winnipeg small businesses — before/after context, live URLs, and client feedback." />
+    <link rel="canonical" href="https://fjmedia.ca/work" />
+
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HH2JF4NCCF');
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#071520',
+                            card: '#0D1F3C',
+                            gold: '#C9A84C',
+                            goldHover: '#e0c26c',
+                            textBase: '#EDEAE5',
+                            textMuted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #071520;
+            color: #EDEAE5;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #071520; }
+        ::-webkit-scrollbar-thumb { background: #0D1F3C; border-radius: 4px; }
+
+        .glass-panel {
+            background: rgba(13, 31, 60, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .client-card {
+            background: #0D1F3C;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(201,168,76,0.35);
+            color: #C9A84C;
+        }
+
+        .stat-chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 24px;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+        .stat-chip:last-child { border-right: none; }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .before-col {
+            background: #071520;
+            padding: 20px;
+        }
+        .after-col {
+            background: rgba(201,168,76,0.06);
+            padding: 20px;
+        }
+
+        .quote-block {
+            border-left: 2px solid #C9A84C;
+            padding: 16px 20px;
+            background: rgba(201,168,76,0.04);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .placeholder-card {
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 32px;
+            text-align: center;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav style="position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(7,21,32,0.92);border-bottom:1px solid rgba(255,255,255,0.05);padding:16px 48px;display:flex;justify-content:space-between;align-items:center;">
+        <a href="index.html" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:#EDEAE5;text-decoration:none;letter-spacing:-0.02em;">
+            { FJ } <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:300;color:#94a3b8;letter-spacing:0.2em;text-transform:uppercase;margin-left:4px;">Media</span>
+        </a>
+        <div style="display:flex;align-items:center;gap:32px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+            <a href="index.html#work" style="color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">Work</a>
+            <a href="index.html#pricing" style="color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">Packages</a>
+            <a href="index.html#contact" style="color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">Contact</a>
+            <a href="index.html#contact" style="background:#C9A84C;color:#071520;font-weight:700;font-size:13px;padding:8px 20px;border-radius:6px;text-decoration:none;" onmouseover="this.style.background='#e0c26c'" onmouseout="this.style.background='#C9A84C'">Get My Free Site</a>
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main style="max-width:1100px;margin:0 auto;padding:140px 40px 80px;">
+
+        <!-- HERO -->
+        <div style="margin-bottom:64px;">
+            <div class="tag" style="margin-bottom:20px;">Client Work</div>
+            <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:3.5rem;line-height:1.1;color:#EDEAE5;margin-bottom:20px;">
+                Real sites.<br>Real results.
+            </h1>
+            <p style="font-family:'DM Sans',sans-serif;font-size:18px;font-weight:300;color:#94a3b8;max-width:480px;line-height:1.6;">
+                Every site here was hand-coded, delivered fast, and built to solve an actual business problem — not to look good in a portfolio deck.
+            </p>
+        </div>
+
+        <!-- STATS BAR -->
+        <div style="display:flex;background:#0D1F3C;border:1px solid rgba(255,255,255,0.07);border-radius:12px;margin-bottom:72px;overflow:hidden;">
+            <div class="stat-chip" style="flex:1;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">2+</div>
+                <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Sites Live</div>
+            </div>
+            <div class="stat-chip" style="flex:1;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">48h</div>
+                <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Avg Delivery</div>
+            </div>
+            <div class="stat-chip" style="flex:1;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">$0</div>
+                <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Upfront to Start</div>
+            </div>
+            <div class="stat-chip" style="flex:1;">
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">100%</div>
+                <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Hand-Coded</div>
+            </div>
+        </div>
+
+        <!-- CLIENT CARDS -->
+        <div style="display:flex;flex-direction:column;gap:48px;">
+
+            <!-- ===== SUGAR & SHAI ===== -->
+            <div class="client-card">
+                <!-- Card header -->
+                <div style="padding:40px 40px 32px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                        <div>
+                            <div style="display:flex;gap:8px;margin-bottom:14px;">
+                                <span class="tag">Bakery</span>
+                                <span class="tag">E-commerce</span>
+                                <span class="tag">Winnipeg, MB</span>
+                            </div>
+                            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.75rem;color:#EDEAE5;margin-bottom:6px;">Sugar & Shai Cookies</h2>
+                            <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#94a3b8;">Home-based cookie business, Tyndall area, MB</p>
+                        </div>
+                        <a href="https://sugarandshaicookies.com" target="_blank" rel="noopener"
+                            style="display:flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:#C9A84C;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;"
+                            onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+                            <i class="ph ph-arrow-square-out"></i> sugarandshaicookies.com
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Before / After -->
+                <div style="padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;">Before &amp; After</div>
+                    <div class="before-after">
+                        <div class="before-col">
+                            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:14px;">Before</div>
+                            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Taking orders through Instagram DMs only
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Manually tracking orders in messages
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    No pricing visible — "DM for info"
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Zero Google presence
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="after-col">
+                            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;">After</div>
+                            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Full order form with per-flavour quantity selectors
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Every order auto-logs to Google Sheets
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Pricing, flavours, and pickup rules all visible
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Custom domain + SEO schema for local search
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What was built -->
+                <div style="padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;">What Was Built</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Order form with live pricing</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Google Sheets backend (GAS)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Custom domain (GoDaddy)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Pickup scheduling logic</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Flavour of the Month system</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Local Business SEO schema</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Email notification on every order</span>
+                    </div>
+                </div>
+
+                <!-- Delivery -->
+                <div style="padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                    <div style="display:flex;align-items:center;gap:24px;">
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">48h</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Delivered in</div>
+                        </div>
+                        <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">5</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Products live</div>
+                        </div>
+                        <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">24/7</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Orders open</div>
+                        </div>
+                    </div>
+                    <!-- Quote placeholder — replace with real quote when available -->
+                    <div class="quote-block" style="max-width:420px;flex:1;min-width:240px;">
+                        <p style="font-family:'DM Sans',sans-serif;font-size:13px;font-style:italic;color:#EDEAE5;line-height:1.6;margin-bottom:8px;">
+                            "From chasing DMs to orders coming in on their own — in 48 hours."
+                        </p>
+                        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Sugar & Shai Cookies</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ROYAL KINGS ===== -->
+            <div class="client-card">
+                <!-- Card header -->
+                <div style="padding:40px 40px 32px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                        <div>
+                            <div style="display:flex;gap:8px;margin-bottom:14px;">
+                                <span class="tag">Auto Detailing</span>
+                                <span class="tag">Booking System</span>
+                                <span class="tag">Winnipeg, MB</span>
+                            </div>
+                            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.75rem;color:#EDEAE5;margin-bottom:6px;">Royal Kings Auto Care</h2>
+                            <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#94a3b8;">Premium mobile detailing service, Winnipeg, MB</p>
+                        </div>
+                        <a href="https://fjdmedia.github.io/royal-kings-auto-care" target="_blank" rel="noopener"
+                            style="display:flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:#C9A84C;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;"
+                            onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+                            <i class="ph ph-arrow-square-out"></i> View Live Site
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Before / After -->
+                <div style="padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;">Before &amp; After</div>
+                    <div class="before-after">
+                        <div class="before-col">
+                            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:14px;">Before</div>
+                            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Bookings through Instagram DMs only
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    No pricing transparency — quotes on request
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    No waiver system — liability exposure
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#94a3b8;">
+                                    <i class="ph ph-x-circle" style="color:#ef4444;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    No record of bookings or add-ons
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="after-col">
+                            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;">After</div>
+                            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Live booking form with real-time estimate builder
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    3 packages + 9 add-ons, all with clear pricing
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    Digital waiver with drawn signature, saved to Drive
+                                </li>
+                                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'DM Sans',sans-serif;font-size:13px;color:#EDEAE5;">
+                                    <i class="ph ph-check-circle" style="color:#22c55e;font-size:16px;flex-shrink:0;margin-top:1px;"></i>
+                                    All bookings logged to Google Sheets automatically
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What was built -->
+                <div style="padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;">What Was Built</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Booking form + real-time estimate</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Vehicle class surcharge toggle</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Digital waiver (drawn signature)</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">Google Sheets + Drive backend</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">9 add-on services with live pricing</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">24h advance booking enforcement</span>
+                        <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:6px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:#EDEAE5;">PDF service agreement</span>
+                    </div>
+                </div>
+
+                <!-- Delivery + quote -->
+                <div style="padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                    <div style="display:flex;align-items:center;gap:24px;">
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">3</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Packages</div>
+                        </div>
+                        <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">9</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Add-ons</div>
+                        </div>
+                        <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                        <div style="text-align:center;">
+                            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#C9A84C;">$0</div>
+                            <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">To start</div>
+                        </div>
+                    </div>
+                    <!-- Quote placeholder -->
+                    <div class="quote-block" style="max-width:420px;flex:1;min-width:240px;">
+                        <p style="font-family:'DM Sans',sans-serif;font-size:13px;font-style:italic;color:#EDEAE5;line-height:1.6;margin-bottom:8px;">
+                            "Professional setup — booking form, waiver, everything. We look legit now."
+                        </p>
+                        <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;">Royal Kings Auto Care</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PLACEHOLDER SLOTS ===== -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+                <div class="placeholder-card">
+                    <i class="ph ph-plus-circle" style="font-size:32px;color:rgba(201,168,76,0.3);margin-bottom:12px;"></i>
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;">Next Client</div>
+                    <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.2);line-height:1.5;">Your site could be here.<br>Delivered in 48 hours.</p>
+                </div>
+                <div class="placeholder-card">
+                    <i class="ph ph-plus-circle" style="font-size:32px;color:rgba(201,168,76,0.3);margin-bottom:12px;"></i>
+                    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;">Next Client</div>
+                    <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.2);line-height:1.5;">Your site could be here.<br>Delivered in 48 hours.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div style="margin-top:80px;padding:56px 48px;background:#0D1F3C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;">Ready?</div>
+            <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.25rem;color:#EDEAE5;margin-bottom:16px;line-height:1.2;">Your business is next.</h2>
+            <p style="font-family:'DM Sans',sans-serif;font-size:16px;color:#94a3b8;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;">
+                No commitments. James reviews your business and tells you exactly what a site would do for you — free.
+            </p>
+            <a href="index.html#contact"
+                style="display:inline-block;background:#C9A84C;color:#071520;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;padding:16px 40px;border-radius:8px;text-decoration:none;letter-spacing:0.02em;"
+                onmouseover="this.style.background='#e0c26c'" onmouseout="this.style.background='#C9A84C'">
+                Get My Free Design Consult
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="width:100%;background:#050c12;border-top:1px solid rgba(255,255,255,0.05);padding:40px 0;display:flex;flex-direction:column;align-items:center;margin-top:80px;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:#EDEAE5;letter-spacing:-0.02em;margin-bottom:8px;">
+            { FJ } <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:300;color:#94a3b8;letter-spacing:0.2em;text-transform:uppercase;margin-left:4px;">Media</span>
+        </div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:12px;color:#94a3b8;margin-bottom:24px;">Hand-coded websites for Winnipeg businesses.</p>
+        <div style="display:flex;gap:24px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:24px;">
+            <a href="work.html" style="color:#C9A84C;text-decoration:none;">Work</a>
+            <a href="index.html#pricing" style="color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">Packages</a>
+            <a href="index.html#contact" style="color:#94a3b8;text-decoration:none;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">Contact</a>
+            <a href="https://www.instagram.com/fjmedia.ca" target="_blank" rel="noopener" style="color:#94a3b8;text-decoration:none;display:flex;align-items:center;gap:6px;" onmouseover="this.style.color='#EDEAE5'" onmouseout="this.style.color='#94a3b8'">
+                <i class="ph ph-instagram-logo"></i> @fjmedia.ca
+            </a>
+        </div>
+        <p style="font-family:'DM Sans',sans-serif;font-size:10px;color:rgba(148,163,184,0.4);">© 2026 FJMedia. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
