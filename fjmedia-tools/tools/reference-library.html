@@ -249,6 +249,14 @@
   .section-preview { height: 180px; display: flex; flex-direction: column; padding: 10px; overflow: hidden; background: #0a1a28; border-radius: 8px 8px 0 0; position: relative; }
   .nav-preview { height: 180px; display: flex; align-items: center; justify-content: center; background: #0a1a28; position: relative; overflow: hidden; padding: 12px; }
 
+  /* ── MODAL PREVIEWS ── */
+  .modal-demo-wrap { position: relative; width: 100%; height: 100%; }
+  .modal-demo-trigger { padding: 6px 16px; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 600; border-radius: 4px; cursor: pointer; border: none; z-index: 2; position: relative; }
+  .modal-demo-overlay { position: absolute; inset: 0; background: var(--navy2); border: 1px solid var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; clip-path: circle(0% at 50% 50%); transition: clip-path .5s cubic-bezier(0.76, 0, 0.24, 1); z-index: 3; }
+  .modal-demo-overlay.open { clip-path: circle(150% at 50% 50%); }
+  .modal-demo-close { padding: 4px 12px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-size: 9px; border-radius: 4px; cursor: pointer; }
+  .modal-demo-label { font-size: 10px; color: var(--cream); }
+
   /* ── MISC UTILITY ── */
   .demo-tag { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; display: inline-block; }
   .demo-divider { width: 30px; height: 2px; background: var(--gold); border-radius: 1px; }
@@ -292,6 +300,7 @@
   <a class="nav-item" onclick="show('motion')">Motion</a>
   <a class="nav-item" onclick="show('sections')">Sections</a>
   <a class="nav-item" onclick="show('navs')">Navigation</a>
+  <a class="nav-item" onclick="show('modals')">Modals</a>
 </nav>
 
 <!-- MAIN -->
@@ -2801,6 +2810,99 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  MODALS                                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="sec-modals" class="section">
+    <h1 class="page-title">Modal Patterns</h1>
+    <p class="page-sub">Overlay and reveal patterns for full-screen content. Reference by name to scaffold modals quickly.</p>
+
+    <div class="section-label">Reveal Transitions</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('circle-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('circle-demo')">Open</button>
+            </div>
+            <div id="circle-demo" class="modal-demo-overlay">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('circle-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Clip-Path Circle Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'clip-path-circle-reveal')">clip-path-circle-reveal</div>
+          <div class="card-desc">CSS-only modal. Hidden checkbox + label toggle. Circle expands from center via clip-path. No JS required. Used on FJMedia case studies.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('iris-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('iris-demo')">Open</button>
+            </div>
+            <div id="iris-demo" class="modal-demo-overlay" style="transition: clip-path .6s cubic-bezier(0.76, 0, 0.24, 1);">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('iris-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Iris Wipe (From Click Origin)</div>
+          <div class="card-prompt" onclick="copyTag(this,'iris-wipe-from-click')">iris-wipe-from-click</div>
+          <div class="card-desc">Same clip-path circle but originates from where the button is. Needs minimal JS to set --x/--y origin coordinates on click.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('inset-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('inset-demo')">Open</button>
+            </div>
+            <div id="inset-demo" class="modal-demo-overlay" style="clip-path:inset(100%);transition:clip-path .5s cubic-bezier(0.76,0,0.24,1);">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('inset-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Inset Reveal (Expand from Center)</div>
+          <div class="card-prompt" onclick="copyTag(this,'inset-reveal-modal')">inset-reveal-modal</div>
+          <div class="card-desc">Rectangular expand using clip-path: inset(). Grows from center outward. Clean, modern alternative to circle reveal.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;" onclick="toggleModalDemo('wipe-demo')">
+          <div class="modal-demo-wrap">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;">
+              <button class="modal-demo-trigger" onclick="event.stopPropagation();toggleModalDemo('wipe-demo')">Open</button>
+            </div>
+            <div id="wipe-demo" class="modal-demo-overlay" style="clip-path:polygon(0 0,0 0,0 100%,0 100%);transition:clip-path .5s cubic-bezier(0.76,0,0.24,1);">
+              <div class="modal-demo-label">Modal Content</div>
+              <button class="modal-demo-close" onclick="event.stopPropagation();toggleModalDemo('wipe-demo')">Close</button>
+            </div>
+          </div>
+          <span class="play-hint">click to preview</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Diagonal Wipe</div>
+          <div class="card-prompt" onclick="copyTag(this,'diagonal-wipe-modal')">diagonal-wipe-modal</div>
+          <div class="card-desc">Clip-path polygon wipes diagonally across the screen. Dramatic, cinematic feel. Great for portfolio reveals.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 </div>
 
@@ -2829,6 +2931,22 @@
       el.offsetHeight;
       el.style.animation = anim;
     });
+  }
+
+  // Modal demo toggle
+  function toggleModalDemo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.classList.contains('open')) {
+      el.classList.remove('open');
+      // Reset non-circle demos to their closed clip-path
+      if (id === 'inset-demo') el.style.clipPath = 'inset(100%)';
+      if (id === 'wipe-demo') el.style.clipPath = 'polygon(0 0,0 0,0 100%,0 100%)';
+    } else {
+      el.classList.add('open');
+      if (id === 'inset-demo') el.style.clipPath = 'inset(0%)';
+      if (id === 'wipe-demo') el.style.clipPath = 'polygon(0 0,100% 0,100% 100%,0 100%)';
+    }
   }
 
   function copyTag(el, tag) {
