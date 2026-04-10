@@ -273,6 +273,7 @@
   @keyframes stickyReveal { from{transform:translateY(-100%)} to{transform:translateY(0)} }
   @keyframes countUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   @keyframes waveDrift { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  @keyframes fillBar { from{width:0} to{width:80%} }
 
   /* ── MISC UTILITY ── */
   .demo-tag { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; display: inline-block; }
@@ -3246,6 +3247,101 @@
       </div>
 
     </div>
+
+    <div class="section-label" style="margin-top:2rem;">Specialized Inputs</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="height:36px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:0 10px;display:flex;align-items:center;gap:8px;">
+              <span style="font-size:12px;color:var(--muted);">&#128269;</span>
+              <span style="font-size:11px;color:var(--muted);">Search services...</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Search Input with Icon</div>
+          <div class="card-prompt" onclick="copyTag(this,'search-input-icon')">search-input-icon</div>
+          <div class="card-desc">Input with magnifying glass icon. Filterable lists, blog search, service finder, FAQ search.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="height:36px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11px;color:var(--cream);">••••••••</span>
+              <span style="font-size:9px;color:var(--gold);cursor:pointer;">SHOW</span>
+            </div>
+            <div style="font-size:8px;color:var(--muted);margin-top:3px;">Min 8 characters</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Password with Toggle</div>
+          <div class="card-prompt" onclick="copyTag(this,'password-toggle')">password-toggle</div>
+          <div class="card-desc">Password field with show/hide eye toggle. Login forms, member areas, admin panels.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="display:flex;gap:4px;margin-bottom:6px;">
+              <span style="font-size:18px;color:var(--gold);cursor:pointer;">&#9733;</span>
+              <span style="font-size:18px;color:var(--gold);cursor:pointer;">&#9733;</span>
+              <span style="font-size:18px;color:var(--gold);cursor:pointer;">&#9733;</span>
+              <span style="font-size:18px;color:var(--gold);cursor:pointer;">&#9733;</span>
+              <span style="font-size:18px;color:rgba(201,168,76,.2);cursor:pointer;">&#9733;</span>
+            </div>
+            <div style="font-size:9px;color:var(--muted);">4 out of 5 stars</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Star Rating Input</div>
+          <div class="card-prompt" onclick="copyTag(this,'star-rating-input')">star-rating-input</div>
+          <div class="card-desc">Clickable star rating. Review forms, feedback, satisfaction surveys. Hover highlights stars.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="width:100%;height:60px;border:2px dashed var(--border);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:border-color .2s;" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border)'">
+              <div style="font-size:16px;color:var(--muted);">&#8593;</div>
+              <div style="font-size:9px;color:var(--muted);">Drop files or <span style="color:var(--gold);">browse</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">File Upload / Drop Zone</div>
+          <div class="card-prompt" onclick="copyTag(this,'file-upload-dropzone')">file-upload-dropzone</div>
+          <div class="card-desc">Dashed border drag-and-drop area. Photo uploads, document submissions, portfolio submissions.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-size:9px;color:var(--muted);width:20px;">0</div>
+              <div style="flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;position:relative;">
+                <div style="height:100%;width:65%;background:var(--gold);border-radius:3px;"></div>
+                <div style="position:absolute;top:-5px;left:65%;width:16px;height:16px;border-radius:50%;background:var(--gold);border:2px solid var(--navy);transform:translateX(-50%);"></div>
+              </div>
+              <div style="font-size:9px;color:var(--muted);width:20px;">100</div>
+            </div>
+            <div style="font-size:9px;color:var(--gold);text-align:center;margin-top:6px;">65</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Range Slider</div>
+          <div class="card-prompt" onclick="copyTag(this,'range-slider-gold')">range-slider-gold</div>
+          <div class="card-desc">Styled range input with gold track and thumb. Budget selectors, quantity pickers, preference scales.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -3382,6 +3478,56 @@
           <div class="card-name">Gradient Fade to Accent</div>
           <div class="card-prompt" onclick="copyTag(this,'gradient-fade-accent')">gradient-fade-accent</div>
           <div class="card-desc">Section bg fades from dark to subtle gold at the bottom. Draws the eye to CTAs below.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="bg-preview" style="background:#0a1a28;overflow:hidden;">
+          <div style="position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(135deg,transparent,transparent 10px,rgba(201,168,76,.4) 10px,rgba(201,168,76,.4) 11px);"></div>
+          <div style="font-size:12px;color:var(--cream);position:relative;">Content here</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Diagonal Stripe Pattern</div>
+          <div class="card-prompt" onclick="copyTag(this,'diagonal-stripe-bg')">diagonal-stripe-bg</div>
+          <div class="card-desc">Subtle repeating diagonal lines. Industrial, construction, barber — adds texture without distraction.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="bg-preview" style="background:#0a1a28;overflow:hidden;">
+          <div style="position:absolute;top:20%;left:25%;width:80px;height:80px;border-radius:50%;background:rgba(201,168,76,.06);filter:blur(20px);"></div>
+          <div style="position:absolute;top:50%;right:20%;width:60px;height:60px;border-radius:50%;background:rgba(59,130,246,.04);filter:blur(16px);"></div>
+          <div style="position:absolute;bottom:20%;left:40%;width:50px;height:50px;border-radius:50%;background:rgba(201,168,76,.05);filter:blur(14px);"></div>
+          <div style="font-size:12px;color:var(--cream);position:relative;">Content here</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Bokeh / Soft Circles</div>
+          <div class="card-prompt" onclick="copyTag(this,'bokeh-circles-bg')">bokeh-circles-bg</div>
+          <div class="card-desc">Blurred floating circles behind content. Dreamy, premium feel. Photography, events, weddings.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="bg-preview" style="background:#0a1a28;overflow:hidden;flex-direction:column;">
+          <div style="flex:1;width:100%;background:rgba(201,168,76,.06);"></div>
+          <svg viewBox="0 0 200 30" style="width:100%;display:block;" preserveAspectRatio="none"><path d="M0,15 C30,30 70,0 100,15 C130,30 170,0 200,15 L200,30 L0,30 Z" fill="#0a1a28"/></svg>
+          <div style="flex:1;width:100%;"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Curved Section Divider</div>
+          <div class="card-prompt" onclick="copyTag(this,'curved-divider')">curved-divider</div>
+          <div class="card-desc">S-curve SVG between sections. Elegant and flowing. Spas, wellness, luxury brands.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="bg-preview" style="background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.1) 0%,transparent 60%),#0a1a28;">
+          <div style="font-size:12px;color:var(--cream);">Content here</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Top Spotlight Glow</div>
+          <div class="card-prompt" onclick="copyTag(this,'spotlight-glow-bg')">spotlight-glow-bg</div>
+          <div class="card-desc">Radial glow from top center, like a spotlight. Draws attention to headings. Hero and CTA sections.</div>
         </div>
       </div>
 
@@ -3545,6 +3691,80 @@
         </div>
       </div>
 
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;align-items:flex-start;justify-content:flex-end;flex-direction:column;gap:6px;">
+          <div style="background:#0d2035;border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:8px;animation:toastSlide .4s ease both;max-width:220px;">
+            <div style="width:20px;height:20px;border-radius:50%;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;">&#9888;</div>
+            <div>
+              <div style="font-size:10px;font-weight:500;color:var(--white);">Heads up</div>
+              <div style="font-size:8px;color:var(--muted);">We're updating our pricing.</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Warning / Info Toast</div>
+          <div class="card-prompt" onclick="copyTag(this,'toast-warning')">toast-warning</div>
+          <div class="card-desc">Gold-bordered info/warning toast. Maintenance notices, schedule changes, soft alerts.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;max-width:240px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;">&#128100;</div>
+            <div>
+              <div style="font-size:9px;color:var(--cream);">Sarah just booked a call</div>
+              <div style="font-size:8px;color:var(--muted);">2 minutes ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Social Proof Popup</div>
+          <div class="card-prompt" onclick="copyTag(this,'social-proof-popup')">social-proof-popup</div>
+          <div class="card-desc">Bottom-left notification showing recent actions. "Sarah just booked..." Creates FOMO and trust.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:6px;padding:10px;">
+          <div style="width:100%;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:6px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:9px;color:var(--cream);">Offer expires in</div>
+            <div style="display:flex;gap:4px;">
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">02</div>
+              <div style="font-size:11px;color:var(--gold);">:</div>
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">14</div>
+              <div style="font-size:11px;color:var(--gold);">:</div>
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">37</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Countdown Timer Bar</div>
+          <div class="card-prompt" onclick="copyTag(this,'countdown-timer-bar')">countdown-timer-bar</div>
+          <div class="card-desc">Ticking countdown in a banner. Flash sales, limited offers, event registrations. High urgency.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="position:relative;width:100%;height:100%;">
+            <div style="position:absolute;bottom:8px;left:8px;background:#0d2035;border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;align-items:flex-start;gap:8px;max-width:200px;">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:4px;flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:9px;font-weight:500;color:var(--white);">New feature!</div>
+                <div style="font-size:8px;color:var(--muted);line-height:1.4;">You can now book online 24/7.</div>
+              </div>
+              <div style="font-size:8px;color:var(--muted);cursor:pointer;flex-shrink:0;">&#10005;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">In-App Notification</div>
+          <div class="card-prompt" onclick="copyTag(this,'in-app-notification')">in-app-notification</div>
+          <div class="card-desc">Dismissable notification card anchored to corner. Feature announcements, update notices, tips.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -3668,6 +3888,92 @@
       </div>
 
     </div>
+
+    <div class="section-label">Advanced Gallery</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;width:100%;height:90px;">
+            <div style="grid-row:1/3;background:rgba(201,168,76,.25);border-radius:6px;"></div>
+            <div style="background:rgba(201,168,76,.12);border-radius:6px;"></div>
+            <div style="background:rgba(201,168,76,.18);border-radius:6px;"></div>
+            <div style="grid-column:2/4;background:rgba(201,168,76,.15);border-radius:6px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Masonry Grid</div>
+          <div class="card-prompt" onclick="copyTag(this,'masonry-grid')">masonry-grid</div>
+          <div class="card-desc">Mixed-size image grid with no gaps. Pinterest style. Photo portfolios, galleries, creative agencies.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="display:flex;gap:4px;align-items:center;height:80px;">
+            <div style="flex:0.6;height:100%;background:rgba(201,168,76,.12);border-radius:6px;transition:flex .4s ease;" onmouseenter="this.style.flex='2'" onmouseleave="this.style.flex='0.6'"></div>
+            <div style="flex:0.6;height:100%;background:rgba(201,168,76,.2);border-radius:6px;transition:flex .4s ease;" onmouseenter="this.style.flex='2'" onmouseleave="this.style.flex='0.6'"></div>
+            <div style="flex:0.6;height:100%;background:rgba(201,168,76,.15);border-radius:6px;transition:flex .4s ease;" onmouseenter="this.style.flex='2'" onmouseleave="this.style.flex='0.6'"></div>
+            <div style="flex:0.6;height:100%;background:rgba(201,168,76,.25);border-radius:6px;transition:flex .4s ease;" onmouseenter="this.style.flex='2'" onmouseleave="this.style.flex='0.6'"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Accordion Image Panels</div>
+          <div class="card-prompt" onclick="copyTag(this,'accordion-image-panels')">accordion-image-panels</div>
+          <div class="card-desc">Hover a panel and it expands while others shrink. Services showcase, team members, portfolio categories.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:140px;height:80px;">
+            <div style="position:absolute;width:70px;height:55px;background:rgba(201,168,76,.2);border-radius:6px;border:2px solid rgba(201,168,76,.1);top:0;left:0;z-index:1;transform:rotate(-5deg);"></div>
+            <div style="position:absolute;width:70px;height:55px;background:rgba(201,168,76,.25);border-radius:6px;border:2px solid rgba(201,168,76,.15);top:5px;left:20px;z-index:2;transform:rotate(2deg);"></div>
+            <div style="position:absolute;width:70px;height:55px;background:rgba(201,168,76,.3);border-radius:6px;border:2px solid rgba(201,168,76,.2);top:10px;left:40px;z-index:3;transform:rotate(5deg);"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Stacked Photo Pile</div>
+          <div class="card-prompt" onclick="copyTag(this,'stacked-photo-pile')">stacked-photo-pile</div>
+          <div class="card-desc">Overlapping photos with slight rotation. Casual, creative feel. About sections, memories, events.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:140px;height:80px;overflow:hidden;border-radius:8px;">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(13,32,53,.4));"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(7,21,32,.9) 0%,transparent 60%);"></div>
+            <div style="position:absolute;bottom:6px;left:8px;">
+              <div style="font-size:9px;font-weight:600;color:var(--cream);">Project Name</div>
+              <div style="font-size:7px;color:var(--muted);">Category</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image Card with Overlay Text</div>
+          <div class="card-prompt" onclick="copyTag(this,'image-overlay-text')">image-overlay-text</div>
+          <div class="card-desc">Text layered over image with gradient overlay. Portfolio grids, project showcases, blog cards.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:120px;height:80px;overflow:hidden;border-radius:8px;cursor:pointer;" onmouseenter="this.querySelector('.overlay').style.opacity='1'" onmouseleave="this.querySelector('.overlay').style.opacity='0'">
+            <div style="width:100%;height:100%;background:rgba(201,168,76,.15);"></div>
+            <div class="overlay" style="position:absolute;inset:0;background:rgba(7,21,32,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease;">
+              <div style="font-size:9px;font-weight:600;color:var(--gold);letter-spacing:.08em;">VIEW</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hover Overlay with Label</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-overlay-label')">hover-overlay-label</div>
+          <div class="card-desc">Dark overlay slides in on hover with action text. Portfolio grids, image galleries, project cards.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -3782,6 +4088,105 @@
       </div>
 
     </div>
+
+    <div class="section-label">Advanced Scroll</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:4px;padding:10px;">
+          <div style="font-size:8px;color:var(--muted);margin-bottom:2px;">Text appears word by word</div>
+          <div style="font-size:14px;font-weight:600;color:var(--cream);">
+            <span style="opacity:0;animation:fadeIn .3s ease both .1s;">We</span>
+            <span style="opacity:0;animation:fadeIn .3s ease both .3s;">build</span>
+            <span style="opacity:0;animation:fadeIn .3s ease both .5s;">websites</span>
+            <span style="opacity:0;animation:fadeIn .3s ease both .7s;color:var(--gold);">that</span>
+            <span style="opacity:0;animation:fadeIn .3s ease both .9s;color:var(--gold);">sell.</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll-Triggered Text Reveal</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-text-reveal')">scroll-text-reveal</div>
+          <div class="card-desc">Words or lines fade in one at a time as you scroll. Hero headlines, mission statements, storytelling pages.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:140px;height:80px;overflow:hidden;border-radius:8px;">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(13,32,53,.6));transform:scale(1.1);animation:parallaxHint 4s ease-in-out infinite;"></div>
+            <div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:4px;">
+              <div style="font-size:10px;font-weight:600;color:var(--cream);">Full-Screen Section</div>
+              <div style="font-size:7px;color:var(--muted);">100vh snap</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Full-Screen Scroll Snap</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-snap-fullscreen')">scroll-snap-fullscreen</div>
+          <div class="card-desc">Each section fills the viewport and snaps into place. Landing pages, presentations, portfolios.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;overflow:hidden;">
+          <div style="display:flex;flex-direction:column;gap:4px;width:100%;">
+            <div style="height:16px;background:rgba(201,168,76,.2);border-radius:4px;width:0;animation:fillBar 2s ease both .2s;"></div>
+            <div style="height:16px;background:rgba(201,168,76,.15);border-radius:4px;width:0;animation:fillBar 2s ease both .5s;"></div>
+            <div style="height:16px;background:rgba(201,168,76,.25);border-radius:4px;width:0;animation:fillBar 2s ease both .8s;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Animated Skill Bars</div>
+          <div class="card-prompt" onclick="copyTag(this,'animated-skill-bars')">animated-skill-bars</div>
+          <div class="card-desc">Horizontal bars fill to a percentage on scroll. Skills, stats, capacity indicators, progress tracking.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;"></div>
+              <div style="width:60px;height:6px;background:rgba(201,168,76,.2);border-radius:3px;"></div>
+            </div>
+            <div style="width:1px;height:12px;background:rgba(201,168,76,.15);margin-left:4.5px;"></div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(201,168,76,.3);flex-shrink:0;"></div>
+              <div style="width:80px;height:6px;background:rgba(201,168,76,.12);border-radius:3px;"></div>
+            </div>
+            <div style="width:1px;height:12px;background:rgba(201,168,76,.15);margin-left:4.5px;"></div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(201,168,76,.3);flex-shrink:0;"></div>
+              <div style="width:50px;height:6px;background:rgba(201,168,76,.08);border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll Timeline / Steps</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-timeline')">scroll-timeline</div>
+          <div class="card-desc">Vertical timeline with dots and lines that fill as you scroll. Process pages, how-it-works, roadmaps.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:120px;height:70px;background:rgba(201,168,76,.08);border-radius:8px;overflow:hidden;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:28px;font-weight:700;color:var(--gold);opacity:.15;">BIG</div>
+            </div>
+            <div style="position:relative;display:flex;align-items:center;justify-content:center;height:100%;">
+              <div style="font-size:9px;color:var(--cream);">Content on top</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll-Scaled Background Text</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-scale-text')">scroll-scale-text</div>
+          <div class="card-desc">Large faded text scales or moves as you scroll while content sits on top. Hero effect, section intros.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -3873,6 +4278,91 @@
           <div class="card-name">Loading Dots</div>
           <div class="card-prompt" onclick="copyTag(this,'loading-dots')">loading-dots</div>
           <div class="card-desc">Three dots pulsing in sequence. Inline loading state for buttons, chat typing indicator.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label">Advanced Micro-interactions</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="display:flex;gap:6px;align-items:center;">
+            <div style="padding:6px 16px;background:var(--gold);border-radius:6px;font-size:10px;font-weight:600;color:var(--navy);cursor:pointer;position:relative;overflow:hidden;transition:all .3s ease;" onmouseenter="this.style.paddingRight='28px';this.querySelector('.arrow').style.opacity='1';this.querySelector('.arrow').style.transform='translateX(0)'" onmouseleave="this.style.paddingRight='16px';this.querySelector('.arrow').style.opacity='0';this.querySelector('.arrow').style.transform='translateX(-6px)'">
+              Learn More<span class="arrow" style="position:absolute;right:10px;top:50%;transform:translateX(-6px) translateY(-50%);opacity:0;transition:all .3s ease;font-size:10px;">&rarr;</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Button Arrow Slide-In</div>
+          <div class="card-prompt" onclick="copyTag(this,'button-arrow-slide')">button-arrow-slide</div>
+          <div class="card-desc">Arrow appears and slides in from left on hover. Subtle call-to-action enhancement for links and buttons.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="position:relative;">
+            <div style="padding:6px 16px;background:transparent;border:1.5px solid var(--gold);border-radius:6px;font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;position:relative;overflow:hidden;z-index:1;transition:color .3s ease;" onmouseenter="this.style.color='var(--navy)';this.querySelector('.fill').style.transform='scaleX(1)'" onmouseleave="this.style.color='var(--gold)';this.querySelector('.fill').style.transform='scaleX(0)'">
+              <span class="fill" style="position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;z-index:-1;"></span>
+              Get Started
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Button Fill on Hover</div>
+          <div class="card-prompt" onclick="copyTag(this,'button-fill-hover')">button-fill-hover</div>
+          <div class="card-desc">Background color fills from left to right on hover. Ghost buttons that transform into solid CTAs.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="display:flex;gap:4px;">
+            <div style="font-size:20px;cursor:pointer;transition:transform .15s;" onmouseenter="this.style.transform='scale(1.3) rotate(-10deg)'" onmouseleave="this.style.transform='scale(1) rotate(0)'">&#9733;</div>
+            <div style="font-size:20px;cursor:pointer;transition:transform .15s;" onmouseenter="this.style.transform='scale(1.3) rotate(-10deg)'" onmouseleave="this.style.transform='scale(1) rotate(0)'">&#9733;</div>
+            <div style="font-size:20px;cursor:pointer;transition:transform .15s;" onmouseenter="this.style.transform='scale(1.3) rotate(-10deg)'" onmouseleave="this.style.transform='scale(1) rotate(0)'">&#9733;</div>
+            <div style="font-size:20px;cursor:pointer;transition:transform .15s;opacity:.3;" onmouseenter="this.style.transform='scale(1.3) rotate(-10deg)'" onmouseleave="this.style.transform='scale(1) rotate(0)'">&#9733;</div>
+            <div style="font-size:20px;cursor:pointer;transition:transform .15s;opacity:.3;" onmouseenter="this.style.transform='scale(1.3) rotate(-10deg)'" onmouseleave="this.style.transform='scale(1) rotate(0)'">&#9733;</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hover Star Rating</div>
+          <div class="card-prompt" onclick="copyTag(this,'hover-star-rating')">hover-star-rating</div>
+          <div class="card-desc">Stars scale and tilt on hover. Adds personality to review/rating displays. Testimonials, feedback.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="display:flex;gap:12px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.1);border:1.5px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s;" onmouseenter="this.style.background='rgba(201,168,76,.2)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.background='rgba(201,168,76,.1)';this.style.transform='translateY(0)'">&#9993;</div>
+              <div style="font-size:7px;color:var(--muted);">Email</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.1);border:1.5px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .2s;" onmouseenter="this.style.background='rgba(201,168,76,.2)';this.style.transform='translateY(-3px)'" onmouseleave="this.style.background='rgba(201,168,76,.1)';this.style.transform='translateY(0)'">&#128247;</div>
+              <div style="font-size:7px;color:var(--muted);">IG</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Social Icon Lift</div>
+          <div class="card-prompt" onclick="copyTag(this,'social-icon-lift')">social-icon-lift</div>
+          <div class="card-desc">Social icons float up with background fill on hover. Footer social links, contact sections.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview">
+          <div style="padding:8px 20px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;position:relative;overflow:hidden;background:var(--gold);color:var(--navy);" onclick="this.textContent=this.textContent==='Copied!'?'Copy Link':'Copied!';setTimeout(()=>this.textContent='Copy Link',1200)">Copy Link</div>
+          <span class="play-hint">click to see</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Copy-to-Clipboard Feedback</div>
+          <div class="card-prompt" onclick="copyTag(this,'copy-clipboard-feedback')">copy-clipboard-feedback</div>
+          <div class="card-desc">Button text swaps to "Copied!" then back. Inline confirmation without modals. Share links, code snippets.</div>
         </div>
       </div>
 
@@ -3984,6 +4474,105 @@
           <div class="card-name">Magnetic Button</div>
           <div class="card-prompt" onclick="copyTag(this,'magnetic-button')">magnetic-button</div>
           <div class="card-desc">Element subtly pulls toward cursor when nearby. Premium interactive feel. Nav buttons, CTAs, icons.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label">Advanced Cursors & Tooltips</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="position:relative;display:inline-block;">
+            <div style="padding:6px 14px;background:var(--gold);border-radius:6px;font-size:10px;font-weight:600;color:var(--navy);cursor:pointer;" onmouseenter="this.parentElement.querySelector('.badge').style.transform='scale(1.2)';this.parentElement.querySelector('.badge').style.background='#ef4444'" onmouseleave="this.parentElement.querySelector('.badge').style.transform='scale(1)';this.parentElement.querySelector('.badge').style.background='var(--gold)'">Inbox</div>
+            <div class="badge" style="position:absolute;top:-6px;right:-6px;width:16px;height:16px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--navy);transition:all .2s cubic-bezier(0.68,-0.55,0.265,1.55);">3</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Animated Notification Badge</div>
+          <div class="card-prompt" onclick="copyTag(this,'notification-badge')">notification-badge</div>
+          <div class="card-desc">Counter badge that bounces or scales on state change. Inbox counts, cart items, unread messages.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="position:relative;display:inline-block;" onmouseenter="this.querySelector('.ctx').style.opacity='1';this.querySelector('.ctx').style.transform='translateY(0) scale(1)'" onmouseleave="this.querySelector('.ctx').style.opacity='0';this.querySelector('.ctx').style.transform='translateY(-4px) scale(0.95)'">
+            <div style="padding:4px 12px;background:rgba(201,168,76,.1);border:1px solid var(--border);border-radius:6px;font-size:10px;color:var(--cream);cursor:context-menu;">Right-click feel</div>
+            <div class="ctx" style="position:absolute;top:calc(100% + 4px);left:0;background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:6px 0;min-width:120px;opacity:0;transform:translateY(-4px) scale(0.95);transition:all .2s ease;pointer-events:none;z-index:10;">
+              <div style="padding:5px 14px;font-size:9px;color:var(--cream);cursor:pointer;" onmouseenter="this.style.background='rgba(201,168,76,.1)'" onmouseleave="this.style.background='transparent'">Edit</div>
+              <div style="padding:5px 14px;font-size:9px;color:var(--cream);cursor:pointer;" onmouseenter="this.style.background='rgba(201,168,76,.1)'" onmouseleave="this.style.background='transparent'">Duplicate</div>
+              <div style="height:1px;background:var(--border);margin:4px 0;"></div>
+              <div style="padding:5px 14px;font-size:9px;color:#ef4444;cursor:pointer;" onmouseenter="this.style.background='rgba(239,68,68,.08)'" onmouseleave="this.style.background='transparent'">Delete</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Context Menu / Dropdown</div>
+          <div class="card-prompt" onclick="copyTag(this,'context-menu')">context-menu</div>
+          <div class="card-desc">Animated dropdown that scales in from trigger point. Action menus, settings, user profile dropdowns.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="position:relative;width:140px;height:70px;border-radius:8px;overflow:hidden;cursor:pointer;background:rgba(201,168,76,.1);" onmouseenter="this.querySelector('.spot').style.opacity='1'" onmouseleave="this.querySelector('.spot').style.opacity='0'">
+            <div class="spot" style="position:absolute;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.25) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s;pointer-events:none;"></div>
+            <div style="position:relative;display:flex;align-items:center;justify-content:center;height:100%;">
+              <div style="font-size:10px;color:var(--cream);">Hover for spotlight</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Cursor Spotlight</div>
+          <div class="card-prompt" onclick="copyTag(this,'cursor-spotlight')">cursor-spotlight</div>
+          <div class="card-desc">Radial glow follows cursor within a container. Premium hero sections, dark-theme feature areas.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="display:flex;gap:8px;">
+            <div style="position:relative;" onmouseenter="this.querySelector('.prog').style.opacity='1'" onmouseleave="this.querySelector('.prog').style.opacity='0'">
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.1);border:1.5px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;">&#127968;</div>
+              <div class="prog" style="position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--navy2);border:1px solid var(--gold);border-radius:10px;padding:8px 12px;width:140px;opacity:0;transition:all .25s ease;pointer-events:none;">
+                <div style="font-size:8px;font-weight:600;color:var(--gold);margin-bottom:4px;">Home Page</div>
+                <div style="font-size:7px;color:var(--cream);line-height:1.5;">Main landing page with hero, services, and contact form.</div>
+                <div style="position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg);width:7px;height:7px;background:var(--navy2);border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);"></div>
+              </div>
+            </div>
+            <div style="font-size:9px;color:var(--muted);align-self:center;">Hover for preview</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Rich Preview Tooltip</div>
+          <div class="card-prompt" onclick="copyTag(this,'rich-preview-tooltip')">rich-preview-tooltip</div>
+          <div class="card-desc">Multi-line tooltip with title + description on hover. Sitemap previews, feature details, navigation hints.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;gap:6px;align-items:center;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
+              <div style="font-size:9px;color:var(--cream);">Available now</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#f59e0b;animation:pulse 1.5s ease infinite;"></div>
+              <div style="font-size:9px;color:var(--cream);">Busy</div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <div style="width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.2);"></div>
+              <div style="font-size:9px;color:var(--muted);">Offline</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Status Dot Indicator</div>
+          <div class="card-prompt" onclick="copyTag(this,'status-dot-indicator')">status-dot-indicator</div>
+          <div class="card-desc">Colored dots with optional pulse for live status. Online/offline, availability, system health indicators.</div>
         </div>
       </div>
 
