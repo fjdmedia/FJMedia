@@ -1073,9 +1073,9 @@
     <section id="contact" style="width:100%;background:#050c12;border-top:1px solid rgba(255,255,255,0.05);position:relative;">
 
             <!-- Inner content constrained to content width -->
-            <div style="max-width:1200px;margin:0 auto;padding:80px 40px;position:relative;z-index:10;">
+            <div class="relative z-10 mx-auto max-w-[1200px] px-5 py-16 md:px-10 md:py-20">
 
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch;">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
 
                     <!-- LEFT: Info + Steps — stretches to match form card height -->
                     <div style="display:flex;flex-direction:column;justify-content:space-between;">
@@ -1083,7 +1083,7 @@
                         <!-- Top block: label + heading + body -->
                         <div>
                             <div class="text-brand-gold text-xs font-bold uppercase mb-4" style="letter-spacing:0.12em;">Book a call</div>
-                            <h2 class="font-display font-bold text-white mb-5" style="font-size:3rem;line-height:1.15;">Let's see if<br>we're a fit.</h2>
+                            <h2 class="font-display font-bold text-white mb-5 text-[2rem] md:text-[3rem] leading-[1.15]">Let's see if<br>we're a fit.</h2>
                             <p class="text-brand-textMuted text-base leading-relaxed" style="max-width:22rem;">No commitments, no pressure. James reviews your business and tells you exactly what a site would do for you — for free.</p>
                         </div>
 
@@ -1149,7 +1149,7 @@
                     <div style="background:rgba(13,31,60,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;">
 
                         <!-- Form body -->
-                        <div style="padding:40px;flex:1;">
+                        <div class="flex-1 p-6 md:p-10">
                             <div class="text-white font-display font-bold text-xl mb-1">Start with a free design consult</div>
                             <p class="text-brand-textMuted text-xs mb-6">No credit card. No commitment. Just answers.</p>
 
@@ -1202,7 +1202,7 @@
             { FJ } <span class="text-brand-textMuted text-xs font-sans tracking-widest uppercase ml-1">Media</span>
         </div>
         <p class="text-xs text-brand-textMuted mb-6">Hand-coded websites for Winnipeg businesses.</p>
-        <div class="flex gap-6 text-xs uppercase tracking-widest text-brand-textMuted mb-6">
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-xs uppercase tracking-widest text-brand-textMuted mb-6 px-4">
             <a href="work.html" class="hover:text-white transition">Work</a>
             <a href="#pricing" class="hover:text-white transition">Packages</a>
             <a href="#contact" class="hover:text-white transition">Contact</a>
