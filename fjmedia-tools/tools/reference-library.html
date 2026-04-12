@@ -343,6 +343,8 @@
   <a class="nav-item" onclick="show('banners')">Banners & Alerts</a>
   <a class="nav-item" onclick="show('cursors')">Cursors & Tooltips</a>
   <a class="nav-item" onclick="show('loading')">Loading States</a>
+  <div class="nav-section">Conversion</div>
+  <a class="nav-item" onclick="show('conversion')">Conversion Patterns</a>
 </nav>
 
 <!-- MAIN -->
@@ -3429,6 +3431,52 @@
       </div>
 
     </div>
+
+    <div class="section-label" style="margin-top:2rem;">Scroll-Aware & State</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:transparent;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:11px;color:var(--gold);font-weight:600;">Brand</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.6);">transparent</div>
+            </div>
+            <div style="font-size:6px;color:var(--muted);text-align:center;padding:2px 0;">&#8595; scrollY &gt; 60px &#8595;</div>
+            <div style="background:rgba(7,21,32,.95);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(4px);">
+              <div style="font-size:11px;color:var(--gold);font-weight:600;">Brand</div>
+              <div style="font-size:7px;color:var(--cream);">solid + border</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll-Aware Nav Background</div>
+          <div class="card-prompt" onclick="copyTag(this,'scroll-aware-nav')">scroll-aware-nav</div>
+          <div class="card-desc">Nav starts transparent, gains background + border after scrolling past 60px. Use on sites with full-bleed or image heroes. classList.toggle('scrolled').</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="nav-preview">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="background:rgba(7,21,32,.95);padding:6px 12px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:10px;color:var(--gold);font-weight:600;">Brand</div>
+              <div style="display:flex;flex-direction:column;gap:2px;cursor:pointer;"><div style="width:14px;height:1.5px;background:var(--cream);"></div><div style="width:14px;height:1.5px;background:var(--cream);"></div><div style="width:10px;height:1.5px;background:var(--cream);"></div></div>
+            </div>
+            <div style="background:var(--navy2);border:1px solid var(--border);padding:8px 12px;font-size:7px;color:var(--cream);display:flex;flex-direction:column;gap:4px;">
+              <div>Home</div><div>Services</div><div>Contact</div>
+              <div style="font-size:6px;color:var(--gold);margin-top:4px;border-top:1px solid var(--border);padding-top:4px;">body.nav-open { overflow: hidden }</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Mobile Nav + Scroll Lock</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-nav-scroll-lock')">mobile-nav-scroll-lock</div>
+          <div class="card-desc">Hamburger toggles .open on nav. Body gets overflow:hidden to prevent scroll-behind. Close on link click + remove scroll lock. Every multi-section site.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -3991,6 +4039,81 @@
           <div class="card-name">Multi-Select Tags</div>
           <div class="card-prompt" onclick="copyTag(this,'multi-select-tags')">multi-select-tags</div>
           <div class="card-desc">Removable pill tags inside an input. Service selection forms, filters, category pickers.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Order Form Controls</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="width:28px;height:28px;border-radius:6px;background:rgba(201,168,76,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);cursor:pointer;">&#8722;</div>
+            <div style="width:40px;height:28px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--white);">6</div>
+            <div style="width:28px;height:28px;border-radius:6px;background:rgba(201,168,76,.15);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);cursor:pointer;">+</div>
+            <div style="margin-left:6px;font-size:9px;color:var(--cream);">Biscoff</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Quantity Stepper (+/-)</div>
+          <div class="card-prompt" onclick="copyTag(this,'quantity-stepper')">quantity-stepper</div>
+          <div class="card-desc">+/- buttons adjust a readonly number input in steps of 3 (or 1). Updates live order summary. Standard for bakery/food order forms.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="display:flex;gap:6px;">
+            <div style="flex:1;background:rgba(201,168,76,.12);border:1.5px solid var(--gold);border-radius:6px;padding:6px;text-align:center;cursor:pointer;">
+              <div style="font-size:9px;font-weight:500;color:var(--white);margin-bottom:2px;">Ceramic Coating</div>
+              <div style="font-size:7px;color:var(--gold);">$80 - $150</div>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:6px;text-align:center;cursor:pointer;">
+              <div style="font-size:9px;color:var(--cream);margin-bottom:2px;">Engine Bay</div>
+              <div style="font-size:7px;color:var(--muted);">$40 - $60</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Add-On Checkbox Cards</div>
+          <div class="card-prompt" onclick="copyTag(this,'addon-checkbox-cards')">addon-checkbox-cards</div>
+          <div class="card-desc">Styled checkbox inputs inside cards. Selected state changes border + background. Each shows price range. Use for optional service add-ons.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;">
+            <div style="font-size:9px;color:var(--gold);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">Order Summary</div>
+            <div style="display:flex;justify-content:space-between;padding:3px 0;font-size:8px;"><span style="color:var(--cream);">Biscoff x6</span><span style="color:var(--muted);">$20.00</span></div>
+            <div style="display:flex;justify-content:space-between;padding:3px 0;font-size:8px;"><span style="color:var(--cream);">Matcha x6</span><span style="color:var(--muted);">$20.00</span></div>
+            <div style="display:flex;justify-content:space-between;padding:5px 0;margin-top:4px;border-top:1px solid var(--gold);font-size:10px;font-weight:600;"><span style="color:var(--white);">Total</span><span style="color:var(--gold);">$40.00</span></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Live Order Summary</div>
+          <div class="card-prompt" onclick="copyTag(this,'live-order-summary')">live-order-summary</div>
+          <div class="card-desc">Dynamic price calculator showing line items + total. Updates in real time based on qty steppers. Shows/hides based on selection state.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="form-preview">
+          <div style="width:100%;max-width:200px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:6px;">
+              <div style="padding:5px 12px;background:var(--gold);border-radius:5px;font-size:9px;font-weight:600;color:var(--navy);">Sedan</div>
+              <div style="padding:5px 12px;background:rgba(201,168,76,.08);border:1px solid var(--border);border-radius:5px;font-size:9px;color:var(--cream);">SUV</div>
+              <div style="padding:5px 12px;background:rgba(201,168,76,.08);border:1px solid var(--border);border-radius:5px;font-size:9px;color:var(--cream);">Truck</div>
+            </div>
+            <div style="font-size:7px;color:var(--muted);">Selection updates all visible prices in real time</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Vehicle Class Toggle + Pricing</div>
+          <div class="card-prompt" onclick="copyTag(this,'vehicle-class-pricing')">vehicle-class-pricing</div>
+          <div class="card-desc">Button group selects category → applies surcharge → updates all visible prices. Use for any service with tiered pricing by class/size.</div>
         </div>
       </div>
 
@@ -4727,6 +4850,82 @@
           <div class="card-name">Hover Overlay with Label</div>
           <div class="card-prompt" onclick="copyTag(this,'hover-overlay-label')">hover-overlay-label</div>
           <div class="card-desc">Dark overlay slides in on hover with action text. Portfolio grids, image galleries, project cards.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Video & Slideshow</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:120px;height:80px;background:rgba(201,168,76,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;">
+              <div style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:14px solid var(--white);margin-left:2px;"></div>
+            </div>
+            <div style="position:absolute;bottom:4px;right:4px;font-size:6px;color:var(--muted);">0:32</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Video Play/Pause Toggle</div>
+          <div class="card-prompt" onclick="copyTag(this,'video-play-toggle')">video-play-toggle</div>
+          <div class="card-desc">Click/tap toggles play/pause. Only one video plays at a time (pause all others). Play button overlay hides when playing. Reviews, galleries, hero backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:140px;height:80px;border-radius:8px;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:rgba(201,168,76,.15);animation:fadeIn 1.6s ease both;"></div>
+            <div style="position:absolute;inset:0;background:rgba(201,168,76,.25);opacity:0;animation:fadeIn 1.6s ease both 2.5s;"></div>
+            <div style="position:absolute;bottom:4px;right:6px;display:flex;gap:3px;">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--gold);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:rgba(201,168,76,.3);"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:rgba(201,168,76,.3);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Auto-Rotating Slideshow</div>
+          <div class="card-prompt" onclick="copyTag(this,'crossfade-slideshow')">crossfade-slideshow</div>
+          <div class="card-desc">Cycles every 5s with 1.6s crossfade. .active shows current, .fading triggers exit. About sections with multiple images, hero backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;overflow:hidden;">
+          <div style="display:flex;gap:6px;width:max-content;animation:marquee 8s linear infinite;">
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.12);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.2);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.08);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.15);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.12);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.2);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.08);border-radius:6px;flex-shrink:0;"></div>
+            <div style="width:60px;height:60px;background:rgba(201,168,76,.15);border-radius:6px;flex-shrink:0;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Infinite Marquee Gallery</div>
+          <div class="card-prompt" onclick="copyTag(this,'marquee-gallery')">marquee-gallery</div>
+          <div class="card-desc">Two rows scrolling opposite directions. Content duplicated for seamless loop. Pause on hover. Photo-heavy sites — bakeries, portfolios.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:140px;height:80px;">
+            <div style="width:100%;height:100%;background:rgba(201,168,76,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:8px;color:var(--muted);">gallery item</div>
+            </div>
+            <div style="position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);display:flex;align-items:center;justify-content:center;font-size:7px;color:#ef4444;">&#10007;</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Image Error Fallback</div>
+          <div class="card-prompt" onclick="copyTag(this,'image-error-fallback')">image-error-fallback</div>
+          <div class="card-desc">onerror handler hides the gallery item if image fails to load. Prevents broken image icons. Use on any gallery pulling from user-uploaded images.</div>
         </div>
       </div>
 
@@ -5798,6 +5997,398 @@
           <div class="card-name">Button Loading Spinner</div>
           <div class="card-prompt" onclick="copyTag(this,'btn-loading-spinner')">btn-loading-spinner</div>
           <div class="card-desc">Button text replaced with inline spinner on click. Form submissions, save actions, payment processing.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  CONVERSION PATTERNS                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="sec-conversion" class="section">
+    <h1 class="page-title">Conversion Patterns</h1>
+    <p class="page-sub">Proven patterns from FJMedia client sites that drive action. Reference by name when building any conversion-focused page.</p>
+    <div class="prompt-tip">
+      <strong>Source:</strong> These patterns are documented in <code style="background:rgba(0,0,0,.3);padding:2px 5px;border-radius:3px;">conversion_playbook.md</code> and <code style="background:rgba(0,0,0,.3);padding:2px 5px;border-radius:3px;">ui_patterns.md</code>. Each card maps to a specific playbook rule.
+    </div>
+
+    <div class="section-label">CTA Patterns</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:8px;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white);text-align:center;">Your Headline Here</div>
+          <div style="font-size:8px;color:var(--muted);text-align:center;">One sentence that answers: who is this for?</div>
+          <div style="display:flex;gap:8px;margin-top:4px;">
+            <div style="padding:7px 16px;background:var(--gold);border-radius:5px;font-size:9px;font-weight:600;color:var(--navy);">Place an Order</div>
+            <div style="padding:7px 16px;background:transparent;border:1px solid var(--gold);border-radius:5px;font-size:9px;color:var(--gold);">View Gallery</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Dual CTA (Primary + Secondary)</div>
+          <div class="card-prompt" onclick="copyTag(this,'dual-cta')">dual-cta</div>
+          <div class="card-desc">Every hero gets two buttons: filled primary (action + outcome) and outline secondary (lower commitment). Never use "Submit" or "Learn More".</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:6px;padding:10px;">
+          <div style="width:100%;padding:12px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div style="display:inline-block;padding:7px 20px;background:var(--gold);border-radius:5px;font-size:10px;font-weight:600;color:var(--navy);">Book Your Detail</div>
+            <div style="font-size:8px;color:var(--muted);letter-spacing:.03em;">No contracts &nbsp;·&nbsp; Free preview &nbsp;·&nbsp; Pay when you're happy</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Trust Signal Bar</div>
+          <div class="card-prompt" onclick="copyTag(this,'trust-signal-bar')">trust-signal-bar</div>
+          <div class="card-desc">One-line micro-copy strip below hero CTA. Eliminates top objections instantly. Dot-separated, muted text.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:14px;">
+          <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:14px 18px;text-align:center;width:100%;max-width:240px;">
+            <div style="font-size:10px;font-weight:600;color:var(--gold);margin-bottom:4px;">Our Promise</div>
+            <div style="font-size:9px;color:var(--cream);line-height:1.6;">Free to see it, pay if you're satisfied.<br>No contracts, no deposits — walk away if not happy.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Risk Reversal Badge</div>
+          <div class="card-prompt" onclick="copyTag(this,'risk-reversal')">risk-reversal</div>
+          <div class="card-desc">The single most powerful conversion lever. State what the customer risks (nothing) and what they gain (everything). Place above final CTA.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:0;padding:0;justify-content:flex-end;">
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);">page content above</div>
+          <div style="width:100%;background:rgba(7,21,32,.95);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:center;">
+            <div style="padding:8px 28px;background:var(--gold);border-radius:6px;font-size:10px;font-weight:600;color:var(--navy);">Order Now</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Sticky Mobile CTA Bar</div>
+          <div class="card-prompt" onclick="copyTag(this,'sticky-mobile-cta')">sticky-mobile-cta</div>
+          <div class="card-desc">Fixed bottom bar on mobile (&lt;768px). Hidden by default, slides up via IntersectionObserver after hero exits viewport. Backdrop blur + shadow.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Urgency & Gating</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="flex-direction:column;gap:6px;padding:10px;">
+          <div style="width:100%;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-radius:6px;">
+            <div style="font-size:9px;color:var(--cream);">This preview expires in</div>
+            <div style="display:flex;gap:4px;">
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">71</div>
+              <div style="font-size:11px;color:var(--gold);">:</div>
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">59</div>
+              <div style="font-size:11px;color:var(--gold);">:</div>
+              <div style="background:var(--navy);padding:3px 6px;border-radius:3px;font-size:11px;font-weight:600;color:var(--gold);font-family:monospace;">44</div>
+            </div>
+          </div>
+          <div style="font-size:7px;color:var(--muted);text-align:center;">Persisted via localStorage across refreshes</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">72-Hour Countdown Expiry</div>
+          <div class="card-prompt" onclick="copyTag(this,'countdown-72hr')">countdown-72hr</div>
+          <div class="card-desc">Sticky top bar with localStorage-persisted countdown. Designed for pitch pages sent to prospects. Creates hard deadline urgency.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="position:relative;width:100%;height:100%;background:rgba(7,21,32,.95);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border);">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--white);">Enter Password</div>
+            <div style="height:28px;width:120px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:5px;display:flex;align-items:center;padding:0 8px;font-size:9px;color:var(--muted);">••••••••</div>
+            <div style="padding:5px 16px;background:var(--gold);border-radius:4px;font-size:8px;font-weight:600;color:var(--navy);">Unlock</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Password Gate Overlay</div>
+          <div class="card-prompt" onclick="copyTag(this,'password-gate')">password-gate</div>
+          <div class="card-desc">Full-screen overlay requiring password before content is accessible. Smooth fade-out on correct entry. Private client previews.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="font-size:12px;color:var(--gold);">&#127846;</div>
+              <div>
+                <div style="font-size:9px;font-weight:500;color:var(--white);">Flavour of the Month</div>
+                <div style="font-size:7px;color:var(--muted);">Ube White Chocolate — April only</div>
+              </div>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;"><div style="height:100%;width:40%;background:var(--gold);border-radius:2px;"></div></div>
+            <div style="font-size:7px;color:var(--muted);text-align:center;">Flavours rotate seasonally — soft, always-true urgency</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">FOTM / Seasonal Rotation</div>
+          <div class="card-prompt" onclick="copyTag(this,'fotm-seasonal')">fotm-seasonal</div>
+          <div class="card-desc">Best repeatable urgency pattern — always true because the flavor/offer does change monthly. Never fake scarcity.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="text-align:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">How to Order</div>
+            <div style="display:flex;gap:4px;">
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:6px;text-align:center;">
+                <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">1</div>
+                <div style="font-size:7px;color:var(--cream);">Browse</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:6px;text-align:center;">
+                <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">2</div>
+                <div style="font-size:7px;color:var(--cream);">Fill Form</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:6px;text-align:center;">
+                <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">3</div>
+                <div style="font-size:7px;color:var(--cream);">Confirm</div>
+              </div>
+            </div>
+            <div style="font-size:7px;color:var(--muted);text-align:center;line-height:1.4;">Hook → Credibility → Desire → Trust → Process → Action → Fallback</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Section Order Framework</div>
+          <div class="card-prompt" onclick="copyTag(this,'section-order-framework')">section-order-framework</div>
+          <div class="card-desc">Default conversion flow: Nav → Hero → About → Featured → Products → Gallery → Reviews → Process → Form → Contact → Footer. Social proof BEFORE conversion path.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Social Proof & Carousels</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:8px;overflow:hidden;">
+          <div style="display:flex;gap:8px;width:max-content;">
+            <div style="width:80px;height:100px;background:rgba(201,168,76,.1);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
+              <div style="width:50px;height:50px;background:rgba(201,168,76,.15);border-radius:4px;"></div>
+              <div style="font-size:10px;color:var(--gold);">&#9654;</div>
+            </div>
+            <div style="width:80px;height:100px;background:rgba(201,168,76,.06);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
+              <div style="width:50px;height:50px;background:rgba(201,168,76,.1);border-radius:4px;"></div>
+              <div style="font-size:6px;color:var(--muted);">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <div style="width:80px;height:100px;background:rgba(201,168,76,.08);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
+              <div style="width:50px;height:50px;background:rgba(201,168,76,.12);border-radius:4px;"></div>
+              <div style="font-size:10px;color:var(--gold);">&#9654;</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scroll-Snap Review Carousel</div>
+          <div class="card-prompt" onclick="copyTag(this,'review-carousel-snap')">review-carousel-snap</div>
+          <div class="card-desc">CSS scroll-snap-type:x mandatory with hidden scrollbar. Cards flex:0 0 220px (desktop) / 155px (mobile). Left/right arrows hidden on mobile — swipe is intuitive.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:8px;overflow:hidden;">
+          <div style="display:flex;gap:6px;width:max-content;">
+            <div style="width:90px;height:100px;background:rgba(201,168,76,.08);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;">
+              <div style="width:60px;height:60px;background:rgba(201,168,76,.12);border-radius:4px;"></div>
+              <div style="position:absolute;bottom:4px;left:4px;font-size:6px;background:rgba(0,0,0,.5);color:var(--cream);padding:1px 4px;border-radius:2px;">9:16</div>
+            </div>
+            <div style="width:90px;height:100px;background:rgba(201,168,76,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--white);">&#9654;</div>
+            </div>
+            <div style="width:90px;height:100px;background:rgba(201,168,76,.06);border-radius:6px;flex-shrink:0;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Video Testimonial Cards</div>
+          <div class="card-prompt" onclick="copyTag(this,'video-testimonial-cards')">video-testimonial-cards</div>
+          <div class="card-desc">9:16 aspect ratio cards with play button overlay. Only one video plays at a time. Mix static screenshot reviews with video in same carousel.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="display:flex;gap:6px;align-items:center;">
+            <div style="display:flex;gap:3px;">
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:3px;padding:8px 12px;background:rgba(201,168,76,.04);border-left:2px solid var(--gold);border-radius:0 6px 6px 0;">
+              <div style="display:flex;gap:2px;font-size:10px;color:var(--gold);">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div style="font-size:8px;color:var(--cream);font-style:italic;line-height:1.4;">"Amazing quality, ordered twice already!"</div>
+              <div style="font-size:7px;color:var(--muted);">— Ashley K.</div>
+            </div>
+            <div style="display:flex;gap:3px;">
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.15);border-radius:50%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Review Placement Rule</div>
+          <div class="card-prompt" onclick="copyTag(this,'review-before-form')">review-before-form</div>
+          <div class="card-desc">Social proof goes BEFORE the conversion form, never after. Flow: Gallery/Menu → Reviews → How It Works → Order Form. See product → see others love it → commit.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:6px;justify-content:center;">
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Product</div>
+                <div style="font-size:7px;color:var(--cream);">Photo + Price</div>
+              </div>
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Service</div>
+                <div style="font-size:7px;color:var(--cream);">Headshot + Badge</div>
+              </div>
+              <div style="text-align:center;flex:1;">
+                <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">Portfolio</div>
+                <div style="font-size:7px;color:var(--cream);">Best Work</div>
+              </div>
+            </div>
+            <div style="font-size:7px;color:var(--gold);text-align:center;border-top:1px solid var(--border);padding-top:4px;">Hero visual by business type</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hero Visual by Niche</div>
+          <div class="card-prompt" onclick="copyTag(this,'hero-visual-niche')">hero-visual-niche</div>
+          <div class="card-desc">Product sites: product photo. Service sites: headshot + credential badge. Portfolio sites: best work slideshow. Event sites: name + date + venue.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:2rem;">Contact & Objection Handling</div>
+    <div class="grid-2">
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="display:flex;gap:6px;width:100%;">
+            <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+              <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">&#9993;</div>
+              <div style="font-size:7px;color:var(--cream);">DM to Order</div>
+              <div style="font-size:6px;color:var(--muted);">@handle</div>
+            </div>
+            <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+              <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">&#9993;</div>
+              <div style="font-size:7px;color:var(--cream);">Email</div>
+              <div style="font-size:6px;color:var(--muted);">hi@brand.ca</div>
+            </div>
+            <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+              <div style="font-size:12px;color:var(--gold);margin-bottom:2px;">&#9906;</div>
+              <div style="font-size:7px;color:var(--cream);">Pickup</div>
+              <div style="font-size:6px;color:var(--muted);">Area only</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Contact Method Cards</div>
+          <div class="card-prompt" onclick="copyTag(this,'contact-method-cards')">contact-method-cards</div>
+          <div class="card-desc">Lucide icon + label + value. Horizontal on desktop, stacked on mobile. 2-3 methods max. Use heading like "Prefer to Order Your Way?" not "Contact Us".</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border);">
+              <div style="font-size:9px;color:var(--gold);flex-shrink:0;">+</div>
+              <div style="font-size:8px;color:var(--cream);flex:1;">How long does the detail take?</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:6px;padding:5px 0;border-bottom:1px solid var(--border);">
+              <div style="font-size:9px;color:var(--gold);flex-shrink:0;">&#8722;</div>
+              <div>
+                <div style="font-size:8px;color:var(--cream);margin-bottom:2px;">What if I'm not satisfied?</div>
+                <div style="font-size:7px;color:var(--muted);line-height:1.4;">Full refund, no questions asked.</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;padding:5px 0;">
+              <div style="font-size:9px;color:var(--gold);flex-shrink:0;">+</div>
+              <div style="font-size:8px;color:var(--cream);">Do you come to me?</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">FAQ Before Final CTA</div>
+          <div class="card-prompt" onclick="copyTag(this,'faq-before-cta')">faq-before-cta</div>
+          <div class="card-desc">Place FAQ between social proof and final CTA — never at the bottom. Questions in customer's voice. Last FAQ addresses biggest objection (pricing, trust, timeline).</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:4px;">
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:8px;color:var(--muted);margin-bottom:2px;">Starter</div>
+                <div style="font-size:14px;font-weight:700;color:var(--white);">$200</div>
+                <div style="padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;font-size:7px;color:var(--cream);margin-top:4px;">Select</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:6px;background:var(--gold);color:var(--navy);padding:1px 5px;border-radius:3px;display:inline-block;font-weight:600;margin-bottom:2px;">BEST VALUE</div>
+                <div style="font-size:14px;font-weight:700;color:var(--gold);">$400</div>
+                <div style="padding:4px 10px;background:var(--gold);border-radius:4px;font-size:7px;font-weight:600;color:var(--navy);margin-top:4px;">Select</div>
+              </div>
+              <div style="flex:1;background:rgba(201,168,76,.06);border:1px solid var(--border);border-radius:6px;padding:8px;text-align:center;">
+                <div style="font-size:8px;color:var(--muted);margin-bottom:2px;">Premium</div>
+                <div style="font-size:14px;font-weight:700;color:var(--white);">$700</div>
+                <div style="padding:4px 10px;background:transparent;border:1px solid var(--border);border-radius:4px;font-size:7px;color:var(--cream);margin-top:4px;">Select</div>
+              </div>
+            </div>
+            <div style="font-size:7px;color:var(--muted);text-align:center;">Middle tier = "Best Value" badge + filled CTA. Others get outline.</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">3-Tier Pricing (Conversion Rules)</div>
+          <div class="card-prompt" onclick="copyTag(this,'pricing-3-tier-conversion')">pricing-3-tier-conversion</div>
+          <div class="card-desc">Always 3 tiers. Featured middle card gets filled CTA, others get outline. Show the math when a calculator applies. "What you see is what you pay."</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;">
+          <div style="width:100%;display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:var(--gold);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:5px;color:var(--navy);font-weight:700;">&#10003;</div>
+              Nav CTA (right side)
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:var(--gold);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:5px;color:var(--navy);font-weight:700;">&#10003;</div>
+              Hero (dual CTA)
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:var(--gold);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:5px;color:var(--navy);font-weight:700;">&#10003;</div>
+              After social proof
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:var(--gold);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:5px;color:var(--navy);font-weight:700;">&#10003;</div>
+              Bottom of page
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:var(--gold);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:5px;color:var(--navy);font-weight:700;">&#10003;</div>
+              Sticky mobile bar (&lt;768px)
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:7px;color:var(--muted);">
+              <div style="width:8px;height:8px;background:rgba(201,168,76,.2);border-radius:2px;"></div>
+              After pricing section
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">CTA Placement Checklist</div>
+          <div class="card-prompt" onclick="copyTag(this,'cta-placement-map')">cta-placement-map</div>
+          <div class="card-desc">Every page needs CTAs at 6 locations minimum: nav, hero (dual), after social proof, bottom of page, sticky mobile bar, after pricing. Copy formula: Action + Outcome.</div>
         </div>
       </div>
 
