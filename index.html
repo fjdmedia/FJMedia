@@ -43,7 +43,7 @@
       "priceRange": "$$",
       "knowsLanguage": ["en"],
       "slogan": "Your site is live before their discovery call is over.",
-      "sameAs": ["https://www.instagram.com/fjmedia.ca"]
+      "sameAs": ["https://www.instagram.com/fjmedia204"]
     }
     </script>
     <!-- Google tag (gtag.js) -->
@@ -146,13 +146,16 @@
             opacity: 1;
             pointer-events: auto;
         }
+        /* When any case-study is open: lock body scroll + sink the nav beneath the modal */
+        body:has(.case-toggle:checked) { overflow: hidden; }
+        body:has(.case-toggle:checked) nav { z-index: 5; }
         
         /* Pure CSS Tabs for Packages */
         .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease; }
         #tab-golive:checked ~ #content-golive,
         #tab-getfound:checked ~ #content-getfound,
         #tab-ownmarket:checked ~ #content-ownmarket {
-            display: grid;
+            display: block;
             animation: fadeIn 0.5s forwards;
         }
         
@@ -171,7 +174,7 @@
         /* Floating Animation — disabled for scroll performance */
         .animate-float { animation: none; }
         
-        /* Interactive Card Glow */
+        /* Interactive Card Glow — only for cards that are actually clickable */
         .glow-card {
             position: relative;
         }
@@ -189,6 +192,92 @@
             transition: opacity 0.3s ease;
         }
         .glow-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Info bento (non-clickable stat/feature cards) */
+        .info-bento {
+            position: relative;
+            background: linear-gradient(180deg, rgba(13,31,60,0.95) 0%, rgba(10,24,45,0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            cursor: default;
+        }
+        .info-bento::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 16px;
+            width: 28px; height: 1px;
+            background: #C9A84C;
+        }
+
+        /* Process timeline — scroll-driven states */
+        .process-step .step-marker {
+            transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease;
+        }
+        .process-step.is-visited .step-marker {
+            border-color: rgba(201,168,76,0.55);
+            color: #C9A84C;
+        }
+        .process-step.is-active .step-marker {
+            background: #C9A84C;
+            color: #071520;
+            border-color: #C9A84C;
+            box-shadow: 0 0 0 6px rgba(201,168,76,0.12), 0 0 28px rgba(201,168,76,0.28);
+        }
+        .process-step .step-card {
+            transition: border-color 0.45s ease, transform 0.45s ease;
+        }
+        .process-step.is-active .step-card {
+            border-color: rgba(201,168,76,0.32);
+        }
+
+        /* Packages tabs — make clickability obvious */
+        .pkg-tab {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            flex: 1;
+            padding: 14px 12px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .pkg-tab:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.035);
+            border-color: rgba(255,255,255,0.08);
+        }
+        .pkg-tab .pkg-tab-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        .pkg-tab .pkg-tab-sub {
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+        #tab-golive:checked ~ .pkg-tabs label[for="tab-golive"],
+        #tab-getfound:checked ~ .pkg-tabs label[for="tab-getfound"],
+        #tab-ownmarket:checked ~ .pkg-tabs label[for="tab-ownmarket"] {
+            background: #0D1F3C;
+            color: #fff;
+            border-color: rgba(201,168,76,0.35);
+            box-shadow: 0 10px 30px -12px rgba(201,168,76,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+        #tab-golive:checked ~ .pkg-tabs label[for="tab-golive"] .pkg-tab-sub,
+        #tab-getfound:checked ~ .pkg-tabs label[for="tab-getfound"] .pkg-tab-sub,
+        #tab-ownmarket:checked ~ .pkg-tabs label[for="tab-ownmarket"] .pkg-tab-sub {
+            color: #C9A84C;
             opacity: 1;
         }
     </style>
@@ -213,6 +302,7 @@
             <a href="#process" class="hover:text-brand-gold transition-colors">Process</a>
             <a href="#pricing" class="hover:text-brand-gold transition-colors">Packages</a>
             <a href="#myths" class="hover:text-brand-gold transition-colors">Why Us</a>
+            <a href="#faq" class="hover:text-brand-gold transition-colors">FAQ</a>
             <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
         </div>
         <a href="#contact" class="bg-white text-brand-bg px-6 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)]">
@@ -254,47 +344,51 @@
             </div>
 
             <!-- Hero Bento Features -->
-            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full relative">
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full relative" aria-label="What you get">
                 <!-- Decorative element -->
                 <div class="absolute -inset-10 bg-brand-gold/5 rounded-full z-0 pointer-events-none"></div>
-                
-                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 0s;">
-                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
-                        <i class="ph ph-money text-2xl"></i>
+
+                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                    <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
+                        <i class="ph ph-money text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-white font-bold text-lg">$0 Upfront</h3>
-                        <p class="text-sm text-brand-textMuted mt-1">Pay only if you're satisfied</p>
+                        <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">01 · Risk</div>
+                        <h3 class="text-white font-bold text-lg leading-tight">$0 Upfront</h3>
+                        <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Pay only if you're satisfied.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 1.5s;">
-                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
-                        <i class="ph ph-lightning text-2xl"></i>
+                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                    <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
+                        <i class="ph ph-lightning text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-white font-bold text-lg">48 Hours</h3>
-                        <p class="text-sm text-brand-textMuted mt-1">Not 6 weeks. Call to finished design.</p>
+                        <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">02 · Speed</div>
+                        <h3 class="text-white font-bold text-lg leading-tight">48 Hours</h3>
+                        <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Not 6 weeks. Call to finished design.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 0.5s;">
-                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
-                        <i class="ph ph-code text-2xl"></i>
+                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                    <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
+                        <i class="ph ph-code text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-white font-bold text-lg">No Builders</h3>
-                        <p class="text-sm text-brand-textMuted mt-1">No Wix. No Shopify. Hand-coded.</p>
+                        <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">03 · Craft</div>
+                        <h3 class="text-white font-bold text-lg leading-tight">No Builders</h3>
+                        <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">No Wix. No Shopify. No templates.</p>
                     </div>
                 </div>
 
-                <div class="glass-panel glow-card p-6 rounded-xl flex flex-col gap-4 relative z-10 animate-float" style="animation-delay: 2s;">
-                    <div class="w-12 h-12 rounded-full bg-brand-card flex items-center justify-center text-brand-gold border border-white/5">
-                        <i class="ph ph-database text-2xl"></i>
+                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                    <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
+                        <i class="ph ph-database text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-white font-bold text-lg">Full Backend</h3>
-                        <p class="text-sm text-brand-textMuted mt-1">Forms, CRM & automation — when you need it</p>
+                        <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">04 · Backend</div>
+                        <h3 class="text-white font-bold text-lg leading-tight">Full Stack Ready</h3>
+                        <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Forms, CRM &amp; automation — when you need it.</p>
                     </div>
                 </div>
             </div>
@@ -360,11 +454,11 @@
                 <div class="lg:col-span-8 space-y-12 relative before:absolute before:inset-0 before:ml-[1.4rem] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-gold before:via-brand-gold/20 before:to-transparent">
                     
                     <!-- Step 1 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-gold bg-brand-bg text-brand-gold font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:bg-brand-gold group-hover:text-brand-bg">
+                    <div class="process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="step-marker flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                             01
                         </div>
-                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                        <div class="step-card w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl">
                             <h3 class="font-display font-bold text-xl text-white mb-2">Quick Call</h3>
                             <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">15 MINUTES. NOT A SALES PITCH.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">We learn about your business and what you need. No strategy sessions, no questionnaires, no follow-up calls — just a straight conversation.</p>
@@ -372,11 +466,11 @@
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                    <div class="process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="step-marker flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                             02
                         </div>
-                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                        <div class="step-card w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl">
                             <h3 class="font-display font-bold text-xl text-white mb-2">We Design It</h3>
                             <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">48 HOURS. YOUR SITE IS READY.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">While most agencies are still scheduling their second meeting, you're already looking at a finished, hand-coded website — live, clickable, yours to review.</p>
@@ -384,11 +478,11 @@
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                    <div class="process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="step-marker flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                             03
                         </div>
-                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                        <div class="step-card w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl">
                             <h3 class="font-display font-bold text-xl text-white mb-2">You Decide</h3>
                             <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">LOVE IT OR LEAVE IT.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">We send you the link. Share it with whoever you want. If you're satisfied, we move forward. If not — walk away, no charge.</p>
@@ -396,11 +490,11 @@
                     </div>
 
                     <!-- Step 4 -->
-                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                        <div class="flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors group-hover:border-brand-gold group-hover:text-brand-gold">
+                    <div class="process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                        <div class="step-marker flex items-center justify-center w-12 h-12 rounded-full border-2 border-brand-card bg-brand-bg text-brand-textMuted font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                             04
                         </div>
-                        <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl glow-card">
+                        <div class="step-card w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl">
                             <h3 class="font-display font-bold text-xl text-white mb-2">Go Live</h3>
                             <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">YOUR SITE. YOUR RULES.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">Happy with the design? You're live. Need more — ordering forms, lead capture, SEO, the full backend? We walk you through packages built on top of what we already made together. Everything adds on. Nothing starts over.</p>
@@ -441,7 +535,7 @@
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Sheets CRM</span>
                         </div>
                         <!-- Pure CSS Modal Trigger -->
-                        <label for="modal-sugar" class="block w-full text-center bg-white border border-white text-brand-bg py-3 text-sm font-bold rounded hover:bg-transparent hover:text-white transition-colors cursor-pointer">
+                        <label for="modal-sugar" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg hover:border-white transition-colors cursor-pointer">
                             View Full Case Study →
                         </label>
                     </div>
@@ -461,7 +555,7 @@
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Packages</span>
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Booking Form</span>
                         </div>
-                        <label for="modal-royal" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg transition-colors cursor-pointer">
+                        <label for="modal-royal" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg hover:border-white transition-colors cursor-pointer">
                             View Full Case Study →
                         </label>
                     </div>
@@ -481,7 +575,7 @@
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Event Site</span>
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] border border-white/10 uppercase">Prize Gallery</span>
                         </div>
-                        <label for="modal-diego" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg transition-colors cursor-pointer">
+                        <label for="modal-diego" class="block w-full text-center border border-white/20 text-white py-3 text-sm font-bold rounded hover:bg-white hover:text-brand-bg hover:border-white transition-colors cursor-pointer">
                             View Full Case Study →
                         </label>
                     </div>
@@ -917,152 +1011,443 @@
                 <p class="text-brand-textMuted mt-4">Everything agencies charge thousands for — delivered lean, fast, and built to grow with your business.</p>
             </div>
 
-            <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-12 border-brand-gold/30">
+            <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-8 border-brand-gold/30">
                 <i class="ph ph-lock-key text-brand-gold"></i> No retainers required. No monthly platform fees. You own everything we build.
+            </div>
+
+            <!-- Hint above tabs — makes clickability obvious -->
+            <div class="flex items-center justify-center gap-2 mb-4 text-[10px] text-brand-gold font-bold uppercase tracking-[0.25em]">
+                <i class="ph ph-hand-pointing"></i> Tap a package to expand
             </div>
 
             <!-- CSS Tabs Implementation -->
             <div class="relative">
                 <!-- Radio Inputs hidden -->
-                <input type="radio" name="pkg-tabs" id="tab-golive" class="hidden peer/golive" checked>
-                <input type="radio" name="pkg-tabs" id="tab-getfound" class="hidden peer/getfound">
-                <input type="radio" name="pkg-tabs" id="tab-ownmarket" class="hidden peer/ownmarket">
+                <input type="radio" name="pkg-tabs" id="tab-golive" class="hidden" checked>
+                <input type="radio" name="pkg-tabs" id="tab-getfound" class="hidden">
+                <input type="radio" name="pkg-tabs" id="tab-ownmarket" class="hidden">
 
                 <!-- Tab Labels -->
-                <div class="flex gap-2 mb-8 bg-brand-bg border border-white/10 p-1 rounded-lg">
-                    <label for="tab-golive" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/golive:bg-brand-card peer-checked/golive:text-white text-brand-textMuted hover:text-white">
-                        Go Live <span class="block text-[10px] font-normal opacity-70">Design only</span>
+                <div class="pkg-tabs flex gap-2 mb-10 bg-brand-bg border border-white/10 p-1.5 rounded-xl">
+                    <label for="tab-golive" class="pkg-tab">
+                        <span class="pkg-tab-title">Go Live</span>
+                        <span class="pkg-tab-sub">Design · Starter</span>
                     </label>
-                    <label for="tab-getfound" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/getfound:bg-brand-card peer-checked/getfound:text-white text-brand-textMuted hover:text-white relative">
-                        Get Found
+                    <label for="tab-getfound" class="pkg-tab">
+                        <span class="pkg-tab-title">Get Found</span>
+                        <span class="pkg-tab-sub">Design + SEO</span>
                     </label>
-                    <label for="tab-ownmarket" class="flex-1 text-center py-3 rounded-md cursor-pointer text-sm font-bold tracking-wide uppercase transition-colors peer-checked/ownmarket:bg-brand-card peer-checked/ownmarket:text-white text-brand-textMuted hover:text-white">
-                        Own the Market <span class="block text-[10px] font-normal opacity-70">Full System</span>
+                    <label for="tab-ownmarket" class="pkg-tab">
+                        <span class="pkg-tab-title">Own the Market</span>
+                        <span class="pkg-tab-sub">Full System</span>
                     </label>
                 </div>
 
                 <!-- Tab Contents -->
                 <!-- Content: Go Live -->
-                <div id="content-golive" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
-                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
-                        <i class="ph ph-desktop text-3xl mb-4 text-white"></i>
-                        <h3 class="text-white font-bold text-lg mb-2">Custom Website</h3>
-                        <p class="text-sm text-brand-textMuted">Hand-coded, mobile-ready, live preview link, domain connection.</p>
-                    </div>
-                     <div class="glass-panel p-8 rounded-xl border border-white/5 opacity-50">
-                        <i class="ph ph-chart-line-up text-3xl mb-4 text-white"></i>
-                        <h3 class="text-white font-bold text-lg mb-2">Analytics & Maintenance</h3>
-                        <p class="text-sm text-brand-textMuted">Analytics setup, monthly reports, seasonal updates, managed maintenance, priority support.</p>
+                <div id="content-golive" class="tab-content">
+                    <div class="glass-panel rounded-2xl border border-brand-gold/30 overflow-hidden">
+                        <!-- Header Band -->
+                        <div class="p-8 md:p-10 border-b border-white/5 bg-gradient-to-br from-brand-card to-brand-bg flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                            <div>
+                                <div class="text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-3">Tier 01 · The Starter</div>
+                                <h3 class="text-3xl md:text-4xl text-white font-display font-bold leading-tight">Your business, online — <span class="text-brand-textMuted italic font-normal">fast.</span></h3>
+                                <p class="text-brand-textMuted text-sm mt-3 max-w-xl leading-relaxed">Perfect if you just need a legit website that works on mobile and looks like you actually care about your business.</p>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-[10px] text-brand-textMuted tracking-widest uppercase mb-1">Delivery</div>
+                                <div class="text-brand-gold font-display font-bold text-3xl">48h</div>
+                            </div>
+                        </div>
+                        <!-- Deliverables -->
+                        <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                            <div class="text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase md:col-span-2 mb-2">Everything Included</div>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Fully custom, hand-built website</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Mobile-first, responsive on every device</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Copywriting — you don't need to write a word</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Contact form wired to your email</li>
+                            </ul>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Live preview link within 48 hours</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Domain setup (yourbusiness.com)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Basic on-page SEO (titles, meta, alt text)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> You own all the files — no lock-in</li>
+                            </ul>
+                        </div>
+                        <!-- Foot Band -->
+                        <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-sm text-brand-textMuted">
+                                <i class="ph ph-hand-coins text-brand-gold text-xl"></i>
+                                <span><span class="text-white font-semibold">Free to see it.</span> Pay only if you love it.</span>
+                            </div>
+                            <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Start My Design →</a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Content: Get Found (Simulated) -->
-                <div id="content-getfound" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
-                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
-                        <i class="ph ph-magnifying-glass text-3xl mb-4 text-white"></i>
-                        <h3 class="text-white font-bold text-lg mb-2">SEO & Google Setup</h3>
-                        <p class="text-sm text-brand-textMuted">On-page SEO, Google Business Profile optimization, local search visibility.</p>
-                    </div>
-                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 flex flex-col justify-center items-center text-center">
-                        <h3 class="text-white font-bold text-lg mb-2">Everything in Go Live</h3>
-                        <p class="text-sm text-brand-gold">+ Plus tailored visibility</p>
+                <!-- Content: Get Found -->
+                <div id="content-getfound" class="tab-content">
+                    <div class="glass-panel rounded-2xl border border-brand-gold/30 overflow-hidden">
+                        <div class="p-8 md:p-10 border-b border-white/5 bg-gradient-to-br from-brand-card to-brand-bg flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                            <div>
+                                <div class="text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-3">Tier 02 · The Visibility Play</div>
+                                <h3 class="text-3xl md:text-4xl text-white font-display font-bold leading-tight">Show up where <span class="text-brand-textMuted italic font-normal">your customers are looking.</span></h3>
+                                <p class="text-brand-textMuted text-sm mt-3 max-w-xl leading-relaxed">A website is useless if no one finds it. This tier gets you on Google Maps, in local search results, and in front of people who already want what you sell.</p>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-[10px] text-brand-textMuted tracking-widest uppercase mb-1">Setup</div>
+                                <div class="text-brand-gold font-display font-bold text-3xl">1 week</div>
+                            </div>
+                        </div>
+                        <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                            <div class="md:col-span-2 text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase mb-2">Everything in Go Live, plus:</div>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Business Profile setup + optimization</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Local SEO targeting (Winnipeg + your service area)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Schema markup so Google reads your site correctly</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Keyword research — we target what actually gets searched</li>
+                            </ul>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Search Console hookup + sitemap</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Analytics 4 installed</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Review funnel (gets customers to leave 5-stars)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Competitor visibility audit — where they beat you</li>
+                            </ul>
+                        </div>
+                        <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-sm text-brand-textMuted">
+                                <i class="ph ph-map-trifold text-brand-gold text-xl"></i>
+                                <span>Built so a stranger in Winnipeg can <span class="text-white font-semibold">find you first.</span></span>
+                            </div>
+                            <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Get Me Found →</a>
+                        </div>
                     </div>
                 </div>
 
-                 <!-- Content: Own Market (Simulated) -->
-                <div id="content-ownmarket" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div class="glass-panel p-8 rounded-xl border border-brand-gold/50 relative">
-                        <div class="absolute top-4 right-4 text-brand-gold"><i class="ph-fill ph-check-circle text-xl"></i></div>
-                        <i class="ph ph-calendar-check text-3xl mb-4 text-white"></i>
-                        <h3 class="text-white font-bold text-lg mb-2">Ordering / Booking</h3>
-                        <p class="text-sm text-brand-textMuted">Forms with live pricing, Google Sheets CRM, automated email notifications.</p>
-                    </div>
-                    <div class="glass-panel p-8 rounded-xl border border-white/5 flex flex-col justify-center items-center text-center opacity-70">
-                        <i class="ph ph-chat-circle-dots text-3xl mb-4 text-brand-textMuted"></i>
-                        <h3 class="text-white font-bold text-lg mb-2">Need something else?</h3>
-                        <p class="text-sm text-brand-textMuted">Tell us when you reach out — we'll figure it out.</p>
+                <!-- Content: Own the Market -->
+                <div id="content-ownmarket" class="tab-content">
+                    <div class="glass-panel rounded-2xl border border-brand-gold/30 overflow-hidden">
+                        <div class="p-8 md:p-10 border-b border-white/5 bg-gradient-to-br from-brand-card to-brand-bg flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                            <div>
+                                <div class="text-brand-gold text-[10px] font-bold tracking-[0.25em] uppercase mb-3">Tier 03 · The Full System</div>
+                                <h3 class="text-3xl md:text-4xl text-white font-display font-bold leading-tight">A business that runs <span class="text-brand-textMuted italic font-normal">while you sleep.</span></h3>
+                                <p class="text-brand-textMuted text-sm mt-3 max-w-xl leading-relaxed">Orders come in. Leads get captured. Emails go out. Data lands in your sheet. You stop managing DMs and start running a business.</p>
+                            </div>
+                            <div class="text-right shrink-0">
+                                <div class="text-[10px] text-brand-textMuted tracking-widest uppercase mb-1">Build</div>
+                                <div class="text-brand-gold font-display font-bold text-3xl">2–3 wks</div>
+                            </div>
+                        </div>
+                        <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+                            <div class="md:col-span-2 text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase mb-2">Everything above, plus:</div>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Order / booking forms with live pricing</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Sheets CRM — every lead logged</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Automated confirmation + follow-up emails</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Calendar-based booking (for service businesses)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Payment collection (Stripe / Square)</li>
+                            </ul>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Custom admin dashboard (for you)</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Monthly reports — what's working, what's not</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Priority support — text James, get answers</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Seasonal updates + content swaps included</li>
+                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> First month of changes free after launch</li>
+                            </ul>
+                        </div>
+                        <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 text-sm text-brand-textMuted">
+                                <i class="ph ph-rocket-launch text-brand-gold text-xl"></i>
+                                <span>What agencies quote at <span class="text-white font-semibold">$5k–$10k+</span>. Built lean, priced honest.</span>
+                            </div>
+                            <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Build My System →</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
                 <a href="#contact" class="inline-block bg-white text-brand-bg px-8 py-4 rounded font-bold hover:bg-brand-gold transition-colors">
                     Get My Free Design →
                 </a>
-                <p class="text-[10px] text-brand-gold uppercase tracking-widest mt-4">What agencies charge $3k-$5k for, we deliver at a fraction of the cost. See it before you pay.</p>
+                <p class="text-[10px] text-brand-gold uppercase tracking-widest mt-4">All tiers start the same way — free design in 48 hours. You only commit once you love it.</p>
             </div>
         </section>
 
         <!-- SECTION: MYTHS VS REALITY -->
+        <style>
+            .myth-card{border:1px solid rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .35s cubic-bezier(.4,0,.2,1);visibility:hidden;}
+            .myth-card.in-view{visibility:visible;}
+            .myth-card:hover{border-color:rgba(201,168,76,0.3);box-shadow:0 4px 40px rgba(201,168,76,0.08),0 0 0 1px rgba(201,168,76,0.1);transform:translateY(-4px);}
+            .myth-chrome{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#0d1a24;border-bottom:1px solid rgba(255,255,255,0.04);}
+            .chrome-dots{display:flex;gap:6px;}
+            .chrome-dot{width:8px;height:8px;border-radius:50%;opacity:0;transform:scale(0);}
+            .chrome-dot.d-close{background:#ff5f57;}
+            .chrome-dot.d-min{background:#febc2e;}
+            .chrome-dot.d-max{background:#28c840;}
+            .chrome-url{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);border-radius:6px;padding:4px 12px;flex:1;max-width:280px;}
+            .chrome-url span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.02em;}
+            .chrome-url i{color:rgba(201,168,76,0.4);font-size:10px;}
+            .myth-body{background:#0a1219;padding:20px 24px 12px;}
+            .myth-text{position:relative;display:inline;}
+            .myth-text::after{content:'';position:absolute;left:0;top:50%;width:0;height:1.5px;background:rgba(255,255,255,0.35);}
+            .myth-text.struck::after{width:100%;transition:width .7s cubic-bezier(.4,0,.2,1);}
+            .reality-zone{padding:16px 24px 24px;position:relative;}
+            .reality-zone::before{content:'';position:absolute;inset:0;background:rgba(201,168,76,0.03);}
+            .reality-inner{position:relative;z-index:1;}
+            .gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.25) 20%,rgba(201,168,76,0.25) 80%,transparent);margin:0;}
+        </style>
+
         <section id="myths" class="py-24 border-t border-white/5">
             <div class="mb-16">
                  <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Myth Vs. Reality</div>
-                 <h2 class="font-display font-bold text-4xl text-white">What the industry tells you. What we actually do.</h2>
+                 <h2 class="font-display font-bold text-4xl text-white">What you've been told. What's actually true.</h2>
+                 <p class="text-brand-textMuted mt-4 max-w-xl">Wix, AI builders, and agencies all sell you the same story. Here's what they leave out.</p>
             </div>
 
-            <div class="space-y-4 pt-8 border-t border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
-                    <div class="p-8 bg-[#0a1219]">
-                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
-                        <p class="text-lg text-white font-display">"A good website takes 4–8 weeks to build."</p>
+                <!-- 01 — Template Trap -->
+                <div class="myth-card" data-myth="01">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-01</span>
+                        </div>
                     </div>
-                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-brand-gold/5"></div>
-                        <div class="relative z-10">
-                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
-                            <p class="text-lg text-white font-display mb-2">Yours is done in 48 hours.</p>
-                            <p class="text-sm text-brand-textMuted">Hand-coded. Live link in your inbox before most agencies finish their first meeting.</p>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Wix and Squarespace give you a professional website."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">They give you the same site as 10,000 other businesses.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Same hero, same layout, same stock feel. Your Winnipeg bakery ends up looking like one in Houston.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
-                    <div class="p-8 bg-[#0a1219]">
-                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
-                        <p class="text-lg text-white font-display">"You have to pay thousands just to see what you're getting."</p>
+                <!-- 02 — AI Shortcut -->
+                <div class="myth-card" data-myth="02">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-02</span>
+                        </div>
                     </div>
-                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-brand-gold/5"></div>
-                        <div class="relative z-10">
-                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
-                            <p class="text-lg text-white font-display mb-2">You see the finished site before you pay anything.</p>
-                            <p class="text-sm text-brand-textMuted">No deposit. No contract. No "discovery fee." We build it — you decide if it's worth it.</p>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"AI can build your website in 60 seconds."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">It can. And it'll look like every other AI site.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Same training data, same layouts. We use AI behind the scenes to audit and optimize — the design is human.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
-                    <div class="p-8 bg-[#0a1219]">
-                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
-                        <p class="text-lg text-white font-display">"You need a team of designers, developers, and project managers."</p>
+                <!-- 03 — DIY Time Sink -->
+                <div class="myth-card" data-myth="03">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-03</span>
+                        </div>
                     </div>
-                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-brand-gold/5"></div>
-                        <div class="relative z-10">
-                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
-                            <p class="text-lg text-white font-display mb-2">One person builds it, maintains it, and picks up when you text.</p>
-                            <p class="text-sm text-brand-textMuted">That's James. No handoffs. No ticket systems. No waiting on "the developer."</p>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"I can just build it myself on the weekend."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">6 months later you're still dragging blocks at midnight.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">And it still doesn't show up on Google. We hand you a live site in 48 hours — SEO, forms, everything.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/5">
-                    <div class="p-8 bg-[#0a1219]">
-                        <div class="text-[10px] font-bold text-brand-textMuted mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-x"></i> Myth</div>
-                        <p class="text-lg text-white font-display">"You need discovery calls, strategy phases, and proposals before anything gets built."</p>
+                <!-- 04 — Price Illusion -->
+                <div class="myth-card" data-myth="04">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-04</span>
+                        </div>
                     </div>
-                    <div class="p-8 glass-panel border-l border-brand-gold/20 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-brand-gold/5"></div>
-                        <div class="relative z-10">
-                            <div class="text-[10px] font-bold text-brand-gold mb-4 tracking-[0.2em] uppercase flex items-center gap-2"><i class="ph ph-check"></i> Reality</div>
-                            <p class="text-lg text-white font-display mb-2">15-minute call. We learn your business, then we build.</p>
-                            <p class="text-sm text-brand-textMuted">No phases, no decks, no 40-page proposals. You talk to a person, not a process.</p>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Wix is free — so it's the cheapest option."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">Free until you need anything that actually matters.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Domain, email, no ads, SEO tools. You'll spend $300/yr and 40+ hours on something that still doesn't convert.</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- 05 — Ownership Myth -->
+                <div class="myth-card" data-myth="05">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-05</span>
+                        </div>
+                    </div>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"If I build on Wix, I own my website."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">You rent it. Cancel and it disappears.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Our sites are hand-coded files you own outright. Host anywhere, move anywhere, no lock-in.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 06 — Speed Assumption -->
+                <div class="myth-card" data-myth="06">
+                    <div class="myth-chrome">
+                        <div class="chrome-dots">
+                            <span class="chrome-dot d-close"></span>
+                            <span class="chrome-dot d-min"></span>
+                            <span class="chrome-dot d-max"></span>
+                        </div>
+                        <div class="chrome-url">
+                            <i class="ph ph-lock-simple"></i>
+                            <span>fjmedia.ca/myth-06</span>
+                        </div>
+                    </div>
+                    <div class="myth-body">
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Custom websites take months and cost $5K+."</span></p>
+                    </div>
+                    <div class="gold-divider"></div>
+                    <div class="reality-zone">
+                        <div class="reality-inner">
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">That's the old agency model.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">One person, AI-powered process, proven frameworks. Live in 48 hours. You don't pay until you love it.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: FAQ — Accordion, CSS-only -->
+        <section id="faq" class="py-24 border-t border-white/5">
+            <div class="mb-16">
+                <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">FAQ</div>
+                <h2 class="font-display font-bold text-4xl text-white max-w-2xl">Okay, how does this actually work?</h2>
+                <p class="text-brand-textMuted mt-4">The practical stuff — process, ownership, what happens next.</p>
+            </div>
+
+            <div class="space-y-3">
+
+                <!-- Q1 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"What does the process look like?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        One 15-minute call. We learn your business, your customers, and what you need the site to do. Then we build — design, copy, forms, SEO, everything. Within 48 hours you get a live link to review. You tell us what to change, we revise it. Once you love it, we talk about keeping it live. That's it. No phases, no proposals, no 6-week timelines.
+                    </div>
+                </details>
+
+                <!-- Q2 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"What do I need to give you to get started?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        Your logo (if you have one), a few photos of your work, and 15 minutes of your time. That's it. We write all the copy, handle the design, build the forms, and set up everything technical. Most clients are surprised how little we actually need from them.
+                    </div>
+                </details>
+
+                <!-- Q3 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"How does 'free until you love it' actually work?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        We build your entire site before you pay a single dollar. You see the finished product — live, functional, on a real URL. If you love it, we talk pricing. If you don't, you walk away. No deposit, no contract, no "discovery fee." The risk is entirely on us. We bet on our work being good enough that you'll want to keep it.
+                    </div>
+                </details>
+
+                <!-- Q4 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"Do I own my site after launch?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        100%. Every file — HTML, CSS, JavaScript, images — is yours. You can host it anywhere, move it anywhere, or hand it to another developer. No lock-in, no proprietary platform, no "you need us to keep the lights on." It's your code. Period.
+                    </div>
+                </details>
+
+                <!-- Q5 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"What if I need changes after launch?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        Your first month of changes is included free. After that, we offer retainer packages starting at $150/month — updates, monitoring, monthly check-ins. Need a one-off tweak instead? Just text James. No ticket systems, no waiting 5 business days. One person handles everything.
+                    </div>
+                </details>
+
+                <!-- Q6 -->
+                <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
+                        <span class="text-white font-bold text-base pr-4">"Can you help with Google and SEO?"</span>
+                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
+                        Every site ships with on-page SEO built in — page titles, meta descriptions, local keywords, schema markup, and mobile optimization. We also set up or optimize your Google Business Profile so you show up in local searches and on Google Maps. For ongoing SEO management, that's available as a retainer add-on.
+                    </div>
+                </details>
 
             </div>
         </section>
@@ -1137,8 +1522,10 @@
                                     Winnipeg, MB — Local &amp; remote clients
                                 </li>
                                 <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
-                                    <i class="ph ph-instagram-logo text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
-                                    @fjmedia.ca
+                                    <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-brand-gold transition">
+                                        <i class="ph ph-instagram-logo text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                        @fjmedia204
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -1185,8 +1572,8 @@
                                 <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">To start</div>
                             </div>
                             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 12px;text-align:center;">
-                                <div class="text-brand-gold font-display font-bold" style="font-size:24px;margin-bottom:4px;">100%</div>
-                                <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Hand-coded</div>
+                                <div class="text-brand-gold font-display font-bold" style="font-size:24px;margin-bottom:4px;">0</div>
+                                <div class="text-brand-textMuted" style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;">Templates</div>
                             </div>
                         </div>
 
@@ -1206,7 +1593,7 @@
             <a href="work.html" class="hover:text-white transition">Work</a>
             <a href="#pricing" class="hover:text-white transition">Packages</a>
             <a href="#contact" class="hover:text-white transition">Contact</a>
-            <a href="https://www.instagram.com/fjmedia.ca" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><i class="ph ph-instagram-logo text-lg"></i> @fjmedia.ca</a>
+            <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><i class="ph ph-instagram-logo text-lg"></i> @fjmedia204</a>
         </div>
         <p class="text-[10px] text-brand-textMuted/50">© 2026 FJMedia. All rights reserved.</p>
     </footer>
@@ -1219,6 +1606,89 @@
              </a>
          </div>
     </div>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* — Process timeline: scroll-driven active step + visited trail — */
+      (function() {
+        const steps = Array.from(document.querySelectorAll('.process-step'));
+        if (!steps.length) return;
+
+        const setState = (activeIdx) => {
+          steps.forEach((s, j) => {
+            s.classList.toggle('is-active', j === activeIdx);
+            s.classList.toggle('is-visited', j < activeIdx);
+          });
+        };
+
+        setState(0);
+
+        steps.forEach((step, i) => {
+          ScrollTrigger.create({
+            trigger: step,
+            start: 'top 65%',
+            end: 'bottom 35%',
+            onEnter:     () => setState(i),
+            onEnterBack: () => setState(i),
+          });
+        });
+      })();
+
+      /* — Myth cards: stagger in, dots pop, strikethrough, reality reveal — */
+      document.querySelectorAll('.myth-card').forEach((card, i) => {
+        const dots = card.querySelectorAll('.chrome-dot');
+        const mythText = card.querySelector('.myth-text');
+        const realityZone = card.querySelector('.reality-zone');
+
+        /* set initial states */
+        gsap.set(card, { y: 50, opacity: 0 });
+        gsap.set(realityZone, { opacity: 0, y: 12 });
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 88%',
+          once: true,
+          onEnter: () => {
+            card.classList.add('in-view');
+
+            /* card slides up */
+            gsap.to(card, {
+              y: 0, opacity: 1,
+              duration: 0.7,
+              delay: (i % 2) * 0.15,
+              ease: 'power3.out'
+            });
+
+            /* dots pop in sequentially */
+            dots.forEach((dot, d) => {
+              gsap.to(dot, {
+                scale: 1, opacity: 1,
+                duration: 0.35,
+                delay: 0.3 + (i % 2) * 0.15 + d * 0.08,
+                ease: 'back.out(3)'
+              });
+            });
+
+            /* strikethrough the myth */
+            setTimeout(() => {
+              if (mythText) mythText.classList.add('struck');
+            }, 700 + (i % 2) * 150);
+
+            /* reality fades in */
+            gsap.to(realityZone, {
+              opacity: 1, y: 0,
+              duration: 0.5,
+              delay: 0.8 + (i % 2) * 0.15,
+              ease: 'power2.out'
+            });
+          }
+        });
+      });
+    </script>
 
     <script>
       const form = document.getElementById('contactForm');
