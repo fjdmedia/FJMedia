@@ -24,31 +24,8 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            bg: '#071520',
-                            card: '#0D1F3C',
-                            gold: '#C9A84C',
-                            goldHover: '#e0c26c',
-                            textBase: '#EDEAE5',
-                            textMuted: '#94a3b8'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind: precompiled CSS (no CDN, no runtime JIT) -->
+    <link rel="stylesheet" href="/tailwind.min.css">
 
     <style>
         body {

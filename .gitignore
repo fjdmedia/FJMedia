@@ -1,2 +1,6 @@
 # Superpowers plan/spec artifacts (session-scoped, not part of the live site)
 docs/superpowers/
+
+# Node / Tailwind build tooling
+node_modules/
+_hero_qa/

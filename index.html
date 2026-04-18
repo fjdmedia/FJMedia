@@ -59,47 +59,16 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Tailwind CSS CDN (sync load — defer broke utility class rendering) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind: precompiled CSS (no CDN, no runtime JIT) -->
+    <link rel="stylesheet" href="/tailwind.min.css">
 
-    <!-- Google Analytics: already async, keep at end of head -->
+    <!-- Google Analytics: async, defer to minimize main-thread blocking -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-HH2JF4NCCF');
-    </script>
-    
-    <!-- Tailwind config: set on window BEFORE the deferred Tailwind CDN script reads it -->
-    <script>
-        window.tailwind = window.tailwind || {};
-        window.tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            bg: '#071520',
-                            card: '#0D1F3C',
-                            gold: '#C9A84C',
-                            goldHover: '#e0c26c',
-                            textBase: '#EDEAE5',
-                            textMuted: '#94a3b8'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    },
-                    backgroundImage: {
-                        'grid-pattern': 'linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)',
-                        'glow-radial': 'radial-gradient(circle at 50% 0%, rgba(13, 31, 60, 0.8) 0%, rgba(7, 21, 32, 0) 50%)',
-                    }
-                }
-            }
-        };
     </script>
     
     <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
