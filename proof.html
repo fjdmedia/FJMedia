@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio & Proof Gallery | FJMedia — Hand-Coded Websites Winnipeg</title>
-  <meta name="description" content="Before-and-after proof of FJMedia's hand-coded websites for Winnipeg businesses. Real client builds — barbers, bakeries, photographers, detailers — delivered in 48 hours." />
-  <meta property="og:title" content="Portfolio & Proof Gallery | FJMedia" />
-  <meta property="og:description" content="Before-and-after proof of hand-coded websites for Winnipeg businesses. Real client builds delivered in 48 hours." />
+  <title>Proof | FJMedia — Custom Websites Winnipeg, Built in 48 Hours</title>
+  <meta name="description" content="Proof of work from FJMedia — Winnipeg's custom web partner. Live on this site: AI chat, Google Sheets contact form, PageSpeed 60+, 0 templates. Plus client case studies and a before/after bug gallery." />
+  <meta property="og:title" content="Proof | FJMedia" />
+  <meta property="og:description" content="Proof of work: AI in the pipeline. Not in the output. Live client builds delivered in 48 hours — free until they love it." />
   <meta property="og:url" content="https://fjmedia.ca/proof" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Portfolio & Proof Gallery | FJMedia" />
-  <meta name="twitter:description" content="Before-and-after proof of hand-coded websites for Winnipeg businesses. Real client builds delivered in 48 hours." />
+  <meta name="twitter:title" content="Proof | FJMedia" />
+  <meta name="twitter:description" content="Proof of work: AI in the pipeline. Not in the output. Live client builds delivered in 48 hours — free until they love it." />
   <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
   <link rel="canonical" href="https://fjmedia.ca/proof" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -99,6 +99,132 @@
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; }
+
+    /* LIVE ON THIS SITE — 6-CARD PROOF GRID */
+    #live-proof { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .proof-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .proof-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.8rem 1.6rem;
+      display: flex; flex-direction: column; gap: 0.55rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .proof-card:hover { border-color: rgba(201,168,76,0.4); }
+    .proof-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+    .proof-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      font-family: var(--mono);
+    }
+    .proof-title {
+      font-family: 'Syne', sans-serif; font-size: 1.05rem;
+      font-weight: 800; color: var(--heading); line-height: 1.25;
+    }
+    .proof-body {
+      font-size: 0.88rem; color: var(--text-mid);
+      line-height: 1.6; flex-grow: 1;
+    }
+    .proof-stat {
+      margin-top: auto; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--mono); font-size: 0.76rem;
+      color: var(--accent); gap: 0.6rem; flex-wrap: wrap;
+    }
+    .proof-stat a { color: var(--accent); text-decoration: none; }
+    .proof-stat a:hover { text-decoration: underline; }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #4ade80; display: inline-block;
+      margin-right: 6px;
+      box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
+      animation: live-pulse 2s infinite;
+      vertical-align: middle;
+    }
+    @keyframes live-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.55); }
+      70%  { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+
+    /* CASE STUDY */
+    #case-study { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .cs-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 2.5rem;
+      margin-top: 2rem;
+    }
+    .cs-head {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-client {
+      font-family: 'Syne', sans-serif; font-size: 1.55rem;
+      font-weight: 800; color: var(--heading); line-height: 1.1;
+    }
+    .cs-niche {
+      font-family: var(--mono); font-size: 0.76rem;
+      color: var(--text-light); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-top: 0.4rem;
+    }
+    .cs-url a {
+      color: var(--accent); font-family: var(--mono);
+      font-size: 0.85rem; text-decoration: none;
+    }
+    .cs-url a:hover { text-decoration: underline; }
+    .cs-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .cs-stat {
+      background: rgba(201,168,76,0.05); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.2rem 1rem;
+    }
+    .cs-stat-num {
+      font-family: 'Syne', sans-serif; font-size: 1.8rem;
+      font-weight: 800; color: var(--accent); line-height: 1;
+    }
+    .cs-stat-num.pending {
+      color: var(--text-light); font-size: 0.95rem;
+      font-style: italic; font-weight: 400; font-family: var(--mono);
+    }
+    .cs-stat-label {
+      font-family: var(--mono); font-size: 0.68rem;
+      color: var(--text-mid); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-top: 0.5rem;
+    }
+    .cs-section { margin-bottom: 1.8rem; }
+    .cs-section:last-child { margin-bottom: 0; }
+    .cs-section-label {
+      font-family: var(--mono); font-size: 0.7rem;
+      color: var(--accent); letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .cs-section-body {
+      font-size: 0.92rem; color: var(--text); line-height: 1.7;
+    }
+    .cs-section-body ul { list-style: none; padding: 0; }
+    .cs-section-body ul li {
+      padding-left: 1.2rem; position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .cs-section-body ul li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent);
+    }
+    .cs-quote-pending {
+      font-size: 0.86rem; color: var(--text-light);
+      font-style: italic; padding: 0.9rem 1rem;
+      border: 1px dashed var(--border); border-radius: 8px;
+    }
+    @media (max-width: 900px) {
+      .cs-card { padding: 1.8rem 1.4rem; }
+      .cs-client { font-size: 1.3rem; }
+    }
 
     /* FOLDER GRID */
     #folder-view { background: var(--bg2); border-bottom: 1px solid var(--border); }
@@ -263,7 +389,7 @@
       <li><a href="/#process">Process</a></li>
       <li><a href="/#why">Why Us</a></li>
       <li><a href="/#pricing">Get a Quote</a></li>
-      <li><a href="/proof.html" class="active">Bug Off 🪲 (Hehe)</a></li>
+      <li><a href="/proof.html" class="active">Proof</a></li>
       <li><a href="/#contact" class="nav-cta">Book a Call</a></li>
     </ul>
     <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
@@ -278,24 +404,157 @@
     <a href="/#process"    onclick="toggleNav()">Process</a>
     <a href="/#why"        onclick="toggleNav()">Why Us</a>
     <a href="/#pricing"    onclick="toggleNav()">Get a Quote</a>
-    <a href="/proof.html"  onclick="toggleNav()">Bug Off 🪲 (Hehe)</a>
+    <a href="/proof.html"  onclick="toggleNav()">Proof</a>
     <a href="/#contact"    onclick="toggleNav()">Book a Call</a>
   </div>
 
   <!-- HERO -->
   <section id="proof-hero">
     <div class="section-inner hero-content">
-      <p class="section-label">Attention to Detail</p>
-      <h1 class="section-title"><em>(Bug)</em> Proof Gallery</h1>
-      <p class="section-sub">Every bug we've caught and fixed — before our clients ever had to see it. Click a site to see the before and after.</p>
+      <p class="section-label">The Proof</p>
+      <h1 class="section-title">We use our own tools <em>on our own site.</em></h1>
+      <p class="section-sub">Every service we sell — running live on fjmedia.ca right now. Plus real client builds and a before-and-after bug gallery. No stock screenshots. No case studies stolen from an agency deck.</p>
       <div class="divider"></div>
+    </div>
+  </section>
+
+  <!-- LIVE ON THIS SITE -->
+  <section id="live-proof">
+    <div class="section-inner">
+      <p class="section-label">Live on this site</p>
+      <h2 class="section-title">Six things you can <em>verify right now.</em></h2>
+      <p class="section-sub">Everything below is running on this page — not in a demo video, not on a staging site. Click around, view source, run the tests yourself.</p>
+      <div class="divider"></div>
+
+      <div class="proof-grid">
+
+        <div class="proof-card">
+          <div class="proof-icon">💬</div>
+          <div class="proof-label">Try it live</div>
+          <div class="proof-title">AI chat, trained on FJMedia.</div>
+          <div class="proof-body">That chat bubble in the corner knows our pricing, process, and packages. Ask it anything — no form, no wait.</div>
+          <div class="proof-stat"><span><span class="live-dot"></span>Live now</span><span>~2s response</span></div>
+        </div>
+
+        <div class="proof-card">
+          <div class="proof-icon">📊</div>
+          <div class="proof-label">Data you own</div>
+          <div class="proof-title">Contact form → Google Sheet.</div>
+          <div class="proof-body">Every inquiry writes straight to a Sheet you own. No CRM tax. No Mailchimp lock-in. Export anywhere.</div>
+          <div class="proof-stat"><span>Zero third-party lock-in</span></div>
+        </div>
+
+        <div class="proof-card">
+          <div class="proof-icon">⚡</div>
+          <div class="proof-label">Custom build</div>
+          <div class="proof-title">0 templates. View source to verify.</div>
+          <div class="proof-body">Every line of this site is custom. Not a Wix theme, not a Shopify skin. Right-click → View Source.</div>
+          <div class="proof-stat"><span>AI in the pipeline.</span><span>Not in the output.</span></div>
+        </div>
+
+        <div class="proof-card">
+          <div class="proof-icon">🚀</div>
+          <div class="proof-label">PageSpeed</div>
+          <div class="proof-title">Measured by Google, not us.</div>
+          <div class="proof-body">Performance, accessibility, best practices, SEO — scored by Google's Lighthouse. Run the test on fjmedia.ca yourself.</div>
+          <div class="proof-stat"><a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ffjmedia.ca" target="_blank" rel="noopener">Run the test →</a></div>
+        </div>
+
+        <div class="proof-card">
+          <div class="proof-icon">🔍</div>
+          <div class="proof-label">SEO</div>
+          <div class="proof-title">100 / 100 SEO score.</div>
+          <div class="proof-body">Meta tags, Open Graph, schema markup, sitemap, canonical URLs — everything Google needs to rank you, wired in from day one.</div>
+          <div class="proof-stat"><span>Lighthouse</span><span>100 / 100</span></div>
+        </div>
+
+        <div class="proof-card">
+          <div class="proof-icon">🔒</div>
+          <div class="proof-label">Shipped</div>
+          <div class="proof-title">Vercel, HTTPS, custom domain.</div>
+          <div class="proof-body">Deployed on Vercel's global CDN. HTTPS enforced. Cache-tuned headers. Not a WordPress panel in sight.</div>
+          <div class="proof-stat"><span>fjmedia.ca</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section id="case-study">
+    <div class="section-inner">
+      <p class="section-label">Case Study</p>
+      <h2 class="section-title">Sugar &amp; Shai <em>Cookies.</em></h2>
+      <p class="section-sub">Winnipeg home baker. Running the whole business from Instagram DMs. Built, shipped, live — inside 48 hours.</p>
+      <div class="divider"></div>
+
+      <div class="cs-card">
+
+        <div class="cs-head">
+          <div>
+            <div class="cs-client">Sugar &amp; Shai Cookies</div>
+            <div class="cs-niche">Home Bakery · Winnipeg</div>
+          </div>
+          <div class="cs-url">
+            <a href="https://sugarandshaicookies.com" target="_blank" rel="noopener">sugarandshaicookies.com ↗</a>
+          </div>
+        </div>
+
+        <div class="cs-stats">
+          <div class="cs-stat">
+            <div class="cs-stat-num">48h</div>
+            <div class="cs-stat-label">Built &amp; shipped</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-num pending">Pulling data</div>
+            <div class="cs-stat-label">Monthly sessions</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-num pending">Pulling data</div>
+            <div class="cs-stat-label">Orders via site</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-num">0</div>
+            <div class="cs-stat-label">Templates used</div>
+          </div>
+        </div>
+
+        <div class="cs-section">
+          <div class="cs-section-label">// The problem</div>
+          <div class="cs-section-body">Shai was running the whole bakery from Instagram DMs. Repeat customers had no way to browse or order without messaging first. Every inquiry was a conversation — not a conversion.</div>
+        </div>
+
+        <div class="cs-section">
+          <div class="cs-section-label">// What we built</div>
+          <div class="cs-section-body">
+            <ul>
+              <li>Full menu with flavour-of-the-month feature — she texts us the new one, we swap it in minutes</li>
+              <li>Order form wired to a Google Sheet she owns. No new login, no new app</li>
+              <li>Mobile-first design — 80%+ of bakery traffic is phone</li>
+              <li>GA4 analytics + Google Search Console indexed</li>
+              <li>Her domain. Her data. Nothing rented.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-section">
+          <div class="cs-section-label">// In her words</div>
+          <div class="cs-section-body">
+            <div class="cs-quote-pending">Quote from Shai — pending. Dropping in once the site's been live a few more weeks.</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
   <!-- FOLDER VIEW -->
   <section id="folder-view">
     <div class="section-inner">
-      <p class="section-label">Sites</p>
+      <p class="section-label">Bug Fix Gallery</p>
+      <h2 class="section-title">Every bug we caught — <em>before the client saw it.</em></h2>
+      <p class="section-sub">Attention to detail, receipts attached. Click a site to see what we spotted, what we shipped, and what changed — with real before-and-after screenshots.</p>
+      <div class="divider"></div>
       <div class="site-grid" id="siteGrid"></div>
     </div>
   </section>
