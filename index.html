@@ -50,26 +50,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+    <!-- Preload the exact woff2 for Plus Jakarta Sans 700 — eliminates the CSS→woff2 waterfall for LCP text -->
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/plusjakartasans/v8/LDIoaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KU7NSg.woff2" crossorigin>
 
     <!-- Google Fonts: non-blocking load via media swap trick -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap"></noscript>
 
-    <!-- Phosphor Icons: defer — icons can flash in briefly, not critical path -->
-    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
-
     <!-- Tailwind: precompiled CSS (no CDN, no runtime JIT) -->
     <link rel="stylesheet" href="/tailwind.min.css">
 
-    <!-- Google Analytics: async, defer to minimize main-thread blocking -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HH2JF4NCCF');
-    </script>
+    <!-- Google Analytics: load deferred until after page parse to free mobile main thread -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
+    <script defer>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HH2JF4NCCF');</script>
     
     <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
     <style>
@@ -282,6 +277,38 @@
 </head>
 <body class="bg-brand-bg relative min-h-screen text-brand-textBase font-sans selection:bg-brand-gold selection:text-brand-bg uppercase-tracking overflow-x-hidden">
 
+    <!-- Inline SVG sprite: replaces the full Phosphor CDN bundle (~30KB) with only the 14 icons actually used -->
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+      <defs>
+        <symbol id="ph-arrow-right" viewBox="0 0 1024 1024"><path d="M886.64 534.64l-288 288c-5.794 5.794-13.799 9.378-22.64 9.378-17.683 0-32.018-14.335-32.018-32.018 0-8.841 3.584-16.846 9.378-22.64l233.4-233.36h-626.76c-17.673 0-32-14.327-32-32s14.327-32 32-32v0h626.76l-233.4-233.36c-5.794-5.794-9.378-13.799-9.378-22.64 0-17.683 14.335-32.018 32.018-32.018 8.841 0 16.846 3.584 22.64 9.378l-0-0 288 288c5.798 5.792 9.385 13.797 9.385 22.64s-3.587 16.848-9.385 22.64l-0 0z"/></symbol>
+        <symbol id="ph-caret-down" viewBox="0 0 1024 1024"><path d="M854.64 406.64l-320 320c-5.792 5.798-13.797 9.385-22.64 9.385s-16.848-3.587-22.64-9.385l-0-0-320-320c-5.794-5.794-9.378-13.799-9.378-22.64 0-17.683 14.335-32.018 32.018-32.018 8.841 0 16.846 3.584 22.64 9.378l297.36 297.4 297.36-297.4c5.794-5.794 13.799-9.378 22.64-9.378 17.683 0 32.018 14.335 32.018 32.018 0 8.841-3.584 16.846-9.378 22.64l0-0z"/></symbol>
+        <symbol id="ph-check" viewBox="0 0 1024 1024"><path d="M918.64 310.64l-512 512c-5.792 5.798-13.797 9.385-22.64 9.385s-16.848-3.587-22.64-9.385l-0-0-224-224c-5.794-5.794-9.378-13.799-9.378-22.64 0-17.683 14.335-32.018 32.018-32.018 8.841 0 16.846 3.584 22.64 9.378l0 0 201.36 201.4 489.36-489.4c5.794-5.794 13.799-9.378 22.64-9.378 17.683 0 32.018 14.335 32.018 32.018 0 8.841-3.584 16.846-9.378 22.64l0-0z"/></symbol>
+        <symbol id="ph-code" viewBox="0 0 1024 1024"><path d="M276.48 376.6l-162.48 135.4 162.48 135.4c7.343 5.914 12.002 14.903 12.002 24.981 0 17.673-14.327 32-32 32-8.036 0-15.38-2.962-21-7.854l0.039 0.033-192-160c-7.056-5.911-11.51-14.725-11.51-24.58s4.455-18.669 11.461-24.539l0.050-0.041 192-160c5.507-4.61 12.667-7.409 20.48-7.409 17.678 0 32.009 14.331 32.009 32.009 0 9.865-4.463 18.687-11.479 24.559l-0.050 0.041zM980.48 487.4l-192-160c-5.507-4.61-12.667-7.409-20.48-7.409-17.678 0-32.009 14.331-32.009 32.009 0 9.865 4.463 18.687 11.479 24.559l0.050 0.041 162.48 135.4-162.48 135.4c-7.343 5.914-12.002 14.903-12.002 24.981 0 17.673 14.327 32 32 32 8.036 0 15.38-2.962 21-7.854l-0.039 0.033 192-160c7.056-5.911 11.51-14.725 11.51-24.58s-4.455-18.669-11.461-24.539l-0.050-0.041zM650.92 129.92c-3.248-1.217-7.002-1.921-10.92-1.921-13.755 0-25.484 8.679-30.008 20.86l-0.072 0.221-256 704c-1.225 3.258-1.934 7.024-1.934 10.956 0 13.76 8.685 25.492 20.873 30.012l0.221 0.072c3.246 1.191 6.995 1.88 10.904 1.88 13.755 0 25.483-8.679 30.007-20.859l0.072-0.221 256-704c1.217-3.248 1.921-7.002 1.921-10.92 0-13.755-8.679-25.484-20.86-30.008l-0.221-0.072z"/></symbol>
+        <symbol id="ph-database" viewBox="0 0 1024 1024"><path d="M512 96c-215.32 0-384 98.4-384 224v384c0 125.6 168.68 224 384 224s384-98.4 384-224v-384c0-125.6-168.68-224-384-224zM832 512c0 38.48-31.52 77.72-86.44 107.68-61.84 33.72-144.8 52.32-233.56 52.32s-171.72-18.6-233.56-52.32c-54.92-29.96-86.44-69.2-86.44-107.68v-66.56c68.24 60 184.92 98.56 320 98.56s251.76-38.72 320-98.56zM278.44 212.32c61.84-33.72 144.8-52.32 233.56-52.32s171.72 18.6 233.56 52.32c54.92 29.96 86.44 69.2 86.44 107.68s-31.52 77.72-86.44 107.68c-61.84 33.72-144.8 52.32-233.56 52.32s-171.72-18.6-233.56-52.32c-54.92-29.96-86.44-69.2-86.44-107.68s31.52-77.72 86.44-107.68zM745.56 811.68c-61.84 33.72-144.8 52.32-233.56 52.32s-171.72-18.6-233.56-52.32c-54.92-29.96-86.44-69.2-86.44-107.68v-66.56c68.24 60 184.92 98.56 320 98.56s251.76-38.72 320-98.56v66.56c0 38.48-31.52 77.72-86.44 107.68z"/></symbol>
+        <symbol id="ph-envelope" viewBox="0 0 1024 1024"><path d="M896 192h-768c-17.673 0-32 14.327-32 32v0 544c0 35.346 28.654 64 64 64v0h704c35.346 0 64-28.654 64-64v0-544c0-17.673-14.327-32-32-32v0zM512 532.6l-301.72-276.6h603.44zM394.84 512l-234.84 215.24v-430.48zM442.2 555.4l48 44.2c5.677 5.224 13.284 8.426 21.64 8.426s15.963-3.203 21.663-8.447l-0.023 0.021 48-44.2 232 212.6h-603.2zM629.16 512l234.84-215.28v430.56z"/></symbol>
+        <symbol id="ph-gauge" viewBox="0 0 1024 1024"><path d="M828.24 290.68c-80.557-80.734-191.941-130.682-314.99-130.682-0.44 0-0.879 0.001-1.318 0.002l0.068-0h-1.6c-246.12 0.84-446.4 204-446.4 452.52v91.48c0 35.346 28.654 64 64 64v0h768c35.346 0 64-28.654 64-64v0-96c0.001-0.368 0.002-0.804 0.002-1.24 0-123.59-50.383-235.413-131.73-316.049l-0.032-0.031zM896 704h-417.16l219.040-301.2c3.831-5.213 6.131-11.758 6.131-18.84 0-17.679-14.332-32.011-32.011-32.011-10.597 0-19.991 5.149-25.818 13.082l-0.062 0.089-246.44 338.88h-271.68v-91.48c0-12.32 0.6-24.48 1.72-36.52h94.28c17.673 0 32-14.327 32-32s-14.327-32-32-32v0h-82.92c41.28-155.44 176-272.96 338.92-286.64v94.64c0 17.673 14.327 32 32 32s32-14.327 32-32v0-94.68c164.501 14.253 298.431 130.165 339.392 283.994l0.608 2.686h-84c-17.673 0-32 14.327-32 32s14.327 32 32 32v0h94.68c0.84 10.6 1.32 21.24 1.32 32z"/></symbol>
+        <symbol id="ph-hand-coins" viewBox="0 0 1024 1024"><path d="M921.32 564.24c-16.306-12.645-37.057-20.271-59.589-20.271-9.024 0-17.762 1.223-26.057 3.513l0.686-0.162-167.36 38.48c1.914-7.75 3.012-16.647 3.012-25.8 0-61.856-50.144-112-112-112-0.004 0-0.009 0-0.013 0l-200.239-0c-0.095-0-0.207-0-0.319-0-35.247 0-67.148 14.327-90.197 37.476l-0.004 0.004-90.48 90.52h-114.76c-35.346 0-64 28.654-64 64v0 160c0 35.346 28.654 64 64 64v0h416c0.005 0 0.010 0 0.015 0 2.751 0 5.42-0.35 7.965-1.008l-0.22 0.048 256-64c1.834-0.441 3.421-0.99 4.935-1.67l-0.175 0.070 157.24-66.96c32.52-16.511 54.416-49.71 54.416-88.022 0-31.789-15.074-60.057-38.464-78.046l-0.232-0.171zM64 640h96v160h-96zM877.72 672.84l-152 64.72-249.72 62.44h-252v-178.76l90.52-90.48c11.498-11.587 27.43-18.76 45.037-18.76 0.071 0 0.143 0 0.214 0l-0.011-0h200.24c26.51 0 48 21.49 48 48s-21.49 48-48 48v0h-112c-17.673 0-32 14.327-32 32s14.327 32 32 32v0h128c2.541-0.007 5.011-0.298 7.384-0.843l-0.224 0.043 269.24-61.96c2.758-0.796 5.927-1.254 9.202-1.254 18.999 0 34.4 15.401 34.4 34.4 0 13.148-7.377 24.574-18.217 30.363l-0.185 0.090zM656 384c0.048 0 0.106 0 0.163 0 8.277 0 16.391-0.698 24.287-2.039l-0.849 0.119c19.774 57.485 73.386 98.054 136.473 98.054 79.529 0 144-64.471 144-144s-64.471-144-144-144c-8.333 0-16.5 0.708-24.446 2.067l0.853-0.121c-19.767-57.499-73.385-98.080-136.482-98.080-79.529 0-144 64.471-144 144s64.471 144 144 144c0.001 0 0.001-0 0.002-0l-0 0zM896 336c0 44.183-35.817 80-80 80s-80-35.817-80-80c0-44.183 35.817-80 80-80v0c44.183 0 80 35.817 80 80v0zM656 160c36.491 0.019 67.267 24.467 76.861 57.875l0.139 0.565c-32.353 22.971-54.627 58.316-59.923 98.995l-0.077 0.725c-5.103 1.152-10.968 1.822-16.987 1.84l-0.013 0c-44.183 0-80-35.817-80-80s35.817-80 80-80v0z"/></symbol>
+        <symbol id="ph-hand-pointing" viewBox="0 0 1024 1024"><path d="M784 352c-0.037-0-0.080-0-0.123-0-19.531 0-37.888 5.024-53.849 13.851l0.573-0.29c-14.988-45.395-57.025-77.577-106.579-77.577-17.449 0-33.967 3.99-48.689 11.109l0.668-0.291v-122.8c0-61.856-50.144-112-112-112s-112 50.144-112 112v0 320l-15.28-24.52c-19.765-33.596-55.741-55.788-96.9-55.788-61.883 0-112.048 50.166-112.048 112.048 0 20.723 5.626 40.133 15.434 56.784l-0.285-0.524 18.68 32.92c137.64 242.64 194.6 343.080 382.4 343.080 194.313-0.228 351.772-157.687 352-351.978l0-0.022v-144c0-61.856-50.144-112-112-112v0zM832 608c-0.182 158.985-129.015 287.818-287.983 288l-0.017 0c-150.52 0-191.36-72-326.72-310.72l-18.76-33.080v-0.2c-4.054-6.892-6.449-15.182-6.449-24.032 0-17.644 9.52-33.065 23.704-41.406l0.225-0.122c6.83-4.024 15.047-6.4 23.819-6.4 17.673 0 33.115 9.551 41.447 23.773l0.123 0.227 74.68 120c5.751 9.077 15.742 15.015 27.12 15.015 17.664 0 31.986-14.312 32-31.973l0-0.001v-432c0-26.51 21.49-48 48-48s48 21.49 48 48v0 272c0 17.673 14.327 32 32 32s32-14.327 32-32v0-48c0-26.51 21.49-48 48-48s48 21.49 48 48v0 80c0 17.673 14.327 32 32 32s32-14.327 32-32v0-16c0-26.51 21.49-48 48-48s48 21.49 48 48v0z"/></symbol>
+        <symbol id="ph-handshake" viewBox="0 0 1024 1024"><path d="M1017.2 431.64l-102.080-204.24c-10.744-21.137-32.329-35.367-57.238-35.367-10.441 0-20.298 2.5-29.005 6.935l0.363-0.168-99.48 49.72-209.56-55.44c-2.461-0.667-5.286-1.049-8.2-1.049s-5.739 0.383-8.428 1.101l0.228-0.052-209.56 55.44-99.48-49.72c-8.344-4.267-18.201-6.767-28.642-6.767-24.909 0-46.494 14.23-57.070 35.004l-0.168 0.363-102.080 204.2c-4.267 8.344-6.767 18.201-6.767 28.642 0 24.909 14.23 46.494 35.004 57.070l0.363 0.168 108 54.040 221.96 158.52c3.089 2.222 6.709 3.944 10.616 4.951l0.224 0.049 256 64c2.337 0.611 5.019 0.961 7.784 0.961 8.831 0 16.826-3.577 22.616-9.361l-0 0 220.28-220.32 105.68-52.84c21.128-10.747 35.351-32.327 35.351-57.23 0-10.429-2.494-20.275-6.919-28.974l0.168 0.364zM797.64 565.12l-137.64-110.24c-5.427-4.375-12.406-7.022-20.003-7.022-8.881 0-16.917 3.618-22.715 9.46l-0.002 0.002c-71.24 71.76-150.64 62.68-201.28 30.68l172.96-168h127.24l108.84 217.64zM166.12 256l81.88 40.88-102.28 204.2-81.72-40.84zM630.12 732.52l-232.44-58.080-196.8-140.56 112-224 199.12-52.76 39.2 10.36-180.32 175.080c-11.582 11.582-18.745 27.582-18.745 45.255 0 22.588 11.701 42.442 29.373 53.833l0.253 0.152c82.24 52.52 181.48 44 259.64-20l110.6 88.84zM878.12 501.040l-102.080-204 81.84-41.040 102.12 204.24zM527.12 871.72c-3.591 14.018-16.101 24.218-30.998 24.24l-0.002 0c-2.771-0.004-5.459-0.354-8.025-1.009l0.225 0.049-166.68-41.68c-4.132-1.039-7.755-2.762-10.932-5.063l0.092 0.063-105.4-75.28c-7.481-5.912-12.238-14.985-12.238-25.169 0-17.673 14.327-32 32-32 6.484 0 12.518 1.929 17.559 5.244l-0.121-0.075 100.44 71.76 160.96 40.16c14.030 3.596 24.234 16.128 24.234 31.043 0 2.755-0.348 5.428-1.003 7.978l0.048-0.222z"/></symbol>
+        <symbol id="ph-instagram-logo" viewBox="0 0 1024 1024"><path d="M512 320c-106.039 0-192 85.961-192 192s85.961 192 192 192c106.039 0 192-85.961 192-192v0c-0.114-105.993-86.007-191.886-191.989-192l-0.011-0zM512 640c-70.692 0-128-57.308-128-128s57.308-128 128-128c70.692 0 128 57.308 128 128v0c0 70.692-57.308 128-128 128v0zM704 96h-384c-123.657 0.137-223.863 100.343-224 223.987l-0 0.013v384c0.137 123.657 100.343 223.863 223.987 224l384.013 0c123.657-0.137 223.863-100.343 224-223.987l0-0.013v-384c-0.137-123.657-100.343-223.863-223.987-224l-0.013-0zM864 704c0 88.366-71.634 160-160 160v0h-384c-88.366 0-160-71.634-160-160v0-384c0-88.366 71.634-160 160-160v0h384c88.366 0 160 71.634 160 160v0zM768 304c0 26.51-21.49 48-48 48s-48-21.49-48-48c0-26.51 21.49-48 48-48v0c26.51 0 48 21.49 48 48v0z"/></symbol>
+        <symbol id="ph-lightning" viewBox="0 0 1024 1024"><path d="M863.16 472.68c-2.544-10.512-10.020-18.858-19.78-22.567l-0.22-0.073-230.44-86.44 58.64-293.32c0.376-1.84 0.591-3.955 0.591-6.12 0-17.673-14.327-32-32-32-9.202 0-17.497 3.884-23.335 10.103l-0.016 0.017-448 480c-5.442 5.725-8.789 13.486-8.789 22.028 0 13.646 8.541 25.297 20.569 29.898l0.219 0.074 230.52 86.44-58.48 293c-0.376 1.84-0.591 3.955-0.591 6.12 0 17.673 14.327 32 32 32 9.202 0 17.497-3.884 23.335-10.103l0.016-0.017 448-480c5.32-5.699 8.587-13.375 8.587-21.813 0-2.563-0.301-5.056-0.87-7.444l0.044 0.218zM437.48 856l41.88-209.52c0.402-1.902 0.632-4.088 0.632-6.327 0-13.587-8.468-25.196-20.414-29.838l-0.218-0.075-211.36-79.4 338.48-362.64-41.84 209.52c-0.402 1.902-0.632 4.088-0.632 6.327 0 13.587 8.468 25.196 20.414 29.838l0.218 0.075 211.2 79.2z"/></symbol>
+        <symbol id="ph-lock-key" viewBox="0 0 1024 1024"><path d="M512 448c-61.84 0.022-111.962 50.157-111.962 112 0 50.432 33.333 93.079 79.169 107.111l0.793 0.209v68.68c0 17.673 14.327 32 32 32s32-14.327 32-32v0-68.68c46.63-14.241 79.962-56.888 79.962-107.32 0-61.843-50.123-111.978-111.96-112l-0.002-0zM512 608c-26.51 0-48-21.49-48-48s21.49-48 48-48c26.51 0 48 21.49 48 48v0c0 26.51-21.49 48-48 48v0zM832 320h-128v-96c0-106.039-85.961-192-192-192s-192 85.961-192 192v0 96h-128c-35.346 0-64 28.654-64 64v0 448c0 35.346 28.654 64 64 64v0h640c35.346 0 64-28.654 64-64v0-448c0-35.346-28.654-64-64-64v0zM384 224c0-70.692 57.308-128 128-128s128 57.308 128 128v0 96h-256zM832 832h-640v-448h640v448z"/></symbol>
+        <symbol id="ph-lock-simple" viewBox="0 0 1024 1024"><path d="M832 320h-128v-96c0-106.039-85.961-192-192-192s-192 85.961-192 192v0 96h-128c-35.346 0-64 28.654-64 64v0 448c0 35.346 28.654 64 64 64v0h640c35.346 0 64-28.654 64-64v0-448c0-35.346-28.654-64-64-64v0zM384 224c0-70.692 57.308-128 128-128s128 57.308 128 128v0 96h-256zM832 832h-640v-448h640v448z"/></symbol>
+        <symbol id="ph-map-pin" viewBox="0 0 1024 1024"><path d="M512 256c-88.366 0-160 71.634-160 160s71.634 160 160 160c88.366 0 160-71.634 160-160v0c0-88.366-71.634-160-160-160v0zM512 512c-53.019 0-96-42.981-96-96s42.981-96 96-96c53.019 0 96 42.981 96 96v0c0 53.019-42.981 96-96 96v0zM512 64c-194.313 0.228-351.772 157.687-352 351.978l-0 0.022c0 125.6 58.040 258.72 168 385 49.439 56.891 103.776 107.23 163.073 151.265l2.727 1.935c5.116 3.623 11.485 5.791 18.36 5.791s13.244-2.168 18.46-5.858l-0.1 0.067c61.893-45.975 116.125-96.311 164.414-151.945l1.066-1.255c109.8-126.28 168-259.4 168-385-0.228-194.313-157.687-351.772-351.978-352l-0.022-0zM512 888c-66.12-52-288-243-288-472 0-159.058 128.942-288 288-288s288 128.942 288 288v0c0 228.92-221.88 420-288 472z"/></symbol>
+        <symbol id="ph-map-trifold" viewBox="0 0 1024 1024"><path d="M915.68 198.76c-5.368-4.214-12.221-6.758-19.668-6.758-2.76 0-5.439 0.349-7.994 1.006l0.222-0.048-244.52 61.12-245.4-122.72c-4.162-2.121-9.077-3.364-14.283-3.364-2.769 0-5.456 0.352-8.019 1.013l0.222-0.049-256 64c-14.031 3.594-24.238 16.125-24.24 31.040l-0 0v576c0.003 17.671 14.329 31.995 32 31.995 2.756 0 5.43-0.348 7.982-1.003l-0.222 0.048 244.52-61.12 245.4 122.72c4.177 2.105 9.102 3.344 14.315 3.36l0.005 0c2.757-0.002 5.431-0.352 7.982-1.008l-0.222 0.048 256-64c14.031-3.594 24.238-16.125 24.24-31.040l0-0v-576c0-0.002 0-0.005 0-0.007 0-10.221-4.792-19.322-12.251-25.181l-0.069-0.052zM416 211.76l192 96v504.48l-192-96zM160 249l192-48v510l-192 48zM864 775l-192 48v-510l192-48z"/></symbol>
+        <symbol id="ph-money" viewBox="0 0 1024 1024"><path d="M512 352c-88.366 0-160 71.634-160 160s71.634 160 160 160c88.366 0 160-71.634 160-160v0c0-88.366-71.634-160-160-160v0zM512 608c-53.019 0-96-42.981-96-96s42.981-96 96-96c53.019 0 96 42.981 96 96v0c0 53.019-42.981 96-96 96v0zM960 224h-896c-17.673 0-32 14.327-32 32v0 512c0 17.673 14.327 32 32 32v0h896c17.673 0 32-14.327 32-32v0-512c0-17.673-14.327-32-32-32v0zM774.6 736h-525.2c-22.361-73.963-79.437-131.039-151.791-152.981l-1.609-0.419v-141.2c73.963-22.361 131.039-79.437 152.981-151.791l0.419-1.609h525.2c22.361 73.963 79.437 131.039 151.791 152.981l1.609 0.419v141.2c-73.963 22.361-131.039 79.437-152.981 151.791l-0.419 1.609zM928 373.48c-38.518-16.852-68.628-46.962-85.070-84.432l-0.41-1.048h85.48zM181.48 288c-16.852 38.518-46.962 68.628-84.432 85.070l-1.048 0.41v-85.48zM96 650.52c38.518 16.852 68.628 46.962 85.070 84.432l0.41 1.048h-85.48zM842.52 736c16.852-38.518 46.962-68.628 84.432-85.070l1.048-0.41v85.48z"/></symbol>
+        <symbol id="ph-rocket-launch" viewBox="0 0 1024 1024"><path d="M895.4 188.48c-2.022-32.291-27.709-57.978-59.816-59.991l-0.184-0.009c-50.32-3-178.92 1.6-285.64 108.28l-19 19.24h-233.32c-0.107-0.001-0.233-0.001-0.359-0.001-17.614 0-33.557 7.156-45.080 18.719l-0.002 0.002-137.2 137.28c-11.591 11.583-18.761 27.589-18.761 45.27 0 32.186 23.759 58.822 54.695 63.328l0.346 0.041 153.88 21.48 176.84 176.84 21.48 153.96c3.504 24.313 20.302 43.969 42.671 51.548l0.449 0.132c6.087 2.103 13.101 3.318 20.399 3.32l0.001 0c0.035 0 0.077 0 0.119 0 17.614 0 33.556-7.156 45.079-18.718l0.002-0.002 137.28-137.2c11.565-11.525 18.721-27.467 18.721-45.081 0-0.126-0-0.252-0.001-0.378l0 0.019v-233.32l19.080-19.080c106.72-106.72 111.32-235.32 108.32-285.68zM297.44 320h169.32l-158.12 158.080-148.64-20.72zM595.080 282.2c55.549-55.882 132.467-90.468 217.464-90.468 6.676 0 13.303 0.213 19.873 0.634l-0.897-0.046c0.402 5.876 0.632 12.735 0.632 19.648 0 84.819-34.528 161.574-90.295 216.976l-0.016 0.016-229.84 229.76-146.72-146.72zM704 726.56l-137.32 137.44-20.76-148.68 158.080-158.080zM407.36 764.56c-18 39.44-78.2 131.44-247.36 131.44-17.673 0-32-14.327-32-32v0c0-169.16 92-229.36 131.44-247.4 3.899-1.822 8.465-2.885 13.28-2.885 17.676 0 32.005 14.329 32.005 32.005 0 12.861-7.586 23.951-18.528 29.038l-0.197 0.082c-25.72 11.72-82.48 49.44-92.48 155.64 106.2-10 144-66.76 155.64-92.48 5.169-11.139 16.259-18.725 29.12-18.725 17.676 0 32.005 14.329 32.005 32.005 0 4.815-1.063 9.381-2.968 13.477l0.082-0.197z"/></symbol>
+        <symbol id="ph-x" viewBox="0 0 1024 1024"><path d="M822.64 777.36c5.794 5.794 9.378 13.799 9.378 22.64 0 17.683-14.335 32.018-32.018 32.018-8.841 0-16.846-3.584-22.64-9.378l-265.36-265.4-265.36 265.4c-5.794 5.794-13.799 9.378-22.64 9.378-17.683 0-32.018-14.335-32.018-32.018 0-8.841 3.584-16.846 9.378-22.64l-0 0 265.4-265.36-265.4-265.36c-5.794-5.794-9.378-13.799-9.378-22.64 0-17.683 14.335-32.018 32.018-32.018 8.841 0 16.846 3.584 22.64 9.378l265.36 265.4 265.36-265.4c5.794-5.794 13.799-9.378 22.64-9.378 17.683 0 32.018 14.335 32.018 32.018 0 8.841-3.584 16.846-9.378 22.64l-0 0-265.4 265.36z"/></symbol>
+        <symbol id="ph-fill-check-circle" viewBox="0 0 1024 1024"><path d="M512 96c-229.75 0-416 186.25-416 416s186.25 416 416 416c229.75 0 416-186.25 416-416v0c-0.25-229.65-186.35-415.75-415.976-416l-0.024-0zM694.64 438.64l-224 224c-5.792 5.798-13.797 9.385-22.64 9.385s-16.848-3.587-22.64-9.385l-0-0-96-96c-5.794-5.794-9.378-13.799-9.378-22.64 0-17.683 14.335-32.018 32.018-32.018 8.841 0 16.846 3.584 22.64 9.378l73.36 73.4 201.36-201.4c5.794-5.794 13.799-9.378 22.64-9.378 17.683 0 32.018 14.335 32.018 32.018 0 8.841-3.584 16.846-9.378 22.64l0-0z"/></symbol>
+        <symbol id="ph-fill-chat-circle-dots" viewBox="0 0 1024 1024"><path d="M512 96c-0.027-0-0.059-0-0.091-0-229.75 0-416 186.25-416 416 0 71.565 18.071 138.91 49.9 197.72l-1.089-2.2-45.4 136.2c-2.084 6.042-3.287 13.004-3.287 20.247 0 35.346 28.654 64 64 64 7.243 0 14.205-1.203 20.698-3.421l-0.45 0.134 136.2-45.4c56.567 30.683 123.852 48.72 195.349 48.72 229.75 0 416-186.25 416-416 0-229.69-186.152-415.903-415.82-416l-0.009-0zM336 560c-26.51 0-48-21.49-48-48s21.49-48 48-48c26.51 0 48 21.49 48 48v0c0 26.51-21.49 48-48 48v0zM512 560c-26.51 0-48-21.49-48-48s21.49-48 48-48c26.51 0 48 21.49 48 48v0c0 26.51-21.49 48-48 48v0zM688 560c-26.51 0-48-21.49-48-48s21.49-48 48-48c26.51 0 48 21.49 48 48v0c0 26.51-21.49 48-48 48v0z"/></symbol>
+      </defs>
+    </svg>
+
+    <!-- ph-icon CSS helper: makes inline SVGs behave like icon-font glyphs (1em × 1em, currentColor fill) -->
+    <style>
+      svg.ph-icon{display:inline-block;width:1em;height:1em;fill:currentColor;vertical-align:-0.15em;flex-shrink:0;}
+    </style>
+
     <!-- Macro Shell: Background Environment -->
     <div class="fixed inset-0 pointer-events-none z-0">
         <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-[0.15]"></div>
@@ -334,7 +361,7 @@
                         Book a Call
                     </a>
                     <a href="#work" class="glass-panel text-white border border-white/10 px-8 py-4 rounded-md font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
-                        See Our Work <i class="ph ph-arrow-right"></i>
+                        See Our Work <svg class="ph-icon" aria-hidden="true"><use href="#ph-arrow-right"/></svg>
                     </a>
                 </div>
                 <p class="text-xs text-brand-textMuted max-w-md pt-8 border-t border-white/10">
@@ -349,44 +376,44 @@
 
                 <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
-                        <i class="ph ph-money text-xl"></i>
+                        <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-money"/></svg>
                     </div>
                     <div>
                         <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">01 · Risk</div>
-                        <h3 class="text-white font-bold text-lg leading-tight">$0 Upfront</h3>
+                        <h2 class="text-white font-bold text-lg leading-tight">$0 Upfront</h2>
                         <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Pay only if you're satisfied.</p>
                     </div>
                 </div>
 
                 <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
-                        <i class="ph ph-lightning text-xl"></i>
+                        <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-lightning"/></svg>
                     </div>
                     <div>
                         <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">02 · Speed</div>
-                        <h3 class="text-white font-bold text-lg leading-tight">48 Hours</h3>
+                        <h2 class="text-white font-bold text-lg leading-tight">48 Hours</h2>
                         <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Not 6 weeks. Call to finished design.</p>
                     </div>
                 </div>
 
                 <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
-                        <i class="ph ph-code text-xl"></i>
+                        <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-code"/></svg>
                     </div>
                     <div>
                         <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">03 · Craft</div>
-                        <h3 class="text-white font-bold text-lg leading-tight">No Builders</h3>
+                        <h2 class="text-white font-bold text-lg leading-tight">No Builders</h2>
                         <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">No Wix. No Shopify. No templates.</p>
                     </div>
                 </div>
 
                 <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
-                        <i class="ph ph-database text-xl"></i>
+                        <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-database"/></svg>
                     </div>
                     <div>
                         <div class="text-[10px] font-bold tracking-[0.22em] text-brand-textMuted uppercase mb-1">04 · Backend</div>
-                        <h3 class="text-white font-bold text-lg leading-tight">Full Stack Ready</h3>
+                        <h2 class="text-white font-bold text-lg leading-tight">Full Stack Ready</h2>
                         <p class="text-sm text-brand-textMuted mt-1 leading-relaxed">Forms, CRM &amp; automation — when you need it.</p>
                     </div>
                 </div>
@@ -409,10 +436,10 @@
                 <div class="glass-panel inline-block text-left p-8 rounded-xl border border-brand-gold/20 mt-8">
                     <p class="text-xs font-bold tracking-[0.1em] text-brand-gold mb-6 uppercase">What you get free:</p>
                     <ul class="space-y-4 text-sm md:text-base">
-                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> A custom website — coded by hand, not built on Wix</li>
-                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> Every page designed and mobile-ready</li>
-                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> A live link you can show off before you spend a dime</li>
-                        <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-1"></i> No contracts. No deposits. Not feeling it? Walk away.</li>
+                        <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-1" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> A custom website — coded by hand, not built on Wix</li>
+                        <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-1" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Every page designed and mobile-ready</li>
+                        <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-1" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> A live link you can show off before you spend a dime</li>
+                        <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-1" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> No contracts. No deposits. Not feeling it? Walk away.</li>
                     </ul>
                 </div>
                 
@@ -591,7 +618,7 @@
             <div class="max-w-5xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#faf6f0]/90 py-4 z-50 border-b border-[#4a3f3a]/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#a87a6b]">Case Study: Sugar & Shai</div>
-                    <label for="modal-sugar" class="cursor-pointer bg-[#4a3f3a] text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#a87a6b] transition"><i class="ph ph-x"></i> Close</label>
+                    <label for="modal-sugar" class="cursor-pointer bg-[#4a3f3a] text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#a87a6b] transition"><svg class="ph-icon" aria-hidden="true"><use href="#ph-x"/></svg> Close</label>
                 </div>
 
                 <!-- Raw Content from Prompt Preserved & Styled -->
@@ -610,12 +637,12 @@
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-20 masonry-grid">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies_1.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies_3.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies_4.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies_5.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
-                    <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Main/Cookies_6.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies_1.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies_3.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies_4.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies_5.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
+                    <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Main/Cookies_6.jpg" alt="Cookies" class="masonry-item rounded-lg shadow-md w-full">
                 </div>
 
                 <div class="my-20 text-center bg-white p-12 rounded-2xl shadow-sm border border-black/5">
@@ -643,7 +670,7 @@
                         <a href="https://sugarandshaicookies.com/#order-form" class="bg-[#8b5c85] text-white px-8 py-4 rounded-full font-bold shadow-lg">Order This Month's Flavour</a>
                     </div>
                     <div class="flex-1">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Cookies/April/Ube.jpg" alt="Ube Bliss Cookie" class="w-full max-w-md mx-auto rounded-full shadow-2xl border-8 border-white origin-center rotate-6">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Cookies/April/Ube.jpg" alt="Ube Bliss Cookie" class="w-full max-w-md mx-auto rounded-full shadow-2xl border-8 border-white origin-center rotate-6">
                     </div>
                 </div>
 
@@ -656,28 +683,28 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
-                            <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Cookies/Bischoff.png" alt="Biscoff Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Cookies/Bischoff.png" alt="Biscoff Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
                             <div>
                                 <h3 class="text-xl font-bold font-display">Biscoff</h3>
                                 <p class="text-sm mt-2">That iconic caramelized speculoos flavour baked right into every bite.</p>
                             </div>
                         </div>
                         <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
-                            <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Cookies/Mini%20Eggs.png" alt="Mini Eggs Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Cookies/Mini%20Eggs.png" alt="Mini Eggs Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
                             <div>
                                 <h3 class="text-xl font-bold font-display">Mini Eggs</h3>
                                 <p class="text-sm mt-2">Crunchy, chocolatey mini eggs folded into a soft, chewy cookie. A seasonal favourite.</p>
                             </div>
                         </div>
                         <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
-                            <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Cookies/Matcha%20Chocolate.png" alt="Matcha with White Chocolate Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Cookies/Matcha%20Chocolate.png" alt="Matcha with White Chocolate Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
                             <div>
                                 <h3 class="text-xl font-bold font-display">Matcha with White Chocolate</h3>
                                 <p class="text-sm mt-2">Earthy matcha balanced with creamy white chocolate chips — elegant and delicious.</p>
                             </div>
                         </div>
                         <div class="bg-white p-6 rounded-2xl flex items-center gap-6 shadow-sm border border-black/5 hover:-translate-y-1 transition-transform">
-                            <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Cookies/Chocolate%20Chunk.png" alt="Chocolate Chunk with Sea Salt Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
+                            <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Cookies/Chocolate%20Chunk.png" alt="Chocolate Chunk with Sea Salt Cookie" class="w-24 h-24 object-cover rounded-full shadow-md">
                             <div>
                                 <h3 class="text-xl font-bold font-display">Chocolate Chunk with Sea Salt</h3>
                                 <p class="text-sm mt-2">Gooey dark chocolate chunks finished with a sprinkle of flaky sea salt. Pure perfection.</p>
@@ -698,14 +725,14 @@
                     <h2 class="text-3xl font-display font-bold text-center mb-8">Sweet Creations ✦ Cookie Gallery</h2>
                     <p class="text-center mb-8">A peek at our cookies — follow us on Instagram for more!</p>
                     <div class="masonry-grid">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies.jpg" alt="Packaged cookies" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies_1.jpg" alt="All flavours" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies_3.jpg" alt="Matcha cookies" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies_4.jpg" alt="Mini eggs cookies" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies_5.jpg" alt="Biscoff cookies" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/Cookies_6.jpg" alt="Chocolate chunk cookies" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/BTS.jpg" alt="New cookie" class="masonry-item rounded shadow">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Gallery/BTS_2.jpg" alt="Dough prep" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies.jpg" alt="Packaged cookies" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies_1.jpg" alt="All flavours" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies_3.jpg" alt="Matcha cookies" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies_4.jpg" alt="Mini eggs cookies" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies_5.jpg" alt="Biscoff cookies" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/Cookies_6.jpg" alt="Chocolate chunk cookies" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/BTS.jpg" alt="New cookie" class="masonry-item rounded shadow">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Gallery/BTS_2.jpg" alt="Dough prep" class="masonry-item rounded shadow">
                     </div>
                     <div class="text-center mt-8">
                         <a href="https://www.instagram.com/sugarandshaicookies/" class="inline-block border-2 border-[#4a3f3a] text-[#4a3f3a] px-6 py-2 rounded-full font-bold hover:bg-[#4a3f3a] hover:text-white transition">📸 See More on Instagram</a>
@@ -753,9 +780,9 @@
                 <div class="my-20">
                     <h2 class="text-3xl font-display font-bold text-center mb-8">Happy Customers ✦ What People Are Saying</h2>
                     <div class="flex flex-wrap justify-center gap-6">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Reviews/Review_2.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Reviews/Review_4.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
-                        <img loading="lazy" decoding="async"src="https://sugarandshaicookies.com/Reviews/Review_5.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Reviews/Review_2.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Reviews/Review_4.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
+                        <img loading="lazy" decoding="async" data-src="https://sugarandshaicookies.com/Reviews/Review_5.jpg" alt="Customer review" class="w-64 rounded-xl shadow-lg border-4 border-white">
                     </div>
                 </div>
 
@@ -802,7 +829,7 @@
              <div class="max-w-4xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0a0a0a]/90 py-4 z-50 border-b border-white/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#d4af37]">Case Study: Royal Kings</div>
-                    <label for="modal-royal" class="cursor-pointer border border-[#d4af37] text-[#d4af37] px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#d4af37] hover:text-black transition"><i class="ph ph-x"></i> Close</label>
+                    <label for="modal-royal" class="cursor-pointer border border-[#d4af37] text-[#d4af37] px-4 py-2 rounded text-xs uppercase font-bold hover:bg-[#d4af37] hover:text-black transition"><svg class="ph-icon" aria-hidden="true"><use href="#ph-x"/></svg> Close</label>
                 </div>
 
                 <div class="text-center space-y-6">
@@ -892,7 +919,7 @@
             <div class="max-w-6xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0d161b]/90 py-4 z-50 border-b border-white/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#7dd3fc]">Case Study: Event Platform</div>
-                    <label for="modal-diego" class="cursor-pointer bg-white/10 text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-white hover:text-black transition"><i class="ph ph-x"></i> Close</label>
+                    <label for="modal-diego" class="cursor-pointer bg-white/10 text-white px-4 py-2 rounded text-xs uppercase font-bold hover:bg-white hover:text-black transition"><svg class="ph-icon" aria-hidden="true"><use href="#ph-x"/></svg> Close</label>
                 </div>
 
                 <div class="text-center space-y-6 mb-16">
@@ -904,42 +931,42 @@
                 <!-- Tickets -->
                 <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Tickets & Admission</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference.jpg" alt="Admission Ticket" class="rounded-xl border border-white/10 shadow-2xl">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference_2.jpg" alt="Support Ticket" class="rounded-xl border border-white/10 shadow-2xl">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GoldenTicket1.jpg" alt="Golden Ticket" class="rounded-xl border border-[#d4af37]/50 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference.jpg" alt="Admission Ticket" class="rounded-xl border border-white/10 shadow-2xl">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference_2.jpg" alt="Support Ticket" class="rounded-xl border border-white/10 shadow-2xl">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GoldenTicket1.jpg" alt="Golden Ticket" class="rounded-xl border border-[#d4af37]/50 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
                 </div>
 
                 <!-- Grand Prizes Data Density -->
                 <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Grand Prizes</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize1.jpg" alt="Yeti Package" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize2.jpg" alt="AirPods Pro 3" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize3.jpg" alt="iPad A16" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize4.jpg" alt="Apple Watch Series 11" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize5.jpg" alt="Rayban Meta Sunglasses" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize6.jpg" alt="Dyson V12 Vacuum" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize7.jpg" alt="Nintendo Switch" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize8.jpg" alt="PlayStation 5" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize9.jpg" alt="Philips 55&quot; QLED Roku TV" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize10.jpg" alt="Bikes His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize11.jpg" alt="Electric Scooter" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize12.jpg" alt="Kayak" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize13.jpg" alt="Brussels 3 Piece Luggage Set" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize14.jpg" alt="Diamond Stud Earrings" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize15.jpg" alt="Ten Spa Gift Card" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize16.jpg" alt="Paddle Boards His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize1.jpg" alt="Yeti Package" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize2.jpg" alt="AirPods Pro 3" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize3.jpg" alt="iPad A16" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize4.jpg" alt="Apple Watch Series 11" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize5.jpg" alt="Rayban Meta Sunglasses" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize6.jpg" alt="Dyson V12 Vacuum" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize7.jpg" alt="Nintendo Switch" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize8.jpg" alt="PlayStation 5" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize9.jpg" alt="Philips 55&quot; QLED Roku TV" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize10.jpg" alt="Bikes His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize11.jpg" alt="Electric Scooter" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize12.jpg" alt="Kayak" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize13.jpg" alt="Brussels 3 Piece Luggage Set" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize14.jpg" alt="Diamond Stud Earrings" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize15.jpg" alt="Ten Spa Gift Card" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/GrandPrize16.jpg" alt="Paddle Boards His &amp; Hers" class="rounded border border-white/5 hover:border-[#7dd3fc] transition">
                 </div>
 
                 <!-- Regular Prizes Data Density -->
                  <h2 class="text-2xl font-display font-bold text-white mb-8 border-l-4 border-[#7dd3fc] pl-4 uppercase">Regular Prizes</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize1.jpg" alt="Gym Package" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize2.jpg" alt="Walking Pad" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize3.jpg" alt="Lottery Tree" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize4.jpg" alt="Pokemon Card Package" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize5.jpg" alt="Coffee Package" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize6.jpg" alt="Ninja Delux Kitchen System" class="rounded border border-white/5">
-                    <img loading="lazy" decoding="async"src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize7.jpg" alt="Air Fryer &amp; Pots &amp; Pan Set" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize1.jpg" alt="Gym Package" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize2.jpg" alt="Walking Pad" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize3.jpg" alt="Lottery Tree" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize4.jpg" alt="Pokemon Card Package" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize5.jpg" alt="Coffee Package" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize6.jpg" alt="Ninja Delux Kitchen System" class="rounded border border-white/5">
+                    <img loading="lazy" decoding="async" data-src="https://fjdmedia.github.io/Diego_n_Andrea/Prizes/FINAL/RegularPrize7.jpg" alt="Air Fryer &amp; Pots &amp; Pan Set" class="rounded border border-white/5">
                 </div>
                  <div class="text-center">
                     <label for="modal-diego" class="text-xs font-bold uppercase tracking-widest text-[#7dd3fc] cursor-pointer hover:text-white">← Back to FJ Media</label>
@@ -957,12 +984,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-panel p-8 rounded-xl border-l-2 border-brand-gold">
-                    <i class="ph ph-rocket-launch text-3xl text-brand-gold mb-4 block"></i>
+                    <svg class="ph-icon text-3xl text-brand-gold mb-4 block" aria-hidden="true"><use href="#ph-rocket-launch"/></svg>
                     <h3 class="text-white font-bold text-xl mb-2">48 hours. Not 4-8 weeks.</h3>
                     <p class="text-brand-textMuted text-sm">It typically takes 4-8 weeks to get a website. We send you a finished design in 48 hours.</p>
                 </div>
                 <div class="glass-panel p-8 rounded-xl">
-                    <i class="ph ph-handshake text-3xl text-brand-gold mb-4 block"></i>
+                    <svg class="ph-icon text-3xl text-brand-gold mb-4 block" aria-hidden="true"><use href="#ph-handshake"/></svg>
                     <h3 class="text-white font-bold text-xl mb-2">$0 until you're satisfied.</h3>
                     <p class="text-brand-textMuted text-sm">We build it first. You see it first. You decide if it's worth paying for.</p>
                 </div>
@@ -973,7 +1000,7 @@
                         <p class="text-brand-textMuted text-sm mt-1">No handoffs. No account managers. No waiting on "the developer."</p>
                     </div>
                     <a href="#contact" class="text-xs font-bold tracking-widest hover:text-brand-gold transition-colors flex items-center gap-2 shrink-0 ml-8">
-                        Book a Call <i class="ph ph-arrow-right"></i>
+                        Book a Call <svg class="ph-icon" aria-hidden="true"><use href="#ph-arrow-right"/></svg>
                     </a>
                 </div>
             </div>
@@ -988,7 +1015,7 @@
                     <p class="text-brand-textMuted mt-4 max-w-2xl">Every service we sell is running live on this page — not in a demo video. Click around, view source, run the tests.</p>
                 </div>
                 <a href="/proof.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gold hover:text-white transition-colors shrink-0">
-                    See all 6 <i class="ph ph-arrow-right"></i>
+                    See all 6 <svg class="ph-icon" aria-hidden="true"><use href="#ph-arrow-right"/></svg>
                 </a>
             </div>
 
@@ -1009,7 +1036,7 @@
 
                 <div class="glass-panel p-8 rounded-xl flex flex-col">
                     <div class="flex items-center gap-2 mb-4">
-                        <i class="ph ph-gauge text-brand-gold text-lg"></i>
+                        <svg class="ph-icon text-brand-gold text-lg" aria-hidden="true"><use href="#ph-gauge"/></svg>
                         <span class="text-brand-gold text-[10px] font-bold tracking-[0.2em] uppercase">PageSpeed</span>
                     </div>
                     <h3 class="text-white font-bold text-lg mb-2">Measured by Google, not us.</h3>
@@ -1019,7 +1046,7 @@
 
                 <div class="glass-panel p-8 rounded-xl flex flex-col">
                     <div class="flex items-center gap-2 mb-4">
-                        <i class="ph ph-code text-brand-gold text-lg"></i>
+                        <svg class="ph-icon text-brand-gold text-lg" aria-hidden="true"><use href="#ph-code"/></svg>
                         <span class="text-brand-gold text-[10px] font-bold tracking-[0.2em] uppercase">Custom build</span>
                     </div>
                     <h3 class="text-white font-bold text-lg mb-2">0 templates. View source to verify.</h3>
@@ -1062,12 +1089,12 @@
             </div>
 
             <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-8 border-brand-gold/30">
-                <i class="ph ph-lock-key text-brand-gold"></i> No retainers required. No monthly platform fees. You own everything we build.
+                <svg class="ph-icon text-brand-gold" aria-hidden="true"><use href="#ph-lock-key"/></svg> No retainers required. No monthly platform fees. You own everything we build.
             </div>
 
             <!-- Hint above tabs — makes clickability obvious -->
             <div class="flex items-center justify-center gap-2 mb-4 text-[10px] text-brand-gold font-bold uppercase tracking-[0.25em]">
-                <i class="ph ph-hand-pointing"></i> Tap a package to expand
+                <svg class="ph-icon" aria-hidden="true"><use href="#ph-hand-pointing"/></svg> Tap a package to expand
             </div>
 
             <!-- CSS Tabs Implementation -->
@@ -1113,22 +1140,22 @@
                         <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
                             <div class="text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase md:col-span-2 mb-2">Everything Included</div>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Fully custom, hand-built website</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Mobile-first, responsive on every device</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Copywriting — you don't need to write a word</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Contact form wired to your email</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Fully custom, hand-built website</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Mobile-first, responsive on every device</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Copywriting — you don't need to write a word</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Contact form wired to your email</li>
                             </ul>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Live preview link within 48 hours</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Domain setup (yourbusiness.com)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Basic on-page SEO (titles, meta, alt text)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> You own all the files — no lock-in</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Live preview link within 48 hours</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Domain setup (yourbusiness.com)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Basic on-page SEO (titles, meta, alt text)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> You own all the files — no lock-in</li>
                             </ul>
                         </div>
                         <!-- Foot Band -->
                         <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                             <div class="flex items-center gap-3 text-sm text-brand-textMuted">
-                                <i class="ph ph-hand-coins text-brand-gold text-xl"></i>
+                                <svg class="ph-icon text-brand-gold text-xl" aria-hidden="true"><use href="#ph-hand-coins"/></svg>
                                 <span><span class="text-white font-semibold">Free to see it.</span> Pay only if you love it.</span>
                             </div>
                             <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Start My Design →</a>
@@ -1153,21 +1180,21 @@
                         <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
                             <div class="md:col-span-2 text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase mb-2">Everything in Go Live, plus:</div>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Business Profile setup + optimization</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Local SEO targeting (Winnipeg + your service area)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Schema markup so Google reads your site correctly</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Keyword research — we target what actually gets searched</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Google Business Profile setup + optimization</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Local SEO targeting (Winnipeg + your service area)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Schema markup so Google reads your site correctly</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Keyword research — we target what actually gets searched</li>
                             </ul>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Search Console hookup + sitemap</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Analytics 4 installed</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Review funnel (gets customers to leave 5-stars)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Competitor visibility audit — where they beat you</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Google Search Console hookup + sitemap</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Google Analytics 4 installed</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Review funnel (gets customers to leave 5-stars)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Competitor visibility audit — where they beat you</li>
                             </ul>
                         </div>
                         <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                             <div class="flex items-center gap-3 text-sm text-brand-textMuted">
-                                <i class="ph ph-map-trifold text-brand-gold text-xl"></i>
+                                <svg class="ph-icon text-brand-gold text-xl" aria-hidden="true"><use href="#ph-map-trifold"/></svg>
                                 <span>Built so a stranger in Winnipeg can <span class="text-white font-semibold">find you first.</span></span>
                             </div>
                             <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Get Me Found →</a>
@@ -1192,23 +1219,23 @@
                         <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
                             <div class="md:col-span-2 text-brand-gold text-[10px] font-bold tracking-[0.22em] uppercase mb-2">Everything above, plus:</div>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Order / booking forms with live pricing</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Google Sheets CRM — every lead logged</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Automated confirmation + follow-up emails</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Calendar-based booking (for service businesses)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Payment collection (Stripe / Square)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Order / booking forms with live pricing</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Google Sheets CRM — every lead logged</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Automated confirmation + follow-up emails</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Calendar-based booking (for service businesses)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Payment collection (Stripe / Square)</li>
                             </ul>
                             <ul class="space-y-3 text-sm">
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Custom admin dashboard (for you)</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Monthly reports — what's working, what's not</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Priority support — text James, get answers</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> Seasonal updates + content swaps included</li>
-                                <li class="flex items-start gap-3"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5 shrink-0"></i> First month of changes free after launch</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Custom admin dashboard (for you)</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Monthly reports — what's working, what's not</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Priority support — text James, get answers</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> Seasonal updates + content swaps included</li>
+                                <li class="flex items-start gap-3"><svg class="ph-icon text-brand-gold mt-0.5 shrink-0" aria-hidden="true"><use href="#ph-fill-check-circle"/></svg> First month of changes free after launch</li>
                             </ul>
                         </div>
                         <div class="px-8 md:px-10 py-6 border-t border-white/5 bg-brand-bg/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                             <div class="flex items-center gap-3 text-sm text-brand-textMuted">
-                                <i class="ph ph-rocket-launch text-brand-gold text-xl"></i>
+                                <svg class="ph-icon text-brand-gold text-xl" aria-hidden="true"><use href="#ph-rocket-launch"/></svg>
                                 <span>What agencies quote at <span class="text-white font-semibold">$5k–$10k+</span>. Built lean, priced honest.</span>
                             </div>
                             <a href="#contact" class="bg-brand-gold text-brand-bg px-6 py-3 rounded-md font-bold text-sm hover:bg-white transition-colors">Build My System →</a>
@@ -1267,18 +1294,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-01</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Wix and Squarespace give you a professional website."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">They give you the same site as 10,000 other businesses.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">Same hero, same layout, same stock feel. Your Winnipeg bakery ends up looking like one in Houston.</p>
                         </div>
@@ -1294,18 +1321,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-02</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"AI can build your website in 60 seconds."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">It can. And it'll look like every other AI site.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">Same training data, same layouts. We use AI behind the scenes to audit and optimize — the design is human.</p>
                         </div>
@@ -1321,18 +1348,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-03</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"I can just build it myself on the weekend."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">6 months later you're still dragging blocks at midnight.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">And it still doesn't show up on Google. We hand you a live site in 48 hours — SEO, forms, everything.</p>
                         </div>
@@ -1348,18 +1375,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-04</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Wix is free — so it's the cheapest option."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">Free until you need anything that actually matters.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">Domain, email, no ads, SEO tools. You'll spend $300/yr and 40+ hours on something that still doesn't convert.</p>
                         </div>
@@ -1375,18 +1402,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-05</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"If I build on Wix, I own my website."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">You rent it. Cancel and it disappears.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">Our sites are plain HTML/CSS files you own outright. Host anywhere, move anywhere, no lock-in.</p>
                         </div>
@@ -1402,18 +1429,18 @@
                             <span class="chrome-dot d-max"></span>
                         </div>
                         <div class="chrome-url">
-                            <i class="ph ph-lock-simple"></i>
+                            <svg class="ph-icon" aria-hidden="true"><use href="#ph-lock-simple"/></svg>
                             <span>fjmedia.ca/myth-06</span>
                         </div>
                     </div>
                     <div class="myth-body">
-                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-x text-white/30"></i> Myth</div>
+                        <div class="text-[10px] font-bold text-white/40 tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon text-white/30" aria-hidden="true"><use href="#ph-x"/></svg> Myth</div>
                         <p class="text-[15px] text-white/60 font-display leading-snug"><span class="myth-text">"Custom websites take months and cost $5K+."</span></p>
                     </div>
                     <div class="gold-divider"></div>
                     <div class="reality-zone">
                         <div class="reality-inner">
-                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
+                            <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><svg class="ph-icon" aria-hidden="true"><use href="#ph-check"/></svg> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">That's the old agency model.</p>
                             <p class="text-sm text-brand-textMuted leading-relaxed">One person, AI-powered process, proven frameworks. Live in 48 hours. You don't pay until you love it.</p>
                         </div>
@@ -1437,7 +1464,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"What does the process look like?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         One 15-minute call. We learn your business, your customers, and what you need the site to do. Then we build — design, copy, forms, SEO, everything. Within 48 hours you get a live link to review. You tell us what to change, we revise it. Once you love it, we talk about keeping it live. That's it. No phases, no proposals, no 6-week timelines.
@@ -1448,7 +1475,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"What do I need to give you to get started?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         Your logo (if you have one), a few photos of your work, and 15 minutes of your time. That's it. We write all the copy, handle the design, build the forms, and set up everything technical. Most clients are surprised how little we actually need from them.
@@ -1459,7 +1486,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"How does 'free until you love it' actually work?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         We build your entire site before you pay a single dollar. You see the finished product — live, functional, on a real URL. If you love it, we talk pricing. If you don't, you walk away. No deposit, no contract, no "discovery fee." The risk is entirely on us. We bet on our work being good enough that you'll want to keep it.
@@ -1470,7 +1497,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"Do I own my site after launch?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         100%. Every file — HTML, CSS, JavaScript, images — is yours. You can host it anywhere, move it anywhere, or hand it to another developer. No lock-in, no proprietary platform, no "you need us to keep the lights on." It's your code. Period.
@@ -1481,7 +1508,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"What if I need changes after launch?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         Your first month of changes is included free. After that, we offer retainer packages starting at $150/month — updates, monitoring, monthly check-ins. Need a one-off tweak instead? Just text James. No ticket systems, no waiting 5 business days. One person handles everything.
@@ -1492,7 +1519,7 @@
                 <details class="group rounded-xl border border-white/5 bg-[#0a1219] overflow-hidden">
                     <summary class="flex items-center justify-between cursor-pointer p-6 list-none [&::-webkit-details-marker]:hidden">
                         <span class="text-white font-bold text-base pr-4">"Can you help with Google and SEO?"</span>
-                        <i class="ph ph-caret-down text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0"></i>
+                        <svg class="ph-icon text-brand-gold text-lg transition-transform duration-300 group-open:rotate-180 shrink-0" aria-hidden="true"><use href="#ph-caret-down"/></svg>
                     </summary>
                     <div class="px-6 pb-6 text-sm text-brand-textMuted leading-relaxed border-t border-white/5 pt-4">
                         Every site ships with on-page SEO built in — page titles, meta descriptions, local keywords, schema markup, and mobile optimization. We also set up or optimize your Google Business Profile so you show up in local searches and on Google Maps. For ongoing SEO management, that's available as a retainer add-on.
@@ -1564,16 +1591,16 @@
                         <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:28px;">
                             <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;margin:0;padding:0;">
                                 <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
-                                    <i class="ph ph-envelope text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                    <svg class="ph-icon text-brand-gold" style="font-size:16px;flex-shrink:0;" aria-hidden="true"><use href="#ph-envelope"/></svg>
                                     diazfjamesc@gmail.com
                                 </li>
                                 <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
-                                    <i class="ph ph-map-pin text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                    <svg class="ph-icon text-brand-gold" style="font-size:16px;flex-shrink:0;" aria-hidden="true"><use href="#ph-map-pin"/></svg>
                                     Winnipeg, MB — Local &amp; remote clients
                                 </li>
                                 <li style="display:flex;align-items:center;gap:12px;font-size:14px;" class="text-brand-textMuted">
                                     <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-brand-gold transition">
-                                        <i class="ph ph-instagram-logo text-brand-gold" style="font-size:16px;flex-shrink:0;"></i>
+                                        <svg class="ph-icon text-brand-gold" style="font-size:16px;flex-shrink:0;" aria-hidden="true"><use href="#ph-instagram-logo"/></svg>
                                         @fjmedia204
                                     </a>
                                 </li>
@@ -1643,16 +1670,16 @@
             <a href="work.html" class="hover:text-white transition">Work</a>
             <a href="#pricing" class="hover:text-white transition">Packages</a>
             <a href="#contact" class="hover:text-white transition">Contact</a>
-            <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><i class="ph ph-instagram-logo text-lg"></i> @fjmedia204</a>
+            <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><svg class="ph-icon text-lg" aria-hidden="true"><use href="#ph-instagram-logo"/></svg> @fjmedia204</a>
         </div>
-        <p class="text-[10px] text-brand-textMuted/50">© 2026 FJMedia. All rights reserved.</p>
+        <p class="text-xs text-brand-textMuted">© 2026 FJMedia. All rights reserved.</p>
     </footer>
 
     <!-- Persistent Floating CTA -->
     <div class="fixed bottom-6 right-6 z-40">
          <div class="relative group">
-             <a href="#contact" class="flex items-center justify-center w-14 h-14 bg-brand-gold text-brand-bg rounded-full shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:scale-110 transition-transform duration-300">
-                <i class="ph-fill ph-chat-circle-dots text-2xl"></i>
+             <a href="#contact" aria-label="Jump to contact form" class="flex items-center justify-center w-14 h-14 bg-brand-gold text-brand-bg rounded-full shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:scale-110 transition-transform duration-300">
+                <svg class="ph-icon text-2xl" aria-hidden="true"><use href="#ph-fill-chat-circle-dots"/></svg>
              </a>
          </div>
     </div>
@@ -1765,6 +1792,25 @@
       }
     </script>
 
+    <script>
+      // Case-study modal gallery hydration: defer image downloads until a modal opens.
+      // Without this, ~10MB of Diego prize gallery images ship on initial mobile load.
+      (function(){
+        function hydrate(modal){
+          if(!modal || modal.dataset.hydrated) return;
+          modal.dataset.hydrated = '1';
+          modal.querySelectorAll('img[data-src]').forEach(function(img){
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          });
+        }
+        document.querySelectorAll('input.case-toggle').forEach(function(t){
+          t.addEventListener('change', function(){
+            if(t.checked) hydrate(t.nextElementSibling);
+          });
+        });
+      })();
+    </script>
 
 </body>
 </html>
