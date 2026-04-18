@@ -150,8 +150,58 @@
       100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
     }
 
+    /* STACK — tech breakdown */
+    #stack { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .stack-list {
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg3);
+      overflow: hidden;
+    }
+    .stack-row {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 1.6rem;
+      padding: 1.6rem 1.9rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .stack-row:last-child { border-bottom: none; }
+    .stack-row:hover { background: rgba(201,168,76,0.03); }
+    .stack-idx {
+      font-family: var(--mono); font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.12em;
+    }
+    .stack-tech {
+      font-family: 'Syne', sans-serif; font-size: 1.2rem;
+      font-weight: 800; color: var(--heading); line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+    .stack-body {
+      font-size: 0.9rem; color: var(--text-mid);
+      line-height: 1.55;
+    }
+    .stack-proof {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.1em;
+      text-transform: uppercase; white-space: nowrap;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+    }
+    @media (max-width: 700px) {
+      .stack-row {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+        padding: 1.3rem 1.4rem;
+      }
+      .stack-proof { justify-self: start; }
+    }
+
     /* CASE STUDY */
-    #case-study { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    #case-study { background: var(--bg); border-bottom: 1px solid var(--border); }
     .cs-card {
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 14px; padding: 2.5rem;
@@ -474,6 +524,65 @@
           <div class="proof-title">Vercel, HTTPS, custom domain.</div>
           <div class="proof-body">Deployed on Vercel's global CDN. HTTPS enforced. Cache-tuned headers. Not a WordPress panel in sight.</div>
           <div class="proof-stat"><span>fjmedia.ca</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK — under the hood -->
+  <section id="stack">
+    <div class="section-inner">
+      <p class="section-label">Under the Hood</p>
+      <h2 class="section-title">What's actually <em>running this.</em></h2>
+      <p class="section-sub">No builders. No page plugins. No template library. Just files — ours to write, yours to own.</p>
+      <div class="divider"></div>
+
+      <div class="stack-list">
+
+        <div class="stack-row">
+          <div class="stack-idx">01.</div>
+          <div>
+            <div class="stack-tech">HTML, CSS, JS — vanilla</div>
+            <div class="stack-body">No framework. No 2 MB bundle to parse on page load. Every element on this page was typed, not dragged.</div>
+          </div>
+          <div class="stack-proof">Zero dependencies</div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-idx">02.</div>
+          <div>
+            <div class="stack-tech">Tailwind — precompiled</div>
+            <div class="stack-body">The CDN runtime that every other &quot;Tailwind&quot; site loads? We don't. Ours is CLI-built and minified before it ever hits your browser.</div>
+          </div>
+          <div class="stack-proof">32 KB minified</div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-idx">03.</div>
+          <div>
+            <div class="stack-tech">Google Apps Script</div>
+            <div class="stack-body">Forms route straight to a Sheet you own. Signed waivers save as PDFs in your Drive. Zero backend fees. Forever.</div>
+          </div>
+          <div class="stack-proof">$0 / month</div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-idx">04.</div>
+          <div>
+            <div class="stack-tech">Vercel + Brotli</div>
+            <div class="stack-body">HTML compressed on the way out. Assets cached for a full year with immutable headers. HTTPS enforced. Global CDN.</div>
+          </div>
+          <div class="stack-proof">94 PageSpeed</div>
+        </div>
+
+        <div class="stack-row">
+          <div class="stack-idx">05.</div>
+          <div>
+            <div class="stack-tech">GA4 + Search Console</div>
+            <div class="stack-body">Sitting in your Google account. Not ours. Every visit, every query, every click — the data is yours, not rented.</div>
+          </div>
+          <div class="stack-proof">You own it</div>
         </div>
 
       </div>
