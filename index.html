@@ -56,11 +56,11 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap"></noscript>
 
-    <!-- Phosphor Icons: defer so it never blocks render -->
-    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- Tailwind CSS: defer the CDN compiler so it does not block first paint -->
-    <script defer src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDN (sync load — defer broke utility class rendering) -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Analytics: already async, keep at end of head -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
