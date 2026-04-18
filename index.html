@@ -8,16 +8,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia</title>
-    <meta name="description" content="100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied." />
-    <meta property="og:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
-    <meta property="og:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
+    <title>Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia</title>
+    <meta name="description" content="Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 48 hours, $0 upfront. Free until you love it." />
+    <meta property="og:title" content="Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia" />
+    <meta property="og:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 48 hours. Free until you love it." />
     <meta property="og:url" content="https://fjmedia.ca" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hand-Coded Web Design Winnipeg | Custom Sites in 48 Hours | FJMedia" />
-    <meta name="twitter:description" content="No Wix. No Shopify. No templates. Every site is hand-coded and custom-built in 48 hours. Free to see it, pay if you're satisfied." />
+    <meta name="twitter:title" content="Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia" />
+    <meta name="twitter:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 48 hours. Free until you love it." />
     <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -34,19 +34,35 @@
       "url": "https://fjmedia.ca",
       "logo": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
       "image": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
-      "description": "100% hand-coded websites for Winnipeg businesses — no Wix, no Shopify, no templates. Designed in 48 hours, $0 upfront. Free to see it, pay if you're satisfied.",
+      "description": "Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 48 hours, $0 upfront. Free until you love it.",
       "founder": { "@type": "Person", "name": "James Diaz" },
       "address": { "@type": "PostalAddress", "addressLocality": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
       "areaServed": { "@type": "City", "name": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
       "geo": { "@type": "GeoCoordinates", "latitude": 49.8951, "longitude": -97.1384 },
-      "serviceType": ["Hand-Coded Websites", "Custom Web Development", "Web Design", "SEO", "Google Business Profile Setup", "Digital Marketing"],
+      "serviceType": ["Custom Websites", "Custom Web Development", "Web Design", "SEO", "Google Business Profile Setup", "Digital Marketing"],
       "priceRange": "$$",
       "knowsLanguage": ["en"],
       "slogan": "Your site is live before their discovery call is over.",
       "sameAs": ["https://www.instagram.com/fjmedia204"]
     }
     </script>
-    <!-- Google tag (gtag.js) -->
+    <!-- Preconnect: critical third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts: non-blocking load via media swap trick -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap"></noscript>
+
+    <!-- Phosphor Icons: defer so it never blocks render -->
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS: defer the CDN compiler so it does not block first paint -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics: already async, keep at end of head -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -55,19 +71,10 @@
       gtag('config', 'G-HH2JF4NCCF');
     </script>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Tailwind config: set on window BEFORE the deferred Tailwind CDN script reads it -->
     <script>
-        tailwind.config = {
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
@@ -92,9 +99,31 @@
                     }
                 }
             }
-        }
+        };
     </script>
     
+    <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
+    <style>
+        /* CRITICAL INLINE: body shell + nav + hero skeleton — prevents blank first paint */
+        *,::before,::after{box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{margin:0;background-color:#071520;color:#EDEAE5;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;}
+        .bg-brand-bg{background-color:#071520;}
+        .text-brand-textBase{color:#EDEAE5;}
+        /* Nav critical shell */
+        nav.glass-panel{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(13,31,60,0.92);border-bottom:1px solid rgba(255,255,255,0.05);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+        /* Hero h1 font so LCP text renders immediately with fallback */
+        h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;}
+        /* Text gradient for the hero italic span */
+        .text-gradient{background:linear-gradient(135deg,#FFF 0%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        /* Prevent layout shift on fixed background layer */
+        .fixed{position:fixed;}
+        .relative{position:relative;}
+        .z-0{z-index:0;}
+        .z-10{z-index:10;}
+        .pointer-events-none{pointer-events:none;}
+        .inset-0{top:0;right:0;bottom:0;left:0;}
+    </style>
     <style>
         /* CSS Architecture & Advanced Utilities */
         body {
@@ -319,16 +348,16 @@
             <div class="flex-1 space-y-8">
                 <div class="flex items-center gap-4 text-brand-gold text-xs font-bold tracking-[0.2em] uppercase">
                     <span class="w-8 h-px bg-brand-gold"></span>
-                    Hand-Coded Web Design · Winnipeg
+                    Web Partner for Local Businesses · Winnipeg
                 </div>
                 <h1 class="font-display font-bold text-5xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
-                    We'll cook you <br/>
-                    up a website <br/>
-                    <span class="text-gradient italic block mt-2">in 48 hours.</span>
+                    We'll cook you up a <br/>
+                    website in 48 hours. <br/>
+                    <span class="text-gradient italic block mt-2">Free until you love it.</span>
                 </h1>
                 <p class="text-xl text-brand-textMuted max-w-lg leading-relaxed font-light">
-                    No discovery calls. No proposals. No 6-week wait. <br>
-                    <span class="text-white font-medium">Free to see it. Pay if you're satisfied.</span>
+                    Custom websites for Winnipeg businesses. <br>
+                    <span class="text-white font-medium">No Wix. No Shopify. No templates.</span>
                 </p>
                 <div class="flex flex-wrap items-center gap-4 pt-4">
                     <a href="#contact" class="bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all transform hover:-translate-y-1">
@@ -339,7 +368,7 @@
                     </a>
                 </div>
                 <p class="text-xs text-brand-textMuted max-w-md pt-8 border-t border-white/10">
-                    Custom web design for Winnipeg businesses — no Wix, no Shopify, no templates. 100% hand-coded, every time.
+                    AI in the pipeline. Not in the output.
                 </p>
             </div>
 
@@ -404,7 +433,7 @@
                     <span class="text-brand-textMuted italic font-normal">You just haven't seen it yet.</span>
                 </h2>
                 <p class="text-lg text-brand-textMuted max-w-2xl mx-auto">
-                    One call. 48 hours. You get a fully designed website — hand-coded from scratch, not dragged and dropped from some template. Don't like it? You don't pay. Simple.
+                    One call. 48 hours. You get a fully designed website — custom-built from scratch, not dragged and dropped from some template. Don't like it? You don't pay. Simple.
                 </p>
                 
                 <div class="glass-panel inline-block text-left p-8 rounded-xl border border-brand-gold/20 mt-8">
@@ -473,7 +502,7 @@
                         <div class="step-card w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-panel p-8 rounded-xl">
                             <h3 class="font-display font-bold text-xl text-white mb-2">We Design It</h3>
                             <p class="text-brand-gold text-xs font-bold tracking-widest mb-4">48 HOURS. YOUR SITE IS READY.</p>
-                            <p class="text-sm text-brand-textMuted leading-relaxed">While most agencies are still scheduling their second meeting, you're already looking at a finished, hand-coded website — live, clickable, yours to review.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">While most agencies are still scheduling their second meeting, you're already looking at a finished, custom-built website — live, clickable, yours to review.</p>
                         </div>
                     </div>
 
@@ -983,7 +1012,7 @@
         <!-- SECTION: AUDIT CTA (Breakout Section) -->
         <section class="py-24 relative overflow-hidden my-12 rounded-3xl group">
             <div class="absolute inset-0 bg-brand-gold z-0 transform scale-[1.02] group-hover:scale-100 transition-transform duration-700"></div>
-            <div class="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay z-0"></div>
+            <div class="absolute inset-0 opacity-10 mix-blend-overlay z-0" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22none%22/%3E%3Cpath d=%22M0 20 L20 0 L40 20 L20 40 Z%22 fill=%22rgba(0,0,0,0.15)%22/%3E%3C/svg%3E')"></div>
             <div class="relative z-10 text-center text-brand-bg py-12 px-6 max-w-4xl mx-auto">
                 <div class="inline-block border border-brand-bg px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-8">Free — No Strings Attached</div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Find out exactly what's costing you customers online. <br><span class="italic font-normal">Before you spend a cent.</span></h2>
@@ -1338,7 +1367,7 @@
                         <div class="reality-inner">
                             <div class="text-[10px] font-bold text-brand-gold tracking-[0.2em] uppercase flex items-center gap-1.5 mb-3"><i class="ph ph-check"></i> Reality</div>
                             <p class="text-[15px] text-white font-display font-bold leading-snug mb-1">You rent it. Cancel and it disappears.</p>
-                            <p class="text-sm text-brand-textMuted leading-relaxed">Our sites are hand-coded files you own outright. Host anywhere, move anywhere, no lock-in.</p>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Our sites are plain HTML/CSS files you own outright. Host anywhere, move anywhere, no lock-in.</p>
                         </div>
                     </div>
                 </div>
@@ -1588,7 +1617,7 @@
         <div class="text-white font-display font-bold text-lg tracking-tighter mb-2">
             { FJ } <span class="text-brand-textMuted text-xs font-sans tracking-widest uppercase ml-1">Media</span>
         </div>
-        <p class="text-xs text-brand-textMuted mb-6">Hand-coded websites for Winnipeg businesses.</p>
+        <p class="text-xs text-brand-textMuted mb-6">Custom websites for Winnipeg businesses.</p>
         <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-xs uppercase tracking-widest text-brand-textMuted mb-6 px-4">
             <a href="work.html" class="hover:text-white transition">Work</a>
             <a href="#pricing" class="hover:text-white transition">Packages</a>
@@ -1714,5 +1743,7 @@
         });
       }
     </script>
+
+
 </body>
 </html>
