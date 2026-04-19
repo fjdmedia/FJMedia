@@ -8,15 +8,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia</title>
+    <title>Custom Web Design Winnipeg | 48-Hour Sites | FJMedia</title>
     <meta name="description" content="Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 48 hours, $0 upfront. Free until you love it." />
-    <meta property="og:title" content="Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia" />
+    <meta property="og:title" content="Custom Web Design Winnipeg | 48-Hour Sites | FJMedia" />
     <meta property="og:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 48 hours. Free until you love it." />
     <meta property="og:url" content="https://fjmedia.ca" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Custom Web Design Winnipeg | Websites Built in 48 Hours | FJMedia" />
+    <meta name="twitter:title" content="Custom Web Design Winnipeg | 48-Hour Sites | FJMedia" />
     <meta name="twitter:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 48 hours. Free until you love it." />
     <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -44,6 +44,86 @@
       "knowsLanguage": ["en"],
       "slogan": "Your site is live before their discovery call is over.",
       "sameAs": ["https://www.instagram.com/fjmedia204"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do Wix and Squarespace give you a professional website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They give you the same site as 10,000 other businesses. Same hero, same layout, same stock feel. Your Winnipeg bakery ends up looking like one in Houston."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI build your website in 60 seconds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can — and it'll look like every other AI site. Same training data, same layouts. We use AI behind the scenes to audit and optimize, but the design is human."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Wix free and the cheapest option?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Free until you need anything that actually matters — domain, email, no ads, SEO tools. You'll spend $300/yr and 40+ hours on something that still doesn't convert."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you own your website if you build on Wix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You rent it. Cancel and it disappears. Our sites are plain HTML/CSS files you own outright. Host anywhere, move anywhere, no lock-in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do custom websites take months and cost $5K+?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That's the old agency model. One person, AI-powered process, proven frameworks. Live in 48 hours. You don't pay until you love it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the process look like?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One 15-minute call. We learn your business, your customers, and what you need the site to do. Then we build — design, copy, forms, SEO, everything. Within 48 hours you get a live link to review. You tell us what to change, we revise it. Once you love it, we talk about keeping it live."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does 'free until you love it' actually work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We build your entire site before you pay a single dollar. You see the finished product — live, functional, on a real URL. If you love it, we talk pricing. If you don't, you walk away. No deposit, no contract, no discovery fee. The risk is entirely on us."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I own my site after launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "100%. Every file — HTML, CSS, JavaScript, images — is yours. You can host it anywhere, move it anywhere, or hand it to another developer. No lock-in, no proprietary platform. It's your code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you help with Google and SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every site ships with on-page SEO built in — page titles, meta descriptions, local keywords, schema markup, and mobile optimization. We also set up or optimize your Google Business Profile so you show up in local searches and on Google Maps."
+          }
+        }
+      ]
     }
     </script>
     <!-- Preconnect: critical third-party origins -->
@@ -1687,7 +1767,8 @@
     <!-- GSAP + ScrollTrigger: defer so they don't block page load; animations fire on scroll -->
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <script defer>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
       gsap.registerPlugin(ScrollTrigger);
 
       /* — Process timeline: scroll-driven active step + visited trail — */
@@ -1765,6 +1846,7 @@
           }
         });
       });
+    }); // end DOMContentLoaded
     </script>
 
     <script>
