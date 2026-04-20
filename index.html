@@ -129,22 +129,21 @@
     <!-- Preconnect: critical third-party origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
 
     <!-- Preload the exact woff2 for Plus Jakarta Sans 700 — eliminates the CSS→woff2 waterfall for LCP text -->
     <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/plusjakartasans/v8/LDIoaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KU7NSg.woff2" crossorigin>
 
-    <!-- Google Fonts: non-blocking load via media swap trick -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,700&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap"></noscript>
+    <!-- Google Fonts: trimmed to used weights only, non-blocking load -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;1,700&family=DM+Sans:wght@400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;1,700&family=DM+Sans:wght@400;500&family=Space+Mono&display=swap"></noscript>
 
-    <!-- Tailwind: precompiled CSS (no CDN, no runtime JIT) -->
-    <link rel="stylesheet" href="/tailwind.min.css">
+    <!-- Tailwind: precompiled CSS, loaded async so it doesn't block first paint -->
+    <link rel="preload" as="style" href="/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/tailwind.min.css"></noscript>
 
     <!-- Google Analytics: load deferred until after page parse to free mobile main thread -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
-    <script defer>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HH2JF4NCCF');</script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HH2JF4NCCF');</script>
     
     <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
     <style>
@@ -668,7 +667,7 @@
                 <!-- Project 1: Sugar & Shai -->
                 <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
                     <div class="h-48 bg-gradient-to-br from-[#f8e5e5] to-[#e8d5d5] p-6 flex flex-col justify-between items-center relative overflow-hidden">
-                        <img loading="lazy" decoding="async" src="/assets/logos/sugar-shai.jpg" alt="Sugar &amp; Shai Cookies" class="w-24 h-24 object-contain rounded-full shadow-lg z-10 mix-blend-multiply">
+                        <img loading="lazy" decoding="async" src="/assets/logos/sugar-shai.jpg" alt="Sugar &amp; Shai Cookies" width="96" height="96" class="w-24 h-24 object-contain rounded-full shadow-lg z-10 mix-blend-multiply">
                         <div class="absolute inset-0 bg-black/10"></div>
                         <div class="z-10 text-center w-full mt-4">
                             <span class="text-[10px] uppercase font-bold text-black/60 tracking-widest bg-white/50 px-2 py-1 rounded">Featured Project</span>
@@ -693,7 +692,7 @@
                 <!-- Project 2: Royal Kings -->
                 <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
                     <div class="h-48 bg-gradient-to-br from-[#111] to-[#222] p-6 flex flex-col justify-between items-center relative overflow-hidden">
-                        <img loading="lazy" decoding="async" src="/assets/logos/royal-kings.jpg" alt="Royal Kings Auto Care" class="w-32 h-auto object-contain z-10">
+                        <img loading="lazy" decoding="async" src="/assets/logos/royal-kings.jpg" alt="Royal Kings Auto Care" width="128" height="48" class="w-32 h-auto object-contain z-10">
                         <div class="absolute inset-0 bg-brand-gold/5 mix-blend-overlay"></div>
                     </div>
                     <div class="p-6">
@@ -714,7 +713,7 @@
                 <div class="glass-panel rounded-xl overflow-hidden group hover:border-brand-gold/50 transition-colors relative">
                     <div class="h-48 bg-gradient-to-br from-[#0c2415] to-[#06140b] p-6 flex flex-col justify-between items-center relative overflow-hidden">
                         <div class="text-white font-display text-2xl z-10 italic">Diego & Andrea</div>
-                        <div class="absolute inset-0 bg-[url('https://fjdmedia.github.io/Diego_n_Andrea/Reference/Reference.jpg')] bg-cover opacity-20 mix-blend-luminosity"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#1a3d2a]/40 to-[#0c2415]/40"></div>
                     </div>
                     <div class="p-6">
                         <p class="text-[10px] text-brand-textMuted mb-2 uppercase tracking-widest">Event Platform · Winnipeg</p>
@@ -749,7 +748,7 @@
                     <p class="text-sm uppercase tracking-widest">sugarandshaicookies.com</p>
                     <h2 class="text-4xl font-display font-medium">Sugar & Shai Cookies</h2>
                     <p class="text-2xl">🍪🌸✨🍪🌷</p>
-                    <img loading="lazy" decoding="async" src="/assets/logos/sugar-shai.jpg" alt="Sugar & Shai Cookies Logo" class="mx-auto w-48 rounded-full border-4 border-white shadow-xl my-8">
+                    <img loading="lazy" decoding="async" src="/assets/logos/sugar-shai.jpg" alt="Sugar & Shai Cookies Logo" width="192" height="192" class="mx-auto w-48 rounded-full border-4 border-white shadow-xl my-8">
                     <p class="italic font-display text-xl text-[#a87a6b]">✦ Handcrafted with love ✦</p>
                     <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight">Sweet Cookies, <br><span class="italic text-[#a87a6b] font-light">Beautiful</span> Designs</h1>
                     <p class="max-w-xl mx-auto text-lg pt-4">Custom decorated sugar cookies for every occasion — birthdays, weddings, baby showers, holidays & more.</p>
@@ -957,7 +956,7 @@
 
                 <div class="text-center space-y-6">
                     <p class="text-xs uppercase tracking-widest">fjdmedia.github.io/royal-kings-auto-care</p>
-                    <img loading="lazy" decoding="async" src="/assets/logos/royal-kings.jpg" alt="Royal Kings Auto Care" class="mx-auto w-64 my-8 relative z-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <img loading="lazy" decoding="async" src="/assets/logos/royal-kings.jpg" alt="Royal Kings Auto Care" width="256" height="96" class="mx-auto w-64 my-8 relative z-10 drop-shadow-[0_0_30px_rgba(212,175,55,0.2)]">
                     <h1 class="text-4xl md:text-6xl font-display font-medium text-white tracking-tight uppercase">Royal Kings <br> <span class="font-light text-[#d4af37]">Auto Care</span></h1>
                     <p class="text-[#d4af37] tracking-widest uppercase text-sm">Premium Detailing Service · Winnipeg, MB</p>
                     <p class="max-w-xl mx-auto text-lg pt-4 text-gray-400">Convenience meets quality — wherever you are, we deliver royal results.</p>
@@ -1808,8 +1807,8 @@
     </div>
 
     <!-- GSAP + ScrollTrigger: defer so they don't block page load; animations fire on scroll -->
-    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script defer src="/js/gsap.min.js"></script>
+    <script defer src="/js/ScrollTrigger.min.js"></script>
     <script>
     window.addEventListener('DOMContentLoaded', function() {
       gsap.registerPlugin(ScrollTrigger);
