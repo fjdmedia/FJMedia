@@ -139,27 +139,31 @@
         @font-face { font-family:'Space Mono'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/spacemono-400.woff2') format('woff2'); }
     </style>
 
-    <!-- Tailwind: precompiled CSS, loaded async so it doesn't block first paint -->
-    <link rel="preload" as="style" href="/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/tailwind.min.css"></noscript>
+    <!-- Tailwind: precompiled CSS, render-blocking (31KB local = ~15ms block, avoids FOUC/LCP penalty from async) -->
+    <link rel="stylesheet" href="/tailwind.min.css">
 
-    <!-- Google Analytics: delayed until after page is interactive to reduce TBT -->
+    <!-- Google Analytics: delayed 3s after load via requestIdleCallback to keep main thread free -->
     <script>
+    function loadGA() {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF';
+      s.async = true;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HH2JF4NCCF');
+    }
     window.addEventListener('load', function() {
-      setTimeout(function() {
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF';
-        s.async = true;
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-HH2JF4NCCF');
-      }, 100);
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGA, { timeout: 3000 });
+      } else {
+        setTimeout(loadGA, 3000);
+      }
     });
     </script>
     
-    <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
+    <!-- Critical above-the-fold CSS: inlined for fastest possible first paint -->
     <style>
         /* CRITICAL INLINE: body shell + nav + hero skeleton — prevents blank first paint */
         *,::before,::after{box-sizing:border-box;}
@@ -750,7 +754,8 @@
         
         <!-- Modal 1: Sugar & Shai Content Dump -->
         <input type="checkbox" id="modal-sugar" class="case-toggle hidden">
-        <div class="case-study-modal fixed inset-0 z-50 bg-[#faf6f0] text-[#4a3f3a] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#faf6f0] text-[#4a3f3a] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24" data-modal="sugar">
+            <template>
             <div class="max-w-5xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#faf6f0]/90 py-4 z-50 border-b border-[#4a3f3a]/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#a87a6b]">Case Study: Sugar & Shai</div>
@@ -957,11 +962,13 @@
                     <label for="modal-sugar" class="mt-4 text-xs font-bold uppercase tracking-widest text-gray-400 cursor-pointer hover:text-black">← Back to FJ Media</label>
                 </div>
             </div>
+            </template>
         </div>
 
         <!-- Modal 2: Royal Kings -->
         <input type="checkbox" id="modal-royal" class="case-toggle hidden">
-        <div class="case-study-modal fixed inset-0 z-50 bg-[#0a0a0a] text-gray-300 overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#0a0a0a] text-gray-300 overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24" data-modal="royal">
+            <template>
              <div class="max-w-4xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0a0a0a]/90 py-4 z-50 border-b border-white/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#d4af37]">Case Study: Royal Kings</div>
@@ -1047,11 +1054,13 @@
                     <label for="modal-royal" class="mt-4 text-xs font-bold uppercase tracking-widest text-[#d4af37] cursor-pointer hover:text-white">← Back to FJ Media</label>
                 </div>
              </div>
+            </template>
         </div>
 
         <!-- Modal 3: Diego & Andrea (Prizes inference) -->
         <input type="checkbox" id="modal-diego" class="case-toggle hidden">
-        <div class="case-study-modal fixed inset-0 z-50 bg-[#0d161b] text-[#e0eab] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24">
+        <div class="case-study-modal fixed inset-0 z-50 bg-[#0d161b] text-[#e0eab] overflow-y-auto w-full h-full opacity-0 pointer-events-none pb-24" data-modal="diego">
+            <template>
             <div class="max-w-6xl mx-auto p-6 md:p-12">
                 <div class="flex justify-between items-center mb-12 sticky top-0 bg-[#0d161b]/90 py-4 z-50 border-b border-white/10">
                     <div class="text-sm font-bold uppercase tracking-widest text-[#7dd3fc]">Case Study: Event Platform</div>
@@ -1108,6 +1117,7 @@
                     <label for="modal-diego" class="text-xs font-bold uppercase tracking-widest text-[#7dd3fc] cursor-pointer hover:text-white">← Back to FJ Media</label>
                 </div>
             </div>
+            </template>
         </div>
 
         <!-- SECTION: WHY US (Reconstructed from visual context to ensure completeness) -->
@@ -1820,20 +1830,18 @@
          </div>
     </div>
 
-    <!-- GSAP + ScrollTrigger: defer so they don't block page load; animations fire on scroll -->
-    <script defer src="/js/gsap.min.js"></script>
-    <script defer src="/js/ScrollTrigger.min.js"></script>
+    <!-- GSAP + ScrollTrigger: lazy-loaded on first scroll (no above-fold animations) -->
     <script>
-    window.addEventListener('DOMContentLoaded', function() {
+    function initAnimations() {
       gsap.registerPlugin(ScrollTrigger);
 
       /* — Process timeline: scroll-driven active step + visited trail — */
       (function() {
-        const steps = Array.from(document.querySelectorAll('.process-step'));
+        var steps = Array.from(document.querySelectorAll('.process-step'));
         if (!steps.length) return;
 
-        const setState = (activeIdx) => {
-          steps.forEach((s, j) => {
+        var setState = function(activeIdx) {
+          steps.forEach(function(s, j) {
             s.classList.toggle('is-active', j === activeIdx);
             s.classList.toggle('is-visited', j < activeIdx);
           });
@@ -1841,22 +1849,22 @@
 
         setState(0);
 
-        steps.forEach((step, i) => {
+        steps.forEach(function(step, i) {
           ScrollTrigger.create({
             trigger: step,
             start: 'top 65%',
             end: 'bottom 35%',
-            onEnter:     () => setState(i),
-            onEnterBack: () => setState(i),
+            onEnter:     function() { setState(i); },
+            onEnterBack: function() { setState(i); },
           });
         });
       })();
 
       /* — Myth cards: stagger in, dots pop, strikethrough, reality reveal — */
-      document.querySelectorAll('.myth-card').forEach((card, i) => {
-        const dots = card.querySelectorAll('.chrome-dot');
-        const mythText = card.querySelector('.myth-text');
-        const realityZone = card.querySelector('.reality-zone');
+      document.querySelectorAll('.myth-card').forEach(function(card, i) {
+        var dots = card.querySelectorAll('.chrome-dot');
+        var mythText = card.querySelector('.myth-text');
+        var realityZone = card.querySelector('.reality-zone');
 
         /* set initial states */
         gsap.set(card, { y: 50, opacity: 0 });
@@ -1866,7 +1874,7 @@
           trigger: card,
           start: 'top 88%',
           once: true,
-          onEnter: () => {
+          onEnter: function() {
             card.classList.add('in-view');
 
             /* card slides up */
@@ -1878,7 +1886,7 @@
             });
 
             /* dots pop in sequentially */
-            dots.forEach((dot, d) => {
+            dots.forEach(function(dot, d) {
               gsap.to(dot, {
                 scale: 1, opacity: 1,
                 duration: 0.35,
@@ -1888,7 +1896,7 @@
             });
 
             /* strikethrough the myth */
-            setTimeout(() => {
+            setTimeout(function() {
               if (mythText) mythText.classList.add('struck');
             }, 700 + (i % 2) * 150);
 
@@ -1904,17 +1912,39 @@
       });
 
       /* — Hide floating CTA when contact section is in view — */
-      const floatingCta = document.getElementById('floating-cta');
-      const contactSection = document.getElementById('contact');
+      var floatingCta = document.getElementById('floating-cta');
+      var contactSection = document.getElementById('contact');
       if (floatingCta && contactSection) {
         ScrollTrigger.create({
           trigger: contactSection,
           start: 'top 80%',
-          onEnter: () => gsap.to(floatingCta, { opacity: 0, pointerEvents: 'none', duration: 0.3 }),
-          onLeaveBack: () => gsap.to(floatingCta, { opacity: 1, pointerEvents: 'auto', duration: 0.3 })
+          onEnter: function() { gsap.to(floatingCta, { opacity: 0, pointerEvents: 'none', duration: 0.3 }); },
+          onLeaveBack: function() { gsap.to(floatingCta, { opacity: 1, pointerEvents: 'auto', duration: 0.3 }); }
         });
       }
-    }); // end DOMContentLoaded
+    }
+
+    (function() {
+      var loaded = false;
+      function loadGSAP() {
+        if (loaded) return;
+        loaded = true;
+        window.removeEventListener('scroll', loadGSAP);
+        var s1 = document.createElement('script');
+        s1.src = '/js/gsap.min.js';
+        s1.onload = function() {
+          var s2 = document.createElement('script');
+          s2.src = '/js/ScrollTrigger.min.js';
+          s2.onload = initAnimations;
+          document.head.appendChild(s2);
+        };
+        document.head.appendChild(s1);
+      }
+      window.addEventListener('scroll', loadGSAP, { once: true, passive: true });
+      window.addEventListener('load', function() {
+        setTimeout(loadGSAP, 4000);
+      });
+    })();
     </script>
 
     <script>
@@ -1943,12 +1973,19 @@
     </script>
 
     <script>
-      // Case-study modal gallery hydration: defer image downloads until a modal opens.
-      // Without this, ~10MB of Diego prize gallery images ship on initial mobile load.
+      // Case-study modals: clone <template> content on first open, then hydrate lazy images.
+      // This removes ~450 DOM elements from initial parse (3 modals worth of hidden content).
       (function(){
-        function hydrate(modal){
+        function hydrateModal(modal){
           if(!modal || modal.dataset.hydrated) return;
+          // Clone template content into the modal wrapper on first open
+          var tpl = modal.querySelector('template');
+          if(tpl){
+            modal.appendChild(tpl.content.cloneNode(true));
+            tpl.remove();
+          }
           modal.dataset.hydrated = '1';
+          // Hydrate lazy images
           modal.querySelectorAll('img[data-src]').forEach(function(img){
             img.src = img.dataset.src;
             img.removeAttribute('data-src');
@@ -1956,7 +1993,7 @@
         }
         document.querySelectorAll('input.case-toggle').forEach(function(t){
           t.addEventListener('change', function(){
-            if(t.checked) hydrate(t.nextElementSibling);
+            if(t.checked) hydrateModal(t.nextElementSibling);
           });
         });
       })();
