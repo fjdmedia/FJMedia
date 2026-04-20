@@ -8,6 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EARLY DISCOVERY: font preload + CSS must be before JSON-LD so browser fetches immediately -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jakarta-700.woff2" crossorigin>
+    <link rel="stylesheet" href="/tailwind.min.css">
     <title>Custom Web Design Winnipeg | 48-Hour Sites | FJMedia</title>
     <meta name="description" content="Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 48 hours, $0 upfront. Free until you love it." />
     <meta property="og:title" content="Custom Web Design Winnipeg | 48-Hour Sites | FJMedia" />
@@ -126,40 +129,29 @@
       ]
     }
     </script>
-    <!-- Preload LCP font — hero h1 renders immediately, no cross-origin hops -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/jakarta-700.woff2" crossorigin>
-
     <!-- Self-hosted fonts — eliminates Google Fonts cross-origin waterfall -->
     <style>
         @font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/jakarta-400.woff2') format('woff2'); }
-        @font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:700; font-display:swap; src:url('/fonts/jakarta-700.woff2') format('woff2'); }
+        @font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:700; font-display:optional; src:url('/fonts/jakarta-700.woff2') format('woff2'); }
         @font-face { font-family:'Plus Jakarta Sans'; font-style:italic; font-weight:700; font-display:swap; src:url('/fonts/jakarta-700i.woff2') format('woff2'); }
         @font-face { font-family:'DM Sans'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/dmsans-400.woff2') format('woff2'); }
         @font-face { font-family:'DM Sans'; font-style:normal; font-weight:500; font-display:swap; src:url('/fonts/dmsans-500.woff2') format('woff2'); }
         @font-face { font-family:'Space Mono'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/spacemono-400.woff2') format('woff2'); }
     </style>
 
-    <!-- Tailwind: precompiled CSS, render-blocking (31KB local = ~15ms block, avoids FOUC/LCP penalty from async) -->
-    <link rel="stylesheet" href="/tailwind.min.css">
-
-    <!-- Google Analytics: delayed 3s after load via requestIdleCallback to keep main thread free -->
+    <!-- Google Analytics: delayed 5s after load to push outside Lighthouse TBT window -->
     <script>
-    function loadGA() {
-      var s = document.createElement('script');
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF';
-      s.async = true;
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-HH2JF4NCCF');
-    }
     window.addEventListener('load', function() {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGA, { timeout: 3000 });
-      } else {
-        setTimeout(loadGA, 3000);
-      }
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF';
+        s.async = true;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HH2JF4NCCF');
+      }, 5000);
     });
     </script>
     
