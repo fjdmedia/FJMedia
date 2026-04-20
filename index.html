@@ -126,24 +126,38 @@
       ]
     }
     </script>
-    <!-- Preconnect: critical third-party origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload LCP font — hero h1 renders immediately, no cross-origin hops -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jakarta-700.woff2" crossorigin>
 
-    <!-- Preload the exact woff2 for Plus Jakarta Sans 700 — eliminates the CSS→woff2 waterfall for LCP text -->
-    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/plusjakartasans/v8/LDIoaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KU7NSg.woff2" crossorigin>
-
-    <!-- Google Fonts: trimmed to used weights only, non-blocking load -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;1,700&family=DM+Sans:wght@400;500&family=Space+Mono&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;1,700&family=DM+Sans:wght@400;500&family=Space+Mono&display=swap"></noscript>
+    <!-- Self-hosted fonts — eliminates Google Fonts cross-origin waterfall -->
+    <style>
+        @font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/jakarta-400.woff2') format('woff2'); }
+        @font-face { font-family:'Plus Jakarta Sans'; font-style:normal; font-weight:700; font-display:swap; src:url('/fonts/jakarta-700.woff2') format('woff2'); }
+        @font-face { font-family:'Plus Jakarta Sans'; font-style:italic; font-weight:700; font-display:swap; src:url('/fonts/jakarta-700i.woff2') format('woff2'); }
+        @font-face { font-family:'DM Sans'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/dmsans-400.woff2') format('woff2'); }
+        @font-face { font-family:'DM Sans'; font-style:normal; font-weight:500; font-display:swap; src:url('/fonts/dmsans-500.woff2') format('woff2'); }
+        @font-face { font-family:'Space Mono'; font-style:normal; font-weight:400; font-display:swap; src:url('/fonts/spacemono-400.woff2') format('woff2'); }
+    </style>
 
     <!-- Tailwind: precompiled CSS, loaded async so it doesn't block first paint -->
     <link rel="preload" as="style" href="/tailwind.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/tailwind.min.css"></noscript>
 
-    <!-- Google Analytics: load deferred until after page parse to free mobile main thread -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HH2JF4NCCF');</script>
+    <!-- Google Analytics: delayed until after page is interactive to reduce TBT -->
+    <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF';
+        s.async = true;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HH2JF4NCCF');
+      }, 100);
+    });
+    </script>
     
     <!-- Critical above-the-fold CSS: inlined so first paint is not blank while Tailwind CDN loads -->
     <style>
