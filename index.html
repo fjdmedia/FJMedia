@@ -353,6 +353,28 @@
             color: #C9A84C;
             opacity: 1;
         }
+
+        /* Mobile nav: hamburger → X + panel reveal */
+        #mobile-nav-toggle:checked ~ nav .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        #mobile-nav-toggle:checked ~ nav .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        #mobile-nav-toggle:checked ~ nav .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        #mobile-nav-toggle:checked ~ .mobile-nav-panel {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Package tabs: tighten on small screens */
+        @media (max-width: 640px) {
+            .pkg-tab { padding: 12px 8px; }
+            .pkg-tab .pkg-tab-title { font-size: 11px; letter-spacing: 0.04em; }
+            .pkg-tab .pkg-tab-sub { display: none; }
+        }
     </style>
 </head>
 <body class="bg-brand-bg relative min-h-screen text-brand-textBase font-sans selection:bg-brand-gold selection:text-brand-bg uppercase-tracking overflow-x-hidden">
@@ -396,6 +418,7 @@
     </div>
 
     <!-- Global Navigation -->
+    <input type="checkbox" id="mobile-nav-toggle" class="hidden" aria-hidden="true">
     <nav class="fixed top-0 left-0 right-0 z-40 glass-panel border-t-0 border-x-0 border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
         <div class="flex items-center gap-2 group cursor-pointer">
             <div class="text-brand-gold font-display font-bold text-2xl tracking-tighter">
@@ -411,10 +434,30 @@
             <a href="#faq" class="hover:text-brand-gold transition-colors">FAQ</a>
             <a href="#contact" class="hover:text-brand-gold transition-colors">Contact</a>
         </div>
-        <a href="#contact" class="bg-white text-brand-bg px-6 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)]">
-            Book a Call
-        </a>
+        <div class="flex items-center gap-4">
+            <a href="#contact" class="bg-white text-brand-bg px-5 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)] text-sm">
+                Book a Call
+            </a>
+            <label for="mobile-nav-toggle" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 cursor-pointer z-50" aria-label="Toggle navigation menu">
+                <span class="hamburger-line block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-white rounded transition-all duration-300 mt-1.5"></span>
+                <span class="hamburger-line block w-6 h-0.5 bg-white rounded transition-all duration-300 mt-1.5"></span>
+            </label>
+        </div>
     </nav>
+    <!-- Mobile Nav Panel -->
+    <div class="mobile-nav-panel fixed inset-0 z-30 pointer-events-none opacity-0 transition-opacity duration-300 lg:hidden">
+        <div class="absolute inset-0 bg-brand-bg/95 backdrop-blur-md"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full gap-8 text-lg font-medium tracking-wide">
+            <a href="work.html" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Work</a>
+            <a href="#process" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Process</a>
+            <a href="#pricing" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Packages</a>
+            <a href="#myths" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Why Us</a>
+            <a href="/proof.html" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Proof</a>
+            <a href="#faq" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">FAQ</a>
+            <a href="#contact" class="mobile-nav-link text-white hover:text-brand-gold transition-colors" onclick="document.getElementById('mobile-nav-toggle').checked=false">Contact</a>
+        </div>
+    </div>
 
     <!-- Main Content Canvas -->
     <main class="relative z-10 pt-32 px-6 md:px-12 max-w-[1600px] mx-auto">
@@ -427,7 +470,7 @@
                     <span class="w-8 h-px bg-brand-gold"></span>
                     Web Partner for Local Businesses · Winnipeg
                 </div>
-                <h1 class="font-display font-bold text-5xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
+                <h1 class="font-display font-bold text-4xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
                     We'll cook up a website <br/>
                     in 48 hours. <br/>
                     <span class="text-gradient italic block mt-2">Free until you love it.</span>
@@ -1073,13 +1116,13 @@
                     <h3 class="text-white font-bold text-xl mb-2">$0 until you're satisfied.</h3>
                     <p class="text-brand-textMuted text-sm">We build it first. You see it first. You decide if it's worth paying for.</p>
                 </div>
-                <div class="md:col-span-2 bg-[#0a1219] p-8 rounded-xl border border-white/5 flex items-center justify-between">
+                <div class="md:col-span-2 bg-[#0a1219] p-8 rounded-xl border border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div>
                         <div class="text-brand-gold text-[10px] font-bold tracking-[0.2em] uppercase mb-2">// One person. Full accountability.</div>
                         <h3 class="text-white font-bold text-lg">You talk to James. James builds it. That's it.</h3>
                         <p class="text-brand-textMuted text-sm mt-1">No handoffs. No account managers. No waiting on "the developer."</p>
                     </div>
-                    <a href="#contact" class="text-xs font-bold tracking-widest hover:text-brand-gold transition-colors flex items-center gap-2 shrink-0 ml-8">
+                    <a href="#contact" class="text-xs font-bold tracking-widest hover:text-brand-gold transition-colors flex items-center gap-2 shrink-0">
                         Book a Call <svg class="ph-icon" aria-hidden="true"><use href="#ph-arrow-right"/></svg>
                     </a>
                 </div>
@@ -1143,7 +1186,7 @@
             <div class="absolute inset-0 opacity-10 mix-blend-overlay z-0" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22none%22/%3E%3Cpath d=%22M0 20 L20 0 L40 20 L20 40 Z%22 fill=%22rgba(0,0,0,0.15)%22/%3E%3C/svg%3E')"></div>
             <div class="relative z-10 text-center text-brand-bg py-12 px-6 max-w-4xl mx-auto">
                 <div class="inline-block border border-brand-bg px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-8">Free — No Strings Attached</div>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Find out exactly what's costing you customers online. <br><span class="italic font-normal">Before you spend a cent.</span></h2>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Find out exactly what's costing you customers online. <br class="hidden md:inline"><span class="italic font-normal">Before you spend a cent.</span></h2>
                 <p class="text-brand-bg/80 max-w-2xl mx-auto mb-8 font-medium">We run a full audit of your online presence — website speed, mobile experience, local SEO, and trust signals — then send you a straight-talking report. No pitch. No obligation. Just the truth about where you're losing customers to competitors.</p>
                 
                 <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-bold mb-10">
@@ -1169,7 +1212,7 @@
             </div>
 
             <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-8 border-brand-gold/30">
-                <svg class="ph-icon text-brand-gold" aria-hidden="true"><use href="#ph-lock-key"/></svg> No retainers required. No monthly platform fees. You own everything we build.
+                <svg class="ph-icon text-brand-gold" aria-hidden="true"><use href="#ph-lock-key"/></svg> No locked-in contracts. No monthly platform fees. You own everything we build.
             </div>
 
             <!-- Hint above tabs — makes clickability obvious -->
@@ -1747,16 +1790,16 @@
         </div>
         <p class="text-xs text-brand-textMuted mb-6">Custom websites for Winnipeg businesses.</p>
         <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-xs uppercase tracking-widest text-brand-textMuted mb-6 px-4">
-            <a href="work.html" class="hover:text-white transition">Work</a>
-            <a href="#pricing" class="hover:text-white transition">Packages</a>
-            <a href="#contact" class="hover:text-white transition">Contact</a>
-            <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="hover:text-white transition flex items-center gap-1"><svg class="ph-icon text-lg" aria-hidden="true"><use href="#ph-instagram-logo"/></svg> @fjmedia204</a>
+            <a href="work.html" class="hover:text-white transition py-2">Work</a>
+            <a href="#pricing" class="hover:text-white transition py-2">Packages</a>
+            <a href="#contact" class="hover:text-white transition py-2">Contact</a>
+            <a href="https://www.instagram.com/fjmedia204" target="_blank" rel="noopener" class="hover:text-white transition py-2 flex items-center gap-1"><svg class="ph-icon text-lg" aria-hidden="true"><use href="#ph-instagram-logo"/></svg> @fjmedia204</a>
         </div>
         <p class="text-xs text-brand-textMuted">© 2026 FJMedia. All rights reserved.</p>
     </footer>
 
     <!-- Persistent Floating CTA -->
-    <div class="fixed bottom-6 right-6 z-40">
+    <div id="floating-cta" class="fixed bottom-6 right-6 z-40 transition-opacity duration-300">
          <div class="relative group">
              <a href="#contact" aria-label="Jump to contact form" class="flex items-center justify-center w-14 h-14 bg-brand-gold text-brand-bg rounded-full shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:scale-110 transition-transform duration-300">
                 <svg class="ph-icon text-2xl" aria-hidden="true"><use href="#ph-fill-chat-circle-dots"/></svg>
@@ -1846,6 +1889,18 @@
           }
         });
       });
+
+      /* — Hide floating CTA when contact section is in view — */
+      const floatingCta = document.getElementById('floating-cta');
+      const contactSection = document.getElementById('contact');
+      if (floatingCta && contactSection) {
+        ScrollTrigger.create({
+          trigger: contactSection,
+          start: 'top 80%',
+          onEnter: () => gsap.to(floatingCta, { opacity: 0, pointerEvents: 'none', duration: 0.3 }),
+          onLeaveBack: () => gsap.to(floatingCta, { opacity: 1, pointerEvents: 'auto', duration: 0.3 })
+        });
+      }
     }); // end DOMContentLoaded
     </script>
 
