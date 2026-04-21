@@ -246,12 +246,19 @@
   .panel .headline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.95rem;line-height:1.22;margin-bottom:.45rem;letter-spacing:-.008em;text-wrap:balance;}
   .panel p{color:var(--cream);font-size:.74rem;line-height:1.5;font-weight:300;text-wrap:pretty;}
 
-  /* includes list */
-  .includes{margin-top:1.15rem;}
-  .includes-title{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.26em;text-transform:uppercase;margin-bottom:.6rem;}
-  .includes ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:1.5rem;row-gap:.4rem;}
-  .includes li{color:var(--cream);font-size:.78rem;line-height:1.38;padding-left:1rem;position:relative;font-weight:300;}
-  .includes li::before{content:"";position:absolute;left:0;top:.5rem;width:6px;height:6px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 2px rgba(201,168,76,.14);}
+  /* about-this-tier block */
+  .about-block{margin-top:1.05rem;padding:.85rem 1rem 1rem;border-left:2px solid var(--gold);background:var(--panel);border-radius:0 8px 8px 0;}
+  .about-tag{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-style:italic;color:var(--gold);font-size:.82rem;letter-spacing:-.01em;margin-bottom:.35rem;}
+  .about-block p{color:var(--cream);font-size:.78rem;line-height:1.5;font-weight:300;text-wrap:pretty;}
+
+  /* expanded includes grid (name + what + why) */
+  .includes{margin-top:1rem;}
+  .includes-title{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.26em;text-transform:uppercase;margin-bottom:.55rem;}
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:.95rem;row-gap:.6rem;}
+  .inc-item{padding-left:.7rem;border-left:2px solid rgba(201,168,76,.35);}
+  .inc-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.72rem;letter-spacing:-.005em;margin-bottom:.2rem;line-height:1.25;}
+  .inc-what{color:var(--cream);font-size:.6rem;line-height:1.5;font-weight:300;margin-bottom:.15rem;}
+  .inc-why{color:var(--muted);font-size:.6rem;line-height:1.5;font-weight:300;font-style:italic;}
 
   /* comparison strip */
   .compare{
@@ -451,34 +458,45 @@
     </div>
   </div>
 
-  <div class="three-panel">
-    <div class="panel">
-      <div class="label">01 · What</div>
-      <div class="headline">Custom 5–7 page website.</div>
-      <p>Built from scratch. No templates. Loads on any device.</p>
-    </div>
-    <div class="panel">
-      <div class="label">02 · Why</div>
-      <div class="headline">You're in the ring.</div>
-      <p>You can throw hands. Customers can find you, read you, contact you. No site = not in the fight.</p>
-    </div>
-    <div class="panel">
-      <div class="label">03 · Who</div>
-      <div class="headline">No site, or stuck on a DIY builder.</div>
-      <p>Outdated, broken on mobile, or sending people to Instagram. Launch is the floor.</p>
-    </div>
+  <div class="about-block">
+    <div class="about-tag">"You're in the ring."</div>
+    <p>Clean presence for solo operators and small shops. You need to exist online, look credible, and give customers a way to reach you — without agency prices. Launch is the floor.</p>
   </div>
 
   <div class="includes">
     <div class="includes-title">What's included</div>
-    <ul>
-      <li>5–7 pages, hand-coded</li>
-      <li>Mobile, tablet, desktop</li>
-      <li>Contact form</li>
-      <li>Domain + hosting wired</li>
-      <li>Indexable on Google (no ranking work)</li>
-      <li>Free changes for 30 days</li>
-    </ul>
+    <div class="inc-grid">
+      <div class="inc-item">
+        <div class="inc-name">5–7 pages, custom built</div>
+        <div class="inc-what">A website built for your business from scratch — not pulled from a template library.</div>
+        <div class="inc-why">Templates read as generic in 3 seconds. Custom earns the trust that closes the sale.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Mobile, tablet, desktop</div>
+        <div class="inc-what">Your site resizes cleanly on every screen people actually use.</div>
+        <div class="inc-why">More than half your traffic is phones. A site that breaks on mobile loses the customer before they scroll.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Contact form</div>
+        <div class="inc-what">One form on your site that sends messages straight to your inbox.</div>
+        <div class="inc-why">One clean channel beats "DM me on Instagram." Professional, trackable, always on.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Domain + hosting wired</div>
+        <div class="inc-what">Your own business address (yourshop.ca) connected to a live, always-on server.</div>
+        <div class="inc-why">You own the address. Nobody can take it from you. No site-builder holding your site hostage.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Indexable on Google</div>
+        <div class="inc-what">Google can find your site when someone searches your exact business name.</div>
+        <div class="inc-why">Without it, you don't exist on Google. Anyone searching for you lands on a competitor.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Free changes for 30 days</div>
+        <div class="inc-what">One month after launch, edits are on us.</div>
+        <div class="inc-why">You'll spot things you want tweaked once it's live. This window is when those tweaks are free.</div>
+      </div>
+    </div>
   </div>
 
   <div class="compare">
@@ -535,35 +553,50 @@
     </div>
   </div>
 
-  <div class="three-panel">
-    <div class="panel">
-      <div class="label">01 · What</div>
-      <div class="headline">Launch + lead capture.</div>
-      <p>Booking form with live pricing. Inquiries auto-save to a sheet. Instant email alerts. Google Maps dialed.</p>
-    </div>
-    <div class="panel">
-      <div class="label">02 · Why</div>
-      <div class="headline">Corner, trainer, game plan.</div>
-      <p>Launch gets you in the ring. Foundation gives you a corner calling shots — every inquiry tracked, every lead routed, nothing dropped.</p>
-    </div>
-    <div class="panel">
-      <div class="label">03 · Who</div>
-      <div class="headline">Inquiries coming in — but slipping through.</div>
-      <p>DMs, texts, missed calls, scraps. Or invisible on Google. Foundation works for you. Not just sits there.</p>
-    </div>
+  <div class="about-block">
+    <div class="about-tag">"Corner, trainer, game plan."</div>
+    <p>For staffed shops with booked schedules. Inquiries already come in — Foundation makes sure none slip through. Every lead tracked, every message routed, nothing dropped between rounds.</p>
   </div>
 
   <div class="includes">
     <div class="includes-title">What's included</div>
-    <ul>
-      <li>Everything in Launch</li>
-      <li>Order/booking form, live pricing</li>
-      <li>Google Sheet auto-logs every inquiry</li>
-      <li>Instant email alerts</li>
-      <li>Google Maps listing setup</li>
-      <li>On-page SEO tags</li>
-      <li>3 months free changes</li>
-    </ul>
+    <div class="inc-grid">
+      <div class="inc-item">
+        <div class="inc-name">Everything in Launch</div>
+        <div class="inc-what">Full Launch tier — custom site, mobile-ready, domain, contact form, Google index, 30-day grace.</div>
+        <div class="inc-why">You need the base site first. Foundation builds the capture system on top.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Order/booking form with live pricing</div>
+        <div class="inc-what">A form that calculates price as the customer fills it out, then books the job.</div>
+        <div class="inc-why">Customers answer their own "how much?" question. You get a qualified booking, not a cold lead.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google Sheet auto-logs every inquiry</div>
+        <div class="inc-what">Every form submission lands in a live Google Sheet you can open anytime.</div>
+        <div class="inc-why">Every lead tracked, searchable, exportable. No lost names, no "who was that again?"</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Instant email alerts</div>
+        <div class="inc-what">Every time a form is filled, you get an email in under 60 seconds.</div>
+        <div class="inc-why">Speed closes. Leads cool fast — reply in minutes, not next morning.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google Maps listing setup</div>
+        <div class="inc-what">Your business set up on Google Maps with photos, hours, and reviews linked.</div>
+        <div class="inc-why">When someone searches "detailer near me," your shop shows up — or your competitor does.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">On-page SEO tags</div>
+        <div class="inc-what">Title tags, meta descriptions, and structured data written for every page.</div>
+        <div class="inc-why">Google needs to read you right to rank you right. Tags tell Google what you do.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">3 months free changes</div>
+        <div class="inc-what">Three months after launch, edits are on us.</div>
+        <div class="inc-why">A booked shop changes things constantly. This covers it while the site settles in.</div>
+      </div>
+    </div>
   </div>
 
   <div class="compare">
@@ -620,35 +653,50 @@
     </div>
   </div>
 
-  <div class="three-panel">
-    <div class="panel">
-      <div class="label">01 · What</div>
-      <div class="headline">Foundation + we stay.</div>
-      <p>Monthly numbers check-in. Seasonal content swaps. Google monitoring. 24-hr text reply. Quarterly strategy sit-down.</p>
-    </div>
-    <div class="panel">
-      <div class="label">02 · Why</div>
-      <div class="headline">In your corner, every round.</div>
-      <p>Launch puts you in the fight. Foundation calls the shots. Authority runs the whole camp — so nothing falls through between rounds.</p>
-    </div>
-    <div class="panel">
-      <div class="label">03 · Who</div>
-      <div class="headline">Full operation, no time.</div>
-      <p>Multi-staff or multi-location. You're running a real business — Authority is for owners who need a partner, not a vendor.</p>
-    </div>
+  <div class="about-block">
+    <div class="about-tag">"Full camp behind you."</div>
+    <p>For multi-staff or multi-location operations. You don't have time to run the site — Authority runs it for you. Scoreboard, swaps, rankings, hands-off. You focus on the business.</p>
   </div>
 
   <div class="includes">
     <div class="includes-title">What's included</div>
-    <ul>
-      <li>Everything in Foundation</li>
-      <li>Monthly scoreboard — leads in, what to fix next</li>
-      <li>Seasonal content swaps</li>
-      <li>Google ranking monitoring</li>
-      <li>6 months upkeep included</li>
-      <li>24-hr text reply, no queue</li>
-      <li>Quarterly strategy sit-down</li>
-    </ul>
+    <div class="inc-grid">
+      <div class="inc-item">
+        <div class="inc-name">Everything in Foundation</div>
+        <div class="inc-what">The full Foundation site — lead capture, CRM, email alerts, Google Maps, SEO tags, 3-month grace.</div>
+        <div class="inc-why">Authority stacks on top. Same engine — now actively run by someone watching.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Monthly scoreboard</div>
+        <div class="inc-what">One monthly report showing lead volume, where they came from, and the next thing worth fixing.</div>
+        <div class="inc-why">You shouldn't have to ask "is the site working?" The scoreboard tells you.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Seasonal content swaps</div>
+        <div class="inc-what">Menus, pricing, photos, services — updated every season so the site reflects the business today.</div>
+        <div class="inc-why">A site that says "Summer Menu" in October reads as neglect. Stale sites lose trust.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google ranking monitoring</div>
+        <div class="inc-what">We watch where you rank for your key local searches every month.</div>
+        <div class="inc-why">Rankings shift constantly. Someone has to watch. That's us.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">6 months upkeep included</div>
+        <div class="inc-what">Six months of managed maintenance baked into the build fee — no monthly retainer yet.</div>
+        <div class="inc-why">Half a year hands-off before any monthly bill shows up. Retainer optional after.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">24-hr text reply, no queue</div>
+        <div class="inc-what">Text us directly — reply within 24 hours, no ticket system.</div>
+        <div class="inc-why">When the booking form breaks at 8pm Saturday, you need an answer by Sunday, not next week.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Quarterly strategy sit-down</div>
+        <div class="inc-what">One scheduled hour every 3 months to review the numbers and plan the next move.</div>
+        <div class="inc-why">A $500K+ business changes plans. We sync every quarter so the site keeps up.</div>
+      </div>
+    </div>
   </div>
 
   <div class="compare">
