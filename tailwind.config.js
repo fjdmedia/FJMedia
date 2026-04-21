@@ -3,6 +3,9 @@ module.exports = {
   content: [
     './index.html',
     './work.html',
+    './proof.html',
+    './dashboard.html',
+    './ops.html',
   ],
   safelist: [
     'bg-brand-bg',

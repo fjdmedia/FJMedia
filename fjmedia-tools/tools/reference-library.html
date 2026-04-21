@@ -79,6 +79,9 @@
   /* Slide In Left */
   @keyframes slideLeft { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
 
+  /* Auto-scroll for device mockup demo */
+  @keyframes libAutoScroll { 0% { transform: translateY(0); } 100% { transform: translateY(calc(-100% + 100px)); } }
+
   /* Slide In Right */
   @keyframes slideRight { from { opacity:0; transform: translateX(40px); } to { opacity:1; transform: translateX(0); } }
 
@@ -345,6 +348,8 @@
   <a class="nav-item" onclick="show('loading')">Loading States</a>
   <div class="nav-section">Conversion</div>
   <a class="nav-item" onclick="show('conversion')">Conversion Patterns</a>
+  <div class="nav-section">Presentation</div>
+  <a class="nav-item" onclick="show('devices')">Device Mockups</a>
 </nav>
 
 <!-- MAIN -->
@@ -4498,20 +4503,38 @@
 
       <div class="ref-card">
         <div class="preview" style="padding:12px;">
-          <div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px 14px;width:100%;max-width:220px;">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-              <div style="width:6px;height:6px;border-radius:50%;background:#22c55e;"></div>
-              <div style="font-size:9px;color:var(--cream);font-weight:500;">3 spots left this month</div>
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.05);">
+            <div style="position:relative;width:7px;height:7px;flex-shrink:0;">
+              <div style="position:absolute;inset:0;border-radius:50%;background:var(--gold);opacity:.6;animation:pulse 2s ease-in-out infinite;"></div>
+              <div style="position:relative;width:7px;height:7px;border-radius:50%;background:var(--gold);"></div>
             </div>
-            <div style="height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;">
-              <div style="height:100%;width:85%;background:var(--gold);border-radius:2px;"></div>
-            </div>
+            <div style="font-size:9px;font-weight:600;color:var(--white);letter-spacing:.02em;">2 of 5 build spots left this month</div>
           </div>
         </div>
         <div class="card-body">
-          <div class="card-name">Urgency / Scarcity Badge</div>
+          <div class="card-name">Scarcity Pill (Gold Pulse)</div>
           <div class="card-prompt" onclick="copyTag(this,'urgency-badge')">urgency-badge</div>
-          <div class="card-desc">Live dot + limited availability message + progress bar. Creates urgency for booking CTAs.</div>
+          <div class="card-desc">Pill with pulsing gold dot + "X of Y spots left this month." Brand-aligned, subtle, always-true (capacity is real). Use in hero beside CTAs and at the top of pricing. Shipped on fjmedia.ca 2026-04-21.</div>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <div class="preview" style="padding:0;align-items:flex-end;background:#0a0a0a;flex-direction:column;justify-content:flex-end;">
+          <div style="width:100%;background:rgba(10,10,10,.95);backdrop-filter:blur(8px);border-top:1px solid rgba(201,168,76,.2);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="display:flex;align-items:center;gap:6px;min-width:0;">
+              <div style="position:relative;width:6px;height:6px;flex-shrink:0;">
+                <div style="position:absolute;inset:0;border-radius:50%;background:var(--gold);opacity:.6;animation:pulse 2s ease-in-out infinite;"></div>
+                <div style="position:relative;width:6px;height:6px;border-radius:50%;background:var(--gold);"></div>
+              </div>
+              <div style="font-size:8px;font-weight:600;color:var(--white);line-height:1.2;">2 of 5 spots left<br><span style="color:var(--muted);font-weight:400;">this month</span></div>
+            </div>
+            <div style="padding:6px 10px;background:var(--gold);border-radius:4px;font-size:8px;font-weight:700;color:var(--navy);white-space:nowrap;">Book Fit Call</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Mobile Sticky CTA + Scarcity</div>
+          <div class="card-prompt" onclick="copyTag(this,'mobile-sticky-scarcity')">mobile-sticky-scarcity</div>
+          <div class="card-desc">Fixed bottom bar for mobile only (lg:hidden). Left: pulse dot + scarcity line. Right: primary CTA. Hide the floating chat bubble on mobile when using this to avoid collision. Shipped on fjmedia.ca 2026-04-21.</div>
         </div>
       </div>
 
@@ -6164,6 +6187,34 @@
         </div>
       </div>
 
+      <div class="ref-card">
+        <div class="preview" style="padding:10px;flex-direction:column;gap:4px;">
+          <div style="font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);">Under the Hood</div>
+          <div style="width:100%;display:flex;flex-direction:column;gap:3px;">
+            <div style="display:grid;grid-template-columns:14px 1fr auto;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);">
+              <div style="font-size:7px;color:var(--gold);font-family:monospace;">01.</div>
+              <div style="font-size:8px;color:var(--white);font-weight:500;">HTML/CSS/JS vanilla</div>
+              <div style="font-size:7px;color:var(--gold);background:rgba(201,168,76,.1);padding:2px 5px;border-radius:3px;">Zero deps</div>
+            </div>
+            <div style="display:grid;grid-template-columns:14px 1fr auto;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);">
+              <div style="font-size:7px;color:var(--gold);font-family:monospace;">02.</div>
+              <div style="font-size:8px;color:var(--white);font-weight:500;">Tailwind precompiled</div>
+              <div style="font-size:7px;color:var(--gold);background:rgba(201,168,76,.1);padding:2px 5px;border-radius:3px;">32 KB</div>
+            </div>
+            <div style="display:grid;grid-template-columns:14px 1fr auto;gap:6px;align-items:center;padding:4px 0;">
+              <div style="font-size:7px;color:var(--gold);font-family:monospace;">03.</div>
+              <div style="font-size:8px;color:var(--white);font-weight:500;">Vercel + Brotli</div>
+              <div style="font-size:7px;color:var(--gold);background:rgba(201,168,76,.1);padding:2px 5px;border-radius:3px;">94 PSI</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Tech Spec Sheet ("Under the Hood")</div>
+          <div class="card-prompt" onclick="copyTag(this,'tech-spec-sheet')">tech-spec-sheet</div>
+          <div class="card-desc">Editorial 5-row list: index · tech name + one-line body · proof badge. Backs up "0 templates" credibility claim with concrete tech names. Use between proof section and case studies. Stacks vertically on mobile. Shipped in proof.html 2026-04-18.</div>
+        </div>
+      </div>
+
     </div>
 
     <div class="section-label" style="margin-top:2rem;">Social Proof & Carousels</div>
@@ -6393,6 +6444,140 @@
       </div>
 
     </div>
+  </div>
+
+  <!-- DEVICE MOCKUPS -->
+  <div id="sec-devices" class="section">
+    <h1 class="page-title">Device Mockups</h1>
+    <p class="page-sub">Laptop and phone frames for client presentations. Use in comparison decks and pitch slides.</p>
+    <div class="prompt-tip">
+      <strong>When to use:</strong> Client comparison presentations (before/after), portfolio showcases, pitch decks. These are the 3 patterns that work — others waste space or hide your work.
+    </div>
+
+    <div class="section-label" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;">Laptop Frames</div>
+    <div class="grid-2">
+
+      <!-- Scrollable Capped -->
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;background:#0a1a28;flex-direction:column;gap:0;">
+          <div style="width:85%;display:flex;flex-direction:column;">
+            <div style="background:#1a1a1a;border:1.5px solid #2a2a2a;border-bottom:none;border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:#2a2a2a;display:flex;align-items:center;padding:0 6px;gap:3px;">
+                <div style="display:flex;gap:2px;"><span style="width:5px;height:5px;border-radius:50%;background:#ff5f57;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#febc2e;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#28c840;display:block;"></span></div>
+                <div style="flex:1;height:9px;background:#1a1a1a;border-radius:2px;margin-left:4px;"></div>
+              </div>
+              <div style="height:100px;overflow-y:auto;background:#fff;">
+                <div style="height:200px;background:linear-gradient(135deg,#1565C0 0%,#0d47a1 50%,#43A047 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:12px;font-size:6px;color:rgba(255,255,255,.5);letter-spacing:.1em;">SCROLLABLE CONTENT</div>
+              </div>
+            </div>
+            <div style="width:calc(100% + 12px);margin-left:-6px;height:6px;background:linear-gradient(180deg,#2a2a2a,#1a1a1a);border-radius:0 0 3px 3px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Scrollable Capped Laptop</div>
+          <div class="card-prompt" onclick="copyTag(this,'laptop-scrollable-capped')">laptop-scrollable-capped</div>
+          <div class="card-desc">Realistic laptop height with scrollable screen. Shows above-the-fold by default, scroll to reveal the rest. Best for side-by-side comparisons where you want to walk the client through the full page.</div>
+        </div>
+      </div>
+
+      <!-- Auto-Scrolling -->
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;background:#0a1a28;flex-direction:column;gap:0;">
+          <div style="width:85%;display:flex;flex-direction:column;">
+            <div style="background:#1a1a1a;border:1.5px solid #2a2a2a;border-bottom:none;border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:#2a2a2a;display:flex;align-items:center;padding:0 6px;gap:3px;">
+                <div style="display:flex;gap:2px;"><span style="width:5px;height:5px;border-radius:50%;background:#ff5f57;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#febc2e;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#28c840;display:block;"></span></div>
+                <div style="flex:1;height:9px;background:#1a1a1a;border-radius:2px;margin-left:4px;"></div>
+              </div>
+              <div style="height:100px;overflow:hidden;background:#fff;">
+                <div style="height:300px;background:linear-gradient(180deg,#1565C0 0%,#0d47a1 33%,#43A047 66%,#2E7D32 100%);animation:libAutoScroll 6s ease-in-out infinite alternate;display:flex;align-items:flex-start;justify-content:center;padding-top:12px;font-size:6px;color:rgba(255,255,255,.5);letter-spacing:.1em;">AUTO-SCROLLING</div>
+              </div>
+            </div>
+            <div style="width:calc(100% + 12px);margin-left:-6px;height:6px;background:linear-gradient(180deg,#2a2a2a,#1a1a1a);border-radius:0 0 3px 3px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Auto-Scrolling Laptop</div>
+          <div class="card-prompt" onclick="copyTag(this,'laptop-auto-scroll')">laptop-auto-scroll</div>
+          <div class="card-desc">Laptop with CSS animation that slowly scrolls through the full page on a loop. Hands-free, cinematic. You present and talk while the site sells itself. Best for pitch meetings.</div>
+        </div>
+      </div>
+
+      <!-- Browser Window -->
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;background:#0a1a28;flex-direction:column;gap:0;">
+          <div style="width:85%;display:flex;flex-direction:column;">
+            <div style="border:1.5px solid #2a2a2a;border-radius:6px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.3);">
+              <div style="height:14px;background:#2a2a2a;display:flex;align-items:center;padding:0 6px;gap:3px;">
+                <div style="display:flex;gap:2px;"><span style="width:5px;height:5px;border-radius:50%;background:#ff5f57;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#febc2e;display:block;"></span><span style="width:5px;height:5px;border-radius:50%;background:#28c840;display:block;"></span></div>
+                <div style="flex:1;height:9px;background:#1a1a1a;border-radius:2px;margin-left:4px;"></div>
+              </div>
+              <div style="height:110px;overflow-y:auto;background:#fff;">
+                <div style="height:250px;background:linear-gradient(135deg,#1565C0 0%,#0d47a1 50%,#43A047 100%);display:flex;align-items:flex-start;justify-content:center;padding-top:12px;font-size:6px;color:rgba(255,255,255,.5);letter-spacing:.1em;">NO FRAME — MAX CONTENT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Browser Window (No Laptop)</div>
+          <div class="card-prompt" onclick="copyTag(this,'browser-window-float')">browser-window-float</div>
+          <div class="card-desc">Drop the laptop frame — just a floating browser window with chrome dots + URL bar. Maximum content space, minimum decoration. Scrollable. Best when the content needs to breathe.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;">Phone Frames</div>
+    <div class="grid-2">
+
+      <!-- iPhone Frame -->
+      <div class="ref-card">
+        <div class="preview" style="padding:12px;background:#0a1a28;">
+          <div style="width:70px;height:130px;background:#1a1a1a;border-radius:14px;border:2px solid #2a2a2a;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 20px rgba(0,0,0,.4);">
+            <div style="height:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;">
+              <div style="position:absolute;top:0;width:30px;height:8px;background:#1a1a1a;border-radius:0 0 6px 6px;"></div>
+            </div>
+            <div style="flex:1;overflow-y:auto;background:#fff;min-height:0;">
+              <div style="height:200px;background:linear-gradient(135deg,#1565C0,#43A047);"></div>
+            </div>
+            <div style="height:8px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <div style="width:24px;height:2px;background:#444;border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">iPhone Mockup Frame</div>
+          <div class="card-prompt" onclick="copyTag(this,'phone-frame-iphone')">phone-frame-iphone</div>
+          <div class="card-desc">Full iPhone frame with notch, status bar (9:41, signal, battery), scrollable screen, home indicator, and decorative side buttons. Use for mobile comparison slides.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;">Layout Angles</div>
+    <div class="grid-2">
+
+      <!-- Hero Focus -->
+      <div class="ref-card">
+        <div class="preview" style="padding:16px;background:#0a1a28;perspective:600px;gap:8px;">
+          <div style="width:80px;height:55px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;transform:scale(0.8) rotateY(5deg);opacity:0.5;overflow:hidden;">
+            <div style="height:8px;background:#2a2a2a;"></div>
+            <div style="flex:1;background:linear-gradient(135deg,#1565C0,#0d47a1);height:47px;"></div>
+          </div>
+          <div style="width:100px;height:65px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:4px;transform:scale(1.05) rotateY(-3deg);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3);">
+            <div style="height:8px;background:#2a2a2a;"></div>
+            <div style="flex:1;background:linear-gradient(135deg,#1565C0,#43A047);height:57px;"></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Hero Focus Angle</div>
+          <div class="card-prompt" onclick="copyTag(this,'layout-hero-focus')">layout-hero-focus</div>
+          <div class="card-desc">Redesign is bigger and prominent, current is faded and smaller. The visual version of "here's where you are, here's where I'm taking you." Best for before/after sales presentations.</div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
 </div>

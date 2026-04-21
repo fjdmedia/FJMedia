@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/fjdmedia/FJMedia#readme",
   "devDependencies": {
+    "@phosphor-icons/web": "^2.1.2",
     "tailwindcss": "^3.4.19"
   }
 }
