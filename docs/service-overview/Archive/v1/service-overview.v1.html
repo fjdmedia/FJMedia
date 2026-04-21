@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>FJMedia — Service Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=DM+Sans:wght@200;300;400;500&family=Space+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#071520;
+    --navy-2:#0D1F3C;
+    --navy-3:#0a1830;
+    --gold:#C9A84C;
+    --cream:#EDEAE5;
+    --muted:#94a3b8;
+    --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--navy);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  @page{size:letter portrait;margin:0;}
+
+  .page{
+    width:8.5in;height:11in;
+    padding:.75in .75in .6in;
+    position:relative;
+    page-break-after:always;
+    overflow:hidden;
+    background:var(--navy);
+  }
+  .page:last-child{page-break-after:auto;}
+
+  /* brand mark */
+  .brand{display:flex;align-items:center;gap:.5rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.02em;}
+  .brand .bk{color:var(--gold);}
+  .brand .fj{color:var(--cream);}
+  .brand .word{color:var(--cream);font-weight:400;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem;margin-left:.35rem;}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2.2rem;}
+  .topbar .meta{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;}
+
+  .eyebrow{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  h1.display{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:3.4rem;line-height:1.02;letter-spacing:-.02em;color:#fff;margin-bottom:1.2rem;}
+  h2.display{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.4rem;line-height:1.05;letter-spacing:-.015em;color:#fff;margin-bottom:.6rem;}
+  p.lede{font-family:'DM Sans',sans-serif;font-weight:300;font-size:1.05rem;line-height:1.5;color:var(--cream);max-width:6in;}
+
+  .rule{height:1px;background:var(--line);margin:1.4rem 0;}
+
+  /* cover hero number */
+  .hero-stack{position:absolute;left:.75in;right:.75in;top:3.6in;}
+  .hero-stack .italic-accent{font-style:italic;font-weight:400;background:linear-gradient(135deg,#fff 0%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  .cover-pillars{position:absolute;left:.75in;right:.75in;bottom:.9in;display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
+  .pillar{border:1px solid var(--line);border-radius:8px;padding:.7rem .8rem;background:rgba(13,31,60,.4);}
+  .pillar .n{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.24em;}
+  .pillar .t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;font-size:.92rem;margin-top:.3rem;}
+  .pillar .d{color:var(--muted);font-size:.72rem;line-height:1.35;margin-top:.2rem;}
+
+  /* package page layout */
+  .pkg-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;}
+  .pkg-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.8rem;letter-spacing:-.015em;color:#fff;line-height:1;}
+  .pkg-sub{color:var(--muted);font-size:.82rem;margin-top:.3rem;}
+  .price-block{text-align:right;}
+  .price{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.6rem;color:var(--gold);line-height:1;}
+  .price-note{font-family:'Space Mono',monospace;color:var(--muted);font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;margin-top:.35rem;}
+  .best{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;padding:.25rem .55rem;border-radius:3px;margin-left:.5rem;vertical-align:middle;}
+
+  /* 3-panel body */
+  .three-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.55rem;margin-top:1.3rem;}
+  .panel{border:1px solid var(--line);border-radius:10px;padding:.85rem .9rem;background:linear-gradient(180deg,rgba(13,31,60,.9),rgba(10,24,45,.9));}
+  .panel .label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.45rem;}
+  .panel .headline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.92rem;line-height:1.25;margin-bottom:.4rem;}
+  .panel p{color:var(--cream);font-size:.74rem;line-height:1.5;font-weight:300;}
+
+  /* includes list */
+  .includes{margin-top:1.2rem;}
+  .includes-title{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.24em;text-transform:uppercase;margin-bottom:.55rem;}
+  .includes ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;column-gap:1.4rem;row-gap:.35rem;}
+  .includes li{color:var(--cream);font-size:.78rem;line-height:1.35;padding-left:1rem;position:relative;font-weight:300;}
+  .includes li::before{content:"";position:absolute;left:0;top:.5rem;width:6px;height:6px;background:var(--gold);border-radius:50%;}
+
+  /* comparison strip */
+  .compare{position:absolute;left:.75in;right:.75in;bottom:.6in;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line);padding-top:.7rem;gap:.5rem;}
+  .c-col{}
+  .c-col .lbl{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;}
+  .c-col .val{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.92rem;margin-top:.2rem;color:#fff;}
+  .c-col.you .val{color:var(--gold);font-weight:800;}
+  .c-col .note{color:var(--muted);font-size:.62rem;margin-top:.2rem;}
+
+  /* retainer page */
+  .retainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.4rem;}
+  .ret-card{border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.2rem;background:linear-gradient(180deg,rgba(13,31,60,.9),rgba(10,24,45,.9));}
+  .ret-card .name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;}
+  .ret-card .cost{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.3rem;color:var(--gold);margin-top:.2rem;}
+  .ret-card .body{color:var(--cream);font-size:.82rem;line-height:1.5;font-weight:300;margin-top:.8rem;}
+
+  /* close page */
+  .close-body{position:absolute;left:.75in;right:.75in;top:3.2in;}
+  .close-quote{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.2rem;line-height:1.15;letter-spacing:-.012em;color:#fff;margin-bottom:1rem;max-width:6.5in;}
+  .close-sub{color:var(--cream);font-size:1rem;line-height:1.6;font-weight:300;max-width:6.2in;}
+  .signature{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--gold);margin-top:2.4rem;font-size:.95rem;letter-spacing:.02em;}
+  .sig-meta{color:var(--muted);font-size:.75rem;font-family:'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;margin-top:.3rem;}
+
+  .footer{position:absolute;left:.75in;right:.75in;bottom:.45in;display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;}
+
+  /* cover-specific */
+  .cover-foot{position:absolute;left:.75in;right:.75in;bottom:.75in;border-top:1px solid var(--line);padding-top:.8rem;display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;}
+
+  /* sources page */
+  .src-list{margin-top:1.4rem;display:flex;flex-direction:column;gap:.7rem;}
+  .src-item{border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;background:linear-gradient(180deg,rgba(13,31,60,.9),rgba(10,24,45,.9));display:grid;grid-template-columns:2.2rem 1fr;gap:.9rem;align-items:start;}
+  .src-num{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.2em;padding-top:.1rem;}
+  .src-body .src-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.92rem;line-height:1.25;}
+  .src-body .src-url{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--gold);margin-top:.2rem;word-break:break-all;}
+  .src-body .src-use{font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--cream);font-weight:300;line-height:1.45;margin-top:.35rem;}
+  .src-body .src-use strong{font-weight:500;color:#fff;}
+  .method{margin-top:1.3rem;border-top:1px solid var(--line);padding-top:.9rem;color:var(--muted);font-size:.72rem;line-height:1.5;font-weight:300;}
+  .method strong{color:var(--cream);font-weight:500;}
+  .compare .src-ref{grid-column:1 / -1;margin-top:.5rem;font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;text-align:right;}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">2026 · Service Overview</div>
+  </div>
+
+  <div class="eyebrow">Web Partner for Local Businesses</div>
+  <h1 class="display">
+    Three packages.<br/>
+    <span class="hero-stack italic-accent" style="position:static;display:inline;">One standard.</span>
+  </h1>
+  <p class="lede" style="margin-top:1.2rem;">
+    Custom-built websites for Winnipeg businesses. 48 hours. No Wix. No Shopify. No templates. Three packages — pick the one that matches where your business is right now.
+  </p>
+
+  <div class="cover-pillars">
+    <div class="pillar">
+      <div class="n">01 · SERVICE</div>
+      <div class="t">What you're getting.</div>
+      <div class="d">The deliverable. Specific. No filler.</div>
+    </div>
+    <div class="pillar">
+      <div class="n">02 · MECHANISM</div>
+      <div class="t">What it's doing.</div>
+      <div class="d">Why the feature matters — in car terms.</div>
+    </div>
+    <div class="pillar">
+      <div class="n">03 · WHEN</div>
+      <div class="t">When you need it.</div>
+      <div class="d">Your situation. Your tier. No guessing.</div>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <div>fjmedia.ca · Winnipeg, MB</div>
+    <div>Prepared for: __________________</div>
+  </div>
+</section>
+
+<!-- ============ LAUNCH ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 01 · Launch</div>
+  </div>
+
+  <div class="eyebrow">The Starter</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Launch</div>
+      <div class="pkg-sub">Custom-built. Loads fast. No template DNA.</div>
+    </div>
+    <div class="price-block">
+      <div class="price">$800</div>
+      <div class="price-note">One-time · No subscriptions</div>
+    </div>
+  </div>
+
+  <div class="three-panel">
+    <div class="panel">
+      <div class="label">01 · Service</div>
+      <div class="headline">Custom 5–7 page website.</div>
+      <p>Built from scratch. No templates. Loads on any phone or laptop. Home, About, Services, Gallery, Contact — or whatever your business needs.</p>
+    </div>
+    <div class="panel">
+      <div class="label">02 · Mechanism</div>
+      <div class="headline">The body of the car.</div>
+      <p>Your business is the car. Your website is the body — what anyone decides about you in seconds. A template site is a dent covered with a sticker. Built from scratch is panels, paint, and trim that tell people this thing actually runs.</p>
+    </div>
+    <div class="panel">
+      <div class="label">03 · When you need it</div>
+      <div class="headline">You don't have a site — or the one you have is embarrassing you.</div>
+      <p>DIY builder. Outdated. Broken on mobile. Or nothing at all and you're sending people to your Instagram. Launch is the floor every business needs.</p>
+    </div>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <ul>
+      <li>A 5–7 page website, built from scratch for you</li>
+      <li>Looks clean on phone, tablet, and laptop</li>
+      <li>Contact form people can fill out from their phone</li>
+      <li>Your domain (yourbusiness.ca) and hosting, wired up</li>
+      <li>The behind-the-scenes setup Google needs to list you</li>
+      <li>1 month of free changes after launch</li>
+      <li>Built in 48 hours</li>
+      <li>Free until you love it</li>
+    </ul>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian basic</div>
+      <div class="val">$1,500</div>
+      <div class="note">Site-builder / starter</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian standard</div>
+      <div class="val">$3,500–$5,000</div>
+      <div class="note">Typical small-biz agency build</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val">$800</div>
+      <div class="note">Same deliverable. Less markup.</div>
+    </div>
+    <div class="src-ref">All figures CAD · Sources · Page 6</div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Launch · Page 2 of 6</div>
+  </div>
+</section>
+
+<!-- ============ FOUNDATION ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 02 · Foundation</div>
+  </div>
+
+  <div class="eyebrow">Most Popular</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Foundation <span class="best">Best Value</span></div>
+      <div class="pkg-sub">Launch — plus every inquiry captured automatically.</div>
+    </div>
+    <div class="price-block">
+      <div class="price">$1,400</div>
+      <div class="price-note">One-time · No subscriptions</div>
+    </div>
+  </div>
+
+  <div class="three-panel">
+    <div class="panel">
+      <div class="label">01 · Service</div>
+      <div class="headline">Everything in Launch, plus lead capture.</div>
+      <p>Order or booking form that shows the price live as they fill it out. Every inquiry saves itself to a Google Sheet. Email alert the second it happens. Your Google Maps listing dialed in.</p>
+    </div>
+    <div class="panel">
+      <div class="label">02 · Mechanism</div>
+      <div class="headline">The engine and the dashboard.</div>
+      <p>Launch is the body. Foundation is the engine — the site goes from sitting pretty to actually driving the business. Every inquiry lands on your dashboard. Google knows where you are. Nothing falls through the cracks because every gauge is live.</p>
+    </div>
+    <div class="panel">
+      <div class="label">03 · When you need it</div>
+      <div class="headline">Inquiries are coming in — but you're losing track.</div>
+      <p>DMs, texts, missed calls, notes on scraps. Or you're invisible on Google and don't know how to fix it. Foundation is the right call when you want the site to earn, not just exist.</p>
+    </div>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <ul>
+      <li>Everything in Launch</li>
+      <li>Order or booking form that shows the price live</li>
+      <li>A Google Sheet where every inquiry saves itself — no more scraps</li>
+      <li>Email alert the second someone fills out the form</li>
+      <li>Your Google Maps listing set up so locals actually find you</li>
+      <li>The behind-the-scenes tags Google reads to rank you</li>
+      <li>3 months of free changes after launch</li>
+      <li>Built in 48 hours · Free until you love it</li>
+    </ul>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian standard</div>
+      <div class="val">$3,500–$5,000</div>
+      <div class="note">Small-biz build, no lead capture</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian advanced</div>
+      <div class="val">$6,000–$10,000</div>
+      <div class="note">Agency build with booking + SEO</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val">$1,400</div>
+      <div class="note">Pays back in 3 customer jobs.</div>
+    </div>
+    <div class="src-ref">All figures CAD · Sources · Page 6</div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Foundation · Page 3 of 6</div>
+  </div>
+</section>
+
+<!-- ============ AUTHORITY ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 03 · Authority</div>
+  </div>
+
+  <div class="eyebrow">The Full System</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Authority</div>
+      <div class="pkg-sub">Foundation — plus 6 months of us keeping it earning.</div>
+    </div>
+    <div class="price-block">
+      <div class="price">$2,200</div>
+      <div class="price-note">Includes 6 months managed</div>
+    </div>
+  </div>
+
+  <div class="three-panel">
+    <div class="panel">
+      <div class="label">01 · Service</div>
+      <div class="headline">Everything in Foundation, then we don't leave.</div>
+      <p>Monthly report: who visited, where they came from, what they clicked. Seasonal swaps to menus, prices, and photos. Google monitoring. Text us — 24-hour reply.</p>
+    </div>
+    <div class="panel">
+      <div class="label">02 · Mechanism</div>
+      <div class="headline">Regular service so it doesn't rot in the driveway.</div>
+      <p>Most small-business sites don't get serviced — stale menus, broken forms, quietly falling off Google. Oil goes stale, tire pressure drops, check-engine light stays on. Authority is the monthly tune-up: fresh content, working forms, Google still finding you, someone watching the gauges so you don't have to.</p>
+    </div>
+    <div class="panel">
+      <div class="label">03 · When you need it</div>
+      <div class="headline">You know the site should keep working — you just don't have time.</div>
+      <p>You're booked. The last thing on your plate is logging into a dashboard. Authority is the fit when you want someone to own the whole digital side and send you the numbers.</p>
+    </div>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <ul>
+      <li>Everything in Foundation</li>
+      <li>Monthly email showing visitors, where they came from, what they clicked</li>
+      <li>Seasonal swaps to menus, prices, and photos</li>
+      <li>Google monitoring — if it slips, we fix it</li>
+      <li>6 months of upkeep — no extra charge</li>
+      <li>Text us, we reply within 24 hours — no ticket queue</li>
+      <li>A sit-down every 3 months to look at the numbers and plan next moves</li>
+      <li>Built in 48 hours · Free until you love it</li>
+    </ul>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian basic</div>
+      <div class="val">$3,500–$5,000 + $100–$300/mo</div>
+      <div class="note">Small-biz build + light retainer</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian managed</div>
+      <div class="val">$6,000–$10,000 + $300–$800/mo</div>
+      <div class="note">Full agency build + retainer</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val">$2,200 · 6 mo included</div>
+      <div class="note">6 months managed. No agency contract.</div>
+    </div>
+    <div class="src-ref">All figures CAD · Sources · Page 6</div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Authority · Page 4 of 6</div>
+  </div>
+</section>
+
+<!-- ============ RETAINERS + CLOSE ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Retainers · Close</div>
+  </div>
+
+  <div class="eyebrow">After the included months</div>
+  <h2 class="display">Keep the site alive.</h2>
+  <p class="lede">After your included months, these keep the site running. Month-to-month. No contracts. Cancel when you want.</p>
+
+  <div class="retainer-grid">
+    <div class="ret-card">
+      <div class="name">Maintain</div>
+      <div class="cost">$150 / month</div>
+      <div class="body">Updates when you need them. Forms stay working. Site stays online. Monthly email with your visitor numbers. You stay in your business — we handle the site.</div>
+    </div>
+    <div class="ret-card">
+      <div class="name">Grow</div>
+      <div class="cost">$300 / month</div>
+      <div class="body">Everything in Maintain — plus monthly content updates and Google monitoring. One-on-one each month to go over the numbers and plan the next move. For owners who want the site earning, not just existing.</div>
+    </div>
+  </div>
+
+  <div class="rule" style="margin-top:2rem;"></div>
+
+  <div class="close-body" style="position:static;margin-top:1.4rem;">
+    <div class="close-quote">You're not paying for a website.<br/>You're paying for the business it brings in.</div>
+    <div class="close-sub">
+      Every package ships in 48 hours. Every package is free until you love it. No deposits, no retainers you didn't ask for, no six-week timelines. Built by one person, start to finish — which is why the quality is consistent and the accountability is total.
+    </div>
+    <div class="signature">— James Diaz</div>
+    <div class="sig-meta">Founder · FJMedia · Winnipeg, MB</div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Page 5 of 6</div>
+  </div>
+</section>
+
+<!-- ============ SOURCES & METHODOLOGY ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Appendix · Sources</div>
+  </div>
+
+  <div class="eyebrow">Where these numbers come from</div>
+  <h2 class="display">Sources & Methodology.</h2>
+  <p class="lede">Every range in this overview comes from published 2026 Canadian pricing data, with one US source for cross-reference. All figures are CAD unless marked. Click through and verify.</p>
+
+  <div class="src-list">
+    <div class="src-item">
+      <div class="src-num">01</div>
+      <div class="src-body">
+        <div class="src-name">Canada Web Pro — Small Business Website Costs in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">canadawebpro.ca/small-business-website-cost-in-canada-2026</div>
+        <div class="src-use"><strong>Used for:</strong> Canadian SMB website ranges — basic from $1,500, standard $3,500–$5,000, advanced $6,000–$10,000+. Backs Launch and Foundation comparison strips.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">02</div>
+      <div class="src-body">
+        <div class="src-name">Impeka — Web Design Pricing in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">impeka.com/web-design-pricing-canada</div>
+        <div class="src-use"><strong>Used for:</strong> Canadian agency tier pricing — small-business sites $3,000–$8,000, mid-sized corporate $8,000–$25,000. Cross-references the Foundation and Authority advanced tiers.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">03</div>
+      <div class="src-body">
+        <div class="src-name">DesignEdge — Website Maintenance Plan Cost in 2026 <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">designedge.ca/website-maintenance-plan-cost-in-2026-a-strategic-budgeting-guide</div>
+        <div class="src-use"><strong>Used for:</strong> Canadian monthly retainer tiers — basic $100–$300/mo, growth $300–$800/mo, e-commerce $1,000+/mo. Ad-hoc support $90–$175/hr. Compared against FJMedia Maintain $150 / Grow $300.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">04</div>
+      <div class="src-body">
+        <div class="src-name">Clickworthy — Local SEO Cost in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">clickworthy.io/blog/how-much-does-local-seo-cost-for-canadian-small-businesses-in-2026</div>
+        <div class="src-use"><strong>Used for:</strong> Canadian local SEO monthly tiers — basic $340–$690/mo, mid $690–$1,380/mo, comprehensive $1,380–$2,750+/mo. Foundation covers on-page SEO; Authority adds ongoing monitoring.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">05</div>
+      <div class="src-body">
+        <div class="src-name">Clutch — Web Design Company Pricing Guide (2026) <span style="color:var(--muted);font-weight:500;">· USD, reference</span></div>
+        <div class="src-url">clutch.co/web-designers/pricing</div>
+        <div class="src-use"><strong>Used for:</strong> Industry-wide cross-reference. Most web design projects on Clutch cost less than $10,000 USD; platform average is $38,105 USD. USD converts ~35% higher in CAD, which makes Canadian comparisons more favourable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="method">
+    <strong>Methodology.</strong> FJMedia prices sit below Canadian mid-range while the Winnipeg case study portfolio builds out. At 8–10 verified cases, package pricing moves to market rate. Retainers already sit at the Canadian low end. Every CAD range on the comparison strips matches a published tier from the sources cited above — no figures are extrapolated or rounded beyond what the sources state. If a source contradicts a claim, the claim gets updated.
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Sources · Page 6 of 6</div>
+  </div>
+</section>
+
+</body>
+</html>

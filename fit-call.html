@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book the 15-Minute Fit Call — FJMedia</title>
+<meta name="description" content="You've seen the overview. Book the 15-minute fit call — we'll walk your numbers, match you to a tier, and quote on the call." />
+<meta name="robots" content="index,follow" />
+
+<meta property="og:title" content="Book the 15-Minute Fit Call — FJMedia" />
+<meta property="og:description" content="Walk your numbers. Match your tier. Get a real quote before you hang up." />
+<meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
+<meta property="og:url" content="https://fjmedia.ca/fit-call" />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,700;0,800;1,700&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --navy:#071520;
+    --navy-2:#0D1F3C;
+    --navy-3:#0a1830;
+    --navy-deep:#040c15;
+    --gold:#C9A84C;
+    --gold-2:#E6C76A;
+    --gold-soft:rgba(201,168,76,.18);
+    --cream:#EDEAE5;
+    --muted:#94a3b8;
+    --muted-2:#6b7b8f;
+    --line:rgba(255,255,255,.08);
+    --line-strong:rgba(201,168,76,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:'DM Sans',system-ui,sans-serif;
+    font-feature-settings:"kern","liga","calt","ss01";
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    min-height:100vh;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 50% 0%, rgba(201,168,76,.06), transparent 60%),
+      linear-gradient(to right, rgba(255,255,255,.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.02) 1px, transparent 1px);
+    background-size:auto, 60px 60px, 60px 60px;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:1.5rem 1.4rem 4rem;}
+
+  /* top bar */
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:3.2rem;flex-wrap:wrap;gap:.8rem;}
+  .brand{display:flex;align-items:center;gap:.5rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.02em;text-decoration:none;}
+  .brand .bk{color:var(--gold);}
+  .brand .fj{color:#fff;}
+  .brand .word{color:#fff;font-weight:400;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;margin-left:.4rem;}
+  .top-contact{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.14em;}
+  .top-contact a{color:var(--gold);text-decoration:none;}
+  .top-contact a:hover{color:#fff;}
+
+  /* hero */
+  .eyebrow{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;display:inline-block;}
+  .eyebrow::before{content:"— ";color:var(--gold);letter-spacing:0;}
+  h1{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:3.4rem;
+    line-height:1.02;
+    letter-spacing:-.025em;
+    color:#fff;
+    max-width:12ch;
+    text-wrap:balance;
+    margin-bottom:1.4rem;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:700;
+    background:linear-gradient(115deg,#fff 10%,var(--gold-2) 55%,var(--gold) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .lede{
+    font-size:1.08rem;
+    line-height:1.6;
+    color:var(--cream);
+    font-weight:300;
+    max-width:38rem;
+    text-wrap:pretty;
+    margin-bottom:2.6rem;
+  }
+  .lede strong{color:#fff;font-weight:500;}
+
+  /* what-happens grid */
+  .what-happens{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.7rem;
+    margin-bottom:3.2rem;
+  }
+  .step{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.15rem 1.1rem 1.25rem;
+    background:linear-gradient(180deg,rgba(13,31,60,.85),rgba(10,24,45,.7));
+    position:relative;
+    overflow:hidden;
+  }
+  .step::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  }
+  .step .n{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.26em;}
+  .step .t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.02rem;margin-top:.4rem;letter-spacing:-.01em;}
+  .step .d{color:var(--muted);font-size:.78rem;line-height:1.5;margin-top:.35rem;font-weight:300;}
+
+  /* form card */
+  .form-card{
+    border:1px solid var(--line-strong);
+    border-radius:14px;
+    padding:1.8rem 1.8rem 1.9rem;
+    background:linear-gradient(180deg,rgba(13,31,60,.92),rgba(10,24,45,.88));
+    position:relative;
+    overflow:hidden;
+    margin-bottom:2.6rem;
+  }
+  .form-card::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse 70% 45% at 100% 0%, rgba(201,168,76,.10), transparent 55%);
+    pointer-events:none;
+  }
+  .form-card > *{position:relative;z-index:1;}
+  .form-card h2{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:1.6rem;
+    letter-spacing:-.015em;
+    color:#fff;
+    margin-bottom:.35rem;
+    line-height:1.15;
+  }
+  .form-card p.sub{color:var(--muted);font-size:.85rem;margin-bottom:1.4rem;font-weight:300;}
+
+  .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.95rem;}
+  .field label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.24em;text-transform:uppercase;}
+  .field input,
+  .field select,
+  .field textarea{
+    width:100%;
+    background:rgba(0,0,0,.32);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:6px;
+    padding:.78rem 1rem;
+    color:#fff;
+    font-size:16px;
+    font-family:'DM Sans',sans-serif;
+    outline:none;
+    transition:border-color .18s;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{border-color:var(--gold);}
+  .field textarea{resize:vertical;min-height:88px;font-family:'DM Sans',sans-serif;}
+  .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23C9A84C'><path d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 1rem center;background-size:10px;padding-right:2.4rem;}
+  .field select option{background:var(--navy-2);color:#fff;}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+
+  .submit{
+    width:100%;
+    height:54px;
+    margin-top:.6rem;
+    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+    color:var(--navy);
+    border:none;
+    border-radius:6px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:1rem;
+    letter-spacing:.02em;
+    cursor:pointer;
+    transition:filter .18s,transform .18s;
+  }
+  .submit:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .submit:active{transform:translateY(0);}
+  .submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+  #formMsg{margin-top:.9rem;font-size:.82rem;color:var(--gold);display:none;text-align:center;font-weight:500;}
+
+  /* call-now band */
+  .call-now{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1rem 1.3rem;
+    background:rgba(13,31,60,.55);
+    margin-bottom:2.6rem;
+    flex-wrap:wrap;
+  }
+  .call-now .cn-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.26em;text-transform:uppercase;}
+  .call-now .cn-value{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.05rem;margin-top:.22rem;letter-spacing:-.005em;}
+  .call-now a{color:var(--gold);text-decoration:none;}
+  .call-now a:hover{color:#fff;}
+  .call-now .cn-col{display:flex;flex-direction:column;}
+
+  /* proof strip */
+  .proof{
+    border-top:1px solid var(--line);
+    padding-top:2rem;
+    margin-bottom:2rem;
+  }
+  .proof-label{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.28em;text-transform:uppercase;margin-bottom:1rem;}
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;}
+  .proof-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:.85rem 1rem;
+    background:rgba(13,31,60,.5);
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .2s,transform .2s;
+  }
+  .proof-card:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .proof-card .pn{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;font-size:.86rem;letter-spacing:-.005em;line-height:1.2;}
+  .proof-card .pm{color:var(--muted);font-size:.68rem;margin-top:.25rem;font-family:'Space Mono',monospace;letter-spacing:.08em;}
+
+  /* footer */
+  footer.f{text-align:center;color:var(--muted);font-size:.72rem;padding-top:1.5rem;border-top:1px solid var(--line);}
+  footer.f a{color:var(--gold);text-decoration:none;}
+
+  /* mobile */
+  @media (max-width:700px){
+    .wrap{padding:1rem 1.1rem 3rem;}
+    h1{font-size:2.3rem;max-width:16ch;}
+    .lede{font-size:1rem;}
+    .what-happens{grid-template-columns:1fr;}
+    .row-2{grid-template-columns:1fr;}
+    .form-card{padding:1.4rem 1.3rem 1.5rem;}
+    .form-card h2{font-size:1.35rem;}
+    .proof-grid{grid-template-columns:repeat(2,1fr);}
+    .call-now{flex-direction:column;align-items:flex-start;gap:.8rem;}
+    .topbar{margin-bottom:2rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="/" class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></a>
+    <div class="top-contact"><a href="tel:+12048941331">(204) 894-1331</a></div>
+  </div>
+
+  <div class="eyebrow">Fit Call · 15 minutes</div>
+  <h1>You've seen the overview.<br/>Let's <em>match you</em> to a tier.</h1>
+  <p class="lede">
+    No proposal back-and-forth. No surprise invoice. <strong>Fifteen minutes on the phone</strong> — we walk your numbers, match you to the right package, and quote before you hang up.
+  </p>
+
+  <div class="what-happens">
+    <div class="step">
+      <div class="n">01 · WALK</div>
+      <div class="t">Your numbers.</div>
+      <div class="d">What the business does, where leads come from now, what's leaking through the cracks.</div>
+    </div>
+    <div class="step">
+      <div class="n">02 · MATCH</div>
+      <div class="t">The right tier.</div>
+      <div class="d">Launch, Foundation, or Authority — sized to the revenue you're already doing.</div>
+    </div>
+    <div class="step">
+      <div class="n">03 · QUOTE</div>
+      <div class="t">Before you hang up.</div>
+      <div class="d">Real number on the call. Deposit to lock the build, balance on launch.</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>Book the 15-minute fit call.</h2>
+    <p class="sub">Tell us a bit about the business. James replies within 12 hours with a call time.</p>
+
+    <form id="fitCallForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="0c04279d-9084-4fdb-91ff-9820f7ca0a05" />
+      <input type="hidden" name="subject" value="New Fit Call Request — FJMedia" />
+      <input type="hidden" name="source" value="fit-call-landing" />
+
+      <div class="row-2">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="business">Business name</label>
+          <input type="text" id="business" name="business" required />
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="contact">Phone or email</label>
+          <input type="text" id="contact" name="contact" placeholder="Best number or email" required />
+        </div>
+        <div class="field">
+          <label for="revenue">Annual revenue</label>
+          <select id="revenue" name="revenue" required>
+            <option value="" disabled selected>Pick a range</option>
+            <option value="Under $75K">Under $75K</option>
+            <option value="$75K–$200K">$75K – $200K</option>
+            <option value="$200K–$500K">$200K – $500K</option>
+            <option value="$500K–$1M">$500K – $1M</option>
+            <option value="$1M+">$1M+</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">What's the site for? (optional)</label>
+        <textarea id="message" name="message" placeholder="New site, replacing DIY, lead capture, whatever you're thinking"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn" class="submit">Request the fit call →</button>
+      <p id="formMsg">Got it — James will reply within 12 hours with a call time.</p>
+    </form>
+  </div>
+
+  <div class="call-now">
+    <div class="cn-col">
+      <div class="cn-label">Want to talk now?</div>
+      <div class="cn-value"><a href="tel:+12048941331">(204) 894-1331</a></div>
+    </div>
+    <div class="cn-col" style="text-align:right;">
+      <div class="cn-label">Or email</div>
+      <div class="cn-value"><a href="mailto:diazcjames@gmail.com">diazcjames@gmail.com</a></div>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-label">Recently built</div>
+    <div class="proof-grid">
+      <a class="proof-card" href="https://sugarandshaicookies.com" target="_blank" rel="noopener">
+        <div class="pn">Sugar &amp; Shai</div>
+        <div class="pm">Bakery · live</div>
+      </a>
+      <a class="proof-card" href="https://fjdmedia.github.io/royal-kings-auto-care" target="_blank" rel="noopener">
+        <div class="pn">Royal Kings Auto Care</div>
+        <div class="pm">Auto · live</div>
+      </a>
+      <a class="proof-card" href="https://fjdmedia.github.io/Diego_n_Andrea" target="_blank" rel="noopener">
+        <div class="pn">Diego &amp; Andrea</div>
+        <div class="pm">Wedding · live</div>
+      </a>
+      <a class="proof-card" href="/work.html">
+        <div class="pn">See all work</div>
+        <div class="pm">Portfolio →</div>
+      </a>
+    </div>
+  </div>
+
+  <footer class="f">
+    © 2026 <a href="/">FJMedia</a> · Winnipeg, MB
+  </footer>
+</div>
+
+<script>
+  const form = document.getElementById('fitCallForm');
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    const data = new FormData(form);
+    try{
+      const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+      if(res.ok){
+        form.style.display = 'none';
+        msg.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Request the fit call →';
+        msg.style.display = 'block';
+        msg.style.color = '#ff9d9d';
+        msg.textContent = 'Something went wrong. Try calling (204) 894-1331 instead.';
+      }
+    } catch(err){
+      btn.disabled = false;
+      btn.textContent = 'Request the fit call →';
+      msg.style.display = 'block';
+      msg.style.color = '#ff9d9d';
+      msg.textContent = 'Network error. Try calling (204) 894-1331 instead.';
+    }
+  });
+</script>
+
+</body>
+</html>
