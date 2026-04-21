@@ -488,6 +488,13 @@
                     Custom websites for Winnipeg businesses. <br>
                     <span class="text-white font-medium">No Wix. No Shopify. No templates.</span>
                 </p>
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-brand-gold/30 bg-brand-gold/5 text-xs font-semibold tracking-wide text-white">
+                    <span class="relative flex w-2 h-2">
+                        <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-60 animate-ping"></span>
+                        <span class="relative inline-flex w-2 h-2 rounded-full bg-brand-gold"></span>
+                    </span>
+                    <span>2 of 5 build spots left this month</span>
+                </div>
                 <div class="flex flex-wrap items-center gap-4 pt-4">
                     <a href="/fit-call" class="bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all transform hover:-translate-y-1">
                         Book the 15-Min Fit Call
@@ -1224,6 +1231,13 @@
                 <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Packages</div>
                 <h2 class="font-display font-bold text-4xl text-white">Your design is ready. <span class="italic text-brand-textMuted font-normal">Now choose what happens next.</span></h2>
                 <p class="text-brand-textMuted mt-4">Everything agencies charge thousands for — delivered lean, fast, and built to grow with your business.</p>
+                <div class="mt-6 inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-brand-gold/30 bg-brand-gold/5 text-xs font-semibold tracking-wide text-white">
+                    <span class="relative flex w-2 h-2">
+                        <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-60 animate-ping"></span>
+                        <span class="relative inline-flex w-2 h-2 rounded-full bg-brand-gold"></span>
+                    </span>
+                    <span>2 of 5 build spots left this month</span>
+                </div>
             </div>
 
             <div class="glass-panel p-4 flex items-center justify-center gap-3 text-sm font-bold text-white rounded mb-8 border-brand-gold/30">
@@ -1814,12 +1828,26 @@
     </footer>
 
     <!-- Persistent Floating CTA -->
-    <div id="floating-cta" class="fixed bottom-6 right-6 z-40 transition-opacity duration-300">
+    <div id="floating-cta" class="fixed bottom-6 right-6 z-40 transition-opacity duration-300 hidden lg:block">
          <div class="relative group">
              <a href="/fit-call" aria-label="Book the 15-minute fit call" class="flex items-center justify-center w-14 h-14 bg-brand-gold text-brand-bg rounded-full shadow-[0_0_20px_rgba(201,168,76,0.4)] hover:scale-110 transition-transform duration-300">
                 <svg class="ph-icon text-2xl" aria-hidden="true"><use href="#ph-fill-chat-circle-dots"/></svg>
              </a>
          </div>
+    </div>
+
+    <!-- Mobile Sticky CTA with scarcity -->
+    <div class="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-brand-bg/95 backdrop-blur-md border-t border-brand-gold/20 px-4 py-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 min-w-0">
+            <span class="relative flex w-2 h-2 shrink-0">
+                <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-60 animate-ping"></span>
+                <span class="relative inline-flex w-2 h-2 rounded-full bg-brand-gold"></span>
+            </span>
+            <span class="text-[11px] font-semibold text-white leading-tight">2 of 5 spots left<br><span class="text-brand-textMuted font-normal">this month</span></span>
+        </div>
+        <a href="/fit-call" class="bg-brand-gold text-brand-bg px-4 py-2.5 rounded-md font-bold text-sm whitespace-nowrap shrink-0">
+            Book Fit Call
+        </a>
     </div>
 
     <!-- GSAP + ScrollTrigger: lazy-loaded on first scroll (no above-fold animations) -->
