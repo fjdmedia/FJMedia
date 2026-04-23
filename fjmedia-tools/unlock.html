@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Unlock · FJMedia Client Tools</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Mono&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #071520;
+      --navy2: #0d2035;
+      --gold: #C9A84C;
+      --gold-dim: #a8893a;
+      --cream: #EDEAE5;
+      --muted: #6b7a8d;
+      --border: rgba(201,168,76,0.2);
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--navy);
+      background-image: radial-gradient(circle at center, rgba(27,58,86,0.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--cream);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.8rem 2.4rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .logo::before { content: '{ FJ } '; opacity: 0.55; }
+    h1 {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    h1 em { font-style: normal; color: var(--gold); }
+    p.sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    input {
+      background: var(--navy);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 14px;
+      color: var(--cream);
+      font-size: 20px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.5em;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    button {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button:hover:not(:disabled) { background: #d4b55a; }
+    button:active:not(:disabled) { transform: scale(0.98); }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .error {
+      color: var(--danger);
+      font-size: 0.82rem;
+      min-height: 1em;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.06em;
+    }
+    .footer-link {
+      text-align: center;
+      margin-top: 1.7rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-link a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(107,122,141,0.4);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-link a:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Client Tools</div>
+    <h1>Private. <em>Keyed.</em></h1>
+    <p class="sub">These tools are for FJMedia clients only. Enter your access code to continue.</p>
+    <form id="unlock-form" onsubmit="return submitUnlock(event)">
+      <input
+        type="password"
+        id="pw"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        autocomplete="off"
+        placeholder="• • • •"
+        maxlength="16"
+        required
+        autofocus
+      />
+      <button type="submit" id="submit-btn">Unlock →</button>
+      <div class="error" id="error" role="alert" aria-live="polite"></div>
+    </form>
+    <div class="footer-link"><a href="/">← Back to fjmedia.ca</a></div>
+  </div>
+
+  <script>
+    async function submitUnlock(e) {
+      e.preventDefault();
+      const pwEl = document.getElementById('pw');
+      const pw = pwEl.value;
+      const btn = document.getElementById('submit-btn');
+      const err = document.getElementById('error');
+      btn.disabled = true;
+      btn.textContent = 'Checking…';
+      err.textContent = '';
+
+      try {
+        const res = await fetch('/api/unlock', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          err.textContent = data.error || 'Wrong code.';
+          pwEl.value = '';
+          pwEl.focus();
+          btn.disabled = false;
+          btn.textContent = 'Unlock →';
+          return false;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        let next = params.get('next') || '/fjmedia-tools/';
+        // Restrict redirect target to the tools directory to prevent open-redirect abuse.
+        if (!next.startsWith('/fjmedia-tools/')) next = '/fjmedia-tools/';
+        window.location.href = next;
+      } catch (networkErr) {
+        err.textContent = 'Network error. Try again.';
+        btn.disabled = false;
+        btn.textContent = 'Unlock →';
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>

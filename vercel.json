@@ -7,6 +7,10 @@
     "api/ops.js": {
       "memory": 128,
       "maxDuration": 15
+    },
+    "api/unlock.js": {
+      "memory": 128,
+      "maxDuration": 5
     }
   },
   "rewrites": [
