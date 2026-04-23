@@ -1,3 +1,5 @@
+import { next } from '@vercel/edge';
+
 export const config = {
   matcher: '/fjmedia-tools/:path*',
 };
@@ -25,7 +27,7 @@ export default async function middleware(request) {
     url.pathname === '/fjmedia-tools/unlock.html' ||
     url.pathname === '/fjmedia-tools/unlock'
   ) {
-    return;
+    return next();
   }
 
   const SECRET =
@@ -37,7 +39,7 @@ export default async function middleware(request) {
   const cookies = request.headers.get('cookie') || '';
   const match = cookies.match(/fjtools_session=([a-f0-9]+)/);
   if (match && match[1] === validToken) {
-    return; // authenticated — let the request through
+    return next(); // authenticated — explicit pass-through to static file
   }
 
   const unlockUrl = new URL('/fjmedia-tools/unlock.html', request.url);
