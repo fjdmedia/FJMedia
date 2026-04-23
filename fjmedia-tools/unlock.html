@@ -12,7 +12,6 @@
       --navy: #071520;
       --navy2: #0d2035;
       --gold: #C9A84C;
-      --gold-dim: #a8893a;
       --cream: #EDEAE5;
       --muted: #6b7a8d;
       --border: rgba(201,168,76,0.2);
@@ -26,9 +25,7 @@
       background-size: 24px 24px;
       color: var(--cream);
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       padding: 2rem;
     }
     .card {
@@ -36,40 +33,28 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 2.8rem 2.4rem;
-      width: 100%;
-      max-width: 380px;
+      width: 100%; max-width: 380px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
     .logo {
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
+      font-size: 11px; color: var(--gold);
+      letter-spacing: 0.25em; text-transform: uppercase;
       margin-bottom: 1.2rem;
     }
     .logo::before { content: '{ FJ } '; opacity: 0.55; }
     h1 {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      font-size: 1.9rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      color: var(--cream);
-      margin-bottom: 0.6rem;
+      font-size: 1.9rem; font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.1;
+      color: var(--cream); margin-bottom: 0.6rem;
     }
     h1 em { font-style: normal; color: var(--gold); }
     p.sub {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1.6rem;
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.6; margin-bottom: 1.6rem;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
+    form { display: flex; flex-direction: column; gap: 0.9rem; }
     input {
       background: var(--navy);
       border: 1.5px solid var(--border);
@@ -78,8 +63,7 @@
       color: var(--cream);
       font-size: 20px;
       font-family: 'Space Mono', monospace;
-      letter-spacing: 0.5em;
-      text-align: center;
+      letter-spacing: 0.5em; text-align: center;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -88,16 +72,12 @@
       box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
     }
     button {
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      border-radius: 8px;
+      background: var(--gold); color: var(--navy);
+      border: none; border-radius: 8px;
       padding: 12px 14px;
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 14px; font-weight: 700;
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      letter-spacing: 0.02em;
-      cursor: pointer;
+      letter-spacing: 0.02em; cursor: pointer;
       transition: background 0.2s, transform 0.1s;
     }
     button:hover:not(:disabled) { background: #d4b55a; }
@@ -105,28 +85,21 @@
     button:disabled { opacity: 0.55; cursor: not-allowed; }
     .error {
       color: var(--danger);
-      font-size: 0.82rem;
-      min-height: 1em;
+      font-size: 0.82rem; min-height: 1em;
       text-align: center;
       font-family: 'Space Mono', monospace;
       letter-spacing: 0.06em;
     }
     .footer-link {
-      text-align: center;
-      margin-top: 1.7rem;
-      font-size: 0.78rem;
-      color: var(--muted);
+      text-align: center; margin-top: 1.7rem;
+      font-size: 0.78rem; color: var(--muted);
     }
     .footer-link a {
-      color: var(--muted);
-      text-decoration: none;
+      color: var(--muted); text-decoration: none;
       border-bottom: 1px dotted rgba(107,122,141,0.4);
       transition: color 0.2s, border-color 0.2s;
     }
-    .footer-link a:hover {
-      color: var(--gold);
-      border-color: var(--gold);
-    }
+    .footer-link a:hover { color: var(--gold); border-color: var(--gold); }
   </style>
 </head>
 <body>
@@ -153,6 +126,14 @@
   </div>
 
   <script>
+    // SHA-256 of the access code. Changing the code requires regenerating this hash.
+    const EXPECTED_HASH = 'f8d64a31eb7d864da9252b7e5dd2659229cf1a3c4bf9d6d544c0318c81e13cff';
+
+    async function sha256Hex(msg) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     async function submitUnlock(e) {
       e.preventDefault();
       const pwEl = document.getElementById('pw');
@@ -163,33 +144,29 @@
       btn.textContent = 'Checking…';
       err.textContent = '';
 
-      try {
-        const res = await fetch('/api/unlock', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: pw }),
-        });
+      // Lightweight brute-force speed-bump.
+      await new Promise(r => setTimeout(r, 300));
 
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          err.textContent = data.error || 'Wrong code.';
-          pwEl.value = '';
-          pwEl.focus();
-          btn.disabled = false;
-          btn.textContent = 'Unlock →';
-          return false;
-        }
-
-        const params = new URLSearchParams(window.location.search);
-        let next = params.get('next') || '/fjmedia-tools/';
-        // Restrict redirect target to the tools directory to prevent open-redirect abuse.
-        if (!next.startsWith('/fjmedia-tools/')) next = '/fjmedia-tools/';
-        window.location.href = next;
-      } catch (networkErr) {
-        err.textContent = 'Network error. Try again.';
+      const h = await sha256Hex(pw);
+      if (h !== EXPECTED_HASH) {
+        err.textContent = 'Wrong code.';
+        pwEl.value = '';
+        pwEl.focus();
         btn.disabled = false;
         btn.textContent = 'Unlock →';
+        return false;
       }
+
+      // Persist unlock across tabs and reloads.
+      try {
+        sessionStorage.setItem('fjtools_k', h);
+        localStorage.setItem('fjtools_k', h);
+      } catch (_) {}
+
+      const params = new URLSearchParams(window.location.search);
+      let next = params.get('next') || '/fjmedia-tools/';
+      if (!next.startsWith('/fjmedia-tools/')) next = '/fjmedia-tools/';
+      window.location.replace(next);
       return false;
     }
   </script>

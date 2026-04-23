@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- © 2026 FJMedia. All rights reserved. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="author" content="FJMedia">
+  <meta name="designer" content="FJMedia — fjmedia.ca">
+  <title>Day 12 — Slide 2 Cost</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:  #071520;
+      --gold:  #c9a84c;
+      --cream: #EDEAE5;
+      --dim:   rgba(201,168,76,0.35);
+      --red:   #c94c4c;
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .post {
+      width: 540px;
+      height: 540px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post::before,
+    .post::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.4;
+      z-index: 5;
+    }
+    .post::before { top: 28px; left: 28px; border-width: 1px 0 0 1px; }
+    .post::after { bottom: 28px; right: 28px; border-width: 0 1px 1px 0; }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+      z-index: 1;
+    }
+
+    .atmosphere {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(201,76,76,0.04) 100%);
+      z-index: 1;
+    }
+
+    .content {
+      position: absolute;
+      z-index: 3;
+      top: 56px;
+      left: 56px;
+      right: 56px;
+      bottom: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--red);
+      opacity: 0.85;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .slide-label::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--red);
+      opacity: 0.75;
+    }
+
+    .slide-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--cream);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 22px;
+    }
+
+    /* Standout stat block */
+    .stat-block {
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      padding: 16px 0 18px;
+      border-top: 1px solid rgba(201,76,76,0.18);
+      border-bottom: 1px solid rgba(201,76,76,0.18);
+      margin-bottom: 16px;
+    }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 72px;
+      color: var(--red);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+    .stat-number .pct {
+      font-size: 38px;
+      color: rgba(201,76,76,0.7);
+      margin-left: 2px;
+    }
+    .stat-text {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: rgba(237,234,229,0.55);
+      line-height: 1.5;
+      padding-bottom: 6px;
+      max-width: 240px;
+    }
+    .stat-text strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .problems {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .problem {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 11px 0;
+    }
+    .problem + .problem {
+      border-top: 1px solid rgba(201,76,76,0.08);
+    }
+
+    .problem-x {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--red);
+      opacity: 0.8;
+      min-width: 16px;
+      line-height: 1;
+      padding-top: 2px;
+    }
+
+    .problem-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--cream);
+      line-height: 1.35;
+    }
+    .problem-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10.5px;
+      color: rgba(237,234,229,0.42);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    .tag {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+    }
+    .dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.2);
+    }
+    .dots span.active { background: var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="post">
+    <div class="grid"></div>
+    <div class="noise"></div>
+    <div class="atmosphere"></div>
+
+    <div class="content">
+      <div class="slide-label">02 · The cost</div>
+      <div class="slide-title">What it's quietly<br>costing you.</div>
+
+      <div class="stat-block">
+        <div class="stat-number">62<span class="pct">%</span></div>
+        <div class="stat-text"><strong>of buyers leave</strong> when pricing isn't visible. They don't DM. They find the next shop.</div>
+      </div>
+
+      <div class="problems">
+        <div class="problem">
+          <div class="problem-x">&times;</div>
+          <div>
+            <div class="problem-title">Orders live in your inbox.</div>
+            <div class="problem-desc">No form, no record — every sale is a thread you scroll back through.</div>
+          </div>
+        </div>
+
+        <div class="problem">
+          <div class="problem-x">&times;</div>
+          <div>
+            <div class="problem-title">Invisible on Google.</div>
+            <div class="problem-desc">Someone searches your product in your city — your competitor shows up first.</div>
+          </div>
+        </div>
+
+        <div class="problem">
+          <div class="problem-x">&times;</div>
+          <div>
+            <div class="problem-title">You don't own the audience.</div>
+            <div class="problem-desc">One algorithm change and reach drops 40% overnight. It's happened before.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span></span><span class="active"></span><span></span><span></span>
+    </div>
+    <div class="tag">fjmedia &nbsp;&middot;&nbsp; winnipeg</div>
+  </div>
+</body>
+</html>

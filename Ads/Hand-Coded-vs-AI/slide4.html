@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — Hand-Coded vs AI — Slide 4 (CTA)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #071520;
+      --gold: #c9a84c;
+      --cream: #EDEAE5;
+      --dim: #5a8aaa;
+    }
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .post {
+      width: 540px;
+      height: 540px;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, #0a1e2e 0%, var(--navy) 70%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .post::before, .post::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.4;
+    }
+    .post::before { top: 28px; left: 28px; border-width: 1px 0 0 1px; }
+    .post::after { bottom: 28px; right: 28px; border-width: 0 1px 1px 0; }
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: 44%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 48px;
+    }
+    .logo-mark {
+      font-family: 'Space Mono', monospace;
+      font-size: 36px;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .logo-word {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--cream);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .logo-word span {
+      color: var(--dim);
+      font-weight: 700;
+    }
+    .headline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--cream);
+      line-height: 1.35;
+      max-width: 380px;
+      margin-bottom: 8px;
+    }
+    .headline em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--dim);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+    .divider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .divider-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.25;
+    }
+    .divider-diamond {
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      opacity: 0.5;
+      transform: rotate(45deg);
+    }
+    .cta-box {
+      border: 1px solid rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.06);
+      padding: 14px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .cta-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--dim);
+    }
+    .cta-keyword {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .tag {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(201,168,76,0.35);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="post">
+    <div class="grid"></div>
+    <div class="glow"></div>
+    <div class="content">
+      <div class="logo-mark">{FJ}</div>
+      <div class="logo-word">FJ<span>Media</span></div>
+
+      <div class="headline">Hand-coded websites.<br><em>AI-powered</em> process.<br>No templates. No shortcuts.</div>
+      <div class="sub">Custom sites in 48 hours. Free until you love it.</div>
+
+      <div class="divider-row">
+        <div class="divider-line"></div>
+        <div class="divider-diamond"></div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="cta-box">
+        <span class="cta-label">DM us the words</span>
+        <span class="cta-keyword">"FREE Webby"</span>
+      </div>
+    </div>
+    <div class="tag">fjmedia &nbsp;·&nbsp; winnipeg</div>
+  </div>
+</body>
+</html>

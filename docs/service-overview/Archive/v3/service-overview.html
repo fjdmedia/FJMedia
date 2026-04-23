@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>FJMedia — Service Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,800;1,700&family=DM+Sans:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#071520;
+    --navy-2:#0D1F3C;
+    --navy-3:#0a1830;
+    --navy-deep:#040c15;
+    --panel:#0c1e3a;
+    --gold:#C9A84C;
+    --gold-2:#E6C76A;
+    --gold-soft:rgba(201,168,76,.18);
+    --cream:#EDEAE5;
+    --muted:#94a3b8;
+    --muted-2:#94a3b8;
+    --line:rgba(255,255,255,.08);
+    --line-strong:rgba(201,168,76,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:'DM Sans',system-ui,sans-serif;
+    font-feature-settings:"kern","liga","calt","ss01";
+    font-variant-numeric:oldstyle-nums proportional-nums;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  @page{size:letter portrait;margin:0;}
+
+  .page{
+    width:8.5in;height:11in;
+    padding:.7in .75in .55in;
+    position:relative;
+    page-break-after:always;
+    overflow:hidden;
+    background:var(--navy);
+  }
+  .page:last-child{page-break-after:auto;}
+
+  .page > *{position:relative;z-index:2;}
+
+  /* per-page numeric watermark — cheap solid fill */
+  .watermark{
+    position:absolute;
+    top:.55in;right:.55in;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-style:italic;
+    font-size:9rem;
+    line-height:1;
+    letter-spacing:-.04em;
+    color:rgba(201,168,76,.07);
+    z-index:1 !important;
+    user-select:none;
+    pointer-events:none;
+  }
+
+  /* brand mark */
+  .brand{display:flex;align-items:center;gap:.5rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.02em;}
+  .brand .bk{color:var(--gold);}
+  .brand .fj{color:var(--cream);}
+  .brand .word{color:var(--cream);font-weight:400;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;margin-left:.4rem;}
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.9rem;}
+  .topbar .meta{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;}
+
+  /* tier progress ribbon */
+  .progress{display:flex;align-items:center;gap:.5rem;margin-bottom:1.6rem;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2);}
+  .progress .dot{width:5px;height:5px;border-radius:50%;background:var(--muted-2);}
+  .progress .seg{height:1px;flex:0 0 14px;background:var(--line);}
+  .progress .active{color:var(--gold);}
+  .progress .active .dot,.progress .dot.active{background:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18);}
+  .progress .step{display:flex;align-items:center;gap:.4rem;}
+
+  .eyebrow{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .eyebrow::before{content:"— ";color:var(--gold);letter-spacing:0;}
+
+  h1.display{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:3.6rem;
+    line-height:.98;
+    letter-spacing:-.025em;
+    color:#fff;
+    margin-bottom:1.1rem;
+    text-wrap:balance;
+    font-feature-settings:"kern","liga","calt","ss01","ss02";
+  }
+  h2.display{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:2.5rem;
+    line-height:1.02;
+    letter-spacing:-.018em;
+    color:#fff;
+    margin-bottom:.6rem;
+    text-wrap:balance;
+  }
+  p.lede{
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:1.02rem;
+    line-height:1.55;
+    color:var(--cream);
+    max-width:6in;
+    text-wrap:pretty;
+  }
+
+  .rule{height:1px;background:var(--line);margin:1.3rem 0;}
+  .rule.gold{background:linear-gradient(90deg,var(--gold) 0%,transparent 80%);height:1.5px;}
+
+  /* ============ COVER ============ */
+  .cover-hero{position:absolute;left:.75in;right:.75in;top:2.1in;z-index:3;}
+  .cover-hero .italic-accent{
+    font-style:italic;
+    font-weight:700;
+    background:linear-gradient(115deg,#fff 10%,var(--gold-2) 55%,var(--gold) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .cover-hero h1{font-size:4.6rem;line-height:.96;}
+  .cover-hero p.lede{margin-top:1.4rem;max-width:5.8in;font-size:1.15rem;line-height:1.6;}
+
+  /* cover supporting "proof" band — sits between hero and pillars to kill the void */
+  .cover-proof{
+    position:absolute;
+    left:.75in;right:.75in;
+    top:6.2in;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.6rem;
+    z-index:3;
+    padding-top:1.1rem;
+    border-top:1px solid var(--line);
+  }
+  .cover-proof .pp-lbl{font-family:'Space Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.24em;text-transform:uppercase;margin-bottom:.3rem;}
+  .cover-proof .pp-val{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.1rem;letter-spacing:-.014em;line-height:1.1;}
+  .cover-proof .pp-val.gold{color:var(--gold);}
+  .cover-proof .pp-note{color:var(--muted);font-size:.68rem;line-height:1.45;margin-top:.25rem;font-weight:300;}
+
+  .cover-pillars{
+    position:absolute;
+    left:.75in;right:.75in;
+    bottom:1.05in;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.55rem;
+    z-index:3;
+  }
+  .pillar{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.05rem 1rem 1.15rem;
+    background:var(--panel);
+    position:relative;
+    overflow:hidden;
+  }
+  .pillar::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  }
+  .pillar .n{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.26em;}
+  .pillar .t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.1rem;margin-top:.4rem;letter-spacing:-.012em;}
+  .pillar .d{color:var(--muted);font-size:.74rem;line-height:1.48;margin-top:.35rem;font-weight:300;}
+
+  .cover-foot{
+    position:absolute;
+    left:.75in;right:.75in;
+    bottom:.55in;
+    border-top:1px solid var(--line);
+    padding-top:.7rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Space Mono',monospace;
+    font-size:.56rem;
+    color:var(--muted);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    z-index:3;
+  }
+
+  /* ============ PACKAGE PAGES ============ */
+  .pkg-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-bottom:.3rem;}
+  .pkg-name{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:3rem;
+    letter-spacing:-.022em;
+    color:#fff;
+    line-height:.95;
+    font-feature-settings:"kern","liga","ss01";
+  }
+  .pkg-sub{color:var(--muted);font-size:.82rem;margin-top:.45rem;font-style:italic;font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;}
+  .price-block{text-align:right;position:relative;}
+  .price-block::after{
+    content:"";
+    position:absolute;
+    right:0;bottom:-.5rem;
+    width:2.2rem;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold));
+  }
+  .price{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:2.7rem;
+    color:var(--gold);
+    line-height:1;
+    letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .price-note{
+    font-family:'Space Mono',monospace;
+    color:var(--muted);
+    font-size:.54rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    margin-top:.4rem;
+  }
+  .best{
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+    color:var(--navy);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:.55rem;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    padding:.28rem .6rem;
+    border-radius:3px;
+    margin-left:.55rem;
+    vertical-align:middle;
+    box-shadow:0 2px 0 rgba(201,168,76,.25);
+  }
+
+  /* 3-panel body */
+  .three-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.55rem;margin-top:1.2rem;}
+  .panel{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:.9rem .95rem 1rem;
+    background:var(--panel);
+    position:relative;
+    overflow:hidden;
+  }
+  .panel::before{
+    content:"";
+    position:absolute;left:0;top:0;right:0;height:1px;
+    background:linear-gradient(90deg,var(--gold) 0%,transparent 70%);
+    opacity:.6;
+  }
+  .panel .label{font-family:'Space Mono',monospace;font-size:.54rem;color:var(--gold);letter-spacing:.24em;text-transform:uppercase;margin-bottom:.5rem;}
+  .panel .headline{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.95rem;line-height:1.22;margin-bottom:.45rem;letter-spacing:-.008em;text-wrap:balance;}
+  .panel p{color:var(--cream);font-size:.74rem;line-height:1.5;font-weight:300;text-wrap:pretty;}
+
+  /* about-this-tier block */
+  .about-block{margin-top:1.05rem;padding:.85rem 1rem 1rem;border-left:2px solid var(--gold);background:var(--panel);border-radius:0 8px 8px 0;}
+  .about-tag{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-style:italic;color:var(--gold);font-size:.82rem;letter-spacing:-.01em;margin-bottom:.35rem;}
+  .about-block p{color:var(--cream);font-size:.78rem;line-height:1.5;font-weight:300;text-wrap:pretty;}
+
+  /* expanded includes grid (name + what + why) */
+  .includes{margin-top:1.3rem;}
+  .includes-title{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.26em;text-transform:uppercase;margin-bottom:1.1rem;}
+  .inc-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:1.3rem;row-gap:1.7rem;}
+  .inc-item{padding:.2rem 0 .25rem .9rem;border-left:2px solid rgba(201,168,76,.35);}
+  .inc-item.span-2{grid-column:1 / -1;}
+  .inc-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.86rem;letter-spacing:-.006em;margin-bottom:.4rem;line-height:1.25;}
+  .inc-what{color:var(--cream);font-size:.7rem;line-height:1.58;font-weight:300;margin-bottom:.32rem;}
+  .inc-why{color:var(--muted);font-size:.68rem;line-height:1.58;font-weight:300;font-style:italic;}
+
+  /* comparison strip */
+  .compare{
+    position:absolute;
+    left:.75in;right:.75in;
+    bottom:.55in;
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    border-top:1px solid var(--line);
+    padding-top:.75rem;
+    gap:.55rem;
+    z-index:3;
+  }
+  .c-col .lbl{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.24em;text-transform:uppercase;}
+  .c-col .val{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.95rem;margin-top:.25rem;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  .c-col.you{position:relative;}
+  .c-col.you::before{
+    content:"";
+    position:absolute;
+    left:-.25rem;top:-.2rem;
+    width:4px;height:calc(100% - .2rem);
+    background:var(--gold);
+    border-radius:2px;
+  }
+  .c-col.you .val{color:var(--gold);font-weight:800;}
+  .c-col .note{color:var(--muted);font-size:.62rem;margin-top:.25rem;font-weight:300;}
+  .compare .src-ref{grid-column:1 / -1;margin-top:.55rem;font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .compare .src-ref .terms{color:var(--gold);}
+
+  /* retainer page */
+  .retainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.3rem;}
+  .ret-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.3rem 1.25rem 1.35rem;
+    background:var(--panel);
+    position:relative;
+    overflow:hidden;
+  }
+  .ret-card::before{
+    content:"";
+    position:absolute;left:0;top:0;right:0;height:1px;
+    background:linear-gradient(90deg,var(--gold) 0%,transparent 70%);
+    opacity:.6;
+    pointer-events:none;
+  }
+  .ret-card .name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.65rem;color:#fff;letter-spacing:-.014em;}
+  .ret-card .cost{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.35rem;color:var(--gold);margin-top:.25rem;font-variant-numeric:tabular-nums;letter-spacing:-.01em;}
+  .ret-card .body{color:var(--cream);font-size:.82rem;line-height:1.55;font-weight:300;margin-top:.85rem;text-wrap:pretty;position:relative;z-index:1;}
+
+  /* close page */
+  .close-body{margin-top:1.5rem;}
+  .close-quote{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:2.35rem;
+    line-height:1.12;
+    letter-spacing:-.018em;
+    color:#fff;
+    margin-bottom:1.1rem;
+    max-width:6.5in;
+    text-wrap:balance;
+  }
+  .close-quote em{
+    font-style:italic;
+    font-weight:700;
+    background:linear-gradient(115deg,#fff 10%,var(--gold-2) 60%,var(--gold) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .close-sub{color:var(--cream);font-size:1rem;line-height:1.62;font-weight:300;max-width:6.2in;text-wrap:pretty;}
+  .signature{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--gold);margin-top:2.3rem;font-size:1rem;letter-spacing:.01em;font-style:italic;}
+  .sig-meta{color:var(--muted);font-size:.72rem;font-family:'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;margin-top:.4rem;}
+
+  .footer{
+    position:absolute;
+    left:.75in;right:.75in;
+    bottom:.4in;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Space Mono',monospace;
+    font-size:.55rem;
+    color:var(--muted);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    z-index:3;
+  }
+
+  /* sources page */
+  .src-list{margin-top:1.4rem;display:flex;flex-direction:column;gap:.8rem;}
+  .src-item{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.05rem 1.15rem 1.15rem;
+    background:var(--panel);
+    display:grid;
+    grid-template-columns:2.2rem 1fr;
+    gap:.95rem;
+    align-items:start;
+    position:relative;
+  }
+  .src-item::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,transparent 80%);
+    opacity:.5;
+  }
+  .src-num{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.22em;padding-top:.15rem;font-weight:700;}
+  .src-body .src-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:.92rem;line-height:1.25;letter-spacing:-.005em;}
+  .src-body .src-url{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--gold);margin-top:.25rem;word-break:break-all;}
+  .src-body .src-use{font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--cream);font-weight:300;line-height:1.5;margin-top:.4rem;text-wrap:pretty;}
+  .src-body .src-use strong{font-weight:500;color:#fff;}
+  .method{margin-top:1.2rem;border-top:1px solid var(--line);padding-top:.9rem;color:var(--muted);font-size:.72rem;line-height:1.55;font-weight:300;text-wrap:pretty;}
+  .method strong{color:var(--cream);font-weight:500;}
+
+  /* screen view — not print */
+  @media screen and (max-width: 900px){
+    .page{width:100vw;height:auto;min-height:100vh;padding:1rem 1.1rem 2rem;}
+    h1.display, .cover-hero h1{font-size:2.4rem;}
+    .pkg-name{font-size:2.2rem;}
+    .price{font-size:2rem;}
+    .three-panel, .includes ul, .retainer-grid, .compare{grid-template-columns:1fr;}
+    .cover-hero, .compare, .cover-foot, .cover-pillars, .footer{position:static;}
+    .cover-numeral, .watermark{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">2026 · Service Overview</div>
+  </div>
+
+  <div class="cover-hero">
+    <div class="eyebrow">Web Partner for Local Businesses</div>
+    <h1>Three packages.<br/><span class="italic-accent">One standard.</span></h1>
+    <p class="lede">
+      Custom-built websites. <em style="font-style:italic;font-weight:500;color:#fff;">Ships in 48 hours.</em> Canadian market rates inside — your price is <em style="font-style:italic;font-weight:500;color:#fff;">quoted on a 15-min fit call,</em> sized to your revenue.
+    </p>
+  </div>
+
+  <div class="cover-proof">
+    <div>
+      <div class="pp-lbl">Ship time</div>
+      <div class="pp-val gold">48 hours</div>
+      <div class="pp-note">Deposit locks the build. Balance on launch.</div>
+    </div>
+    <div>
+      <div class="pp-lbl">Pricing</div>
+      <div class="pp-val">Sized to revenue</div>
+      <div class="pp-note">Quoted on a 15-min fit call. Real number before you hang up.</div>
+    </div>
+    <div>
+      <div class="pp-lbl">Built by</div>
+      <div class="pp-val">One person, start to finish</div>
+      <div class="pp-note">Custom code. No Wix. No Shopify. No templates.</div>
+    </div>
+  </div>
+
+  <div class="cover-pillars">
+    <div class="pillar">
+      <div class="n">TIER 01</div>
+      <div class="t">Launch</div>
+      <div class="d">Custom site. Mobile-ready. Ships in 48 hrs.</div>
+    </div>
+    <div class="pillar">
+      <div class="n">TIER 02 · ⭐</div>
+      <div class="t">Foundation</div>
+      <div class="d">Launch + lead capture, email alerts, SEO, Google Maps.</div>
+    </div>
+    <div class="pillar">
+      <div class="n">TIER 03</div>
+      <div class="t">Authority</div>
+      <div class="d">Foundation + 6 months managed. Scoreboards, swaps, monitoring.</div>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <div>fjmedia.ca · Winnipeg, MB</div>
+    <div>Prepared for: __________________</div>
+  </div>
+</section>
+
+<!-- ============ LAUNCH ============ -->
+<section class="page">
+  <div class="watermark">01</div>
+
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 01 · Launch</div>
+  </div>
+
+  <div class="progress">
+    <div class="step active"><span class="dot"></span>01 · LAUNCH</div>
+    <div class="seg"></div>
+    <div class="step"><span class="dot"></span>02 · FOUNDATION</div>
+    <div class="seg"></div>
+    <div class="step"><span class="dot"></span>03 · AUTHORITY</div>
+  </div>
+
+  <div class="eyebrow">The Starter</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Launch</div>
+      <div class="pkg-sub">Solo operator or small shop · $75K–$200K/yr revenue.</div>
+    </div>
+    <div class="price-block">
+      <div class="price" style="font-size:1.35rem;font-style:italic;line-height:1.15;">Quoted on<br/>fit call</div>
+      <div class="price-note">15 min · Sized to your revenue</div>
+    </div>
+  </div>
+
+  <div class="about-block">
+    <div class="about-tag">"You're in the ring."</div>
+    <p>Solo operators and small shops. No online presence yet, or one that's embarrassing to send people to. Launch gets you on the board — custom site, real domain, contact form. Agency quality. Not agency prices.</p>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <div class="inc-grid">
+      <div class="inc-item">
+        <div class="inc-name">5–7 pages, custom built</div>
+        <div class="inc-what">Built from scratch. No Wix. No Shopify. No templates.</div>
+        <div class="inc-why">Visitors tell the difference. A templated site says "I didn't care enough." A custom one doesn't.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Mobile, tablet, desktop</div>
+        <div class="inc-what">Built for phones, tablets, and desktop. Every screen, working.</div>
+        <div class="inc-why">Over half your traffic hits from a phone. If it breaks there, they're gone — never scrolled past the fold.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Contact form</div>
+        <div class="inc-what">One form on your site that sends messages straight to your inbox.</div>
+        <div class="inc-why">Beats "DM me on Instagram." Inquiries hit your inbox. Not lost in a notification pile.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Domain + hosting wired</div>
+        <div class="inc-what">Your own business address (yourshop.ca) connected to a live, always-on server.</div>
+        <div class="inc-why">You own the address. Nobody can take it from you. No site-builder holding your site hostage.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Indexable on Google</div>
+        <div class="inc-what">Google can find your site when someone searches your exact business name.</div>
+        <div class="inc-why">Without it, you don't exist on Google. Anyone searching for you lands on a competitor.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Free changes for 30 days</div>
+        <div class="inc-what">One month after launch, edits are on us.</div>
+        <div class="inc-why">You'll spot things you want tweaked once it's live. This window is when those tweaks are free.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian basic</div>
+      <div class="val">$1,500</div>
+      <div class="note">Site-builder / starter</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian standard</div>
+      <div class="val">$3,500–$5,000</div>
+      <div class="note">Typical small-biz agency build</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val" style="font-size:.78rem;font-style:italic;letter-spacing:.01em;">Below market · Quoted on call</div>
+      <div class="note">Same deliverable. Sized to your revenue.</div>
+    </div>
+    <div class="src-ref"><span class="terms">Ships in 48 hrs · Deposit to start, balance on launch</span><span>All figures CAD · Sources · Page 6</span></div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Launch · Page 2 of 6</div>
+  </div>
+</section>
+
+<!-- ============ FOUNDATION ============ -->
+<section class="page">
+  <div class="watermark">02</div>
+
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 02 · Foundation</div>
+  </div>
+
+  <div class="progress">
+    <div class="step"><span class="dot"></span>01 · LAUNCH</div>
+    <div class="seg"></div>
+    <div class="step active"><span class="dot"></span>02 · FOUNDATION</div>
+    <div class="seg"></div>
+    <div class="step"><span class="dot"></span>03 · AUTHORITY</div>
+  </div>
+
+  <div class="eyebrow">Most Popular</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Foundation <span class="best">Best Value</span></div>
+      <div class="pkg-sub">Staffed shop, booked schedule · $200K–$500K/yr revenue.</div>
+    </div>
+    <div class="price-block">
+      <div class="price" style="font-size:1.35rem;font-style:italic;line-height:1.15;">Quoted on<br/>fit call</div>
+      <div class="price-note">15 min · Sized to your revenue</div>
+    </div>
+  </div>
+
+  <div class="about-block">
+    <div class="about-tag">"Corner, trainer, game plan."</div>
+    <p>For staffed shops with booked schedules. Inquiries come in — the problem is losing them. Foundation catches every form submission, logs it, and pings you in under 60 seconds. Nothing drops between rounds.</p>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <div class="inc-grid">
+      <div class="inc-item span-2">
+        <div class="inc-name">Everything in Launch</div>
+        <div class="inc-what">Full Launch tier — custom site, mobile-ready, domain, contact form, Google index, 30-day grace.</div>
+        <div class="inc-why">You need the base site first. Foundation builds the capture system on top.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Order/booking form with live pricing</div>
+        <div class="inc-what">A form that calculates price as the customer fills it out, then books the job.</div>
+        <div class="inc-why">Customers answer their own "how much?" question. You get a qualified booking, not a cold lead.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google Sheet auto-logs every inquiry</div>
+        <div class="inc-what">Every form submission lands in a live Google Sheet you can open anytime.</div>
+        <div class="inc-why">Open it anytime. Every lead named, dated, searchable. No "who was that guy who called Tuesday?"</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Instant email alerts</div>
+        <div class="inc-what">Every time a form is filled, you get an email in under 60 seconds.</div>
+        <div class="inc-why">Speed closes. Leads cool fast — reply in minutes, not next morning.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google Maps listing setup</div>
+        <div class="inc-what">Your business set up on Google Maps with photos, hours, and reviews linked.</div>
+        <div class="inc-why">Without it, you're invisible on Maps. Someone searches "near me" — they find whoever set it up, not whoever's actually better.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">On-page SEO tags</div>
+        <div class="inc-what">Title tags, meta descriptions, and structured data written for every page.</div>
+        <div class="inc-why">Google needs to read you right to rank you right. Tags tell Google what you do.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">3 months free changes</div>
+        <div class="inc-what">Three months after launch, edits are on us.</div>
+        <div class="inc-why">A booked shop changes things constantly. This covers it while the site settles in.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian standard</div>
+      <div class="val">$3,500–$5,000</div>
+      <div class="note">Small-biz build, no lead capture</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian advanced</div>
+      <div class="val">$6,000–$10,000</div>
+      <div class="note">Agency build with booking + SEO</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val" style="font-size:.78rem;font-style:italic;letter-spacing:.01em;">Below market · Quoted on call</div>
+      <div class="note">Pays back in 3–6 customer jobs.</div>
+    </div>
+    <div class="src-ref"><span class="terms">Ships in 48 hrs · Deposit to start, balance on launch</span><span>All figures CAD · Sources · Page 6</span></div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Foundation · Page 3 of 6</div>
+  </div>
+</section>
+
+<!-- ============ AUTHORITY ============ -->
+<section class="page">
+  <div class="watermark">03</div>
+
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Tier 03 · Authority</div>
+  </div>
+
+  <div class="progress">
+    <div class="step"><span class="dot"></span>01 · LAUNCH</div>
+    <div class="seg"></div>
+    <div class="step"><span class="dot"></span>02 · FOUNDATION</div>
+    <div class="seg"></div>
+    <div class="step active"><span class="dot"></span>03 · AUTHORITY</div>
+  </div>
+
+  <div class="eyebrow">The Full System</div>
+  <div class="pkg-head">
+    <div>
+      <div class="pkg-name">Authority</div>
+      <div class="pkg-sub">Multi-staff or multi-location · $500K+/yr revenue.</div>
+    </div>
+    <div class="price-block">
+      <div class="price" style="font-size:1.35rem;font-style:italic;line-height:1.15;">Quoted on<br/>fit call</div>
+      <div class="price-note">6 months managed · Sized to revenue</div>
+    </div>
+  </div>
+
+  <div class="about-block">
+    <div class="about-tag">"Full camp behind you."</div>
+    <p>Multi-staff or multi-location. The site has to keep pace with the business — updated, monitored, reported on. Authority is a web presence that someone is actually watching. You run the business. We run the site.</p>
+  </div>
+
+  <div class="includes">
+    <div class="includes-title">What's included</div>
+    <div class="inc-grid">
+      <div class="inc-item span-2">
+        <div class="inc-name">Everything in Foundation</div>
+        <div class="inc-what">The full Foundation site — lead capture, CRM, email alerts, Google Maps, SEO tags, 3-month grace.</div>
+        <div class="inc-why">Authority stacks on top. Same engine — now actively run by someone watching.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Monthly scoreboard</div>
+        <div class="inc-what">One monthly report showing lead volume, where they came from, and the next thing worth fixing.</div>
+        <div class="inc-why">One page. Lead count, traffic source, what's next. No digging — it lands in your inbox.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Seasonal content swaps</div>
+        <div class="inc-what">Menus, pricing, photos, services — updated every season so the site reflects the business today.</div>
+        <div class="inc-why">A site frozen in April while it's October tells every visitor the same thing: nobody's home.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Google ranking monitoring</div>
+        <div class="inc-what">We watch where you rank for your key local searches every month.</div>
+        <div class="inc-why">Rankings shift constantly. Someone has to watch. That's us.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">6 months upkeep included</div>
+        <div class="inc-what">Six months of managed maintenance baked into the build fee — no monthly retainer yet.</div>
+        <div class="inc-why">Half a year hands-off before any monthly bill shows up. Retainer optional after.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">24-hr text reply, no queue</div>
+        <div class="inc-what">Text us directly — reply within 24 hours, no ticket system.</div>
+        <div class="inc-why">When the booking form breaks at 8pm Saturday, you need an answer by Sunday, not next week.</div>
+      </div>
+      <div class="inc-item">
+        <div class="inc-name">Quarterly strategy sit-down</div>
+        <div class="inc-what">One scheduled hour every 3 months to review the numbers and plan the next move.</div>
+        <div class="inc-why">A $500K+ business changes plans. We sync every quarter so the site keeps up.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="c-col">
+      <div class="lbl">Canadian basic</div>
+      <div class="val">$3,500–$5,000 + $100–$300/mo</div>
+      <div class="note">Small-biz build + light retainer</div>
+    </div>
+    <div class="c-col">
+      <div class="lbl">Canadian managed</div>
+      <div class="val">$6,000–$10,000 + $300–$800/mo</div>
+      <div class="note">Full agency build + retainer</div>
+    </div>
+    <div class="c-col you">
+      <div class="lbl">FJMedia</div>
+      <div class="val" style="font-size:.78rem;font-style:italic;letter-spacing:.01em;">Below market · Quoted on call</div>
+      <div class="note">6 months managed. No agency contract.</div>
+    </div>
+    <div class="src-ref"><span class="terms">Ships in 48 hrs · Deposit to start, balance on launch</span><span>All figures CAD · Sources · Page 6</span></div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Authority · Page 4 of 6</div>
+  </div>
+</section>
+
+<!-- ============ RETAINERS + CLOSE ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Retainers · Close</div>
+  </div>
+
+  <div class="eyebrow">After the included months</div>
+  <h2 class="display">Keep the site <em style="font-style:italic;background:linear-gradient(115deg,#fff 10%,var(--gold-2) 60%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">alive.</em></h2>
+  <p class="lede">Month-to-month. No contracts. Cancel anytime.</p>
+
+  <div class="retainer-grid">
+    <div class="ret-card">
+      <div class="name">Maintain</div>
+      <div class="cost" style="font-size:.95rem;font-style:italic;">Quoted on fit call</div>
+      <div class="body">Updates, uptime, forms checked. Monthly traffic email so you know the site's still pulling. You focus on the job — site's covered.</div>
+    </div>
+    <div class="ret-card">
+      <div class="name">Grow</div>
+      <div class="cost" style="font-size:.95rem;font-style:italic;">Quoted on fit call</div>
+      <div class="body">Maintain + monthly content, ranking checks, and a call every 30 days. For owners who want the site pulling new business, not just staying up.</div>
+    </div>
+  </div>
+
+  <div class="rule gold" style="margin-top:1.9rem;"></div>
+
+  <div class="close-body">
+    <div class="close-quote">You're not paying for a website.<br/>You're paying for the <em>business it brings in.</em></div>
+    <div class="close-sub">
+      Ships in 48 hours. Deposit locks the build, balance on launch — you see it live first. Priced to your revenue. Built by one person, start to finish.
+    </div>
+
+    <div style="margin-top:1.9rem;border:1px solid var(--line-strong);border-radius:12px;padding:1.1rem 1.3rem;background:#141f33;position:relative;overflow:hidden;">
+      <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--gold);letter-spacing:.28em;text-transform:uppercase;margin-bottom:.45rem;">Next step</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.25rem;line-height:1.2;letter-spacing:-.012em;margin-bottom:.4rem;">Book the 15-minute fit call.</div>
+      <div style="color:var(--cream);font-size:.8rem;line-height:1.55;font-weight:300;max-width:5.8in;">15 minutes. We match you to a tier and quote on the call. Real number before you hang up — no proposal loop.</div>
+      <div style="margin-top:.85rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.18em;">fjmedia.ca · (204) 894-1331</div>
+    </div>
+
+    <div class="signature">— James Diaz</div>
+    <div class="sig-meta">Founder · FJMedia · Winnipeg, MB</div>
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Page 5 of 6</div>
+  </div>
+</section>
+
+<!-- ============ SOURCES & METHODOLOGY ============ -->
+<section class="page">
+  <div class="topbar">
+    <div class="brand"><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="word">Media</span></div>
+    <div class="meta">Appendix · Sources</div>
+  </div>
+
+  <div class="eyebrow">Where these numbers come from</div>
+  <h2 class="display">Sources &amp; Methodology.</h2>
+  <p class="lede">All ranges from published 2026 Canadian data. CAD unless marked. Verify any source below.</p>
+
+  <div class="src-list">
+    <div class="src-item">
+      <div class="src-num">01</div>
+      <div class="src-body">
+        <div class="src-name">Canada Web Pro — Small Business Website Costs in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">canadawebpro.ca/small-business-website-cost-in-canada-2026</div>
+        <div class="src-use"><strong>Used for:</strong> SMB ranges — basic from $1,500, standard $3,500–$5,000, advanced $6,000–$10,000+.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">02</div>
+      <div class="src-body">
+        <div class="src-name">Impeka — Web Design Pricing in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">impeka.com/web-design-pricing-canada</div>
+        <div class="src-use"><strong>Used for:</strong> Agency tiers — small $3,000–$8,000, mid-sized corporate $8,000–$25,000.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">03</div>
+      <div class="src-body">
+        <div class="src-name">DesignEdge — Website Maintenance Plan Cost in 2026 <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">designedge.ca/website-maintenance-plan-cost-in-2026-a-strategic-budgeting-guide</div>
+        <div class="src-use"><strong>Used for:</strong> Retainers — basic $100–$300/mo, growth $300–$800/mo, e-commerce $1,000+/mo. Ad-hoc $90–$175/hr.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">04</div>
+      <div class="src-body">
+        <div class="src-name">Clickworthy — Local SEO Cost in Canada (2026) <span style="color:var(--gold);font-weight:500;">· CAD</span></div>
+        <div class="src-url">clickworthy.io/blog/how-much-does-local-seo-cost-for-canadian-small-businesses-in-2026</div>
+        <div class="src-use"><strong>Used for:</strong> Local SEO — basic $340–$690/mo, mid $690–$1,380/mo, comprehensive $1,380–$2,750+/mo.</div>
+      </div>
+    </div>
+
+    <div class="src-item">
+      <div class="src-num">05</div>
+      <div class="src-body">
+        <div class="src-name">Clutch — Web Design Company Pricing Guide (2026) <span style="color:var(--muted);font-weight:500;">· USD, reference</span></div>
+        <div class="src-url">clutch.co/web-designers/pricing</div>
+        <div class="src-use"><strong>Used for:</strong> Cross-reference. Most Clutch projects under $10K USD; platform average $38,105 USD.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="method">
+    <strong>Methodology.</strong> FJMedia prices sit below Canadian mid-range while the case portfolio builds out. Every range matches a published tier above — nothing is extrapolated.
+  </div>
+
+  <div class="footer">
+    <div>fjmedia.ca</div>
+    <div>Sources · Page 6 of 6</div>
+  </div>
+</section>
+
+</body>
+</html>

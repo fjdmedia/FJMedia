@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!-- © 2026 FJMedia. All rights reserved. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="author" content="FJMedia">
+  <meta name="designer" content="FJMedia — fjmedia.ca">
+  <title>Day 12 — Slide 1 Hook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:  #071520;
+      --gold:  #c9a84c;
+      --cream: #EDEAE5;
+      --dim:   rgba(201,168,76,0.35);
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .post {
+      width: 540px;
+      height: 540px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post::before,
+    .post::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.4;
+      z-index: 5;
+    }
+    .post::before { top: 28px; left: 28px; border-width: 1px 0 0 1px; }
+    .post::after { bottom: 28px; right: 28px; border-width: 0 1px 1px 0; }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+      z-index: 1;
+    }
+
+    .atmosphere {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(155deg, transparent 30%, rgba(201,168,76,0.05) 100%);
+      z-index: 1;
+    }
+
+    .ghost {
+      position: absolute;
+      right: -32px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 240px;
+      color: rgba(201,168,76,0.035);
+      line-height: 0.85;
+      user-select: none;
+      z-index: 2;
+      letter-spacing: -0.06em;
+    }
+
+    .content {
+      position: absolute;
+      z-index: 3;
+      top: 76px;
+      left: 56px;
+      right: 56px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      opacity: 0.65;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    .headline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 42px;
+      color: var(--cream);
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin-bottom: 18px;
+    }
+
+    .headline em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: rgba(237,234,229,0.5);
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    /* Mini IG grid silhouette — bottom-left visual prop */
+    .ig-mock {
+      position: absolute;
+      z-index: 3;
+      bottom: 102px;
+      left: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      opacity: 0.55;
+    }
+    .ig-mock-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 400;
+      color: rgba(237,234,229,0.4);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 22px);
+      grid-template-rows: repeat(3, 22px);
+      gap: 2px;
+    }
+    .ig-grid span {
+      background: rgba(237,234,229,0.08);
+      border: 1px solid rgba(237,234,229,0.06);
+    }
+
+    .accent-bar {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      opacity: 0.55;
+      margin-top: 20px;
+    }
+
+    .tag {
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 5;
+    }
+    .dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.2);
+    }
+    .dots span.active { background: var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="post">
+    <div class="grid"></div>
+    <div class="noise"></div>
+    <div class="atmosphere"></div>
+    <div class="ghost">IG</div>
+
+    <div class="content">
+      <div class="eyebrow">01 · Uncomfortable truth</div>
+      <div class="headline">Your Instagram<br>is <em>not</em> a<br>website.</div>
+      <div class="sub">It's a rented storefront on someone else's street — and the rent just went up again.</div>
+      <div class="accent-bar"></div>
+    </div>
+
+    <div class="ig-mock">
+      <div class="ig-mock-label">@ your · business</div>
+      <div class="ig-grid">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="dots">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+    <div class="tag">fjmedia &nbsp;&middot;&nbsp; winnipeg</div>
+  </div>
+</body>
+</html>

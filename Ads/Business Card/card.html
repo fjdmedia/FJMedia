@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FJMedia — Business Card</title>
+  <!-- Design System: FJMedia | Fonts: Plus Jakarta Sans + Space Mono + DM Sans | Palette: #071520 #c9a84c #EDEAE5 -->
+  <!-- Size: 3.5" x 2" (89mm x 51mm) | Print: bleed 3mm each side -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:  #071520;
+      --navy-lift: #0a1e2e;
+      --gold:  #c9a84c;
+      --cream: #EDEAE5;
+      --dim:   rgba(237,234,229,0.45);
+    }
+
+    @page {
+      size: auto;
+      margin: 0;
+    }
+
+    html, body {
+      background: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 48px 24px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: -16px;
+    }
+
+    .card {
+      width: 3.5in;
+      height: 2in;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 50%, var(--navy-lift) 0%, var(--navy) 70%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      color: var(--cream);
+    }
+
+    /* Grid texture */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+
+    /* Corner brackets */
+    .bracket {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.5;
+      z-index: 3;
+    }
+    .bracket.tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .bracket.tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+    .bracket.bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+    .bracket.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    /* ───── FRONT ───── */
+    .front {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.22in 0.26in;
+    }
+
+    .front-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo-mark {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .logo-mark .brace {
+      color: var(--gold);
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    .logo-word {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 7.5px;
+      letter-spacing: 0.32em;
+      color: var(--cream);
+      opacity: 0.75;
+      margin-top: 3px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 6.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      opacity: 0.7;
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .front-mid {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .title {
+      font-family: 'Space Mono', monospace;
+      font-weight: 400;
+      font-size: 8px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .front-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-line {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 7.5px;
+      color: var(--cream);
+      opacity: 0.85;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .contact-line strong {
+      font-weight: 600;
+      color: var(--gold);
+      opacity: 0.9;
+      margin-right: 4px;
+    }
+
+    .accent-bar {
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 4px;
+    }
+
+    /* ───── BACK ───── */
+    .back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.22in 0.26in;
+    }
+
+    .back-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.22in;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .qr-wrap {
+      width: 1.35in;
+      height: 1.35in;
+      background: var(--cream);
+      padding: 0.06in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .qr-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    .qr-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .back-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      max-width: 1.5in;
+    }
+
+    .tagline-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 6.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--cream);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .tagline em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .back-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin: 2px 0;
+    }
+
+    .back-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      font-weight: 400;
+      color: var(--cream);
+      opacity: 0.6;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+    }
+
+    .scan-hint {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 5.5px;
+      font-weight: 400;
+      color: var(--gold);
+      opacity: 0.5;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    /* ───── Print ───── */
+    @media print {
+      html, body {
+        background: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        padding: 0;
+        gap: 0;
+      }
+      .label { display: none; }
+      .card {
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .card:last-of-type {
+        page-break-after: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="label">Front</div>
+
+  <!-- FRONT -->
+  <div class="card front">
+    <div class="bracket tl"></div>
+    <div class="bracket tr"></div>
+    <div class="bracket bl"></div>
+    <div class="bracket br"></div>
+
+    <div class="front-top">
+      <div class="logo">
+        <div class="logo-mark"><span class="brace">{</span>FJ<span class="brace">}</span></div>
+        <div class="logo-word">MEDIA</div>
+      </div>
+      <div class="eyebrow">Web Partner for<br>Local Businesses</div>
+    </div>
+
+    <div class="front-mid">
+      <div class="name">James Diaz</div>
+      <div class="title">Founder &amp; Designer</div>
+    </div>
+
+    <div class="front-bottom">
+      <div class="contact">
+        <div class="accent-bar"></div>
+        <div class="contact-line"><strong>W</strong>fjmedia.ca</div>
+        <div class="contact-line"><strong>E</strong>diazcjames@gmail.com</div>
+        <div class="contact-line"><strong>P</strong>204.894.1331</div>
+        <div class="contact-line"><strong>IG</strong>@fjmedia</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="label">Back</div>
+
+  <!-- BACK -->
+  <div class="card back">
+    <div class="bracket tl"></div>
+    <div class="bracket tr"></div>
+    <div class="bracket bl"></div>
+    <div class="bracket br"></div>
+
+    <div class="back-content">
+      <div class="qr-wrap">
+        <img src="../Logo/qr-code_FJMedia.png" alt="FJMedia QR — scans to fjmedia.ca"/>
+      </div>
+
+      <div class="back-text">
+        <div class="tagline-eyebrow">Winnipeg · MB</div>
+        <div class="tagline"><em>Free</em> until<br>you love it.</div>
+        <div class="back-divider"></div>
+        <div class="back-sub">Built in 48 hours.<br>Scan to see the work.</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
