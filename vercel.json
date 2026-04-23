@@ -12,9 +12,14 @@
   "rewrites": [
     { "source": "/ops", "destination": "/ops.html" },
     { "source": "/dashboard", "destination": "/dashboard.html" },
-    { "source": "/proof", "destination": "/proof.html" },
     { "source": "/fit-call", "destination": "/fit-call.html" },
-    { "source": "/work", "destination": "/work.html" }
+    { "source": "/work", "destination": "/work.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/case-studies", "destination": "/case-studies.html" }
+  ],
+  "redirects": [
+    { "source": "/proof", "destination": "/case-studies", "permanent": true },
+    { "source": "/proof.html", "destination": "/case-studies", "permanent": true }
   ],
   "headers": [
     {

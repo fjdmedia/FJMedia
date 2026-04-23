@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | FJMedia — Launch, Grow, Maintain. Built in 48 Hours.</title>
+  <meta name="description" content="Three packages for businesses that need a site that works. Launch a new build, grow traffic and trust, or maintain the one you have. Built in 48 hours. Free until you love it." />
+  <meta property="og:title" content="Services | FJMedia" />
+  <meta property="og:description" content="Launch, Grow, Maintain — three packages built around the 48-hour promise. Free until you love it." />
+  <meta property="og:url" content="https://fjmedia.ca/services" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Services | FJMedia" />
+  <meta name="twitter:description" content="Launch, Grow, Maintain — three packages built around the 48-hour promise." />
+  <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
+  <link rel="canonical" href="https://fjmedia.ca/services" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH2JF4NCCF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HH2JF4NCCF');
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --heading:    #EDEAE5;
+      --accent:     #c9a84c;
+      --accent-mid: rgba(201,168,76,0.1);
+      --bg:         #071520;
+      --bg2:        #0d1f3c;
+      --bg3:        #112840;
+      --text:       #EDEAE5;
+      --text-mid:   #A09C96;
+      --text-light: #888480;
+      --border:     #1b3a56;
+      --mono:       'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 6%;
+      background: rgba(7,21,32,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: inline-flex; align-items: baseline; gap: 9px; text-decoration: none; line-height: 1; }
+    .logo-mark { display: inline-flex; align-items: baseline; }
+    .logo-bk { color: var(--accent); font-family: 'Space Mono', monospace; font-weight: 400; font-size: 1.25rem; line-height: 1; }
+    .logo-fj { color: var(--heading); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.01em; line-height: 1; padding: 0 3px; }
+    .logo-media-word { color: var(--text-mid); font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; align-self: center; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--heading); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-cta { background: var(--heading) !important; color: var(--bg) !important; padding: 0.5rem 1.3rem; border-radius: 5px; font-weight: 600 !important; font-size: 0.85rem !important; transition: background 0.2s !important; }
+    .nav-cta:hover { background: #D8D4CE !important; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { width: 22px; height: 2px; background: var(--text-mid); border-radius: 2px; transition: all 0.3s; display: block; }
+    .nav-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .nav-overlay.open { display: flex; }
+    .nav-overlay a { color: var(--text-mid); text-decoration: none; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-overlay a:hover { color: var(--accent); }
+    .overlay-close { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; font-size: 2rem; color: var(--text-light); cursor: pointer; }
+
+    /* SECTIONS */
+    section { padding: 5rem 6%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; font-family: var(--mono); }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; color: var(--heading); line-height: 1.1; margin-bottom: 0.8rem; }
+    .section-title em { font-style: normal; color: var(--accent); }
+    .section-sub { font-size: 0.95rem; color: var(--text-mid); max-width: 620px; line-height: 1.7; margin-bottom: 1rem; }
+    .divider { width: 32px; height: 2px; background: var(--accent); opacity: 0.4; margin: 1.4rem 0; }
+
+    /* HERO */
+    #svc-hero {
+      padding-top: 9rem;
+      border-bottom: 1px solid var(--border);
+      background-image: radial-gradient(circle, rgba(27,58,86,0.5) 1px, transparent 1px);
+      background-size: 24px 24px;
+      position: relative;
+    }
+    #svc-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; color: var(--heading); margin-bottom: 1.3rem; }
+    .hero-title em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: 1.05rem; color: var(--text-mid); max-width: 620px; line-height: 1.7; margin-bottom: 2rem; }
+
+    .hero-guarantees { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
+    .guarantee-pill {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.5rem 0.95rem;
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50px; font-family: var(--mono); font-size: 0.72rem;
+      color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .guarantee-pill::before { content: '✓'; font-weight: 700; }
+
+    /* BUNDLES */
+    #bundles { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .bundle-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .bundle-card {
+      position: relative;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2.2rem 1.9rem 2rem;
+      display: flex; flex-direction: column; gap: 1.1rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .bundle-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-2px); }
+    .bundle-card.featured { border-color: rgba(201,168,76,0.55); background: linear-gradient(180deg, rgba(201,168,76,0.06), var(--bg3)); }
+    .bundle-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute; top: -10px; left: 1.9rem;
+      background: var(--accent); color: var(--bg);
+      padding: 3px 10px; border-radius: 20px;
+      font-family: var(--mono); font-size: 0.64rem; font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+    .bundle-eyebrow {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .bundle-name {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.65rem;
+      font-weight: 800; color: var(--heading); line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .bundle-tagline {
+      font-size: 0.92rem; color: var(--text-mid);
+      line-height: 1.55; min-height: 2.8em;
+    }
+    .bundle-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin: 0.5rem 0; }
+    .bundle-list li {
+      font-size: 0.86rem; color: var(--heading);
+      padding-left: 1.4rem; position: relative; line-height: 1.5;
+    }
+    .bundle-list li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-family: var(--mono); font-weight: 700;
+    }
+    .bundle-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.85rem 1.3rem; margin-top: auto;
+      border-radius: 6px; font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; transition: all 0.2s;
+      border: 1.5px solid var(--accent);
+      color: var(--accent); background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .bundle-cta:hover { background: var(--accent); color: var(--bg); }
+    .bundle-card.featured .bundle-cta { background: var(--accent); color: var(--bg); }
+    .bundle-card.featured .bundle-cta:hover { background: var(--heading); border-color: var(--heading); color: var(--bg); }
+    .bundle-best-for {
+      font-size: 0.76rem; color: var(--text-light);
+      font-family: var(--mono); letter-spacing: 0.08em;
+      padding-top: 0.8rem; border-top: 1px dashed var(--border);
+    }
+    .bundle-best-for strong { color: var(--text-mid); font-weight: 400; }
+
+    /* A LA CARTE */
+    #a-la-carte { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .ala-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .ala-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem 1.4rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color 0.2s;
+    }
+    .ala-card:hover { border-color: rgba(201,168,76,0.4); }
+    .ala-icon {
+      font-size: 1.5rem; margin-bottom: 0.3rem;
+      font-family: var(--mono); color: var(--accent);
+    }
+    .ala-title {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;
+      font-weight: 800; color: var(--heading); letter-spacing: -0.01em;
+    }
+    .ala-body {
+      font-size: 0.85rem; color: var(--text-mid); line-height: 1.55;
+    }
+
+    /* OBJECTIONS FAQ */
+    #objections { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .q-list {
+      margin-top: 2rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .q-item {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem 1.6rem;
+    }
+    .q-question {
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem;
+      font-weight: 800; color: var(--heading); margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .q-answer {
+      font-size: 0.93rem; color: var(--text-mid); line-height: 1.65;
+    }
+    .q-answer strong { color: var(--accent); font-weight: 600; }
+
+    /* FINAL CTA */
+    #final-cta {
+      background: radial-gradient(ellipse at center, var(--bg2) 0%, var(--bg) 70%);
+      text-align: center; padding: 7rem 6%;
+      border-bottom: 1px solid var(--border);
+    }
+    #final-cta .section-title { max-width: 720px; margin: 0 auto 1rem; }
+    .final-cta-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      margin-top: 2rem;
+      padding: 1.05rem 2.3rem;
+      background: var(--accent); color: var(--bg);
+      border-radius: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      text-decoration: none; transition: all 0.2s;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 0 0 rgba(201,168,76,0.5);
+    }
+    .final-cta-btn:hover {
+      background: var(--heading); color: var(--bg);
+      box-shadow: 0 0 30px rgba(201,168,76,0.4);
+      transform: translateY(-2px);
+    }
+    .final-cta-sub {
+      font-family: var(--mono); font-size: 0.78rem;
+      color: var(--text-light); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-top: 1.2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 6%;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .footer-copy { font-size: 0.78rem; color: var(--text-light); font-family: var(--mono); letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { color: var(--text-mid); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* MOBILE CTA BAR */
+    .mobile-cta-bar { display: none; }
+
+    /* MOBILE */
+    @media (max-width: 840px) {
+      .bundle-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .bundle-card.featured::before { left: 50%; transform: translateX(-50%); }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      section { padding: 3.5rem 5%; }
+      .hero-guarantees { justify-content: flex-start; }
+      .mobile-cta-bar {
+        display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+        padding: 0.8rem 1rem; background: var(--accent); text-align: center;
+      }
+      .mobile-cta-bar a {
+        color: var(--bg); text-decoration: none; font-weight: 800;
+        font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;
+      }
+      body { padding-bottom: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/work">Work</a></li>
+      <li><a href="/services" class="active">Services</a></li>
+      <li><a href="/case-studies">Case Studies</a></li>
+      <li><a href="/fit-call" class="nav-cta">Book a Call</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay">
+    <button class="overlay-close" onclick="toggleNav()">×</button>
+    <a href="/work" onclick="toggleNav()">Work</a>
+    <a href="/services" onclick="toggleNav()">Services</a>
+    <a href="/case-studies" onclick="toggleNav()">Case Studies</a>
+    <a href="/fit-call" onclick="toggleNav()">Book a Call</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="svc-hero">
+    <div class="section-inner hero-content">
+      <div class="section-label">Services</div>
+      <h1 class="hero-title">Packages built for <em>what you actually need</em> — not for what sounds fancy.</h1>
+      <p class="hero-sub">Three paths. One promise: built in 48 hours, free until you love it. Whether you're launching from scratch, ready to grow, or keeping a live site in shape — pick the one that fits and start on a 15-minute call.</p>
+      <div class="hero-guarantees">
+        <span class="guarantee-pill">48-hour turnaround</span>
+        <span class="guarantee-pill">Free until you love it</span>
+        <span class="guarantee-pill">No deposits</span>
+        <span class="guarantee-pill">60-day fix window</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUNDLES -->
+  <section id="bundles">
+    <div class="section-inner">
+      <div class="section-label">Packages</div>
+      <h2 class="section-title">Three ways <em>we ship</em>.</h2>
+      <p class="section-sub">Every package ends the same way — a site you're proud to send to every lead for the next five years.</p>
+
+      <div class="bundle-grid">
+
+        <!-- LAUNCH -->
+        <div class="bundle-card">
+          <div class="bundle-eyebrow">Launch</div>
+          <div class="bundle-name">New site. 48 hours.</div>
+          <div class="bundle-tagline">You don't have a website yet — or the one you have is holding you back. We build from scratch around your offer.</div>
+          <ul class="bundle-list">
+            <li>Custom-designed homepage + core pages</li>
+            <li>Mobile-first, fully responsive</li>
+            <li>On-page SEO foundations (meta, sitemap, schema)</li>
+            <li>Domain, SSL, and hosting set up for you</li>
+            <li>Google Analytics + lead-capture wired in</li>
+            <li>60-day fix window after launch</li>
+          </ul>
+          <div class="bundle-best-for"><strong>Best for:</strong> First-time site or full rebuild.</div>
+          <a class="bundle-cta" href="/fit-call">See if Launch fits →</a>
+        </div>
+
+        <!-- GROW (featured) -->
+        <div class="bundle-card featured">
+          <div class="bundle-eyebrow">Grow</div>
+          <div class="bundle-name">Site + traffic engine.</div>
+          <div class="bundle-tagline">Launch a site <em style="font-style:normal;color:var(--accent);">and</em> turn the SEO dial up month over month so leads keep coming without more ads.</div>
+          <ul class="bundle-list">
+            <li>Everything in Launch</li>
+            <li>Monthly technical SEO audits + fixes</li>
+            <li>Content rewrites and new landing pages</li>
+            <li>PageSpeed and Core Web Vitals monitoring</li>
+            <li>Google Search Console reporting</li>
+            <li>Priority bug fixes and small features</li>
+          </ul>
+          <div class="bundle-best-for"><strong>Best for:</strong> You want leads, not just a brochure.</div>
+          <a class="bundle-cta" href="/fit-call">Start with Grow →</a>
+        </div>
+
+        <!-- MAINTAIN -->
+        <div class="bundle-card">
+          <div class="bundle-eyebrow">Maintain</div>
+          <div class="bundle-name">Keep it running. Keep it fast.</div>
+          <div class="bundle-tagline">Already have a site that works? We keep it healthy — uptime, security, backups, and the small fixes that otherwise rot.</div>
+          <ul class="bundle-list">
+            <li>99.9%-uptime managed hosting</li>
+            <li>Security patches + weekly backups</li>
+            <li>Priority bug fix queue</li>
+            <li>Small content and design updates</li>
+            <li>Monthly health + traffic report</li>
+            <li>Direct line for emergencies</li>
+          </ul>
+          <div class="bundle-best-for"><strong>Best for:</strong> Site is live, you don't want to think about it.</div>
+          <a class="bundle-cta" href="/fit-call">Book a Maintain call →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- A LA CARTE -->
+  <section id="a-la-carte">
+    <div class="section-inner">
+      <div class="section-label">A la carte</div>
+      <h2 class="section-title">Already have a site? <em>Here's what we fix.</em></h2>
+      <p class="section-sub">Sometimes you don't need a full rebuild — you need the one thing that's breaking. Every fix below is quoted on the 15-minute call, no packages required.</p>
+
+      <div class="ala-grid">
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">SEO Audit + Fix</div>
+          <div class="ala-body">Full technical audit. Meta, schema, sitemap, Core Web Vitals. You get a scored report and we fix what's worth fixing.</div>
+        </div>
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">Speed Tune-Up</div>
+          <div class="ala-body">Page loads in 6+ seconds? We get you under 2. Image compression, lazy loading, font strategy, render-blocker cleanup.</div>
+        </div>
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">Copy Polish</div>
+          <div class="ala-body">Your offer is strong but the words don't sell it. We rewrite your hero, packages, and about — punchy, on-voice, built for skim.</div>
+        </div>
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">Design Refresh</div>
+          <div class="ala-body">Site works but looks like 2019. Typography, spacing, hover states, consistent grid. No rebuild — surgical upgrades.</div>
+        </div>
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">Lead Capture Wire-up</div>
+          <div class="ala-body">Contact form goes nowhere? We connect it to Google Sheets, email alerts, or your CRM. No-code back-end for one-person teams.</div>
+        </div>
+
+        <div class="ala-card">
+          <div class="ala-icon">&#8227;</div>
+          <div class="ala-title">Hosting Migration</div>
+          <div class="ala-body">Stuck on Wix, Squarespace, GoDaddy, or something slower than dial-up? We move you to modern hosting — zero downtime.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIONS -->
+  <section id="objections">
+    <div class="section-inner">
+      <div class="section-label">Before you ask</div>
+      <h2 class="section-title">The questions <em>everyone has</em>.</h2>
+
+      <div class="q-list">
+
+        <div class="q-item">
+          <div class="q-question">Why isn't there pricing on this page?</div>
+          <div class="q-answer">Because every project is different — a one-page bakery site isn't the same as a multi-location service business. A 15-minute call tells us both whether we're a fit <strong>and</strong> what the number looks like. No pitch, no pressure.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-question">What does "free until you love it" actually mean?</div>
+          <div class="q-answer">We build it first. You see the live preview. If it's not the one, <strong>you walk away — no invoice, no hard feelings.</strong> We only collect after you approve. That's the whole contract.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-question">Do you take deposits?</div>
+          <div class="q-answer">Never. If someone's asking you to pay before you've seen anything, you're not hiring a builder — you're funding their risk. We carry the risk, not you.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-question">How does "48 hours" work?</div>
+          <div class="q-answer">From the kickoff call, we ship a live preview inside 48 hours. Not a Figma mockup — a real, live link on a real domain. Revisions happen after the preview, not before.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-question">Who owns the site after?</div>
+          <div class="q-answer">You do. Domain in your name, code you can take anywhere, no platform lock-in, no monthly licensing. If we ever part ways, everything goes with you.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-question">What if I need something not on this page?</div>
+          <div class="q-answer">Ask. We also do e-commerce, booking systems, automations, and wild one-off projects. If it's web-shaped, we've probably built something close — the call is free to find out.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="final-cta">
+    <div class="section-inner">
+      <div class="section-label" style="display:inline-block;">One call</div>
+      <h2 class="section-title">15 minutes. No pitch. <em>You walk away with a plan</em> — whether we work together or not.</h2>
+      <a class="final-cta-btn" href="/fit-call">Book the 15-min fit call →</a>
+      <div class="final-cta-sub">No deposits · No contracts · Free until you love it</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="nav-logo" href="/">
+      <span class="logo-mark"><span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span></span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="footer-copy">&#169; 2026 FJMedia · Winnipeg, MB</div>
+    <div class="footer-links">
+      <a href="/work">Work</a>
+      <a href="/services">Services</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/fit-call">Book a Call</a>
+    </div>
+  </footer>
+
+  <div class="mobile-cta-bar">
+    <a href="/fit-call">Book a 15-min call →</a>
+  </div>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navOverlay').classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
