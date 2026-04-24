@@ -339,11 +339,30 @@
     background:var(--panel);
     padding:.9rem 1.05rem 1rem;
     display:grid;
-    grid-template-columns:auto 1fr 1fr;
-    gap:1.1rem;
+    grid-template-columns:auto 1fr 1fr 1fr;
+    gap:.9rem;
     align-items:center;
     position:relative;
     overflow:hidden;
+  }
+  .retainer-strip .rs-item.is-picked{
+    background:rgba(201,162,74,.06);
+    border:1px solid rgba(201,162,74,.22);
+    border-radius:6px;
+    padding:.55rem .65rem;
+    margin:-.55rem -.65rem;
+  }
+  .retainer-strip .rs-picked-tag{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:.46rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#0B1A2F;
+    background:var(--gold);
+    padding:.1rem .35rem;
+    border-radius:3px;
+    margin-bottom:.35rem;
   }
   .retainer-strip::before{
     content:"";
@@ -857,14 +876,20 @@
       <div class="rs-hl">Keep me on.<br/>Or don't.</div>
     </div>
     <div class="rs-item">
-      <div class="rs-name">Maintain · $150/mo</div>
+      <div class="rs-name">Keep It Running · $75/mo</div>
       <div class="rs-price">Month to month. Cancel anytime.</div>
-      <div class="rs-det">Updates, form monitoring, uptime checks, monthly analytics snapshot. The site stays healthy without you thinking about it.</div>
+      <div class="rs-det">Hosting, SSL, and domain kept alive. Minor edits when you need them. The site stays healthy without you thinking about it.</div>
+    </div>
+    <div class="rs-item is-picked">
+      <div class="rs-picked-tag">Most picked</div>
+      <div class="rs-name">Keep It Growing · $175/mo</div>
+      <div class="rs-price">Month to month. Cancel anytime.</div>
+      <div class="rs-det">Running plus monthly analytics, SEO tweaks, GBP management, and seasonal content swaps. The site gets better each month.</div>
     </div>
     <div class="rs-item">
-      <div class="rs-name">Grow · $300/mo</div>
+      <div class="rs-name">Own Your Market · $350/mo</div>
       <div class="rs-price">Month to month. Cancel anytime.</div>
-      <div class="rs-det">Maintain plus content swaps, local SEO monitoring, and a 1-on-1 sit-down each month — what's working, what to change.</div>
+      <div class="rs-det">Growing plus a monthly 1-on-1, 4 social posts/mo, competitor monitoring, and ad strategy. I grow your business, not just your site.</div>
     </div>
   </div>
 
