@@ -297,9 +297,12 @@
         err.textContent = '';
         try {
           await new Promise(r => setTimeout(r, 250));
-          const h = await sha256Hex(pwEl.value);
+          const raw = pwEl.value;
+          const trimmed = raw.trim();
+          const h = await sha256Hex(trimmed);
+          console.log('[billing gate] input length:', raw.length, 'trimmed length:', trimmed.length, 'hash:', h, 'expected:', EXPECTED, 'match:', h === EXPECTED);
           if (h !== EXPECTED) {
-            err.textContent = 'Wrong code.';
+            err.textContent = 'Wrong code. (See console for details)';
             pwEl.value = '';
             pwEl.focus();
             btn.disabled = false;
