@@ -295,21 +295,28 @@
         btn.disabled = true;
         btn.textContent = 'Checking…';
         err.textContent = '';
-        await new Promise(r => setTimeout(r, 250));
-        const h = await sha256Hex(pwEl.value);
-        if (h !== EXPECTED) {
-          err.textContent = 'Wrong code.';
-          pwEl.value = '';
-          pwEl.focus();
+        try {
+          await new Promise(r => setTimeout(r, 250));
+          const h = await sha256Hex(pwEl.value);
+          if (h !== EXPECTED) {
+            err.textContent = 'Wrong code.';
+            pwEl.value = '';
+            pwEl.focus();
+            btn.disabled = false;
+            btn.textContent = 'Unlock →';
+            return;
+          }
+          try {
+            sessionStorage.setItem('fjtools_k', h);
+            localStorage.setItem('fjtools_k', h);
+          } catch(_) {}
+          grantAccess();
+        } catch (ex) {
+          console.error('[billing gate] error:', ex);
+          err.textContent = 'Error: ' + (ex && ex.message ? ex.message : 'unknown');
           btn.disabled = false;
           btn.textContent = 'Unlock →';
-          return;
         }
-        try {
-          sessionStorage.setItem('fjtools_k', h);
-          localStorage.setItem('fjtools_k', h);
-        } catch(_) {}
-        grantAccess();
       });
     })();
   </script>
