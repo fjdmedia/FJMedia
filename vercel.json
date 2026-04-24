@@ -15,7 +15,9 @@
     { "source": "/fit-call", "destination": "/fit-call.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/services", "destination": "/services.html" },
-    { "source": "/case-studies", "destination": "/case-studies.html" }
+    { "source": "/case-studies", "destination": "/case-studies.html" },
+    { "source": "/docs/service-overview/service-overview", "destination": "/docs/service-overview/service-overview.html" },
+    { "source": "/service-overview", "destination": "/docs/service-overview/service-overview.html" }
   ],
   "redirects": [
     { "source": "/proof", "destination": "/case-studies", "permanent": true },
