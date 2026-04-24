@@ -79,8 +79,8 @@ function render() {
 
   panel.querySelector('#logout-btn').onclick = () => {
     try {
-      sessionStorage.removeItem('fjbilling_k');
-      localStorage.removeItem('fjbilling_k');
+      sessionStorage.removeItem('fjtools_k');
+      localStorage.removeItem('fjtools_k');
     } catch(_) {}
     location.reload();
   };

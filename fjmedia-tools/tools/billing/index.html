@@ -272,7 +272,7 @@
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
       }
       function isUnlocked() {
-        try { return (sessionStorage.getItem('fjbilling_k') || localStorage.getItem('fjbilling_k')) === EXPECTED; }
+        try { return (sessionStorage.getItem('fjtools_k') || localStorage.getItem('fjtools_k')) === EXPECTED; }
         catch(_) { return false; }
       }
       function grantAccess() {
@@ -306,8 +306,8 @@
           return;
         }
         try {
-          sessionStorage.setItem('fjbilling_k', h);
-          localStorage.setItem('fjbilling_k', h);
+          sessionStorage.setItem('fjtools_k', h);
+          localStorage.setItem('fjtools_k', h);
         } catch(_) {}
         grantAccess();
       });
