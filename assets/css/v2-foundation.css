@@ -1,0 +1,560 @@
+/* ==========================================================================
+   FJMedia v2 — Foundation layer
+   Loaded AFTER tailwind.min.css / page inline styles on every page.
+   Pure CSS. Zero JS. GPU-only animations (transform / opacity / filter).
+   Honors prefers-reduced-motion. No layout thrash.
+   ========================================================================== */
+
+/* ---------- 1. Micro-typography polish ---------- */
+
+html { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* text-wrap: balance on every headline so we never get single-word widows */
+h1, h2, h3,
+.section-title,
+.hero-title,
+.headline,
+[data-balance] {
+  text-wrap: balance;
+}
+
+/* Long paragraphs read better with pretty wrapping (Chromium/Safari) */
+p, li, .lede, .subhead {
+  text-wrap: pretty;
+}
+
+/* ---------- 2. Italic-emphasis standardization ---------- */
+/* Real italic + accent — replaces the "color-only" hack used in some spans. */
+
+.fjm-em,
+.section-title em,
+.hero-title em,
+.headline em {
+  font-style: italic;
+  color: var(--accent, #C9A84C);
+  font-synthesis: none; /* never fake italic — use the real face */
+}
+
+/* When a paragraph em should pop slightly without color change */
+.fjm-em--subtle {
+  font-style: italic;
+  color: inherit;
+  font-synthesis: none;
+}
+
+/* ---------- 3. Shimmer-sweep CTA utility ---------- */
+/* Additive modifier. Use as `class="... fjm-shimmer"`. */
+/* Only animates on :hover — zero idle paint cost. */
+
+.fjm-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fjm-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  transform: translate3d(-110%, 0, 0);
+  transition: transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+}
+
+.fjm-shimmer:hover::after,
+.fjm-shimmer:focus-visible::after {
+  transform: translate3d(110%, 0, 0);
+}
+
+/* Subtle idle glow that intensifies on hover — no keyframe animation (static) */
+.fjm-shimmer {
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+
+.fjm-shimmer:hover {
+  box-shadow: 0 0 28px -4px rgba(201, 168, 76, 0.45);
+  transform: translate3d(0, -1px, 0);
+}
+
+/* ---------- 4. Section-bridge primitives ---------- */
+/* Stitch sections together instead of hard-border stacking. */
+
+.fjm-bridge {
+  position: relative;
+}
+
+/* Top bridge: gold accent line extends from previous section */
+.fjm-bridge--top::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: min(520px, 60%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.45) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Bottom bridge: grain fade carries texture into the next section */
+.fjm-bridge--bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -64px;
+  left: 0;
+  right: 0;
+  height: 128px;
+  background: radial-gradient(
+    ellipse 80% 100% at 50% 0%,
+    rgba(201, 168, 76, 0.035) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Section peek — when a card should extend slightly into the next section */
+.fjm-peek {
+  position: relative;
+  z-index: 3;
+  transform: translate3d(0, 24px, 0);
+  margin-bottom: -24px;
+}
+
+/* Vertical gold throughline — drop into any section with `class="fjm-line"` */
+.fjm-line {
+  position: relative;
+}
+.fjm-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.22) 12%,
+    rgba(201, 168, 76, 0.22) 88%,
+    transparent 100%
+  );
+  transform: translate3d(-50%, 0, 0);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ---------- 5. Nav scroll-depth behavior ---------- */
+/* Canonical `scroll-aware-nav` pattern (ref-tag: scroll-aware-nav):         */
+/*   nav starts in its default state, gains .scrolled class past 60px.       */
+/* Toggled by the tiny sentinel script in js/v2-foundation.js.               */
+/* Fallback: if the script never runs, nav simply stays in its default state. */
+
+nav {
+  transition: padding 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              background-color 0.35s ease,
+              backdrop-filter 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+/* Only promote to a compositor layer while animating — avoids permanent memory cost */
+nav.scrolled {
+  will-change: padding, background-color;
+  padding-top: 0.6rem !important;
+  padding-bottom: 0.6rem !important;
+  background-color: rgba(7, 21, 32, 0.94) !important;
+  -webkit-backdrop-filter: blur(18px);
+          backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Nav entrance on first load (no JS needed) */
+@keyframes fjmNavDrop {
+  from { transform: translate3d(0, -100%, 0); opacity: 0; }
+  to   { transform: translate3d(0, 0, 0);     opacity: 1; }
+}
+nav {
+  animation: fjmNavDrop 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: 0.05s;
+}
+
+/* ==========================================================================
+   HERO ENTRANCE — Phase 2 whoa layer (pure CSS, zero JS, zero LCP cost)
+   Headline stays in DOM for LCP — just starts invisible, reveals via
+   transform+opacity (compositor-only, no layout thrash).
+   ========================================================================== */
+
+/* Words in the headline reveal word-by-word.
+   Each `.hero-word` gets its own nth-child delay for stagger. */
+.hero-headline .hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: fjmHeroWordIn 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+
+@keyframes fjmHeroWordIn {
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Line-break helper: visually inserts a line break between word spans
+   without breaking the staggered nth flow. Accessibility-safe (aria-hidden). */
+.hero-line-break {
+  display: block;
+  height: 0;
+  width: 100%;
+}
+
+/* After-headline elements (eyebrow, subcopy, scarcity, CTAs, tagline, bento).
+   Delay steps are additive so the page choreographs in sequence.
+   Accepts inline `style="--d:1.3s"` for precise timing, or `.hero-delay-N` helpers. */
+.hero-in {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  animation: fjmHeroElemIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+
+/* Accent word: real italic + gold accent, portable across pages
+   that don't have Tailwind's italic/text-gradient utilities. */
+.hero-word--accent {
+  font-style: italic;
+  color: var(--accent, #C9A84C);
+  font-synthesis: none;
+}
+
+@keyframes fjmHeroElemIn {
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.hero-delay-0   { animation-delay: 0.00s; }
+.hero-delay-1   { animation-delay: 0.10s; }  /* eyebrow */
+.hero-delay-2   { animation-delay: 1.10s; }  /* after headline */
+.hero-delay-3   { animation-delay: 1.25s; }
+.hero-delay-4   { animation-delay: 1.40s; }  /* scarcity pill */
+.hero-delay-5   { animation-delay: 1.55s; }  /* CTAs */
+.hero-delay-6   { animation-delay: 1.70s; }  /* tagline */
+
+/* Scarcity pill / guarantee pills get a slight scale pop on top of fade-up.
+   Accepts inline `style="--d:1.3s"` or `.hero-delay-N` helpers. */
+.hero-pop {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0) scale(0.96);
+  animation: fjmHeroPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+@keyframes fjmHeroPop {
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* Bento cards cascade — each card takes `style="--d: 1.0s"` inline */
+.hero-bento-in {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  animation: fjmHeroElemIn 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  animation-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+
+/* Floating gold orbs — drift forever on the compositor thread, never touch layout.
+   Three orbs, three different drift curves, different phases. */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(201, 168, 76, 0.55) 0%,
+    rgba(201, 168, 76, 0.20) 45%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: fjmOrbFadeIn 1.6s ease-out 0.4s forwards,
+             fjmOrbDrift 16s ease-in-out 2s infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes fjmOrbFadeIn {
+  to { opacity: 0.55; }
+}
+
+@keyframes fjmOrbDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(40px, -30px, 0) scale(1.08); }
+  100% { transform: translate3d(-20px, 20px, 0) scale(0.95); }
+}
+
+.hero-orb--a {
+  width: 380px; height: 380px;
+  top: -80px; left: 10%;
+}
+.hero-orb--b {
+  width: 280px; height: 280px;
+  top: 40%; right: 5%;
+  animation-delay: 0.6s, 3s;
+  animation-duration: 1.6s, 20s;
+}
+.hero-orb--c {
+  width: 220px; height: 220px;
+  bottom: 5%; left: 45%;
+  animation-delay: 0.8s, 4s;
+  animation-duration: 1.6s, 14s;
+}
+
+/* Mobile: scale orbs down so they don't eat the viewport */
+@media (max-width: 640px) {
+  .hero-orb--a { width: 240px; height: 240px; top: -40px; left: -30px; }
+  .hero-orb--b { width: 180px; height: 180px; top: 30%; right: -30px; }
+  .hero-orb--c { width: 160px; height: 160px; bottom: 10%; left: 30%; }
+}
+
+/* Reduced-motion: snap to final state, kill orb drift + headline stagger */
+@media (prefers-reduced-motion: reduce) {
+  .hero-headline .hero-word,
+  .hero-in, .hero-pop, .hero-bento-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hero-orb {
+    opacity: 0.3 !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE 375px FIRST-CLASS — Phase 3
+   - Fluid hero typography (clamp-based, prevents 5-line stacks on small phones)
+   - Unified sticky mobile CTA (canonical scarcity pattern from ref-library)
+   - Mobile nav overlay polish (stronger blur, gold accent line, smoother entrance)
+   - Tighter hero vertical rhythm on 375-640px
+   - Min 44px touch targets on key interactive elements
+   ========================================================================== */
+
+@media (max-width: 640px) {
+
+  /* Fluid headline sizing: shrinks cleanly on small phones without wrapping into 5 lines */
+  .hero-headline {
+    font-size: clamp(2.3rem, 10vw, 3.5rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.015em;
+  }
+
+  /* Tighter hero vertical rhythm — kills the desktop-sized gaps */
+  main section:first-of-type,
+  #svc-hero,
+  #proof-hero {
+    padding-top: clamp(4rem, 18vw, 6.5rem) !important;
+  }
+
+  /* Subcopy reads cleaner at this width */
+  .hero-sub,
+  .hero-in + p,
+  p.hero-in {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Touch targets — buttons, nav links, guarantee pills */
+  a.bundle-cta,
+  a.guarantee-pill,
+  .guarantee-pill,
+  nav a,
+  .nav-link,
+  .mobile-nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ---------- Canonical mobile sticky CTA (ref-tag: mobile-sticky-scarcity) ---------- */
+/* Drop `<div class="v2-mobile-cta">…</div>` on any page to get the brand-consistent
+   bottom bar. Safe on top of existing .mobile-cta-bar (this is a sibling, not replacer). */
+.v2-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .v2-mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(7, 21, 32, 0.94);
+    -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(201, 168, 76, 0.25);
+    box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
+    animation: v2MobileCtaIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) 0.8s both;
+  }
+
+  .v2-mobile-cta__scarcity {
+    display: flex; align-items: center; gap: 10px;
+    min-width: 0; flex: 1;
+  }
+
+  .v2-mobile-cta__dot {
+    position: relative;
+    width: 8px; height: 8px;
+    flex-shrink: 0;
+  }
+  .v2-mobile-cta__dot::before,
+  .v2-mobile-cta__dot::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: var(--accent, #C9A84C);
+  }
+  .v2-mobile-cta__dot::before {
+    inset: 0;
+    opacity: 0.6;
+    animation: v2Pulse 2s ease-in-out infinite;
+  }
+  .v2-mobile-cta__dot::after {
+    inset: 0;
+    box-shadow: 0 0 8px rgba(201, 168, 76, 0.85);
+  }
+
+  .v2-mobile-cta__text {
+    display: flex; flex-direction: column; line-height: 1.2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-width: 0;
+  }
+  .v2-mobile-cta__text strong {
+    color: #fff; font-size: 13px; font-weight: 700;
+  }
+  .v2-mobile-cta__text span {
+    color: rgba(160, 156, 150, 0.95); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .v2-mobile-cta__btn {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: var(--accent, #C9A84C);
+    color: #071520;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 44px;
+    display: inline-flex; align-items: center;
+    box-shadow: 0 4px 14px rgba(201, 168, 76, 0.35);
+  }
+
+  /* Make room for the bar so content doesn't sit beneath it */
+  body:has(.v2-mobile-cta) { padding-bottom: 72px; }
+}
+
+@keyframes v2MobileCtaIn {
+  from { transform: translate3d(0, 100%, 0); opacity: 0; }
+  to   { transform: translate3d(0, 0, 0);     opacity: 1; }
+}
+
+@keyframes v2Pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%      { transform: scale(1.4); opacity: 0; }
+}
+
+/* ---------- Mobile nav overlay polish (applies to any .nav-overlay / .mobile-nav-panel) ---------- */
+@media (max-width: 900px) {
+  .nav-overlay,
+  .mobile-nav-panel {
+    -webkit-backdrop-filter: blur(22px) !important;
+            backdrop-filter: blur(22px) !important;
+  }
+
+  /* Gold accent line at the top of the overlay — signals it's a proper panel */
+  .nav-overlay::before,
+  .mobile-nav-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 3px;
+    border-radius: 2px;
+    background: var(--accent, #C9A84C);
+    opacity: 0.7;
+    margin-top: 10px;
+    pointer-events: none;
+  }
+}
+
+/* Hide the floating chat bubble on mobile when the sticky CTA is present —
+   avoids two bottom-right elements colliding. */
+@media (max-width: 900px) {
+  body:has(.v2-mobile-cta) #fj-chat-bubble,
+  body:has(.v2-mobile-cta) .fj-chat-bubble,
+  body:has(.v2-mobile-cta) .chat-widget-bubble {
+    display: none !important;
+  }
+}
+
+/* ---------- 6. Reduced-motion kill switch ---------- */
+/* Anyone with prefers-reduced-motion gets zero non-essential animation.   */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .fjm-shimmer::after { display: none; }
+}
+
+/* ---------- 7. Selection polish ---------- */
+
+::selection {
+  background: rgba(201, 168, 76, 0.92);
+  color: #071520;
+}
+
+/* ---------- 8. Focus ring (accessibility, keyboard users only) ---------- */
+
+:focus-visible {
+  outline: 2px solid rgba(201, 168, 76, 0.85);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+:focus:not(:focus-visible) { outline: none; }

@@ -425,6 +425,7 @@
       .footer-links { justify-content: center; }
     }
   </style>
+  <link rel="stylesheet" href="/assets/css/v2-foundation.css">
 </head>
 <body>
 
@@ -457,15 +458,26 @@
   <!-- HERO -->
   <section id="proof-hero">
     <div class="section-inner hero-content">
-      <p class="section-label">The Proof</p>
-      <h1 class="section-title">We use our own tools <em>on our own site.</em></h1>
-      <p class="section-sub">Every service we sell — running live on fjmedia.ca right now. Plus real client builds and a before-and-after bug gallery. No stock screenshots. No case studies stolen from an agency deck.</p>
-      <div class="divider"></div>
+      <p class="section-label hero-in hero-delay-1">The Proof</p>
+      <h1 class="section-title hero-headline">
+        <span class="hero-word" style="--d:.15s">We</span>
+        <span class="hero-word" style="--d:.23s">use</span>
+        <span class="hero-word" style="--d:.31s">our</span>
+        <span class="hero-word" style="--d:.39s">own</span>
+        <span class="hero-word" style="--d:.47s">tools</span>
+        <span class="hero-line-break" aria-hidden="true"></span>
+        <span class="hero-word hero-word--accent" style="--d:.62s">on</span>
+        <span class="hero-word hero-word--accent" style="--d:.70s">our</span>
+        <span class="hero-word hero-word--accent" style="--d:.78s">own</span>
+        <span class="hero-word hero-word--accent" style="--d:.86s">site.</span>
+      </h1>
+      <p class="section-sub hero-in" style="--d:1.10s">Every service we sell — running live on fjmedia.ca right now. Plus real client builds and a before-and-after bug gallery. No stock screenshots. No case studies stolen from an agency deck.</p>
+      <div class="divider hero-in" style="--d:1.30s"></div>
     </div>
   </section>
 
   <!-- LIVE ON THIS SITE -->
-  <section id="live-proof">
+  <section id="live-proof" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <p class="section-label">Live on this site</p>
       <h2 class="section-title">Six things you can <em>verify right now.</em></h2>
@@ -527,7 +539,7 @@
   </section>
 
   <!-- STACK — under the hood -->
-  <section id="stack">
+  <section id="stack" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <p class="section-label">Under the Hood</p>
       <h2 class="section-title">What's actually <em>running this.</em></h2>
@@ -586,7 +598,7 @@
   </section>
 
   <!-- CASE STUDY -->
-  <section id="case-study">
+  <section id="case-study" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <p class="section-label">Case Studies</p>
       <h2 class="section-title">Three builds. <em>Three live sites.</em></h2>
@@ -823,8 +835,16 @@
     </div>
   </footer>
 
-  <div class="mobile-cta-bar">
-    <a href="/fit-call">Book a Call</a>
+  <!-- Canonical mobile sticky CTA (ref-tag: mobile-sticky-scarcity) -->
+  <div class="v2-mobile-cta" aria-label="Book a fit call">
+    <div class="v2-mobile-cta__scarcity">
+      <span class="v2-mobile-cta__dot" aria-hidden="true"></span>
+      <span class="v2-mobile-cta__text">
+        <strong>2 of 5 spots left</strong>
+        <span>this month</span>
+      </span>
+    </div>
+    <a href="/fit-call" class="v2-mobile-cta__btn">Book Fit Call</a>
   </div>
 
   <script>
@@ -989,13 +1009,40 @@
     });
     // ── END LIGHTBOX ──────────────────────────────────────
 
-    // GSAP
-    gsap.from('.hero-content', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out', delay: 0.2 });
+    // GSAP — hero itself handled by v2 CSS entrance; below-fold uses ScrollTrigger
     gsap.from('.site-card', {
       scrollTrigger: { trigger: '.site-grid', start: 'top 80%', once: true },
       opacity: 0, y: 20, duration: 0.5, stagger: 0.1, ease: 'power2.out'
     });
+    gsap.from('.proof-card', {
+      scrollTrigger: { trigger: '.proof-grid', start: 'top 85%', once: true },
+      opacity: 0, y: 24, duration: 0.55, stagger: 0.08, ease: 'power2.out'
+    });
+    // Tech-spec rows cascade in from the left (editorial feel).
+    // immediateRender:false = stays visible if GSAP fails to load.
+    gsap.from('.stack-row', {
+      scrollTrigger: { trigger: '#stack', start: 'top 80%', once: true },
+      opacity: 0, x: -18, duration: 0.5, stagger: 0.07, ease: 'power2.out',
+      immediateRender: false
+    });
+    // Case-study compare pairs: before slides from left, after from right
+    document.querySelectorAll('.compare-grid').forEach(function(grid) {
+      var panels = grid.querySelectorAll('.compare-panel');
+      if (panels.length === 2) {
+        gsap.from(panels[0], {
+          scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
+          opacity: 0, x: -30, duration: 0.65, ease: 'power2.out',
+          immediateRender: false
+        });
+        gsap.from(panels[1], {
+          scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
+          opacity: 0, x: 30, duration: 0.65, ease: 'power2.out', delay: 0.1,
+          immediateRender: false
+        });
+      }
+    });
   </script>
   <script src="/widget.js"></script>
+  <script src="/js/v2-foundation.js"></script>
 </body>
 </html>

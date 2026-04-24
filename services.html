@@ -285,6 +285,7 @@
       body { padding-bottom: 60px; }
     }
   </style>
+  <link rel="stylesheet" href="/assets/css/v2-foundation.css">
 </head>
 <body>
 
@@ -316,20 +317,34 @@
   <!-- HERO -->
   <section id="svc-hero">
     <div class="section-inner hero-content">
-      <div class="section-label">Services</div>
-      <h1 class="hero-title">Packages built for <em>what you actually need</em> — not for what sounds fancy.</h1>
-      <p class="hero-sub">Three tiers. One promise: a live preview in 48 hours, free until you love it. Whether you need a clean first site, a full lead-capturing machine, or a managed digital system — pick the one that fits and start on a 15-minute call.</p>
+      <div class="section-label hero-in hero-delay-1">Services</div>
+      <h1 class="hero-title hero-headline">
+        <span class="hero-word" style="--d:.15s">Packages</span>
+        <span class="hero-word" style="--d:.21s">built</span>
+        <span class="hero-word" style="--d:.27s">for</span>
+        <span class="hero-word hero-word--accent" style="--d:.33s">what</span>
+        <span class="hero-word hero-word--accent" style="--d:.39s">you</span>
+        <span class="hero-word hero-word--accent" style="--d:.45s">actually</span>
+        <span class="hero-word hero-word--accent" style="--d:.51s">need</span>
+        <span class="hero-word" style="--d:.60s">—</span>
+        <span class="hero-word" style="--d:.66s">not</span>
+        <span class="hero-word" style="--d:.72s">for</span>
+        <span class="hero-word" style="--d:.78s">what</span>
+        <span class="hero-word" style="--d:.84s">sounds</span>
+        <span class="hero-word" style="--d:.90s">fancy.</span>
+      </h1>
+      <p class="hero-sub hero-in hero-delay-2">Three tiers. One promise: a live preview in 48 hours, free until you love it. Whether you need a clean first site, a full lead-capturing machine, or a managed digital system — pick the one that fits and start on a 15-minute call.</p>
       <div class="hero-guarantees">
-        <span class="guarantee-pill">48-hour live preview</span>
-        <span class="guarantee-pill">Free until you love it</span>
-        <span class="guarantee-pill">No deposits</span>
-        <span class="guarantee-pill">You own everything</span>
+        <span class="guarantee-pill hero-pop" style="--d:1.30s">48-hour live preview</span>
+        <span class="guarantee-pill hero-pop" style="--d:1.40s">Free until you love it</span>
+        <span class="guarantee-pill hero-pop" style="--d:1.50s">No deposits</span>
+        <span class="guarantee-pill hero-pop" style="--d:1.60s">You own everything</span>
       </div>
     </div>
   </section>
 
   <!-- BUNDLES -->
-  <section id="bundles">
+  <section id="bundles" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <div class="section-label">Packages</div>
       <h2 class="section-title">Three tiers. <em>One builder.</em></h2>
@@ -417,7 +432,7 @@
   </section>
 
   <!-- A LA CARTE -->
-  <section id="a-la-carte">
+  <section id="a-la-carte" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <div class="section-label">A la carte</div>
       <h2 class="section-title">Already have a site? <em>Here's what we fix.</em></h2>
@@ -466,7 +481,7 @@
   </section>
 
   <!-- OBJECTIONS -->
-  <section id="objections">
+  <section id="objections" class="fjm-bridge fjm-bridge--top">
     <div class="section-inner">
       <div class="section-label">Before you ask</div>
       <h2 class="section-title">The questions <em>everyone has</em>.</h2>
@@ -532,8 +547,16 @@
     </div>
   </footer>
 
-  <div class="mobile-cta-bar">
-    <a href="/fit-call">Book a 15-min call →</a>
+  <!-- Canonical mobile sticky CTA (ref-tag: mobile-sticky-scarcity) -->
+  <div class="v2-mobile-cta" aria-label="Book a fit call">
+    <div class="v2-mobile-cta__scarcity">
+      <span class="v2-mobile-cta__dot" aria-hidden="true"></span>
+      <span class="v2-mobile-cta__text">
+        <strong>2 of 5 spots left</strong>
+        <span>this month</span>
+      </span>
+    </div>
+    <a href="/fit-call" class="v2-mobile-cta__btn">Book Fit Call</a>
   </div>
 
   <script>
@@ -541,6 +564,7 @@
       document.getElementById('navOverlay').classList.toggle('open');
     }
   </script>
+  <script src="/js/v2-foundation.js"></script>
 
 </body>
 </html>

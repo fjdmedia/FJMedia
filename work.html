@@ -26,6 +26,7 @@
 
     <!-- Tailwind: precompiled CSS (no CDN, no runtime JIT) -->
     <link rel="stylesheet" href="/tailwind.min.css">
+    <link rel="stylesheet" href="/assets/css/v2-foundation.css">
 
     <style>
         body {
@@ -128,37 +129,41 @@
 
         <!-- HERO -->
         <div style="margin-bottom:64px;">
-            <div class="tag" style="margin-bottom:20px;">Client Work</div>
-            <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:3.5rem;line-height:1.1;color:#EDEAE5;margin-bottom:20px;">
-                Real sites.<br>Real results.
+            <div class="tag hero-in hero-delay-1" style="margin-bottom:20px;">Client Work</div>
+            <h1 class="hero-headline" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:3.5rem;line-height:1.1;color:#EDEAE5;margin-bottom:20px;">
+                <span class="hero-word" style="--d:.15s">Real</span>
+                <span class="hero-word" style="--d:.26s">sites.</span>
+                <span class="hero-line-break" aria-hidden="true"></span>
+                <span class="hero-word" style="--d:.40s">Real</span>
+                <span class="hero-word hero-word--accent" style="--d:.51s">results.</span>
             </h1>
-            <p style="font-family:'DM Sans',sans-serif;font-size:18px;font-weight:300;color:#94a3b8;max-width:480px;line-height:1.6;">
+            <p class="hero-in" style="font-family:'DM Sans',sans-serif;font-size:18px;font-weight:300;color:#94a3b8;max-width:480px;line-height:1.6;--d:.75s">
                 Every site here was built from scratch, delivered fast, and built to solve an actual business problem — not to look good in a portfolio deck.
             </p>
         </div>
 
         <!-- STATS BAR -->
         <div style="display:flex;background:#0D1F3C;border:1px solid rgba(255,255,255,0.07);border-radius:12px;margin-bottom:72px;overflow:hidden;">
-            <div class="stat-chip" style="flex:1;">
+            <div class="stat-chip hero-pop" style="flex:1;--d:1.00s">
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">2+</div>
                 <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Sites Live</div>
             </div>
-            <div class="stat-chip" style="flex:1;">
+            <div class="stat-chip hero-pop" style="flex:1;--d:1.12s">
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">48h</div>
                 <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Avg Delivery</div>
             </div>
-            <div class="stat-chip" style="flex:1;">
+            <div class="stat-chip hero-pop" style="flex:1;--d:1.24s">
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">$0</div>
                 <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Upfront to Start</div>
             </div>
-            <div class="stat-chip" style="flex:1;">
+            <div class="stat-chip hero-pop" style="flex:1;--d:1.36s">
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:#C9A84C;margin-bottom:4px;">0</div>
                 <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">Templates Used</div>
             </div>
         </div>
 
         <!-- CLIENT CARDS -->
-        <div style="display:flex;flex-direction:column;gap:48px;">
+        <div class="fjm-bridge fjm-bridge--top" style="display:flex;flex-direction:column;gap:48px;padding-top:48px;">
 
             <!-- ===== SUGAR & SHAI ===== -->
             <div class="client-card">
@@ -403,7 +408,7 @@
         </div>
 
         <!-- BOTTOM CTA -->
-        <div style="margin-top:80px;padding:56px 48px;background:#0D1F3C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;text-align:center;">
+        <div class="fjm-bridge fjm-bridge--top" style="margin-top:80px;padding:56px 48px;background:#0D1F3C;border:1px solid rgba(255,255,255,0.07);border-radius:16px;text-align:center;">
             <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;">Ready?</div>
             <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.25rem;color:#EDEAE5;margin-bottom:16px;line-height:1.2;">Your business is next.</h2>
             <p style="font-family:'DM Sans',sans-serif;font-size:16px;color:#94a3b8;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6;">
@@ -436,5 +441,18 @@
         <p style="font-family:'DM Sans',sans-serif;font-size:10px;color:rgba(148,163,184,0.4);">© 2026 FJMedia. All rights reserved.</p>
     </footer>
 
+    <!-- Canonical mobile sticky CTA (ref-tag: mobile-sticky-scarcity) -->
+    <div class="v2-mobile-cta" aria-label="Book a fit call">
+        <div class="v2-mobile-cta__scarcity">
+            <span class="v2-mobile-cta__dot" aria-hidden="true"></span>
+            <span class="v2-mobile-cta__text">
+                <strong>2 of 5 spots left</strong>
+                <span>this month</span>
+            </span>
+        </div>
+        <a href="/fit-call" class="v2-mobile-cta__btn">Book Fit Call</a>
+    </div>
+
+    <script src="/js/v2-foundation.js"></script>
 </body>
 </html>

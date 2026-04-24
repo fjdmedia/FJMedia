@@ -11,6 +11,7 @@
     <!-- EARLY DISCOVERY: font preload + CSS must be before JSON-LD so browser fetches immediately -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/jakarta-700.woff2" crossorigin>
     <link rel="stylesheet" href="/tailwind.min.css">
+    <link rel="stylesheet" href="/assets/css/v2-foundation.css">
     <title>Custom Web Design Winnipeg | 48-Hour Sites | FJMedia</title>
     <meta name="description" content="Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 48 hours, $0 upfront. Free until you love it." />
     <meta property="og:title" content="Custom Web Design Winnipeg | 48-Hour Sites | FJMedia" />
@@ -465,23 +466,40 @@
     <main class="relative z-10 pt-32 px-6 md:px-12 max-w-[1600px] mx-auto">
 
         <!-- SECTION: HERO -->
-        <section class="min-h-[85vh] flex flex-col lg:flex-row items-center gap-16 lg:gap-24 py-12">
+        <section class="relative min-h-[85vh] flex flex-col lg:flex-row items-center gap-16 lg:gap-24 py-12">
+            <!-- Floating gold orbs — GPU-only drift, zero JS, zero LCP cost -->
+            <div class="hero-orb hero-orb--a" aria-hidden="true"></div>
+            <div class="hero-orb hero-orb--b" aria-hidden="true"></div>
+            <div class="hero-orb hero-orb--c" aria-hidden="true"></div>
+
             <!-- Hero Typography -->
-            <div class="flex-1 space-y-8">
-                <div class="flex items-center gap-4 text-brand-gold text-xs font-bold tracking-[0.2em] uppercase">
+            <div class="flex-1 space-y-8 relative z-10">
+                <div class="hero-in hero-delay-1 flex items-center gap-4 text-brand-gold text-xs font-bold tracking-[0.2em] uppercase">
                     <span class="w-8 h-px bg-brand-gold"></span>
                     Web Partner for Local Businesses · Winnipeg
                 </div>
-                <h1 class="font-display font-bold text-4xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
-                    We'll cook up a website <br/>
-                    in 48 hours. <br/>
-                    <span class="text-gradient italic block mt-2">Free until you love it.</span>
+                <h1 class="hero-headline font-display font-bold text-4xl md:text-[80px] leading-[1.05] tracking-tight text-white drop-shadow-2xl">
+                    <span class="hero-word" style="--d:.15s">We'll</span>
+                    <span class="hero-word" style="--d:.21s">cook</span>
+                    <span class="hero-word" style="--d:.27s">up</span>
+                    <span class="hero-word" style="--d:.33s">a</span>
+                    <span class="hero-word" style="--d:.39s">website</span>
+                    <span class="hero-line-break" aria-hidden="true"></span>
+                    <span class="hero-word" style="--d:.45s">in</span>
+                    <span class="hero-word" style="--d:.51s">48</span>
+                    <span class="hero-word" style="--d:.57s">hours.</span>
+                    <span class="hero-line-break" aria-hidden="true"></span>
+                    <span class="hero-word text-gradient italic" style="--d:.80s">Free</span>
+                    <span class="hero-word text-gradient italic" style="--d:.86s">until</span>
+                    <span class="hero-word text-gradient italic" style="--d:.92s">you</span>
+                    <span class="hero-word text-gradient italic" style="--d:.98s">love</span>
+                    <span class="hero-word text-gradient italic" style="--d:1.04s">it.</span>
                 </h1>
-                <p class="text-xl text-brand-textMuted max-w-lg leading-relaxed font-light">
+                <p class="hero-in hero-delay-2 text-xl text-brand-textMuted max-w-lg leading-relaxed font-light">
                     Custom websites for Winnipeg businesses. <br>
                     <span class="text-white font-medium">No Wix. No Shopify. No templates.</span>
                 </p>
-                <div class="scarcity-badge inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(201,168,76,0.15)]">
+                <div class="scarcity-badge hero-pop hero-delay-4 inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(201,168,76,0.15)]">
                     <div class="flex items-center gap-4 px-4 py-2.5 border-r border-brand-gold/20">
                         <span class="relative flex w-2.5 h-2.5" aria-hidden="true">
                             <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-75 animate-ping"></span>
@@ -494,25 +512,25 @@
                         <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-white/80 ml-1">Spots · This Month</span>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-4 pt-4">
-                    <a href="/fit-call" class="bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all transform hover:-translate-y-1">
+                <div class="hero-in hero-delay-5 flex flex-wrap items-center gap-4 pt-4">
+                    <a href="/fit-call" class="fjm-shimmer bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all transform hover:-translate-y-1">
                         Book the 15-Min Fit Call
                     </a>
                     <a href="#work" class="glass-panel text-white border border-white/10 px-8 py-4 rounded-md font-medium hover:bg-white/10 transition-colors flex items-center gap-2">
                         See Our Work <svg class="ph-icon" aria-hidden="true"><use href="#ph-arrow-right"/></svg>
                     </a>
                 </div>
-                <p class="text-xs text-brand-textMuted max-w-md pt-8 border-t border-white/10">
+                <p class="hero-in hero-delay-6 text-xs text-brand-textMuted max-w-md pt-8 border-t border-white/10">
                     AI in the pipeline. Not in the output.
                 </p>
             </div>
 
             <!-- Hero Bento Features -->
-            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full relative" aria-label="What you get">
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full relative z-10" aria-label="What you get">
                 <!-- Decorative element -->
                 <div class="absolute -inset-10 bg-brand-gold/5 rounded-full z-0 pointer-events-none"></div>
 
-                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                <div class="hero-bento-in info-bento p-6 rounded-xl flex items-start gap-4 relative z-10" style="--d:1.00s">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
                         <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-money"/></svg>
                     </div>
@@ -523,7 +541,7 @@
                     </div>
                 </div>
 
-                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                <div class="hero-bento-in info-bento p-6 rounded-xl flex items-start gap-4 relative z-10" style="--d:1.12s">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
                         <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-lightning"/></svg>
                     </div>
@@ -534,7 +552,7 @@
                     </div>
                 </div>
 
-                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                <div class="hero-bento-in info-bento p-6 rounded-xl flex items-start gap-4 relative z-10" style="--d:1.24s">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
                         <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-code"/></svg>
                     </div>
@@ -545,7 +563,7 @@
                     </div>
                 </div>
 
-                <div class="info-bento p-6 rounded-xl flex items-start gap-4 relative z-10">
+                <div class="hero-bento-in info-bento p-6 rounded-xl flex items-start gap-4 relative z-10" style="--d:1.36s">
                     <div class="w-10 h-10 rounded-md bg-brand-card flex items-center justify-center text-brand-gold border border-white/5 shrink-0">
                         <svg class="ph-icon text-xl" aria-hidden="true"><use href="#ph-database"/></svg>
                     </div>
@@ -559,7 +577,7 @@
         </section>
 
         <!-- SECTION: THE OFFER -->
-        <section class="py-32 relative border-y border-white/5 my-20">
+        <section class="fjm-bridge fjm-bridge--top py-32 relative border-y border-white/5 my-20">
             <div class="absolute inset-0 bg-brand-card/20 z-0"></div>
             <div class="relative z-10 text-center max-w-4xl mx-auto space-y-8">
                 <div class="text-xs font-bold tracking-[0.2em] text-brand-textMuted uppercase">The Offer</div>
@@ -605,7 +623,7 @@
         </section>
 
         <!-- SECTION: PROCESS -->
-        <section id="process" class="py-24">
+        <section id="process" class="fjm-bridge fjm-bridge--top py-24">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
                 <!-- Sticky Left -->
                 <div class="lg:col-span-4 lg:sticky top-32 self-start space-y-6">
@@ -670,7 +688,7 @@
         </section>
 
         <!-- SECTION: OUR WORK (The Complex Micro-Architecture) -->
-        <section id="work" class="py-24 border-t border-white/5">
+        <section id="work" class="fjm-bridge fjm-bridge--top py-24 border-t border-white/5">
             <div class="text-center mb-16">
                 <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Our Work</div>
                 <h2 class="font-display font-bold text-4xl text-white mb-4">Real sites. Real businesses.</h2>
@@ -1225,7 +1243,7 @@
         </section>
 
         <!-- SECTION: PACKAGES (Interactive Macro-Architecture) -->
-        <section id="pricing" class="py-24 border-t border-white/5">
+        <section id="pricing" class="fjm-bridge fjm-bridge--top py-24 border-t border-white/5">
             <div class="mb-12">
                 <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Packages</div>
                 <h2 class="font-display font-bold text-4xl text-white">Your design is ready. <span class="italic text-brand-textMuted font-normal">Now choose what happens next.</span></h2>
@@ -2040,5 +2058,6 @@
       })();
     </script>
 
+    <script src="/js/v2-foundation.js"></script>
 </body>
 </html>
