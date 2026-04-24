@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Billing · FJMedia Tools</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #071520;
+      --navy2: #0d2035;
+      --panel: #0E2136;
+      --gold: #C9A84C;
+      --gold-hi: #e0c26c;
+      --cream: #EDEAE5;
+      --muted: #6b7a8d;
+      --line: rgba(201,168,76,0.18);
+      --line-soft: rgba(237,234,229,0.09);
+      --danger: #ef4444;
+      --ok: #10b981;
+      --warn: #f59e0b;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -------- NAV -------- */
+    nav.fj-nav {
+      position: sticky; top: 0; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(7,21,32,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .fj-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--cream); font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:-0.01em; }
+    .fj-logo .bk { color: var(--muted); }
+    .fj-logo .fj { color: var(--cream); }
+    .fj-logo .media { color: var(--gold); font-weight:700; margin-left:2px; }
+    .fj-nav .right { display:flex; align-items:center; gap:16px; }
+    .fj-nav .page-label { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); }
+    .fj-nav a.back { font-size:0.82rem; color:var(--muted); text-decoration:none; border-bottom:1px dotted rgba(107,122,141,0.35); transition: color .2s, border-color .2s; }
+    .fj-nav a.back:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* -------- TABS -------- */
+    .tabs-bar {
+      display:flex; gap:6px; padding:14px 28px 0;
+      border-bottom: 1px solid var(--line-soft);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent; border: none;
+      padding: 10px 16px; border-radius: 8px 8px 0 0;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: pointer; transition: color .2s, background .2s;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--cream); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* -------- MAIN -------- */
+    main { max-width: 1100px; margin: 0 auto; padding: 28px; }
+    h2.panel-h { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.65rem; font-weight:800; letter-spacing:-0.015em; margin: 0 0 20px; color: var(--cream); }
+    .eyebrow { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.26em; text-transform:uppercase; color: var(--muted); margin-bottom: 6px; }
+
+    /* -------- CARDS -------- */
+    .stat-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: var(--panel); border:1px solid var(--line-soft); border-radius:12px; padding:16px 18px; }
+    .stat-card.alert { border-color: rgba(239,68,68,0.45); box-shadow: 0 0 0 3px rgba(239,68,68,0.06); }
+    .stat-card .lbl { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color: var(--muted); }
+    .stat-card .val { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.55rem; font-weight:800; margin-top:6px; letter-spacing:-0.01em; color: var(--cream); }
+    .stat-card.alert .val { color: var(--danger); }
+    .stat-card.alert .lbl { color: var(--danger); }
+
+    .card {
+      background: var(--panel); border:1px solid var(--line-soft); border-radius: 12px;
+      padding: 18px 20px; margin-bottom: 16px;
+    }
+    .card h3 { margin: 0 0 12px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:1rem; color: var(--cream); }
+    .card.alert { border-color: rgba(239,68,68,0.35); background: linear-gradient(0deg, rgba(239,68,68,0.04), rgba(239,68,68,0.04)), var(--panel); }
+    .card.alert h3 { color: var(--danger); }
+
+    .card ul.clean { list-style:none; padding:0; margin:0; }
+    .card ul.clean li { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line-soft); font-size:0.92rem; }
+    .card ul.clean li:last-child { border-bottom: none; }
+
+    /* -------- TABLES -------- */
+    table.fj-table { width:100%; border-collapse:collapse; background: var(--panel); border-radius:12px; overflow:hidden; border:1px solid var(--line-soft); }
+    table.fj-table thead th { background: rgba(13,32,53,0.8); padding: 12px 14px; text-align:left; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color: var(--muted); font-weight:400; border-bottom:1px solid var(--line-soft); }
+    table.fj-table tbody td { padding: 14px; border-bottom:1px solid var(--line-soft); font-size:0.9rem; vertical-align: top; }
+    table.fj-table tbody tr:last-child td { border-bottom: none; }
+    table.fj-table tbody tr:hover { background: rgba(201,168,76,0.035); }
+    .empty-row td { text-align:center; color: var(--muted); padding: 32px 14px !important; }
+
+    /* -------- INPUTS -------- */
+    input, select, textarea {
+      background: rgba(7,21,32,0.6); border:1px solid var(--line-soft); border-radius:8px;
+      padding: 10px 12px; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size:0.92rem;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus { outline:none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    input[type="number"] { font-family:'Space Mono',monospace; }
+    .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* -------- BUTTONS -------- */
+    .btn { display:inline-flex; align-items:center; gap:6px; padding:9px 16px; border-radius:8px; border:none; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.02em; transition: background .15s, transform .1s, color .15s; }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-hi); }
+    .btn-ghost { background: transparent; color: var(--cream); border:1px solid var(--line-soft); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-danger { background: transparent; color: var(--danger); border:1px solid rgba(239,68,68,0.35); }
+    .btn-danger:hover { background: rgba(239,68,68,0.08); }
+    .btn-sm { padding: 6px 10px; font-size: 0.72rem; letter-spacing: 0.04em; }
+
+    .row-actions { display:flex; gap: 6px; flex-wrap: wrap; justify-content:flex-end; white-space: nowrap; }
+    .row-actions button { background: transparent; border:none; padding:4px 6px; font-size:0.78rem; cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .row-actions .a-preview { color: var(--muted); }
+    .row-actions .a-pdf { color: var(--cream); font-weight:600; }
+    .row-actions .a-pack { color: var(--gold); font-weight:700; }
+    .row-actions .a-send { color: #60a5fa; }
+    .row-actions .a-paid { color: var(--ok); }
+    .row-actions .a-del { color: var(--danger); }
+    .row-actions button:hover { text-decoration: underline; }
+
+    /* status badges */
+    .badge { display:inline-block; padding:3px 8px; border-radius:999px; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.16em; text-transform:uppercase; }
+    .badge.draft { background: rgba(148,163,184,0.15); color: #cbd5e1; }
+    .badge.sent { background: rgba(96,165,250,0.18); color: #93c5fd; }
+    .badge.paid { background: rgba(16,185,129,0.18); color: #6ee7b7; }
+    .badge.overdue { background: rgba(239,68,68,0.18); color: #fca5a5; }
+
+    /* money helpers */
+    .money-pos { color: var(--cream); font-weight: 600; }
+    .money-disc { color: var(--ok); font-size: 0.78rem; font-weight: 400; }
+
+    /* line-item editor */
+    .li-row { display:grid; grid-template-columns: 1fr 160px 40px; gap: 8px; align-items: start; padding: 8px 0; border-bottom: 1px dashed var(--line-soft); }
+    .li-row:last-child { border-bottom: none; }
+    .li-hint { font-size: 0.74rem; margin-top: 3px; font-family: 'Space Mono', monospace; letter-spacing: 0.06em; }
+    .li-hint.disc { color: var(--ok); }
+    .li-hint.over { color: var(--muted); }
+
+    /* inline form */
+    .inline-form { background: rgba(13,32,53,0.5); border:1px solid var(--line-soft); border-radius:10px; padding: 14px; margin-bottom: 16px; }
+
+    /* totals box */
+    .totals-box { margin-left: auto; min-width: 260px; padding: 12px 14px; background: rgba(7,21,32,0.5); border-radius: 10px; border: 1px solid var(--line-soft); }
+    .totals-box .row { display:flex; justify-content: space-between; padding: 4px 0; font-size: 0.88rem; color: var(--muted); }
+    .totals-box .row.total { border-top: 2px solid var(--gold); margin-top: 6px; padding-top: 10px; font-size: 1.05rem; font-weight: 800; font-family:'Plus Jakarta Sans',sans-serif; color: var(--cream); }
+    .totals-box .row.disc { color: var(--ok); }
+    .totals-box .total .amt { color: var(--gold); }
+
+    /* danger zone */
+    .danger-zone { border:1px solid rgba(239,68,68,0.35); border-radius:12px; padding: 16px 18px; background: rgba(239,68,68,0.04); }
+    .danger-zone h3 { color: var(--danger); }
+
+    /* -------- UNLOCK OVERLAY -------- */
+    #unlock-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: var(--navy);
+      background-image: radial-gradient(circle at center, rgba(27,58,86,0.35) 1px, transparent 1px);
+      background-size: 24px 24px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    #unlock-overlay .uc {
+      background: var(--navy2); border:1px solid var(--line);
+      border-radius: 14px; padding: 2.4rem 2.2rem;
+      width: 100%; max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    #unlock-overlay .tag { font-family:'Space Mono',monospace; font-size:10px; color: var(--gold); letter-spacing:0.26em; text-transform:uppercase; margin-bottom: 14px; }
+    #unlock-overlay h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.75rem; font-weight:800; letter-spacing:-0.02em; line-height:1.1; margin: 0 0 8px; }
+    #unlock-overlay h1 em { font-style:normal; color: var(--gold); }
+    #unlock-overlay p.sub { font-size: 0.86rem; color: var(--muted); margin: 0 0 18px; line-height: 1.5; }
+    #unlock-overlay form { display:flex; flex-direction:column; gap: 10px; }
+    #unlock-overlay input {
+      background: var(--navy); border:1.5px solid var(--line); border-radius: 8px; padding: 13px;
+      font-family:'Space Mono',monospace; font-size: 20px; letter-spacing: 0.5em; text-align: center; color: var(--cream);
+    }
+    #unlock-overlay input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    #unlock-overlay button { background: var(--gold); color: var(--navy); border:none; border-radius: 8px; padding: 12px; font-weight: 700; font-family:'Plus Jakarta Sans',sans-serif; cursor: pointer; }
+    #unlock-overlay button:hover { background: var(--gold-hi); }
+    #unlock-overlay .err { color: var(--danger); font-size: 0.78rem; text-align: center; font-family:'Space Mono',monospace; letter-spacing:0.05em; min-height: 1em; }
+    #unlock-overlay .back { display:block; text-align:center; margin-top: 14px; font-size: 0.76rem; color: var(--muted); text-decoration: none; }
+    #unlock-overlay .back:hover { color: var(--gold); }
+
+    @media (max-width: 720px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .li-row { grid-template-columns: 1fr 110px 36px; }
+      main { padding: 18px; }
+      nav.fj-nav { padding: 12px 18px; }
+      .tabs-bar { padding: 10px 18px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ UNLOCK GATE ============ -->
+  <div id="unlock-overlay">
+    <div class="uc">
+      <div class="tag">FJMedia Billing</div>
+      <h1>Private. <em>Keyed.</em></h1>
+      <p class="sub">This is the agency's invoicing desk. Enter your access code to continue.</p>
+      <form id="unlock-form">
+        <input id="unlock-pw" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="• • • •" maxlength="16" required autofocus />
+        <button type="submit" id="unlock-btn">Unlock →</button>
+        <div class="err" id="unlock-err" role="alert" aria-live="polite"></div>
+      </form>
+      <a href="/fjmedia-tools/" class="back">← Back to tools</a>
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div id="app" hidden>
+
+    <nav class="fj-nav">
+      <a class="fj-logo" href="/fjmedia-tools/">
+        <span><span class="bk">{</span><span class="fj">FJ</span><span class="bk">}</span><span class="media">Media</span></span>
+      </a>
+      <div class="right">
+        <span class="page-label">Billing</span>
+        <a class="back" href="/fjmedia-tools/">← Tools</a>
+      </div>
+    </nav>
+
+    <div class="tabs-bar" id="tabs">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="clients">Clients</button>
+      <button class="tab-btn" data-tab="invoices">Invoices</button>
+      <button class="tab-btn" data-tab="payments">Payments</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+
+    <main>
+      <section data-panel="dashboard"></section>
+      <section data-panel="clients" hidden></section>
+      <section data-panel="invoices" hidden></section>
+      <section data-panel="payments" hidden></section>
+      <section data-panel="settings" hidden></section>
+    </main>
+  </div>
+
+  <!-- ============ GATE SCRIPT ============ -->
+  <script>
+    (function() {
+      const EXPECTED = '61697e084834fbb2cf9ceebd945b42bdb9cd7cee96e0eaeb3df2232ccc95a3f0';
+      const overlay = document.getElementById('unlock-overlay');
+      const app = document.getElementById('app');
+      const form = document.getElementById('unlock-form');
+      const pwEl = document.getElementById('unlock-pw');
+      const btn = document.getElementById('unlock-btn');
+      const err = document.getElementById('unlock-err');
+
+      async function sha256Hex(msg) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+      function isUnlocked() {
+        try { return (sessionStorage.getItem('fjbilling_k') || localStorage.getItem('fjbilling_k')) === EXPECTED; }
+        catch(_) { return false; }
+      }
+      function grantAccess() {
+        overlay.hidden = true;
+        app.hidden = false;
+        // Load the app AFTER gate passes
+        if (!window.__billing_loaded) {
+          window.__billing_loaded = true;
+          const s = document.createElement('script');
+          s.type = 'module';
+          s.src = 'js/app.js';
+          document.body.appendChild(s);
+        }
+      }
+
+      if (isUnlocked()) { grantAccess(); return; }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Checking…';
+        err.textContent = '';
+        await new Promise(r => setTimeout(r, 250));
+        const h = await sha256Hex(pwEl.value);
+        if (h !== EXPECTED) {
+          err.textContent = 'Wrong code.';
+          pwEl.value = '';
+          pwEl.focus();
+          btn.disabled = false;
+          btn.textContent = 'Unlock →';
+          return;
+        }
+        try {
+          sessionStorage.setItem('fjbilling_k', h);
+          localStorage.setItem('fjbilling_k', h);
+        } catch(_) {}
+        grantAccess();
+      });
+    })();
+  </script>
+</body>
+</html>
