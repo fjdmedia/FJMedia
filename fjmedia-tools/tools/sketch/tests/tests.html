@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8"><title>FJSketch tests</title>
+<style>
+  body { font-family: monospace; padding: 24px; background: #0a1020; color: #e8e8e8; }
+  h2 { color: #c9a84c; margin-top: 24px; }
+  ul { list-style: none; padding-left: 0; }
+  li.ok { color: #10b981; }
+  li.fail { color: #ef4444; }
+  .summary { font-weight: bold; padding: 12px; background: #0E2136; border-radius: 6px; }
+</style>
+</head><body>
+<h1>FJSketch — Test Run</h1>
+<div id="root">Loading…</div>
+<script type="module">
+  import './models.test.js';
+  import './storage.test.js';
+  import './blocks.test.js';
+  import { renderResults } from './test-runner.js';
+  renderResults(document.getElementById('root'));
+</script>
+</body></html>
