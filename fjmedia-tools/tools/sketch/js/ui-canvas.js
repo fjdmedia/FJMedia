@@ -2,6 +2,7 @@ import { renderBlockWire } from './render-wire.js';
 import { renderBlockStyled } from './render-styled.js';
 import { renderDoodleOverlay } from './ui-doodle.js';
 import { CATEGORIES } from './blocks.js';
+import { createPolaroid, rollPolaroidTilt } from './models.js';
 
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -9,6 +10,7 @@ export function mountCanvas(rootEl, controller) {
   let focusedId = null;
 
   function render() {
+    if (rootEl.__freeTeardown) { rootEl.__freeTeardown(); rootEl.__freeTeardown = null; }
     const board = controller.getActiveBoard();
     if (!board) {
       rootEl.innerHTML = `<div class="cv-empty">No board. Click "+ New" in the topbar to start.</div>`;
@@ -40,6 +42,7 @@ export function mountCanvas(rootEl, controller) {
     wrap.innerHTML = `
       <div class="cv-free-bar">
         <span class="cv-free-label">FREE SKETCH — click and drag to draw</span>
+        <button class="doodle-btn" id="cv-free-add-polaroid">+ Polaroid</button>
         <button class="doodle-btn" id="cv-free-undo">Undo</button>
         <button class="doodle-btn" id="cv-free-clear">Clear</button>
       </div>
@@ -52,12 +55,26 @@ export function mountCanvas(rootEl, controller) {
     svg.setAttribute('viewBox', '0 0 1200 1600');
     svg.setAttribute('preserveAspectRatio', 'xMidYMin meet');
     surface.appendChild(svg);
+
+    const polaroidLayer = document.createElement('div');
+    polaroidLayer.className = 'sk-polaroid-layer';
+    surface.appendChild(polaroidLayer);
+
     wrap.appendChild(surface);
     rootEl.appendChild(wrap);
 
     const W = 1200, H = 1600;
-    const paths = (board.freeCanvas && board.freeCanvas.paths) ? board.freeCanvas.paths.map(p => p.slice()) : [];
+    const fc = board.freeCanvas || {};
+    const paths = Array.isArray(fc.paths) ? fc.paths.map(p => p.slice()) : [];
+    const polaroids = Array.isArray(fc.polaroids) ? fc.polaroids.map(p => ({ ...p })) : [];
     let drawing = null;
+    let selectedId = null;
+    let openMenuEl = null;
+
+    function commit() {
+      const empty = paths.length === 0 && polaroids.length === 0;
+      controller.onSaveFreeCanvas(empty ? null : { paths, polaroids });
+    }
 
     function redraw() {
       let html = paths.map(p =>
@@ -68,6 +85,7 @@ export function mountCanvas(rootEl, controller) {
       }
       svg.innerHTML = html;
     }
+
     function ptFromEvent(e) {
       const r = svg.getBoundingClientRect();
       return {
@@ -75,10 +93,244 @@ export function mountCanvas(rootEl, controller) {
         y: ((e.clientY - r.top) / r.height) * H
       };
     }
-    function commit() {
-      controller.onSaveFreeCanvas(paths.length === 0 ? null : { paths });
+
+    function escapeHtmlLocal(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
+
+    function renderPolaroids() {
+      polaroidLayer.innerHTML = '';
+      const sorted = polaroids.slice().sort((a, b) => (a.z || 0) - (b.z || 0));
+      sorted.forEach(p => polaroidLayer.appendChild(buildPolaroidEl(p)));
+    }
+
+    function buildPolaroidEl(p) {
+      const el = document.createElement('div');
+      el.className = 'sk-polaroid' + (p.id === selectedId ? ' is-selected' : '');
+      el.dataset.id = p.id;
+      el.style.left = (p.x * 100) + '%';
+      el.style.top = (p.y * 100) + '%';
+      el.style.transform = `rotate(${p.rotation}deg)`;
+      el.style.zIndex = String(p.z || 0);
+
+      const photo = document.createElement('div');
+      photo.className = 'sk-polaroid__photo';
+      if (p.imageDataUrl) {
+        const img = document.createElement('img');
+        img.src = p.imageDataUrl;
+        img.alt = '';
+        img.draggable = false;
+        photo.appendChild(img);
+      } else {
+        const hint = document.createElement('span');
+        hint.className = 'sk-polaroid__hint';
+        hint.textContent = '+ photo';
+        photo.appendChild(hint);
+      }
+
+      const cap = document.createElement('div');
+      cap.className = 'sk-polaroid__caption';
+      const capInput = document.createElement('input');
+      capInput.type = 'text';
+      capInput.placeholder = 'caption…';
+      capInput.value = p.caption || '';
+      cap.appendChild(capInput);
+
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.className = 'sk-polaroid__file';
+      fileInput.hidden = true;
+
+      el.appendChild(photo);
+      el.appendChild(cap);
+      el.appendChild(fileInput);
+
+      // Caption edit
+      capInput.addEventListener('input', () => { p.caption = capInput.value; });
+      capInput.addEventListener('change', () => commit());
+      capInput.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+      // Image upload via dblclick on photo
+      photo.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', () => {
+        const f = fileInput.files && fileInput.files[0];
+        if (!f) return;
+        if (f.size > 1.5 * 1024 * 1024) {
+          alert('Image is too big. Pick something under 1.5 MB.');
+          fileInput.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          p.imageDataUrl = reader.result;
+          renderPolaroids();
+          commit();
+        };
+        reader.readAsDataURL(f);
+      });
+
+      // Drag + select
+      let dragState = null;
+      el.addEventListener('pointerdown', (e) => {
+        if (e.target === capInput) return;
+        if (e.button !== 0) return;
+        e.stopPropagation();
+        selectPolaroid(p.id);
+        bringToTop(p);
+        const surfaceRect = surface.getBoundingClientRect();
+        const startX = e.clientX, startY = e.clientY;
+        const startPx = p.x, startPy = p.y;
+        dragState = { surfaceRect, startX, startY, startPx, startPy, moved: false };
+        el.setPointerCapture(e.pointerId);
+      });
+      el.addEventListener('pointermove', (e) => {
+        if (!dragState) return;
+        const dx = (e.clientX - dragState.startX) / dragState.surfaceRect.width;
+        const dy = (e.clientY - dragState.startY) / dragState.surfaceRect.height;
+        if (Math.abs(e.clientX - dragState.startX) > 3 || Math.abs(e.clientY - dragState.startY) > 3) {
+          dragState.moved = true;
+        }
+        p.x = clamp01(dragState.startPx + dx);
+        p.y = clamp01(dragState.startPy + dy);
+        el.style.left = (p.x * 100) + '%';
+        el.style.top = (p.y * 100) + '%';
+      });
+      el.addEventListener('pointerup', (e) => {
+        if (!dragState) return;
+        const moved = dragState.moved;
+        dragState = null;
+        try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+        if (moved) commit();
+      });
+
+      // Right-click context menu
+      el.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        selectPolaroid(p.id);
+        openContextMenu(p, e.clientX, e.clientY);
+      });
+
+      return el;
+    }
+
+    function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+    function bringToTop(p) {
+      const maxZ = polaroids.reduce((m, pl) => Math.max(m, pl.z || 0), 0);
+      if ((p.z || 0) < maxZ) {
+        p.z = maxZ + 1;
+        const el = polaroidLayer.querySelector(`.sk-polaroid[data-id="${p.id}"]`);
+        if (el) el.style.zIndex = String(p.z);
+      }
+    }
+
+    function sendToBack(p) {
+      const minZ = polaroids.reduce((m, pl) => Math.min(m, pl.z || 0), 0);
+      p.z = minZ - 1;
+      renderPolaroids();
+    }
+
+    function selectPolaroid(id) {
+      selectedId = id;
+      polaroidLayer.querySelectorAll('.sk-polaroid').forEach(el => {
+        el.classList.toggle('is-selected', el.dataset.id === id);
+      });
+    }
+
+    function deselect() {
+      selectedId = null;
+      polaroidLayer.querySelectorAll('.sk-polaroid').forEach(el => el.classList.remove('is-selected'));
+    }
+
+    function addPolaroidAt(xFrac, yFrac) {
+      const maxZ = polaroids.reduce((m, pl) => Math.max(m, pl.z || 0), 0);
+      const p = createPolaroid({ x: xFrac, y: yFrac });
+      p.z = maxZ + 1;
+      polaroids.push(p);
+      selectedId = p.id;
+      renderPolaroids();
+      commit();
+    }
+
+    function duplicateById(id) {
+      const src = polaroids.find(pl => pl.id === id);
+      if (!src) return;
+      const maxZ = polaroids.reduce((m, pl) => Math.max(m, pl.z || 0), 0);
+      const copy = {
+        ...src,
+        id: 'pol_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 7),
+        x: clamp01(src.x + 0.025),
+        y: clamp01(src.y + 0.025),
+        rotation: rollPolaroidTilt(),
+        z: maxZ + 1
+      };
+      polaroids.push(copy);
+      selectedId = copy.id;
+      renderPolaroids();
+      commit();
+    }
+
+    function deleteById(id) {
+      const i = polaroids.findIndex(pl => pl.id === id);
+      if (i === -1) return;
+      polaroids.splice(i, 1);
+      if (selectedId === id) selectedId = null;
+      renderPolaroids();
+      commit();
+    }
+
+    function rerollTilt(p) {
+      p.rotation = rollPolaroidTilt();
+      renderPolaroids();
+      commit();
+    }
+
+    function closeContextMenu() {
+      if (openMenuEl) { openMenuEl.remove(); openMenuEl = null; }
+    }
+
+    function openContextMenu(p, clientX, clientY) {
+      closeContextMenu();
+      const menu = document.createElement('div');
+      menu.className = 'sk-ctx-menu';
+      menu.innerHTML = `
+        <button data-act="duplicate">Duplicate</button>
+        <button data-act="reroll">Re-roll tilt</button>
+        <button data-act="front">Bring to front</button>
+        <button data-act="back">Send to back</button>
+        <button data-act="delete" class="sk-ctx-menu__danger">Delete</button>
+      `;
+      document.body.appendChild(menu);
+      // Position, clamping to viewport
+      const mw = 180, mh = 200;
+      const left = Math.min(clientX, window.innerWidth - mw - 8);
+      const top = Math.min(clientY, window.innerHeight - mh - 8);
+      menu.style.left = left + 'px';
+      menu.style.top = top + 'px';
+      openMenuEl = menu;
+
+      menu.addEventListener('click', (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        const act = b.dataset.act;
+        closeContextMenu();
+        if (act === 'duplicate') duplicateById(p.id);
+        else if (act === 'reroll') rerollTilt(p);
+        else if (act === 'front') { bringToTop(p); commit(); }
+        else if (act === 'back') { sendToBack(p); commit(); }
+        else if (act === 'delete') deleteById(p.id);
+      });
+    }
+
+    // Drawing on the SVG (only fires when not interacting with a polaroid)
     svg.addEventListener('pointerdown', (e) => {
+      closeContextMenu();
+      deselect();
       svg.setPointerCapture(e.pointerId);
       drawing = [ptFromEvent(e)];
       redraw();
@@ -94,12 +346,54 @@ export function mountCanvas(rootEl, controller) {
       redraw();
       commit();
     });
+
+    // Toolbar
+    wrap.querySelector('#cv-free-add-polaroid').addEventListener('click', () => {
+      addPolaroidAt(0.4 + Math.random() * 0.1, 0.25 + Math.random() * 0.1);
+    });
     wrap.querySelector('#cv-free-undo').addEventListener('click', () => { paths.pop(); redraw(); commit(); });
     wrap.querySelector('#cv-free-clear').addEventListener('click', () => {
       if (!confirm('Clear the whole free canvas?')) return;
-      paths.length = 0; redraw(); commit();
+      paths.length = 0;
+      polaroids.length = 0;
+      selectedId = null;
+      renderPolaroids();
+      redraw();
+      commit();
     });
+
+    // Click outside polaroid area closes menu + deselects
+    document.addEventListener('pointerdown', onDocPointerDown);
+    function onDocPointerDown(e) {
+      if (openMenuEl && !openMenuEl.contains(e.target)) closeContextMenu();
+      if (!e.target.closest('.sk-polaroid')) deselect();
+    }
+
+    // Keyboard: Cmd/Ctrl+D duplicate, Delete/Backspace remove
+    function onDocKey(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (!selectedId) return;
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'd' || e.key === 'D')) {
+        e.preventDefault();
+        duplicateById(selectedId);
+      } else if (e.key === 'Delete' || e.key === 'Backspace') {
+        e.preventDefault();
+        deleteById(selectedId);
+      } else if (e.key === 'Escape') {
+        closeContextMenu();
+        deselect();
+      }
+    }
+    document.addEventListener('keydown', onDocKey);
+
+    rootEl.__freeTeardown = () => {
+      document.removeEventListener('keydown', onDocKey);
+      document.removeEventListener('pointerdown', onDocPointerDown);
+      closeContextMenu();
+    };
+
     redraw();
+    renderPolaroids();
   }
 
   function buildBlockEl(block, index, mode) {

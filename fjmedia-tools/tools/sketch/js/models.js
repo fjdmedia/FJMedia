@@ -69,6 +69,22 @@ export function setDoodle(board, blockId, doodle) {
   }
 }
 
+export function rollPolaroidTilt() {
+  return Math.round((Math.random() * 12 - 6) * 10) / 10;
+}
+
+export function createPolaroid({ x = 0.4, y = 0.3 } = {}) {
+  return {
+    id: uid('pol'),
+    x,
+    y,
+    rotation: rollPolaroidTilt(),
+    caption: '',
+    imageDataUrl: null,
+    z: Date.now()
+  };
+}
+
 export function serializeBoardToSpec(board, variantSummaryFn) {
   const lines = [`Board: ${board.name}`, ''];
   board.stack.forEach((blk, i) => {
