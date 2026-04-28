@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Gold Prime Renovations — Winnipeg's Custom Home & Commercial Builders</title>
+<meta name="description" content="Premium Winnipeg renovation company. Kitchens, bathrooms, whole-home remodels, commercial builds, and disaster recovery — built to the gold standard." />
+<meta name="theme-color" content="#0A0A0A" />
+
+<meta property="og:title" content="Gold Prime Renovations — The Gold Standard in Winnipeg Renovations" />
+<meta property="og:description" content="Kitchens. Bathrooms. Whole-home remodels. Disaster recovery. Premium renovations across Winnipeg & Manitoba." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/Images/West%20End%20Home/After_Kitchen.jpg" />
+
+<link rel="icon" href="assets/Images/Info%26Context/Logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GeneralContractor",
+  "name": "Gold Prime Renovations",
+  "image": "assets/Images/Info%26Context/Logo.png",
+  "telephone": "+1-204-999-3313",
+  "email": "info.gprenos@gmail.com",
+  "address": {"@type": "PostalAddress", "addressLocality": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA"},
+  "areaServed": "Winnipeg, Manitoba",
+  "slogan": "The gold standard is our prime objective"
+}
+</script>
+
+<style>
+/* Design System: Gold Prime — Concept 2 v2 (The Reveal) | Fraunces + Plus Jakarta Sans | Black + Gold gradient */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0A0A0A;
+  --bg-warm: #0E0C09;
+  --bg-card: #161310;
+  --gold-light: #E5C77F;
+  --gold: #C9A14A;
+  --gold-dark: #B5944D;
+  --gold-deep: #8A6D2C;
+  --text: #F5F0E6;
+  --text-muted: #A8A29A;
+  --border: rgba(201, 161, 74, 0.18);
+  --border-soft: rgba(255, 248, 230, 0.06);
+  --gold-grad: linear-gradient(135deg, #E5C77F 0%, #C9A14A 45%, #B5944D 100%);
+  --shadow-card: 0 30px 80px -30px rgba(0, 0, 0, 0.85);
+  --shadow-gold: 0 20px 60px -20px rgba(201, 161, 74, 0.4);
+  --container: 1280px;
+}
+html, body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { line-height: 1.6; }
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; line-height: 1.08; letter-spacing: -0.022em; }
+h1 { font-size: clamp(2.6rem, 6vw, 5.4rem); font-weight: 300; overflow-wrap: break-word; }
+h2 { font-size: clamp(2rem, 4.4vw, 3.6rem); }
+h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+.eyebrow { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gold-text { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 500; }
+
+/* ---------- NAV ---------- */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 0; background: rgba(10, 10, 10, 0.5); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid transparent; transition: all 0.3s ease; }
+.nav.scrolled { background: rgba(10, 10, 10, 0.92); border-bottom-color: var(--border); }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo img { height: 42px; width: auto; object-fit: contain; }
+.nav-logo-text { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; }
+.nav-logo-text span { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; font-weight: 600; margin-top: 2px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s ease; }
+.nav-links a:hover { color: var(--gold-light); }
+.nav-cta { padding: 10px 22px; border-radius: 999px; background: var(--gold-grad); color: #0A0A0A !important; font-weight: 700; font-size: 0.86rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
+.nav-burger { display: none; width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border); align-items: center; justify-content: center; }
+.nav-burger span, .nav-burger span::before, .nav-burger span::after { display: block; width: 18px; height: 1.5px; background: var(--gold); }
+.nav-burger span { position: relative; }
+.nav-burger span::before, .nav-burger span::after { content: ''; position: absolute; left: 0; }
+.nav-burger span::before { top: -6px; }
+.nav-burger span::after { top: 6px; }
+@media (max-width: 880px) { .nav-links { display: none; } .nav-burger { display: flex; } .nav-logo-text { display: none; } }
+
+/* ---------- HERO ---------- */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 160px 0 100px; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(201, 161, 74, 0.14) 0%, transparent 65%), radial-gradient(ellipse 70% 60% at 50% 100%, rgba(229, 199, 127, 0.06) 0%, transparent 70%); }
+.hero-grain { position: absolute; inset: 0; z-index: 1; opacity: 0.03; pointer-events: none; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+.hero-inner { position: relative; z-index: 2; text-align: center; max-width: 920px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 7px 18px; border: 1px solid var(--border); border-radius: 999px; background: rgba(201, 161, 74, 0.05); margin-bottom: 40px; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; color: var(--gold-light); }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 { margin-bottom: 32px; letter-spacing: -0.028em; }
+.hero h1 em { font-style: italic; font-weight: 400; }
+.hero-tagline { font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--gold-light); margin-bottom: 24px; }
+.hero-lead { font-size: clamp(1rem, 1.3vw, 1.1rem); color: var(--text-muted); max-width: 620px; margin: 0 auto 48px; line-height: 1.7; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; background: var(--gold-grad); color: #0A0A0A; border-radius: 999px; font-weight: 700; font-size: 0.96rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+.btn-primary svg { width: 16px; height: 16px; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border: 1px solid var(--border); border-radius: 999px; color: var(--text); font-weight: 500; font-size: 0.94rem; background: rgba(255, 248, 230, 0.02); transition: all 0.2s ease; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(201, 161, 74, 0.08); }
+
+.hero-meta { display: inline-flex; gap: 28px; padding: 18px 30px; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); flex-wrap: wrap; justify-content: center; }
+.hero-meta strong { color: var(--gold-light); font-weight: 700; margin-right: 6px; }
+.hero-meta-divider { color: var(--gold-deep); }
+
+/* hint to scroll */
+.hero-scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+.hero-scroll-hint-line { width: 1px; height: 36px; background: linear-gradient(180deg, var(--gold) 0%, transparent 100%); animation: scroll-pulse 2.4s ease-in-out infinite; }
+@keyframes scroll-pulse { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+@media (max-width: 720px) { .hero-scroll-hint { display: none; } }
+
+/* ---------- TAGLINE STRIP ---------- */
+.tagline-strip { padding: 100px 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: linear-gradient(90deg, transparent 0%, rgba(201, 161, 74, 0.05) 50%, transparent 100%); }
+.tagline-strip-inner { text-align: center; max-width: 860px; margin: 0 auto; }
+.tagline-strip-rule { width: 60px; height: 1px; background: var(--gold-grad); margin: 0 auto 32px; opacity: 0.55; }
+.tagline-strip h2 { font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.45; padding: 0 12px; }
+.tagline-strip h2 .gold-text { font-style: italic; font-weight: 500; }
+.tagline-strip-sub { margin-top: 24px; font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); display: flex; justify-content: center; flex-wrap: wrap; }
+.tagline-strip-sub span { padding: 0 16px; }
+.tagline-strip-sub span + span { border-left: 1px solid var(--border-soft); }
+
+/* ---------- WORK — THE REVEAL THEATRE ---------- */
+.work { padding: 0; background: var(--bg); }
+.reveal-intro { padding: 140px 0 80px; text-align: center; }
+.reveal-intro .eyebrow { display: inline-block; margin-bottom: 18px; }
+.reveal-intro h2 { margin-bottom: 18px; }
+.reveal-intro p { color: var(--text-muted); font-size: 1.05rem; max-width: 580px; margin: 0 auto; }
+
+/* each project = full-bleed reveal scene */
+.scene { position: relative; padding: 60px 0 120px; }
+.scene-meta { max-width: 1180px; margin: 0 auto 28px; padding: 0 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+.scene-meta-left { flex: 1 1 auto; min-width: 0; }
+.scene-counter { font-family: 'Fraunces', serif; font-size: 0.86rem; font-style: italic; color: var(--gold); letter-spacing: 0.04em; margin-bottom: 6px; }
+.scene-meta h3 { font-size: clamp(1.6rem, 2.6vw, 2.4rem); margin-bottom: 6px; line-height: 1.1; }
+.scene-meta p { color: var(--text-muted); font-size: 0.95rem; max-width: 620px; }
+.scene-tag { padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); background: rgba(201, 161, 74, 0.05); white-space: nowrap; }
+
+.reveal-stage { position: relative; max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+.reveal-frame { position: relative; aspect-ratio: 5 / 4; max-height: 78vh; border-radius: 8px; overflow: hidden; background: var(--bg-card); box-shadow: var(--shadow-card), 0 0 0 1px var(--border); cursor: ew-resize; user-select: none; touch-action: none; }
+@media (max-width: 720px) { .reveal-frame { aspect-ratio: 4 / 5; max-height: none; } }
+.reveal-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.reveal-after { z-index: 1; }
+.reveal-before-wrap { position: absolute; inset: 0; z-index: 2; overflow: hidden; clip-path: inset(0 0 0 100%); will-change: clip-path; transition: clip-path 1.6s cubic-bezier(0.65, 0, 0.35, 1); }
+.reveal-frame.armed .reveal-before-wrap { clip-path: inset(0 100% 0 0); transition: none; }
+.reveal-divider { position: absolute; top: 0; bottom: 0; left: 0%; width: 2px; background: linear-gradient(180deg, transparent 0%, #E5C77F 20%, #C9A14A 50%, #E5C77F 80%, transparent 100%); z-index: 3; pointer-events: none; box-shadow: 0 0 24px rgba(229, 199, 127, 0.6), 0 0 48px rgba(201, 161, 74, 0.3); transition: left 1.6s cubic-bezier(0.65, 0, 0.35, 1); opacity: 0; }
+.reveal-frame.armed .reveal-divider { opacity: 1; }
+.reveal-frame.played .reveal-divider { transition: left 0.05s linear; }
+.reveal-handle { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: var(--gold-grad); z-index: 4; pointer-events: none; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.12); display: flex; align-items: center; justify-content: center; opacity: 0; transition: left 1.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s ease; }
+.reveal-frame.armed .reveal-handle { opacity: 1; }
+.reveal-frame.played .reveal-handle { transition: left 0.05s linear; }
+.reveal-handle::before, .reveal-handle::after { content: ''; width: 7px; height: 11px; border: solid #0A0A0A; border-width: 0; }
+.reveal-handle::before { border-left-width: 2px; border-bottom-width: 2px; transform: rotate(45deg) translateX(-2px); }
+.reveal-handle::after { border-right-width: 2px; border-top-width: 2px; transform: rotate(45deg) translateX(2px); }
+
+.reveal-label { position: absolute; top: 18px; padding: 6px 14px; border-radius: 999px; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; background: rgba(10, 10, 10, 0.78); backdrop-filter: blur(10px); z-index: 5; pointer-events: none; }
+.reveal-label-before { left: 18px; color: #fff; border: 1px solid rgba(255, 255, 255, 0.18); }
+.reveal-label-after { right: 18px; color: var(--gold-light); border: 1px solid var(--border); }
+
+.reveal-room-tag { position: absolute; bottom: 18px; left: 18px; padding: 8px 16px; border-radius: 999px; background: rgba(10, 10, 10, 0.78); backdrop-filter: blur(10px); border: 1px solid var(--border-soft); font-family: 'Fraunces', serif; font-size: 0.86rem; font-style: italic; color: var(--text); z-index: 5; pointer-events: none; }
+.reveal-prompt { position: absolute; bottom: 18px; right: 18px; padding: 8px 14px; border-radius: 999px; background: rgba(10, 10, 10, 0.78); backdrop-filter: blur(10px); border: 1px solid var(--border-soft); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); z-index: 5; pointer-events: none; opacity: 0; transition: opacity 0.4s ease 0.6s; }
+.reveal-frame.played .reveal-prompt { opacity: 1; }
+
+/* room dots */
+.reveal-rooms { display: flex; justify-content: center; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+.reveal-room-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); transition: all 0.3s ease; cursor: pointer; border: none; padding: 0; }
+.reveal-room-dot.active { background: var(--gold); width: 28px; border-radius: 999px; }
+
+/* video scene (fire) */
+.scene-video-grid { max-width: 1180px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 720px) { .scene-video-grid { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 540px; } }
+.scene-video-item { position: relative; aspect-ratio: 9 / 16; border-radius: 8px; overflow: hidden; background: #000; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
+.scene-video-item video { width: 100%; height: 100%; object-fit: cover; }
+.scene-video-label { position: absolute; top: 14px; left: 14px; padding: 5px 12px; border-radius: 999px; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(8px); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; z-index: 2; }
+.scene-video-label-before { color: #fff; border: 1px solid rgba(255, 255, 255, 0.18); }
+.scene-video-label-after { color: var(--gold-light); border: 1px solid var(--border); }
+
+/* ---------- SERVICES (compact 3-col) ---------- */
+.services { padding: 130px 0; background: var(--bg-warm); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+.services-head { max-width: 760px; margin: 0 auto 64px; text-align: center; }
+.services-head .eyebrow { display: inline-block; margin-bottom: 16px; }
+.services-head h2 { margin-bottom: 16px; }
+.services-head p { color: var(--text-muted); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); border-radius: 14px; overflow: hidden; }
+@media (max-width: 880px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .services-grid { grid-template-columns: 1fr; } }
+.service-cell { padding: 36px 30px; background: var(--bg); transition: background 0.3s ease; }
+.service-cell:hover { background: var(--bg-card); }
+.service-num { font-family: 'Fraunces', serif; font-size: 0.86rem; font-style: italic; color: var(--gold); margin-bottom: 16px; letter-spacing: 0.04em; }
+.service-cell h4 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 500; margin-bottom: 8px; }
+.service-cell p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ---------- ABOUT (compact, on-brand dark) ---------- */
+.about { padding: 140px 0; background: var(--bg); }
+.about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto; }
+@media (max-width: 980px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+.about-image { position: relative; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-card); border: 1px solid var(--border); }
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+.about-text .eyebrow { display: inline-block; margin-bottom: 18px; }
+.about-text h2 { margin-bottom: 22px; }
+.about-text p { color: var(--text-muted); font-size: 1.04rem; margin-bottom: 14px; line-height: 1.7; }
+.about-text p strong { color: var(--text); font-weight: 600; }
+.about-points { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; }
+@media (max-width: 540px) { .about-points { grid-template-columns: 1fr; } }
+.about-point { display: flex; gap: 12px; align-items: center; font-size: 0.92rem; color: var(--text); }
+.about-point::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px rgba(201, 161, 74, 0.5); }
+
+/* ---------- CONTACT ---------- */
+.contact { padding: 140px 0; background: var(--bg-warm); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1140px; margin: 0 auto; }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+.contact-info h2 { margin: 16px 0 18px; }
+.contact-info-lead { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 36px; max-width: 460px; }
+.contact-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.contact-item { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid var(--border-soft); border-radius: 12px; background: var(--bg-card); transition: all 0.2s ease; }
+.contact-item:hover { border-color: var(--border); transform: translateX(4px); }
+.contact-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(201, 161, 74, 0.08); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.6; }
+.contact-item-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.contact-item-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+.contact-item-value { font-size: 0.98rem; font-weight: 500; word-break: break-word; }
+.contact-form { padding: 36px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow-card); }
+.form-row { margin-bottom: 18px; }
+.form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 540px) { .form-row.two-col { grid-template-columns: 1fr; } }
+.form-row label { display: block; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.form-row input, .form-row select, .form-row textarea { width: 100%; padding: 14px 16px; background: var(--bg); border: 1px solid var(--border-soft); border-radius: 8px; color: var(--text); font-family: inherit; font-size: 0.96rem; transition: border-color 0.2s ease; }
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--gold-dark); }
+.form-row textarea { min-height: 110px; resize: vertical; }
+.form-submit { width: 100%; padding: 16px 30px; background: var(--gold-grad); color: #0A0A0A; border-radius: 999px; font-weight: 700; font-size: 1rem; transition: transform 0.2s ease, box-shadow 0.2s ease; margin-top: 8px; }
+.form-submit:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
+.form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 14px; }
+
+/* ---------- FOOTER ---------- */
+.footer { padding: 60px 0 36px; background: var(--bg); border-top: 1px solid var(--border-soft); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.footer-brand { display: flex; align-items: center; gap: 14px; }
+.footer-brand img { height: 56px; width: auto; object-fit: contain; }
+.footer-brand-text { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 500; }
+.footer-brand-text span { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.74rem; font-style: italic; color: var(--gold); margin-top: 2px; font-weight: 400; }
+.footer-meta { font-size: 0.84rem; color: var(--text-muted); text-align: right; }
+.footer-meta a { color: var(--gold-light); }
+.footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-muted); }
+.footer-bottom .credit a { color: var(--gold); }
+
+/* mobile sticky */
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(10, 10, 10, 0.96); backdrop-filter: blur(16px); border-top: 1px solid var(--border); }
+.mobile-cta-inner { display: flex; gap: 10px; }
+.mobile-cta a { flex: 1; padding: 14px; border-radius: 999px; font-weight: 700; font-size: 0.92rem; text-align: center; }
+.mobile-cta a.call { border: 1px solid var(--border); color: var(--gold-light); background: rgba(201, 161, 74, 0.06); }
+.mobile-cta a.estimate { background: var(--gold-grad); color: #0A0A0A; }
+@media (max-width: 720px) { .mobile-cta { display: block; } body { padding-bottom: 80px; } }
+
+.reveal-on { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal-on.on { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .reveal-on { opacity: 1; transform: none; } }
+
+/* ---------- FJMedia preview switcher (added by FJMedia, not part of build) ---------- */
+.fj-preview-bar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 14px; border-radius: 999px; background: rgba(10, 10, 10, 0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(201, 161, 74, 0.35); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+.fj-preview-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A14A; padding-right: 10px; border-right: 1px solid rgba(201, 161, 74, 0.25); margin-right: 4px; white-space: nowrap; }
+.fj-preview-link { font-size: 0.74rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: #A8A29A; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; }
+.fj-preview-link:hover { color: #F5F0E6; }
+.fj-preview-link.active { background: linear-gradient(135deg, #E5C77F 0%, #C9A14A 45%, #B5944D 100%); color: #0A0A0A; }
+@media (max-width: 540px) { .fj-preview-bar { padding: 4px 6px 4px 10px; } .fj-preview-eyebrow { font-size: 0.55rem; padding-right: 8px; } .fj-preview-link { font-size: 0.7rem; padding: 5px 10px; } }
+@media (max-width: 380px) { .fj-preview-eyebrow { display: none; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="assets/Images/Info%26Context/Logo.png" alt="Gold Prime Renovations" />
+      <div class="nav-logo-text">Gold Prime<span>Renovations</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#work">Our Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Free Estimate</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="container hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span>Winnipeg · Manitoba · Licensed & Insured</span>
+    </div>
+    <h1>Renovations built to <em class="gold-text">the gold standard.</em></h1>
+    <p class="hero-tagline">"The gold standard is our prime objective."</p>
+    <p class="hero-lead">Custom kitchens, bathrooms, whole-home transformations, additions, commercial fit-outs, and disaster recovery — built end-to-end by our own crews.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a free estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <a href="#work" class="btn-ghost">See the transformation</a>
+    </div>
+    <div class="hero-meta">
+      <span><strong>4</strong>Featured Projects</span>
+      <span class="hero-meta-divider">/</span>
+      <span><strong>30+</strong>Rooms Transformed</span>
+      <span class="hero-meta-divider">/</span>
+      <span><strong>100%</strong>Built In-House</span>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span>Scroll</span><span class="hero-scroll-hint-line"></span></div>
+</section>
+
+<!-- ============ TAGLINE STRIP ============ -->
+<section class="tagline-strip">
+  <div class="container tagline-strip-inner">
+    <div class="tagline-strip-rule"></div>
+    <h2>"The <span class="gold-text">gold standard</span> is our prime objective."</h2>
+    <div class="tagline-strip-sub">
+      <span>Built right</span><span>Built once</span><span>Built to last</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK / THE REVEAL ============ -->
+<section class="work" id="work">
+  <div class="reveal-intro reveal-on">
+    <span class="eyebrow">Our work · Scroll to reveal</span>
+    <h2>Watch each project <span class="gold-text">transform.</span></h2>
+    <p>Every project below shows the before — until it doesn't. Scroll, and the after sweeps in. Drag the divider after to compare side by side.</p>
+  </div>
+
+  <!-- Scene 1: West End Home -->
+  <div class="scene reveal-on" id="scene-0">
+    <div class="scene-meta">
+      <div class="scene-meta-left">
+        <div class="scene-counter">— Project 01 of 04 —</div>
+        <h3>West End Home</h3>
+        <p>A full-property transformation across nine rooms. Pick a room below to step inside.</p>
+      </div>
+      <span class="scene-tag">Whole-Home · 9 Rooms</span>
+    </div>
+    <div class="reveal-stage">
+      <div class="reveal-frame" data-project="0" data-room="0">
+        <img class="reveal-after" alt="" />
+        <div class="reveal-before-wrap"><img class="reveal-before" alt="" /></div>
+        <div class="reveal-divider"></div>
+        <div class="reveal-handle"></div>
+        <span class="reveal-label reveal-label-before">Before</span>
+        <span class="reveal-label reveal-label-after">After</span>
+        <div class="reveal-room-tag"></div>
+        <div class="reveal-prompt">Drag to compare ↔</div>
+      </div>
+      <div class="reveal-rooms" data-rooms-for="0"></div>
+    </div>
+  </div>
+
+  <!-- Scene 2: Kitchen -->
+  <div class="scene reveal-on" id="scene-1">
+    <div class="scene-meta">
+      <div class="scene-meta-left">
+        <div class="scene-counter">— Project 02 of 04 —</div>
+        <h3>Vaulted Ceiling Kitchen</h3>
+        <p>Cabinetry refit, two-tone island, full appliance package, restored wood ceiling.</p>
+      </div>
+      <span class="scene-tag">Custom Kitchen · 4 Angles</span>
+    </div>
+    <div class="reveal-stage">
+      <div class="reveal-frame" data-project="1" data-room="0">
+        <img class="reveal-after" alt="" />
+        <div class="reveal-before-wrap"><img class="reveal-before" alt="" /></div>
+        <div class="reveal-divider"></div>
+        <div class="reveal-handle"></div>
+        <span class="reveal-label reveal-label-before">Before</span>
+        <span class="reveal-label reveal-label-after">After</span>
+        <div class="reveal-room-tag"></div>
+        <div class="reveal-prompt">Drag to compare ↔</div>
+      </div>
+      <div class="reveal-rooms" data-rooms-for="1"></div>
+    </div>
+  </div>
+
+  <!-- Scene 3: Fire Damage (video) -->
+  <div class="scene reveal-on" id="scene-2">
+    <div class="scene-meta">
+      <div class="scene-meta-left">
+        <div class="scene-counter">— Project 03 of 04 —</div>
+        <h3>Fire Damage Restoration</h3>
+        <p>From smoke-damaged walls to a fully restored, move-in-ready home. Side-by-side walkthroughs.</p>
+      </div>
+      <span class="scene-tag">Disaster Recovery · Full Rebuild</span>
+    </div>
+    <div class="scene-video-grid">
+      <div class="scene-video-item">
+        <span class="scene-video-label scene-video-label-before">Before</span>
+        <video autoplay muted loop playsinline><source src="assets/Images/Fire%20Damage%20Project/Before.mp4" type="video/mp4" /></video>
+      </div>
+      <div class="scene-video-item">
+        <span class="scene-video-label scene-video-label-after">After</span>
+        <video autoplay muted loop playsinline><source src="assets/Images/Fire%20Damage%20Project/After.mp4" type="video/mp4" /></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4: Big Project -->
+  <div class="scene reveal-on" id="scene-3">
+    <div class="scene-meta">
+      <div class="scene-meta-left">
+        <div class="scene-counter">— Project 04 of 04 —</div>
+        <h3>7-Phase Major Build</h3>
+        <p>One of the largest projects on our books. Structural work, finishing, end-to-end.</p>
+      </div>
+      <span class="scene-tag">Major Renovation · 7 Phases</span>
+    </div>
+    <div class="reveal-stage">
+      <div class="reveal-frame" data-project="3" data-room="0">
+        <img class="reveal-after" alt="" />
+        <div class="reveal-before-wrap"><img class="reveal-before" alt="" /></div>
+        <div class="reveal-divider"></div>
+        <div class="reveal-handle"></div>
+        <span class="reveal-label reveal-label-before">Before</span>
+        <span class="reveal-label reveal-label-after">After</span>
+        <div class="reveal-room-tag"></div>
+        <div class="reveal-prompt">Drag to compare ↔</div>
+      </div>
+      <div class="reveal-rooms" data-rooms-for="3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-head reveal-on">
+      <span class="eyebrow">What we build</span>
+      <h2>One contractor. <span class="gold-text">Every trade.</span></h2>
+      <p>From a single-room refresh to a six-month whole-property build — we manage every detail so you don't have to chase trades.</p>
+    </div>
+    <div class="services-grid reveal-on">
+      <div class="service-cell"><div class="service-num">01</div><h4>Whole-Home</h4><p>Full transformations, top to bottom. One crew, one timeline, one accountable team.</p></div>
+      <div class="service-cell"><div class="service-num">02</div><h4>Custom Kitchens</h4><p>Cabinetry, countertops, islands, lighting. Designed for how you cook.</p></div>
+      <div class="service-cell"><div class="service-num">03</div><h4>Bathrooms</h4><p>Tile, vanities, walk-in showers, full layouts. Sealed and finished to last.</p></div>
+      <div class="service-cell"><div class="service-num">04</div><h4>Additions</h4><p>Sun rooms, basements, garages, second-storey adds. Engineered and integrated.</p></div>
+      <div class="service-cell"><div class="service-num">05</div><h4>Commercial</h4><p>Storefronts, offices, restaurants, retail. Built to code, to schedule, to spec.</p></div>
+      <div class="service-cell"><div class="service-num">06</div><h4>Disaster Recovery</h4><p>Fire, flood, smoke. Insurance rebuilds from the studs out.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image reveal-on">
+        <img src="assets/Images/West%20End%20Home/After_Living.jpg" alt="Gold Prime — finished living room" />
+      </div>
+      <div class="about-text reveal-on">
+        <span class="eyebrow">About Gold Prime</span>
+        <h2>A Winnipeg crew that <span class="gold-text">finishes what they start.</span></h2>
+        <p>We built this company on one principle: <strong>do it the way you'd do it for your own house.</strong> Own crews, end-to-end project management, and standards higher than the inspector's.</p>
+        <p>Homeowners. Property managers. Insurance rebuilds. Commercial. If it needs to be built right the first time — we're the call.</p>
+        <div class="about-points">
+          <div class="about-point">Licensed & insured</div>
+          <div class="about-point">Own crews — no middlemen</div>
+          <div class="about-point">Daily project updates</div>
+          <div class="about-point">Insurance experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal-on">
+        <span class="eyebrow">Free Estimate</span>
+        <h2>Reach <span class="gold-text">Gold Prime.</span></h2>
+        <p class="contact-info-lead">Tell us about your project. We'll respond within one business day — no pressure, no obligation.</p>
+        <div class="contact-list">
+          <a href="tel:+12049993313" class="contact-item">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="contact-item-meta"><span class="contact-item-label">Call us</span><span class="contact-item-value">(204) 999-3313</span></div>
+          </a>
+          <a href="mailto:info.gprenos@gmail.com" class="contact-item">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="contact-item-meta"><span class="contact-item-label">Email</span><span class="contact-item-value">info.gprenos@gmail.com</span></div>
+          </a>
+          <a href="https://instagram.com/goldprimerenovations" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="contact-item-meta"><span class="contact-item-label">Instagram</span><span class="contact-item-value">@goldprimerenovations</span></div>
+          </a>
+          <div class="contact-item" style="cursor: default;">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="contact-item-meta"><span class="contact-item-label">Service Area</span><span class="contact-item-value">Winnipeg, Manitoba</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal-on" onsubmit="event.preventDefault(); alert('Thanks — we will be in touch within 1 business day.'); this.reset();">
+        <div class="form-row two-col">
+          <div><label for="name">Your Name</label><input type="text" id="name" name="name" required /></div>
+          <div><label for="phone">Phone</label><input type="tel" id="phone" name="phone" required /></div>
+        </div>
+        <div class="form-row"><label for="email">Email</label><input type="email" id="email" name="email" required /></div>
+        <div class="form-row">
+          <label for="project">Project Type</label>
+          <select id="project" name="project" required>
+            <option value="">Select one...</option>
+            <option>Kitchen renovation</option>
+            <option>Bathroom renovation</option>
+            <option>Whole-home renovation</option>
+            <option>Addition / extension</option>
+            <option>Commercial build</option>
+            <option>Disaster recovery / insurance</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row"><label for="details">Tell us about your project</label><textarea id="details" name="details" placeholder="Rough scope, timeline, what you're hoping for..." required></textarea></div>
+        <button type="submit" class="form-submit">Request Free Estimate</button>
+        <p class="form-note">We'll respond within 1 business day. No obligation.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/Images/Info%26Context/Logo.png" alt="Gold Prime Renovations" />
+        <div class="footer-brand-text">Gold Prime Renovations<span>"The gold standard is our prime objective."</span></div>
+      </div>
+      <div class="footer-meta">
+        <a href="tel:+12049993313">(204) 999-3313</a> · <a href="mailto:info.gprenos@gmail.com">info.gprenos@gmail.com</a><br />
+        Winnipeg, Manitoba · Licensed & Insured
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span id="year"></span> Gold Prime Renovations. All rights reserved.</div>
+      <div class="credit">Powered by <a href="https://fjmedia.ca">FJMedia</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <div class="mobile-cta-inner">
+    <a href="tel:+12049993313" class="call">Call</a>
+    <a href="#contact" class="estimate">Free Estimate</a>
+  </div>
+</div>
+
+<script>
+const PROJECTS = [
+  { rooms: [
+    { name: 'Kitchen', before: 'assets/Images/West%20End%20Home/Before_Kitchen.jpg', after: 'assets/Images/West%20End%20Home/After_Kitchen.jpg' },
+    { name: 'Living Room', before: 'assets/Images/West%20End%20Home/Before_Living.jpg', after: 'assets/Images/West%20End%20Home/After_Living.jpg' },
+    { name: 'Bathroom', before: 'assets/Images/West%20End%20Home/Before_Bathroom.jpg', after: 'assets/Images/West%20End%20Home/After_Bathroom.jpg' },
+    { name: 'Primary Bedroom', before: 'assets/Images/West%20End%20Home/Before_Bedroom1.jpg', after: 'assets/Images/West%20End%20Home/After_Bedroom1.jpg' },
+    { name: 'Bedroom 2', before: 'assets/Images/West%20End%20Home/Before_Bedroom2.jpg', after: 'assets/Images/West%20End%20Home/After_Bedroom2.jpg' },
+    { name: 'Hall', before: 'assets/Images/West%20End%20Home/Before_Hall.jpg', after: 'assets/Images/West%20End%20Home/After_Hall.jpg' },
+    { name: 'Sun Room', before: 'assets/Images/West%20End%20Home/Before_SunRoom.jpg', after: 'assets/Images/West%20End%20Home/After_SunRoom.jpg' },
+    { name: 'Kitchen Detail', before: 'assets/Images/West%20End%20Home/Before_KitchenSink.jpg', after: 'assets/Images/West%20End%20Home/After_KitchenSink.jpg' },
+    { name: 'Exterior', before: 'assets/Images/West%20End%20Home/Before_Outside.jpg', after: 'assets/Images/West%20End%20Home/After_Outside.jpg' }
+  ]},
+  { rooms: [
+    { name: 'Wide', before: 'assets/Images/Kitchen%20Project/Before.jpg', after: 'assets/Images/Kitchen%20Project/After.jpg' },
+    { name: 'Cabinetry', before: 'assets/Images/Kitchen%20Project/Before1.jpg', after: 'assets/Images/Kitchen%20Project/After1.jpg' },
+    { name: 'Island', before: 'assets/Images/Kitchen%20Project/Before2.jpg', after: 'assets/Images/Kitchen%20Project/After2.jpg' },
+    { name: 'Detail', before: 'assets/Images/Kitchen%20Project/Before3.jpg', after: 'assets/Images/Kitchen%20Project/After3.jpg' }
+  ]},
+  null, // fire damage = video scene, no slider
+  { rooms: [
+    { name: 'Phase 1', before: 'assets/Images/BigProject/Before1.jpg', after: 'assets/Images/BigProject/After1.jpg' },
+    { name: 'Phase 2', before: 'assets/Images/BigProject/Before2.jpg', after: 'assets/Images/BigProject/After2.jpg' },
+    { name: 'Phase 3', before: 'assets/Images/BigProject/Before3.jpg', after: 'assets/Images/BigProject/After3.jpg' },
+    { name: 'Phase 4', before: 'assets/Images/BigProject/Before4.jpg', after: 'assets/Images/BigProject/After4.jpg' },
+    { name: 'Phase 5', before: 'assets/Images/BigProject/Before5.jpg', after: 'assets/Images/BigProject/After5.jpg' },
+    { name: 'Phase 6', before: 'assets/Images/BigProject/Before6.jpg', after: 'assets/Images/BigProject/After6.jpg' },
+    { name: 'Phase 7', before: 'assets/Images/BigProject/Before7.jpg', after: 'assets/Images/BigProject/After7.jpg' }
+  ]}
+];
+
+// initialise each scene
+document.querySelectorAll('.reveal-frame').forEach(frame => {
+  const projIdx = parseInt(frame.dataset.project);
+  const proj = PROJECTS[projIdx];
+  if (!proj) return;
+  let roomIdx = 0;
+
+  const beforeImg = frame.querySelector('.reveal-before');
+  const afterImg = frame.querySelector('.reveal-after');
+  const divider = frame.querySelector('.reveal-divider');
+  const handle = frame.querySelector('.reveal-handle');
+  const beforeWrap = frame.querySelector('.reveal-before-wrap');
+  const roomTag = frame.querySelector('.reveal-room-tag');
+  const stage = frame.closest('.reveal-stage');
+  const dotsWrap = stage.querySelector('.reveal-rooms');
+
+  function loadRoom(i) {
+    roomIdx = i;
+    const r = proj.rooms[i];
+    beforeImg.src = r.before;
+    afterImg.src = r.after;
+    roomTag.textContent = r.name;
+    dotsWrap.querySelectorAll('.reveal-room-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+    // reset to "before" state for re-arming
+    frame.classList.remove('played');
+    frame.classList.add('armed');
+    divider.style.left = '0%';
+    handle.style.left = '0%';
+    beforeWrap.style.clipPath = 'inset(0 0 0 0)';
+    if (frame.dataset.played === '1') {
+      // already played once — show after immediately
+      requestAnimationFrame(() => {
+        frame.classList.remove('armed');
+        frame.classList.add('played');
+        divider.style.left = '100%';
+        handle.style.left = '100%';
+        beforeWrap.style.clipPath = 'inset(0 0 0 100%)';
+      });
+    }
+  }
+
+  // build dots
+  dotsWrap.innerHTML = '';
+  proj.rooms.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'reveal-room-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Room ' + (i + 1));
+    d.addEventListener('click', () => loadRoom(i));
+    dotsWrap.appendChild(d);
+  });
+
+  loadRoom(0);
+
+  // auto-sweep on first view
+  const playSweep = () => {
+    if (frame.dataset.played === '1') return;
+    frame.dataset.played = '1';
+    requestAnimationFrame(() => {
+      divider.style.left = '100%';
+      handle.style.left = '100%';
+      beforeWrap.style.clipPath = 'inset(0 0 0 100%)';
+      setTimeout(() => { frame.classList.add('played'); }, 1700);
+    });
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio >= 0.5) { playSweep(); io.unobserve(frame); } });
+  }, { threshold: [0.5] });
+  io.observe(frame);
+
+  // manual drag (after sweep has played)
+  let dragging = false;
+  const setPos = (pct) => {
+    pct = Math.max(0, Math.min(100, pct));
+    divider.style.left = pct + '%';
+    handle.style.left = pct + '%';
+    beforeWrap.style.clipPath = `inset(0 0 0 ${pct}%)`;
+  };
+  const fromEvent = (e) => {
+    const rect = frame.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    return (x / rect.width) * 100;
+  };
+  const start = (e) => {
+    if (!frame.classList.contains('played')) return;
+    dragging = true;
+    setPos(fromEvent(e));
+    e.preventDefault();
+  };
+  const move = (e) => { if (!dragging) return; setPos(fromEvent(e)); };
+  const end = () => { dragging = false; };
+
+  frame.addEventListener('mousedown', start);
+  frame.addEventListener('touchstart', start, { passive: false });
+  window.addEventListener('mousemove', move);
+  window.addEventListener('touchmove', move, { passive: false });
+  window.addEventListener('mouseup', end);
+  window.addEventListener('touchend', end);
+});
+
+// nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// reveal-on-scroll
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal-on').forEach(el => ro.observe(el));
+
+// smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id.length > 1) {
+      const t = document.querySelector(id);
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+  });
+});
+</script>
+
+<aside class="fj-preview-bar" aria-label="Concept switcher">
+  <span class="fj-preview-eyebrow">FJMedia · Preview</span>
+  <a href="./" class="fj-preview-link">Concept 1</a>
+  <a href="./concept-2.html" class="fj-preview-link active">Concept 2</a>
+</aside>
+
+</body>
+</html>
