@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Preview · Sugar & Shai Cookies — May Refresh</title>
+  <meta name="description" content="Handcrafted cookies made from scratch in Tyndall, MB. Biscoff, Matcha, Chocolate Chunk & monthly specials. Pre-order pickup — min 3pc per flavour." />
+  <meta property="og:title" content="Sugar & Shai Cookies | Homemade Cookies · Winnipeg, MB" />
+  <meta property="og:description" content="Handcrafted cookies made from scratch in Tyndall, MB. Pre-order for pickup — Biscoff, Matcha, Chocolate Chunk & monthly specials." />
+  <meta property="og:image" content="https://sugarandshaicookies.com/Gallery/Cookies.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sugar & Shai Cookies | Homemade Cookies · Winnipeg, MB" />
+  <meta name="twitter:description" content="Handcrafted cookies made from scratch in Tyndall, MB. Pre-order for pickup — Biscoff, Matcha, Chocolate Chunk & monthly specials." />
+  <meta name="twitter:image" content="https://sugarandshaicookies.com/Gallery/Cookies.jpg" />
+  <meta property="og:url" content="https://sugarandshaicookies.com" />
+  <link rel="canonical" href="https://sugarandshaicookies.com" />
+  <link rel="preload" as="image" href="Logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka+One&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <!-- Analytics disabled on preview (do not pollute production GA) -->
+  <script>function gtag(){}</script>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cream:    #FDF6EE;
+      --blush:    #F2C4CE;
+      --rose:     #D4849A;
+      --dusty:    #C97B8B;
+      --mocha:    #8B5E52;
+      --chocolate:#5C3D35;
+      --olive:    #4A5E2A;
+      --olive-dark:#3A4A20;
+      --olive-light:#6B7D45;
+      --sage:     #B5C4B1;
+      --text:     #3D2B27;
+      --text-light:#7A5C56;
+      --white:    #FFFFFF;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(253, 246, 238, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--blush);
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 52px;
+      width: 52px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--blush);
+      transition: transform 0.3s;
+    }
+    .nav-logo img:hover { transform: rotate(6deg) scale(1.05); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--dusty); }
+
+    .nav-cta {
+      background: var(--olive);
+      color: var(--white) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--olive-dark) !important; color: var(--white) !important; }
+
+    /* hamburger */
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--mocha); border-radius: 2px; transition: 0.3s; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 70px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(160deg, var(--cream) 45%, #EAF0E0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(74,94,42,0.12) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(242,196,206,0.3) 0%, transparent 70%);
+      bottom: 60px; left: -80px;
+      border-radius: 50%;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image-blob {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(74,94,42,0.2), 0 0 0 8px rgba(74,94,42,0.06);
+      animation: blobMorph 8s ease-in-out infinite;
+    }
+
+    .hero-image-blob img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes blobMorph {
+      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      25% { border-radius: 58% 42% 36% 64% / 43% 60% 40% 57%; }
+      50% { border-radius: 40% 60% 55% 45% / 55% 35% 65% 45%; }
+      75% { border-radius: 65% 35% 45% 55% / 38% 58% 42% 62%; }
+    }
+
+    .hero-logo {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--white);
+      box-shadow: 0 8px 30px rgba(74,94,42,0.25);
+      z-index: 2;
+      animation: heroLogoFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes heroLogoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--blush);
+      color: var(--mocha);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--chocolate);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em {
+      font-family: 'Pacifico', cursive;
+      font-style: normal;
+      color: var(--dusty);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 480px;
+      margin: 0 0 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--olive);
+      color: var(--white);
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--olive-dark); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--mocha);
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 2px solid var(--blush);
+      transition: border-color 0.25s, color 0.25s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline:hover { border-color: var(--dusty); color: var(--dusty); transform: translateY(-2px); }
+
+    /* decorative floaters */
+    .floaters { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .floater {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    .floater:nth-child(1) { top: 12%; left: 6%; width: 80px; height: 80px; background: var(--blush); animation-delay: 0s; }
+    .floater:nth-child(2) { top: 22%; right: 8%; width: 50px; height: 50px; background: var(--sage); animation-delay: 1.5s; }
+    .floater:nth-child(3) { bottom: 28%; left: 4%; width: 40px; height: 40px; background: var(--olive-light); animation-delay: 3s; }
+    .floater:nth-child(4) { bottom: 18%; right: 6%; width: 65px; height: 65px; background: var(--blush); animation-delay: 0.8s; }
+    .floater:nth-child(5) { top: 55%; left: 14%; width: 35px; height: 35px; background: var(--sage); animation-delay: 2.2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(8deg); }
+    }
+
+    /* ── Section base ── */
+    section { padding: 6rem 2rem; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9E5B6B;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--chocolate);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 540px;
+    }
+
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    /* ── Trust Strip ── */
+    .trust-strip {
+      background: var(--olive);
+      padding: 0.9rem 2rem;
+    }
+    .trust-strip-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.9);
+    }
+    .trust-item svg { flex-shrink: 0; color: rgba(255,255,255,0.7); }
+    .trust-divider {
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .trust-divider { display: none; }
+      .trust-strip-inner { gap: 0.5rem 1rem; }
+    }
+
+    /* ── About ── */
+    #about {
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-slideshow {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+    }
+    .about-slide.active { opacity: 1; }
+    .about-slide.fading { opacity: 0; }
+
+    .about-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-img-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--olive);
+      color: var(--white);
+      border-radius: 50%;
+      width: 110px; height: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      line-height: 1.2;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 8px 30px rgba(74,94,42,0.35);
+    }
+    .about-img-badge strong { font-size: 1.6rem; display: block; }
+
+    .about-text .section-subtitle { margin-bottom: 2rem; }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    .about-feature-icon {
+      width: 40px; height: 40px;
+      background: var(--cream);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Specialties ── */
+    #specialties {
+      background: var(--cream);
+    }
+
+    .specialties-inner { max-width: 1100px; margin: 0 auto; }
+
+    .specialties-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .specialties-header .section-subtitle { margin: 0 auto; }
+
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .specialty-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 0;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(242,196,206,0.4);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .specialty-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(139,94,82,0.15); }
+
+    .specialty-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #f5f0eb;
+      position: relative;
+    }
+    .specialty-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .specialty-card:hover .specialty-img-wrap img {
+      transform: scale(1.06);
+    }
+    .specialty-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(74,94,42,0.85) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .specialty-card:hover .specialty-overlay { opacity: 1; }
+    .specialty-overlay span {
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .specialty-card-body {
+      padding: 1.4rem 1.5rem 1.8rem;
+    }
+    .specialty-card h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.15rem;
+      color: var(--chocolate);
+      margin-bottom: 0.5rem;
+    }
+    .specialty-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+
+    .flavors-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+    .flavors-note a {
+      color: var(--olive);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .flavors-note a:hover { text-decoration: underline; }
+
+    .pricing-banner {
+      margin-top: 3rem;
+      background: var(--olive);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .pricing-banner-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .pricing-banner-qty {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pricing-banner-price {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .pricing-banner-divider {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .pricing-banner-note {
+      width: 100%;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.06em;
+      margin-top: -0.5rem;
+    }
+
+    /* ── Gallery ── */
+    #gallery {
+      background: #FBF0F2;
+      overflow: hidden;
+    }
+
+    .gallery-inner { max-width: 100%; }
+    .gallery-header { text-align: center; margin-bottom: 2.5rem; max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
+    .gallery-header .section-subtitle { margin: 0 auto; }
+
+    /* Soft edge fade so the rows dissolve into the bg instead of butting against the viewport */
+    .marquee-track {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 150px, #000 calc(100% - 150px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 150px, #000 calc(100% - 150px), transparent 100%);
+    }
+
+    /* Longhand animation props so the reverse rule never resets delay via shorthand */
+    .marquee-row {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      width: max-content;
+      animation-name: marquee;
+      animation-duration: 30s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-delay: -10s; /* mid-flow on first paint */
+      will-change: transform;
+    }
+    .marquee-row.reverse {
+      animation-name: marquee-reverse;
+      animation-duration: 35s;
+      animation-delay: -17s; /* deeper into the reverse loop so leftmost item is mid-frame */
+    }
+    .marquee-row:hover,
+    .marquee-row.reverse:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marquee-reverse {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .gallery-item {
+      border-radius: 14px;
+      overflow: hidden;
+      width: 260px;
+      height: 260px;
+      flex-shrink: 0;
+      background: var(--cream);
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-play {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
+    .gallery-item.playing .gallery-play { display: none; }
+    .gallery-play svg { width: 44px; height: 44px; fill: rgba(255,255,255,0.9); filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+
+    .gallery-cta {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding: 0 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-item { width: 160px; height: 160px; }
+      .marquee-row { gap: 0.5rem; }
+    }
+
+    /* ── How to Order ── */
+    #order {
+      background: var(--white);
+    }
+
+    .order-inner { max-width: 1100px; margin: 0 auto; }
+    .order-header { text-align: center; margin-bottom: 4rem; }
+    .order-header .section-subtitle { margin: 0 auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+
+    .step-number {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--olive-light), var(--olive));
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 24px rgba(74,94,42,0.3);
+    }
+
+    .step h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      color: var(--chocolate);
+      margin-bottom: 0.6rem;
+    }
+    .step p { font-size: 0.9rem; color: var(--text-light); }
+    .step p a { color: var(--olive); font-weight: 700; text-decoration: none; }
+    .step p a:hover { text-decoration: underline; }
+
+    /* ── Reviews ── */
+    #testimonials {
+      background: var(--white);
+    }
+    .reviews-inner { max-width: 1100px; margin: 0 auto; }
+    .reviews-header { text-align: center; margin-bottom: 3rem; }
+
+    .reviews-carousel-wrap {
+      position: relative;
+    }
+
+    .reviews-carousel {
+      display: flex;
+      gap: 1.2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0.5rem 1.5rem;
+      scrollbar-width: none;
+    }
+    .reviews-carousel::-webkit-scrollbar { display: none; }
+
+    .review-item {
+      flex: 0 0 220px;
+      scroll-snap-align: start;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 9/16;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .review-item:hover { transform: translateY(-6px) scale(1.02); }
+
+    .review-item img,
+    .review-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .review-item video {
+      cursor: pointer;
+    }
+
+    .review-play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+      transition: background 0.25s;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    .review-item.playing .review-play-btn { display: none; }
+    .review-play-btn svg {
+      width: 52px; height: 52px;
+      fill: rgba(255,255,255,0.9);
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px;
+      background: var(--white);
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--chocolate);
+      z-index: 2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-btn:hover { background: var(--cream); transform: translateY(-50%) scale(1.1); }
+    .carousel-btn.prev { left: -20px; }
+    .carousel-btn.next { right: -20px; }
+
+
+    /* ── Order Form ── */
+    #order-form {
+      background: var(--cream);
+    }
+
+    .order-form-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .order-form-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .order-form {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem 2.5rem;
+      box-shadow: 0 8px 40px rgba(74,94,42,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--blush);
+      border-radius: 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--olive);
+      box-shadow: 0 0 0 3px rgba(74,94,42,0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-flavours-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 0.6rem;
+    }
+
+    .flavour-checkboxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .flavour-check {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--cream);
+      border: 1.5px solid var(--blush);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 0.9rem;
+      color: var(--text);
+      user-select: none;
+    }
+    .flavour-check:has(input:checked) {
+      border-color: var(--olive);
+      background: #f0f4ea;
+    }
+
+    .flavour-check input[type="checkbox"] {
+      accent-color: var(--olive);
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* ── Flavours of the Month ── */
+    #fotm {
+      background: linear-gradient(160deg, #fdf2f8 0%, #fbe4ee 100%);
+      padding: 5rem 2rem;
+    }
+    .fotm-inner { max-width: 1100px; margin: 0 auto; }
+    .fotm-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .fotm-header .section-subtitle { margin: 0 auto; }
+
+    .fotm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .fotm-card {
+      --acc: #d63384;
+      --acc-mid: #e67ba8;
+      --acc-light: #f4a4c2;
+      --acc-bg: #fef0f6;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(214,51,132,0.10);
+      border: 1.5px solid var(--acc-light);
+    }
+    .fotm-card.fotm-ube {
+      --acc: #6b3fa0;
+      --acc-mid: #7952b3;
+      --acc-light: #9b72cf;
+      --acc-bg: #f0e8f8;
+      box-shadow: 0 12px 40px rgba(107,63,160,0.10);
+    }
+    .fotm-media {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+    }
+    .fotm-media img,
+    .fotm-media video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .fotm-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--acc);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+    }
+    .fotm-urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--acc), var(--acc-mid));
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+      animation: urgencyPulse 2s ease-in-out infinite;
+    }
+    .fotm-urgency-dot {
+      width: 8px; height: 8px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      animation: dotBlink 1.5s ease-in-out infinite;
+    }
+    @keyframes urgencyPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(214,51,132,0.35); }
+      50% { box-shadow: 0 0 0 8px rgba(214,51,132,0); }
+    }
+    .fotm-card.fotm-ube .fotm-urgency {
+      animation: urgencyPulseUbe 2s ease-in-out infinite;
+    }
+    @keyframes urgencyPulseUbe {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(107,63,160,0.35); }
+      50% { box-shadow: 0 0 0 8px rgba(107,63,160,0); }
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .fotm-body { padding: 1.8rem 1.8rem 2rem; }
+    .fotm-body .section-label { margin-bottom: 0.4rem; color: var(--acc); }
+    .fotm-name {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.7rem;
+      color: var(--chocolate);
+      line-height: 1.3;
+      margin-bottom: 0.85rem;
+    }
+    .fotm-desc {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 1.4rem;
+    }
+    .fotm-pricing {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+    .fotm-price-pill {
+      background: var(--acc-bg);
+      border: 1.5px solid var(--acc-light);
+      border-radius: 50px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--acc);
+    }
+    .fotm-card .btn-primary {
+      background: var(--acc);
+      align-self: flex-start;
+    }
+    .fotm-card .btn-primary:hover { background: var(--acc-mid); }
+
+    @media (max-width: 768px) {
+      .fotm-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .fotm-media { height: 240px; }
+      .fotm-body { padding: 1.4rem 1.4rem 1.6rem; }
+      .fotm-name { font-size: 1.5rem; }
+    }
+
+    /* ── Mother's Day Special ── */
+    #mothers-day {
+      background: linear-gradient(160deg, #fff8f0 0%, #fdeed8 100%);
+      padding: 5rem 2rem;
+    }
+    .md-inner { max-width: 1000px; margin: 0 auto; }
+    .md-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(201,123,139,0.12);
+      border: 1.5px solid #f2c4ce;
+    }
+    .md-media {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      background: #f5e9d8;
+    }
+    .md-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .md-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: #c7587a;
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+    }
+    .md-body {
+      padding: 2.2rem 2.2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .md-body .section-label { color: #c7587a; margin-bottom: 0.4rem; }
+    .md-name {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.9rem;
+      color: var(--chocolate);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .md-price {
+      display: inline-block;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: #c7587a;
+      margin-bottom: 1rem;
+    }
+    .md-urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #c7587a, #e67ba8);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+    .md-urgency-dot {
+      width: 8px; height: 8px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      animation: dotBlink 1.5s ease-in-out infinite;
+    }
+    .md-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 1.4rem;
+    }
+    .md-card .btn-primary {
+      background: #c7587a;
+      align-self: flex-start;
+    }
+    .md-card .btn-primary:hover { background: #b04464; }
+    @media (max-width: 768px) {
+      .md-card { grid-template-columns: 1fr; }
+      .md-media { min-height: 240px; }
+      .md-body { padding: 1.6rem; }
+      .md-name { font-size: 1.5rem; }
+    }
+
+    /* ── Flavor Quantity Rows ── */
+    .flavor-qty-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .flavor-qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--cream);
+      border: 1.5px solid var(--blush);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .flavor-qty-row.active { border-color: var(--olive); background: #f0f4ea; }
+    .flavor-qty-row.fotm-flavor { border-color: #c3a0e0; background: #f9f5fd; }
+    .flavor-qty-row.fotm-flavor.active { border-color: #7952b3; background: #ede5f7; }
+    .flavor-qty-row.fotm-flavor.fotm-lemon { border-color: #f4a4c2; background: #fef0f6; }
+    .flavor-qty-row.fotm-flavor.fotm-lemon.active { border-color: #d63384; background: #fdd9e6; }
+    .flavor-qty-row.bundle-row { border-color: #f2c4ce; background: #fff5f8; }
+    .flavor-qty-row.bundle-row.active { border-color: #c7587a; background: #fde4ec; }
+    .bundle-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #c7587a;
+      color: var(--white);
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+    }
+    .flavor-qty-name {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .fotm-inline-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #7952b3;
+      color: var(--white);
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+    }
+    .flavor-qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .qty-btn {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1.5px solid var(--blush);
+      background: var(--white);
+      color: var(--olive);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+    .qty-btn:hover { background: var(--olive); color: var(--white); border-color: var(--olive); }
+    .qty-input {
+      width: 44px;
+      text-align: center;
+      border: 1.5px solid var(--blush);
+      border-radius: 8px;
+      padding: 0.3rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+    }
+    .qty-min-warn {
+      font-size: 0.72rem;
+      color: var(--dusty);
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    /* ── Order Summary ── */
+    .order-summary {
+      background: #f0f4ea;
+      border: 1.5px solid var(--olive);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      display: none;
+    }
+    .order-summary.visible { display: block; }
+    .order-summary-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 0.75rem;
+    }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text);
+      padding: 0.2rem 0;
+    }
+    .order-summary-divider {
+      border: none;
+      border-top: 1px solid rgba(74,94,42,0.2);
+      margin: 0.6rem 0;
+    }
+    .order-summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--olive);
+    }
+    .order-summary-note {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 0.6rem;
+      text-align: center;
+    }
+    .order-summary-warn {
+      font-size: 0.8rem;
+      color: var(--dusty);
+      margin-top: 0.5rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .form-divider {
+      border: none;
+      border-top: 1px solid var(--blush);
+      margin: 0.4rem 0;
+    }
+
+    .form-submit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .form-submit .btn-primary {
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      border: none;
+    }
+
+    .form-submit-note {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(74,94,42,0.08);
+    }
+    .form-success.visible { display: block; }
+    .form-success-icon { margin-bottom: 1rem; display: flex; justify-content: center; }
+    .form-success h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      color: var(--olive);
+      margin-bottom: 0.75rem;
+    }
+    .form-success p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* ── Contact ── */
+    #contact {
+      background: linear-gradient(160deg, var(--olive-dark) 0%, var(--olive) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .contact-inner { max-width: 700px; margin: 0 auto; }
+    #contact .section-label { color: var(--blush); }
+    #contact .section-title { color: var(--white); }
+
+    #contact .section-subtitle {
+      color: rgba(255,255,255,0.75);
+      margin: 0 auto 3rem;
+    }
+
+    .contact-methods {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .contact-method {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      text-decoration: none;
+      color: var(--white);
+      transition: background 0.25s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 160px;
+      cursor: pointer;
+    }
+    .contact-method:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); }
+
+    .contact-method-icon { font-size: 0; line-height: 0; display: flex; align-items: center; justify-content: center; }
+    .contact-method-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
+    .contact-method-value { font-size: 0.95rem; font-weight: 400; }
+
+    .contact-note {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--olive-dark);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-logo img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      margin-bottom: 0.75rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--blush); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+
+      /* ── Global ── */
+      section { padding: 3.5rem 1.25rem; }
+
+      /* ── Nav ── */
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: var(--cream);
+        padding: 1.5rem 1.25rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--blush);
+        z-index: 99;
+      }
+      .nav-links.open a { font-size: 1rem; }
+
+      /* ── Hero ── */
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .hero-image-wrap { order: -1; }
+      .hero-image-blob { max-width: 280px; margin: 0 auto; }
+      .hero-logo { width: 70px; height: 70px; bottom: -10px; left: -10px; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero p { font-size: 0.95rem; margin: 0 auto 2rem; }
+      .hero-btns { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .hero-btns a { width: 100%; max-width: 280px; justify-content: center; }
+      .hero-badge { font-size: 0.68rem; }
+
+      /* ── About ── */
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-image-wrap { max-width: 280px; margin: 0 auto; }
+      .about-img-badge { width: 90px; height: 90px; font-size: 0.72rem; right: -0.5rem; bottom: -0.5rem; }
+      .about-img-badge strong { font-size: 1.3rem; }
+      .section-title { font-size: 1.9rem; }
+
+      /* ── Flavours ── */
+      .specialties-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .specialty-card h3 { font-size: 0.95rem; }
+      .specialty-card p { font-size: 0.8rem; }
+      .pricing-banner { padding: 1.5rem 1.25rem; gap: 1rem; }
+      .pricing-banner-price { font-size: 1.8rem; }
+
+      /* ── Reviews ── */
+      .carousel-btn { display: none; }
+      .review-item { flex: 0 0 155px; }
+
+      /* ── How to Order ── */
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .step { padding: 1.25rem 1rem; }
+      .step-number { width: 48px; height: 48px; font-size: 1.2rem; }
+      .step h3 { font-size: 1rem; }
+      .step p { font-size: 0.82rem; }
+
+      /* ── Order Form ── */
+      .order-form { padding: 1.5rem 1.25rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .flavour-checkboxes { grid-template-columns: 1fr; }
+
+      /* ── Contact ── */
+      .contact-methods { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .contact-method { width: 100%; max-width: 300px; padding: 1.2rem 1rem; flex-direction: row; gap: 1rem; text-align: left; }
+      .contact-method-icon { font-size: 1.5rem; }
+      .contact-note { font-size: 0.78rem; line-height: 1.8; }
+      #contact .section-subtitle { font-size: 0.95rem; }
+
+      /* ── Footer ── */
+      .footer-links { gap: 1rem; }
+      .footer-links a { font-size: 0.78rem; }
+      .footer-tagline { font-size: 0.8rem; }
+      .footer-copy { font-size: 0.72rem; }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 2rem; }
+      .specialties-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .contact-method { flex-direction: column; text-align: center; }
+    }
+
+    /* ── GSAP Reveal ── */
+    .gs-reveal { opacity: 0; }
+
+    /* ── Mobile Nav Scroll Lock ── */
+    body.nav-open { overflow: hidden; }
+
+    /* ── Sticky Mobile CTA ── */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 98;
+      background: rgba(253,246,238,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--blush);
+      padding: 0.65rem 1.25rem;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+    .mobile-cta-bar.visible { transform: translateY(0); }
+    .mobile-cta-bar a {
+      display: block;
+      background: var(--olive);
+      color: var(--white);
+      text-align: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s;
+    }
+    .mobile-cta-bar a:hover { background: var(--olive-dark); }
+
+    @media (max-width: 768px) {
+      .mobile-cta-bar { display: block; }
+      /* Offset footer for sticky bar */
+      footer { padding-bottom: 5rem; }
+    }
+
+    /* ---------- FJMedia preview pill (added by FJMedia, not part of build) ---------- */
+    .fj-preview-bar { position: fixed; top: 84px; left: 50%; transform: translateX(-50%); z-index: 96; display: inline-flex; align-items: center; gap: 0; padding: 6px 14px; border-radius: 999px; background: rgba(58,74,32,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(181,196,177,0.35); font-family: 'Lato', system-ui, sans-serif; box-shadow: 0 8px 24px rgba(58,74,32,0.35); pointer-events: none; }
+    .fj-preview-eyebrow { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #f2c4ce; white-space: nowrap; }
+    .fj-preview-eyebrow strong { color: #FDF6EE; font-weight: 800; margin-left: 0.4rem; padding-left: 0.5rem; border-left: 1px solid rgba(242,196,206,0.35); }
+    @media (max-width: 540px) { .fj-preview-bar { top: 78px; padding: 5px 12px; } .fj-preview-eyebrow { font-size: 0.55rem; } }
+  </style>
+  <noscript><style>.gs-reveal{opacity:1!important}</style></noscript>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Sugar & Shai Cookies",
+    "description": "Handcrafted cookies made from scratch in Tyndall, MB. Biscoff, Matcha, Chocolate Chunk & monthly specials. Pre-order pickup.",
+    "url": "https://sugarandshaicookies.com",
+    "image": "https://sugarandshaicookies.com/Gallery/Cookies.jpg",
+    "telephone": "",
+    "email": "sugarandshaicookies@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tyndall",
+      "addressRegion": "MB",
+      "addressCountry": "CA"
+    },
+    "sameAs": [
+      "https://www.instagram.com/sugarandshaicookies/"
+    ],
+    "priceRange": "$20–$45",
+    "servesCuisine": "Cookies",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Wednesday",
+      "description": "Pickup by appointment — pre-order required"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="#"><img src="Logo.jpg" alt="Sugar & Shai Cookies" /></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#specialties">Flavours</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#order">How to Order</a></li>
+      <li><a href="#order-form" class="nav-cta" onclick="gtag('event','order_button_click',{button:'nav_order_now'})">Order Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="home">
+    <div class="floaters" aria-hidden="true">
+      <span class="floater"></span>
+      <span class="floater"></span>
+      <span class="floater"></span>
+      <span class="floater"></span>
+      <span class="floater"></span>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">Handcrafted with Love</div>
+        <h1>Sweet Cookies,<br /><em>Beautiful</em> Designs</h1>
+        <p>Handcrafted cookies made from scratch in Tyndall, MB — pre-order pickup every Wednesday. Biscoff, Matcha, Chocolate Chunk & monthly specials.</p>
+        <div class="hero-btns">
+          <a href="#order-form" class="btn-primary" onclick="gtag('event','order_button_click',{button:'hero_place_an_order'})"><i data-lucide="cookie" style="width:18px;height:18px;stroke-width:1.5;"></i> Place an Order</a>
+          <a href="#specialties" class="btn-outline">See Our Flavours</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <div class="hero-image-blob">
+          <img src="Gallery/Cookies_1.jpg" alt="Assorted Sugar & Shai cookie flavours" />
+        </div>
+        <img src="Logo.jpg" alt="Sugar & Shai Cookies" class="hero-logo" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST STRIP ── -->
+  <div class="trust-strip">
+    <div class="trust-strip-inner">
+      <div class="trust-item"><i data-lucide="map-pin" style="width:16px;height:16px;stroke-width:2;"></i> Tyndall, MB</div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><i data-lucide="clock" style="width:16px;height:16px;stroke-width:2;"></i> Pickup Every Wednesday</div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><i data-lucide="heart" style="width:16px;height:16px;stroke-width:2;"></i> Made Fresh From Scratch</div>
+      <div class="trust-divider"></div>
+      <div class="trust-item"><i data-lucide="package" style="width:16px;height:16px;stroke-width:2;"></i> Pre-Order Only · Min. 3pc</div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-image-wrap">
+        <div class="about-slideshow" id="aboutSlideshow">
+          <div class="about-slide active"><img src="Gallery/Main/Cookies.jpg" alt="Assorted Sugar & Shai cookies" /></div>
+          <div class="about-slide"><img src="Gallery/Main/Cookies_1.jpg" alt="Biscoff and matcha cookies" loading="lazy" /></div>
+          <div class="about-slide"><img src="Gallery/Main/Cookies_3.jpg" alt="Matcha white chocolate cookies" loading="lazy" /></div>
+          <div class="about-slide"><img src="Gallery/Main/Cookies_4.jpg" alt="Mini eggs cookies" loading="lazy" /></div>
+          <div class="about-slide"><img src="Gallery/Main/Cookies_5.jpg" alt="Biscoff cookies close-up" loading="lazy" /></div>
+          <div class="about-slide"><img src="Gallery/Main/Cookies_6.jpg" alt="Chocolate chunk sea salt cookies" loading="lazy" /></div>
+        </div>
+        <div class="about-img-badge">
+          <strong>100%</strong>
+          Made with<br />Love
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Where Every Cookie is a <em>Work of Art</em></h2>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+          Hi, I'm Shai! Sugar & Shai is my home-based cookie business where baking meets artistry. Every cookie is hand-decorated with royal icing, made to order, and crafted with serious love and attention to detail.
+        </p>
+        <p class="section-subtitle">
+          Whether you need a dozen for a birthday or a hundred for a wedding — I'm here to make your sweetest moments even sweeter.
+        </p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon"><i data-lucide="chef-hat" style="width:20px;height:20px;stroke-width:1.5;color:var(--olive);"></i></div>
+            <span>Home-based bakery</span>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><i data-lucide="wheat" style="width:20px;height:20px;stroke-width:1.5;color:var(--olive);"></i></div>
+            <span>Made from scratch with quality ingredients</span>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><i data-lucide="gift" style="width:20px;height:20px;stroke-width:1.5;color:var(--olive);"></i></div>
+            <span>Beautifully packaged, ready to gift</span>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><i data-lucide="map-pin" style="width:20px;height:20px;stroke-width:1.5;color:var(--olive);"></i></div>
+            <span>Pickup only — Tyndall area</span>
+          </div>
+        </div>
+        <a href="#order-form" class="btn-primary" onclick="gtag('event','order_button_click',{button:'about_place_an_order'})">Place an Order</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FLAVOURS OF THE MONTH ── -->
+  <section id="fotm">
+    <div class="fotm-inner">
+      <div class="fotm-header gs-reveal">
+        <p class="section-label">This Month</p>
+        <h2 class="section-title">Flavours of the Month</h2>
+        <p class="section-subtitle">Our brand-new May limited edition — plus one last call on Ube Bliss before it disappears.</p>
+      </div>
+      <div class="fotm-grid">
+
+        <!-- Card 1: Lemon Raspberry Dream (May 2026) -->
+        <div class="fotm-card gs-reveal">
+          <div class="fotm-media">
+            <img src="Cookies/May/Lemon Raspberry Dream.png" alt="Lemon Raspberry Dream Cookie" loading="lazy">
+            <span class="fotm-badge">May 2026 Limited Edition</span>
+          </div>
+          <div class="fotm-body">
+            <p class="section-label">Flavour of the Month</p>
+            <h2 class="fotm-name">Lemon Raspberry Dream</h2>
+            <div class="fotm-urgency"><span class="fotm-urgency-dot"></span> Limited — May Only</div>
+            <p class="fotm-desc">citrusy, zesty and packed with real raspberry bits and white chocolate</p>
+            <div class="fotm-pricing">
+              <span class="fotm-price-pill">12 mixed — $25</span>
+              <span class="fotm-price-pill">24 mixed — $45</span>
+            </div>
+            <a href="#order-form" class="btn-primary">Order Lemon Raspberry</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Ube Bliss — extended until May 16 -->
+        <div class="fotm-card fotm-ube gs-reveal">
+          <div class="fotm-media">
+            <img src="Cookies/April/Ube.jpg" alt="Ube Bliss Cookie" loading="lazy">
+            <span class="fotm-badge">Last Call</span>
+          </div>
+          <div class="fotm-body">
+            <p class="section-label">Encore</p>
+            <h2 class="fotm-name">Ube Bliss</h2>
+            <div class="fotm-urgency"><span class="fotm-urgency-dot"></span> Extended — Until May 16</div>
+            <p class="fotm-desc">A little nutty, a little creamy, a whole lot of ube — made with real ube halaya and finished with toasted coconut + ube cream cheese filling.</p>
+            <div class="fotm-pricing">
+              <span class="fotm-price-pill">12 mixed — $25</span>
+              <span class="fotm-price-pill">24 mixed — $45</span>
+            </div>
+            <a href="#order-form" class="btn-primary">Order Ube Bliss</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MOTHER'S DAY SPECIAL ── -->
+  <section id="mothers-day">
+    <div class="md-inner">
+      <div class="md-card gs-reveal">
+        <div class="md-media">
+          <img src="Cookies/May/Mom's Treat Box.jpg" alt="Mom's Treat Box — 3 mini cookies plus 6 cookies" loading="lazy">
+          <span class="md-badge">Mother's Day Special</span>
+        </div>
+        <div class="md-body">
+          <p class="section-label">Limited Bundle · May Only</p>
+          <h2 class="md-name">Mom's Treat Box</h2>
+          <span class="md-price">$28</span>
+          <div class="md-urgency"><span class="md-urgency-dot"></span> Order by Sun May 3 · 7PM for May 6 pickup</div>
+          <p class="md-desc">featuring 3 mini cookies + 6 cookies (one of each flavour to try!)</p>
+          <a href="#order-form" class="btn-primary">Add a Mom's Box</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FLAVORS ── -->
+  <section id="specialties">
+    <div class="specialties-inner">
+      <div class="specialties-header">
+        <p class="section-label">Current Menu</p>
+        <h2 class="section-title">Available Flavours</h2>
+        <p class="section-subtitle">Flavours rotate seasonally — DM on Instagram to ask what's available right now!</p>
+      </div>
+      <div class="specialties-grid">
+        <div class="specialty-card gs-reveal">
+          <div class="specialty-img-wrap">
+            <img src="Cookies/Bischoff.png" alt="Biscoff Cookie" loading="lazy" />
+            <div class="specialty-overlay"><span>Order Now</span></div>
+          </div>
+          <div class="specialty-card-body">
+            <h3>Biscoff</h3>
+            <p>That iconic caramelized speculoos flavour baked right into every bite.</p>
+          </div>
+        </div>
+        <div class="specialty-card gs-reveal">
+          <div class="specialty-img-wrap">
+            <img src="Cookies/Mini Eggs.png" alt="Mini Eggs Cookie" loading="lazy" />
+            <div class="specialty-overlay"><span>Order Now</span></div>
+          </div>
+          <div class="specialty-card-body">
+            <h3>Mini Eggs</h3>
+            <p>Crunchy, chocolatey mini eggs folded into a soft, chewy cookie. A seasonal favourite.</p>
+          </div>
+        </div>
+        <div class="specialty-card gs-reveal">
+          <div class="specialty-img-wrap">
+            <img src="Cookies/Matcha Chocolate.png" alt="Matcha with White Chocolate Cookie" loading="lazy" />
+            <div class="specialty-overlay"><span>Order Now</span></div>
+          </div>
+          <div class="specialty-card-body">
+            <h3>Matcha with White Chocolate</h3>
+            <p>Earthy matcha balanced with creamy white chocolate chips — elegant and delicious.</p>
+          </div>
+        </div>
+        <div class="specialty-card gs-reveal">
+          <div class="specialty-img-wrap">
+            <img src="Cookies/Chocolate Chunk.png" alt="Chocolate Chunk with Sea Salt Cookie" loading="lazy" />
+            <div class="specialty-overlay"><span>Order Now</span></div>
+          </div>
+          <div class="specialty-card-body">
+            <h3>Chocolate Chunk with Sea Salt</h3>
+            <p>Gooey dark chocolate chunks finished with a sprinkle of flaky sea salt. Pure perfection.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flavors-note">
+        Flavours rotate seasonally — follow
+        <a href="https://www.instagram.com/sugarandshaicookies/" target="_blank" rel="noopener">@sugarandshaicookies</a>
+        on Instagram to stay up to date!
+      </div>
+
+      <div class="pricing-banner gs-reveal">
+        <div class="pricing-banner-item">
+          <span class="pricing-banner-qty">12pc</span>
+          <span class="pricing-banner-price">$20.00</span>
+        </div>
+        <div class="pricing-banner-divider">✦</div>
+        <div class="pricing-banner-item">
+          <span class="pricing-banner-qty">24pc</span>
+          <span class="pricing-banner-price">$35.00</span>
+        </div>
+        <div class="pricing-banner-note">Minimum of 3pc per flavour &nbsp;✦&nbsp; Mix with Flavour of the Month: 12pc $25 / 24pc $45</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY ── -->
+  <section id="gallery">
+    <div class="gallery-inner">
+      <div class="gallery-header">
+        <p class="section-label">Sweet Creations</p>
+        <h2 class="section-title">Cookie Gallery</h2>
+        <p class="section-subtitle">A peek at our cookies — follow us on Instagram for more!</p>
+      </div>
+
+      <!-- Row 1: Cookies — scrolls left -->
+      <div class="marquee-track gs-reveal">
+      <div class="marquee-row">
+        <!-- original set -->
+        <div class="gallery-item"><img src="Cookies/May/Lemon Raspberry Dream.png" alt="Lemon Raspberry Dream cookies — May Flavour of the Month" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/May/Mom's Treat Box.jpg" alt="Mom's Treat Box — Mother's Day Special" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies.jpg" alt="Packaged cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_1.jpg" alt="All flavours" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/Matcha Chocolate.png" alt="Matcha White Chocolate cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/Mini Eggs.png" alt="Mini Eggs cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_3.jpg" alt="Matcha cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_4.jpg" alt="Mini eggs cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_5.jpg" alt="Biscoff cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_6.jpg" alt="Chocolate chunk cookies" loading="lazy" /></div>
+        <div class="gallery-item">
+          <video src="Gallery/Cookies_2.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <!-- duplicate set for seamless loop -->
+        <div class="gallery-item"><img src="Cookies/May/Lemon Raspberry Dream.png" alt="Lemon Raspberry Dream cookies — May Flavour of the Month" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/May/Mom's Treat Box.jpg" alt="Mom's Treat Box — Mother's Day Special" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies.jpg" alt="Packaged cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_1.jpg" alt="All flavours" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/Matcha Chocolate.png" alt="Matcha White Chocolate cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Cookies/Mini Eggs.png" alt="Mini Eggs cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_3.jpg" alt="Matcha cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_4.jpg" alt="Mini eggs cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_5.jpg" alt="Biscoff cookies" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/Cookies_6.jpg" alt="Chocolate chunk cookies" loading="lazy" /></div>
+        <div class="gallery-item">
+          <video src="Gallery/Cookies_2.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+
+      </div>
+
+      <!-- Row 2: BTS — scrolls right (reverse) -->
+      <div class="marquee-track gs-reveal">
+      <div class="marquee-row reverse">
+        <!-- original set -->
+        <div class="gallery-item"><img src="Gallery/BTS.jpg" alt="New cookie" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/BTS_2.jpg" alt="Dough prep" loading="lazy" /></div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_1.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_3.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_4.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_5.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <!-- duplicate set -->
+        <div class="gallery-item"><img src="Gallery/BTS.jpg" alt="New cookie" loading="lazy" /></div>
+        <div class="gallery-item"><img src="Gallery/BTS_2.jpg" alt="Dough prep" loading="lazy" /></div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_3.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_4.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_5.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="gallery-item">
+          <video src="Gallery/BTS_1.mp4" loop playsinline muted preload="metadata"></video>
+          <div class="gallery-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="gallery-cta">
+        <a href="https://www.instagram.com/sugarandshaicookies/" target="_blank" rel="noopener" class="btn-primary">
+          <i data-lucide="instagram" style="width:18px;height:18px;stroke-width:1.5;"></i> See More on Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section id="testimonials">
+    <div class="reviews-inner">
+      <div class="reviews-header">
+        <p class="section-label">Happy Customers</p>
+        <h2 class="section-title">What People Are Saying</h2>
+      </div>
+      <div class="review-quotes" style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;">
+        <div style="background:var(--cream);border-radius:16px;padding:1.5rem 1.8rem;max-width:300px;border:1px solid rgba(242,196,206,0.4);text-align:center;">
+          <p style="font-size:0.92rem;color:var(--text);line-height:1.6;font-style:italic;margin-bottom:0.75rem;">"These cookies are INSANE. The biscoff ones didn't last a day in my house."</p>
+          <p style="font-size:0.78rem;font-weight:700;color:var(--olive);letter-spacing:0.06em;">— Happy Customer</p>
+        </div>
+        <div style="background:var(--cream);border-radius:16px;padding:1.5rem 1.8rem;max-width:300px;border:1px solid rgba(242,196,206,0.4);text-align:center;">
+          <p style="font-size:0.92rem;color:var(--text);line-height:1.6;font-style:italic;margin-bottom:0.75rem;">"Ordered for my daughter's birthday — everyone asked where the cookies were from!"</p>
+          <p style="font-size:0.78rem;font-weight:700;color:var(--olive);letter-spacing:0.06em;">— Happy Customer</p>
+        </div>
+        <div style="background:var(--cream);border-radius:16px;padding:1.5rem 1.8rem;max-width:300px;border:1px solid rgba(242,196,206,0.4);text-align:center;">
+          <p style="font-size:0.92rem;color:var(--text);line-height:1.6;font-style:italic;margin-bottom:0.75rem;">"Best cookies in Manitoba, hands down. The matcha white chocolate is next level."</p>
+          <p style="font-size:0.78rem;font-weight:700;color:var(--olive);letter-spacing:0.06em;">— Happy Customer</p>
+        </div>
+      </div>
+      <div class="reviews-carousel-wrap gs-reveal">
+        <button class="carousel-btn prev" onclick="scrollCarousel(-1)">&#8592;</button>
+        <div class="reviews-carousel" id="reviewsCarousel">
+
+          <div class="review-item">
+            <video src="Reviews/Review_1.mp4" loop playsinline preload="metadata"></video>
+            <div class="review-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <img src="Reviews/Review_2.jpg" alt="Customer review" loading="lazy" />
+          </div>
+
+          <div class="review-item">
+            <video src="Reviews/Review_3.mp4" loop playsinline preload="metadata"></video>
+            <div class="review-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <img src="Reviews/Review_4.jpg" alt="Customer review" loading="lazy" />
+          </div>
+
+          <div class="review-item">
+            <img src="Reviews/Review_5.jpg" alt="Customer review" loading="lazy" />
+          </div>
+
+          <div class="review-item">
+            <video src="Reviews/Review_6.mp4" loop playsinline preload="metadata"></video>
+            <div class="review-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <video src="Reviews/Review_7.mp4" loop playsinline preload="metadata"></video>
+            <div class="review-play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-btn next" onclick="scrollCarousel(1)">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW TO ORDER ── -->
+  <section id="order">
+    <div class="order-inner">
+      <div class="order-header">
+        <p class="section-label">The Process</p>
+        <h2 class="section-title">How to Order</h2>
+        <p class="section-subtitle">Pre-orders only · Pickup in the <strong>Tyndall area</strong> · Minimum 3pc per flavour</p>
+      </div>
+      <div class="steps">
+        <div class="step gs-reveal">
+          <div class="step-number">1</div>
+          <h3>Choose Your Flavours</h3>
+          <p>Browse our flavours including the <strong>Flavour of the Month</strong>. Select quantities in multiples of 3 — minimum 3pc per flavour. Need more than 24 pieces? Slide into our DMs on Instagram!</p>
+        </div>
+        <div class="step gs-reveal">
+          <div class="step-number">2</div>
+          <h3>Submit Your Order</h3>
+          <p>Fill out the order form with your details, preferred pickup date, and payment method. <strong>Wednesdays</strong> are our regular pickup day — order cutoff is <strong>Sunday at 7PM</strong> the week before. Orders after cutoff are automatically moved to the following Wednesday.</p>
+        </div>
+        <div class="step gs-reveal">
+          <div class="step-number">3</div>
+          <h3>Get Confirmed</h3>
+          <p>Once your order is in, secure your spot with <strong>e-transfer or cash</strong>. Non-Wednesday pickups are subject to Shai's confirmation. Need it sooner? <a href="https://www.instagram.com/sugarandshaicookies/" target="_blank" style="color:var(--olive);font-weight:700;">DM Shai on Instagram.</a></p>
+        </div>
+        <div class="step gs-reveal">
+          <div class="step-number">4</div>
+          <h3>Pick Up & Enjoy</h3>
+          <p>Shai will reach out <strong>on pickup day</strong> to coordinate a time. Pick up your freshly baked cookies in the <strong>Tyndall area</strong> and enjoy!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ORDER FORM ── -->
+  <section id="order-form">
+    <div class="order-form-inner">
+      <div class="order-form-header">
+        <p class="section-label">Place Your Order</p>
+        <h2 class="section-title">Ready to Order?</h2>
+        <p class="section-subtitle">Fill out the form below and Shai will get back to you to confirm your spot! Most orders confirmed within 24 hours.</p>
+      </div>
+
+      <form class="order-form" id="orderForm">
+        <input type="hidden" name="access_key" value="05b0163d-2b1f-4da2-870c-c4460c6ef221" />
+        <input type="hidden" name="subject" value="New Cookie Order — Sugar & Shai" />
+        <input type="hidden" name="from_name" value="Sugar & Shai Cookies Website" />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="e.g. Sarah M." autocomplete="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone / Instagram</label>
+            <input type="text" id="phone" name="contact" placeholder="Phone # or @handle" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="pickup-date">Pickup Date Needed</label>
+            <input type="date" id="pickup-date" name="pickup_date" required />
+            <span id="pickupDateNote" style="font-size:0.78rem;margin-top:0.25rem;color:var(--text-light);">Wednesdays are our regular pickup day — cutoff is Sunday at 7PM the week before.</span>
+          </div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <div>
+          <p class="form-flavours-label">Flavours &amp; Quantities <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.78rem;color:var(--text-light)">(min. 3pc per flavour)</span></p>
+          <div class="flavor-qty-grid">
+
+            <div class="flavor-qty-row" id="row-biscoff">
+              <span class="flavor-qty-name">Biscoff</span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-biscoff" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-biscoff" name="qty_biscoff" value="0" min="0" readonly aria-label="Biscoff quantity" />
+                <button type="button" class="qty-btn" data-target="qty-biscoff" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row" id="row-matcha">
+              <span class="flavor-qty-name">Matcha White Chocolate</span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-matcha" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-matcha" name="qty_matcha" value="0" min="0" readonly aria-label="Matcha White Chocolate quantity" />
+                <button type="button" class="qty-btn" data-target="qty-matcha" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row" id="row-choco">
+              <span class="flavor-qty-name">Chocolate Chunk Sea Salt</span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-choco" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-choco" name="qty_choco" value="0" min="0" readonly aria-label="Chocolate Chunk Sea Salt quantity" />
+                <button type="button" class="qty-btn" data-target="qty-choco" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row" id="row-minieggs">
+              <span class="flavor-qty-name">Mini Eggs</span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-minieggs" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-minieggs" name="qty_minieggs" value="0" min="0" readonly aria-label="Mini Eggs quantity" />
+                <button type="button" class="qty-btn" data-target="qty-minieggs" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row fotm-flavor fotm-lemon" id="row-lemon">
+              <span class="flavor-qty-name">Lemon Raspberry Dream <span class="fotm-inline-tag" style="background:#d63384;">Flavour of the Month</span></span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-lemon" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-lemon" name="qty_lemon" value="0" min="0" readonly aria-label="Lemon Raspberry Dream quantity" />
+                <button type="button" class="qty-btn" data-target="qty-lemon" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row fotm-flavor" id="row-ube">
+              <span class="flavor-qty-name">Ube Bliss <span class="fotm-inline-tag">Last Call · Until May 16</span></span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn" data-target="qty-ube" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-ube" name="qty_ube" value="0" min="0" readonly aria-label="Ube Bliss quantity" />
+                <button type="button" class="qty-btn" data-target="qty-ube" data-action="plus">+</button>
+              </div>
+            </div>
+
+            <div class="flavor-qty-row bundle-row" id="row-momsbox">
+              <span class="flavor-qty-name">Mom's Treat Box <span class="bundle-tag">$28 · Bundle</span></span>
+              <div class="flavor-qty-controls">
+                <button type="button" class="qty-btn bundle-btn" data-target="qty-momsbox" data-action="minus">−</button>
+                <input type="number" class="qty-input" id="qty-momsbox" name="qty_momsbox" value="0" min="0" readonly aria-label="Mom's Treat Box quantity" />
+                <button type="button" class="qty-btn bundle-btn" data-target="qty-momsbox" data-action="plus">+</button>
+              </div>
+            </div>
+
+          </div>
+          <p class="qty-min-warn" id="qtyMinWarn">⚠ Cookie quantities must be in multiples of 3 — use the buttons to adjust.</p>
+        </div>
+
+        <div class="order-summary" id="orderSummary">
+          <div class="order-summary-title">Order Summary</div>
+          <div id="summaryLines"></div>
+          <hr class="order-summary-divider" />
+          <div class="order-summary-total">
+            <span>Total</span>
+            <span id="summaryTotal"></span>
+          </div>
+          <p class="order-summary-note" id="summaryNote"></p>
+          <p class="order-summary-warn" id="summaryWarn"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="payment">Preferred Payment</label>
+          <select id="payment" name="payment" required>
+            <option value="" disabled selected>Select payment method</option>
+            <option value="E-Transfer">E-Transfer</option>
+            <option value="Cash">Cash</option>
+          </select>
+          <span id="paymentNote" style="font-size:0.78rem;margin-top:0.25rem;color:var(--text-light);display:none;"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Special Requests / Occasion</label>
+          <textarea id="notes" name="notes" placeholder="e.g. Custom combo of 12pcs not in multiples of 3 (e.g. 5 Biscoff + 4 Matcha + 3 Lemon Raspberry), gift wrapping, nut-free request, birthday occasion, etc."></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn-primary"><i data-lucide="cookie" style="width:18px;height:18px;stroke-width:1.5;"></i> Reserve My Cookies</button>
+          <p class="form-submit-note">Pre-orders only · Pickup in Tyndall area · Min. 3pc per flavour</p>
+          <p style="font-size:0.78rem;color:var(--olive);font-weight:600;margin-top:0.25rem;"><i data-lucide="shield-check" style="width:14px;height:14px;stroke-width:2;vertical-align:-2px;margin-right:4px;"></i> No payment taken until Shai confirms your order</p>
+        </div>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon"><i data-lucide="check-circle" style="width:48px;height:48px;stroke-width:1.5;color:var(--olive);"></i></div>
+        <h3>Order Received!</h3>
+        <p>Thanks for reaching out! Shai will confirm your spot within 24–48 hours.<br />Check your email for a reply.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Skip the Form</p>
+      <h2 class="section-title">Prefer to Order Your Way?</h2>
+      <p class="section-subtitle">
+        Not a form person? No worries — slide into our DMs or drop us an email and we'll get your order sorted just the same.
+      </p>
+      <div class="contact-methods">
+        <a href="https://www.instagram.com/sugarandshaicookies/" target="_blank" rel="noopener" class="contact-method">
+          <span class="contact-method-icon"><i data-lucide="send" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
+          <span class="contact-method-label">DM to Pre-Order</span>
+          <span class="contact-method-value">@sugarandshaicookies</span>
+        </a>
+        <a href="mailto:sugarandshaicookies@gmail.com" class="contact-method">
+          <span class="contact-method-icon"><i data-lucide="mail" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
+          <span class="contact-method-label">Email</span>
+          <span class="contact-method-value">sugarandshaicookies@gmail.com</span>
+        </a>
+        <div class="contact-method" style="cursor:default;">
+          <span class="contact-method-icon"><i data-lucide="map-pin" style="width:24px;height:24px;stroke-width:1.5;"></i></span>
+          <span class="contact-method-label">Pickup Only</span>
+          <span class="contact-method-value">Tyndall area</span>
+        </div>
+      </div>
+      <p class="contact-note">
+        Home-based bakery · Pre-orders only · Pickup in Tyndall area · Please allow 24–48 hrs for a response
+      </p>
+    </div>
+  </section>
+
+  <!-- FJMedia preview pill -->
+  <aside class="fj-preview-bar" aria-label="FJMedia Preview">
+    <span class="fj-preview-eyebrow">FJMedia · Preview <strong>May Refresh</strong></span>
+  </aside>
+
+  <!-- ── STICKY MOBILE CTA ── -->
+  <div class="mobile-cta-bar" id="mobileCta">
+    <a href="#order-form" onclick="gtag('event','order_button_click',{button:'sticky_mobile_cta'})">Order Now</a>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo"><img src="Logo.jpg" alt="Sugar & Shai Cookies" /></div>
+    <p class="footer-tagline">Handcrafted with love, one cookie at a time.</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#specialties">Flavours</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#order">How to Order</a></li>
+      <li><a href="https://www.instagram.com/sugarandshaicookies/" target="_blank">Instagram</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Sugar & Shai Cookies. All rights reserved.</p>
+    <p style="font-size:0.65rem; opacity:0.45; margin-top:0.5rem;">Powered by <a href="https://fjmedia.ca" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">FJMedia</a></p>
+  </footer>
+
+  <script>
+    // ── Pickup date logic ──
+    const pickupInput = document.getElementById('pickup-date');
+    const pickupNote  = document.getElementById('pickupDateNote');
+
+    // No same-day or past orders — use local date, not UTC
+    function localDateStr(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    pickupInput.min = localDateStr(tomorrow);
+
+    pickupInput.addEventListener('change', function() {
+      let selected = new Date(this.value + 'T12:00:00');
+      const now = new Date();
+      const day = selected.getDay();
+
+      if (day === 3) { // Wednesday
+        const cutoff = new Date(selected);
+        cutoff.setDate(cutoff.getDate() - 3); // Sunday before
+        cutoff.setHours(19, 0, 0, 0);         // 7PM
+
+        if (now > cutoff) {
+          // Auto-advance to the following Wednesday
+          selected.setDate(selected.getDate() + 7);
+          this.value = localDateStr(selected);
+          const nextLabel = selected.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
+          pickupNote.style.color = '#c07a2b';
+          pickupNote.textContent = 'Cutoff for this Wednesday has passed — your order will be placed for ' + nextLabel + '.';
+        } else {
+          pickupNote.style.color = 'var(--olive)';
+          pickupNote.textContent = 'Wednesday pickup — order by Sunday at 7PM to lock in your spot.';
+        }
+      } else {
+        pickupNote.style.color = 'var(--dusty)';
+        pickupNote.textContent = 'Non-Wednesday pickup — Shai will reach out to confirm this date works.';
+      }
+    });
+
+    // ── Payment note ──
+    const paymentSelect = document.getElementById('payment');
+    const paymentNote   = document.getElementById('paymentNote');
+    paymentSelect.addEventListener('change', function() {
+      if (this.value === 'E-Transfer') {
+        paymentNote.style.display = 'block';
+        paymentNote.style.color   = 'var(--olive)';
+        paymentNote.textContent   = 'E-transfer will be sent to your email address provided above.';
+      } else {
+        paymentNote.style.display = 'none';
+      }
+    });
+
+    // ── Flavour quantity buttons ──
+    const FLAVORS = [
+      { id: 'qty-biscoff',   row: 'row-biscoff',  label: 'Biscoff',                   fotm: false },
+      { id: 'qty-matcha',    row: 'row-matcha',   label: 'Matcha White Chocolate',     fotm: false },
+      { id: 'qty-choco',     row: 'row-choco',    label: 'Chocolate Chunk Sea Salt',   fotm: false },
+      { id: 'qty-minieggs',  row: 'row-minieggs', label: 'Mini Eggs',                  fotm: false },
+      { id: 'qty-lemon',     row: 'row-lemon',    label: 'Lemon Raspberry Dream',     fotm: true  },
+      { id: 'qty-ube',       row: 'row-ube',      label: 'Ube Bliss',                  fotm: true  },
+    ];
+
+    // Mom's Treat Box — sealed bundle, $28 flat, doesn't follow cookie min-3 rule, doesn't trigger FOTM mix pricing
+    const MOMS_BOX = { id: 'qty-momsbox', row: 'row-momsbox', label: "Mom's Treat Box", price: 28 };
+
+    // Pricing (per cookie box)
+    const PRICE = {
+      regular: { 12: 20, 24: 35 },
+      mixed:   { 12: 25, 24: 45 },
+    };
+
+    function getQty(id) { return parseInt(document.getElementById(id).value) || 0; }
+
+    function calcOrder() {
+      let cookieTotal = 0, hasFOTM = false, lines = [], hasMinError = false;
+      FLAVORS.forEach(f => {
+        const qty = getQty(f.id);
+        const row = document.getElementById(f.row);
+        if (qty > 0) {
+          if (qty % 3 !== 0) hasMinError = true;
+          cookieTotal += qty;
+          if (f.fotm && qty >= 3) hasFOTM = true;
+          lines.push({ label: f.label, qty, fotm: f.fotm });
+          row.classList.add('active');
+        } else {
+          row.classList.remove('active');
+        }
+      });
+      const momsQty = getQty(MOMS_BOX.id);
+      const momsTotal = momsQty * MOMS_BOX.price;
+      const momsRow = document.getElementById(MOMS_BOX.row);
+      if (momsQty > 0) {
+        momsRow.classList.add('active');
+        lines.push({ label: MOMS_BOX.label, qty: momsQty, bundle: true, lineTotal: momsTotal });
+      } else {
+        momsRow.classList.remove('active');
+      }
+      return { cookieTotal, hasFOTM, lines, hasMinError, momsQty, momsTotal };
+    }
+
+    function updateSummary() {
+      const { cookieTotal, hasFOTM, lines, hasMinError, momsQty, momsTotal } = calcOrder();
+      const summary = document.getElementById('orderSummary');
+      const summaryLines = document.getElementById('summaryLines');
+      const summaryTotal = document.getElementById('summaryTotal');
+      const summaryNote  = document.getElementById('summaryNote');
+      const summaryWarn  = document.getElementById('summaryWarn');
+      const minWarn      = document.getElementById('qtyMinWarn');
+
+      minWarn.style.display = hasMinError ? 'block' : 'none';
+
+      if (cookieTotal === 0 && momsQty === 0) { summary.classList.remove('visible'); return; }
+      summary.classList.add('visible');
+
+      summaryLines.innerHTML = lines.map(l => {
+        if (l.bundle) {
+          return `<div class="summary-line"><span>${l.label} 🎁</span><span>${l.qty} × $${MOMS_BOX.price} = $${l.lineTotal}</span></div>`;
+        }
+        return `<div class="summary-line"><span>${l.label}${l.fotm ? ' ✦' : ''}</span><span>${l.qty} pcs</span></div>`;
+      }).join('');
+
+      const type = hasFOTM ? 'mixed' : 'regular';
+      const priceTable = PRICE[type];
+      let cookiePrice = 0;
+      let warnStr = '', noteStr = '';
+
+      // Cookie pricing logic
+      if (cookieTotal > 24) {
+        warnStr = 'Cookie orders above 24 pieces must be placed via DM — message @sugarandshaicookies on Instagram.';
+      } else if (cookieTotal > 0 && priceTable[cookieTotal]) {
+        cookiePrice = priceTable[cookieTotal];
+      } else if (cookieTotal > 0) {
+        warnStr = 'Cookie pricing is set for 12 or 24 pieces. Adjust your quantities to hit a box size.';
+      }
+
+      // Friendly note
+      if (!warnStr) {
+        if (cookieTotal > 0 && hasFOTM) {
+          noteStr = momsQty > 0
+            ? "Mix & match cookies (FOTM included) + Mom's Treat Box."
+            : 'Mix & match pricing applied (Flavour of the Month included).';
+        } else if (cookieTotal > 0) {
+          const lemonQty = getQty('qty-lemon');
+          const ubeQty   = getQty('qty-ube');
+          if ((lemonQty > 0 && lemonQty < 3) || (ubeQty > 0 && ubeQty < 3)) {
+            noteStr = 'Add at least 3 Lemon Raspberry Dream or 3 Ube Bliss to unlock mix pricing.';
+          } else {
+            noteStr = momsQty > 0
+              ? "Regular cookie pricing + Mom's Treat Box."
+              : 'Regular pricing applied.';
+          }
+        } else if (momsQty > 0) {
+          noteStr = "Mom's Treat Box only — no cookies in cart.";
+        }
+      }
+
+      // Grand total display
+      const grandTotal = cookiePrice + momsTotal;
+      let priceStr = '';
+      if (warnStr && cookieTotal > 0 && momsQty === 0) {
+        priceStr = `${cookieTotal} pcs`;
+      } else if (warnStr && momsQty > 0) {
+        priceStr = `Mom's Box: $${momsTotal}.00 (cookies pending)`;
+      } else if (cookieTotal > 0 && momsQty > 0) {
+        priceStr = `${cookieTotal} pcs ($${cookiePrice}) + ${momsQty} Mom's Box ($${momsTotal}) = $${grandTotal}.00`;
+      } else if (cookieTotal > 0) {
+        priceStr = `${cookieTotal} pcs — $${cookiePrice}.00`;
+      } else if (momsQty > 0) {
+        priceStr = `${momsQty} × Mom's Box — $${momsTotal}.00`;
+      }
+
+      summaryTotal.textContent = priceStr;
+      summaryNote.textContent  = noteStr;
+      summaryWarn.textContent  = warnStr;
+    }
+
+    // Cookie buttons step by 3 ; Mom's Box steps by 1
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const input = document.getElementById(this.dataset.target);
+        const isBundle = this.classList.contains('bundle-btn');
+        const step = isBundle ? 1 : 3;
+        let val = parseInt(input.value) || 0;
+        if (this.dataset.action === 'plus') val += step;
+        else if (this.dataset.action === 'minus' && val > 0) val = Math.max(0, val - step);
+        input.value = val;
+        updateSummary();
+      });
+    });
+
+    // Order form — submit via Web3Forms
+    const orderForm = document.getElementById('orderForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    orderForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const { cookieTotal, hasFOTM, lines, hasMinError, momsQty, momsTotal } = calcOrder();
+      const type = hasFOTM ? 'mixed' : 'regular';
+      const priceTable = PRICE[type];
+
+      if (cookieTotal === 0 && momsQty === 0) { alert("Please select at least one flavour or a Mom's Treat Box."); return; }
+      if (cookieTotal > 24) { alert('Cookie orders above 24 pieces must be placed via DM — message @sugarandshaicookies on Instagram.'); return; }
+      if (hasMinError) { alert('Cookie quantities must be in multiples of 3. Use the Special Requests field for custom combos.'); return; }
+      if (cookieTotal > 0 && !priceTable[cookieTotal]) { alert('Cookie quantities must total 12 or 24 pieces. Adjust your selection or use Special Requests for custom combos.'); return; }
+
+      const btn = orderForm.querySelector('button[type="submit"]');
+      btn.textContent = 'Reserving…';
+      btn.disabled = true;
+
+      // Build flavours summary string (cookies + Mom's Box if any)
+      const flavourSummary = lines.map(l => l.bundle
+        ? `${l.label}: ${l.qty} × $${MOMS_BOX.price}`
+        : `${l.label}: ${l.qty}pc`
+      ).join(', ');
+
+      const cookiePrice = cookieTotal > 0 ? priceTable[cookieTotal] : 0;
+      const grandTotal = cookiePrice + momsTotal;
+      const totalParts = [];
+      if (cookieTotal > 0) totalParts.push(`${cookieTotal}pc cookies $${cookiePrice}`);
+      if (momsQty > 0)     totalParts.push(`${momsQty}× Mom's Box $${momsTotal}`);
+      const priceStr = `${totalParts.join(' + ')} = $${grandTotal}.00`;
+
+      const formData = new FormData(orderForm);
+      formData.set('flavours', flavourSummary);
+      formData.set('quantity', priceStr);
+
+      // Send to Google Sheet + email notification
+      const gasData = new URLSearchParams();
+      gasData.append('name',        formData.get('name')        || '');
+      gasData.append('email',       formData.get('email')       || '');
+      gasData.append('contact',     formData.get('contact')     || '');
+      gasData.append('pickup_date', formData.get('pickup_date') || '');
+      gasData.append('flavours',    flavourSummary);
+      gasData.append('quantity',    `${total}pc — ${priceStr}`);
+      gasData.append('payment',     formData.get('payment')     || '');
+      gasData.append('notes',       formData.get('notes')       || '');
+      fetch('https://script.google.com/macros/s/AKfycbyxwDivyFF4zPmyRzhIGhXLniUcF-dRUz80Bl1GVYEsUsd7pemc27bmKQV8JH8yXelH/exec', {
+        method: 'POST',
+        body: gasData
+      }).catch(() => {});
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          gtag('event', 'order_form_submitted', { method: 'web3forms' });
+          const pickupVal = formData.get('pickup_date') || '';
+          const pickupDate = pickupVal ? new Date(pickupVal + 'T12:00:00') : null;
+          const isWednesday = pickupDate ? pickupDate.getDay() === 3 : false;
+          const dateLabel = pickupDate ? pickupDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) : '';
+          const dateParam = dateLabel ? '?date=' + encodeURIComponent(dateLabel) : '';
+          if (isWednesday) {
+            window.location.href = (hasFOTM ? 'thanks_lemon.html' : 'thanks.html') + dateParam;
+          } else {
+            window.location.href = 'thanks_pending.html' + dateParam;
+          }
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch(() => {
+        btn.textContent = 'Reserve My Cookies';
+        btn.disabled = false;
+        alert('Something went wrong. Please DM us on Instagram!');
+      });
+    });
+
+    // About section slideshow — fade out current, then fade in next
+    const slides = document.querySelectorAll('#aboutSlideshow .about-slide');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.add('fading');
+      slides[current].classList.remove('active');
+      setTimeout(() => {
+        slides[current].classList.remove('fading');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 1600);
+    }, 5000);
+
+    // Mobile nav toggle with scroll lock
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        document.body.classList.remove('nav-open');
+      });
+    });
+
+    // Carousel scroll buttons
+    function scrollCarousel(dir) {
+      const carousel = document.getElementById('reviewsCarousel');
+      carousel.scrollBy({ left: dir * 250, behavior: 'smooth' });
+    }
+
+    // Specialty cards — click to order
+    document.querySelectorAll('.specialty-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+        gtag('event', 'order_button_click', { button: 'specialty_card' });
+      });
+    });
+
+    // Gallery video tap to play/pause
+    document.querySelectorAll('.gallery-item video').forEach(video => {
+      const item = video.parentElement;
+      item.addEventListener('click', () => {
+        if (video.paused) {
+          document.querySelectorAll('.gallery-item video').forEach(v => { v.pause(); v.parentElement.classList.remove('playing'); });
+          video.play();
+          item.classList.add('playing');
+        } else {
+          video.pause();
+          item.classList.remove('playing');
+        }
+      });
+    });
+
+    // Review video tap to play/pause
+    document.querySelectorAll('.review-item video').forEach(video => {
+      const item = video.parentElement;
+      item.addEventListener('click', () => {
+        if (video.paused) {
+          document.querySelectorAll('.review-item video').forEach(v => { v.pause(); v.parentElement.classList.remove('playing'); });
+          video.play();
+          item.classList.add('playing');
+        } else {
+          video.pause();
+          item.classList.remove('playing');
+        }
+      });
+    });
+
+    // Mother's Day urgency — hide after May 3, 7PM cutoff has passed
+    (function hideMdUrgencyAfterCutoff() {
+      const cutoff = new Date('2026-05-03T19:00:00');
+      if (new Date() > cutoff) {
+        document.querySelectorAll('.md-urgency').forEach(el => { el.style.display = 'none'; });
+      }
+    })();
+
+    // Sticky mobile CTA bar — show after scrolling past hero
+    var mobileCta = document.getElementById('mobileCta');
+    var heroSection = document.querySelector('.hero');
+    if (mobileCta && heroSection) {
+      var ctaObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            mobileCta.classList.remove('visible');
+          } else {
+            mobileCta.classList.add('visible');
+          }
+        });
+      }, { threshold: 0 });
+      ctaObserver.observe(heroSection);
+    }
+  </script>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <script>
+    window.addEventListener('load', function() {
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      // GSAP animations
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero — stagger text in from left, image from right
+        gsap.fromTo('.hero-content',
+          { x: -50, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.2 }
+        );
+        gsap.fromTo('.hero-image-wrap',
+          { x: 50, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.4 }
+        );
+
+        // About section
+        gsap.fromTo('#about .about-image-wrap',
+          { x: -40, opacity: 0 },
+          { x: 0, opacity: 1, scrollTrigger: { trigger: '#about', start: 'top 85%', once: true }, duration: 0.7, ease: 'power1.out' }
+        );
+        gsap.fromTo('#about .about-text',
+          { x: 40, opacity: 0 },
+          { x: 0, opacity: 1, scrollTrigger: { trigger: '#about', start: 'top 85%', once: true }, duration: 0.7, delay: 0.15, ease: 'power1.out' }
+        );
+
+        // FOTM cards (stagger so the May card leads, Ube extension follows)
+        gsap.fromTo('.fotm-card',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#fotm', start: 'top 85%', once: true }, duration: 0.7, stagger: 0.12, ease: 'power1.out' }
+        );
+
+        // Mother's Day Special card
+        gsap.fromTo('.md-card',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#mothers-day', start: 'top 85%', once: true }, duration: 0.7, ease: 'power1.out' }
+        );
+
+        // FOTM section header
+        gsap.fromTo('.fotm-header',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#fotm', start: 'top 88%', once: true }, duration: 0.6, ease: 'power1.out' }
+        );
+
+        // Specialty cards — stagger
+        gsap.fromTo('.specialty-card',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '.specialties-grid', start: 'top 85%', once: true }, duration: 0.5, stagger: 0.1, ease: 'power1.out' }
+        );
+
+        // Pricing banner
+        gsap.fromTo('.pricing-banner',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '.pricing-banner', start: 'top 88%', once: true }, duration: 0.6, ease: 'power1.out' }
+        );
+
+        // Gallery marquee — fade tracks in on scroll so the cold-start frame is never visible
+        gsap.fromTo('.marquee-track',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#gallery', start: 'top 85%', once: true }, duration: 0.7, stagger: 0.15, ease: 'power1.out' }
+        );
+
+        // Reviews carousel
+        gsap.fromTo('.reviews-carousel-wrap',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#testimonials', start: 'top 85%', once: true }, duration: 0.7, ease: 'power1.out' }
+        );
+
+        // Steps — stagger
+        gsap.fromTo('.step',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '.steps', start: 'top 85%', once: true }, duration: 0.5, stagger: 0.1, ease: 'power1.out' }
+        );
+
+        // Order form
+        gsap.fromTo('.order-form',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#order-form', start: 'top 85%', once: true }, duration: 0.7, ease: 'power1.out' }
+        );
+
+        // Contact methods
+        gsap.fromTo('.contact-method',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, scrollTrigger: { trigger: '#contact', start: 'top 85%', once: true }, duration: 0.5, stagger: 0.1, ease: 'power1.out' }
+        );
+
+        // Section labels & headings
+        document.querySelectorAll('.section-label, .section-title').forEach(function(el) {
+          gsap.fromTo(el,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, scrollTrigger: { trigger: el, start: 'top 90%', once: true }, duration: 0.5, ease: 'power1.out' }
+          );
+        });
+
+      } else {
+        // Fallback: if GSAP fails to load, show all elements
+        document.querySelectorAll('.gs-reveal').forEach(function(el) {
+          el.style.opacity = '1';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
