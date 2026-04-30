@@ -1787,7 +1787,7 @@
           <p class="section-label">Limited Bundle · May Only</p>
           <h2 class="md-name">Mom's Treat Box</h2>
           <span class="md-price">$28</span>
-          <div class="md-urgency"><span class="md-urgency-dot"></span> Order by Sun May 3 · 7PM for May 6 pickup</div>
+          <div class="md-urgency"><span class="md-urgency-dot"></span> Pre-order now · Pickups May 7 – 16</div>
           <p class="md-desc">featuring 3 mini cookies + 6 cookies (one of each flavour to try!)</p>
           <a href="#order-form" class="btn-primary">Add a Mom's Box</a>
         </div>
@@ -2622,9 +2622,9 @@
       });
     });
 
-    // Mother's Day urgency — hide after May 3, 7PM cutoff has passed
+    // Mother's Day urgency — hide after May 16, last pickup day for Mom's Box + Ube Last Call window
     (function hideMdUrgencyAfterCutoff() {
-      const cutoff = new Date('2026-05-03T19:00:00');
+      const cutoff = new Date('2026-05-16T23:59:00');
       if (new Date() > cutoff) {
         document.querySelectorAll('.md-urgency').forEach(el => { el.style.display = 'none'; });
       }
