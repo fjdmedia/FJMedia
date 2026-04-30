@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>FJMedia — Packages & Industry Standard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,800;1,700&family=DM+Sans:wght@300;400&family=Space+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#071520;
+    --navy-2:#0D1F3C;
+    --panel:#0c1e3a;
+    --panel-2:#0a1a32;
+    --gold:#C9A84C;
+    --gold-2:#E6C76A;
+    --gold-soft:rgba(201,168,76,.18);
+    --cream:#EDEAE5;
+    --muted:#94a3b8;
+    --line:rgba(255,255,255,.08);
+    --line-strong:rgba(201,168,76,.32);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:'DM Sans',system-ui,sans-serif;
+    font-feature-settings:"kern","liga","calt","ss01";
+    font-variant-numeric:oldstyle-nums proportional-nums;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  @page{size:letter portrait;margin:0;}
+
+  .page{
+    width:8.5in;height:11in;
+    padding:.85in .85in .65in;
+    position:relative;
+    page-break-after:always;
+    overflow:hidden;
+    background:var(--navy);
+    display:flex;
+    flex-direction:column;
+  }
+  .page:last-child{page-break-after:auto;}
+  .page > *{position:relative;z-index:2;}
+  .page > .watermark{position:absolute;}
+
+  .watermark{
+    position:absolute;
+    top:.55in;right:.55in;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;font-style:italic;
+    font-size:11rem;line-height:1;
+    letter-spacing:-.04em;
+    color:rgba(201,168,76,.06);
+    z-index:1 !important;
+    user-select:none;pointer-events:none;
+  }
+
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2.4rem;}
+  .brand{display:flex;align-items:center;gap:.5rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.02em;}
+  .brand .bk{color:var(--gold);}
+  .brand .fj{color:var(--cream);}
+  .brand .word{color:var(--cream);font-weight:400;letter-spacing:.18em;text-transform:uppercase;font-size:.65rem;margin-left:.5rem;}
+  .topbar .meta{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.26em;text-transform:uppercase;}
+
+  .eyebrow{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+
+  h1.display{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:3.4rem;
+    line-height:1.0;
+    letter-spacing:-.025em;
+    color:#fff;
+    text-wrap:balance;
+    font-feature-settings:"kern","liga","calt","ss01","ss02";
+  }
+  .italic-accent{
+    font-style:italic;font-weight:700;
+    background:linear-gradient(115deg,#fff 10%,var(--gold-2) 55%,var(--gold) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+
+  /* ============ TIER TRIO ============ */
+  .tier-trio{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:.7rem;
+    margin-top:2.4rem;
+  }
+  .tier-card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--panel);
+    padding:1.6rem 1.2rem 1.5rem;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height:3.6in;
+  }
+  .tier-card::before{
+    content:"";
+    position:absolute;left:0;top:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--gold) 0%,transparent 80%);
+    opacity:.8;
+  }
+  .tier-card.featured{
+    border-color:var(--line-strong);
+    background:linear-gradient(180deg,rgba(201,168,76,.1) 0%,var(--panel) 60%);
+  }
+  .tier-card .tnum{
+    font-family:'Space Mono',monospace;
+    font-size:.55rem;
+    color:var(--gold);
+    letter-spacing:.28em;
+  }
+  .tier-card .tname{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:#fff;
+    font-size:1.85rem;
+    letter-spacing:-.024em;
+    line-height:1;
+    margin-top:.45rem;
+  }
+  .tier-card .tprice{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:var(--gold);
+    font-size:3.2rem;
+    letter-spacing:-.03em;
+    line-height:1;
+    margin-top:.85rem;
+    font-variant-numeric:tabular-nums;
+  }
+  .tier-card .tprice .cur{font-size:1.4rem;vertical-align:.55em;margin-right:.04em;color:var(--gold-2);font-weight:700;}
+  .tier-card .tonce{
+    font-family:'Space Mono',monospace;
+    font-size:.5rem;
+    color:var(--muted);
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    margin-top:.35rem;
+  }
+  .tier-card .tline{
+    color:#fff;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-style:italic;
+    font-size:.95rem;
+    line-height:1.3;
+    margin-top:1.05rem;
+    letter-spacing:-.008em;
+    text-wrap:balance;
+  }
+  .tier-card .tkeys{
+    margin-top:auto;
+    padding-top:1rem;
+    border-top:1px solid var(--line);
+    color:var(--cream);
+    font-family:'DM Sans',sans-serif;
+    font-weight:300;
+    font-size:.74rem;
+    line-height:1.55;
+    text-wrap:pretty;
+  }
+  .tier-card .tkeys .dot{color:var(--gold);margin:0 .35em;font-weight:800;}
+  .tier-card .best-tag{
+    position:absolute;
+    top:.85rem;right:.85rem;
+    background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);
+    color:var(--navy);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:.5rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    padding:.3rem .55rem;
+    border-radius:3px;
+  }
+
+  /* ============ RETAINER STRIP ============ */
+  .ret-head{
+    margin-top:2rem;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:1.1rem;
+  }
+  .ret-head .lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+  .ret-head .sub{font-family:'DM Sans',sans-serif;font-size:.7rem;color:var(--muted);font-weight:300;font-style:italic;}
+
+  .ret-trio{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:.7rem;
+    margin-top:.85rem;
+  }
+  .ret-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--panel-2);
+    padding:1.05rem 1.1rem 1.15rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .ret-card::before{
+    content:"";
+    position:absolute;left:0;top:0;bottom:0;width:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  }
+  .ret-card.featured{
+    border-color:var(--line-strong);
+    background:linear-gradient(180deg,rgba(201,168,76,.08) 0%,var(--panel-2) 60%);
+  }
+  .ret-card .rname{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;font-size:1.02rem;letter-spacing:-.012em;}
+  .ret-card .rprice{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:var(--gold);
+    font-size:1.7rem;
+    letter-spacing:-.022em;
+    line-height:1;
+    margin-top:.45rem;
+    font-variant-numeric:tabular-nums;
+  }
+  .ret-card .rprice .per{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.24em;text-transform:uppercase;font-weight:400;margin-left:.25rem;}
+  .ret-card .rline{color:var(--cream);font-size:.72rem;line-height:1.45;font-weight:300;margin-top:.55rem;text-wrap:pretty;font-style:italic;}
+
+  /* ============ PAGE 2 — VS BAR ============ */
+  .vs-bar{
+    margin-top:3rem;
+    border:1px solid var(--line-strong);
+    border-radius:14px;
+    background:linear-gradient(135deg,rgba(201,168,76,.08) 0%,var(--panel) 70%);
+    padding:1.6rem 1.8rem;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:1.5rem;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .vs-side{text-align:center;}
+  .vs-side .lbl{
+    font-family:'Space Mono',monospace;
+    font-size:.55rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:.55rem;
+  }
+  .vs-side.us .lbl{color:var(--gold);}
+  .vs-side .num{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:#fff;
+    font-size:2.6rem;
+    letter-spacing:-.028em;
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .vs-side.us .num{color:var(--gold);font-size:3rem;}
+  .vs-side .cap{
+    font-family:'DM Sans',sans-serif;
+    font-size:.7rem;
+    color:var(--muted);
+    line-height:1.4;
+    font-weight:300;
+    margin-top:.5rem;
+    font-style:italic;
+  }
+  .vs-mid{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.4rem;
+    letter-spacing:-.018em;
+  }
+
+  /* ============ TRANSLATION STRIP ============ */
+  .trans-head{
+    margin-top:2rem;
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:1.1rem;
+  }
+  .trans-head .lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+  .trans-head .sub{font-family:'DM Sans',sans-serif;font-size:.7rem;color:var(--muted);font-weight:300;font-style:italic;}
+
+  .trans-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:.7rem;
+    margin-top:.85rem;
+  }
+  .trans-card{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--panel-2);
+    padding:1.1rem .9rem 1.15rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .trans-card .tname{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:#fff;
+    font-size:.85rem;
+    letter-spacing:-.005em;
+  }
+  .trans-card .tour{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:var(--gold);
+    font-size:1.7rem;
+    letter-spacing:-.022em;
+    line-height:1;
+    margin-top:.5rem;
+    font-variant-numeric:tabular-nums;
+  }
+  .trans-card .arrow{
+    color:var(--muted);
+    font-size:.5rem;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    font-family:'Space Mono',monospace;
+    margin:.55rem 0 .35rem;
+  }
+  .trans-card .their{
+    color:var(--cream);
+    font-size:.78rem;
+    font-weight:400;
+    line-height:1.25;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ============ KICKER (1 LINE) ============ */
+  .kicker-line{
+    margin-top:1.6rem;
+    text-align:center;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-style:italic;
+    font-size:1.1rem;
+    color:#fff;
+    line-height:1.3;
+    letter-spacing:-.012em;
+  }
+  .kicker-line em{color:var(--gold);font-style:normal;}
+
+  /* ============ SOURCES ============ */
+  .sources{
+    margin-top:.9rem;
+    text-align:center;
+    font-family:'Space Mono',monospace;
+    font-size:.5rem;
+    color:var(--muted);
+    letter-spacing:.1em;
+    line-height:1.5;
+    text-transform:none;
+    opacity:.7;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer{
+    margin-top:auto;
+    padding-top:.85rem;
+    border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'Space Mono',monospace;
+    font-size:.55rem;
+    color:var(--muted);
+    letter-spacing:.26em;
+    text-transform:uppercase;
+  }
+  .footer a{color:var(--gold);text-decoration:none;}
+
+  .page-head{margin-bottom:.4rem;}
+</style>
+</head>
+<body>
+
+<!-- ====================== PAGE 1 — PACKAGES ====================== -->
+<section class="page" id="page-packages">
+  <div class="watermark">FJ</div>
+
+  <div class="topbar">
+    <div class="brand"><span class="fj">FJ</span><span class="bk">Media</span><span class="word">Packages</span></div>
+    <div class="meta">01 / 02</div>
+  </div>
+
+  <div class="page-head">
+    <div class="eyebrow">Pricing</div>
+    <h1 class="display">Pick a <span class="italic-accent">package.</span></h1>
+  </div>
+
+  <div class="tier-trio">
+    <!-- LAUNCH -->
+    <div class="tier-card">
+      <div class="tnum">TIER 01</div>
+      <div class="tname">Launch</div>
+      <div class="tprice"><span class="cur">$</span>600</div>
+      <div class="tonce">One-time</div>
+      <div class="tline">A clean professional presence. Fast.</div>
+      <div class="tkeys">5–7 page custom site<span class="dot">·</span>mobile-first<span class="dot">·</span>contact form<span class="dot">·</span>domain<span class="dot">·</span>1 month free edits</div>
+    </div>
+
+    <!-- FOUNDATION -->
+    <div class="tier-card featured">
+      <div class="best-tag">Most Picked</div>
+      <div class="tnum">TIER 02</div>
+      <div class="tname">Foundation</div>
+      <div class="tprice"><span class="cur">$</span>1,200</div>
+      <div class="tonce">One-time</div>
+      <div class="tline">Captures and tracks every lead.</div>
+      <div class="tkeys">All of Launch<span class="dot">·</span>booking form<span class="dot">·</span>lead capture<span class="dot">·</span>email alerts<span class="dot">·</span>Google Profile<span class="dot">·</span>SEO<span class="dot">·</span>3 months free edits</div>
+    </div>
+
+    <!-- AUTHORITY -->
+    <div class="tier-card">
+      <div class="tnum">TIER 03</div>
+      <div class="tname">Authority</div>
+      <div class="tprice"><span class="cur">$</span>2,000</div>
+      <div class="tonce">One-time</div>
+      <div class="tline">Full site system, polished &amp; maintained.</div>
+      <div class="tkeys">All of Foundation<span class="dot">·</span>6 months managed<span class="dot">·</span>ongoing on-page SEO<span class="dot">·</span>GBP management<span class="dot">·</span>priority support</div>
+    </div>
+  </div>
+
+  <!-- RETAINER STRIP -->
+  <div class="ret-head">
+    <div class="lbl">Monthly Retainers</div>
+    <div class="sub">Optional. Starts after included months expire.</div>
+  </div>
+  <div class="ret-trio">
+    <div class="ret-card">
+      <div class="rname">Keep It Running</div>
+      <div class="rprice">$75<span class="per">/ month</span></div>
+      <div class="rline">Site stays healthy.</div>
+    </div>
+    <div class="ret-card featured">
+      <div class="rname">Keep It Growing</div>
+      <div class="rprice">$175<span class="per">/ month</span></div>
+      <div class="rline">Site gets better each month.</div>
+    </div>
+    <div class="ret-card">
+      <div class="rname">Own Your Market</div>
+      <div class="rprice">$350<span class="per">/ month</span></div>
+      <div class="rline">Highest priority, deepest site work.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Prepared for: __________________</span>
+    <span>fjmedia.ca</span>
+  </div>
+</section>
+
+<!-- ====================== PAGE 2 — INDUSTRY STANDARD ====================== -->
+<section class="page" id="page-industry">
+  <div class="watermark">FJ</div>
+
+  <div class="topbar">
+    <div class="brand"><span class="fj">FJ</span><span class="bk">Media</span><span class="word">Industry Standard</span></div>
+    <div class="meta">02 / 02</div>
+  </div>
+
+  <div class="page-head">
+    <div class="eyebrow">What you'd pay elsewhere</div>
+    <h1 class="display">A <span class="italic-accent">fraction</span> of agency rate.</h1>
+  </div>
+
+  <!-- VS BAR -->
+  <div class="vs-bar">
+    <div class="vs-side">
+      <div class="lbl">Canadian agency</div>
+      <div class="num">$4K–$8K</div>
+      <div class="cap">For the same bundle. Quoted.</div>
+    </div>
+    <div class="vs-mid">vs.</div>
+    <div class="vs-side us">
+      <div class="lbl">FJMedia</div>
+      <div class="num">$600–$2,000</div>
+      <div class="cap">Same custom code. Same ownership.</div>
+    </div>
+  </div>
+
+  <!-- TRANSLATION STRIP -->
+  <div class="trans-head">
+    <div class="lbl">Tier by tier</div>
+    <div class="sub">What each FJMedia tier would cost at a Canadian agency.</div>
+  </div>
+  <div class="trans-grid">
+    <div class="trans-card">
+      <div class="tname">Launch</div>
+      <div class="tour">$600</div>
+      <div class="arrow">↓ elsewhere</div>
+      <div class="their">$1.5K–$3.5K</div>
+    </div>
+    <div class="trans-card">
+      <div class="tname">Foundation</div>
+      <div class="tour">$1,200</div>
+      <div class="arrow">↓ elsewhere</div>
+      <div class="their">$4.5K–$7K</div>
+    </div>
+    <div class="trans-card">
+      <div class="tname">Authority</div>
+      <div class="tour">$2,000</div>
+      <div class="arrow">↓ elsewhere</div>
+      <div class="their">$6K–$10K</div>
+    </div>
+    <div class="trans-card">
+      <div class="tname">Event Site</div>
+      <div class="tour">$300</div>
+      <div class="arrow">↓ elsewhere</div>
+      <div class="their">$1.5K–$3K</div>
+    </div>
+  </div>
+
+  <div class="kicker-line">
+    Roughly <em>a quarter</em> of agency rate — while the portfolio's still being built.
+  </div>
+
+  <div class="sources">
+    Sources · Shift8 Web (Toronto 2026 pricing guide) · Elevate Web Design (Canada 2026 SMB cost tiers) · Holler Digital (Canada 2026 website pricing) · Idea Marketing (Canada 2026 cost guide) · Clutch.co Web Design pricing guide · Retrieved April 2026
+  </div>
+
+  <div class="footer">
+    <span>Prepared for: __________________</span>
+    <span>fjmedia.ca</span>
+  </div>
+</section>
+
+</body>
+</html>
