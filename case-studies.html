@@ -206,6 +206,29 @@
       background: var(--bg3); border: 1px solid var(--border);
       border-radius: 14px; padding: 2.5rem;
       margin-top: 2rem;
+      scroll-margin-top: 90px;
+    }
+    /* Pop-in animation when arriving at a card via #anchor (replaces the
+       old modal clip-path pop on the home page). */
+    @keyframes csTargetPop {
+      0%   { transform: scale(0.94); opacity: 0.45;
+             box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+      55%  { transform: scale(1.025); opacity: 1;
+             box-shadow: 0 0 0 1px rgba(201,168,76,0.55),
+                         0 0 48px rgba(201,168,76,0.22); }
+      100% { transform: scale(1); opacity: 1;
+             box-shadow: 0 0 0 1px rgba(201,168,76,0.35),
+                         0 0 32px rgba(201,168,76,0.12); }
+    }
+    .cs-card:target {
+      border-color: rgba(201,168,76,0.6);
+      animation: csTargetPop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cs-card:target {
+        animation: none;
+        box-shadow: 0 0 0 1px rgba(201,168,76,0.35), 0 0 32px rgba(201,168,76,0.12);
+      }
     }
     .cs-head {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
@@ -605,7 +628,7 @@
       <p class="section-sub">Every build below is live, linked, and owned by the client. Scroll through how each one came together.</p>
       <div class="divider"></div>
 
-      <div class="cs-card">
+      <div class="cs-card" id="sugar-shai">
 
         <div class="cs-head">
           <div>
@@ -664,7 +687,7 @@
       </div>
 
       <!-- Case Study: Royal Kings Auto Care -->
-      <div class="cs-card" style="margin-top: 2rem;">
+      <div class="cs-card" id="royal-kings" style="margin-top: 2rem;">
 
         <div class="cs-head">
           <div>
@@ -723,7 +746,7 @@
       </div>
 
       <!-- Case Study: Diego & Andrea -->
-      <div class="cs-card" style="margin-top: 2rem;">
+      <div class="cs-card" id="diego-andrea" style="margin-top: 2rem;">
 
         <div class="cs-head">
           <div>
@@ -782,7 +805,7 @@
       </div>
 
       <!-- Case Study: Inflatable Decorations -->
-      <div class="cs-card" style="margin-top: 2rem;">
+      <div class="cs-card" id="inflatable-decorations" style="margin-top: 2rem;">
 
         <div class="cs-head">
           <div>
