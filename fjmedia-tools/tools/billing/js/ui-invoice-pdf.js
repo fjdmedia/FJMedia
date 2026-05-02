@@ -1,5 +1,6 @@
 import { store } from './storage.js';
 import { invoiceTotal } from './models.js';
+import { writeInvoicePDF, isConnected, isFSAccessSupported } from './file-archive.js';
 
 function fmt(n) { return `$${Number(n).toFixed(2)}`; }
 
@@ -173,12 +174,69 @@ function openPrintWindow(invoice, client, settings, autoPrint = true) {
   return w;
 }
 
-export function downloadInvoicePDF(invoiceId) {
+// Legacy print-window flow — kept as a fallback when the user hasn't
+// connected the Invoices folder yet, and as the implementation behind the
+// "Print" button.
+function printInvoiceFallback(invoiceId) {
   const data = store.read();
   const inv = data.invoices.find(i => i.id === invoiceId);
   if (!inv) { alert('Invoice not found'); return; }
   const client = data.clients.find(c => c.id === inv.clientId);
   openPrintWindow(inv, client, data.settings, true);
+}
+
+// New primary flow: render invoice HTML → real PDF blob → write straight to
+// the connected archive folder. One click, no print dialog, named correctly,
+// collision-protected. Falls back to the print-window flow if the folder
+// isn't connected yet.
+export async function downloadInvoicePDF(invoiceId) {
+  const data = store.read();
+  const inv = data.invoices.find(i => i.id === invoiceId);
+  if (!inv) { alert('Invoice not found'); return; }
+  const client = data.clients.find(c => c.id === inv.clientId);
+
+  // No FS Access API support → keep old behaviour (Safari, older browsers)
+  if (!isFSAccessSupported()) {
+    return printInvoiceFallback(invoiceId);
+  }
+
+  // Folder not connected → tell user how to connect, then fall back so the
+  // current click still produces a usable PDF.
+  if (!(await isConnected())) {
+    const ok = confirm('Invoices folder is not connected — using the print dialog this time.\n\nConnect a folder under Settings → Connect Invoices folder to save PDFs in one click going forward.');
+    if (!ok) return;
+    return printInvoiceFallback(invoiceId);
+  }
+
+  const html = buildInvoiceHTML(inv, client, data.settings);
+  try {
+    const result = await writeInvoicePDF(inv, client, html);
+    showArchiveToast(`Saved → ${result.folder}/${result.filename}`);
+  } catch (e) {
+    console.error('[archive] write failed:', e);
+    alert('Could not save to archive: ' + (e.message || e) + '\n\nFalling back to the print dialog.');
+    printInvoiceFallback(invoiceId);
+  }
+}
+
+function showArchiveToast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `
+    position:fixed; bottom:24px; right:24px; z-index:9999;
+    background:#0E2136; border:1px solid #C9A84C;
+    color:#EDEAE5; font-family:'DM Sans',system-ui,sans-serif; font-size:13px;
+    padding:12px 18px; border-radius:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.45);
+    transition:opacity .25s ease, transform .25s ease;
+    transform:translateY(8px); opacity:0;
+  `;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateY(0)'; });
+  setTimeout(() => {
+    t.style.opacity = '0';
+    setTimeout(() => t.remove(), 300);
+  }, 3500);
 }
 
 export function previewInvoice(invoiceId) {
@@ -189,7 +247,7 @@ export function previewInvoice(invoiceId) {
   openPrintWindow(inv, client, data.settings, false);
 }
 
-export function copyEmailPack(invoiceId) {
+export async function copyEmailPack(invoiceId) {
   const data = store.read();
   const inv = data.invoices.find(i => i.id === invoiceId);
   if (!inv) return;
@@ -214,11 +272,14 @@ Let me know if any questions.
 — James
 FJMedia · fjmedia.ca`;
 
-  navigator.clipboard.writeText(body).then(() => {
-    const msg = `Email body copied to clipboard.\n\nPrint dialog will open — choose "Save as PDF" and save as ${inv.id}.pdf.\n\nThen paste the email and attach:\n  1. ${inv.id}.pdf\n  2. FJMedia-Service-Overview.pdf\n     (FJDMedia Website\\docs\\service-overview\\)`;
-    alert(msg);
-    downloadInvoicePDF(invoiceId);
-  }).catch(err => {
+  try {
+    await navigator.clipboard.writeText(body);
+  } catch (err) {
     alert('Could not copy to clipboard — here\'s the email body to copy manually:\n\n' + body);
-  });
+    return;
+  }
+
+  // Save the PDF (uses the new archive flow if connected, prints otherwise)
+  await downloadInvoicePDF(invoiceId);
+  alert(`Email body copied.\n\nNow paste it into your email and attach:\n  1. ${inv.id}.pdf\n  2. FJMedia-Service-Overview.pdf\n     (FJDMedia Website\\docs\\service-overview\\)`);
 }
