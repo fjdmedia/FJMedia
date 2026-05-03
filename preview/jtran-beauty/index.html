@@ -54,14 +54,18 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; background-color: var(--color-bg); }
-    body {
+    html {
+      scroll-behavior: smooth;
       background-color: var(--color-bg);
       background-image: url('assets/silk-bg.webp');
-      background-size: 100% auto;
-      background-position: center top;
-      background-repeat: repeat-y;
-      background-attachment: scroll;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100%;
+    }
+    body {
+      background: transparent;
       color: var(--color-text);
       font-family: var(--font-body);
       font-size: 1.0625rem;
@@ -70,10 +74,19 @@
       padding-bottom: 92px;
       overflow-x: hidden;
     }
-    /* Desktop only: parallax-fix the silk so it stays put while sections scroll over it */
-    @media (min-width: 1024px) {
-      body { background-size: cover; background-attachment: fixed; background-repeat: no-repeat; padding-bottom: 0; }
+    /* Silk: fixed-position layer ensures every browser (incl. Android Chrome where html background-attachment: fixed is flaky) sees silk behind every section */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('assets/silk-bg.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+      pointer-events: none;
     }
+    @media (min-width: 1024px) { body { padding-bottom: 0; } }
 
     h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.05; letter-spacing: 0.04em; text-transform: uppercase; }
     p { font-family: var(--font-body); }
