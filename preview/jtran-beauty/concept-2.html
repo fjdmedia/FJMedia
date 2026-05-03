@@ -325,21 +325,19 @@
     .footer__poweredby a:hover { border-bottom-color: var(--color-accent-deep); }
 
     /* ---- MOBILE STICKY (floating pill) ---- */
-    .mobile-sticky { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 380px; padding: 0.55rem 0.55rem 0.55rem 1rem; background: rgba(58, 42, 32, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.35); border-radius: 999px; z-index: 60; box-shadow: 0 14px 40px rgba(58, 42, 32, 0.32); display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
-    .mobile-sticky__label { font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #E8DCC9; display: flex; align-items: center; gap: 0.45rem; }
-    .mobile-sticky__dot { width: 7px; height: 7px; background: var(--color-accent-soft); border-radius: 50%; position: relative; flex: 0 0 auto; }
-    .mobile-sticky__dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; background: var(--color-accent-soft); opacity: 0.4; animation: scarcityPulse 2.4s ease-out infinite; }
-    .mobile-sticky .btn { padding: 0.65rem 1.1rem; font-size: 0.7rem; letter-spacing: 0.16em; background: var(--color-accent); color: var(--color-text); }
+    .mobile-sticky { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 320px; padding: 0.5rem; background: rgba(58, 42, 32, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.35); border-radius: 999px; z-index: 60; box-shadow: 0 14px 40px rgba(58, 42, 32, 0.32); display: flex; align-items: center; justify-content: center; }
+    .mobile-sticky .btn { padding: 0.65rem 1.5rem; font-size: 0.72rem; letter-spacing: 0.18em; background: var(--color-accent); color: var(--color-text); width: 100%; }
     .mobile-sticky .btn:hover { background: var(--color-accent-soft); color: var(--color-text); }
     @media (min-width: 1024px) { .mobile-sticky { display: none; } }
 
-    /* ---- FJMedia preview switcher (JTran palette) ---- */
-    .fj-preview-bar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 14px; border-radius: 999px; background: rgba(58, 42, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.45); font-family: 'Montserrat', system-ui, sans-serif; box-shadow: 0 10px 30px rgba(58, 42, 32, 0.45); }
-    .fj-preview-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #B89456; padding-right: 10px; border-right: 1px solid rgba(184, 148, 86, 0.3); margin-right: 4px; white-space: nowrap; }
-    .fj-preview-link { font-size: 0.74rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
+    /* ---- FJMedia preview switcher (bottom-right, out of the way) ---- */
+    .fj-preview-bar { position: fixed; bottom: 18px; right: 18px; z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 12px; border-radius: 999px; background: rgba(58, 42, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.45); font-family: 'Montserrat', system-ui, sans-serif; box-shadow: 0 10px 30px rgba(58, 42, 32, 0.45); }
+    .fj-preview-eyebrow { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #B89456; padding-right: 9px; border-right: 1px solid rgba(184, 148, 86, 0.3); margin-right: 3px; white-space: nowrap; }
+    .fj-preview-link { font-size: 0.7rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
     .fj-preview-link:hover { color: #FBF6EC; }
     .fj-preview-link.active { background: linear-gradient(135deg, #E5C77F 0%, #B89456 50%, #9A7A42 100%); color: #3A2A20; }
-    @media (max-width: 540px) { .fj-preview-bar { padding: 4px 6px 4px 10px; } .fj-preview-eyebrow { font-size: 0.55rem; padding-right: 8px; } .fj-preview-link { font-size: 0.7rem; padding: 5px 10px; } }
+    /* Mobile: shift up so it doesn't fight the bottom sticky CTA */
+    @media (max-width: 1023px) { .fj-preview-bar { bottom: auto; top: 88px; right: 12px; padding: 4px 5px 4px 10px; } .fj-preview-eyebrow { font-size: 0.54rem; padding-right: 8px; } .fj-preview-link { font-size: 0.66rem; padding: 4px 9px; } }
     @media (max-width: 380px) { .fj-preview-eyebrow { display: none; } }
     @media print { .fj-preview-bar, .mobile-sticky { display: none !important; } }
 
@@ -395,14 +393,6 @@
       <div class="hero__orb hero__orb--a" aria-hidden="true"></div>
       <div class="hero__orb hero__orb--b" aria-hidden="true"></div>
       <div class="container hero__inner">
-        <div class="hero__scarcity">
-          <div class="scarcity-pill">
-            <span class="scarcity-pill__dot"></span>
-            <span>Booking</span>
-            <span class="scarcity-pill__sep">·</span>
-            <span>3 spots left this week</span>
-          </div>
-        </div>
         <div class="hero__eyebrow-wrap">
           <span class="eyebrow" style="margin: 0;">Solo Esthetician · Winnipeg + Carman</span>
         </div>
@@ -699,11 +689,7 @@
 
   <!-- ============ MOBILE STICKY (floating pill) ============ -->
   <aside class="mobile-sticky" aria-label="Booking">
-    <span class="mobile-sticky__label">
-      <span class="mobile-sticky__dot" aria-hidden="true"></span>
-      3 Spots Left
-    </span>
-    <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn">Book Now</a>
+    <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn">Book a Session</a>
   </aside>
 
   <!-- ============ FJMedia preview switcher ============ -->

@@ -294,13 +294,14 @@
     .mobile-sticky .btn { width: 100%; }
     @media (min-width: 1024px) { .mobile-sticky { display: none; } }
 
-    /* ---- FJMedia preview switcher (per client_preview_workflow — JTran palette) ---- */
-    .fj-preview-bar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 14px; border-radius: 999px; background: rgba(58, 42, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.45); font-family: 'Montserrat', system-ui, sans-serif; box-shadow: 0 10px 30px rgba(58, 42, 32, 0.45); }
-    .fj-preview-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #B89456; padding-right: 10px; border-right: 1px solid rgba(184, 148, 86, 0.3); margin-right: 4px; white-space: nowrap; }
-    .fj-preview-link { font-size: 0.74rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
+    /* ---- FJMedia preview switcher (bottom-right, out of the way) ---- */
+    .fj-preview-bar { position: fixed; bottom: 18px; right: 18px; z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 12px; border-radius: 999px; background: rgba(58, 42, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.45); font-family: 'Montserrat', system-ui, sans-serif; box-shadow: 0 10px 30px rgba(58, 42, 32, 0.45); }
+    .fj-preview-eyebrow { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #B89456; padding-right: 9px; border-right: 1px solid rgba(184, 148, 86, 0.3); margin-right: 3px; white-space: nowrap; }
+    .fj-preview-link { font-size: 0.7rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
     .fj-preview-link:hover { color: #FBF6EC; }
     .fj-preview-link.active { background: linear-gradient(135deg, #E5C77F 0%, #B89456 50%, #9A7A42 100%); color: #3A2A20; }
-    @media (max-width: 540px) { .fj-preview-bar { padding: 4px 6px 4px 10px; } .fj-preview-eyebrow { font-size: 0.55rem; padding-right: 8px; } .fj-preview-link { font-size: 0.7rem; padding: 5px 10px; } }
+    /* Mobile: shift up so it doesn't fight the bottom sticky CTA */
+    @media (max-width: 1023px) { .fj-preview-bar { bottom: auto; top: 88px; right: 12px; padding: 4px 5px 4px 10px; } .fj-preview-eyebrow { font-size: 0.54rem; padding-right: 8px; } .fj-preview-link { font-size: 0.66rem; padding: 4px 9px; } }
     @media (max-width: 380px) { .fj-preview-eyebrow { display: none; } }
     @media print { .fj-preview-bar, .mobile-sticky { display: none !important; } }
 
