@@ -12,8 +12,9 @@
     :root {
       --color-bg: #F4ECDF;
       --color-bg-warm: #F0E5D2;
-      --bg-wash: rgba(244, 236, 223, 0.92);
+      --bg-wash: rgba(244, 236, 223, 0.94);
       --bg-wash-soft: rgba(244, 236, 223, 0.78);
+      --bg-silk: rgba(244, 236, 223, 0.42); /* silk shows through strongly */
       --color-surface: #EDE2D0;
       --color-surface-2: #E5D5BD;
       --color-card: #FBF6EC;
@@ -230,7 +231,7 @@
     }
 
     /* ---- SERVICES ---- */
-    .services { padding: var(--space-2xl) 0; background-color: var(--bg-wash); }
+    .services { padding: var(--space-2xl) 0; background-color: var(--bg-silk); }
     .services__caption { text-align: center; font-family: var(--font-body); font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-md); font-size: 0.95rem; letter-spacing: 0.02em; }
     .services__accordion { max-width: 820px; margin: 0 auto; }
     .svc-group { border-bottom: 1px solid rgba(217, 201, 176, 0.5); }
@@ -268,7 +269,7 @@
     @media (min-width: 1024px) { .policies__grid { grid-template-columns: repeat(4, 1fr); } }
 
     /* ---- BEFORE YOUR APPOINTMENT ---- */
-    .before { padding: var(--space-2xl) 0; background-color: var(--bg-wash); }
+    .before { padding: var(--space-2xl) 0; background-color: var(--bg-silk); }
     .before__grid { display: grid; gap: 1.75rem; max-width: 880px; margin: 0 auto; }
     .before-tip { padding-top: 1.5rem; position: relative; text-align: center; }
     .before-tip::before { content: ''; position: absolute; top: 0; left: 0; height: 1px; width: 0; background: var(--color-accent); transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -278,7 +279,7 @@
     @media (min-width: 700px) { .before__grid { grid-template-columns: repeat(2, 1fr); } .before-tip { text-align: left; } }
 
     /* ---- CLIENT CAM (polaroid v2 with tape) ---- */
-    .client-care { padding: var(--space-2xl) 0; overflow: hidden; background-color: var(--bg-wash-soft); }
+    .client-care { padding: var(--space-2xl) 0; overflow: hidden; background-color: var(--bg-wash); }
     .client-care__gallery { display: flex; gap: 1.5rem; overflow-x: auto; padding: 2rem 1rem 2.5rem; scroll-snap-type: x mandatory; -ms-overflow-style: none; scrollbar-width: none; }
     .client-care__gallery::-webkit-scrollbar { display: none; }
     .polaroid { flex: 0 0 72%; max-width: 280px; scroll-snap-align: center; background: var(--color-card); padding: 0.75rem 0.75rem 1.85rem; box-shadow: var(--shadow-soft); border-radius: 2px; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s; position: relative; }
@@ -297,7 +298,7 @@
     }
 
     /* ---- CONTACT ---- */
-    .contact { padding: var(--space-2xl) 0; background-color: var(--bg-wash); }
+    .contact { padding: var(--space-2xl) 0; background-color: var(--bg-silk); }
     .contact__grid { display: grid; gap: var(--space-lg); }
     .contact__info { display: grid; gap: 1.85rem; }
     .contact-block { padding-bottom: 1.4rem; border-bottom: 1px solid var(--color-border); }
