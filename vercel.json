@@ -21,7 +21,8 @@
   ],
   "redirects": [
     { "source": "/proof", "destination": "/case-studies", "permanent": true },
-    { "source": "/proof.html", "destination": "/case-studies", "permanent": true }
+    { "source": "/proof.html", "destination": "/case-studies", "permanent": true },
+    { "source": "/preview/jtran-beauty/concept-2.html", "destination": "/preview/jtran-beauty/", "permanent": true }
   ],
   "headers": [
     {
