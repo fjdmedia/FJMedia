@@ -7,7 +7,8 @@
   <title>J Tran Beauty — Facials, Lashes, Brows & Waxing in Winnipeg</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@300;400;500;600&family=Italianno&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet"></noscript>
   <style>
     :root {
       --color-bg: #F4ECDF;
@@ -53,7 +54,7 @@
     html { scroll-behavior: smooth; background-color: var(--color-bg); }
     body {
       background-color: var(--color-bg);
-      background-image: url('assets/silk-bg.png');
+      background-image: url('assets/silk-bg.webp');
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
@@ -402,7 +403,7 @@
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <div class="container nav__inner">
-      <a href="#top" class="nav__logo" aria-label="J Tran Beauty home">
+      <a href="#top" class="nav__logo">
         <img src="assets/Logo+Design/Logo-transparent.png" alt="J Tran Beauty monogram">
         <span class="nav__brand">J Tran Beauty</span>
       </a>
@@ -419,7 +420,7 @@
     </div>
   </header>
 
-  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true" inert>
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#policies">Policies</a>
@@ -669,7 +670,7 @@
           <div class="contact__info reveal">
             <div class="contact-block">
               <span class="eyebrow">Address</span>
-              <a href="https://maps.google.com/?q=236+Stafford+Avenue+Winnipeg+MB+R3M+1J1" target="_blank" rel="noopener">236 Stafford Avenue<br>Winnipeg, Manitoba<br>R3M 1J5, Canada</a>
+              <a href="https://maps.google.com/?q=236+Stafford+Avenue+Winnipeg+MB+R3M+1J5" target="_blank" rel="noopener">236 Stafford Avenue<br>Winnipeg, Manitoba<br>R3M 1J5, Canada</a>
             </div>
             <div class="contact-block">
               <span class="eyebrow">Hours</span>
@@ -696,7 +697,7 @@
           </div>
           <div class="contact__map reveal">
             <div class="map-embed">
-              <iframe src="https://www.google.com/maps?q=236+Stafford+Avenue+Winnipeg+MB+R3M+1J1&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="J Tran Beauty location"></iframe>
+              <iframe src="https://www.google.com/maps?q=236+Stafford+Avenue+Winnipeg+MB+R3M+1J5&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="J Tran Beauty location"></iframe>
             </div>
           </div>
         </div>
@@ -748,7 +749,7 @@
   </aside>
 
   <!-- ============ LOCATION-CHOOSER MODAL ============ -->
-  <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" aria-hidden="true">
+  <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" aria-hidden="true" inert>
     <div class="booking-modal__backdrop" data-close-modal></div>
     <div class="booking-modal__panel" role="document">
       <button class="booking-modal__close" aria-label="Close" data-close-modal>
@@ -795,6 +796,7 @@
     const openBookingModal = () => {
       bookingModal.classList.add('is-open');
       bookingModal.setAttribute('aria-hidden', 'false');
+      bookingModal.removeAttribute('inert');
       document.body.classList.add('modal-open');
       const firstFocusable = bookingModal.querySelector('.location-card__cta');
       firstFocusable?.focus();
@@ -802,6 +804,7 @@
     const closeBookingModal = () => {
       bookingModal.classList.remove('is-open');
       bookingModal.setAttribute('aria-hidden', 'true');
+      bookingModal.setAttribute('inert', '');
       document.body.classList.remove('modal-open');
     };
     document.querySelectorAll('.js-book-trigger').forEach(el => {
@@ -826,6 +829,7 @@
       mobileNav.classList.toggle('is-active', open);
       navToggle.setAttribute('aria-expanded', open);
       mobileNav.setAttribute('aria-hidden', !open);
+      if (open) mobileNav.removeAttribute('inert'); else mobileNav.setAttribute('inert', '');
       document.body.style.overflow = open ? 'hidden' : '';
     });
     mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
@@ -833,6 +837,7 @@
       mobileNav.classList.remove('is-active');
       navToggle.setAttribute('aria-expanded', false);
       mobileNav.setAttribute('aria-hidden', true);
+      mobileNav.setAttribute('inert', '');
       document.body.style.overflow = '';
     }));
 
