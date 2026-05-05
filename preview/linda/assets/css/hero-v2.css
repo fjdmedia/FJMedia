@@ -1,0 +1,178 @@
+/* ============================================================
+   Linda Quach Photography — HERO V2 (additive layer)
+   Loaded after site.css, on index.html only.
+   Ken Burns + per-letter quote stagger + segmented progress bar
+   + counter + scroll cue. Nothing else changes.
+   ============================================================ */
+
+/* Ken Burns — slow zoom on the active slide image */
+.hero__slide img {
+  transform: scale(1.001);
+  will-change: transform;
+}
+.js-ready .hero__slide.is-active img {
+  animation: heroV2KenBurns 8.5s ease-out forwards;
+}
+@keyframes heroV2KenBurns {
+  0%   { transform: scale(1.001); }
+  100% { transform: scale(1.06); }
+}
+
+/* Per-letter quote reveal */
+.hero__quote .v2-word {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.32em;
+  overflow: visible;
+}
+.hero__quote .v2-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em) rotate(2deg);
+  transition: opacity 600ms cubic-bezier(0.2, 0.6, 0.2, 1), transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: var(--v2-d, 0ms);
+  will-change: opacity, transform;
+}
+.hero__quote.is-active .v2-char {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+/* Segmented progress bar */
+.hero__progress {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  gap: 10px;
+  padding: 6px 4px;
+  isolation: isolate;
+}
+.hero__progress-bar {
+  width: 56px;
+  height: 14px;
+  background: transparent;
+  position: relative;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
+  overflow: visible;
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.hero__progress-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-50%);
+}
+.hero__progress-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-50%);
+  transition: width 80ms linear;
+}
+.hero__progress-bar.is-active::after {
+  animation: heroV2ProgressFill 5500ms linear forwards;
+}
+.hero__progress-bar.is-played::after {
+  width: 100%;
+}
+@keyframes heroV2ProgressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@media (min-width: 768px) {
+  .hero__progress-bar { width: 78px; }
+}
+
+/* Italic counter "01 of 03" */
+.hero__counter {
+  position: absolute;
+  bottom: 32px;
+  right: var(--gutter);
+  z-index: 4;
+  font-family: var(--font-display-italic);
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.78);
+  display: none;
+}
+.hero__counter b {
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-right: 8px;
+}
+@media (min-width: 768px) {
+  .hero__counter { display: block; }
+}
+
+/* Hide the V1 dots — JS still toggles them, we mirror visually */
+.hero__dots { display: none !important; }
+
+/* Animated scroll cue */
+.hero__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: var(--gutter);
+  z-index: 4;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+.hero__scroll::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.85), rgba(255,255,255,0));
+  background-size: 100% 200%;
+  background-position: 0 0;
+  animation: heroV2ScrollPulse 1800ms ease-in-out infinite;
+}
+@keyframes heroV2ScrollPulse {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+@media (min-width: 768px) {
+  .hero__scroll { display: inline-flex; }
+}
+
+/* Mobile polish */
+@media (max-width: 540px) {
+  .hero__progress { bottom: 24px; gap: 8px; }
+  .hero__progress-bar { width: 40px; }
+  .hero__counter { display: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .hero__slide.is-active img { animation: none !important; transform: none !important; }
+  .hero__quote .v2-char { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .hero__progress-bar.is-active::after { animation: none !important; width: 100% !important; }
+  .hero__scroll::before { animation: none !important; }
+}

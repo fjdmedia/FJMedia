@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Italiana&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css?v=20260504-navfix">
+  <link rel="stylesheet" href="assets/css/hero-v2.css?v=20260505-hero">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='0' fill='%23faf6f1'/%3E%3Ctext x='16' y='22' font-size='14' font-weight='400' font-family='serif' font-style='italic' text-anchor='middle' fill='%237a5c3e'%3ELQ%3C/text%3E%3C/svg%3E">
   <style>
     /* FJMedia preview pill - Linda's brand (cream + taupe-bronze) */
@@ -109,12 +110,24 @@
       <p class="hero__quote" style="--q-x: 50%; --q-y: 50%;">Photography is Art</p>
       <p class="hero__quote" style="--q-x: 50%; --q-y: 50%;">Photography is Emotion</p>
     </div>
-    <div class="hero__dots" role="tablist" aria-label="Hero quotes">
-      <button type="button" class="hero__dot" aria-label="Show quote 1"></button>
-      <button type="button" class="hero__dot" aria-label="Show quote 2"></button>
-      <button type="button" class="hero__dot" aria-label="Show quote 3"></button>
+    <!-- V2 segmented progress bar (visible) -->
+    <div class="hero__progress" role="tablist" aria-label="Hero quotes">
+      <button type="button" class="hero__progress-bar" aria-label="Show quote 1"></button>
+      <button type="button" class="hero__progress-bar" aria-label="Show quote 2"></button>
+      <button type="button" class="hero__progress-bar" aria-label="Show quote 3"></button>
     </div>
-    <span class="hero__scroll">Scroll</span>
+
+    <!-- V1 dots (hidden by hero-v2.css; JS still drives them so V2 progress can mirror) -->
+    <div class="hero__dots" role="tablist" aria-label="Hero quotes" aria-hidden="true">
+      <button type="button" class="hero__dot" tabindex="-1"></button>
+      <button type="button" class="hero__dot" tabindex="-1"></button>
+      <button type="button" class="hero__dot" tabindex="-1"></button>
+    </div>
+
+    <!-- Italic counter, top-right of hero -->
+    <div class="hero__counter" aria-hidden="true"><b>01</b>of <span>03</span></div>
+
+    <span class="hero__scroll" aria-hidden="true">Scroll</span>
   </section>
 
   <!-- ============ FEATURED GALLERIES ============ -->
@@ -220,6 +233,7 @@
 </footer>
 
 <script src="assets/js/site.js?v=20260504-navfix" defer></script>
+<script src="assets/js/hero-v2.js?v=20260505-hero" defer></script>
 <aside class="fj-preview-bar" aria-label="FJMedia preview">
   <span class="fj-preview-eyebrow"><a href="https://fjmedia.ca" target="_blank" rel="noopener">FJMedia &middot; Preview</a></span>
 </aside>
