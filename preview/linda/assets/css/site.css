@@ -370,42 +370,49 @@ img { width: 100%; height: auto; display: block; object-fit: cover; }
   .nav__brand-row { gap: 18px; }
 }
 
-/* Mobile open menu — brand first, then page links flow below */
+/* Mobile open menu — brand first, then page links flow below
+   Switched to flexbox column so `order` is guaranteed to apply
+   (CSS Grid auto-placement was ignoring `order` here). */
 @media (max-width: 979px) {
   .nav.is-open {
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px var(--gutter) 24px;
     gap: 0;
+    grid-template-columns: none;
   }
   .nav.is-open .nav__brand {
-    order: 0;
-    grid-column: 1;
+    order: 1;
+    margin: 4px 0 12px;
     justify-self: center;
-    margin-bottom: 8px;
-    padding-top: 4px;
-  }
-  .nav.is-open .nav__toggle {
-    order: -1;
-    position: absolute;
-    right: var(--gutter);
-    top: 18px;
   }
   .nav.is-open .nav__left {
-    order: 1;
-    display: flex;
+    order: 2;
+    display: flex !important;
     flex-direction: column;
     gap: 16px;
-    padding: 16px 0 8px;
+    padding: 12px 0 6px;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
   .nav.is-open .nav__right {
-    order: 2;
-    display: flex;
+    order: 3;
+    display: flex !important;
     flex-direction: column;
     gap: 16px;
-    padding: 8px 0 24px;
+    padding: 6px 0 0;
     align-items: center;
     justify-content: center;
+    width: 100%;
+  }
+  .nav.is-open .nav__toggle {
+    order: 0;
+    position: absolute;
+    right: var(--gutter);
+    top: 14px;
   }
 }
 
