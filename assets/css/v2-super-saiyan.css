@@ -1,0 +1,390 @@
+/* ─────────────────────────────────────────────────────────────────
+   FJMedia v2 — Super Saiyan polish layer (DNA-preserved volume pass)
+   Per Memory/reference/ai_kill_rubric.md + super_saiyan_v2_default.md
+   Loaded sitewide via <link rel="stylesheet" href="/assets/css/v2-super-saiyan.css">
+   ───────────────────────────────────────────────────────────────── */
+
+/* ── Italic accent (replaces text-gradient on hero italic) ── */
+.ss-italic-accent {
+  font-style: italic;
+  color: #C9A84C;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+.ss-italic-accent::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 0.02em;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #C9A84C 12%, #C9A84C 88%, transparent);
+  box-shadow: 0 0 18px rgba(201,168,76,0.45);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: ssDrawUnderline 0.9s cubic-bezier(.22,.92,.4,1) 1.55s forwards;
+}
+.ss-italic-accent--last::after { right: 14%; }
+@keyframes ssDrawUnderline {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-italic-accent::after { animation: none; transform: scaleX(1); }
+}
+
+/* ── Tabular numerals on stats / prices / counters ── */
+.font-display,
+.info-bento h2,
+[class*="font-display"],
+.pkg-tab-title,
+[data-stat],
+.text-3xl, .text-2xl, .text-xl,
+.ph-icon ~ * {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+em, i, .italic { font-feature-settings: "onum" 1; }
+
+/* ── Glass-panel + info-bento hover quality (color flip, not scale) ── */
+.glass-panel,
+.info-bento {
+  transition: border-color 0.45s cubic-bezier(.22,.92,.4,1),
+              box-shadow   0.45s cubic-bezier(.22,.92,.4,1),
+              transform    0.55s cubic-bezier(.22,.92,.4,1);
+  will-change: border-color;
+}
+.info-bento:hover {
+  border-color: rgba(201,168,76,0.32);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.12),
+    0 12px 32px -16px rgba(7,21,32,0.65);
+  transform: translateY(-1px);
+}
+.info-bento:hover::after { width: 56px; transition: width 0.45s ease; }
+
+a.glass-panel:hover,
+.glass-panel.glow-card:hover {
+  border-color: rgba(201,168,76,0.28) !important;
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.10),
+    0 18px 48px -22px rgba(7,21,32,0.7);
+}
+
+/* ── Process step active state ── */
+.process-step.is-active .step-card {
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.18),
+    0 22px 60px -28px rgba(0,0,0,0.55);
+}
+
+/* ── Hard-cut reveal class (no fade-up everywhere) ── */
+[data-ss-reveal] {
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(.22,.92,.4,1);
+}
+[data-ss-reveal].in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  [data-ss-reveal] { opacity: 1 !important; transition: none !important; }
+}
+
+/* ── Hero word stagger curve ── */
+.hero-word { animation-timing-function: cubic-bezier(.22,.92,.4,1) !important; }
+.info-bento h2 { letter-spacing: -0.005em; }
+
+/* ── Pricing tab card top hairline ── */
+.tab-content .glass-panel { position: relative; }
+.tab-content .glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, #C9A84C, transparent);
+  opacity: 0.85;
+}
+
+/* ── Myth-card chrome dots draw-in ── */
+.myth-card.in-view .chrome-dot {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.4s cubic-bezier(.22,.92,.4,1), opacity 0.4s ease;
+}
+.myth-card.in-view .chrome-dot.d-close { transition-delay: 0s; }
+.myth-card.in-view .chrome-dot.d-min   { transition-delay: 0.06s; }
+.myth-card.in-view .chrome-dot.d-max   { transition-delay: 0.12s; }
+
+/* ── Marquee/scroller edge-mask primitive ── */
+.ss-h-scroll {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+}
+
+/* ── Selection color refined ── */
+::selection { background: #C9A84C; color: #071520; }
+::-moz-selection { background: #C9A84C; color: #071520; }
+
+
+/* ═════════════════════════════════════════════════════════════════
+   VOLUME PASS — visible-at-rest changes
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Hero h1 ── */
+@media (min-width: 768px) {
+  .hero-headline {
+    font-size: clamp(64px, 9vw, 120px) !important;
+    line-height: 0.96 !important;
+    letter-spacing: -0.022em !important;
+  }
+}
+
+/* ── Section h2s — DRAMATICALLY larger ── */
+main section h2.font-display,
+main section h2[class*="font-display"] {
+  font-size: clamp(36px, 5.4vw, 72px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.015em !important;
+}
+main > section:first-of-type h1.hero-headline { font-size: inherit; }
+
+/* ── Bridge / Offer headline ── */
+.fjm-bridge h2.text-4xl,
+.fjm-bridge h2.md\:text-6xl {
+  font-size: clamp(40px, 6vw, 84px) !important;
+  line-height: 1.02 !important;
+}
+
+/* ── Stats band ($0 / 48 Hours / 0 Risk) MASSIVE ── */
+.ss-display-stat {
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  letter-spacing: -0.04em;
+  font-size: clamp(56px, 8vw, 104px) !important;
+  line-height: 0.95 !important;
+  margin-bottom: 12px !important;
+}
+
+/* ── Gold corner brackets on every glass-panel at rest ── */
+.glass-panel { position: relative; }
+.glass-panel::before,
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(201,168,76,0.45);
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+.glass-panel::before {
+  top: -1px; left: -1px;
+  border-top: 1px solid rgba(201,168,76,0.45);
+  border-left: 1px solid rgba(201,168,76,0.45);
+}
+.glass-panel::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 1px solid rgba(201,168,76,0.45);
+  border-right: 1px solid rgba(201,168,76,0.45);
+}
+.glass-panel:hover::before,
+.glass-panel:hover::after {
+  width: 22px;
+  height: 22px;
+  border-top-color: #C9A84C;
+  border-left-color: #C9A84C;
+  border-bottom-color: #C9A84C;
+  border-right-color: #C9A84C;
+}
+/* Don't break sub-panels w/ existing ::before/::after */
+.myth-card.glass-panel::before, .myth-card.glass-panel::after,
+.info-bento::before, .info-bento::after,
+nav.glass-panel::before, nav.glass-panel::after,
+.tab-content .glass-panel::after { display: none; }
+
+/* ── Section bridge bands — gold hairline + center diamond ── */
+.fjm-bridge--top { position: relative; }
+.fjm-bridge--top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 10px; height: 10px;
+  background: #C9A84C;
+  box-shadow: 0 0 24px rgba(201,168,76,0.4);
+  z-index: 2;
+}
+.fjm-bridge--top {
+  border-top: 1px solid rgba(201,168,76,0.18) !important;
+}
+
+/* ── Process timeline gold connector glow ── */
+#process .relative.before\:absolute::before,
+#process [class*="before:bg-gradient-to-b"]::before {
+  background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.22) 60%, transparent 100%) !important;
+  box-shadow: 0 0 18px rgba(201,168,76,0.25);
+  width: 2px !important;
+}
+
+/* ── Process step marker ── */
+.step-marker {
+  width: 56px !important;
+  height: 56px !important;
+  font-size: 14px !important;
+  letter-spacing: 0.08em;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* ── Info-bento h2 ── */
+.info-bento h2 {
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.012em !important;
+}
+.info-bento::after {
+  width: 36px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, #C9A84C, rgba(201,168,76,0.2)) !important;
+}
+
+/* ── Pricing tab labels louder ── */
+.pkg-tab .pkg-tab-title { font-size: 15px !important; letter-spacing: 0.1em !important; }
+
+/* ── Pricing card glow ── */
+.tab-content > div.glass-panel {
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 30px 80px -40px rgba(201,168,76,0.18);
+}
+.tab-content .text-brand-gold.font-display.font-bold.text-3xl {
+  font-size: 56px !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* ── Booking pill scarcity ── */
+.glass-panel.border-brand-gold\/30,
+.border-brand-gold\/30 {
+  background: linear-gradient(135deg, rgba(201,168,76,0.10), rgba(201,168,76,0.02)) !important;
+}
+
+/* ── Section-label gold dash ── */
+.text-brand-gold.text-xs.font-bold.tracking-\[0\.2em\].uppercase,
+.text-brand-gold.text-\[10px\].font-bold.tracking-\[0\.25em\].uppercase {
+  position: relative;
+  padding-left: 32px;
+}
+.text-brand-gold.text-xs.font-bold.tracking-\[0\.2em\].uppercase::before,
+.text-brand-gold.text-\[10px\].font-bold.tracking-\[0\.25em\].uppercase::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  width: 24px; height: 1px;
+  background: #C9A84C;
+  transform: translateY(-50%);
+}
+
+/* ── Myth card shadow + hover ── */
+.myth-card {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 12px 36px -20px rgba(0,0,0,0.55) !important;
+}
+.myth-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.22),
+    0 22px 56px -22px rgba(201,168,76,0.18),
+    0 22px 56px -28px rgba(0,0,0,0.55) !important;
+}
+
+/* ── Audit gold breakout sheen ── */
+section .bg-brand-gold {
+  background: linear-gradient(135deg, #C9A84C 0%, #d8b86a 50%, #C9A84C 100%) !important;
+}
+
+/* ── Footer wordmark scale ── */
+footer .text-white.font-display.font-bold.text-lg {
+  font-size: 28px !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ── Mobile volume ── */
+@media (max-width: 480px) {
+  .hero-headline {
+    font-size: 44px !important;
+    line-height: 1.04 !important;
+  }
+  main section h2.font-display { font-size: 32px !important; }
+  .ss-display-stat { font-size: 56px !important; }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   FAQ ACCORDION — premium expand animation
+   Pairs with /js/v2-super-saiyan.js (height interpolation)
+   ═════════════════════════════════════════════════════════════════ */
+
+#faq details {
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  background: #0a1219;
+  overflow: hidden;
+  transition: border-color 0.4s cubic-bezier(.22,.92,.4,1),
+              box-shadow 0.4s cubic-bezier(.22,.92,.4,1);
+  position: relative;
+}
+#faq details:hover {
+  border-color: rgba(201,168,76,0.22);
+  box-shadow: 0 8px 32px -16px rgba(201,168,76,0.18);
+}
+#faq details[open] {
+  border-color: rgba(201,168,76,0.35);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.15),
+    0 18px 48px -22px rgba(201,168,76,0.22);
+}
+#faq details[open]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C 40%, #C9A84C 60%, transparent);
+  opacity: 0.85;
+  z-index: 1;
+}
+#faq summary {
+  position: relative;
+  transition: background 0.3s ease;
+}
+#faq summary:hover { background: rgba(201,168,76,0.04); }
+#faq details[open] summary { background: rgba(201,168,76,0.05); }
+
+/* The chevron rotation already exists; sharpen the curve */
+#faq summary svg.ph-icon {
+  transition: transform 0.5s cubic-bezier(.22,.92,.4,1), color 0.3s ease;
+}
+#faq details[open] summary svg.ph-icon {
+  color: #ffffff !important;
+}
+
+/* The animated content pane (controlled by JS — see v2-super-saiyan.js) */
+#faq details > div {
+  overflow: hidden;
+  transition: height 0.45s cubic-bezier(.22,.92,.4,1),
+              opacity 0.35s ease,
+              transform 0.45s cubic-bezier(.22,.92,.4,1);
+  will-change: height, opacity, transform;
+}
+#faq details:not([open]) > div {
+  height: 0 !important;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+#faq details[open] > div {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  #faq details > div { transition: none !important; transform: none !important; }
+}

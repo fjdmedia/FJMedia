@@ -4,3 +4,7 @@ docs/superpowers/
 # Node / Tailwind build tooling
 node_modules/
 _hero_qa/
+
+# Sweep artifacts staged for deletion (screenshots, videos, scratch files)
+# See Memory/rules/sweep_artifact_cleanup.md
+delete/
