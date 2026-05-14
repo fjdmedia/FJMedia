@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){var k=null;try{k=sessionStorage.getItem('fjtools_k')||localStorage.getItem('fjtools_k');}catch(_){}if(k!=='61697e084834fbb2cf9ceebd945b42bdb9cd7cee96e0eaeb3df2232ccc95a3f0'){location.replace('/fjmedia-tools/unlock.html?next='+encodeURIComponent(location.pathname+location.search));document.documentElement.innerHTML='';throw new Error('locked');}})();</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Client Discovery — FJMedia Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Space+Mono&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    /* ── Wider than other tools — textareas need room when filling live ── */
+    .tool-page { max-width: 1100px; }
+    .disco-wrap { display: block; }
+    #discoveryForm { width: 100%; }
+
+    /* ── Click-to-open Section Jumper (bottom-right) ── */
+    .disco-jumper {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 40;
+      font-family: var(--mono);
+    }
+    .disco-jumper-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      background: rgba(7, 21, 32, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: all var(--transition);
+    }
+    .disco-jumper-btn:hover { color: var(--accent); transform: translateY(-1px); }
+    .disco-jumper-btn .arrow { font-size: 0.85rem; line-height: 0.7; }
+    .disco-jumper-menu {
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      right: 0;
+      min-width: 220px;
+      padding: 0.5rem;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      display: none;
+      flex-direction: column;
+      gap: 0.1rem;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    .disco-jumper.open .disco-jumper-menu { display: flex; }
+    .disco-jumper-menu a {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: var(--text-mid);
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+    .disco-jumper-menu a:hover { color: var(--accent); background: rgba(201, 168, 76, 0.06); }
+    .disco-jumper-menu .num {
+      font-size: 0.68rem;
+      opacity: 0.5;
+      min-width: 1rem;
+    }
+
+    .disco-btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-mid);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: left;
+    }
+    .disco-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .disco-btn.primary { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); }
+    .disco-btn.primary:hover { background: var(--btn-hover); border-color: var(--btn-hover); color: var(--btn-text); }
+    .disco-save-status {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-light);
+      margin-top: 0.6rem;
+      min-height: 0.9rem;
+    }
+    .disco-save-status.saved { color: var(--green); }
+
+    /* ── Section cards ── */
+    .disco-section {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.5rem;
+      background: rgba(255,255,255,0.012);
+      scroll-margin-top: 5rem;
+    }
+    .disco-section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .disco-section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--heading);
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .disco-section-sub {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+      margin: 0 0 1.75rem;
+      max-width: 56ch;
+    }
+    .disco-q { margin-bottom: 1.4rem; }
+    .disco-q:last-child { margin-bottom: 0; }
+    .disco-q-label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+      line-height: 1.45;
+    }
+    .disco-q-hint {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 0.55rem;
+      font-style: italic;
+    }
+    .disco-textarea {
+      width: 100%;
+      min-height: 70px;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      resize: vertical;
+      transition: border-color var(--transition);
+    }
+    .disco-textarea:focus { outline: none; border-color: var(--accent); }
+    .disco-textarea::placeholder { color: var(--text-light); opacity: 0.6; }
+
+    /* ── Meta header block ── */
+    .disco-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; }
+    .disco-meta-grid .disco-q { margin-bottom: 0; }
+    .disco-meta-grid .disco-textarea { min-height: 42px; }
+
+    /* ── Bottom action bar ── */
+    .disco-bottom-actions {
+      display: flex; gap: 1rem; justify-content: flex-end;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .disco-section { padding: 1.5rem 1.25rem; }
+      .disco-meta-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Screenshare-mode toggle ── */
+    .disco-mode-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 0 1rem;
+    }
+    .disco-mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-mid);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .disco-mode-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .disco-mode-toggle .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--text-light);
+      transition: background var(--transition);
+    }
+    .disco-mode-toggle .state { opacity: 0.7; }
+    .disco-mode-toggle[aria-pressed="true"] {
+      border-color: var(--green);
+      color: var(--green);
+    }
+    .disco-mode-toggle[aria-pressed="true"] .dot { background: var(--green); }
+    .disco-mode-toggle[aria-pressed="true"] .state { opacity: 1; }
+
+    /* ── Screenshare-mode rules ── */
+    body.screenshare-mode .disco-q-hint { display: none; }
+    body.screenshare-mode .eb-fuels { display: none; }
+    body.screenshare-mode #sec-9 { display: none; }
+    body.screenshare-mode .disco-q-label { font-size: 1.04rem; }
+    body.screenshare-mode .disco-textarea { font-size: 1.04rem; min-height: 80px; }
+    body.screenshare-mode .disco-section-title { font-size: 1.7rem; }
+    body.screenshare-mode .disco-section-sub { font-size: 1rem; max-width: 60ch; }
+    body.screenshare-mode .disco-section { padding: 2.25rem 2.5rem; }
+    @media (max-width: 900px) {
+      body.screenshare-mode .disco-section { padding: 1.75rem 1.4rem; }
+    }
+
+    /* ── Jumper fade (hides when action bar in viewport) ── */
+    .disco-jumper { transition: opacity 0.25s ease, transform 0.25s ease; }
+    .disco-jumper.disco-jumper-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+    }
+
+    /* ── Print: clean, branded, no nav/sidebar ── */
+    @media print {
+      @page { margin: 0.6in 0.55in; size: letter; }
+      nav, .breadcrumb, .disco-sidebar, .disco-bottom-actions, .disco-jumper, .tool-header, .disco-mode-bar { display: none !important; }
+      body { background: #fff !important; color: #111 !important; }
+      .disco-wrap { display: block; }
+      .disco-section {
+        background: #fff !important;
+        border: none !important;
+        border-bottom: 1px solid #ddd !important;
+        border-radius: 0 !important;
+        padding: 0.4in 0 !important;
+        page-break-inside: avoid;
+        margin: 0 !important;
+      }
+      .disco-section:first-of-type {
+        padding-top: 0 !important;
+      }
+      .disco-section-eyebrow { color: #b08a2c !important; }
+      .disco-section-title { color: #071520 !important; font-size: 1.2rem; }
+      .disco-section-sub { color: #444 !important; font-size: 0.85rem; }
+      .disco-q-label { color: #071520 !important; font-size: 0.88rem; }
+      .disco-q-hint { display: none; }
+      .disco-textarea {
+        background: #fff !important;
+        color: #111 !important;
+        border: none !important;
+        border-bottom: 1px solid #ccc !important;
+        border-radius: 0 !important;
+        padding: 0.25rem 0 !important;
+        font-size: 0.88rem;
+        min-height: 1.4rem !important;
+        resize: none;
+      }
+      .print-header {
+        display: block !important;
+        text-align: left;
+        margin-bottom: 0.3in;
+        padding-bottom: 0.15in;
+        border-bottom: 2px solid #071520;
+      }
+      .print-header .ph-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: #071520;
+      }
+      .print-header .ph-sub {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.72rem;
+        color: #b08a2c;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-top: 0.15rem;
+      }
+    }
+    .print-header { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <span class="logo-mark">
+        <span class="logo-bk">{</span><span class="logo-fj">FJ</span><span class="logo-bk">}</span>
+      </span>
+      <span class="logo-media-word">Media</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-label">Tools Platform</span>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+      <a href="../index.html">Tools</a>
+      <span class="sep">/</span>
+      <span class="current">Client Discovery</span>
+    </div>
+
+    <!-- ── PAGE ── -->
+    <div class="tool-page">
+
+      <div class="tool-header">
+        <h1>Client Discovery</h1>
+        <p>Run this with the client live — screen-share or hand them the keyboard. Captures the vision behind the site before a single hex code gets picked. Auto-saves locally. Export to PDF when done.</p>
+      </div>
+
+      <!-- Print-only header -->
+      <div class="print-header">
+        <div class="ph-title">Client Discovery Worksheet</div>
+        <div class="ph-sub">FJMedia · Winnipeg</div>
+      </div>
+
+      <div class="disco-wrap">
+
+        <!-- ── SCREENSHARE-MODE TOGGLE ── -->
+        <div class="disco-mode-bar">
+          <button type="button" class="disco-mode-toggle" id="screenshareToggle" aria-pressed="false" title="Hides internal coaching cues, 'Fuels:' tags, and Section 9 so this is safe to share with a client live.">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="label">Screenshare Mode</span>
+            <span class="state">Off</span>
+          </button>
+        </div>
+
+        <!-- ── FORM ── -->
+        <form id="discoveryForm" autocomplete="off">
+
+          <!-- 0. PROJECT HEADER -->
+          <section class="disco-section" id="sec-0">
+            <div class="disco-section-eyebrow">Section 0 of 9</div>
+            <h2 class="disco-section-title">Project Header</h2>
+            <p class="disco-section-sub">Who, what, when. Used as the file header on the exported PDF.</p>
+            <div class="disco-meta-grid">
+              <div class="disco-q">
+                <label class="disco-q-label" for="f-client">Client name</label>
+                <textarea class="disco-textarea" id="f-client" name="client" rows="1" placeholder="First + last name"></textarea>
+              </div>
+              <div class="disco-q">
+                <label class="disco-q-label" for="f-business">Business name</label>
+                <textarea class="disco-textarea" id="f-business" name="business" rows="1" placeholder="Exact spelling — as it'll appear on the site"></textarea>
+              </div>
+              <div class="disco-q">
+                <label class="disco-q-label" for="f-date">Discovery date</label>
+                <textarea class="disco-textarea" id="f-date" name="date" rows="1" placeholder="e.g. May 14, 2026"></textarea>
+              </div>
+              <div class="disco-q">
+                <label class="disco-q-label" for="f-conducted">Conducted by</label>
+                <textarea class="disco-textarea" id="f-conducted" name="conducted" rows="1" placeholder="James Diaz · FJMedia"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- 1. CUSTOMER & MONEY -->
+          <section class="disco-section" id="sec-1">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 1 of 9</span><span class="eb-fuels"> · Fuels: hero copy, primary CTA, local SEO, services order</span></div>
+            <h2 class="disco-section-title">Customer &amp; Money</h2>
+            <p class="disco-section-sub">Where customers come from today and what they're actually buying. The answers here decide whether this build is a lead-gen engine or a credibility check — two very different sites.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-1-1">In one sentence, what does your business do and who is it for?</label>
+              <span class="disco-q-hint">If they ramble, ask them to retry in 15 words or less. Becomes the hero subhead seed.</span>
+              <textarea class="disco-textarea" id="q-1-1" name="q1_1" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-1-2">Where do customers find you today? Roughly what % from each source?</label>
+              <span class="disco-q-hint">IG / GBP / referral / Google / walk-in / paid ads. If 90% referral, this site is a trust check — not a lead engine.</span>
+              <textarea class="disco-textarea" id="q-1-2" name="q1_2" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-1-3">What does the customer actually walk away with — the transformation, not the service?</label>
+              <span class="disco-q-hint">e.g. "peace of mind", "a memorable celebration", "confidence walking into a room". This becomes the value-prop copy.</span>
+              <textarea class="disco-textarea" id="q-1-3" name="q1_3" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-1-4">Service area — exact cities, neighborhoods, regions you serve.</label>
+              <span class="disco-q-hint">Drives local SEO targeting, GBP service-area setup, and footer content. "All of Winnipeg" or "Transcona + East Kildonan + Saint Boniface".</span>
+              <textarea class="disco-textarea" id="q-1-4" name="q1_4" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-1-5">Customer aesthetic — what does your ideal customer shop, drive, wear?</label>
+              <span class="disco-q-hint">Brands they aspire to, neighborhoods they live in, the decade their taste sits in. e.g. "early-30s, drives a Tesla, shops Aritzia / Frank &amp; Oak, follows Kinfolk." This locks photography tier + design polish more than age/income ever does.</span>
+              <textarea class="disco-textarea" id="q-1-5" name="q1_5" rows="3" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 2. THE WIN & CTA -->
+          <section class="disco-section" id="sec-2">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 2 of 9</span><span class="eb-fuels"> · Fuels: information hierarchy, primary CTA, secondary CTAs, feature priority</span></div>
+            <h2 class="disco-section-title">The Win &amp; the CTA</h2>
+            <p class="disco-section-sub">Lock the one action every visitor must take — and the context they're arriving in — before deciding what's on the page.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-2-0">Closer or door-opener — what's the visitor's state of mind when they land?</label>
+              <span class="disco-q-hint"><strong>Closer:</strong> they've already heard of you (referral, DM, business card), site needs to seal the deal → testimonials + guarantees + clear pricing FIRST. <strong>Door-opener:</strong> first-time discovery (Google, IG explore), site needs to hook them → benefits + transformation + visual proof FIRST. This single answer reorders the entire homepage.</span>
+              <textarea class="disco-textarea" id="q-2-0" name="q2_0" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-2-1">If a stranger lands on the homepage right now, what's the ONE action they should take?</label>
+              <span class="disco-q-hint">Book / order / inquire / call / DM / get a quote. Pick one — this is the global CTA and it appears in nav, hero, and footer.</span>
+              <textarea class="disco-textarea" id="q-2-1" name="q2_1" rows="1" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-2-2">Secondary actions allowed — what else should be one-click reachable?</label>
+              <span class="disco-q-hint">Call, DM, SMS, email, contact form, directions. Drives the secondary CTA bar + sticky-nav buttons.</span>
+              <textarea class="disco-textarea" id="q-2-2" name="q2_2" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-2-3">What does your current online presence (site / IG / GBP) fail to do that this MUST fix?</label>
+              <span class="disco-q-hint">Push for specifics: "can't book online", "no pricing visible", "no mobile site", "no reviews shown". Drives feature priority.</span>
+              <textarea class="disco-textarea" id="q-2-3" name="q2_3" rows="3" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 3. SERVICES & PRICING -->
+          <section class="disco-section" id="sec-3">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 3 of 9</span><span class="eb-fuels"> · Fuels: services section, pricing layout, FAQ section, SEO long-tail</span></div>
+            <h2 class="disco-section-title">Services &amp; Pricing</h2>
+            <p class="disco-section-sub">Every service the site needs to sell, in priority order, with the exact pricing presentation we'll use.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-3-1">List every service with a one-line description and starting price (if applicable).</label>
+              <span class="disco-q-hint">This is the raw input for the services section. Push for completeness now or risk going back twice.</span>
+              <textarea class="disco-textarea" id="q-3-1" name="q3_1" rows="6" placeholder="Service — what it includes — from $X&#10;Service — what it includes — from $X&#10;…"></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-3-2">Top 3 services to lead with. Which one is the cash cow?</label>
+              <span class="disco-q-hint">Hierarchy decision — top 3 get featured cards, the rest get listed. Cash cow goes first.</span>
+              <textarea class="disco-textarea" id="q-3-2" name="q3_2" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-3-3">Pricing presentation — pick one.</label>
+              <span class="disco-q-hint">Show exact prices · show "from $X" · show packages only · hide pricing (inquire). Drives the pricing block layout.</span>
+              <textarea class="disco-textarea" id="q-3-3" name="q3_3" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-3-4">Top 5 questions customers ask before buying.</label>
+              <span class="disco-q-hint">Becomes the FAQ section content + targets SEO long-tail keywords ("how much does X cost in Winnipeg", "do you serve Y").</span>
+              <textarea class="disco-textarea" id="q-3-4" name="q3_4" rows="5" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5."></textarea>
+            </div>
+          </section>
+
+          <!-- 4. PROOF & BRAND ASSETS -->
+          <section class="disco-section" id="sec-4">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 4 of 9</span><span class="eb-fuels"> · Fuels: proof section, photography brief, copy scope, design system</span></div>
+            <h2 class="disco-section-title">Proof &amp; Brand Assets</h2>
+            <p class="disco-section-sub">Audit what already exists vs. what we need to create. This is where scope balloons or stays tight.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-1">Reviews + testimonials — where do they live? Roughly how many?</label>
+              <span class="disco-q-hint">Google, IG DMs, screenshots, Facebook, email, none yet. Drives testimonial section vs. "request after launch" plan.</span>
+              <textarea class="disco-textarea" id="q-4-1" name="q4_1" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-2">Before-afters, portfolio work, case studies — what's available?</label>
+              <span class="disco-q-hint">Drives gallery feasibility. If nothing exists, the site can't lean on visual proof — needs to lean on social proof or guarantees.</span>
+              <textarea class="disco-textarea" id="q-4-2" name="q4_2" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-3">Logo + photography — what do you have, what do we need to shoot, what STYLE do you want?</label>
+              <span class="disco-q-hint">Logo state (vector / PNG / needs refresh / nothing). Photos available (pro shoot already done / phone photos / nothing). Style preference: <strong>custom on-brand</strong> (book a shoot) · <strong>high-end stock</strong> (Pexels / Unsplash / paid stock) · <strong>authentic raw</strong> (on-the-job phone shots, lifestyle). Locks the entire image direction.</span>
+              <textarea class="disco-textarea" id="q-4-3" name="q4_3" rows="4" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-4">Brand colors + fonts — locked already, or am I picking?</label>
+              <span class="disco-q-hint">Hex codes if they have them. Otherwise I pick per the niche playbook. Drives the entire design system.</span>
+              <textarea class="disco-textarea" id="q-4-4" name="q4_4" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-5">Copy — do you have any written, are you writing it, or am I?</label>
+              <span class="disco-q-hint">Biggest scope multiplier of the whole project. If I'm writing all copy, add 30–50% to the timeline + price tier.</span>
+              <textarea class="disco-textarea" id="q-4-5" name="q4_5" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-4-6">Hero focus — THE WORK or THE PEOPLE?</label>
+              <span class="disco-q-hint"><strong>The Work:</strong> projects, before-afters, finished results — portfolio-first sites (renovators, designers, photographers). <strong>The People:</strong> you + team — trust/relationship-first sites (realtors, therapists, salons, consultants). Locks portrait vs. project imagery balance + about-page weight.</span>
+              <textarea class="disco-textarea" id="q-4-6" name="q4_6" rows="2" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 5. LOOK & FEEL -->
+          <section class="disco-section" id="sec-5">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 5 of 9</span><span class="eb-fuels"> · Fuels: design system, layout archetype, motion level, anti-patterns</span></div>
+            <h2 class="disco-section-title">Look &amp; Feel</h2>
+            <p class="disco-section-sub">The fastest path to design alignment is references and opposites. Don't accept "modern" or "clean" as answers — push to specifics every time.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-5-1">Three sites you love — paste links + what specifically hits about each.</label>
+              <span class="disco-q-hint">Most operational question in the whole worksheet. Locks the layout archetype + motion level + density.</span>
+              <textarea class="disco-textarea" id="q-5-1" name="q5_1" rows="5" placeholder="1. URL — what you love about it&#10;2.&#10;3."></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-5-2">Three you hate — what feels wrong?</label>
+              <span class="disco-q-hint">Equally critical. Sets the anti-pattern guardrails.</span>
+              <textarea class="disco-textarea" id="q-5-2" name="q5_2" rows="5" placeholder="1. URL — what bothers you&#10;2.&#10;3."></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-5-3">Three MATERIAL words for the feeling — not "modern" or "clean".</label>
+              <span class="disco-q-hint">Push for textures, materials, eras, places: <em>industrial · organic · handmade · clinical · editorial · gallery · workshop · velvet · concrete · linen · neon · brass.</em> Vibe words like "modern, clean, professional" tell me nothing — material words lock the entire mood board.</span>
+              <textarea class="disco-textarea" id="q-5-3" name="q5_3" rows="1" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-5-4">Design system levers — circle one each.</label>
+              <span class="disco-q-hint">Dark / light · Photo-driven / type-driven · Quiet / loud · Spacious / dense · Sharp / rounded · Static / scroll-animated. Each binary instantly narrows the design direction.</span>
+              <textarea class="disco-textarea" id="q-5-4" name="q5_4" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-5-5">Specific UI patterns / behaviors you HATE — list them.</label>
+              <span class="disco-q-hint">Not adjectives — specific things to ban: <em>"no popups · no auto-playing video · no carousels · no countdown timers · no chat-bot bubble · no 'we' marketing speak · no stock photos of fake handshakes · no fade-in-on-scroll everywhere."</em> Saves me from building something they'll ask me to rip out.</span>
+              <textarea class="disco-textarea" id="q-5-5" name="q5_5" rows="3" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 6. COMPETITIVE EDGE -->
+          <section class="disco-section" id="sec-6">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 6 of 9</span><span class="eb-fuels"> · Fuels: "why us" section, meta description, value-prop copy</span></div>
+            <h2 class="disco-section-title">Competitive Edge</h2>
+            <p class="disco-section-sub">If their site looks like every competitor's, it earns nothing. Find the gap and build the messaging around it.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-6-1">Name 2–3 direct competitors. Paste links.</label>
+              <span class="disco-q-hint">I'll audit what they do, what they show, what they charge. Drives positioning + features-they-don't-have analysis.</span>
+              <textarea class="disco-textarea" id="q-6-1" name="q6_1" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-6-2">What's your unfair advantage?</label>
+              <span class="disco-q-hint">Price · speed · quality · story · certification · location · relationships. Becomes the "Why Us" section + meta description.</span>
+              <textarea class="disco-textarea" id="q-6-2" name="q6_2" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-6-3">Look at your top competitor's site. What's ONE specific thing about it that turns you off?</label>
+              <span class="disco-q-hint">Not "I don't like their logo" — push to a UI / copy / tone specific: <em>"their hero is just a stock photo of a handshake", "they list 47 services on one page", "their photos look like a 2014 dental brochure", "they sound corporate / desperate / cold".</em> The opposite of what they hate becomes our hero subhead + visual hook.</span>
+              <textarea class="disco-textarea" id="q-6-3" name="q6_3" rows="3" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 7. TECH & INTEGRATIONS -->
+          <section class="disco-section" id="sec-7">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 7 of 9</span><span class="eb-fuels"> · Fuels: migration scope, form wiring, SEO setup, analytics, retainer pitch</span></div>
+            <h2 class="disco-section-title">Tech &amp; Integrations</h2>
+            <p class="disco-section-sub">Everything technical that affects build complexity, migration risk, and what we wire on day one.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-1">Existing domain, hosting, and business email — what's the current setup?</label>
+              <span class="disco-q-hint">Domain registrar (GoDaddy / Google / Namecheap). Current host (WordPress / Wix / Squarespace / none). Email (Google Workspace / Outlook / personal). Drives migration scope.</span>
+              <textarea class="disco-textarea" id="q-7-1" name="q7_1" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-2">Migrating from a current site? Which platform?</label>
+              <span class="disco-q-hint">WordPress / Wix / Squarespace / Shopify / custom / nothing. Wix-to-modern migrations have specific content extraction quirks — flag now.</span>
+              <textarea class="disco-textarea" id="q-7-2" name="q7_2" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-3">Forms needed — list every one.</label>
+              <span class="disco-q-hint">Contact, booking, quote request, online order, custom intake. Each needs its own Web3Forms key + GAS sheet logging.</span>
+              <textarea class="disco-textarea" id="q-7-3" name="q7_3" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-4">Third-party integrations.</label>
+              <span class="disco-q-hint">Calendly · Stripe · GBP feed · Instagram feed · POS · payment processor · CRM (HubSpot, Mailchimp). Each adds wiring time.</span>
+              <textarea class="disco-textarea" id="q-7-4" name="q7_4" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-5">Google Business Profile status + owner email/access.</label>
+              <span class="disco-q-hint">Claimed + optimized · claimed but neglected · not claimed yet · don't know what GBP is. I need owner email to request access. Critical local SEO step.</span>
+              <textarea class="disco-textarea" id="q-7-5" name="q7_5" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-7-6">Analytics already running.</label>
+              <span class="disco-q-hint">GA4 · Search Console · Meta Pixel · TikTok Pixel · nothing. Drives reporting setup + retainer's monthly snapshot.</span>
+              <textarea class="disco-textarea" id="q-7-6" name="q7_6" rows="2" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 8. SCOPE & APPROVAL -->
+          <section class="disco-section" id="sec-8">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 8 of 9</span><span class="eb-fuels"> · Fuels: contract, timeline, revision rounds, retainer pitch</span></div>
+            <h2 class="disco-section-title">Scope &amp; Approval</h2>
+            <p class="disco-section-sub">What pages exist, who decides, when it ships, and what happens after launch. Where scope creep gets locked out.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-1">Pages confirmed for this build.</label>
+              <span class="disco-q-hint">Home · Services · About · Contact · Gallery · FAQ · Booking · Blog · Custom (list). Drives architecture + sitemap.</span>
+              <textarea class="disco-textarea" id="q-8-1" name="q8_1" rows="3" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-2">Hard deadline — tied to what?</label>
+              <span class="disco-q-hint">Launch event · season opener · ad campaign · grand opening · grant submission. If no deadline, default = 21 days from kickoff.</span>
+              <textarea class="disco-textarea" id="q-8-2" name="q8_2" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-3">Who has final say on approval?</label>
+              <span class="disco-q-hint">Just them · partner / spouse · business partner · franchise HQ · committee. If &gt;1 decision maker, schedule them on review calls now or eat a redo.</span>
+              <textarea class="disco-textarea" id="q-8-3" name="q8_3" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-4">Anything off-limits — tone, claims, competitors, imagery.</label>
+              <span class="disco-q-hint">Sets copywriter + image-selection guardrails. e.g. "don't mention X competitor", "no stock photos of white people only", "no medical claims".</span>
+              <textarea class="disco-textarea" id="q-8-4" name="q8_4" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-5">Who updates the site after launch — you, me, or nobody?</label>
+              <span class="disco-q-hint">"You" = retainer pitch (Keep It Running / Growing / Own Your Market). "Me" = handoff doc + Loom walkthrough required. "Nobody" = build it more bulletproof up front.</span>
+              <textarea class="disco-textarea" id="q-8-5" name="q8_5" rows="2" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-8-6">Roadmap — what should we leave room to add in 6–12 months?</label>
+              <span class="disco-q-hint">More services · online store · booking system · blog · second location · French/bilingual version. Drives info-architecture flex points.</span>
+              <textarea class="disco-textarea" id="q-8-6" name="q8_6" rows="3" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <!-- 9. INTERNAL NOTES -->
+          <section class="disco-section" id="sec-9">
+            <div class="disco-section-eyebrow"><span class="eb-num">Section 9 of 9</span><span class="eb-fuels"> · Internal · Strip before sharing the PDF with client</span></div>
+            <h2 class="disco-section-title">Internal Notes — What I Heard</h2>
+            <p class="disco-section-sub">Your read of the call, the tier recommendation, and next steps. Keep blank if exporting to client; fill in after for your own file.</p>
+
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-9-1">Read between the lines.</label>
+              <span class="disco-q-hint">What they got excited about · what they dodged · what their partner said · budget cues · decision-maker signals · urgency level.</span>
+              <textarea class="disco-textarea" id="q-9-1" name="q9_1" rows="5" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-9-2">Tier recommendation + reasoning.</label>
+              <span class="disco-q-hint">Launch $600 / Foundation $1,200 / Authority $2,000 — name the tier + the 2 reasons + the add-ons. Cross-check against packages.md before quoting.</span>
+              <textarea class="disco-textarea" id="q-9-2" name="q9_2" rows="4" placeholder=""></textarea>
+            </div>
+            <div class="disco-q">
+              <label class="disco-q-label" for="q-9-3">Next steps + proposal sent date + follow-up date.</label>
+              <textarea class="disco-textarea" id="q-9-3" name="q9_3" rows="2" placeholder=""></textarea>
+            </div>
+          </section>
+
+          <div class="disco-bottom-actions">
+            <button type="button" class="disco-btn" onclick="resetForm()">Reset Form</button>
+            <button type="button" class="disco-btn" onclick="loadDraftPrompt()">Load Draft</button>
+            <button type="button" class="disco-btn" onclick="saveDraft(true)">Save Draft</button>
+            <button type="button" class="disco-btn primary" onclick="window.print()">Export PDF</button>
+          </div>
+          <div class="disco-save-status" id="saveStatus" style="text-align: right; margin-top: 0.6rem;"></div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ── SECTION JUMPER (click-to-open, bottom-right) ── -->
+    <div class="disco-jumper" id="discoJumper">
+      <div class="disco-jumper-menu" id="discoJumperMenu" role="menu">
+        <a href="#sec-0"><span class="num">0</span> Project Header</a>
+        <a href="#sec-1"><span class="num">1</span> Customer &amp; Money</a>
+        <a href="#sec-2"><span class="num">2</span> The Win &amp; CTA</a>
+        <a href="#sec-3"><span class="num">3</span> Services &amp; Pricing</a>
+        <a href="#sec-4"><span class="num">4</span> Proof &amp; Brand Assets</a>
+        <a href="#sec-5"><span class="num">5</span> Look &amp; Feel</a>
+        <a href="#sec-6"><span class="num">6</span> Competitive Edge</a>
+        <a href="#sec-7"><span class="num">7</span> Tech &amp; Integrations</a>
+        <a href="#sec-8"><span class="num">8</span> Scope &amp; Approval</a>
+        <a href="#sec-9"><span class="num">9</span> Internal Notes</a>
+      </div>
+      <button type="button" class="disco-jumper-btn" id="discoJumperBtn" aria-haspopup="menu" aria-expanded="false">
+        <span class="arrow">↑</span> Sections
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    const FORM_ID = 'discoveryForm';
+    const STORAGE_PREFIX = 'fjmedia_discovery_';
+    const ALL_KEY = 'fjmedia_discovery_drafts';
+
+    function getFormData() {
+      const form = document.getElementById(FORM_ID);
+      const data = {};
+      form.querySelectorAll('textarea').forEach(el => { data[el.id] = el.value; });
+      return data;
+    }
+
+    function setFormData(data) {
+      if (!data) return;
+      Object.keys(data).forEach(k => {
+        const el = document.getElementById(k);
+        if (el) el.value = data[k] || '';
+      });
+    }
+
+    function currentClientKey() {
+      const v = (document.getElementById('f-client').value || '').trim() ||
+                (document.getElementById('f-business').value || '').trim();
+      return v ? STORAGE_PREFIX + v.toLowerCase().replace(/[^a-z0-9]+/g, '_') : null;
+    }
+
+    let lastSavedAt = null;
+    function fmtTime(d) {
+      return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+    function flashStatus(msg, ok) {
+      const el = document.getElementById('saveStatus');
+      el.textContent = msg;
+      el.className = 'disco-save-status' + (ok ? ' saved' : '');
+      if (ok) {
+        lastSavedAt = new Date();
+        setTimeout(() => {
+          if (lastSavedAt) {
+            el.textContent = 'Last saved ' + fmtTime(lastSavedAt);
+            el.className = 'disco-save-status saved';
+          }
+        }, 1500);
+      }
+    }
+
+    function saveDraft(explicit) {
+      const key = currentClientKey();
+      if (!key) {
+        if (explicit) flashStatus('Add client or business name first', false);
+        return;
+      }
+      const data = getFormData();
+      data._savedAt = new Date().toISOString();
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+        const index = JSON.parse(localStorage.getItem(ALL_KEY) || '[]');
+        if (!index.includes(key)) {
+          index.push(key);
+          localStorage.setItem(ALL_KEY, JSON.stringify(index));
+        }
+        flashStatus(explicit ? 'Draft saved' : 'Auto-saved · ' + new Date().toLocaleTimeString(), true);
+      } catch (e) {
+        flashStatus('Save failed: ' + e.message, false);
+      }
+    }
+
+    function loadDraftPrompt() {
+      const index = JSON.parse(localStorage.getItem(ALL_KEY) || '[]');
+      if (!index.length) { alert('No saved drafts yet.'); return; }
+      const labels = index.map(k => k.replace(STORAGE_PREFIX, '').replace(/_/g, ' '));
+      const choice = prompt('Saved drafts:\n\n' + labels.map((l, i) => `${i + 1}. ${l}`).join('\n') + '\n\nType a number to load:');
+      const idx = parseInt(choice, 10) - 1;
+      if (isNaN(idx) || idx < 0 || idx >= index.length) return;
+      const data = JSON.parse(localStorage.getItem(index[idx]) || 'null');
+      setFormData(data);
+      flashStatus('Loaded: ' + labels[idx], true);
+    }
+
+    function resetForm() {
+      if (!confirm('Reset every field? This does not delete saved drafts.')) return;
+      document.getElementById(FORM_ID).reset();
+      document.querySelectorAll('#' + FORM_ID + ' textarea').forEach(el => el.value = '');
+      flashStatus('Form cleared', true);
+    }
+
+    // ── Auto-save every 4 seconds if there are changes ──
+    let lastSnapshot = '';
+    setInterval(() => {
+      const key = currentClientKey();
+      if (!key) return;
+      const snap = JSON.stringify(getFormData());
+      if (snap !== lastSnapshot) {
+        lastSnapshot = snap;
+        saveDraft(false);
+      }
+    }, 4000);
+
+    // ── Auto-load latest draft for current client name as they type ──
+    let lastClientKey = null;
+    document.getElementById('f-client').addEventListener('blur', tryAutoLoad);
+    document.getElementById('f-business').addEventListener('blur', tryAutoLoad);
+    function tryAutoLoad() {
+      const key = currentClientKey();
+      if (!key || key === lastClientKey) return;
+      const existing = localStorage.getItem(key);
+      if (existing) {
+        if (confirm('Found a saved draft for this client. Load it?')) {
+          setFormData(JSON.parse(existing));
+          flashStatus('Draft loaded', true);
+        }
+        lastClientKey = key;
+      }
+    }
+
+    // ── Keyboard shortcut: Ctrl+S / Cmd+S saves draft ──
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveDraft(true);
+      }
+    });
+
+    // ── Date prefill ──
+    (function () {
+      const dateEl = document.getElementById('f-date');
+      if (!dateEl.value) {
+        const d = new Date();
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        dateEl.value = `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+      }
+      const conductedEl = document.getElementById('f-conducted');
+      if (!conductedEl.value) conductedEl.value = 'James Diaz · FJMedia';
+    })();
+
+    // ── Section Jumper: click-to-open menu ──
+    (function () {
+      const wrap = document.getElementById('discoJumper');
+      const btn = document.getElementById('discoJumperBtn');
+      const menu = document.getElementById('discoJumperMenu');
+      if (!wrap || !btn || !menu) return;
+
+      function close() {
+        wrap.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function toggle(e) {
+        e.stopPropagation();
+        const isOpen = wrap.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+
+      btn.addEventListener('click', toggle);
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') close();
+      });
+      document.addEventListener('click', (e) => {
+        if (!wrap.contains(e.target)) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+
+      // Fade jumper out when the bottom action bar enters viewport — keeps it
+      // from sitting on top of the Export PDF button at the end of the form.
+      const actionBar = document.querySelector('.disco-bottom-actions');
+      if (actionBar && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            wrap.classList.toggle('disco-jumper-hidden', e.isIntersecting);
+            if (e.isIntersecting) close();
+          });
+        }, { rootMargin: '0px 0px -20% 0px' });
+        io.observe(actionBar);
+      }
+    })();
+
+    // ── Screenshare Mode toggle ──
+    (function () {
+      const btn = document.getElementById('screenshareToggle');
+      if (!btn) return;
+      const stateEl = btn.querySelector('.state');
+      const KEY = 'fjmedia_discovery_screenshare';
+
+      function apply(on) {
+        document.body.classList.toggle('screenshare-mode', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (stateEl) stateEl.textContent = on ? 'On' : 'Off';
+      }
+
+      try { apply(localStorage.getItem(KEY) === '1'); } catch (_) {}
+
+      btn.addEventListener('click', () => {
+        const next = !document.body.classList.contains('screenshare-mode');
+        apply(next);
+        try { localStorage.setItem(KEY, next ? '1' : '0'); } catch (_) {}
+      });
+    })();
+  </script>
+
+</body>
+</html>
