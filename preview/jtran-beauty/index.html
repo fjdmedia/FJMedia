@@ -57,12 +57,20 @@
     html {
       scroll-behavior: smooth;
       background-color: var(--color-bg);
-      background-image: url('assets/silk-bg-v2.webp?v=20260515j');
+      background-image: url('assets/silk-bg-v2.webp?v=20260516a');
       background-size: 100% auto;
       background-position: top center;
       background-repeat: no-repeat;
       background-attachment: scroll;
       min-height: 100%;
+    }
+    /* Mobile silk fix: at narrow viewports, the 100%-width-auto scaling leaves silk covering only ~19% of the (very tall) mobile page. Switch to fill-viewport-always so the silk fabric reads across the whole scroll. */
+    @media (max-width: 768px) {
+      html {
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center center;
+      }
     }
     body {
       background: transparent;

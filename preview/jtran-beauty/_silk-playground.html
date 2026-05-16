@@ -84,7 +84,7 @@
   .bc-dots i:nth-child(3){background:#28c940}
   .bc-url{flex:1;background:#1a1a1a;border-radius:4px;padding:5px 10px;font:11px/1 'SF Mono',monospace;color:#888;border:1px solid #1a1a1a}
   .bc-url::before{content:'🔒 ';color:#666;font-size:10px}
-  .preview-page{width:100%;max-width:720px;aspect-ratio:1/5.91;background-color:var(--jt-bg);background-image:var(--silk-img,none);background-size:var(--silk-size,cover);background-position:var(--silk-pos,center);background-repeat:no-repeat;display:flex;flex-direction:column;position:relative;border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;flex-shrink:0;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+  .preview-page{width:100%;max-width:720px;aspect-ratio:1/6.67;background-color:var(--jt-bg);background-image:var(--silk-img,none);background-size:var(--silk-size,cover);background-position:var(--silk-pos,center);background-repeat:no-repeat;display:flex;flex-direction:column;position:relative;border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;flex-shrink:0;box-shadow:0 12px 32px rgba(0,0,0,.5)}
   .ps{position:relative;width:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0 24px;font-family:'Playfair Display',serif}
   .ps::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1}
   .ps-silk::after{background:rgba(244,236,223,.42)}
@@ -121,7 +121,7 @@
 
 <h1>Silk Crop Playground · Section Gallery</h1>
 <p class="lead">
-  <strong style="color:#eee">Left = picker, Right = live page.</strong> Drag the crop on the left, the right panel renders the actual page in real time (true <code>1:5.91</code> aspect, browser-chrome frame, exact cream washes per section). Both panels now paint silk through the same <code>42%</code> wash that the live site uses, so what you see IS what will render. Click <strong>Download Crop</strong> when the right panel reads right.
+  <strong style="color:#eee">Left = picker, Right = live page.</strong> Drag the crop on the left, the right panel renders the actual page in real time (true <code>1:6.67</code> aspect — updated 2026-05-16 to include the new Bridal section, so 10 sections total). Both panels paint silk through the same <code>42%</code> wash the live site uses, so what you see IS what will render. <strong style="color:var(--gold)">Tip:</strong> pick a region with textured fabric folds distributed across the height — silk smooth regions get washed by the cream overlay and read as cream on the live site. Click <strong>Download Crop</strong> when the right panel reads right.
 </p>
 
 <div class="layout">
@@ -130,8 +130,8 @@
   <div class="panel">
     <h2>1 · Pick the region</h2>
     <div class="ratio-row" id="ratios">
-      <button class="ratio-btn is-active" data-mode="locked-desktop" data-w="2085" data-h="12317" title="Drag-only. Locked to exact aspect for 100% silk coverage on a 1440px-wide page.">🔒 Desktop full-coverage 2085×12317</button>
-      <button class="ratio-btn" data-mode="locked-tall" data-w="1557" data-h="12317" title="Narrower band, taller aspect — for over-coverage on wide monitors or longer pages">🔒 Wide-monitor 1557×12317</button>
+      <button class="ratio-btn is-active" data-mode="locked-desktop" data-w="1846" data-h="12317" title="Drag-only. Locked to exact aspect 6.67 for 100% silk coverage on a 1440px-wide page with the new 10-section layout (Bridal included).">🔒 Desktop full-coverage 1846×12317 · aspect 6.67</button>
+      <button class="ratio-btn" data-mode="locked-tall" data-w="1395" data-h="12317" title="Narrower band — over-coverage for narrower desktops (1024–1280px) where the page is taller">🔒 Narrow-desktop 1395×12317 · aspect 8.83</button>
       <button class="ratio-btn" data-mode="free">Free (resize + move)</button>
       <label class="bands-toggle" title="Overlay the live page's section bands on the crop so you can see which silk region becomes which section"><input type="checkbox" id="bandsToggle" checked> Section bands</label>
     </div>
@@ -154,19 +154,20 @@
         <div class="bc-url">fjmedia.ca/preview/jtran-beauty/</div>
       </div>
       <div class="preview-page" id="previewPage">
-        <div class="ps ps-silk"  style="height:11%"><div class="ps-content"><div class="ps-eyebrow">Section 01</div><div class="ps-name" style="font-size:28px">Hero</div></div></div>
-        <div class="ps ps-silk"  style="height:14%"><div class="ps-content"><div class="ps-eyebrow">Section 02</div><div class="ps-name" style="font-size:24px">About</div></div></div>
-        <div class="ps ps-silk"  style="height:16%"><div class="ps-content"><div class="ps-eyebrow">Section 03</div><div class="ps-name" style="font-size:24px">Services</div></div></div>
-        <div class="ps ps-silk"  style="height:10%"><div class="ps-content"><div class="ps-eyebrow">Section 04</div><div class="ps-name" style="font-size:20px">Booking</div></div></div>
-        <div class="ps ps-silk"  style="height:9%"><div class="ps-content"><div class="ps-eyebrow">Section 05</div><div class="ps-name" style="font-size:20px">Before Your Appointment</div></div></div>
-        <div class="ps ps-silk"  style="height:14%"><div class="ps-content"><div class="ps-eyebrow">Section 06</div><div class="ps-name" style="font-size:24px">Client Cam</div></div></div>
-        <div class="ps ps-cream" style="height:11%"><div class="ps-content"><div class="ps-eyebrow">Section 07</div><div class="ps-name" style="font-size:22px">Get In Touch</div></div></div>
-        <div class="ps ps-cream" style="height:8%"><div class="ps-content"><div class="ps-eyebrow">Section 08</div><div class="ps-name" style="font-size:18px">Thank You</div></div></div>
-        <div class="ps ps-cream" style="height:7%"><div class="ps-content"><div class="ps-eyebrow">Section 09</div><div class="ps-name" style="font-size:14px">Footer</div></div></div>
+        <div class="ps ps-silk"  style="height:10%"><div class="ps-content"><div class="ps-eyebrow">Section 01</div><div class="ps-name" style="font-size:28px">Hero</div></div></div>
+        <div class="ps ps-silk"  style="height:13%"><div class="ps-content"><div class="ps-eyebrow">Section 02</div><div class="ps-name" style="font-size:24px">About</div></div></div>
+        <div class="ps ps-silk"  style="height:14%"><div class="ps-content"><div class="ps-eyebrow">Section 03</div><div class="ps-name" style="font-size:24px">Services</div></div></div>
+        <div class="ps ps-silk"  style="height:9%"><div class="ps-content"><div class="ps-eyebrow">Section 04</div><div class="ps-name" style="font-size:20px">Booking</div></div></div>
+        <div class="ps ps-silk"  style="height:8%"><div class="ps-content"><div class="ps-eyebrow">Section 05</div><div class="ps-name" style="font-size:20px">Before Your Appointment</div></div></div>
+        <div class="ps ps-silk"  style="height:13%"><div class="ps-content"><div class="ps-eyebrow">Section 06</div><div class="ps-name" style="font-size:24px">Client Cam</div></div></div>
+        <div class="ps ps-silk"  style="height:11%"><div class="ps-content"><div class="ps-eyebrow">Section 07</div><div class="ps-name" style="font-size:24px">Bridal Party</div></div></div>
+        <div class="ps ps-cream" style="height:10%"><div class="ps-content"><div class="ps-eyebrow">Section 08</div><div class="ps-name" style="font-size:22px">Get In Touch</div></div></div>
+        <div class="ps ps-cream" style="height:7%"><div class="ps-content"><div class="ps-eyebrow">Section 09</div><div class="ps-name" style="font-size:18px">Thank You</div></div></div>
+        <div class="ps ps-cream" style="height:5%"><div class="ps-content"><div class="ps-eyebrow">Section 10</div><div class="ps-name" style="font-size:14px">Footer</div></div></div>
       </div>
     </div>
     <div class="hint">
-      Drag the crop on the left → silk shifts here in real time. This panel matches the live page exactly: <code>1 : 5.91</code> aspect, silk-visible sections at <code>42%</code> cream wash, cream sections at <code>94%</code> (Get In · Thank You · Footer hide the silk). When this preview reads right, hit Download.
+      Drag the crop on the left → silk shifts here in real time. This panel matches the live page exactly: <code>1 : 6.67</code> aspect (10 sections, Bridal included), silk-visible sections at <code>42%</code> cream wash, cream sections at <code>94%</code> (Get In · Thank You · Footer hide the silk). When this preview reads right, hit Download.
     </div>
   </div>
 
@@ -180,19 +181,21 @@
   let cropper = null;
   let lastCrop = null;
   let currentMode = 'locked-desktop'; // default
-  let lockedW = 2085, lockedH = 12317;
+  let lockedW = 1846, lockedH = 12317;
 
-  // Section heights as % of live page (1440 viewport, ~8505px tall) — used to overlay bands on the crop box
+  // Section heights as % of live page (1440 viewport, ~9600px tall with Bridal added).
+  // Updated 2026-05-16 to 10 sections at aspect 6.67. Bridal slotted as section 07.
   const SECTIONS = [
-    { name: 'Hero',       pct: 11, mode: 'silk'  },
-    { name: 'About',      pct: 14, mode: 'silk'  },
-    { name: 'Services',   pct: 16, mode: 'silk'  },
-    { name: 'Booking',    pct: 10, mode: 'silk'  },
-    { name: 'Before',     pct:  9, mode: 'silk'  },
-    { name: 'Client Cam', pct: 14, mode: 'silk'  },
-    { name: 'Get In',     pct: 11, mode: 'cream' },
-    { name: 'Thank You',  pct:  8, mode: 'cream' },
-    { name: 'Footer',     pct:  7, mode: 'cream' }
+    { name: 'Hero',       pct: 10, mode: 'silk'  },
+    { name: 'About',      pct: 13, mode: 'silk'  },
+    { name: 'Services',   pct: 14, mode: 'silk'  },
+    { name: 'Booking',    pct:  9, mode: 'silk'  },
+    { name: 'Before',     pct:  8, mode: 'silk'  },
+    { name: 'Client Cam', pct: 13, mode: 'silk'  },
+    { name: 'Bridal',     pct: 11, mode: 'silk'  },
+    { name: 'Get In',     pct: 10, mode: 'cream' },
+    { name: 'Thank You',  pct:  7, mode: 'cream' },
+    { name: 'Footer',     pct:  5, mode: 'cream' }
   ];
 
   function injectSectionBands() {
@@ -206,7 +209,7 @@
     box.appendChild(wrap);
   }
 
-  function init(mode = 'locked-desktop', w = 2085, h = 12317) {
+  function init(mode = 'locked-desktop', w = 1846, h = 12317) {
     if (cropper) { cropper.destroy(); cropper = null; }
     currentMode = mode; lockedW = w; lockedH = h;
     const isLocked = mode.startsWith('locked');
