@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Silk Crop Playground — JTran</title>
+<link href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Italianno&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1a1a1a; --panel:#242424; --line:#333; --text:#eee; --muted:#888; --gold:#C9A84C;
+    /* JTran palette */
+    --jt-bg:#F4ECDF; --jt-text:#3A2A20; --jt-accent:#B89456; --jt-deep:#7a5e3f; --jt-card:#FBF6EC; --jt-border:rgba(58,42,32,.12);
+    --bg-wash:rgba(244,236,223,.94);
+    --bg-silk:rgba(244,236,223,.42);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',monospace;padding:12px;min-height:100vh;display:flex;flex-direction:column}
+  h1{font-size:16px;font-weight:600;color:var(--gold);margin-bottom:2px}
+  .lead{color:var(--muted);font-size:12px;margin-bottom:10px;max-width:120ch}
+  .layout{display:grid;grid-template-columns:420px 1fr;gap:14px;flex:1;min-height:0}
+  @media (max-width:1100px){.layout{grid-template-columns:1fr;grid-template-rows:auto 1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .panel h2{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;flex:0 0 auto}
+  .cropper-wrap{flex:1 1 auto;min-height:0;background:#000;border-radius:4px;overflow:hidden;position:relative}
+  .cropper-wrap img{max-width:100%;display:block}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center;flex:0 0 auto}
+  .btn{background:var(--gold);color:#1a1a1a;border:0;padding:8px 12px;border-radius:4px;cursor:pointer;font:600 11px/1 -apple-system,monospace;letter-spacing:.06em;text-transform:uppercase}
+  .btn:hover{filter:brightness(1.1)}
+  .btn--ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .btn--ghost:hover{background:rgba(201,168,76,.1)}
+  .stats{font-size:11px;color:var(--muted);line-height:1.6;margin-top:8px;padding:8px;background:#1a1a1a;border-radius:4px;font-family:'SF Mono','Consolas',monospace;flex:0 0 auto}
+  .stats code{color:var(--gold)}
+  .ratio-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;flex:0 0 auto}
+  .ratio-btn{background:#1a1a1a;color:var(--muted);border:1px solid var(--line);padding:5px 9px;border-radius:3px;cursor:pointer;font-size:11px}
+  .ratio-btn.is-active{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
+
+  /* Section gallery */
+  .gallery{flex:1 1 auto;overflow-y:auto;padding-right:6px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-content:start}
+  .tile{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;background:var(--jt-bg)}
+  .tile-label{position:absolute;top:8px;left:8px;background:rgba(26,26,26,.78);color:var(--gold);padding:3px 8px;border-radius:3px;font:600 9px/1 monospace;letter-spacing:.16em;text-transform:uppercase;z-index:10;pointer-events:none}
+  .tile-mode{position:absolute;top:8px;right:8px;background:rgba(26,26,26,.6);color:#bbb;padding:3px 6px;border-radius:3px;font:9px/1 monospace;z-index:10;pointer-events:none}
+  .tile-mode.is-cream{background:rgba(244,236,223,.85);color:var(--jt-text)}
+  .tile-stage{aspect-ratio:16/10;background-image:var(--silk-img,none);background-size:var(--silk-size,cover);background-position:var(--silk-pos,center);background-repeat:no-repeat;position:relative;display:flex;align-items:center;justify-content:center;color:var(--jt-text);font-family:'Libre Franklin',sans-serif;font-weight:300;padding:18px}
+  .tile.is-silk .tile-stage::after{content:'';position:absolute;inset:0;background:var(--bg-silk);pointer-events:none;z-index:1}
+  .tile.is-cream .tile-stage::after{content:'';position:absolute;inset:0;background:var(--bg-wash);pointer-events:none;z-index:1}
+  .tile-content{position:relative;z-index:2;text-align:center;width:100%;max-width:100%}
+  .tc-eyebrow{font-size:7px;letter-spacing:.28em;color:var(--jt-deep);margin-bottom:6px;text-transform:uppercase}
+  .tc-h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;line-height:1;letter-spacing:.02em;margin-bottom:2px}
+  .tc-h2{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;line-height:1.05;letter-spacing:.02em;text-transform:uppercase;margin-bottom:6px}
+  .tc-script{font-family:'Italianno',cursive;font-size:20px;color:var(--jt-deep);line-height:1;margin:2px 0 6px}
+  .tc-body{font-size:8.5px;line-height:1.5;color:var(--jt-text);opacity:.85;margin-bottom:8px;max-width:80%;margin-left:auto;margin-right:auto}
+  .tc-cta{display:inline-block;background:var(--jt-text);color:var(--jt-bg);padding:5px 12px;border-radius:3px;font-size:7px;letter-spacing:.22em;text-transform:uppercase;margin-top:6px}
+  .tc-divider{width:32px;height:1px;background:var(--jt-accent);margin:4px auto;opacity:.7}
+  .tc-row{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:4px;flex-wrap:wrap}
+  .tc-chip{background:var(--jt-card);border:1px solid var(--jt-border);padding:3px 7px;border-radius:3px;font-size:7px;color:var(--jt-text)}
+  .tc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+  .tc-card{background:var(--jt-card);border:1px solid var(--jt-border);border-radius:3px;padding:6px;font-size:7px;line-height:1.3;text-align:left}
+  .tc-card-h{font-weight:600;color:var(--jt-text);text-transform:uppercase;letter-spacing:.1em;font-size:7px;margin-bottom:2px;text-align:center}
+  .tc-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left}
+  .tc-pic{aspect-ratio:1/1;background:linear-gradient(135deg,var(--jt-bg) 50%,#e8dec9 50%);border-radius:50%;width:38px;height:38px;margin:0 auto 6px;border:1px solid var(--jt-border)}
+  .tc-polaroid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
+  .tc-polaroid{aspect-ratio:1/1;background:var(--jt-card);border:1px solid var(--jt-border);border-radius:2px}
+  .tc-form{background:var(--jt-card);border:1px solid var(--jt-border);border-radius:3px;padding:6px;font-size:7px;text-align:left}
+  .tc-form-row{display:flex;gap:4px;margin-bottom:3px}
+  .tc-form-field{flex:1;background:#fff;border:1px solid var(--jt-border);padding:2px 4px;border-radius:2px;font-size:7px;color:#999}
+  .tc-form-btn{background:var(--jt-text);color:var(--jt-bg);padding:3px 8px;font-size:6px;letter-spacing:.16em;text-transform:uppercase;text-align:center;border-radius:2px;margin-top:3px}
+  .tc-trust{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--jt-deep);margin-top:6px}
+  .tc-foot{font-size:7px;color:var(--jt-text);opacity:.65;display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 6px}
+
+  .hint{font-size:11px;color:var(--muted);margin-top:8px;flex:0 0 auto;line-height:1.6}
+  .hint code{color:var(--gold)}
+
+  /* LIVE PAGE PREVIEW — this is what the visitor sees. True 1:5.91 aspect, silk painted exactly as live page paints it. */
+  .preview-frame{flex:1 1 auto;overflow-y:auto;background:#0c0c0c;border-radius:6px;padding:18px;display:flex;flex-direction:column;align-items:center}
+  .browser-chrome{width:100%;max-width:720px;background:#2a2a2a;border-radius:8px 8px 0 0;padding:8px 12px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-bottom:none;flex-shrink:0}
+  .bc-dots{display:flex;gap:5px}
+  .bc-dots i{width:9px;height:9px;border-radius:50%;background:#444}
+  .bc-dots i:nth-child(1){background:#ff5f57}
+  .bc-dots i:nth-child(2){background:#ffbd2e}
+  .bc-dots i:nth-child(3){background:#28c940}
+  .bc-url{flex:1;background:#1a1a1a;border-radius:4px;padding:5px 10px;font:11px/1 'SF Mono',monospace;color:#888;border:1px solid #1a1a1a}
+  .bc-url::before{content:'🔒 ';color:#666;font-size:10px}
+  .preview-page{width:100%;max-width:720px;aspect-ratio:1/5.91;background-color:var(--jt-bg);background-image:var(--silk-img,none);background-size:var(--silk-size,cover);background-position:var(--silk-pos,center);background-repeat:no-repeat;display:flex;flex-direction:column;position:relative;border:1px solid var(--line);border-top:none;border-radius:0 0 8px 8px;flex-shrink:0;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+  .ps{position:relative;width:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0 24px;font-family:'Playfair Display',serif}
+  .ps::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1}
+  .ps-silk::after{background:rgba(244,236,223,.42)}
+  .ps-cream::after{background:rgba(244,236,223,.94)}
+  .ps-content{position:relative;z-index:2;text-align:center;width:100%}
+  .ps-eyebrow{font:600 8px/1 'SF Mono',monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--jt-deep);opacity:.7;margin-bottom:6px}
+  .ps-name{font-family:'Playfair Display',serif;font-weight:600;color:var(--jt-text);letter-spacing:.02em;line-height:1}
+  .ps-cream .ps-name{color:rgba(58,42,32,.92)}
+  .ps-cream .ps-eyebrow{color:rgba(58,42,32,.55)}
+  .ps-divider{width:1px;background:rgba(184,148,86,.45);height:18px;margin:6px auto;display:block}
+
+  /* Section bands inside the cropper crop-box — paint the LIVE page composite right on the source.
+     Silk sections wear the actual 42% cream wash · cream sections wear the actual 94% wash.
+     The crop box IS the live preview: drag to slide silk under the page. */
+  .section-bands{position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none;z-index:5;font-family:'Playfair Display','SF Mono','Consolas',serif}
+  .sb{flex-shrink:0;border-bottom:1px dashed rgba(58,42,32,.18);display:flex;align-items:center;justify-content:center;padding:0 8px;font-weight:600;line-height:1;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;overflow:hidden;color:rgba(58,42,32,.78);text-shadow:0 1px 1px rgba(255,255,255,.5);position:relative}
+  .sb[data-mode="silk"]{background:rgba(244,236,223,.42)}  /* exact live wash */
+  .sb[data-mode="cream"]{background:rgba(244,236,223,.94);color:rgba(58,42,32,.92)}  /* exact live wash */
+  .sb[data-mode="cream"]::after{content:' · silk hidden';opacity:.5;font-weight:400;font-size:.7em;letter-spacing:.08em;text-transform:none;font-family:'SF Mono',monospace;margin-left:4px}
+  .sb:last-child{border-bottom:none}
+  .sb-num{opacity:.45;margin-right:6px;font-weight:400;font-family:'SF Mono',monospace}
+
+  /* Font sizes scale roughly with band height — sized for ~700-900px-wide cropper at full source view */
+  .sb[data-mode="silk"]{font-size:clamp(10px,1.2vw,14px)}
+  .sb[data-mode="cream"]{font-size:clamp(9px,1.0vw,12px)}
+
+  /* Toggle to show/hide section bands */
+  .bands-toggle{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-left:auto}
+  .bands-toggle input{accent-color:var(--gold)}
+  .cropper-wrap.no-bands .section-bands{display:none}
+</style>
+</head>
+<body>
+
+<h1>Silk Crop Playground · Section Gallery</h1>
+<p class="lead">
+  <strong style="color:#eee">Left = picker, Right = live page.</strong> Drag the crop on the left, the right panel renders the actual page in real time (true <code>1:5.91</code> aspect, browser-chrome frame, exact cream washes per section). Both panels now paint silk through the same <code>42%</code> wash that the live site uses, so what you see IS what will render. Click <strong>Download Crop</strong> when the right panel reads right.
+</p>
+
+<div class="layout">
+
+  <!-- LEFT — cropper -->
+  <div class="panel">
+    <h2>1 · Pick the region</h2>
+    <div class="ratio-row" id="ratios">
+      <button class="ratio-btn is-active" data-mode="locked-desktop" data-w="2085" data-h="12317" title="Drag-only. Locked to exact aspect for 100% silk coverage on a 1440px-wide page.">🔒 Desktop full-coverage 2085×12317</button>
+      <button class="ratio-btn" data-mode="locked-tall" data-w="1557" data-h="12317" title="Narrower band, taller aspect — for over-coverage on wide monitors or longer pages">🔒 Wide-monitor 1557×12317</button>
+      <button class="ratio-btn" data-mode="free">Free (resize + move)</button>
+      <label class="bands-toggle" title="Overlay the live page's section bands on the crop so you can see which silk region becomes which section"><input type="checkbox" id="bandsToggle" checked> Section bands</label>
+    </div>
+    <div class="cropper-wrap">
+      <img id="src" src="assets/silk-bg-source.jpg?v=20260515f" alt="silk source">
+    </div>
+    <div class="controls">
+      <button class="btn" id="dl">⬇  Download Crop (PNG)</button>
+      <button class="btn btn--ghost" id="reset">Reset</button>
+    </div>
+    <div class="stats" id="stats">drag the crop box to begin</div>
+  </div>
+
+  <!-- RIGHT — LIVE PAGE PREVIEW (this is what the visitor will see) -->
+  <div class="panel">
+    <h2>2 · Live Page Preview — exactly what will render</h2>
+    <div class="preview-frame">
+      <div class="browser-chrome">
+        <div class="bc-dots"><i></i><i></i><i></i></div>
+        <div class="bc-url">fjmedia.ca/preview/jtran-beauty/</div>
+      </div>
+      <div class="preview-page" id="previewPage">
+        <div class="ps ps-silk"  style="height:11%"><div class="ps-content"><div class="ps-eyebrow">Section 01</div><div class="ps-name" style="font-size:28px">Hero</div></div></div>
+        <div class="ps ps-silk"  style="height:14%"><div class="ps-content"><div class="ps-eyebrow">Section 02</div><div class="ps-name" style="font-size:24px">About</div></div></div>
+        <div class="ps ps-silk"  style="height:16%"><div class="ps-content"><div class="ps-eyebrow">Section 03</div><div class="ps-name" style="font-size:24px">Services</div></div></div>
+        <div class="ps ps-silk"  style="height:10%"><div class="ps-content"><div class="ps-eyebrow">Section 04</div><div class="ps-name" style="font-size:20px">Booking</div></div></div>
+        <div class="ps ps-silk"  style="height:9%"><div class="ps-content"><div class="ps-eyebrow">Section 05</div><div class="ps-name" style="font-size:20px">Before Your Appointment</div></div></div>
+        <div class="ps ps-silk"  style="height:14%"><div class="ps-content"><div class="ps-eyebrow">Section 06</div><div class="ps-name" style="font-size:24px">Client Cam</div></div></div>
+        <div class="ps ps-cream" style="height:11%"><div class="ps-content"><div class="ps-eyebrow">Section 07</div><div class="ps-name" style="font-size:22px">Get In Touch</div></div></div>
+        <div class="ps ps-cream" style="height:8%"><div class="ps-content"><div class="ps-eyebrow">Section 08</div><div class="ps-name" style="font-size:18px">Thank You</div></div></div>
+        <div class="ps ps-cream" style="height:7%"><div class="ps-content"><div class="ps-eyebrow">Section 09</div><div class="ps-name" style="font-size:14px">Footer</div></div></div>
+      </div>
+    </div>
+    <div class="hint">
+      Drag the crop on the left → silk shifts here in real time. This panel matches the live page exactly: <code>1 : 5.91</code> aspect, silk-visible sections at <code>42%</code> cream wash, cream sections at <code>94%</code> (Get In · Thank You · Footer hide the silk). When this preview reads right, hit Download.
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.js"></script>
+<script>
+  const img = document.getElementById('src');
+  const stats = document.getElementById('stats');
+  const root = document.documentElement;
+  let cropper = null;
+  let lastCrop = null;
+  let currentMode = 'locked-desktop'; // default
+  let lockedW = 2085, lockedH = 12317;
+
+  // Section heights as % of live page (1440 viewport, ~8505px tall) — used to overlay bands on the crop box
+  const SECTIONS = [
+    { name: 'Hero',       pct: 11, mode: 'silk'  },
+    { name: 'About',      pct: 14, mode: 'silk'  },
+    { name: 'Services',   pct: 16, mode: 'silk'  },
+    { name: 'Booking',    pct: 10, mode: 'silk'  },
+    { name: 'Before',     pct:  9, mode: 'silk'  },
+    { name: 'Client Cam', pct: 14, mode: 'silk'  },
+    { name: 'Get In',     pct: 11, mode: 'cream' },
+    { name: 'Thank You',  pct:  8, mode: 'cream' },
+    { name: 'Footer',     pct:  7, mode: 'cream' }
+  ];
+
+  function injectSectionBands() {
+    const box = document.querySelector('.cropper-crop-box');
+    if (!box || box.querySelector('.section-bands')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'section-bands';
+    wrap.innerHTML = SECTIONS.map((s, i) =>
+      `<div class="sb" data-mode="${s.mode}" style="height:${s.pct}%"><span class="sb-num">${String(i+1).padStart(2,'0')}</span>${s.name}</div>`
+    ).join('');
+    box.appendChild(wrap);
+  }
+
+  function init(mode = 'locked-desktop', w = 2085, h = 12317) {
+    if (cropper) { cropper.destroy(); cropper = null; }
+    currentMode = mode; lockedW = w; lockedH = h;
+    const isLocked = mode.startsWith('locked');
+    cropper = new Cropper(img, {
+      viewMode: 1,
+      dragMode: 'move',                  // pan the image inside the box
+      autoCropArea: 1,
+      aspectRatio: isLocked ? (w / h) : NaN,
+      background: false,
+      responsive: true,
+      cropBoxResizable: !isLocked,       // locked → can't resize, only move
+      cropBoxMovable: true,
+      zoomable: !isLocked,               // locked → no accidental zoom
+      ready() {
+        if (isLocked) {
+          // Set crop box to exact pixel size, centered
+          cropper.setData({
+            x: Math.round((img.naturalWidth - w) / 2),
+            y: Math.round((img.naturalHeight - h) / 2),
+            width: w,
+            height: h
+          });
+        }
+        injectSectionBands();
+      },
+      crop(event) { lastCrop = event.detail; updateStats(); applyToTiles(); }
+    });
+  }
+
+  function updateStats() {
+    if (!lastCrop) return;
+    const x = Math.round(lastCrop.x), y = Math.round(lastCrop.y), w = Math.round(lastCrop.width), h = Math.round(lastCrop.height);
+    const lockedTag = currentMode.startsWith('locked') ? '<span style="color:#C9A84C">🔒 locked</span> · ' : '';
+    stats.innerHTML = lockedTag + 'Crop: <code>' + w + '×' + h + '</code> · Offset: <code>x=' + x + ', y=' + y + '</code> · Source: ' + img.naturalWidth + '×' + img.naturalHeight;
+  }
+
+  function applyToTiles() {
+    if (!lastCrop) return;
+    const W = img.naturalWidth, H = img.naturalHeight;
+    const x = lastCrop.x, y = lastCrop.y, w = lastCrop.width, h = lastCrop.height;
+    const bgSizePct = (W / w * 100).toFixed(2);
+    const posX = W === w ? 0 : (x / (W - w)) * 100;
+    const posY = H === h ? 0 : (y / (H - h)) * 100;
+    root.style.setProperty('--silk-img', 'url("' + img.src + '")');
+    root.style.setProperty('--silk-size', bgSizePct + '% auto');
+    root.style.setProperty('--silk-pos', posX.toFixed(2) + '% ' + posY.toFixed(2) + '%');
+  }
+
+  document.getElementById('dl').onclick = () => {
+    if (!cropper) return;
+    const canvas = cropper.getCroppedCanvas({ maxWidth: 8192, maxHeight: 16000, imageSmoothingQuality: 'high' });
+    canvas.toBlob(b => {
+      const a = document.createElement('a');
+      a.download = 'silk-crop.png';
+      a.href = URL.createObjectURL(b);
+      a.click();
+    }, 'image/png');
+  };
+
+  document.getElementById('reset').onclick = () => cropper && cropper.reset();
+
+  document.getElementById('bandsToggle').addEventListener('change', e => {
+    document.querySelector('.cropper-wrap').classList.toggle('no-bands', !e.target.checked);
+  });
+
+  document.querySelectorAll('#ratios .ratio-btn').forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll('#ratios .ratio-btn').forEach(x => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      const mode = b.dataset.mode;
+      if (mode === 'free') {
+        init('free');
+      } else {
+        init(mode, parseInt(b.dataset.w), parseInt(b.dataset.h));
+      }
+    };
+  });
+
+  img.addEventListener('load', init);
+  if (img.complete) init();
+</script>
+
+</body>
+</html>

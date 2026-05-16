@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Service URL Mapper · JTran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#1a1a1a; --panel:#242424; --panel-2:#2c2c2c; --line:#333; --text:#eee; --muted:#888; --gold:#C9A84C; --gold-deep:#9a7d3b;
+    --ok:#4ade80; --warn:#fbbf24; --err:#f87171;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--text);font:13px/1.5 'Libre Franklin',-apple-system,BlinkMacSystemFont,sans-serif;padding:0 0 100px;min-height:100vh}
+  header{max-width:1100px;margin:0 auto;padding:24px 24px 16px}
+  h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--gold);margin-bottom:6px;letter-spacing:.02em}
+  .sub{color:var(--muted);font-size:13px;max-width:80ch;line-height:1.6}
+  .sub strong{color:#ccc;font-weight:500}
+  .sub code{background:#000;padding:1px 6px;border-radius:3px;color:var(--gold);font-family:'SF Mono','Consolas',monospace;font-size:11.5px}
+
+  main{max-width:1100px;margin:0 auto;padding:0 24px}
+  .group{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:14px;overflow:hidden}
+  .group-head{padding:12px 18px;background:var(--panel-2);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .group-name{font:600 12px/1 'SF Mono',monospace;color:var(--gold);letter-spacing:.18em;text-transform:uppercase}
+  .group-count{font:11px/1 'SF Mono',monospace;color:var(--muted)}
+  .group-body{padding:6px 0}
+
+  .svc-row{display:grid;grid-template-columns:280px 1fr;gap:18px;padding:12px 18px;border-bottom:1px solid #2a2a2a;align-items:start}
+  .svc-row:last-child{border-bottom:none}
+  .svc-row:hover{background:rgba(201,168,76,.03)}
+  .svc-info{display:flex;flex-direction:column;gap:2px;padding-top:8px}
+  .svc-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:500;color:#eee;letter-spacing:.01em}
+  .svc-price{font:11px/1 'SF Mono',monospace;color:var(--muted)}
+  .svc-status{margin-top:6px;display:inline-flex;align-items:center;gap:5px;font:10px/1 'SF Mono',monospace;color:var(--muted)}
+  .svc-status .dot{width:6px;height:6px;border-radius:50%;background:#444}
+  .svc-status.is-partial .dot{background:var(--warn)}
+  .svc-status.is-complete .dot{background:var(--ok)}
+  .svc-status.is-empty{opacity:.5}
+
+  .url-field{display:flex;flex-direction:column;gap:4px}
+  .url-label{font:600 9px/1 'SF Mono',monospace;color:var(--gold-deep);letter-spacing:.18em;text-transform:uppercase}
+  .url-input{background:#1a1a1a;border:1px solid var(--line);color:#ddd;padding:8px 10px;font:11.5px/1.4 'SF Mono','Consolas',monospace;border-radius:4px;width:100%;transition:border-color .2s}
+  .url-input:focus{outline:none;border-color:var(--gold)}
+  .url-input:disabled{opacity:.35;cursor:not-allowed;background:#0c0c0c}
+  .url-input.is-valid{border-color:rgba(74,222,128,.4)}
+  .url-input.is-invalid{border-color:rgba(248,113,113,.5)}
+  .carman-only-toggle{display:inline-flex;align-items:center;gap:5px;margin-left:10px;font:400 9px/1 'SF Mono',monospace;color:var(--muted);cursor:pointer;letter-spacing:.04em;text-transform:none}
+  .carman-only-toggle input{accent-color:var(--gold);cursor:pointer}
+  .carman-only-toggle:hover{color:var(--text)}
+  .svc-status.is-carman .dot{background:#a78bfa}
+  .url-label{display:flex;align-items:center;gap:6px}
+  .url-hint{font:10px/1.3 'SF Mono',monospace;color:var(--muted);min-height:1.3em}
+  .url-hint.is-err{color:var(--err)}
+  .url-hint.is-ok{color:var(--ok)}
+
+  /* Add-service affordance per category */
+  .add-svc-btn{background:transparent;border:1px solid var(--gold-deep);color:var(--gold);font:600 10px/1 'SF Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:3px;cursor:pointer;transition:background .15s,color .15s}
+  .add-svc-btn:hover{background:var(--gold);color:#1a1a1a}
+  .add-form{display:none;padding:12px 18px;background:rgba(201,168,76,.05);border-bottom:1px solid var(--line);gap:10px;align-items:end;grid-template-columns:1.4fr 1fr auto auto}
+  .add-form.is-open{display:grid}
+  .add-form input{background:#1a1a1a;border:1px solid var(--line);color:#ddd;padding:8px 10px;font:12px/1.4 'SF Mono','Consolas',monospace;border-radius:3px;width:100%}
+  .add-form input:focus{outline:none;border-color:var(--gold)}
+  .add-form .url-label{font:600 9px/1 'SF Mono',monospace;color:var(--gold-deep);letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:4px}
+  .add-form .btn{padding:8px 12px;font-size:10px}
+
+  /* Custom-added service flagging */
+  .svc-name__badge{display:inline-block;margin-left:6px;padding:2px 6px;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);border-radius:2px;font:500 8px/1 'SF Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);vertical-align:middle}
+  .svc-delete{background:transparent;border:0;color:var(--err);opacity:.5;cursor:pointer;font:11px/1 'SF Mono',monospace;padding:4px 6px;border-radius:2px;transition:opacity .15s,background .15s}
+  .svc-delete:hover{opacity:1;background:rgba(248,113,113,.1)}
+  .svc-row.is-custom .svc-info{position:relative}
+
+  /* Sticky bottom action bar */
+  .actions{position:fixed;bottom:0;left:0;right:0;background:var(--panel-2);border-top:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;gap:14px;z-index:50;box-shadow:0 -8px 24px rgba(0,0,0,.4)}
+  .actions .progress{flex:1;display:flex;flex-direction:column;gap:3px;max-width:300px}
+  .progress-bar{height:4px;background:#1a1a1a;border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-deep),var(--gold));width:0;transition:width .3s ease}
+  .progress-stats{font:10px/1 'SF Mono',monospace;color:var(--muted);display:flex;gap:10px}
+  .progress-stats strong{color:#eee;font-weight:600}
+  .saved-tag{font:10px/1 'SF Mono',monospace;color:var(--muted);margin-left:auto}
+  .saved-tag.is-flash{color:var(--ok)}
+  .btn{background:var(--gold);color:#1a1a1a;border:0;padding:10px 16px;border-radius:4px;cursor:pointer;font:600 11px/1 'Libre Franklin',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:filter .2s,transform .2s}
+  .btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+  .btn--ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .btn--ghost:hover{background:rgba(201,168,76,.1)}
+  .btn--danger{background:transparent;color:var(--err);border:1px solid rgba(248,113,113,.4)}
+  .btn--danger:hover{background:rgba(248,113,113,.1)}
+
+  /* Output overlay */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+  .overlay.is-open{display:flex}
+  .overlay-panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;max-width:900px;width:100%;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+  .overlay-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .overlay-head h2{font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;font-weight:600}
+  .overlay-head button{background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px}
+  .overlay-head button:hover{color:#fff}
+  .overlay-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+  .overlay-hint{color:var(--muted);font-size:13px;line-height:1.6}
+  .overlay-hint code{background:#000;padding:1px 6px;border-radius:3px;color:var(--gold);font-family:'SF Mono','Consolas',monospace;font-size:11.5px}
+  .overlay-code{background:#0c0c0c;border:1px solid #2a2a2a;border-radius:4px;padding:16px;font:12px/1.6 'SF Mono','Consolas',monospace;color:#ddd;overflow:auto;max-height:50vh;white-space:pre}
+  .overlay-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+  @media (max-width:760px){
+    .svc-row{grid-template-columns:1fr}
+    .svc-info{padding-top:0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Service URL Mapper · JTran</h1>
+  <p class="sub">
+    For each Winnipeg service, click through her Square booking flow once, copy the URL that lands on that specific service, paste it here. <strong>Carman doesn't need per-service URLs</strong> — the Carman button on the site keeps linking to her SalonMonster appointment page where the visitor picks from the full list.
+    Hit <strong>Generate Code</strong> when you're done (or partway — empty services fall back to the location-level Square URL). Saves to localStorage on every keystroke so you can come back and finish later.
+    If you find services in Square OR SalonMonster that aren't in the list below, hit <strong>+ Add Service</strong> on the right category — manually-added services get an <span style="display:inline-block;padding:1px 5px;background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.4);border-radius:2px;font:500 8px/1 'SF Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)">Added</span> tag so I know which ones to add to the on-site accordion later.
+    <br><br>
+    <strong>Winnipeg = Square</strong> · valid prefixes: <code>book.squareup.com/appointments/</code> or <code>j-tran-beauty.square.site/</code>
+  </p>
+</header>
+
+<main id="app"></main>
+
+<div class="actions">
+  <div class="progress">
+    <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+    <div class="progress-stats">
+      <span><strong id="progFilled">0</strong> of <strong id="progTotal">0</strong> Winnipeg services mapped</span>
+    </div>
+  </div>
+  <span class="saved-tag" id="savedTag">unsaved</span>
+  <button class="btn btn--danger" id="resetBtn" title="Clear all entries (asks first)">Reset</button>
+  <button class="btn btn--ghost" id="generateBtn">Generate Code</button>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="overlay-panel">
+    <div class="overlay-head">
+      <h2>Paste this into <code style="background:#000;padding:1px 6px;border-radius:3px;color:var(--gold);font-family:'SF Mono',monospace;font-size:13px">index.html</code></h2>
+      <button id="overlayClose" aria-label="Close">✕</button>
+    </div>
+    <div class="overlay-body">
+      <p class="overlay-hint">
+        Replace the existing <code>const SERVICE_BOOKING_URLS = {};</code> line near the top of the <code>&lt;script&gt;</code> block in <code>preview/jtran-beauty/index.html</code> with the code below. Cache-bust the page after pasting.
+      </p>
+      <pre class="overlay-code" id="output"></pre>
+      <div class="overlay-actions">
+        <button class="btn" id="copyBtn">Copy to clipboard</button>
+        <button class="btn btn--ghost" id="downloadBtn">Download as .js</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Services extracted from index.html accordion. Add-ons + "—" priced items intentionally omitted.
+  const SERVICES = [
+    { cat: 'Facials', items: [
+      { name: 'JTB Intensive Facial', price: '$140' },
+      { name: 'GM Collin Botinol Facial', price: '$190' },
+      { name: 'GM Collin Collagen 90', price: '$190' },
+      { name: 'GM Collin Oxygenate + Detox', price: '$150' },
+      { name: 'Yonka C20 Facial', price: '$150' },
+      { name: 'C20 Dermaplane Facial', price: '$190' },
+      { name: 'Dermaplane Facial', price: '$150' }
+    ]},
+    { cat: 'Lashes & Brows', items: [
+      { name: 'Lash Lift + Tint', price: '$120' },
+      { name: 'Lash Tint', price: '$30' },
+      { name: 'False Lash Application Only', price: '$30' },
+      { name: 'Brow Wax + Tint', price: '$40' },
+      { name: 'Brow Wax / Tweeze', price: '$25' },
+      { name: 'Brow Tint', price: '$25' }
+    ]},
+    { cat: 'Makeup', items: [
+      { name: 'Makeup Application', price: '$130' },
+      { name: 'Makeup Lesson', price: '$175' },
+      { name: 'Single Event Makeup (mobile)', price: '$150' },
+      { name: 'Event Makeup Trial', price: '$150 / hr' }
+    ]},
+    { cat: 'Waxing', items: [
+      { name: 'Lip Wax', price: '$20' },
+      { name: 'Chin Wax', price: '$20' },
+      { name: 'Underarm Wax', price: '$40' },
+      { name: 'Bikini Wax+', price: '$40+' }
+    ]}
+  ];
+
+  const STORAGE_KEY = 'jtran_service_urls_v1';
+  const CUSTOM_KEY = 'jtran_custom_services_v1';
+  const app = document.getElementById('app');
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+  }
+  function saveState(state) { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  function loadCustom() {
+    try { return JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]'); } catch { return []; }
+  }
+  function saveCustom() { localStorage.setItem(CUSTOM_KEY, JSON.stringify(customServices)); }
+
+  const state = loadState();
+  const customServices = loadCustom(); // [{ cat, name, price }]
+
+  // Services known to be Carman-only (no Square / Winnipeg booking). Applied as defaults on first load.
+  const CARMAN_ONLY_DEFAULTS = ['Makeup Application', 'Event Makeup Trial'];
+  CARMAN_ONLY_DEFAULTS.forEach(name => {
+    if (!state[name]) { state[name] = { winnipeg: '', carmanOnly: true }; }
+  });
+  saveState(state);
+
+  function itemsForCategory(cat) {
+    const builtIn = (SERVICES.find(g => g.cat === cat)?.items || []).map(s => ({ ...s, custom: false }));
+    const custom = customServices.filter(s => s.cat === cat).map(s => ({ ...s, custom: true }));
+    return [...builtIn, ...custom];
+  }
+  function getEntry(name) { return state[name] || { winnipeg: '', carmanOnly: false }; }
+  function setEntry(name, key, val) {
+    state[name] = state[name] || { winnipeg: '', carmanOnly: false };
+    state[name][key] = (typeof val === 'string') ? val.trim() : val;
+    saveState(state);
+    flashSaved();
+    updateProgress();
+  }
+
+  function validateUrl(value, kind) {
+    if (!value) return { ok: null, msg: '' };
+    let url;
+    try { url = new URL(value); } catch { return { ok: false, msg: 'not a valid URL' }; }
+    if (kind === 'winnipeg') {
+      const valid = url.hostname.endsWith('squareup.com') || url.hostname.endsWith('square.site');
+      return valid ? { ok: true, msg: '✓ Square host' } : { ok: false, msg: 'should be book.squareup.com or *.square.site' };
+    }
+    return { ok: null, msg: '' };
+  }
+
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+
+  function render() {
+    app.innerHTML = '';
+    SERVICES.forEach(group => {
+      const items = itemsForCategory(group.cat);
+      const customCount = items.filter(s => s.custom).length;
+      const groupEl = document.createElement('section');
+      groupEl.className = 'group';
+      groupEl.innerHTML = `
+        <div class="group-head">
+          <span class="group-name">${group.cat}</span>
+          <span style="display:flex;align-items:center;gap:14px">
+            <span class="group-count">${items.length} services${customCount ? ` · ${customCount} added` : ''}</span>
+            <button class="add-svc-btn" data-cat="${escapeHtml(group.cat)}">+ Add Service</button>
+          </span>
+        </div>
+        <form class="add-form" data-cat="${escapeHtml(group.cat)}">
+          <div><span class="url-label">Service name</span><input type="text" name="name" placeholder="e.g. Bridal Trial Glam" required></div>
+          <div><span class="url-label">Price</span><input type="text" name="price" placeholder="$120" required></div>
+          <button type="submit" class="btn">Add</button>
+          <button type="button" class="btn btn--ghost" data-cancel>Cancel</button>
+        </form>
+        <div class="group-body"></div>
+      `;
+      const body = groupEl.querySelector('.group-body');
+      const addBtn = groupEl.querySelector('.add-svc-btn');
+      const addForm = groupEl.querySelector('.add-form');
+
+      addBtn.addEventListener('click', () => {
+        addForm.classList.toggle('is-open');
+        if (addForm.classList.contains('is-open')) addForm.querySelector('input[name="name"]').focus();
+      });
+      addForm.querySelector('[data-cancel]').addEventListener('click', () => {
+        addForm.classList.remove('is-open');
+        addForm.reset();
+      });
+      addForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(addForm);
+        const name = String(fd.get('name') || '').trim();
+        const price = String(fd.get('price') || '').trim();
+        if (!name || !price) return;
+        if (itemsForCategory(group.cat).some(s => s.name.toLowerCase() === name.toLowerCase())) {
+          alert(`"${name}" already exists in ${group.cat}.`); return;
+        }
+        customServices.push({ cat: group.cat, name, price });
+        saveCustom();
+        flashSaved();
+        render();
+        updateProgress();
+      });
+
+      items.forEach(svc => {
+        const entry = getEntry(svc.name);
+        const row = document.createElement('div');
+        row.className = 'svc-row' + (svc.custom ? ' is-custom' : '');
+        row.dataset.service = svc.name;
+        row.innerHTML = `
+          <div class="svc-info">
+            <span class="svc-name">${escapeHtml(svc.name)}${svc.custom ? ' <span class="svc-name__badge">Added</span>' : ''}</span>
+            <span class="svc-price">${escapeHtml(svc.price)}${svc.custom ? ' <button class="svc-delete" type="button" data-del="' + escapeHtml(svc.name) + '" title="Remove this added service">✕ remove</button>' : ''}</span>
+            <span class="svc-status"><span class="dot"></span><span class="lbl">empty</span></span>
+          </div>
+          <div class="url-field">
+            <span class="url-label">
+              <span>Winnipeg · Square URL</span>
+              <label class="carman-only-toggle" title="Tick if this service is only offered at the Carman location"><input type="checkbox" data-kind="carmanOnly" ${entry.carmanOnly ? 'checked' : ''}> Carman only</label>
+            </span>
+            <input type="url" class="url-input" data-kind="winnipeg" placeholder="https://book.squareup.com/appointments/..." value="${escapeHtml(entry.winnipeg)}" ${entry.carmanOnly ? 'disabled' : ''}>
+            <span class="url-hint"></span>
+          </div>
+        `;
+        body.appendChild(row);
+        const urlInput = row.querySelector('.url-input[data-kind="winnipeg"]');
+        const carmanOnlyToggle = row.querySelector('input[data-kind="carmanOnly"]');
+        urlInput.addEventListener('input', e => {
+          // Typing a Winnipeg URL clears the Carman-only flag (mutual exclusion)
+          if (e.target.value.trim() && carmanOnlyToggle.checked) {
+            carmanOnlyToggle.checked = false;
+            setEntry(svc.name, 'carmanOnly', false);
+            urlInput.disabled = false;
+          }
+          setEntry(svc.name, 'winnipeg', e.target.value);
+          applyRowValidation(row, svc.name);
+        });
+        urlInput.addEventListener('blur', () => applyRowValidation(row, svc.name));
+        carmanOnlyToggle.addEventListener('change', () => {
+          const isCarmanOnly = carmanOnlyToggle.checked;
+          setEntry(svc.name, 'carmanOnly', isCarmanOnly);
+          if (isCarmanOnly) {
+            urlInput.value = '';
+            setEntry(svc.name, 'winnipeg', '');
+            urlInput.disabled = true;
+          } else {
+            urlInput.disabled = false;
+          }
+          applyRowValidation(row, svc.name);
+        });
+        const delBtn = row.querySelector('.svc-delete');
+        if (delBtn) {
+          delBtn.addEventListener('click', () => {
+            if (!confirm(`Remove "${svc.name}" from ${group.cat}? Any URLs entered for it will also be cleared.`)) return;
+            const idx = customServices.findIndex(s => s.cat === group.cat && s.name === svc.name);
+            if (idx >= 0) { customServices.splice(idx, 1); saveCustom(); }
+            delete state[svc.name];
+            saveState(state);
+            flashSaved();
+            render();
+            updateProgress();
+          });
+        }
+        applyRowValidation(row, svc.name);
+      });
+      app.appendChild(groupEl);
+    });
+  }
+
+  function applyRowValidation(row, name) {
+    const entry = getEntry(name);
+    row.querySelectorAll('.url-input').forEach(input => {
+      const kind = input.dataset.kind;
+      const val = entry[kind] || '';
+      const hint = input.parentElement.querySelector('.url-hint');
+      input.classList.remove('is-valid', 'is-invalid');
+      hint.classList.remove('is-err', 'is-ok');
+      if (!val) { hint.textContent = ''; return; }
+      const v = validateUrl(val, kind);
+      if (v.ok === true) { input.classList.add('is-valid'); hint.classList.add('is-ok'); hint.textContent = v.msg; }
+      else if (v.ok === false) { input.classList.add('is-invalid'); hint.classList.add('is-err'); hint.textContent = v.msg; }
+      else hint.textContent = '';
+    });
+    const status = row.querySelector('.svc-status');
+    const lbl = status.querySelector('.lbl');
+    const hasWin = !!entry.winnipeg;
+    const carmanOnly = !!entry.carmanOnly;
+    status.classList.remove('is-partial', 'is-complete', 'is-empty', 'is-carman');
+    if (carmanOnly) { status.classList.add('is-carman'); lbl.textContent = 'Carman only · no Square URL needed'; }
+    else if (hasWin) { status.classList.add('is-complete'); lbl.textContent = 'mapped'; }
+    else { status.classList.add('is-empty'); lbl.textContent = 'empty'; }
+  }
+
+  function updateProgress() {
+    let total = 0, filled = 0;
+    SERVICES.forEach(g => {
+      itemsForCategory(g.cat).forEach(svc => {
+        total++;
+        const e = getEntry(svc.name);
+        if (e.winnipeg || e.carmanOnly) filled++;  // carman-only counts as "decided"
+      });
+    });
+    document.getElementById('progTotal').textContent = total;
+    document.getElementById('progFilled').textContent = filled;
+    document.getElementById('progFill').style.width = total ? (filled / total * 100).toFixed(1) + '%' : '0%';
+  }
+
+  let flashTimer;
+  function flashSaved() {
+    const tag = document.getElementById('savedTag');
+    tag.classList.add('is-flash');
+    tag.textContent = 'saved';
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => {
+      tag.classList.remove('is-flash');
+      const t = new Date();
+      tag.textContent = 'last saved ' + t.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+    }, 1200);
+  }
+
+  function generateCode() {
+    const lines = ['const SERVICE_BOOKING_URLS = {'];
+    const addedNotes = []; // collect added-service summary for footer comment
+    SERVICES.forEach(group => {
+      const items = itemsForCategory(group.cat);
+      const filled = items.filter(s => {
+        const e = getEntry(s.name);
+        return e.winnipeg || e.carmanOnly;
+      });
+      if (filled.length === 0) return;
+      lines.push('  // ' + group.cat);
+      filled.forEach(s => {
+        const e = getEntry(s.name);
+        const parts = [];
+        if (e.winnipeg) parts.push(`winnipeg: ${JSON.stringify(e.winnipeg)}`);
+        if (e.carmanOnly) parts.push('carmanOnly: true');
+        const tags = [];
+        if (s.custom) tags.push('ADDED — needs accordion sync');
+        if (e.carmanOnly) tags.push('Carman only');
+        const tag = tags.length ? `  /* ${tags.join(' · ')} */` : '';
+        lines.push(`  ${JSON.stringify(s.name)}: { ${parts.join(', ')} },${tag}`);
+        if (s.custom) addedNotes.push(`  - ${group.cat}: ${s.name} (${s.price})${e.carmanOnly ? ' · Carman only' : ''}`);
+      });
+      lines.push('');
+    });
+    if (lines[lines.length - 1] === '') lines.pop();
+    lines.push('};');
+    if (addedNotes.length) {
+      lines.push('');
+      lines.push('/* ADDED services (not yet in the on-site accordion — Claude will sync on next push):');
+      addedNotes.forEach(n => lines.push(n));
+      lines.push('*/');
+    }
+    return lines.join('\n');
+  }
+
+  document.getElementById('generateBtn').onclick = () => {
+    document.getElementById('output').textContent = generateCode();
+    document.getElementById('overlay').classList.add('is-open');
+  };
+  document.getElementById('overlayClose').onclick = () =>
+    document.getElementById('overlay').classList.remove('is-open');
+  document.getElementById('overlay').addEventListener('click', e => {
+    if (e.target.id === 'overlay') e.currentTarget.classList.remove('is-open');
+  });
+
+  document.getElementById('copyBtn').onclick = async () => {
+    const code = document.getElementById('output').textContent;
+    try {
+      await navigator.clipboard.writeText(code);
+      const btn = document.getElementById('copyBtn');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = orig; }, 1500);
+    } catch {
+      alert('Clipboard blocked. Select the code manually and copy.');
+    }
+  };
+
+  document.getElementById('downloadBtn').onclick = () => {
+    const blob = new Blob([generateCode()], { type: 'text/javascript' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'service-booking-urls.js';
+    a.click();
+  };
+
+  document.getElementById('resetBtn').onclick = () => {
+    if (!confirm('Clear all URLs AND remove all manually-added services? This wipes localStorage for this tool.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(CUSTOM_KEY);
+    Object.keys(state).forEach(k => delete state[k]);
+    customServices.length = 0;
+    render();
+    updateProgress();
+    document.getElementById('savedTag').textContent = 'reset';
+  };
+
+  render();
+  updateProgress();
+  // Initial "last saved" label based on what's already in storage
+  if (Object.keys(state).length) {
+    document.getElementById('savedTag').textContent = 'loaded from saved';
+  }
+</script>
+
+</body>
+</html>
