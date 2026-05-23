@@ -18,7 +18,7 @@
       --color-bg-warm: #F0E5D2;
       --bg-wash: rgba(244, 236, 223, 0.94);
       --bg-wash-soft: rgba(244, 236, 223, 0.78);
-      --bg-silk: rgba(244, 236, 223, 0.42); /* silk shows through strongly */
+      --bg-silk: rgba(244, 236, 223, 0.55); /* silk shows through — softer mute over blurred bg */
       --color-surface: #EDE2D0;
       --color-surface-2: #E5D5BD;
       --color-card: #FBF6EC;
@@ -88,6 +88,9 @@
       background-position: top center;
       background-repeat: no-repeat;
       pointer-events: none;
+      filter: blur(12px);                 /* soften fabric detail — kills the "high-res up close" feel */
+      transform: scale(1.03);             /* hide edge bleed from blur (pillars cover sides; this covers top/bottom) */
+      transform-origin: center top;
     }
     @media (max-width: 768px) {
       body::before {
@@ -96,6 +99,8 @@
         height: auto;
         background-size: cover;
         background-position: center center;
+        filter: blur(10px);
+        transform: scale(1.04);
       }
     }
     @media (min-width: 1024px) { body { padding-bottom: 0; } }
@@ -141,11 +146,6 @@
     .ss-heading__script { display: block; margin-top: -0.42em; font-family: var(--font-script); font-weight: 400; font-size: clamp(2.3rem, 5.4vw, 3.7rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; line-height: 1; position: relative; }
     .ss-heading__dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); margin: 0 0.5rem; vertical-align: middle; opacity: 0.7; }
 
-    /* ---- SECTION DIVIDERS (airy hairlines, no color bands) ---- */
-    /* Bridges removed 2026-05-23 — horizontal section dividers were drawing the eye toward any
-       silk seams. Sections now blend via wash-color contrast alone. */
-    .bridge { display: none; }
-
     /* ============================================================
        EDGE PILLARS — solid cream side panels framing the page.
        Fixed-positioned at viewport edges, full height. They cover
@@ -168,27 +168,119 @@
     @media (max-width: 1024px) { .pillar { width: 28px; } }
     @media (max-width: 640px)  { .pillar { display: none; } }
 
-    /* ---- NAV ---- */
-    .nav { position: sticky; top: 0; z-index: 80; background-color: rgba(246, 238, 229, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.3s, background-color 0.3s, padding 0.3s; }
-    .nav.is-scrolled { border-bottom-color: var(--color-border); background-color: rgba(246, 238, 229, 0.96); box-shadow: 0 4px 18px rgba(58, 42, 32, 0.04); }
-    .nav__inner { display: flex; justify-content: space-between; align-items: center; height: 76px; transition: height 0.3s; }
-    .nav.is-scrolled .nav__inner { height: 64px; }
-    .nav__logo { display: flex; align-items: center; gap: 0.6rem; }
-    .nav__logo img { height: 38px; width: auto; transition: height 0.3s; }
-    .nav.is-scrolled .nav__logo img { height: 32px; }
-    .nav__brand { font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.28em; color: var(--color-text); }
-    .nav__menu { display: none; align-items: center; gap: var(--space-md); }
-    .nav__link { font-family: var(--font-ui); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-text); position: relative; padding: 0.4rem 0; }
+    /* ---- NAV — FLOATING CREAM CARTOUCHE (atelier) ----
+       Pill-shaped, floats 24px from top, max-width 720px. Cream-on-cream with hairline
+       gold border + soft shadow. The booking CTA is a gold-underline textual link inside
+       the cartouche (no more dark pill fighting the silk). On scroll-down, shrinks to a
+       compact monogram-only pill at 440px; re-expands on scroll-up. */
+    .nav {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      width: calc(100% - 32px);
+      max-width: 720px;
+      background-color: rgba(251, 246, 236, 0.74);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(217, 201, 176, 0.5);
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(58, 42, 32, 0.06);
+      transition: max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.3s ease,
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease,
+                  top 0.3s ease;
+    }
+    .nav.is-scrolled {
+      max-width: 320px;
+      background-color: rgba(251, 246, 236, 0.92);
+      box-shadow: 0 12px 32px rgba(58, 42, 32, 0.10);
+      top: 16px;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 54px;
+      padding: 0 1.25rem;
+      gap: 1rem;
+      transition: padding 0.3s ease, justify-content 0.3s ease, gap 0.3s ease;
+    }
+    .nav.is-scrolled .nav__inner {
+      padding: 0 1.1rem;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+    .nav__logo { display: flex; align-items: center; gap: 0.55rem; flex-shrink: 0; }
+    .nav__logo img { height: 28px; width: auto; transition: height 0.3s ease; }
+    .nav.is-scrolled .nav__logo img { height: 26px; }
+    .nav__brand {
+      display: none;                  /* wordmark suppressed inside the cartouche — monogram does the job */
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      color: var(--color-text);
+    }
+    .nav__menu {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      transition: opacity 0.3s ease;
+    }
+    .nav.is-scrolled .nav__menu {
+      display: none;       /* remove from layout, not just visibility:hidden — was reserving width and puffing the pill */
+    }
+    .nav__link {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      position: relative;
+      padding: 0.4rem 0;
+    }
     .nav__link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--color-accent); transition: width 0.35s ease; }
     .nav__link:hover::after { width: 100%; }
-    .nav__cta { padding: 0.7rem 1.25rem; }
-    .nav__toggle { display: flex; flex-direction: column; gap: 5px; padding: 0.5rem; background: transparent; }
-    .nav__toggle span { width: 22px; height: 1px; background: var(--color-text); transition: transform 0.3s, opacity 0.3s; }
+    /* CTA inside cartouche — gold-underline textual link, NOT a dark pill */
+    .nav__cta {
+      padding: 0.3rem 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid var(--color-accent) !important;
+      font-family: var(--font-ui) !important;
+      font-size: 0.68rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      color: var(--color-text) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.4rem !important;
+      transition: color 0.2s, border-bottom-color 0.2s, letter-spacing 0.3s !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+      flex-shrink: 0;
+    }
+    .nav__cta:hover {
+      color: var(--color-accent-deep) !important;
+      border-bottom-color: var(--color-accent-deep) !important;
+      letter-spacing: 0.26em !important;
+      transform: none !important;
+      background: transparent !important;
+    }
+    .nav__cta::before { display: none !important; }
+    .nav__cta::after { display: none !important; }
+    .nav__toggle { display: flex; flex-direction: column; gap: 5px; padding: 0.45rem; background: transparent; }
+    .nav__toggle span { width: 20px; height: 1px; background: var(--color-text); transition: transform 0.3s, opacity 0.3s; }
     .nav__toggle.is-active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .nav__toggle.is-active span:nth-child(2) { opacity: 0; }
     .nav__toggle.is-active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-    .mobile-nav { position: fixed; top: 76px; left: 0; right: 0; bottom: 0; background-color: var(--color-bg); padding: var(--space-lg) 1.5rem; transform: translateY(-110%); transition: transform 0.4s ease; z-index: 70; display: flex; flex-direction: column; gap: 1.25rem; }
+    .mobile-nav { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--color-bg); padding: calc(var(--space-lg) + 56px) 1.5rem var(--space-lg); transform: translateY(-110%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); z-index: 70; display: flex; flex-direction: column; gap: 1.25rem; }
     .mobile-nav.is-active { transform: translateY(0); }
     .mobile-nav a { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text); padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
     .mobile-nav .btn { margin-top: var(--space-sm); }
@@ -197,6 +289,14 @@
       .nav__menu { display: flex; }
       .nav__toggle, .mobile-nav { display: none; }
     }
+    @media (max-width: 1023px) {
+      /* Mobile cartouche: only monogram + hamburger. Booking lives in the mobile-nav overlay + mobile-sticky pill. */
+      .nav__cta { display: none !important; }
+      .nav { max-width: 280px; }
+      .nav.is-scrolled { max-width: 220px; }
+    }
+    /* Pull hero down so the floating cartouche doesn't crowd it */
+    .hero { padding-top: calc(var(--space-xl) + 28px); }
 
     /* ---- HERO (silk shows through fully — body bg handles the texture) ---- */
     .hero {
@@ -209,26 +309,19 @@
     }
     /* Subtle cream wash at hero edges so the title has contrast against silk highlights */
     .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at center, rgba(244, 236, 223, 0.0) 0%, rgba(244, 236, 223, 0.35) 100%); pointer-events: none; z-index: 0; }
-    .hero__inner { position: relative; z-index: 1; }
-    .hero__orb { position: absolute; pointer-events: none; border-radius: 50%; filter: blur(60px); opacity: 0; animation: orbRise 1.4s ease-out 0.1s forwards; z-index: 0; }
-    .hero__orb--a { top: 8%; left: -8%; width: 320px; height: 320px; background: radial-gradient(circle, rgba(217, 185, 122, 0.18) 0%, transparent 70%); }
-    .hero__orb--b { bottom: 10%; right: -10%; width: 380px; height: 380px; background: radial-gradient(circle, rgba(184, 148, 86, 0.10) 0%, transparent 70%); animation-delay: 0.35s; }
-    @keyframes orbRise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-    .hero__inner { max-width: 780px; position: relative; z-index: 1; }
+    .hero__inner { position: relative; z-index: 1; max-width: 980px; }
     .hero__eyebrow-wrap { display: flex; align-items: center; justify-content: center; gap: 0.85rem; margin-bottom: var(--space-md); }
     .hero__eyebrow-wrap::before, .hero__eyebrow-wrap::after { content: ''; width: 36px; height: 1px; background: var(--color-accent); }
 
-    /* Hero title — masked words rise from below */
-    .hero__title { font-family: var(--font-display); font-size: clamp(2.7rem, 9vw, 5.8rem); font-weight: 500; letter-spacing: 0.16em; line-height: 1.02; color: var(--color-text); }
-    .hero__title-row { display: block; overflow: hidden; padding-bottom: 0.05em; }
+    /* Hero title — single-line "J TRAN BEAUTY" + script signoff "By Joanna Tran" */
+    .hero__title { font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 5.2rem); font-weight: 500; letter-spacing: 0.08em; line-height: 1.02; color: var(--color-text); }
+    .hero__title-row { display: block; overflow: hidden; padding-bottom: 0.08em; white-space: nowrap; }
     .hero__word { display: inline-block; transform: translateY(110%); transition: transform 1.05s cubic-bezier(0.2, 1, 0.2, 1); }
     .is-loaded .hero__word { transform: translateY(0); }
-    .is-loaded .hero__word--2 { transition-delay: 0.13s; }
-    .hero__script-wrap { display: block; margin-top: -0.05em; opacity: 0; transform: translateY(8px); transition: opacity 0.85s ease, transform 0.85s ease; transition-delay: 0.55s; position: relative; }
+    .is-loaded .hero__word--2 { transition-delay: 0.25s; }
+    .hero__script-wrap { display: block; margin-top: 0.15em; opacity: 0; transform: translateY(8px); transition: opacity 0.85s ease, transform 0.85s ease; transition-delay: 0.55s; position: relative; }
     .is-loaded .hero__script-wrap { opacity: 1; transform: translateY(0); }
-    .hero__script { font-family: var(--font-script); font-weight: 400; font-size: clamp(2.4rem, 7vw, 4.8rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; line-height: 1; }
-    .hero__script-wrap::after { content: ''; position: absolute; left: 50%; bottom: -0.3em; transform: translateX(-50%) scaleX(0); transform-origin: left center; width: 110px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent), transparent); transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.95s; }
-    .is-loaded .hero__script-wrap::after { transform: translateX(-50%) scaleX(1); }
+    .hero__script { font-family: var(--font-script); font-weight: 400; font-size: clamp(2rem, 5.2vw, 3.8rem); color: var(--color-text-muted); text-transform: none; letter-spacing: 0; line-height: 1; }
 
     .hero__divider { width: 90px; height: 1px; background-color: var(--color-accent); margin: var(--space-md) auto; opacity: 0; transition: opacity 0.6s ease 1.2s; }
     .is-loaded .hero__divider { opacity: 0.7; }
@@ -236,8 +329,7 @@
     .is-loaded .hero__subhead { opacity: 1; }
     .hero__trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1rem; margin-bottom: var(--space-lg); font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-text-muted); opacity: 0; transition: opacity 0.7s ease 1.5s; }
     .is-loaded .hero__trust { opacity: 1; }
-    .hero__trust-dot { width: 5px; height: 5px; background-color: var(--color-accent); border-radius: 50%; position: relative; }
-    .hero__trust-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; background: var(--color-accent); opacity: 0.4; animation: scarcityPulse 2.6s ease-out infinite; }
+    .hero__trust-dot { width: 5px; height: 5px; background-color: var(--color-accent); border-radius: 50%; position: relative; opacity: 0.85; }
     .hero__actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.7s ease 1.65s; }
     .is-loaded .hero__actions { opacity: 1; }
     @media (min-width: 600px) { .hero__actions { flex-direction: row; } }
@@ -281,37 +373,53 @@
       .about__divider, .about__checklist { margin-left: 0; }
     }
 
-    /* ---- SERVICES ---- */
+    /* ---- SERVICES — EDITORIAL MENU (printed-menu typography, no interaction puzzle) ---- */
     .services { padding: var(--space-2xl) 0; background-color: var(--bg-silk); }
-    .services__caption { text-align: center; font-family: var(--font-body); font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-md); font-size: 0.95rem; letter-spacing: 0.02em; }
-    .services__accordion { max-width: 820px; margin: 0 auto; }
-    .svc-group { border-bottom: 1px solid rgba(217, 201, 176, 0.5); }
-    .svc-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.85rem 0.5rem 1.85rem 0; text-align: left; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text); transition: color 0.25s, padding-left 0.3s; position: relative; }
-    .svc-trigger:hover { color: var(--color-accent-deep); padding-left: 0.5rem; }
-    .svc-trigger::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%) scaleY(0); width: 2px; height: 24px; background: var(--color-accent); transition: transform 0.3s ease; }
-    .svc-trigger[aria-expanded="true"]::before, .svc-trigger:hover::before { transform: translateY(-50%) scaleY(1); }
-    .svc-chevron { color: var(--color-accent); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); flex: 0 0 auto; font-size: 1.1rem; }
-    .svc-trigger[aria-expanded="true"] .svc-chevron { transform: rotate(180deg); color: var(--color-accent-deep); }
-    .svc-panel { max-height: 0; overflow: hidden; transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
-    .svc-panel-inner { padding-bottom: 1.5rem; }
-    .svc-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.35rem 0.5rem; border-bottom: 1px solid rgba(184, 148, 86, 0.12); transition: background 0.2s, padding-left 0.3s; }
-    .svc-item:hover { background: rgba(184, 148, 86, 0.05); padding-left: 0.85rem; }
-    .svc-item:last-child { border-bottom: none; }
-    .svc-item-info { flex: 1; min-width: 0; }
-    .svc-item-name { font-family: var(--font-display); font-size: 0.92rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text); margin-bottom: 0.25rem; }
-    .svc-item-name span { font-size: 0.78rem; letter-spacing: 0.08em; opacity: 0.55; }
-    .svc-item-desc { font-family: var(--font-body); font-size: 0.95rem; font-style: italic; color: var(--color-text-muted); line-height: 1.5; }
-    .svc-item-price { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.05em; color: var(--color-accent-deep); flex: 0 0 auto; transition: transform 0.3s, color 0.3s; }
-    .svc-item:hover .svc-item-price { transform: scale(1.06); color: var(--color-accent); }
-    .svc-book { flex: 0 0 auto; background: transparent; border: 0; padding: 0.3rem 0; font-family: var(--font-ui); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-accent-deep); border-bottom: 1px solid var(--color-accent); border-radius: 0; cursor: pointer; transition: color 0.2s, border-color 0.2s, letter-spacing 0.3s, transform 0.25s; align-self: center; }
-    .svc-book:hover { color: var(--color-text); border-bottom-color: var(--color-text); letter-spacing: 0.26em; transform: translateY(-1px); }
+    .services__menu { max-width: 880px; margin: 0 auto; display: grid; gap: var(--space-xl); }
+
+    .svc-section { display: grid; gap: var(--space-md); }
+    .svc-section__head { display: flex; align-items: baseline; gap: 1.1rem; padding-bottom: 0.95rem; border-bottom: 1px solid rgba(184, 148, 86, 0.32); }
+    .svc-section__num { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent-deep); flex: 0 0 auto; }
+    .svc-section__title { font-family: var(--font-display); font-size: clamp(1.1rem, 1.5vw, 1.35rem); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text); font-weight: 500; margin: 0; }
+    .svc-section__title-script { display: inline-block; margin-left: 0.75rem; font-family: var(--font-script); font-size: 1.6rem; letter-spacing: 0; text-transform: none; color: var(--color-text-muted); vertical-align: middle; line-height: 1; }
+
+    .svc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+    .svc-list .svc-item { display: flex; gap: 1.5rem; align-items: baseline; padding: 1.15rem 0; border-bottom: 1px solid rgba(184, 148, 86, 0.1); transition: padding-left 0.3s ease, background 0.2s; }
+    .svc-list .svc-item:last-child { border-bottom: none; }
+    .svc-list .svc-item:hover { background: rgba(184, 148, 86, 0.04); padding-left: 0.6rem; }
+    .svc-list .svc-item-info { flex: 1; min-width: 0; }
+    .svc-list .svc-item-name { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text); margin-bottom: 0.25rem; line-height: 1.2; }
+    .svc-list .svc-item-name span { font-size: 0.74rem; letter-spacing: 0.08em; opacity: 0.55; text-transform: none; font-style: italic; }
+    .svc-list .svc-item-desc { font-family: var(--font-body); font-size: 0.92rem; font-style: italic; color: var(--color-text-muted); line-height: 1.55; max-width: 56ch; }
+    .svc-list .svc-item-price { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.04em; color: var(--color-accent-deep); flex: 0 0 auto; align-self: center; transition: color 0.3s; }
+    .svc-list .svc-item:hover .svc-item-price { color: var(--color-accent); }
+
+    /* Add-ons sub-strip — quieter sibling at the bottom of each category */
+    .svc-addons-wrap { padding-top: 0.5rem; }
+    .svc-addons-label { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 0.65rem; display: block; }
+    .svc-addons { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; }
+    .svc-addons .svc-item { display: flex; gap: 1rem; align-items: baseline; padding: 0.35rem 0; border-bottom: none; opacity: 0.78; transition: opacity 0.3s ease, padding-left 0.3s; }
+    .svc-addons .svc-item:hover { opacity: 1; padding-left: 0.35rem; background: transparent; }
+    .svc-addons .svc-item-info { flex: 1; min-width: 0; }
+    .svc-addons .svc-item-name { font-family: var(--font-body); font-size: 0.88rem; font-weight: 400; letter-spacing: 0.02em; text-transform: none; color: var(--color-text-muted); margin: 0; line-height: 1.4; }
+    .svc-addons .svc-item-name::before { content: '+ '; color: var(--color-accent); margin-right: 0.15rem; font-weight: 500; }
+    .svc-addons .svc-item-name span { display: none; }    /* hide the "(add-on)" parenthetical — context implied by sub-strip */
+    .svc-addons .svc-item-desc { display: none; }
+    .svc-addons .svc-item-price { font-family: var(--font-body); font-size: 0.88rem; color: var(--color-text-muted); letter-spacing: 0; }
+
+    /* Per-service Book → link injected by JS — sits at the right edge of each row */
+    .svc-book { flex: 0 0 auto; background: transparent; border: 0; padding: 0.3rem 0; font-family: var(--font-ui); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-accent-deep); border-bottom: 1px solid var(--color-accent); border-radius: 0; cursor: pointer; transition: color 0.2s, border-color 0.2s, letter-spacing 0.3s; align-self: center; margin-left: 0.5rem; }
+    .svc-book:hover { color: var(--color-text); border-bottom-color: var(--color-text); letter-spacing: 0.28em; }
     .svc-book span { transition: transform 0.3s ease; display: inline-block; margin-left: 2px; }
     .svc-book:hover span { transform: translateX(3px); }
-    @media (max-width: 560px) {
-      .svc-item { flex-wrap: wrap; }
-      .svc-item-info { flex: 1 1 100%; }
-      .svc-item-price { flex: 0 0 auto; margin-right: auto; }
+
+    @media (max-width: 600px) {
+      .svc-list .svc-item { flex-wrap: wrap; gap: 0.5rem 1rem; }
+      .svc-list .svc-item-info { flex: 1 1 100%; }
+      .svc-list .svc-item-price { flex: 0 0 auto; }
       .svc-book { margin-left: auto; }
+      .svc-section__head { flex-wrap: wrap; gap: 0.5rem 1rem; }
+      .svc-section__title-script { margin-left: 0; }
     }
 
     /* ---- POLICIES ---- */
@@ -341,11 +449,15 @@
 
     /* ---- CLIENT CAM (polaroid v2 with tape) ---- */
     .client-care { padding: var(--space-2xl) 0; overflow: hidden; background-color: var(--bg-silk); }
+    .client-care__more { text-align: center; margin-top: var(--space-md); }
+    .client-care__more .btn--text { display: inline-flex; align-items: center; gap: 0.55rem; }
+    .client-care__more .btn--text svg { transition: transform 0.3s ease; }
+    .client-care__more .btn--text:hover svg { transform: translateX(4px); }
+    .client-care__more-note { display: block; margin-top: 0.65rem; font-family: var(--font-body); font-style: italic; font-size: 0.88rem; color: var(--color-text-dim); }
     .client-care__gallery { display: flex; gap: 1.5rem; overflow-x: auto; padding: 2rem 1rem 2.5rem; scroll-snap-type: x mandatory; -ms-overflow-style: none; scrollbar-width: none; }
     .client-care__gallery::-webkit-scrollbar { display: none; }
     .polaroid { flex: 0 0 72%; max-width: 280px; scroll-snap-align: center; background: var(--color-card); padding: 0.75rem 0.75rem 1.85rem; box-shadow: var(--shadow-soft); border-radius: 2px; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s; position: relative; }
-    .polaroid::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 80px; height: 22px; background: rgba(255, 252, 240, 0.65); border: 1px solid rgba(184, 148, 86, 0.18); border-radius: 1px; box-shadow: 0 2px 6px rgba(58, 42, 32, 0.06); pointer-events: none; }
-    .polaroid:hover { transform: rotate(0deg) scale(1.05) translateY(-4px); box-shadow: var(--shadow-deep); z-index: 2; }
+.polaroid:hover { transform: rotate(0deg) scale(1.05) translateY(-4px); box-shadow: var(--shadow-deep); z-index: 2; }
     .polaroid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--color-surface-2); }
     .polaroid:nth-child(1) { transform: rotate(-2deg); }
     .polaroid:nth-child(2) { transform: rotate(1deg); }
@@ -426,7 +538,8 @@
     .contact__hours { display: grid; grid-template-columns: 130px 1fr; gap: 0.6rem 1rem; font-family: var(--font-ui); font-size: 0.84rem; padding: 0.4rem 0; }
     .contact__hours dt { font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text); padding: 0.3rem 0.5rem; border-radius: 3px; }
     .contact__hours dd { color: var(--color-text-muted); padding: 0.3rem 0; }
-    .contact__hours-row:nth-child(odd) dt, .contact__hours-row:nth-child(odd) dd { background: rgba(184, 148, 86, 0.05); }
+    /* Stripe every other row — uses nth-of-type on the direct dt/dd children of the dl. */
+    .contact__hours dt:nth-of-type(odd), .contact__hours dt:nth-of-type(odd) + dd { background: rgba(184, 148, 86, 0.05); }
     .contact__hours dd.is-closed { color: var(--color-text-dim); font-style: italic; }
     .map-embed { width: 100%; aspect-ratio: 4/3; background-color: var(--color-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); position: relative; transition: box-shadow 0.4s, transform 0.4s; }
     .map-embed:hover { box-shadow: var(--shadow-deep); transform: translateY(-3px); }
@@ -441,25 +554,9 @@
     .thank-you__body { max-width: 600px; margin: 0 auto var(--space-md); font-family: var(--font-body); font-size: 1.12rem; font-style: italic; color: var(--color-text-muted); line-height: 1.6; }
     .thank-you__sig { display: block; margin-bottom: var(--space-lg); font-family: var(--font-script); font-size: 1.85rem; color: var(--color-accent-deep); }
 
-    /* ---- FOOTER ---- */
-    .footer { padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--color-border); text-align: center; background-color: rgba(246, 238, 229, 0.94); }
-    .footer__logo { height: 36px; margin: 0 auto var(--space-md); }
-    .footer__nav { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem; margin-bottom: var(--space-sm); font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; }
-    .footer__nav a { position: relative; padding-bottom: 2px; }
-    .footer__nav a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--color-accent); transition: width 0.3s; }
-    .footer__nav a:hover::after { width: 100%; }
-    .footer__middot { color: var(--color-accent); }
-    .footer__social { display: flex; justify-content: center; gap: var(--space-sm); margin-bottom: var(--space-md); }
-    .footer__social a { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-text); transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s; }
-    .footer__social a:hover { background-color: var(--color-text); color: var(--color-bg); border-color: var(--color-text); transform: translateY(-2px) rotate(-4deg); }
-    .footer__social svg { display: block; }
-    .footer__copy { font-family: var(--font-ui); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); }
-    .footer__poweredby { margin-top: 0.5rem; font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-text-dim); }
-    .footer__poweredby a { color: var(--color-accent-deep); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
-    .footer__poweredby a:hover { border-bottom-color: var(--color-accent-deep); }
-
     /* ---- MOBILE STICKY (floating pill) ---- */
-    .mobile-sticky { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 320px; padding: 0.5rem; background: rgba(58, 42, 32, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.35); border-radius: 999px; z-index: 60; box-shadow: 0 14px 40px rgba(58, 42, 32, 0.32); display: flex; align-items: center; justify-content: center; }
+    .mobile-sticky { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 320px; padding: 0.5rem; background: rgba(58, 42, 32, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.35); border-radius: 999px; z-index: 60; box-shadow: 0 14px 40px rgba(58, 42, 32, 0.32); display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 0.4s ease, transform 0.4s ease; }
+    .mobile-sticky.is-hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(20px); }
     .mobile-sticky .btn { padding: 0.65rem 1.5rem; font-size: 0.72rem; letter-spacing: 0.18em; background: var(--color-accent); color: var(--color-text); width: 100%; }
     .mobile-sticky .btn:hover { background: var(--color-accent-soft); color: var(--color-text); }
     @media (min-width: 1024px) { .mobile-sticky { display: none; } }
@@ -470,8 +567,10 @@
     .fj-preview-link { font-size: 0.7rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
     .fj-preview-link:hover { color: #FBF6EC; }
     .fj-preview-link.active { background: linear-gradient(135deg, #E5C77F 0%, #B89456 50%, #9A7A42 100%); color: #3A2A20; }
-    /* Mobile: shift up so it doesn't fight the bottom sticky CTA */
-    @media (max-width: 1023px) { .fj-preview-bar { bottom: auto; top: 88px; right: 12px; padding: 4px 5px 4px 10px; } .fj-preview-eyebrow { font-size: 0.54rem; padding-right: 8px; } .fj-preview-link { font-size: 0.66rem; padding: 4px 9px; } }
+    /* Mobile: hide entirely. The floating cartouche + mobile-sticky are already eating
+       the safe edges; a third floating pill is one element too many. Desktop visitors
+       still see the "Built by FJMedia" attribution. */
+    @media (max-width: 1023px) { .fj-preview-bar { display: none; } }
     @media (max-width: 380px) { .fj-preview-eyebrow { display: none; } }
     @media print { .fj-preview-bar, .mobile-sticky { display: none !important; } }
 
@@ -490,6 +589,9 @@
     .booking-modal__title-script { display: block; margin-top: -0.15em; font-family: var(--font-script); font-weight: 400; font-size: clamp(2rem, 4vw, 2.6rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; line-height: 1; }
     .booking-modal__divider { width: 56px; height: 1px; background: var(--color-accent); margin: 1rem auto 0; opacity: 0.6; }
     .booking-modal__service { text-align: center; margin: 0 auto 1.4rem; max-width: 460px; padding: 0.85rem 1.25rem; background: rgba(184, 148, 86, 0.1); border: 1px solid rgba(184, 148, 86, 0.28); border-radius: var(--radius-sm); }
+    .location-card.is-soft { opacity: 0.7; }
+    .location-card.is-soft:hover { opacity: 0.92; }
+    .location-card.is-soft .location-card__name::after { content: ' · By Request'; font-family: var(--font-ui); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; color: var(--color-text-muted); display: inline-block; margin-left: 0.4rem; vertical-align: middle; }
     .booking-modal__service[hidden] { display: none; }
     .bms-label { display: block; font-family: var(--font-ui); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-accent-deep); margin-bottom: 0.3rem; }
     .bms-name { display: block; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
@@ -517,29 +619,181 @@
 
     /* ---- A11Y ---- */
     :focus-visible { outline: 2px solid var(--color-accent-deep); outline-offset: 3px; border-radius: 2px; }
+
+    /* ============================================================
+       SUPER-SAIYAN MOTION LAYER (concept variant only)
+       Atelier intro · ambient silk drift · divider shimmer ·
+       section-heading wash-in. GSAP ScrollTrigger drives the
+       in-view choreography from the inline script below.
+       ============================================================ */
+
+    /* ---- ATELIER INTRO OVERLAY ---- */
+    .atelier-intro {
+      position: fixed; inset: 0; z-index: 9999;
+      background-color: var(--color-bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.6rem;
+      transform: translateY(0);
+      transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1),
+                  opacity 0.9s ease 0.2s;
+      will-change: transform, opacity;
+      overflow: hidden;
+    }
+    .atelier-intro.is-lifting { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+    .atelier-intro.is-gone    { display: none; }
+    .atelier-intro__mark {
+      font-family: var(--font-script);
+      font-size: clamp(3.2rem, 9vw, 5.6rem);
+      color: var(--color-accent-deep);
+      line-height: 1;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.85s ease 0.15s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+    }
+    .atelier-intro__sub {
+      font-family: var(--font-ui);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.42em; text-transform: uppercase;
+      color: var(--color-text-muted);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s;
+    }
+    .atelier-intro__hair {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+      transition: width 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;
+      margin-top: 0.85rem;
+    }
+    .atelier-intro.is-revealed .atelier-intro__mark { opacity: 1; transform: translateY(0); }
+    .atelier-intro.is-revealed .atelier-intro__sub  { opacity: 1; transform: translateY(0); }
+    .atelier-intro.is-revealed .atelier-intro__hair { width: 180px; }
+    .atelier-intro__skip {
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--color-text-dim);
+      opacity: 0; transition: opacity 0.5s ease 0.3s;
+    }
+    .atelier-intro.is-revealed .atelier-intro__skip { opacity: 0.7; }
+    /* Hide the rest of the page from screen readers + interactivity while intro is up */
+    body.is-intro-active { overflow: hidden; }
+
+    /* ---- AMBIENT SILK DRIFT (replaces static silk position on Concept-saiyan only) ----
+       Scale dropped — blur edge fade now reads as natural softness at top/bottom,
+       and the feathered pillars (below) handle left/right. No more hard borders. */
+    @keyframes silkDriftDesktop {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(-18px, -10px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+    @keyframes silkDriftMobile {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(-12px, -8px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+    body::before {
+      animation: silkDriftDesktop 60s ease-in-out infinite;
+      will-change: transform;
+      transform: none;             /* override the inherited scale(1.03) — blur softens edges naturally */
+    }
+    @media (max-width: 768px) {
+      body::before { animation: silkDriftMobile 50s ease-in-out infinite; transform: none; }
+    }
+
+    /* ---- FEATHERED PILLARS (override the solid-cream slabs from base styles) ----
+       Wider footprint + cream-to-transparent gradient so the edge fades into the silk
+       instead of cutting a hard line. Box-shadow killed. */
+    .pillar {
+      width: 160px;
+      background-color: transparent;
+      box-shadow: none;
+    }
+    .pillar--left  { background: linear-gradient(to right, var(--color-bg) 0%, var(--color-bg) 30%, transparent 100%); }
+    .pillar--right { background: linear-gradient(to left,  var(--color-bg) 0%, var(--color-bg) 30%, transparent 100%); }
+    @media (max-width: 1024px) { .pillar { width: 100px; } }
+    @media (max-width: 640px)  { .pillar { display: none; } }
+
+
+    /* ---- DIVIDER SHIMMER (on ss-heading flanking hairlines) ---- */
+    @keyframes dividerShimmer {
+      0%   { background-position: -120px 0; }
+      45%  { background-position: 120px 0; }
+      100% { background-position: 120px 0; }
+    }
+    .ss-heading__line::before,
+    .ss-heading__line::after {
+      background: linear-gradient(90deg, transparent, var(--color-accent) 50%, transparent);
+      background-size: 220% 100%;
+      background-position: 0 0;
+      animation: dividerShimmer 12s ease-in-out infinite;
+    }
+    .ss-heading__line::after { animation-delay: 4s; } /* offset so the flanks occasionally overlap instead of always anti-phase */
+
+    /* ---- SECTION HEADING WASH-IN (GSAP toggles .is-washed) ---- */
+    .ss-heading__display {
+      letter-spacing: 0.18em;
+      transition: letter-spacing 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ss-heading.is-washed .ss-heading__display { letter-spacing: 0.14em; }
+
+    /* ---- BOOKING MODAL: AMBIENT INNER-GLOW PULSE ON FOCUSED CARD ---- */
+    @keyframes locationGlow {
+      0%, 100% { box-shadow: var(--shadow-lift), inset 0 0 0 0 rgba(184, 148, 86, 0); }
+      50%      { box-shadow: var(--shadow-lift), inset 0 0 24px 0 rgba(184, 148, 86, 0.10); }
+    }
+    .location-card:hover,
+    .location-card:focus-within { animation: locationGlow 3.4s ease-in-out infinite; }
+
+    /* ---- POLISH OVERRIDES (audit fixes) ---- */
+    /* Hide About portrait column until Joanna sends her HQ portrait — the JT logo stretched into a 4/5 arched frame was reading wrong. About becomes single-column centered. */
+    .about__media { display: none !important; }
+    @media (min-width: 900px) {
+      .about__grid { grid-template-columns: 1fr !important; gap: var(--space-lg) !important; max-width: 720px; margin: 0 auto; }
+      .about__content { text-align: center !important; }
+      .about__checklist { margin-left: auto !important; margin-right: auto !important; }
+    }
+    /* FJMedia preview pill — was using unloaded Montserrat, fell back to system-ui */
+    .fj-preview-bar { font-family: var(--font-ui) !important; }
+
+    /* ---- REDUCED MOTION OVERRIDES (kill the saiyan layer entirely) ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .atelier-intro { display: none !important; }
+      body::before { animation: none !important; }
+      .ss-heading__line::before, .ss-heading__line::after { animation: none !important; background-position: 0 0 !important; }
+      .ss-heading__display { transition: none !important; letter-spacing: 0.14em !important; }
+      .location-card:hover, .location-card:focus-within { animation: none !important; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ============ ATELIER INTRO (first visit only, sessionStorage-gated) ============ -->
+  <div class="atelier-intro" id="atelierIntro" role="dialog" aria-label="Welcome">
+    <span class="atelier-intro__mark">J Tran Beauty</span>
+    <span class="atelier-intro__sub">Esthetician · Winnipeg + Carman</span>
+    <div class="atelier-intro__hair" aria-hidden="true"></div>
+    <span class="atelier-intro__skip">Tap or scroll to enter</span>
+  </div>
 
   <!-- ============ EDGE PILLARS (cream side panels framing the page) ============ -->
   <div class="pillar pillar--left" aria-hidden="true"></div>
   <div class="pillar pillar--right" aria-hidden="true"></div>
 
-  <!-- ============ NAV ============ -->
+  <!-- ============ NAV (floating cream cartouche) ============ -->
   <header class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="#top" class="nav__logo">
-        <img src="assets/Logo+Design/Logo-transparent.png" alt="J Tran Beauty monogram">
-        <span class="nav__brand">J Tran Beauty</span>
+    <div class="nav__inner">
+      <a href="#top" class="nav__logo" aria-label="J Tran Beauty home">
+        <img src="assets/Logo+Design/Logo-transparent.png" alt="">
       </a>
       <nav class="nav__menu" aria-label="Primary">
         <a href="#about" class="nav__link">About</a>
         <a href="#services" class="nav__link">Services</a>
-        <a href="#policies" class="nav__link">Policies</a>
+        <a href="gallery.html" class="nav__link">Gallery</a>
         <a href="#bridal" class="nav__link">Bridal</a>
         <a href="#contact" class="nav__link">Contact</a>
-        <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary nav__cta js-magnetic js-book-trigger">Book a Session</a>
       </nav>
+      <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="nav__cta js-book-trigger">Book <span aria-hidden="true">→</span></a>
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -549,6 +803,7 @@
   <div class="mobile-nav" id="mobileNav" aria-hidden="true" inert>
     <a href="#about">About</a>
     <a href="#services">Services</a>
+    <a href="gallery.html">Gallery</a>
     <a href="#policies">Policies</a>
     <a href="#before">Before Your Visit</a>
     <a href="#bridal">Bridal</a>
@@ -560,15 +815,12 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero__orb hero__orb--a" aria-hidden="true"></div>
-      <div class="hero__orb hero__orb--b" aria-hidden="true"></div>
-      <div class="container hero__inner">
+<div class="container hero__inner">
         <div class="hero__eyebrow-wrap">
           <span class="eyebrow" style="margin: 0;">Solo Esthetician · Winnipeg + Carman</span>
         </div>
         <h1 class="hero__title">
-          <span class="hero__title-row"><span class="hero__word hero__word--1">J Tran</span></span>
-          <span class="hero__title-row"><span class="hero__word hero__word--2">Beauty</span></span>
+          <span class="hero__title-row"><span class="hero__word hero__word--1">J Tran</span> <span class="hero__word hero__word--2">Beauty</span></span>
           <span class="hero__script-wrap"><span class="hero__script">By Joanna Tran</span></span>
         </h1>
         <div class="hero__divider" aria-hidden="true"></div>
@@ -591,9 +843,7 @@
       </div>
     </section>
 
-    <div class="bridge bridge--cream-to-warm" aria-hidden="true"></div>
-
-    <!-- ============ ABOUT ============ -->
+    <!-- ============ABOUT ============ -->
     <section class="about" id="about">
       <div class="container">
         <div class="about__grid">
@@ -625,96 +875,92 @@
       </div>
     </section>
 
-    <div class="bridge bridge--warm-to-cream" aria-hidden="true"></div>
-
     <!-- ============ SERVICES ============ -->
     <section class="services" id="services">
       <div class="container">
         <div class="ss-heading reveal">
           <div class="ss-heading__line"><h2 class="ss-heading__display">Services</h2></div>
-          <span class="ss-heading__script">What I Offer</span>
         </div>
-        <p class="services__caption reveal">— tap a category —</p>
-        <div class="services__accordion reveal">
+        <div class="services__menu reveal">
 
-          <div class="svc-group">
-            <button class="svc-trigger" aria-expanded="false" aria-controls="svc-facials">
-              <span>Facials</span>
-              <span class="svc-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="svc-panel" id="svc-facials">
-              <div class="svc-panel-inner">
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">JTB Intensive Facial</div><div class="svc-item-desc">An essential, personalized, deep cleansing treatment to indulge in once a month.</div></div><div class="svc-item-price">$140</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Botinol Facial</div></div><div class="svc-item-price">$190</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Collagen 90</div></div><div class="svc-item-price">$190</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Oxygenate + Detox</div></div><div class="svc-item-price">$150</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Yonka C20 Facial</div><div class="svc-item-desc">Anti-aging, brightening, balancing — 25% Vitamin C and 30% Glycolic Acid for an intense glow.</div></div><div class="svc-item-price">$150</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">C20 Dermaplane Facial</div></div><div class="svc-item-price">$190</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Dermaplane Facial</div></div><div class="svc-item-price">$150</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Yonka Masque Modelant <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Eye Treatment <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Neck Treatment <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Dermaplane <span>(add-on)</span></div></div><div class="svc-item-price">$40</div></div>
-              </div>
+          <article class="svc-section">
+            <header class="svc-section__head">
+              <span class="svc-section__num">01</span>
+              <h3 class="svc-section__title">Facials</h3>
+            </header>
+            <ul class="svc-list">
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">JTB Intensive Facial</div><div class="svc-item-desc">An essential, personalized, deep cleansing treatment to indulge in once a month.</div></div><div class="svc-item-price">$140</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Botinol Facial</div></div><div class="svc-item-price">$190</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Collagen 90</div></div><div class="svc-item-price">$190</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">GM Collin Oxygenate + Detox</div></div><div class="svc-item-price">$150</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Yonka C20 Facial</div><div class="svc-item-desc">Anti-aging, brightening, balancing — 25% Vitamin C and 30% Glycolic Acid for an intense glow.</div></div><div class="svc-item-price">$150</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">C20 Dermaplane Facial</div></div><div class="svc-item-price">$190</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Dermaplane Facial</div></div><div class="svc-item-price">$150</div></li>
+            </ul>
+            <div class="svc-addons-wrap">
+              <span class="svc-addons-label">Add-ons</span>
+              <ul class="svc-addons">
+                <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Yonka Masque Modelant <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></li>
+                <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Eye Treatment <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></li>
+                <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Neck Treatment <span>(add-on)</span></div></div><div class="svc-item-price">$25</div></li>
+                <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Dermaplane <span>(add-on)</span></div></div><div class="svc-item-price">$40</div></li>
+              </ul>
             </div>
-          </div>
+          </article>
 
-          <div class="svc-group">
-            <button class="svc-trigger" aria-expanded="false" aria-controls="svc-lashes-brows">
-              <span>Lashes &amp; Brows</span>
-              <span class="svc-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="svc-panel" id="svc-lashes-brows">
-              <div class="svc-panel-inner">
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lash Lift + Tint</div></div><div class="svc-item-price">$120</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lash Tint</div></div><div class="svc-item-price">$30</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">False Lash Application Only</div><div class="svc-item-desc">Soft shadow and eyeliner application included.</div></div><div class="svc-item-price">$30</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">False Lash <span>(add-on)</span></div></div><div class="svc-item-price">$15</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Wax + Tint</div></div><div class="svc-item-price">$40</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Wax / Tweeze</div></div><div class="svc-item-price">$25</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Tint</div></div><div class="svc-item-price">$25</div></div>
-              </div>
+          <article class="svc-section">
+            <header class="svc-section__head">
+              <span class="svc-section__num">02</span>
+              <h3 class="svc-section__title">Lashes &amp; Brows</h3>
+            </header>
+            <ul class="svc-list">
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lash Lift + Tint</div></div><div class="svc-item-price">$120</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lash Tint</div></div><div class="svc-item-price">$30</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">False Lash Application Only</div><div class="svc-item-desc">Soft shadow and eyeliner application included.</div></div><div class="svc-item-price">$30</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Wax + Tint</div></div><div class="svc-item-price">$40</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Wax / Tweeze</div></div><div class="svc-item-price">$25</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Brow Tint</div></div><div class="svc-item-price">$25</div></li>
+            </ul>
+            <div class="svc-addons-wrap">
+              <span class="svc-addons-label">Add-ons</span>
+              <ul class="svc-addons">
+                <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">False Lash <span>(add-on)</span></div></div><div class="svc-item-price">$15</div></li>
+              </ul>
             </div>
-          </div>
+          </article>
 
-          <div class="svc-group">
-            <button class="svc-trigger" aria-expanded="false" aria-controls="svc-makeup">
-              <span>Makeup</span>
-              <span class="svc-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="svc-panel" id="svc-makeup">
-              <div class="svc-panel-inner">
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Makeup Application</div></div><div class="svc-item-price">$130</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Makeup Lesson</div></div><div class="svc-item-price">$175</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Single Event Makeup <span>(mobile)</span></div></div><div class="svc-item-price">$150</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Event Makeup Trial</div></div><div class="svc-item-price">$150 / hr</div></div>
-              </div>
-            </div>
-          </div>
+          <article class="svc-section">
+            <header class="svc-section__head">
+              <span class="svc-section__num">03</span>
+              <h3 class="svc-section__title">Makeup</h3>
+            </header>
+            <ul class="svc-list">
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Makeup Application</div></div><div class="svc-item-price">$130</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Makeup Lesson</div></div><div class="svc-item-price">$175</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Single Event Makeup <span>(mobile)</span></div></div><div class="svc-item-price">$150</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Event Makeup Trial</div></div><div class="svc-item-price">$150 / hr</div></li>
+            </ul>
+          </article>
 
-          <div class="svc-group">
-            <button class="svc-trigger" aria-expanded="false" aria-controls="svc-waxing">
-              <span>Waxing</span>
-              <span class="svc-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="svc-panel" id="svc-waxing">
-              <div class="svc-panel-inner">
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lip Wax</div></div><div class="svc-item-price">$20</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Chin Wax</div></div><div class="svc-item-price">$20</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Underarm Wax</div></div><div class="svc-item-price">$40</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Bikini Wax+</div><div class="svc-item-desc">Additional fees may apply.</div></div><div class="svc-item-price">$40+</div></div>
-                <div class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Face Wax+</div></div><div class="svc-item-price">—</div></div>
-              </div>
-            </div>
-          </div>
+          <article class="svc-section">
+            <header class="svc-section__head">
+              <span class="svc-section__num">04</span>
+              <h3 class="svc-section__title">Waxing</h3>
+            </header>
+            <ul class="svc-list">
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Lip Wax</div></div><div class="svc-item-price">$20</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Chin Wax</div></div><div class="svc-item-price">$20</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Underarm Wax</div></div><div class="svc-item-price">$40</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Bikini Wax+</div><div class="svc-item-desc">Additional fees may apply.</div></div><div class="svc-item-price">$40+</div></li>
+              <li class="svc-item"><div class="svc-item-info"><div class="svc-item-name">Face Wax+ <span>(consultation)</span></div></div><div class="svc-item-price">—</div></li>
+            </ul>
+          </article>
 
         </div>
       </div>
     </section>
 
-    <div class="bridge bridge--cream-to-warm" aria-hidden="true"></div>
-
-    <!-- ============ POLICIES ============ -->
+    <!-- ============POLICIES ============ -->
     <section class="policies" id="policies">
       <div class="container">
         <div class="ss-heading reveal">
@@ -746,7 +992,6 @@
       </div>
     </section>
 
-    <div class="bridge bridge--cream-to-deep" aria-hidden="true"></div>
 
     <!-- ============ BEFORE YOUR APPOINTMENT ============ -->
     <section class="before" id="before">
@@ -764,7 +1009,6 @@
       </div>
     </section>
 
-    <div class="bridge bridge--deep-to-cream" aria-hidden="true"></div>
 
     <!-- ============ CLIENT CAM ============ -->
     <section class="client-care" id="gallery">
@@ -782,11 +1026,16 @@
         <div class="polaroid" role="listitem"><img src="" alt="Bridal makeup application" loading="lazy"></div>
         <div class="polaroid" role="listitem"><img src="" alt="GM Collin Collagen 90+ treatment" loading="lazy"></div>
       </div>
+      <div class="container client-care__more reveal">
+        <a href="gallery.html" class="btn btn--text" aria-label="See the full gallery of Joanna's work">
+          <span>See The Full Gallery</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <span class="client-care__more-note">A small set here. Twenty-four more inside.</span>
+      </div>
     </section>
 
-    <div class="bridge bridge--cream-to-warm" aria-hidden="true"></div>
-
-    <!-- ============ BRIDAL PARTY ============ -->
+    <!-- ============BRIDAL PARTY ============ -->
     <section class="bridal" id="bridal">
       <div class="container">
         <div class="ss-heading reveal">
@@ -812,7 +1061,7 @@
           <div class="bf-row bf-row--2">
             <label class="bf-field">
               <span class="bf-label">Wedding Date</span>
-              <input type="date" name="wedding-date" required>
+              <input type="date" name="wedding-date" id="bridalWeddingDate" required>
             </label>
             <label class="bf-field">
               <span class="bf-label">Party Size</span>
@@ -858,9 +1107,7 @@
       </div>
     </section>
 
-    <div class="bridge bridge--cream-to-warm" aria-hidden="true"></div>
-
-    <!-- ============ CONTACT ============ -->
+    <!-- ============CONTACT ============ -->
     <section class="contact" id="contact">
       <div class="container">
         <div class="ss-heading reveal">
@@ -876,13 +1123,13 @@
             <div class="contact-block">
               <span class="eyebrow">Hours</span>
               <dl class="contact__hours">
-                <div class="contact__hours-row" style="display:contents;"><dt>Tuesday</dt><dd>10:00 AM — 2:00 PM</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Wednesday</dt><dd>10:00 AM — 2:00 PM</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Thursday</dt><dd>10:00 AM — 2:00 PM</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Friday</dt><dd>10:00 AM — 2:00 PM</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Saturday</dt><dd class="is-closed">Closed</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Sunday</dt><dd class="is-closed">Closed</dd></div>
-                <div class="contact__hours-row" style="display:contents;"><dt>Monday</dt><dd class="is-closed">Closed</dd></div>
+                <dt>Tuesday</dt><dd>10:00 AM — 2:00 PM</dd>
+                <dt>Wednesday</dt><dd>10:00 AM — 2:00 PM</dd>
+                <dt>Thursday</dt><dd>10:00 AM — 2:00 PM</dd>
+                <dt>Friday</dt><dd>10:00 AM — 2:00 PM</dd>
+                <dt>Saturday</dt><dd class="is-closed">Closed</dd>
+                <dt>Sunday</dt><dd class="is-closed">Closed</dd>
+                <dt>Monday</dt><dd class="is-closed">Closed</dd>
               </dl>
               <p style="margin-top:0.7rem;font-family:var(--font-body);font-style:italic;font-size:0.95rem;color:var(--color-text-muted);">Weekend &amp; evening by request.</p>
             </div>
@@ -905,7 +1152,6 @@
       </div>
     </section>
 
-    <div class="bridge bridge--warm-to-cream" aria-hidden="true"></div>
 
     <!-- ============ THANK YOU ============ -->
     <section class="thank-you">
@@ -920,31 +1166,6 @@
     </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container">
-      <img src="assets/Logo+Design/Logo-transparent.png" alt="J Tran Beauty" class="footer__logo">
-      <nav class="footer__nav" aria-label="Footer">
-        <a href="#about">About</a><span class="footer__middot">·</span>
-        <a href="#services">Services</a><span class="footer__middot">·</span>
-        <a href="#policies">Policies</a><span class="footer__middot">·</span>
-        <a href="#bridal">Bridal</a><span class="footer__middot">·</span>
-        <a href="#contact">Contact</a><span class="footer__middot">·</span>
-        <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="js-book-trigger">Book</a>
-      </nav>
-      <div class="footer__social">
-        <a href="https://www.instagram.com/jtranbeauty/" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" aria-label="Book online" class="js-book-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-        </a>
-      </div>
-      <p class="footer__copy">&copy; 2026 J Tran Beauty. All rights reserved.</p>
-      <p class="footer__poweredby">Powered by <a href="https://fjmedia.ca" target="_blank" rel="noopener">FJMedia</a></p>
-    </div>
-  </footer>
-
   <!-- ============ MOBILE STICKY (floating pill) ============ -->
   <aside class="mobile-sticky" aria-label="Booking">
     <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn js-book-trigger">Book a Session</a>
@@ -958,14 +1179,14 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
       <div class="booking-modal__header">
-        <span class="booking-modal__eyebrow">Two Locations</span>
-        <h2 id="bookingModalTitle" class="booking-modal__title">Where Would You Like<span class="booking-modal__title-script">to Book?</span></h2>
+        <span class="booking-modal__eyebrow">By Appointment</span>
+        <h2 id="bookingModalTitle" class="booking-modal__title">Choose Your<span class="booking-modal__title-script">Location</span></h2>
         <div class="booking-modal__divider" aria-hidden="true"></div>
       </div>
       <div class="booking-modal__service" id="bookingModalService" hidden>
         <span class="bms-label">You're booking</span>
         <span class="bms-name" id="bookingModalServiceName"></span>
-        <span class="bms-hint">Pick your location, then select this service on the next screen.</span>
+        <span class="bms-hint">Winnipeg has direct booking. Carman is by request — text Joanna or browse the full menu.</span>
       </div>
       <div class="booking-modal__grid">
         <article class="location-card" data-loc="winnipeg">
@@ -978,10 +1199,10 @@
           <div class="location-card__pin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
           <div class="location-card__name">Carman</div>
           <p class="location-card__addr">Carman, Manitoba<br><em style="opacity:0.7">By appointment</em></p>
-          <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary location-card__cta" data-default-href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services">Book Carman</a>
+          <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary location-card__cta" data-default-href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services">Request Carman</a>
         </article>
       </div>
-      <p class="booking-modal__footer">Each location has its own booking calendar. Pick whichever is closer to you.</p>
+      <p class="booking-modal__footer">Each location keeps its own calendar — whichever is closer to you.</p>
     </div>
   </div>
 
@@ -992,6 +1213,9 @@
   </aside>
 
   <!-- ============ SCRIPTS ============ -->
+  <!-- GSAP + ScrollTrigger (super-saiyan motion layer). Loaded sync before the inline script below. -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     // ---- Hero entrance: fire on next frame so transitions catch ----
     requestAnimationFrame(() => {
@@ -1000,20 +1224,43 @@
 
     // ---- Booking modal (location chooser) ----
     const bookingModal = document.getElementById('bookingModal');
+    let modalLastFocus = null;       // restore focus when closing
+    const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
     const openBookingModal = () => {
+      modalLastFocus = document.activeElement;
       bookingModal.classList.add('is-open');
       bookingModal.setAttribute('aria-hidden', 'false');
       bookingModal.removeAttribute('inert');
       document.body.classList.add('modal-open');
-      const firstFocusable = bookingModal.querySelector('.location-card__cta');
-      firstFocusable?.focus();
+      // Blur the trigger first — native anchor click focuses the trigger AFTER our handler,
+      // overriding a single rAF focus. Blur + double-rAF beats the race cleanly.
+      modalLastFocus?.blur?.();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bookingModal.querySelector('.location-card__cta')?.focus({ preventScroll: true });
+      }));
     };
     const closeBookingModal = () => {
       bookingModal.classList.remove('is-open');
       bookingModal.setAttribute('aria-hidden', 'true');
       bookingModal.setAttribute('inert', '');
       document.body.classList.remove('modal-open');
+      modalLastFocus?.focus?.();      // restore focus to the trigger
     };
+    // Focus trap — cycle Tab/Shift-Tab inside modal while open
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !bookingModal.classList.contains('is-open')) return;
+      const focusables = Array.from(bookingModal.querySelectorAll(FOCUSABLE_SELECTOR))
+        .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
     // Per-service booking URLs. Generated from _service-url-playground.html.
     // Services not in this map fall back to the location-level defaults on the cards.
     const SERVICE_BOOKING_URLS = {
@@ -1057,11 +1304,17 @@
     const carCta = carCard?.querySelector('.location-card__cta');
 
     function applyServiceContext(serviceName) {
-      // Restore defaults + both cards visible. Carman always uses its default location-level SalonMonster URL.
-      if (winCta) winCta.href = winCta.dataset.defaultHref;
-      if (carCta) carCta.href = carCta.dataset.defaultHref;
-      if (winCard) winCard.hidden = false;
-      if (carCard) carCard.hidden = false;
+      // Restore defaults + both cards visible + clear soft-disabled state.
+      if (winCta) {
+        winCta.href = winCta.dataset.defaultHref;
+        winCta.textContent = 'Book Winnipeg';
+      }
+      if (carCta) {
+        carCta.href = carCta.dataset.defaultHref;
+        carCta.textContent = 'Request Carman';
+      }
+      if (winCard) { winCard.hidden = false; winCard.classList.remove('is-soft'); }
+      if (carCard) { carCard.hidden = false; carCard.classList.remove('is-soft'); }
 
       if (!serviceName) {
         if (serviceCtx) serviceCtx.hidden = true;
@@ -1070,15 +1323,26 @@
       const urls = SERVICE_BOOKING_URLS[serviceName] || {};
       if (serviceCtxName) serviceCtxName.textContent = serviceName;
       if (serviceCtx) serviceCtx.hidden = false;
+
       // Winnipeg per-service deep-link if mapped
       if (urls.winnipeg && winCta) winCta.href = urls.winnipeg;
+
       // Carman-only services: hide the Winnipeg card entirely
       if (urls.carmanOnly && winCard) winCard.hidden = true;
+
+      // Winnipeg-only services (Winnipeg mapped, Carman not, not carmanOnly):
+      // soft-disable Carman so visitors understand the asymmetry — no false promise.
+      if (urls.winnipeg && !urls.carman && !urls.carmanOnly && carCard && carCta) {
+        carCard.classList.add('is-soft');
+        carCta.textContent = 'Browse Carman menu →';
+      }
     }
 
     document.addEventListener('click', (e) => {
       const trigger = e.target.closest('.js-book-trigger');
       if (!trigger || trigger.closest('.booking-modal')) return;
+      // Block booking clicks while the atelier intro is still up — prevents a half-painted modal-over-intro race.
+      if (document.body.classList.contains('is-intro-active')) { e.preventDefault(); return; }
       e.preventDefault();
       applyServiceContext(trigger.dataset.service || '');
       openBookingModal();
@@ -1135,16 +1399,17 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // ---- Services accordion ----
-    document.querySelectorAll('.svc-trigger').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        const panel = document.getElementById(btn.getAttribute('aria-controls'));
-        btn.setAttribute('aria-expanded', !expanded);
-        if (!expanded) panel.style.maxHeight = panel.scrollHeight + 'px';
-        else panel.style.maxHeight = '0px';
-      });
-    });
+    // ---- Hide mobile-sticky when the thank-you closing CTA is in view (it has its own Book CTA) ----
+    const thankYou = document.querySelector('.thank-you');
+    const mobileSticky = document.querySelector('.mobile-sticky');
+    if (thankYou && mobileSticky && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        mobileSticky.classList.toggle('is-hidden', entry.isIntersecting);
+      }, { threshold: 0.3 }).observe(thankYou);
+    }
+
+    // Services accordion JS removed — section is now editorial (all visible, no interaction).
+    // Per-service Book → buttons are still injected by the .svc-item loop further down.
 
     // ---- Magnetic buttons (subtle pull on cursor — desktop only) ----
     const isFinePointer = window.matchMedia('(pointer: fine)').matches;
@@ -1161,6 +1426,12 @@
     }
 
     // ---- Bridal form (mockup — no backend wired yet) ----
+    // Block past dates on the wedding-date picker.
+    const weddingDateInput = document.getElementById('bridalWeddingDate');
+    if (weddingDateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      weddingDateInput.min = today;
+    }
     const bridalForm = document.getElementById('bridalForm');
     bridalForm?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -1172,10 +1443,20 @@
     });
 
     // ---- Reveal animations ----
+    // Gated behind `jtran:intro-done` event so first-time visitors don't lose the fade-up
+    // animation behind the atelier intro cover. The atelier IIFE below dispatches the
+    // event after the intro lifts (or immediately for returning visits / reduced-motion).
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced && 'IntersectionObserver' in window) {
+    // Mark all .reveal nodes as hidden right away so they don't paint pre-animation.
+    if (!prefersReduced) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-hidden'));
+    }
+    function initReveals() {
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal.is-hidden').forEach(el => { el.classList.remove('is-hidden'); el.classList.add('is-visible'); });
+        return;
+      }
       const reveals = Array.from(document.querySelectorAll('.reveal'));
-      reveals.forEach(el => el.classList.add('is-hidden'));
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1186,10 +1467,97 @@
         });
       }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
       reveals.forEach(el => io.observe(el));
+      // Safety: anything still hidden after 1.5s post-intro flips on
       setTimeout(() => {
         document.querySelectorAll('.reveal.is-hidden').forEach(el => { el.classList.remove('is-hidden'); el.classList.add('is-visible'); });
       }, 1500);
     }
+    window.addEventListener('jtran:intro-done', initReveals, { once: true });
+
+    /* ============================================================
+       SUPER-SAIYAN MOTION LAYER — JS
+       Atelier intro (sessionStorage-gated) + GSAP heading wash-in
+       ============================================================ */
+
+    // ---- Atelier intro ----
+    function dispatchIntroDone() {
+      window.dispatchEvent(new Event('jtran:intro-done'));
+    }
+
+    (function atelierIntro() {
+      const intro = document.getElementById('atelierIntro');
+      if (!intro) { dispatchIntroDone(); return; }
+      if (prefersReduced) { intro.classList.add('is-gone'); dispatchIntroDone(); return; }
+
+      const SKEY = 'jtran.intro.seen';
+      // Returning visit within this tab session — skip intro entirely, no flash.
+      if (sessionStorage.getItem(SKEY) === '1') {
+        intro.classList.add('is-gone');
+        dispatchIntroDone();
+        return;
+      }
+
+      document.body.classList.add('is-intro-active');
+
+      // Reveal sequence: mark @ 0.15s · sub @ 0.55s · hairline @ 0.9s · skip-hint @ 1.4s (all CSS-driven)
+      // Apply is-revealed immediately on next frame so initial-state CSS commits first paint.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => intro.classList.add('is-revealed'));
+      });
+
+      let lifted = false;
+      const LIFT_AT_MS = 1800;       // total dwell before auto-lift (was 2400 — gave user too little agency before snap)
+      const TRANSITION_MS = 1100;    // matches .atelier-intro transform transition
+
+      function lift() {
+        if (lifted) return;
+        lifted = true;
+        intro.classList.add('is-lifting');
+        sessionStorage.setItem(SKEY, '1');
+        setTimeout(() => {
+          intro.classList.add('is-gone');
+          document.body.classList.remove('is-intro-active');
+          // Refresh any ScrollTrigger calculations after layout settles.
+          if (window.ScrollTrigger) ScrollTrigger.refresh();
+          // Tell the rest of the page the cover is gone — reveal animations can start now.
+          dispatchIntroDone();
+        }, TRANSITION_MS);
+      }
+
+      // Auto-lift
+      const autoTimer = setTimeout(lift, LIFT_AT_MS);
+
+      // Manual dismissal (tap, click, scroll, key, touch). Each clears the auto timer.
+      function manualLift(e) {
+        clearTimeout(autoTimer);
+        lift();
+      }
+      intro.addEventListener('click', manualLift, { once: true });
+      intro.addEventListener('touchstart', manualLift, { once: true, passive: true });
+      window.addEventListener('wheel', manualLift, { once: true, passive: true });
+      window.addEventListener('keydown', manualLift, { once: true });
+    })();
+
+    // ---- GSAP: section-heading wash-in on scroll-into-view ----
+    (function gsapChoreography() {
+      if (prefersReduced) return;
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.querySelectorAll('.ss-heading').forEach(heading => {
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 82%',
+          onEnter:    () => heading.classList.add('is-washed'),
+          onEnterBack:() => heading.classList.add('is-washed'),
+        });
+        // Init check — fire wash-in for headings already past the trigger on reload (scroll restore)
+        if (heading.getBoundingClientRect().top < window.innerHeight * 0.82) {
+          heading.classList.add('is-washed');
+        }
+      });
+    })();
   </script>
 </body>
 </html>

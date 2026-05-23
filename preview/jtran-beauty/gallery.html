@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F4ECDF">
+  <title>Gallery — J Tran Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@300;400;500;600&family=Italianno&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet"></noscript>
+  <style>
+    :root {
+      color-scheme: light only;
+      --color-bg: #F4ECDF;
+      --color-bg-warm: #F0E5D2;
+      --bg-wash: rgba(244, 236, 223, 0.94);
+      --bg-wash-soft: rgba(244, 236, 223, 0.78);
+      --bg-silk: rgba(244, 236, 223, 0.55);
+      --color-surface: #EDE2D0;
+      --color-surface-2: #E5D5BD;
+      --color-card: #FBF6EC;
+      --color-border: #D9C9B0;
+      --color-text: #3A2A20;
+      --color-text-muted: #6B5648;
+      --color-text-dim: #9A8775;
+      --color-accent: #B89456;
+      --color-accent-deep: #9A7A42;
+      --color-accent-soft: #D9B97A;
+      --color-accent-dim: rgba(184, 148, 86, 0.12);
+
+      --font-display: 'Playfair Display', 'Times New Roman', serif;
+      --font-body: 'Libre Franklin', system-ui, -apple-system, sans-serif;
+      --font-script: 'Brittany Signature', 'Italianno', cursive;
+      --font-ui: 'Libre Franklin', system-ui, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 5rem;
+      --space-xl: 8rem;
+      --space-2xl: 11rem;
+
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 18px;
+
+      --max-width: 1180px;
+      --shadow-soft: 0 4px 18px rgba(58, 42, 32, 0.04);
+      --shadow-lift: 0 10px 28px rgba(58, 42, 32, 0.07);
+      --shadow-deep: 0 16px 36px rgba(58, 42, 32, 0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background-color: var(--color-bg); min-height: 100%; }
+    body {
+      background: transparent;
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 92px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    @media (min-width: 1024px) { body { padding-bottom: 0; } }
+
+    /* ---- SILK BG (matches Concept-saiyan: blur 12px, no scale, drift) ---- */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100%;
+      z-index: -1;
+      background-image: url('assets/test5-bg-v1.webp?v=20260523a');
+      background-size: 100% auto;
+      background-position: top center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      filter: blur(12px);
+      animation: silkDriftDesktop 60s ease-in-out infinite;
+      will-change: transform;
+    }
+    @media (max-width: 768px) {
+      body::before {
+        position: fixed;
+        inset: 0;
+        height: auto;
+        background-size: cover;
+        background-position: center center;
+        filter: blur(10px);
+        animation: silkDriftMobile 50s ease-in-out infinite;
+      }
+    }
+    @keyframes silkDriftDesktop {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(-18px, -10px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+    @keyframes silkDriftMobile {
+      0%   { transform: translate3d(0, 0, 0); }
+      50%  { transform: translate3d(-12px, -8px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    /* ---- FEATHERED PILLARS ---- */
+    .pillar {
+      position: fixed; top: 0; bottom: 0; width: 160px;
+      background-color: transparent;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .pillar--left  { left: 0;  background: linear-gradient(to right, var(--color-bg) 0%, var(--color-bg) 30%, transparent 100%); }
+    .pillar--right { right: 0; background: linear-gradient(to left,  var(--color-bg) 0%, var(--color-bg) 30%, transparent 100%); }
+    @media (max-width: 1024px) { .pillar { width: 100px; } }
+    @media (max-width: 640px)  { .pillar { display: none; } }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.05; letter-spacing: 0.04em; text-transform: uppercase; }
+    p { font-family: var(--font-body); }
+    a { color: inherit; text-decoration: none; transition: color 0.2s, opacity 0.2s; }
+    a:hover { color: var(--color-accent-deep); }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+    ::selection { background: var(--color-accent-dim); color: var(--color-text); }
+
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 1.25rem; }
+    @media (min-width: 768px) { .container { padding: 0 var(--space-md); } }
+
+    /* ---- BUTTONS ---- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.95rem 1.85rem; font-family: var(--font-ui); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; border-radius: var(--radius-sm); border: 1px solid transparent; transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.25s, box-shadow 0.3s; white-space: nowrap; position: relative; overflow: hidden; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--primary { background-color: var(--color-text); color: var(--color-bg); box-shadow: 0 6px 18px rgba(58, 42, 32, 0.18); }
+    .btn--primary:hover { background-color: var(--color-accent-deep); color: var(--color-card); box-shadow: 0 14px 32px rgba(154, 122, 66, 0.32); }
+    .btn--primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.7s ease; }
+    .btn--primary:hover::before { transform: translateX(100%); }
+    .btn--outline { border-color: var(--color-text); color: var(--color-text); background: transparent; }
+    .btn--outline:hover { background-color: var(--color-text); color: var(--color-bg); }
+
+    .eyebrow { display: inline-block; font-family: var(--font-ui); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent-deep); margin-bottom: var(--space-sm); }
+
+    /* ---- SS HEADING ---- */
+    .ss-heading { text-align: center; margin-bottom: var(--space-lg); position: relative; }
+    .ss-heading__line { display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
+    .ss-heading__line::before, .ss-heading__line::after {
+      content: ''; flex: 0 0 56px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-accent) 50%, transparent);
+      background-size: 220% 100%;
+      background-position: 0 0;
+      animation: dividerShimmer 12s ease-in-out infinite;
+    }
+    .ss-heading__line::after { animation-delay: 6s; }
+    .ss-heading__display { font-family: var(--font-display); font-size: clamp(1.95rem, 4.4vw, 3rem); letter-spacing: 0.18em; color: var(--color-text); transition: letter-spacing 1s cubic-bezier(0.22, 1, 0.36, 1); }
+    .ss-heading.is-washed .ss-heading__display { letter-spacing: 0.14em; }
+    .ss-heading__script { display: block; margin-top: -0.42em; font-family: var(--font-script); font-weight: 400; font-size: clamp(2.3rem, 5.4vw, 3.7rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; line-height: 1; }
+    @keyframes dividerShimmer {
+      0%   { background-position: -120px 0; }
+      45%  { background-position: 120px 0; }
+      100% { background-position: 120px 0; }
+    }
+
+    /* ---- NAV — FLOATING CREAM CARTOUCHE (atelier) ---- */
+    .nav {
+      position: fixed;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      width: calc(100% - 32px);
+      max-width: 720px;
+      background-color: rgba(251, 246, 236, 0.74);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(217, 201, 176, 0.5);
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(58, 42, 32, 0.06);
+      transition: max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.3s ease,
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease,
+                  top 0.3s ease;
+    }
+    .nav.is-scrolled {
+      max-width: 320px;
+      background-color: rgba(251, 246, 236, 0.92);
+      box-shadow: 0 12px 32px rgba(58, 42, 32, 0.10);
+      top: 16px;
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 54px; padding: 0 1.25rem; gap: 1rem; transition: padding 0.3s ease, justify-content 0.3s ease, gap 0.3s ease; }
+    .nav.is-scrolled .nav__inner { padding: 0 1.1rem; justify-content: center; gap: 1.25rem; }
+    .nav__logo { display: flex; align-items: center; gap: 0.55rem; flex-shrink: 0; }
+    .nav__logo img { height: 28px; width: auto; transition: height 0.3s ease; }
+    .nav.is-scrolled .nav__logo img { height: 26px; }
+    .nav__brand { display: none; font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.28em; color: var(--color-text); }
+    .nav__menu { display: none; align-items: center; gap: 1.5rem; transition: opacity 0.3s ease; }
+    .nav.is-scrolled .nav__menu { display: none; }
+    .nav__link { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-text); position: relative; padding: 0.4rem 0; }
+    .nav__link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--color-accent); transition: width 0.35s ease; }
+    .nav__link:hover::after { width: 100%; }
+    .nav__link.is-current { color: var(--color-accent-deep); }
+    .nav__link.is-current::after { width: 100%; }
+    .nav__cta {
+      padding: 0.3rem 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid var(--color-accent) !important;
+      font-family: var(--font-ui) !important;
+      font-size: 0.68rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      color: var(--color-text) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.4rem !important;
+      transition: color 0.2s, border-bottom-color 0.2s, letter-spacing 0.3s !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+      flex-shrink: 0;
+    }
+    .nav__cta:hover {
+      color: var(--color-accent-deep) !important;
+      border-bottom-color: var(--color-accent-deep) !important;
+      letter-spacing: 0.26em !important;
+      transform: none !important;
+      background: transparent !important;
+    }
+    .nav__cta::before, .nav__cta::after { display: none !important; }
+    .nav__toggle { display: flex; flex-direction: column; gap: 5px; padding: 0.45rem; background: transparent; }
+    .nav__toggle span { width: 20px; height: 1px; background: var(--color-text); transition: transform 0.3s, opacity 0.3s; }
+    .nav__toggle.is-active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav__toggle.is-active span:nth-child(2) { opacity: 0; }
+    .nav__toggle.is-active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .mobile-nav { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--color-bg); padding: calc(var(--space-lg) + 56px) 1.5rem var(--space-lg); transform: translateY(-110%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); z-index: 70; display: flex; flex-direction: column; gap: 1.25rem; }
+    .mobile-nav.is-active { transform: translateY(0); }
+    .mobile-nav a { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text); padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+    .mobile-nav .btn { margin-top: var(--space-sm); }
+    @media (min-width: 1024px) {
+      .nav__menu { display: flex; }
+      .nav__toggle, .mobile-nav { display: none; }
+    }
+    @media (max-width: 1023px) {
+      .nav__cta { display: none !important; }
+      .nav { max-width: 280px; }
+      .nav.is-scrolled { max-width: 220px; }
+    }
+    /* Pull the gallery hero down so the floating cartouche doesn't crowd it */
+    .gallery-hero { padding-top: calc(var(--space-xl) + 28px); }
+
+    /* ---- GALLERY HERO ---- */
+    .gallery-hero {
+      padding: var(--space-xl) 0 var(--space-lg);
+      text-align: center;
+      position: relative;
+    }
+    .gallery-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: var(--space-md);
+      font-family: var(--font-ui);
+      font-size: 0.66rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s ease, border-color 0.25s ease, gap 0.3s ease;
+    }
+    .gallery-hero__back:hover { color: var(--color-accent-deep); border-bottom-color: var(--color-accent); gap: 0.75rem; }
+    .gallery-hero__back svg { transition: transform 0.3s ease; }
+    .gallery-hero__back:hover svg { transform: translateX(-3px); }
+    .gallery-hero__lede {
+      max-width: 56ch;
+      margin: 0 auto;
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      font-style: italic;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    .gallery-hero__hint {
+      display: block;
+      margin-top: var(--space-md);
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+
+    /* ---- MASONRY GRID (CSS columns — natural Pinterest packing, no JS lib needed) ---- */
+    .gallery-grid-wrap {
+      padding: var(--space-md) 0 var(--space-2xl);
+    }
+    .gallery-grid {
+      column-count: 1;
+      column-gap: 1.25rem;
+    }
+    @media (min-width: 600px)  { .gallery-grid { column-count: 2; column-gap: 1.4rem; } }
+    @media (min-width: 900px)  { .gallery-grid { column-count: 3; column-gap: 1.6rem; } }
+    @media (min-width: 1300px) { .gallery-grid { column-count: 4; column-gap: 1.8rem; } }
+
+    .tile {
+      break-inside: avoid;
+      margin-bottom: 1.25rem;
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: var(--color-card);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(28px);
+      will-change: transform, opacity;
+    }
+    .tile.is-revealed { opacity: 1; transform: translateY(0); }
+    .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-deep); }
+    @media (min-width: 600px) { .gallery-grid { } .tile { margin-bottom: 1.4rem; } }
+    @media (min-width: 900px) { .tile { margin-bottom: 1.6rem; } }
+    @media (min-width: 1300px) { .tile { margin-bottom: 1.8rem; } }
+
+    .tile__media {
+      width: 100%;
+      display: block;
+      position: relative;
+      background-color: var(--color-surface-2);
+      overflow: hidden;
+    }
+    /* aspect-ratio variants — drive the masonry height variation */
+    .tile--square    .tile__media { aspect-ratio: 1 / 1;   }
+    .tile--portrait  .tile__media { aspect-ratio: 4 / 5;   }
+    .tile--tall      .tile__media { aspect-ratio: 3 / 5;   }
+    .tile--landscape .tile__media { aspect-ratio: 4 / 3;   }
+    .tile--wide      .tile__media { aspect-ratio: 5 / 3;   }
+
+    /* placeholder gradient blocks — category-tinted. Swap each .tile__media for an <img> when Joanna sends real photos. */
+    .tile--cat-facial   .tile__media { background: linear-gradient(135deg, #F0E5D2 0%, #E5D5BD 100%); }
+    .tile--cat-lashes   .tile__media { background: linear-gradient(135deg, #E5D5BD 0%, #D9C9B0 100%); }
+    .tile--cat-brows    .tile__media { background: linear-gradient(135deg, #EDE2D0 0%, #D9C9B0 100%); }
+    .tile--cat-makeup   .tile__media { background: linear-gradient(135deg, #F4ECDF 0%, #E8D5B7 100%); }
+    .tile--cat-bridal   .tile__media { background: linear-gradient(135deg, #FBF6EC 0%, #EDE2D0 100%); }
+    .tile--cat-waxing   .tile__media { background: linear-gradient(135deg, #EDE2D0 0%, #C9B894 100%); }
+    .tile--cat-detail   .tile__media { background: linear-gradient(135deg, #F0E5D2 0%, #B89456 100%); opacity: 0.85; }
+
+    .tile__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(58, 42, 32, 0.18) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .tile:hover .tile__media::after { opacity: 1; }
+
+    .tile__caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.9rem 1.1rem;
+      font-family: var(--font-ui);
+      font-size: 0.66rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-card);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .tile:hover .tile__caption { opacity: 1; transform: translateY(0); }
+    .tile__caption-script {
+      font-family: var(--font-script);
+      font-size: 1.3rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--color-accent-soft);
+      line-height: 1;
+    }
+
+    /* Subtle placeholder hint — visible only on tiles when not hovering, marks them as placeholders. Remove this rule when real photos are wired in. */
+    .tile__placeholder-hint {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.85rem;
+      font-family: var(--font-ui);
+      font-size: 0.52rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      opacity: 0.55;
+      transition: opacity 0.3s ease;
+    }
+    .tile:hover .tile__placeholder-hint { opacity: 0; }
+
+    /* ---- TOUCH FALLBACK — captions visible without hover (most gallery viewers are on phones) ---- */
+    @media (hover: none) {
+      .tile__caption {
+        position: static;
+        opacity: 1;
+        transform: none;
+        background: var(--color-card);
+        color: var(--color-text);
+        padding: 0.85rem 1rem 1rem;
+        font-size: 0.7rem;
+      }
+      .tile__caption-script { color: var(--color-accent-deep); }
+      .tile__media::after { display: none; }
+      .tile__placeholder-hint { display: none; }
+    }
+
+    /* ---- GALLERY-CTA (closing moment) ---- */
+    .gallery-cta {
+      padding: var(--space-2xl) 0;
+      text-align: center;
+      background-color: rgba(246, 238, 229, 0.94);
+      position: relative;
+    }
+    .gallery-cta__flourish { width: 130px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent), transparent); margin: 0 auto var(--space-md); }
+    .gallery-cta__title { font-family: var(--font-display); font-size: clamp(2.1rem, 5.8vw, 3.4rem); letter-spacing: 0.14em; margin-bottom: 0.2em; color: var(--color-text); }
+    .gallery-cta__script { display: block; margin-top: -0.1em; margin-bottom: var(--space-md); font-family: var(--font-script); font-weight: 400; font-size: clamp(2.1rem, 5.4vw, 3rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; }
+    .gallery-cta__body { max-width: 560px; margin: 0 auto var(--space-lg); font-family: var(--font-body); font-size: 1.08rem; font-style: italic; color: var(--color-text-muted); line-height: 1.6; }
+
+    /* ---- MOBILE STICKY ---- */
+    .mobile-sticky { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 24px); max-width: 320px; padding: 0.5rem; background: rgba(58, 42, 32, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.35); border-radius: 999px; z-index: 60; box-shadow: 0 14px 40px rgba(58, 42, 32, 0.32); display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 0.4s ease, transform 0.4s ease; }
+    .mobile-sticky.is-hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(20px); }
+    .mobile-sticky .btn { padding: 0.65rem 1.5rem; font-size: 0.72rem; letter-spacing: 0.18em; background: var(--color-accent); color: var(--color-text); width: 100%; }
+    .mobile-sticky .btn:hover { background: var(--color-accent-soft); color: var(--color-text); }
+    @media (min-width: 1024px) { .mobile-sticky { display: none; } }
+
+    /* ---- FJMedia preview pill ---- */
+    .fj-preview-bar { position: fixed; bottom: 18px; right: 18px; z-index: 1000; display: inline-flex; align-items: center; gap: 4px; padding: 6px 6px 6px 12px; border-radius: 999px; background: rgba(58, 42, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(184, 148, 86, 0.45); font-family: var(--font-ui); box-shadow: 0 10px 30px rgba(58, 42, 32, 0.45); }
+    .fj-preview-eyebrow { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #B89456; padding-right: 9px; border-right: 1px solid rgba(184, 148, 86, 0.3); margin-right: 3px; white-space: nowrap; }
+    .fj-preview-link { font-size: 0.7rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; color: #E8DCC9; transition: color 0.2s ease, background 0.2s ease; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; }
+    .fj-preview-link:hover { color: #FBF6EC; }
+    @media (max-width: 1023px) { .fj-preview-bar { display: none; } }
+    @media print { .fj-preview-bar, .mobile-sticky { display: none !important; } }
+
+    /* ---- LOCATION-CHOOSER MODAL ---- */
+    .booking-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s; }
+    .booking-modal.is-open { opacity: 1; visibility: visible; }
+    .booking-modal__backdrop { position: absolute; inset: 0; background: rgba(58, 42, 32, 0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .booking-modal__panel { position: relative; width: 100%; max-width: 720px; max-height: calc(100vh - 2rem); overflow-y: auto; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem 1.5rem; box-shadow: 0 32px 80px rgba(58, 42, 32, 0.45); transform: translateY(16px) scale(0.98); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .booking-modal.is-open .booking-modal__panel { transform: translateY(0) scale(1); }
+    @media (min-width: 768px) { .booking-modal__panel { padding: 3rem 2.5rem; } }
+    .booking-modal__close { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; background: var(--color-card); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text); transition: background 0.2s, transform 0.2s; }
+    .booking-modal__close:hover { background: var(--color-text); color: var(--color-bg); transform: rotate(90deg); }
+    .booking-modal__header { text-align: center; margin-bottom: 2rem; }
+    .booking-modal__eyebrow { font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent-deep); margin-bottom: 0.5rem; display: block; }
+    .booking-modal__title { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.1rem); letter-spacing: 0.12em; color: var(--color-text); }
+    .booking-modal__title-script { display: block; margin-top: -0.15em; font-family: var(--font-script); font-weight: 400; font-size: clamp(2rem, 4vw, 2.6rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; line-height: 1; }
+    .booking-modal__divider { width: 56px; height: 1px; background: var(--color-accent); margin: 1rem auto 0; opacity: 0.6; }
+    .booking-modal__grid { display: grid; gap: 1rem; }
+    @media (min-width: 600px) { .booking-modal__grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
+    .location-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem 1.25rem; text-align: center; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; display: flex; flex-direction: column; gap: 0.85rem; }
+    .location-card:hover { border-color: var(--color-accent); box-shadow: var(--shadow-lift); transform: translateY(-3px); }
+    .location-card__pin { width: 44px; height: 44px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: var(--color-accent-dim); border-radius: 50%; color: var(--color-accent-deep); }
+    .location-card__name { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text); }
+    .location-card__addr { font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.5; flex: 1; }
+    .location-card__cta { margin-top: 0.5rem; }
+    @keyframes locationGlow {
+      0%, 100% { box-shadow: var(--shadow-lift), inset 0 0 0 0 rgba(184, 148, 86, 0); }
+      50%      { box-shadow: var(--shadow-lift), inset 0 0 24px 0 rgba(184, 148, 86, 0.10); }
+    }
+    .location-card:hover, .location-card:focus-within { animation: locationGlow 3.4s ease-in-out infinite; }
+    .booking-modal__footer { margin-top: 1.5rem; text-align: center; font-family: var(--font-body); font-style: italic; font-size: 0.92rem; color: var(--color-text-muted); }
+    body.modal-open { overflow: hidden; }
+
+    /* ---- A11Y ---- */
+    :focus-visible { outline: 2px solid var(--color-accent-deep); outline-offset: 3px; border-radius: 2px; }
+
+    /* ---- REDUCED MOTION ---- */
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none !important; }
+      .ss-heading__line::before, .ss-heading__line::after { animation: none !important; background-position: 0 0 !important; }
+      .ss-heading__display { transition: none !important; letter-spacing: 0.14em !important; }
+      .tile { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .location-card:hover, .location-card:focus-within { animation: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ EDGE PILLARS ============ -->
+  <div class="pillar pillar--left" aria-hidden="true"></div>
+  <div class="pillar pillar--right" aria-hidden="true"></div>
+
+  <!-- ============ NAV (floating cream cartouche) ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="J Tran Beauty home">
+        <img src="assets/Logo+Design/Logo-transparent.png" alt="">
+      </a>
+      <nav class="nav__menu" aria-label="Primary">
+        <a href="index.html#about" class="nav__link">About</a>
+        <a href="index.html#services" class="nav__link">Services</a>
+        <a href="gallery.html" class="nav__link is-current" aria-current="page">Gallery</a>
+        <a href="index.html#bridal" class="nav__link">Bridal</a>
+        <a href="index.html#contact" class="nav__link">Contact</a>
+      </nav>
+      <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="nav__cta js-book-trigger">Book <span aria-hidden="true">→</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true" inert>
+    <a href="index.html#about">About</a>
+    <a href="index.html#services">Services</a>
+    <a href="gallery.html" aria-current="page">Gallery</a>
+    <a href="index.html#bridal">Bridal</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary js-book-trigger">Book a Session</a>
+  </div>
+
+  <main>
+
+    <!-- ============ GALLERY HERO ============ -->
+    <section class="gallery-hero">
+      <div class="container">
+        <a href="index.html" class="gallery-hero__back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Back to J Tran Beauty</span>
+        </a>
+        <div class="ss-heading">
+          <div class="ss-heading__line"><h1 class="ss-heading__display">Gallery</h1></div>
+          <span class="ss-heading__script">Her Work</span>
+        </div>
+        <p class="gallery-hero__lede">Facials, lashes, brows, bridal. Twenty-five years of appointments.</p>
+      </div>
+    </section>
+
+    <!-- ============ MASONRY GRID ============
+         24 placeholder tiles. Aspect ratio classes: portrait / square / tall / landscape / wide
+         Category classes (tint the gradient): cat-facial / cat-lashes / cat-brows / cat-makeup / cat-bridal / cat-waxing / cat-detail
+         When Joanna sends real photos: replace each <div class="tile__media"></div> with <img src="..." alt="..."> at the same aspect ratio.
+    -->
+    <section class="gallery-grid-wrap">
+      <div class="container">
+        <div class="gallery-grid" id="galleryGrid">
+
+          <article class="tile tile--portrait tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">01 · Facial</span>
+            <div class="tile__caption"><span>Facial · JTB Intensive</span><span class="tile__caption-script">glow</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-lashes">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">02 · Lash Lift</span>
+            <div class="tile__caption"><span>Lash Lift + Tint</span><span class="tile__caption-script">lift</span></div>
+          </article>
+
+          <article class="tile tile--tall tile--cat-bridal">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">03 · Bridal</span>
+            <div class="tile__caption"><span>Bridal Makeup</span><span class="tile__caption-script">aisle</span></div>
+          </article>
+
+          <article class="tile tile--landscape tile--cat-makeup">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">04 · Makeup</span>
+            <div class="tile__caption"><span>Soft Glam · Event</span><span class="tile__caption-script">soft</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-brows">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">05 · Brows</span>
+            <div class="tile__caption"><span>Brow Wax + Tint</span><span class="tile__caption-script">shape</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">06 · Facial</span>
+            <div class="tile__caption"><span>GM Collin Collagen 90</span><span class="tile__caption-script">smooth</span></div>
+          </article>
+
+          <article class="tile tile--wide tile--cat-detail">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">07 · Studio</span>
+            <div class="tile__caption"><span>The Studio · Winnipeg</span><span class="tile__caption-script">still</span></div>
+          </article>
+
+          <article class="tile tile--tall tile--cat-makeup">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">08 · Makeup</span>
+            <div class="tile__caption"><span>Full Face · Event</span><span class="tile__caption-script">finish</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">09 · Facial</span>
+            <div class="tile__caption"><span>Yonka C20 Facial</span><span class="tile__caption-script">bright</span></div>
+          </article>
+
+          <article class="tile tile--landscape tile--cat-lashes">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">10 · Lashes</span>
+            <div class="tile__caption"><span>Soft Lash Set</span><span class="tile__caption-script">flutter</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-bridal">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">11 · Bridal</span>
+            <div class="tile__caption"><span>Bridal Trial</span><span class="tile__caption-script">trial</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-makeup">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">12 · Makeup</span>
+            <div class="tile__caption"><span>Makeup Lesson</span><span class="tile__caption-script">hands</span></div>
+          </article>
+
+          <article class="tile tile--tall tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">13 · Facial</span>
+            <div class="tile__caption"><span>Dermaplane Facial</span><span class="tile__caption-script">polish</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-brows">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">14 · Brows</span>
+            <div class="tile__caption"><span>Brow Tint</span><span class="tile__caption-script">tone</span></div>
+          </article>
+
+          <article class="tile tile--landscape tile--cat-detail">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">15 · Tools</span>
+            <div class="tile__caption"><span>Yonka Products</span><span class="tile__caption-script">ritual</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-bridal">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">16 · Bridal</span>
+            <div class="tile__caption"><span>Bridal Party · 4</span><span class="tile__caption-script">party</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-lashes">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">17 · Lashes</span>
+            <div class="tile__caption"><span>Lash Tint</span><span class="tile__caption-script">depth</span></div>
+          </article>
+
+          <article class="tile tile--wide tile--cat-makeup">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">18 · Makeup</span>
+            <div class="tile__caption"><span>Editorial · Trial</span><span class="tile__caption-script">frame</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">19 · Facial</span>
+            <div class="tile__caption"><span>Botinol Facial</span><span class="tile__caption-script">firm</span></div>
+          </article>
+
+          <article class="tile tile--tall tile--cat-bridal">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">20 · Bridal</span>
+            <div class="tile__caption"><span>Bridal Lashes</span><span class="tile__caption-script">vow</span></div>
+          </article>
+
+          <article class="tile tile--landscape tile--cat-waxing">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">21 · Waxing</span>
+            <div class="tile__caption"><span>Brow + Lip Wax</span><span class="tile__caption-script">clean</span></div>
+          </article>
+
+          <article class="tile tile--square tile--cat-detail">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">22 · Detail</span>
+            <div class="tile__caption"><span>Hands at Work</span><span class="tile__caption-script">care</span></div>
+          </article>
+
+          <article class="tile tile--portrait tile--cat-makeup">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">23 · Makeup</span>
+            <div class="tile__caption"><span>Event Makeup</span><span class="tile__caption-script">night</span></div>
+          </article>
+
+          <article class="tile tile--tall tile--cat-facial">
+            <div class="tile__media"></div>
+            <span class="tile__placeholder-hint">24 · Facial</span>
+            <div class="tile__caption"><span>Oxygenate + Detox</span><span class="tile__caption-script">breathe</span></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLOSING CTA ============ -->
+    <section class="gallery-cta">
+      <div class="container">
+        <div class="gallery-cta__flourish" aria-hidden="true"></div>
+        <h2 class="gallery-cta__title">See Something<span class="gallery-cta__script">you love?</span></h2>
+        <p class="gallery-cta__body">Each session is built around the face in front of me — your skin, your day, what you came in for. Reserve yours quietly, by appointment.</p>
+        <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary js-magnetic js-book-trigger">Book a Session</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ MOBILE STICKY ============ -->
+  <aside class="mobile-sticky" aria-label="Booking">
+    <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn js-book-trigger">Book a Session</a>
+  </aside>
+
+  <!-- ============ LOCATION-CHOOSER MODAL ============ -->
+  <div class="booking-modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" aria-hidden="true" inert>
+    <div class="booking-modal__backdrop" data-close-modal></div>
+    <div class="booking-modal__panel" role="document">
+      <button class="booking-modal__close" aria-label="Close" data-close-modal>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="booking-modal__header">
+        <span class="booking-modal__eyebrow">By Appointment</span>
+        <h2 id="bookingModalTitle" class="booking-modal__title">Choose Your<span class="booking-modal__title-script">Location</span></h2>
+        <div class="booking-modal__divider" aria-hidden="true"></div>
+      </div>
+      <div class="booking-modal__grid">
+        <article class="location-card" data-loc="winnipeg">
+          <div class="location-card__pin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <div class="location-card__name">Winnipeg</div>
+          <p class="location-card__addr">236 Stafford Avenue<br>Winnipeg, MB · R3M 1J5</p>
+          <a href="https://j-tran-beauty.square.site/s/appointments" target="_blank" rel="noopener" class="btn btn--primary location-card__cta">Book Winnipeg</a>
+        </article>
+        <article class="location-card" data-loc="carman">
+          <div class="location-card__pin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <div class="location-card__name">Carman</div>
+          <p class="location-card__addr">Carman, Manitoba<br><em style="opacity:0.7">By appointment</em></p>
+          <a href="https://birchandhoney.salonmonster.com/10/client/#/stylists/22379/services" target="_blank" rel="noopener" class="btn btn--primary location-card__cta">Request Carman</a>
+        </article>
+      </div>
+      <p class="booking-modal__footer">Each location keeps its own calendar — whichever is closer to you.</p>
+    </div>
+  </div>
+
+  <!-- ============ FJMedia preview pill ============ -->
+  <aside class="fj-preview-bar" aria-label="FJMedia preview">
+    <span class="fj-preview-eyebrow">FJMedia · Preview</span>
+    <a href="https://fjmedia.ca" target="_blank" rel="noopener" class="fj-preview-link">Built by FJMedia</a>
+  </aside>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- Booking modal ----
+    const bookingModal = document.getElementById('bookingModal');
+    let modalLastFocus = null;
+    const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const openBookingModal = () => {
+      modalLastFocus = document.activeElement;
+      bookingModal.classList.add('is-open');
+      bookingModal.setAttribute('aria-hidden', 'false');
+      bookingModal.removeAttribute('inert');
+      document.body.classList.add('modal-open');
+      modalLastFocus?.blur?.();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bookingModal.querySelector('.location-card__cta')?.focus({ preventScroll: true });
+      }));
+    };
+    const closeBookingModal = () => {
+      bookingModal.classList.remove('is-open');
+      bookingModal.setAttribute('aria-hidden', 'true');
+      bookingModal.setAttribute('inert', '');
+      document.body.classList.remove('modal-open');
+      modalLastFocus?.focus?.();
+    };
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.js-book-trigger');
+      if (!trigger || trigger.closest('.booking-modal')) return;
+      e.preventDefault();
+      openBookingModal();
+    });
+    bookingModal?.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', closeBookingModal));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && bookingModal.classList.contains('is-open')) closeBookingModal();
+      // Focus trap — cycle Tab/Shift-Tab inside modal while open
+      if (e.key === 'Tab' && bookingModal.classList.contains('is-open')) {
+        const focusables = Array.from(bookingModal.querySelectorAll(FOCUSABLE_SELECTOR))
+          .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+    });
+
+    // ---- Mobile nav toggle ----
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    navToggle?.addEventListener('click', () => {
+      const open = navToggle.classList.toggle('is-active');
+      mobileNav.classList.toggle('is-active', open);
+      navToggle.setAttribute('aria-expanded', open);
+      mobileNav.setAttribute('aria-hidden', !open);
+      if (open) mobileNav.removeAttribute('inert'); else mobileNav.setAttribute('inert', '');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navToggle.classList.remove('is-active');
+      mobileNav.classList.remove('is-active');
+      navToggle.setAttribute('aria-expanded', false);
+      mobileNav.setAttribute('aria-hidden', true);
+      mobileNav.setAttribute('inert', '');
+      document.body.style.overflow = '';
+    }));
+
+    // ---- Scroll-aware nav ----
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ---- Hide mobile-sticky when the closing CTA section is in view ----
+    const galleryCta = document.querySelector('.gallery-cta');
+    const mobileSticky = document.querySelector('.mobile-sticky');
+    if (galleryCta && mobileSticky && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        mobileSticky.classList.toggle('is-hidden', entry.isIntersecting);
+      }, { threshold: 0.3 }).observe(galleryCta);
+    }
+
+    // ---- Magnetic buttons (desktop only) ----
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.querySelectorAll('.js-magnetic').forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          el.style.transform = `translate(${x * 0.18}px, ${y * 0.22}px) translateY(-2px)`;
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      });
+    }
+
+    // ---- GSAP: ss-heading wash-in + tile stagger reveal ----
+    (function gsapChoreography() {
+      if (prefersReduced) {
+        document.querySelectorAll('.tile').forEach(el => el.classList.add('is-revealed'));
+        return;
+      }
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        document.querySelectorAll('.tile').forEach(el => el.classList.add('is-revealed'));
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Section heading wash-in
+      document.querySelectorAll('.ss-heading').forEach(heading => {
+        ScrollTrigger.create({
+          trigger: heading,
+          start: 'top 82%',
+          onEnter:    () => heading.classList.add('is-washed'),
+          onEnterBack:() => heading.classList.add('is-washed'),
+        });
+        if (heading.getBoundingClientRect().top < window.innerHeight * 0.82) {
+          heading.classList.add('is-washed');
+        }
+      });
+
+      // Tile stagger reveal — small batches so the grid feels alive without all 24 firing at once
+      ScrollTrigger.batch('.tile', {
+        start: 'top 88%',
+        onEnter: (batch) => {
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            stagger: 0.08,
+            overwrite: 'auto',
+            onStart: () => batch.forEach(el => el.classList.add('is-revealed')),
+          });
+        },
+        // Defensive: hand off any tiles already above the fold on load
+        onRefresh: () => {
+          document.querySelectorAll('.tile').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight && !el.classList.contains('is-revealed')) {
+              el.classList.add('is-revealed');
+            }
+          });
+        },
+      });
+    })();
+
+    // ---- Fallback safety: reveal any tile still hidden after 2s (defends against ScrollTrigger init quirks) ----
+    setTimeout(() => {
+      document.querySelectorAll('.tile:not(.is-revealed)').forEach(el => el.classList.add('is-revealed'));
+    }, 2000);
+  </script>
+</body>
+</html>
