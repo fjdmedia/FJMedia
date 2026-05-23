@@ -57,20 +57,7 @@
     html {
       scroll-behavior: smooth;
       background-color: var(--color-bg);
-      background-image: url('assets/silk-bg-v2.webp?v=20260516b');
-      background-size: 100% auto;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
       min-height: 100%;
-    }
-    /* Mobile silk fix: at narrow viewports, the 100%-width-auto scaling leaves silk covering only ~19% of the (very tall) mobile page. Switch to fill-viewport-always so the silk fabric reads across the whole scroll. */
-    @media (max-width: 768px) {
-      html {
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center center;
-      }
     }
     body {
       background: transparent;
@@ -81,6 +68,35 @@
       -webkit-font-smoothing: antialiased;
       padding-bottom: 92px;
       overflow-x: hidden;
+      position: relative;
+    }
+    /* ============================================================
+       Animated silk — moved from html background to body::before
+       pseudo so we can transform it. Desktop: absolute, body-height,
+       scrolls with page (preserves the "panning fabric" feel).
+       Mobile: fixed + cover (matches previous static behavior).
+       Both run a slow drift via translate3d + scale (GPU only).
+       ============================================================ */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100%;
+      z-index: -1;
+      background-image: url('assets/test5-bg-v1.webp?v=20260523a');
+      background-size: 100% auto;
+      background-position: top center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+    @media (max-width: 768px) {
+      body::before {
+        position: fixed;
+        inset: 0;
+        height: auto;
+        background-size: cover;
+        background-position: center center;
+      }
     }
     @media (min-width: 1024px) { body { padding-bottom: 0; } }
 
@@ -126,12 +142,35 @@
     .ss-heading__dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); margin: 0 0.5rem; vertical-align: middle; opacity: 0.7; }
 
     /* ---- SECTION DIVIDERS (airy hairlines, no color bands) ---- */
-    .bridge { height: 1px; width: 60%; max-width: 280px; margin: 0 auto; background: linear-gradient(90deg, transparent, rgba(184, 148, 86, 0.3), transparent); pointer-events: none; }
-    .bridge--cream-to-warm, .bridge--warm-to-cream, .bridge--cream-to-deep, .bridge--deep-to-cream { background: linear-gradient(90deg, transparent, rgba(184, 148, 86, 0.3), transparent); height: 1px; }
+    /* Bridges removed 2026-05-23 — horizontal section dividers were drawing the eye toward any
+       silk seams. Sections now blend via wash-color contrast alone. */
+    .bridge { display: none; }
+
+    /* ============================================================
+       EDGE PILLARS — solid cream side panels framing the page.
+       Fixed-positioned at viewport edges, full height. They cover
+       the silk at the edges but sit BELOW main content (since
+       content lives inside .container max-width:1180px which is
+       narrower than any viewport where pillars are visible).
+       Hidden on phones — page is already edge-to-edge there.
+       ============================================================ */
+    .pillar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 48px;
+      background-color: var(--color-bg);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .pillar--left  { left: 0;  box-shadow: 8px 0 24px -16px rgba(58, 42, 32, 0.18); }
+    .pillar--right { right: 0; box-shadow: -8px 0 24px -16px rgba(58, 42, 32, 0.18); }
+    @media (max-width: 1024px) { .pillar { width: 28px; } }
+    @media (max-width: 640px)  { .pillar { display: none; } }
 
     /* ---- NAV ---- */
-    .nav { position: sticky; top: 0; z-index: 80; background-color: rgba(244, 236, 223, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.3s, background-color 0.3s, padding 0.3s; }
-    .nav.is-scrolled { border-bottom-color: var(--color-border); background-color: rgba(244, 236, 223, 0.96); box-shadow: 0 4px 18px rgba(58, 42, 32, 0.04); }
+    .nav { position: sticky; top: 0; z-index: 80; background-color: rgba(246, 238, 229, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.3s, background-color 0.3s, padding 0.3s; }
+    .nav.is-scrolled { border-bottom-color: var(--color-border); background-color: rgba(246, 238, 229, 0.96); box-shadow: 0 4px 18px rgba(58, 42, 32, 0.04); }
     .nav__inner { display: flex; justify-content: space-between; align-items: center; height: 76px; transition: height 0.3s; }
     .nav.is-scrolled .nav__inner { height: 64px; }
     .nav__logo { display: flex; align-items: center; gap: 0.6rem; }
@@ -376,7 +415,7 @@
     .bf-success { padding: 1rem 1.25rem; background-color: rgba(184, 148, 86, 0.12); border: 1px solid rgba(184, 148, 86, 0.32); border-radius: var(--radius-sm); font-family: var(--font-body); font-style: italic; color: var(--color-text); text-align: center; }
 
     /* ---- CONTACT ---- */
-    .contact { padding: var(--space-2xl) 0; background-color: var(--bg-wash); }
+    .contact { padding: var(--space-2xl) 0; background-color: rgba(246, 238, 229, 0.94); }
     .contact__grid { display: grid; gap: var(--space-lg); }
     .contact__info { display: grid; gap: 1.85rem; }
     .contact-block { padding-bottom: 1.4rem; border-bottom: 1px solid var(--color-border); }
@@ -395,7 +434,7 @@
     @media (min-width: 900px) { .contact__grid { grid-template-columns: 1fr 1fr; gap: var(--space-2xl); } }
 
     /* ---- THANK YOU ---- */
-    .thank-you { padding: var(--space-2xl) 0; text-align: center; position: relative; background-color: var(--bg-wash); }
+    .thank-you { padding: var(--space-2xl) 0; text-align: center; position: relative; background-color: rgba(246, 238, 229, 0.94); }
     .thank-you__flourish { width: 130px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-accent), transparent); margin: 0 auto var(--space-md); }
     .thank-you__title { font-size: clamp(2.1rem, 5.8vw, 3.8rem); letter-spacing: 0.14em; margin-bottom: 0.2em; }
     .thank-you__script { display: block; margin-top: -0.1em; margin-bottom: var(--space-md); font-family: var(--font-script); font-weight: 400; font-size: clamp(2.1rem, 5.4vw, 3.4rem); color: var(--color-accent-deep); text-transform: none; letter-spacing: 0; }
@@ -403,7 +442,7 @@
     .thank-you__sig { display: block; margin-bottom: var(--space-lg); font-family: var(--font-script); font-size: 1.85rem; color: var(--color-accent-deep); }
 
     /* ---- FOOTER ---- */
-    .footer { padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--color-border); text-align: center; background-color: var(--bg-wash); }
+    .footer { padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--color-border); text-align: center; background-color: rgba(246, 238, 229, 0.94); }
     .footer__logo { height: 36px; margin: 0 auto var(--space-md); }
     .footer__nav { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem; margin-bottom: var(--space-sm); font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; }
     .footer__nav a { position: relative; padding-bottom: 2px; }
@@ -481,6 +520,10 @@
   </style>
 </head>
 <body>
+
+  <!-- ============ EDGE PILLARS (cream side panels framing the page) ============ -->
+  <div class="pillar pillar--left" aria-hidden="true"></div>
+  <div class="pillar pillar--right" aria-hidden="true"></div>
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
