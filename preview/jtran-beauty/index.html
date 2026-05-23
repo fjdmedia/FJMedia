@@ -642,10 +642,12 @@
     .atelier-intro.is-lifting { transform: translateY(-100%); opacity: 0; pointer-events: none; }
     .atelier-intro.is-gone    { display: none; }
     .atelier-intro__mark {
-      font-family: var(--font-script);
-      font-size: clamp(3.2rem, 9vw, 5.6rem);
-      color: var(--color-accent-deep);
-      line-height: 1;
+      width: auto;
+      height: auto;
+      max-width: clamp(180px, 28vw, 320px);
+      max-height: clamp(140px, 22vh, 220px);
+      object-fit: contain;
+      display: block;
       opacity: 0;
       transform: translateY(14px);
       transition: opacity 0.85s ease 0.15s, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
@@ -770,7 +772,7 @@
 
   <!-- ============ ATELIER INTRO (first visit only, sessionStorage-gated) ============ -->
   <div class="atelier-intro" id="atelierIntro" role="dialog" aria-label="Welcome">
-    <span class="atelier-intro__mark">J Tran Beauty</span>
+    <img class="atelier-intro__mark" src="assets/Logo+Design/Logo-transparent.png" alt="J Tran Beauty">
     <span class="atelier-intro__sub">Esthetician · Winnipeg + Carman</span>
     <div class="atelier-intro__hair" aria-hidden="true"></div>
     <span class="atelier-intro__skip">Tap or scroll to enter</span>
