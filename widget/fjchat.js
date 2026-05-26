@@ -14,7 +14,7 @@
  *   <script src="https://fjmedia.ca/widget/fjchat.js"
  *     data-api-key="sk-ant-..."
  *     data-business="FJMedia"
- *     data-context="FJMedia builds custom websites for Winnipeg businesses in 48 hours..."
+ *     data-context="FJMedia builds custom websites for Winnipeg businesses in 72 hours..."
  *     data-accent="#c9a84c">
  *   </script>
  */
