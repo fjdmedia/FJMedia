@@ -24,7 +24,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --navy: #0b1120; --navy2: #111827; --navy3: #1e293b;
-    --gold: #c9a84c; --gold-light: #e8c96d;
+    --gold: #2EE6A6; --gold-light: #6EE7B7;
     --text: #e2e8f0; --muted: #6b7280; --border: rgba(255,255,255,.08);
     --green: #22c55e; --red: #ef4444;
   }
@@ -50,7 +50,7 @@
     font-size: 14px; font-family: inherit; outline: none;
     transition: border-color .2s; margin-bottom: 12px; text-align: center; letter-spacing: 3px;
   }
-  .lock-input:focus { border-color: rgba(201,168,76,.5); }
+  .lock-input:focus { border-color: rgba(46,230,166,.5); }
   .lock-btn {
     width: 100%; padding: 12px; border-radius: 10px; border: none;
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
@@ -83,7 +83,7 @@
     padding: 8px 14px; color: var(--text); font-size: 13px; font-family: inherit;
     outline: none; cursor: pointer; min-width: 180px;
   }
-  .client-select:focus { border-color: rgba(201,168,76,.45); }
+  .client-select:focus { border-color: rgba(46,230,166,.45); }
   .client-select option { background: var(--navy2); }
 
   .lock-out { background: none; border: 1px solid var(--border); color: var(--muted); padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: inherit; transition: color .2s; }
@@ -100,7 +100,7 @@
     padding: 6px 14px; border-radius: 8px; font-size: 12px; cursor: pointer;
     font-family: inherit; transition: all .2s;
   }
-  .dr-btn.on { background: var(--navy3); color: var(--text); border-color: rgba(201,168,76,.3); }
+  .dr-btn.on { background: var(--navy3); color: var(--text); border-color: rgba(46,230,166,.3); }
 
   /* KPI cards */
   .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
@@ -174,7 +174,7 @@
 
   /* Setup banner */
   .setup-banner {
-    display: none; background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.25);
+    display: none; background: rgba(46,230,166,.08); border: 1px solid rgba(46,230,166,.25);
     border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; color: var(--gold);
   }
   .setup-banner.on { display: block; }

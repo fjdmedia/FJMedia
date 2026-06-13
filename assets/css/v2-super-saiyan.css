@@ -7,7 +7,7 @@
 /* ── Italic accent (replaces text-gradient on hero italic) ── */
 .ss-italic-accent {
   font-style: italic;
-  color: #C9A84C;
+  color: #2EE6A6;
   font-weight: 600;
   position: relative;
   display: inline-block;
@@ -19,8 +19,8 @@
   right: 4%;
   bottom: 0.02em;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #C9A84C 12%, #C9A84C 88%, transparent);
-  box-shadow: 0 0 18px rgba(201,168,76,0.45);
+  background: linear-gradient(90deg, transparent, #2EE6A6 12%, #2EE6A6 88%, transparent);
+  box-shadow: 0 0 18px rgba(46,230,166,0.45);
   transform: scaleX(0);
   transform-origin: left center;
   animation: ssDrawUnderline 0.9s cubic-bezier(.22,.92,.4,1) 1.55s forwards;
@@ -56,9 +56,9 @@ em, i, .italic { font-feature-settings: "onum" 1; }
   will-change: border-color;
 }
 .info-bento:hover {
-  border-color: rgba(201,168,76,0.32);
+  border-color: rgba(46,230,166,0.32);
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.12),
+    0 0 0 1px rgba(46,230,166,0.12),
     0 12px 32px -16px rgba(7,21,32,0.65);
   transform: translateY(-1px);
 }
@@ -66,17 +66,17 @@ em, i, .italic { font-feature-settings: "onum" 1; }
 
 a.glass-panel:hover,
 .glass-panel.glow-card:hover {
-  border-color: rgba(201,168,76,0.28) !important;
+  border-color: rgba(46,230,166,0.28) !important;
   transform: translateY(-1px);
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.10),
+    0 0 0 1px rgba(46,230,166,0.10),
     0 18px 48px -22px rgba(7,21,32,0.7);
 }
 
 /* ── Process step active state ── */
 .process-step.is-active .step-card {
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.18),
+    0 0 0 1px rgba(46,230,166,0.18),
     0 22px 60px -28px rgba(0,0,0,0.55);
 }
 
@@ -101,7 +101,7 @@ a.glass-panel:hover,
   position: absolute;
   top: 0; left: 0;
   width: 80px; height: 1px;
-  background: linear-gradient(90deg, #C9A84C, transparent);
+  background: linear-gradient(90deg, #2EE6A6, transparent);
   opacity: 0.85;
 }
 
@@ -124,8 +124,8 @@ a.glass-panel:hover,
 }
 
 /* ── Selection color refined ── */
-::selection { background: #C9A84C; color: #071520; }
-::-moz-selection { background: #C9A84C; color: #071520; }
+::selection { background: #2EE6A6; color: #071520; }
+::-moz-selection { background: #2EE6A6; color: #071520; }
 
 
 /* ═════════════════════════════════════════════════════════════════
@@ -174,28 +174,28 @@ main > section:first-of-type h1.hero-headline { font-size: inherit; }
   position: absolute;
   width: 14px;
   height: 14px;
-  border-color: rgba(201,168,76,0.45);
+  border-color: rgba(46,230,166,0.45);
   pointer-events: none;
   transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
 }
 .glass-panel::before {
   top: -1px; left: -1px;
-  border-top: 1px solid rgba(201,168,76,0.45);
-  border-left: 1px solid rgba(201,168,76,0.45);
+  border-top: 1px solid rgba(46,230,166,0.45);
+  border-left: 1px solid rgba(46,230,166,0.45);
 }
 .glass-panel::after {
   bottom: -1px; right: -1px;
-  border-bottom: 1px solid rgba(201,168,76,0.45);
-  border-right: 1px solid rgba(201,168,76,0.45);
+  border-bottom: 1px solid rgba(46,230,166,0.45);
+  border-right: 1px solid rgba(46,230,166,0.45);
 }
 .glass-panel:hover::before,
 .glass-panel:hover::after {
   width: 22px;
   height: 22px;
-  border-top-color: #C9A84C;
-  border-left-color: #C9A84C;
-  border-bottom-color: #C9A84C;
-  border-right-color: #C9A84C;
+  border-top-color: #2EE6A6;
+  border-left-color: #2EE6A6;
+  border-bottom-color: #2EE6A6;
+  border-right-color: #2EE6A6;
 }
 /* Don't break sub-panels w/ existing ::before/::after */
 .myth-card.glass-panel::before, .myth-card.glass-panel::after,
@@ -211,19 +211,19 @@ nav.glass-panel::before, nav.glass-panel::after,
   top: 0; left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
   width: 10px; height: 10px;
-  background: #C9A84C;
-  box-shadow: 0 0 24px rgba(201,168,76,0.4);
+  background: #2EE6A6;
+  box-shadow: 0 0 24px rgba(46,230,166,0.4);
   z-index: 2;
 }
 .fjm-bridge--top {
-  border-top: 1px solid rgba(201,168,76,0.18) !important;
+  border-top: 1px solid rgba(46,230,166,0.18) !important;
 }
 
 /* ── Process timeline gold connector glow ── */
 #process .relative.before\:absolute::before,
 #process [class*="before:bg-gradient-to-b"]::before {
-  background: linear-gradient(180deg, #C9A84C 0%, rgba(201,168,76,0.22) 60%, transparent 100%) !important;
-  box-shadow: 0 0 18px rgba(201,168,76,0.25);
+  background: linear-gradient(180deg, #2EE6A6 0%, rgba(46,230,166,0.22) 60%, transparent 100%) !important;
+  box-shadow: 0 0 18px rgba(46,230,166,0.25);
   width: 2px !important;
 }
 
@@ -245,7 +245,7 @@ nav.glass-panel::before, nav.glass-panel::after,
 .info-bento::after {
   width: 36px !important;
   height: 2px !important;
-  background: linear-gradient(90deg, #C9A84C, rgba(201,168,76,0.2)) !important;
+  background: linear-gradient(90deg, #2EE6A6, rgba(46,230,166,0.2)) !important;
 }
 
 /* ── Pricing tab labels louder ── */
@@ -254,9 +254,9 @@ nav.glass-panel::before, nav.glass-panel::after,
 /* ── Pricing card glow ── */
 .tab-content > div.glass-panel {
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.10),
+    0 0 0 1px rgba(46,230,166,0.10),
     inset 0 1px 0 rgba(255,255,255,0.04),
-    0 30px 80px -40px rgba(201,168,76,0.18);
+    0 30px 80px -40px rgba(46,230,166,0.18);
 }
 .tab-content .text-brand-gold.font-display.font-bold.text-3xl {
   font-size: 56px !important;
@@ -266,7 +266,7 @@ nav.glass-panel::before, nav.glass-panel::after,
 /* ── Booking pill scarcity ── */
 .glass-panel.border-brand-gold\/30,
 .border-brand-gold\/30 {
-  background: linear-gradient(135deg, rgba(201,168,76,0.10), rgba(201,168,76,0.02)) !important;
+  background: linear-gradient(135deg, rgba(46,230,166,0.10), rgba(46,230,166,0.02)) !important;
 }
 
 /* ── Section-label gold dash ── */
@@ -281,7 +281,7 @@ nav.glass-panel::before, nav.glass-panel::after,
   position: absolute;
   left: 0; top: 50%;
   width: 24px; height: 1px;
-  background: #C9A84C;
+  background: #2EE6A6;
   transform: translateY(-50%);
 }
 
@@ -293,14 +293,14 @@ nav.glass-panel::before, nav.glass-panel::after,
 }
 .myth-card:hover {
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.22),
-    0 22px 56px -22px rgba(201,168,76,0.18),
+    0 0 0 1px rgba(46,230,166,0.22),
+    0 22px 56px -22px rgba(46,230,166,0.18),
     0 22px 56px -28px rgba(0,0,0,0.55) !important;
 }
 
 /* ── Audit gold breakout sheen ── */
 section .bg-brand-gold {
-  background: linear-gradient(135deg, #C9A84C 0%, #d8b86a 50%, #C9A84C 100%) !important;
+  background: linear-gradient(135deg, #2EE6A6 0%, #6EE7B7 50%, #2EE6A6 100%) !important;
 }
 
 /* ── Footer wordmark scale ── */
@@ -334,14 +334,14 @@ footer .text-white.font-display.font-bold.text-lg {
   position: relative;
 }
 #faq details:hover {
-  border-color: rgba(201,168,76,0.22);
-  box-shadow: 0 8px 32px -16px rgba(201,168,76,0.18);
+  border-color: rgba(46,230,166,0.22);
+  box-shadow: 0 8px 32px -16px rgba(46,230,166,0.18);
 }
 #faq details[open] {
-  border-color: rgba(201,168,76,0.35);
+  border-color: rgba(46,230,166,0.35);
   box-shadow:
-    0 0 0 1px rgba(201,168,76,0.15),
-    0 18px 48px -22px rgba(201,168,76,0.22);
+    0 0 0 1px rgba(46,230,166,0.15),
+    0 18px 48px -22px rgba(46,230,166,0.22);
 }
 #faq details[open]::before {
   content: '';
@@ -349,7 +349,7 @@ footer .text-white.font-display.font-bold.text-lg {
   top: 0; left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #C9A84C 40%, #C9A84C 60%, transparent);
+  background: linear-gradient(90deg, transparent, #2EE6A6 40%, #2EE6A6 60%, transparent);
   opacity: 0.85;
   z-index: 1;
 }
@@ -357,8 +357,8 @@ footer .text-white.font-display.font-bold.text-lg {
   position: relative;
   transition: background 0.3s ease;
 }
-#faq summary:hover { background: rgba(201,168,76,0.04); }
-#faq details[open] summary { background: rgba(201,168,76,0.05); }
+#faq summary:hover { background: rgba(46,230,166,0.04); }
+#faq details[open] summary { background: rgba(46,230,166,0.05); }
 
 /* The chevron rotation already exists; sharpen the curve */
 #faq summary svg.ph-icon {

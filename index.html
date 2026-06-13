@@ -1,7 +1,7 @@
 ﻿<!--
   aesthetic_dna: Dark Editorial High-Tech. Deep spatial gradients, glassmorphic brutalism, and severe typographic contrast. 
   ui_paradigm: Multi-layered architectural single-page application. Features a sticky macro-shell with expansive, hidden micro-environments (full-screen case study modals) triggered by purely CSS-driven interactions.
-  palette: Deep Navy (#071520), Midnight Card (#0D1F3C), Gold/Brass Accent (#C9A84C), Cream Text (#EDEAE5).
+  palette: Deep Navy (#071520), Midnight Card (#0D1F3C), Gold/Brass Accent (#2EE6A6), Cream Text (#EDEAE5).
 -->
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -18,13 +18,13 @@
     <meta property="og:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 72 hours. Free until you love it." />
     <meta property="og:url" content="https://fjmedia.ca" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://fjmedia.ca/og-preview.png" />
+    <meta property="og:image" content="https://fjmedia.ca/og-preview-emerald.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Custom Web Design Winnipeg | 72-Hour Sites | FJMedia" />
     <meta name="twitter:description" content="No Wix. No Shopify. No templates. Custom-built websites for Winnipeg, shipped in 72 hours. Free until you love it." />
-    <meta name="twitter:image" content="https://fjmedia.ca/og-preview.png" />
+    <meta name="twitter:image" content="https://fjmedia.ca/og-preview-emerald.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-emerald.png" />
     <link rel="canonical" href="https://fjmedia.ca/" />
     <meta name="geo.region" content="CA-MB" />
     <meta name="geo.placename" content="Winnipeg" />
@@ -36,8 +36,8 @@
       "@type": "ProfessionalService",
       "name": "FJMedia",
       "url": "https://fjmedia.ca",
-      "logo": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
-      "image": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-dark.png",
+      "logo": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-emerald.png",
+      "image": "https://fjmedia.ca/Ads/Logo/main/fjmedia-horizontal-emerald.png",
       "description": "Custom websites for Winnipeg businesses — no Wix, no Shopify, no templates. Built in 72 hours, $0 upfront. Free until you love it.",
       "founder": { "@type": "Person", "name": "James Diaz" },
       "address": { "@type": "PostalAddress", "addressLocality": "Winnipeg", "addressRegion": "MB", "addressCountry": "CA" },
@@ -169,7 +169,7 @@
         /* Hero h1 font so LCP text renders immediately with fallback */
         h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;}
         /* Text gradient for the hero italic span */
-        .text-gradient{background:linear-gradient(135deg,#FFF 0%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .text-gradient{background:linear-gradient(135deg,#FFF 0%,#2EE6A6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         /* Prevent layout shift on fixed background layer */
         .fixed{position:fixed;}
         .relative{position:relative;}
@@ -199,7 +199,7 @@
             border: 1px solid #071520;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #C9A84C;
+            background: #2EE6A6;
         }
 
         .bg-grid {
@@ -213,7 +213,7 @@
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #FFF 0%, #C9A84C 100%);
+            background: linear-gradient(135deg, #FFF 0%, #2EE6A6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -253,7 +253,7 @@
             inset: 0;
             border-radius: inherit;
             padding: 1px;
-            background: linear-gradient(to bottom, rgba(201, 168, 76, 0.4), transparent);
+            background: linear-gradient(to bottom, rgba(46,230,166, 0.4), transparent);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -276,7 +276,7 @@
             position: absolute;
             top: 0; left: 16px;
             width: 28px; height: 1px;
-            background: #C9A84C;
+            background: #2EE6A6;
         }
 
         /* Process timeline — scroll-driven states */
@@ -284,20 +284,20 @@
             transition: background-color 0.45s ease, border-color 0.45s ease, color 0.45s ease, box-shadow 0.45s ease;
         }
         .process-step.is-visited .step-marker {
-            border-color: rgba(201,168,76,0.55);
-            color: #C9A84C;
+            border-color: rgba(46,230,166,0.55);
+            color: #2EE6A6;
         }
         .process-step.is-active .step-marker {
-            background: #C9A84C;
+            background: #2EE6A6;
             color: #071520;
-            border-color: #C9A84C;
-            box-shadow: 0 0 0 6px rgba(201,168,76,0.12), 0 0 28px rgba(201,168,76,0.28);
+            border-color: #2EE6A6;
+            box-shadow: 0 0 0 6px rgba(46,230,166,0.12), 0 0 28px rgba(46,230,166,0.28);
         }
         .process-step .step-card {
             transition: border-color 0.45s ease, transform 0.45s ease;
         }
         .process-step.is-active .step-card {
-            border-color: rgba(201,168,76,0.32);
+            border-color: rgba(46,230,166,0.32);
         }
 
         /* Packages tabs — make clickability obvious */
@@ -340,13 +340,13 @@
         #tab-ownmarket:checked ~ .pkg-tabs label[for="tab-ownmarket"] {
             background: #0D1F3C;
             color: #fff;
-            border-color: rgba(201,168,76,0.35);
-            box-shadow: 0 10px 30px -12px rgba(201,168,76,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+            border-color: rgba(46,230,166,0.35);
+            box-shadow: 0 10px 30px -12px rgba(46,230,166,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
         }
         #tab-golive:checked ~ .pkg-tabs label[for="tab-golive"] .pkg-tab-sub,
         #tab-getfound:checked ~ .pkg-tabs label[for="tab-getfound"] .pkg-tab-sub,
         #tab-ownmarket:checked ~ .pkg-tabs label[for="tab-ownmarket"] .pkg-tab-sub {
-            color: #C9A84C;
+            color: #2EE6A6;
             opacity: 1;
         }
 
@@ -431,7 +431,7 @@
             <a href="/case-studies" class="hover:text-brand-gold transition-colors">Case Studies</a>
         </div>
         <div class="flex items-center gap-4">
-            <a href="#contact" class="bg-white text-brand-bg px-5 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(201,168,76,0.3)] text-sm">
+            <a href="#contact" class="bg-white text-brand-bg px-5 py-2.5 rounded-md font-semibold hover:bg-brand-gold transition-colors shadow-[0_0_15px_rgba(46,230,166,0.3)] text-sm">
                 Book a Call
             </a>
             <label for="mobile-nav-toggle" class="lg:hidden flex flex-col justify-center items-center w-10 h-10 cursor-pointer z-50" aria-label="Toggle navigation menu">
@@ -492,11 +492,11 @@
                     Custom websites for Winnipeg businesses. <br>
                     <span class="text-white font-medium">No Wix. No Shopify. No templates.</span>
                 </p>
-                <div class="scarcity-badge hero-pop hero-delay-4 inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(201,168,76,0.15)]">
+                <div class="scarcity-badge hero-pop hero-delay-4 inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(46,230,166,0.15)]">
                     <div class="flex items-center gap-4 px-4 py-2.5 border-r border-brand-gold/20">
                         <span class="relative flex w-2.5 h-2.5" aria-hidden="true">
                             <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-75 animate-ping"></span>
-                            <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(201,168,76,0.9)]"></span>
+                            <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(46,230,166,0.9)]"></span>
                         </span>
                         <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-brand-gold">Booking</span>
                     </div>
@@ -605,7 +605,7 @@
                 </div>
 
                 <div class="pt-8">
-                    <a href="#contact" class="inline-block bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all shadow-[0_0_30px_rgba(201,168,76,0.2)]">
+                    <a href="#contact" class="inline-block bg-brand-gold text-brand-bg px-8 py-4 rounded-md font-bold hover:bg-white transition-all shadow-[0_0_30px_rgba(46,230,166,0.2)]">
                         Book a Call — See Your Site in 72 Hours
                     </a>
                 </div>
@@ -892,11 +892,11 @@
                 <div class="text-brand-gold text-xs font-bold tracking-[0.2em] uppercase mb-4">Where you're at</div>
                 <h2 class="font-display font-bold text-4xl text-white">Three stages. <span class="italic text-brand-textMuted font-normal">One direction — forward.</span></h2>
                 <p class="text-brand-textMuted mt-4">Where your business is at right now decides what we build first. The full pricing for each stage lives on <a href="/services" class="text-brand-gold hover:text-white underline underline-offset-4 decoration-brand-gold/40">the Services page</a>.</p>
-                <div class="mt-6 inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(201,168,76,0.15)]">
+                <div class="mt-6 inline-flex items-stretch gap-0 rounded-lg overflow-hidden border border-brand-gold/40 bg-gradient-to-r from-brand-gold/10 via-brand-gold/5 to-transparent backdrop-blur-sm shadow-[0_0_24px_rgba(46,230,166,0.15)]">
                     <div class="flex items-center gap-4 px-4 py-2.5 border-r border-brand-gold/20">
                         <span class="relative flex w-2.5 h-2.5" aria-hidden="true">
                             <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-75 animate-ping"></span>
-                            <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(201,168,76,0.9)]"></span>
+                            <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(46,230,166,0.9)]"></span>
                         </span>
                         <span class="text-[10px] font-bold tracking-[0.22em] uppercase text-brand-gold">Booking</span>
                     </div>
@@ -1079,7 +1079,7 @@
         <style>
             .myth-card{border:1px solid rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .35s cubic-bezier(.4,0,.2,1);visibility:hidden;}
             .myth-card.in-view{visibility:visible;}
-            .myth-card:hover{border-color:rgba(201,168,76,0.3);box-shadow:0 4px 40px rgba(201,168,76,0.08),0 0 0 1px rgba(201,168,76,0.1);transform:translateY(-4px);}
+            .myth-card:hover{border-color:rgba(46,230,166,0.3);box-shadow:0 4px 40px rgba(46,230,166,0.08),0 0 0 1px rgba(46,230,166,0.1);transform:translateY(-4px);}
             .myth-chrome{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#0d1a24;border-bottom:1px solid rgba(255,255,255,0.04);}
             .chrome-dots{display:flex;gap:6px;}
             .chrome-dot{width:8px;height:8px;border-radius:50%;opacity:0;transform:scale(0);}
@@ -1088,15 +1088,15 @@
             .chrome-dot.d-max{background:#28c840;}
             .chrome-url{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);border-radius:6px;padding:4px 12px;flex:1;max-width:280px;}
             .chrome-url span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.02em;}
-            .chrome-url i{color:rgba(201,168,76,0.4);font-size:10px;}
+            .chrome-url i{color:rgba(46,230,166,0.4);font-size:10px;}
             .myth-body{background:#0a1219;padding:20px 24px 12px;}
             .myth-text{position:relative;display:inline;}
             .myth-text::after{content:'';position:absolute;left:0;top:50%;width:0;height:1.5px;background:rgba(255,255,255,0.35);}
             .myth-text.struck::after{width:100%;transition:width .7s cubic-bezier(.4,0,.2,1);}
             .reality-zone{padding:16px 24px 24px;position:relative;}
-            .reality-zone::before{content:'';position:absolute;inset:0;background:rgba(201,168,76,0.03);}
+            .reality-zone::before{content:'';position:absolute;inset:0;background:rgba(46,230,166,0.03);}
             .reality-inner{position:relative;z-index:1;}
-            .gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.25) 20%,rgba(201,168,76,0.25) 80%,transparent);margin:0;}
+            .gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(46,230,166,0.25) 20%,rgba(46,230,166,0.25) 80%,transparent);margin:0;}
         </style>
 
         <section id="myths" class="py-24 border-t border-white/5">
@@ -1378,7 +1378,7 @@
                             <div style="display:flex;flex-direction:column;gap:28px;">
 
                                 <div style="display:flex;align-items:flex-start;gap:12px;">
-                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#2EE6A6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                         <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">1</span>
                                     </div>
                                     <div style="padding-top:4px;">
@@ -1388,7 +1388,7 @@
                                 </div>
 
                                 <div style="display:flex;align-items:flex-start;gap:12px;">
-                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#2EE6A6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                         <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">2</span>
                                     </div>
                                     <div style="padding-top:4px;">
@@ -1398,7 +1398,7 @@
                                 </div>
 
                                 <div style="display:flex;align-items:flex-start;gap:12px;">
-                                    <div style="width:36px;height:36px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <div style="width:36px;height:36px;border-radius:50%;background:#2EE6A6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                         <span style="color:#071520;font-size:14px;font-weight:700;font-family:monospace;">3</span>
                                     </div>
                                     <div style="padding-top:4px;">
@@ -1453,11 +1453,11 @@
                                     style="height:120px;border-radius:4px;width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);padding:12px 16px;color:#fff;font-size:14px;outline:none;resize:none;box-sizing:border-box;"
                                     class="placeholder-gray-500 focus:border-brand-gold transition-colors"></textarea>
                                 <button type="submit" id="submitBtn"
-                                    style="height:52px;font-size:16px;font-weight:600;border-radius:6px;width:100%;background:#C9A84C;color:#071520;border:none;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s;"
-                                    onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#C9A84C'">
+                                    style="height:52px;font-size:16px;font-weight:600;border-radius:6px;width:100%;background:#2EE6A6;color:#071520;border:none;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s;"
+                                    onmouseover="this.style.background='#fff'" onmouseout="this.style.background='#2EE6A6'">
                                     Book a Call
                                 </button>
-                                <p id="formMsg" style="font-size:0.8rem;color:#c9a84c;display:none;text-align:center;">Sent — James will be in touch same day.</p>
+                                <p id="formMsg" style="font-size:0.8rem;color:#2EE6A6;display:none;text-align:center;">Sent — James will be in touch same day.</p>
                             </form>
                         </div>
 
@@ -1507,7 +1507,7 @@
         <div class="flex items-center gap-4 min-w-0">
             <span class="relative flex w-2.5 h-2.5 shrink-0" aria-hidden="true">
                 <span class="absolute inline-flex w-full h-full rounded-full bg-brand-gold opacity-75 animate-ping"></span>
-                <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(201,168,76,0.9)]"></span>
+                <span class="relative inline-flex w-2.5 h-2.5 rounded-full bg-brand-gold shadow-[0_0_8px_rgba(46,230,166,0.9)]"></span>
             </span>
             <div class="flex flex-col leading-none">
                 <span class="font-display font-bold text-lg text-white tabular-nums">4<span class="text-brand-textMuted mx-0.5 font-light text-base">/</span><span class="text-brand-textMuted text-base">10</span></span>
@@ -1684,8 +1684,103 @@
       data-endpoint="https://script.google.com/macros/s/AKfycbzNo2GGNQ7H73iU7kuS1UldbQuJEnslCp2YmAFMCxf0g35qfj8x36v7JxGiBZ6fUcvu/exec"
       data-business="FJMedia"
       data-initials="FJ"
-      data-accent="#c9a84c"
+      data-accent="#2EE6A6"
       data-greeting="Hey! Ask me about pricing, our packages, or how the 72-hour build actually works."
       defer></script>
+    <!-- ─── Emerald accent — homepage palette — HOMEPAGE-SCOPED override ───────────────
+         Repaints the shared gold/navy brand to the emerald register on index.html ONLY.
+         Overrides the three shared sheets (tailwind.min.css + v2-foundation.css +
+         v2-super-saiyan.css); loads last so it wins on cascade order. The other FJMedia
+         pages stay gold until/unless this is promoted to the shared sheets.
+         Palette: ink #06101C · card #0E1C30 · accent #2EE6A6 · accent-hi #6EE7B7 · text #E8F0FF · muted #8DA2C4
+         To revert the homepage to gold: delete this <style> block. ──────────────── -->
+    <style id="fjm-emerald-palette">
+      :root{ --accent:#2EE6A6; }
+
+      /* ── Tailwind brand-* utilities (compiled into tailwind.min.css) ── */
+      [class~="text-brand-gold"]{ color:#2EE6A6; }
+      [class~="bg-brand-gold"]{ background-color:#2EE6A6; }
+      [class~="border-brand-gold"]{ border-color:#2EE6A6; }
+      [class~="bg-brand-card"]{ background-color:#0E1C30; }
+      [class~="bg-brand-bg"]{ background-color:#06101C; }
+      [class~="text-brand-bg"]{ color:#06101C; }
+      [class~="border-brand-bg"]{ border-color:#06101C; }
+      [class~="text-brand-textBase"]{ color:#E8F0FF; }
+      [class~="text-brand-textMuted"]{ color:#8DA2C4; }
+      [class~="hover:text-brand-gold"]:hover{ color:#2EE6A6; }
+      [class~="hover:bg-brand-gold"]:hover{ background-color:#2EE6A6; }
+      [class~="focus:border-brand-gold"]:focus{ border-color:#2EE6A6; }
+
+      /* opacity variants */
+      [class~="text-brand-gold/70"]{ color:rgba(46,230,166,0.7); }
+      [class~="border-brand-gold/50"]{ border-color:rgba(46,230,166,0.5); }
+      [class~="border-brand-gold/40"]{ border-color:rgba(46,230,166,0.4); }
+      [class~="border-brand-gold/30"]{ border-color:rgba(46,230,166,0.3); }
+      [class~="border-brand-gold/20"]{ border-color:rgba(46,230,166,0.2); }
+      [class~="bg-brand-gold/5"]{ background-color:rgba(46,230,166,0.05); }
+      [class~="bg-brand-card/20"]{ background-color:rgba(14,28,48,0.2); }
+      [class~="bg-brand-bg/95"]{ background-color:rgba(6,16,28,0.95); }
+      [class~="bg-brand-bg/50"]{ background-color:rgba(6,16,28,0.5); }
+      [class~="text-brand-bg/80"]{ color:rgba(6,16,28,0.8); }
+
+      /* gradient-stop variants (scarcity badge) */
+      [class~="from-brand-gold/10"]{ --tw-gradient-from:rgba(46,230,166,0.1); }
+      [class~="via-brand-gold/5"]{ --tw-gradient-stops:var(--tw-gradient-from),rgba(46,230,166,0.05),var(--tw-gradient-to,rgba(46,230,166,0)); }
+      [class~="via-brand-gold/20"]{ --tw-gradient-stops:var(--tw-gradient-from),rgba(46,230,166,0.2),var(--tw-gradient-to,rgba(46,230,166,0)); }
+
+      /* arbitrary shadow utilities — keep the original class name, rewrite the glow color */
+      [class~="shadow-[0_0_15px_rgba(46,230,166,0.3)]"]{ box-shadow:0 0 15px rgba(46,230,166,0.3); }
+      [class~="shadow-[0_0_24px_rgba(46,230,166,0.15)]"]{ box-shadow:0 0 24px rgba(46,230,166,0.15); }
+      [class~="shadow-[0_0_30px_rgba(46,230,166,0.2)]"]{ box-shadow:0 0 30px rgba(46,230,166,0.2); }
+      [class~="shadow-[0_0_8px_rgba(46,230,166,0.9)]"]{ box-shadow:0 0 8px rgba(46,230,166,0.9); }
+
+      /* ── v2-foundation.css literal-gold (the non-tokenized rgba values) ── */
+      .fjm-shimmer:hover{ box-shadow:0 0 28px -4px rgba(46,230,166,0.45); }
+      .fjm-bridge--bottom::after{ background:radial-gradient(ellipse 80% 100% at 50% 0%, rgba(46,230,166,0.035) 0%, transparent 70%); }
+      .fjm-line::before{ background:linear-gradient(180deg, transparent 0%, rgba(46,230,166,0.22) 12%, rgba(46,230,166,0.22) 88%, transparent 100%); }
+      .hero-orb{ background:radial-gradient(circle at 35% 35%, rgba(46,230,166,0.55) 0%, rgba(46,230,166,0.20) 45%, transparent 75%); }
+      .v2-mobile-cta{ border-top:1px solid rgba(46,230,166,0.25); }
+      .v2-mobile-cta__dot::after{ box-shadow:0 0 8px rgba(46,230,166,0.85); }
+      .v2-mobile-cta__btn{ color:#06101C; box-shadow:0 4px 14px rgba(46,230,166,0.35); }
+      :focus-visible{ outline:2px solid rgba(46,230,166,0.85); }
+
+      /* ── v2-super-saiyan.css gold selectors (match specificity; !important where it uses it) ── */
+      .ss-italic-accent{ color:#2EE6A6; }
+      .ss-italic-accent::after{ background:linear-gradient(90deg, transparent, #2EE6A6 12%, #2EE6A6 88%, transparent); box-shadow:0 0 18px rgba(46,230,166,0.45); }
+      .info-bento:hover{ border-color:rgba(46,230,166,0.32); box-shadow:0 0 0 1px rgba(46,230,166,0.12), 0 12px 32px -16px rgba(6,16,28,0.65); }
+      a.glass-panel:hover, .glass-panel.glow-card:hover{ border-color:rgba(46,230,166,0.28) !important; box-shadow:0 0 0 1px rgba(46,230,166,0.10), 0 18px 48px -22px rgba(6,16,28,0.7); }
+      .process-step.is-active .step-card{ box-shadow:0 0 0 1px rgba(46,230,166,0.18), 0 22px 60px -28px rgba(0,0,0,0.55); }
+      .tab-content .glass-panel::before{ background:linear-gradient(90deg, #2EE6A6, transparent); }
+      ::selection{ background:#2EE6A6; color:#06101C; }
+      ::-moz-selection{ background:#2EE6A6; color:#06101C; }
+      [class~="selection:bg-brand-gold"]::selection{ background:#2EE6A6 !important; }
+      [class~="selection:bg-brand-gold"] ::selection{ background:#2EE6A6 !important; }
+      [class~="selection:text-brand-bg"]::selection{ color:#06101C !important; }
+      [class~="selection:text-brand-bg"] ::selection{ color:#06101C !important; }
+      .glass-panel::before, .glass-panel::after{ border-color:rgba(46,230,166,0.45); }
+      .glass-panel::before{ border-top:1px solid rgba(46,230,166,0.45); border-left:1px solid rgba(46,230,166,0.45); }
+      .glass-panel::after{ border-bottom:1px solid rgba(46,230,166,0.45); border-right:1px solid rgba(46,230,166,0.45); }
+      .glass-panel:hover::before, .glass-panel:hover::after{ border-top-color:#2EE6A6; border-left-color:#2EE6A6; border-bottom-color:#2EE6A6; border-right-color:#2EE6A6; }
+      .fjm-bridge--top::before{ background:#2EE6A6; box-shadow:0 0 24px rgba(46,230,166,0.4); }
+      .fjm-bridge--top{ border-top:1px solid rgba(46,230,166,0.18) !important; }
+      #process .relative.before\:absolute::before,
+      #process [class*="before:bg-gradient-to-b"]::before{ background:linear-gradient(180deg, #2EE6A6 0%, rgba(46,230,166,0.22) 60%, transparent 100%) !important; box-shadow:0 0 18px rgba(46,230,166,0.25); }
+      .info-bento::after{ background:linear-gradient(90deg, #2EE6A6, rgba(46,230,166,0.2)) !important; }
+      .tab-content > div.glass-panel{ box-shadow:0 0 0 1px rgba(46,230,166,0.10), inset 0 1px 0 rgba(255,255,255,0.04), 0 30px 80px -40px rgba(46,230,166,0.18); }
+      .glass-panel[class~="border-brand-gold/30"], [class~="border-brand-gold/30"]{ background:linear-gradient(135deg, rgba(46,230,166,0.10), rgba(46,230,166,0.02)) !important; }
+      section .bg-brand-gold{ background:linear-gradient(135deg, #2EE6A6 0%, #6EE7B7 50%, #2EE6A6 100%) !important; }
+      .myth-card:hover{ box-shadow:0 0 0 1px rgba(46,230,166,0.22), 0 22px 56px -22px rgba(46,230,166,0.18), 0 22px 56px -28px rgba(0,0,0,0.55) !important; }
+
+      /* section-label gold dash (saiyan ::before, high specificity) */
+      [class~="text-brand-gold"][class~="text-xs"][class~="font-bold"][class~="tracking-[0.2em]"][class~="uppercase"]::before,
+      [class~="text-brand-gold"][class~="text-[10px]"][class~="font-bold"][class~="tracking-[0.25em]"][class~="uppercase"]::before{ background:#2EE6A6 !important; }
+
+      /* FAQ accordion */
+      #faq details:hover{ border-color:rgba(46,230,166,0.22); box-shadow:0 8px 32px -16px rgba(46,230,166,0.18); }
+      #faq details[open]{ border-color:rgba(46,230,166,0.35); box-shadow:0 0 0 1px rgba(46,230,166,0.15), 0 18px 48px -22px rgba(46,230,166,0.22); }
+      #faq details[open]::before{ background:linear-gradient(90deg, transparent, #2EE6A6 40%, #2EE6A6 60%, transparent); }
+      #faq summary:hover{ background:rgba(46,230,166,0.04); }
+      #faq details[open] summary{ background:rgba(46,230,166,0.05); }
+    </style>
 </body>
 </html>

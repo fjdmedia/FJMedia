@@ -33,8 +33,8 @@
 
     :root {
       --heading:    #EDEAE5;
-      --accent:     #c9a84c;
-      --accent-mid: rgba(201,168,76,0.1);
+      --accent:     #2EE6A6;
+      --accent-mid: rgba(46,230,166,0.1);
       --bg:         #071520;
       --bg2:        #0d1f3c;
       --bg3:        #112840;
@@ -112,7 +112,7 @@
       display: flex; flex-direction: column; gap: 0.55rem;
       transition: border-color 0.2s, background 0.2s;
     }
-    .proof-card:hover { border-color: rgba(201,168,76,0.4); }
+    .proof-card:hover { border-color: rgba(46,230,166,0.4); }
     .proof-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
     .proof-label {
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
@@ -169,7 +169,7 @@
       transition: background 0.2s;
     }
     .stack-row:last-child { border-bottom: none; }
-    .stack-row:hover { background: rgba(201,168,76,0.03); }
+    .stack-row:hover { background: rgba(46,230,166,0.03); }
     .stack-idx {
       font-family: var(--mono); font-size: 0.78rem;
       color: var(--accent); letter-spacing: 0.12em;
@@ -188,7 +188,7 @@
       color: var(--accent); letter-spacing: 0.1em;
       text-transform: uppercase; white-space: nowrap;
       padding: 0.4rem 0.8rem;
-      border: 1px solid rgba(201,168,76,0.3);
+      border: 1px solid rgba(46,230,166,0.3);
       border-radius: 4px;
     }
     @media (max-width: 700px) {
@@ -212,22 +212,22 @@
        old modal clip-path pop on the home page). */
     @keyframes csTargetPop {
       0%   { transform: scale(0.94); opacity: 0.45;
-             box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+             box-shadow: 0 0 0 0 rgba(46,230,166,0); }
       55%  { transform: scale(1.025); opacity: 1;
-             box-shadow: 0 0 0 1px rgba(201,168,76,0.55),
-                         0 0 48px rgba(201,168,76,0.22); }
+             box-shadow: 0 0 0 1px rgba(46,230,166,0.55),
+                         0 0 48px rgba(46,230,166,0.22); }
       100% { transform: scale(1); opacity: 1;
-             box-shadow: 0 0 0 1px rgba(201,168,76,0.35),
-                         0 0 32px rgba(201,168,76,0.12); }
+             box-shadow: 0 0 0 1px rgba(46,230,166,0.35),
+                         0 0 32px rgba(46,230,166,0.12); }
     }
     .cs-card:target {
-      border-color: rgba(201,168,76,0.6);
+      border-color: rgba(46,230,166,0.6);
       animation: csTargetPop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
     @media (prefers-reduced-motion: reduce) {
       .cs-card:target {
         animation: none;
-        box-shadow: 0 0 0 1px rgba(201,168,76,0.35), 0 0 32px rgba(201,168,76,0.12);
+        box-shadow: 0 0 0 1px rgba(46,230,166,0.35), 0 0 32px rgba(46,230,166,0.12);
       }
     }
     .cs-head {
@@ -254,7 +254,7 @@
       gap: 1rem; margin-bottom: 2rem;
     }
     .cs-stat {
-      background: rgba(201,168,76,0.05); border: 1px solid var(--border);
+      background: rgba(46,230,166,0.05); border: 1px solid var(--border);
       border-radius: 8px; padding: 1.2rem 1rem;
     }
     .cs-stat-num {
@@ -308,7 +308,7 @@
       cursor: pointer; transition: border-color 0.2s, background 0.2s;
       display: flex; flex-direction: column; gap: 0.5rem;
     }
-    .site-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
+    .site-card:hover { border-color: rgba(46,230,166,0.4); background: rgba(46,230,166,0.04); }
     .site-card-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
     .site-card-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 800; color: var(--heading); }
     .site-card-count { font-size: 0.78rem; color: var(--text-light); font-family: var(--mono); }
@@ -533,7 +533,7 @@
           <div class="proof-label">Custom build</div>
           <div class="proof-title">0 templates. View source to verify.</div>
           <div class="proof-body">Every line of this site is custom. Not a Wix theme, not a Shopify skin. Right-click → View Source.</div>
-          <div class="proof-stat"><span>AI in the pipeline.</span><span>Not in the output.</span></div>
+          <div class="proof-stat"><span>Custom-built.</span><span>Yours to keep.</span></div>
         </div>
 
         <div class="proof-card">
@@ -1135,7 +1135,7 @@
     data-endpoint="https://script.google.com/macros/s/AKfycbzNo2GGNQ7H73iU7kuS1UldbQuJEnslCp2YmAFMCxf0g35qfj8x36v7JxGiBZ6fUcvu/exec"
     data-business="FJMedia"
     data-initials="FJ"
-    data-accent="#c9a84c"
+    data-accent="#2EE6A6"
     data-greeting="Hey! Ask me about pricing, our packages, or how the 72-hour build actually works."
     defer></script>
 </body>

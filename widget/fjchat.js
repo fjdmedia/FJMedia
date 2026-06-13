@@ -5,7 +5,7 @@
  * Usage (GAS proxy — for client sites):
  *   <script src="https://fjmedia.ca/widget/fjchat.js"
  *     data-endpoint="https://script.google.com/macros/s/YOUR_ID/exec"
- *     data-accent="#c9a84c"
+ *     data-accent="#2EE6A6"
  *     data-greeting="Hi! Ask us anything."
  *     data-business="Tom's Detailing">
  *   </script>
@@ -15,7 +15,7 @@
  *     data-api-key="sk-ant-..."
  *     data-business="FJMedia"
  *     data-context="FJMedia builds custom websites for Winnipeg businesses in 72 hours..."
- *     data-accent="#c9a84c">
+ *     data-accent="#2EE6A6">
  *   </script>
  */
 (function () {
@@ -30,7 +30,7 @@
     initials:  script.getAttribute('data-initials')   || '',
     context:   script.getAttribute('data-context')    || '',
     greeting:  script.getAttribute('data-greeting')   || '',
-    accent:    script.getAttribute('data-accent')     || '#c9a84c',
+    accent:    script.getAttribute('data-accent')     || '#2EE6A6',
     position:  script.getAttribute('data-position')   || 'right',
     model:     script.getAttribute('data-model')      || 'claude-sonnet-4-6',
   };
@@ -77,16 +77,16 @@
       ${CFG.position === 'left' ? 'left: 28px;' : 'right: 28px;'}
       width: 60px; height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
+      background: linear-gradient(135deg, ${CFG.accent}, #6EE7B7);
       border: none;
       color: #0b1120;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(201,168,76,0.35), 0 0 48px rgba(201,168,76,0.12);
+      box-shadow: 0 4px 20px rgba(46,230,166,0.35), 0 0 48px rgba(46,230,166,0.12);
       transition: transform 0.2s, box-shadow 0.2s;
       z-index: 99998;
     }
-    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(201,168,76,0.45), 0 0 56px rgba(201,168,76,0.18); }
+    #fjchat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(46,230,166,0.45), 0 0 56px rgba(46,230,166,0.18); }
     #fjchat-bubble svg { width: 26px; height: 26px; fill: #0b1120; }
     #fjchat-bubble.open svg.chat-icon { display: none; }
     #fjchat-bubble.open svg.close-icon { display: block; }
@@ -270,12 +270,12 @@
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .fjchat-input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .fjchat-input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(46,230,166,0.15); }
     .fjchat-input::placeholder { color: #4b5563; }
     .fjchat-send {
       width: 48px; height: 48px;
       border-radius: 12px;
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
+      background: linear-gradient(135deg, ${CFG.accent}, #6EE7B7);
       border: none;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -309,10 +309,10 @@
       color: #e2e8f0;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .fjchat-lead input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .fjchat-lead input:focus { border-color: ${CFG.accent}; box-shadow: 0 0 0 3px rgba(46,230,166,0.15); }
     .fjchat-lead input::placeholder { color: #4b5563; }
     .fjchat-lead button {
-      background: linear-gradient(135deg, ${CFG.accent}, #e8c96d);
+      background: linear-gradient(135deg, ${CFG.accent}, #6EE7B7);
       color: #0b1120;
       border: none;
       border-radius: 10px;

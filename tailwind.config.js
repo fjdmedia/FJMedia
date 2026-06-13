@@ -25,8 +25,8 @@ module.exports = {
         brand: {
           bg:         '#071520',
           card:       '#0D1F3C',
-          gold:       '#C9A84C',
-          goldHover:  '#e0c26c',
+          gold:       '#2EE6A6',
+          goldHover:  '#6EE7B7',
           textBase:   '#EDEAE5',
           textMuted:  '#94a3b8',
         },
